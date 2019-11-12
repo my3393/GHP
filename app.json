@@ -1,8 +1,11 @@
 {
   "pages": [
+    "pages/shoping/shoping",
+    "pages/canvas/canvas",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/home/home"
+    "pages/home/home",
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,20 @@
+/* pages/canvas/canvas.wxss */
+page{
+  background: #ccc;
+}
+.canva-top{
+margin-top: -90rpx;
+
+}
+.back{
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  background: #e65099;
+  margin-top: 30rpx;
+  color: #fff;
+}
+.container{
+  
+}
