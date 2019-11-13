@@ -1,0 +1,46 @@
+<view class="goodsdetialtwo">
+  <view class='guige' bindtap='guigeselect'>
+    <view style='color:#676767;'>规格：</view>
+    <view style='width:80%;'>
+      请选择
+      <text style='margin-right:20rpx;' wx:for="{{goods_spec}}" wx:key>{{item[0].spec_name}}</text>
+    </view>
+    <image src='../../images/jian.png'></image>
+  </view>
+  <view animation="{{animationData}}" class='animation' catchtouchmove='noMove'>
+    <view class='tophead'>
+      <view class='topimg'>
+        <image src='{{goodsList.original_img}}'></image>
+      </view>
+      <view class='topright'>
+        <view>{{goodsList.goods_name}}</view>
+        <view class='imgcha'>
+          <view style='color:#ef5426;'>{{guilist.price}}</view>
+          <image src='../../images/cha.png' bindtap='guigeno'></image>
+        </view>
+        <view style='margin:10rpx 0;color:#999999;'>库存:{{guilist.store_count}}</view>
+        <view>规格:
+          <text style="margin-right:20rpx;" wx:for="{{selectGuigeName}}" wx:key>{{item}}</text>
+        </view>
+      </view>
+    </view>
+    <view class='guigeclass' wx:for="{{goods_spec}}" wx:for-index="fuindex" wx:key>
+      <view class='ggtitle'>{{item[0].spec_name}}</view>
+      <view class='xuanze'>
+        <view class="selectkuai {{textStates[items.isClick]}}" catchtap='selectGuige' wx:for-index="chindex" wx:for-item="items" data-fuindex="{{fuindex}}" data-chindex="{{chindex}}" data-id="{{items.item_id}}" data-item="{{items.item}}" wx:for="{{item}}" wx:key>{{items.item}}</view>
+      </view>
+      <view style='height:2rpx; width:100%;background-color:#eeeeee;'></view>
+    </view>
+    <view class='guigecount'>
+      <view class='countname'>数量</view>
+      <view class='countright'>
+       <view class="num">
+            <i-input-number value="{{ num }}" min="1" max="999999" bindchange="numChange" />
+          </view>
+      </view>
+    </view>
+    <view class='yesyes' catchtap='queDing'>
+      确定
+    </view>
+  </view>
+</view>

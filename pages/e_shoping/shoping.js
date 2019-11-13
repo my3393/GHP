@@ -89,7 +89,13 @@ Page({
   */
 
   onLoad: function (options) {
-
+      wx.showToast({
+        title: '价值',
+        icon:'warn',
+        //image:'../../images/head.png',
+        
+        duration:3000
+      })
     //获取购物车信息
 
   },

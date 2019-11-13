@@ -1,4 +1,4 @@
-// pages/home/home.js
+// pages/e_ welfare/e_ welfare.js
 Page({
 
   /**

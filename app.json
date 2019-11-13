@@ -1,17 +1,58 @@
 {
   "pages": [
-    "pages/shoping/shoping",
+    "pages/e_home/home",
+    "pages/good_detail/good_detail",
+    "pages/e_shoping/shoping",
     "pages/canvas/canvas",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/home/home",
-    "pages/mine/mine"
+    "pages/e_mine/mine",
+    "pages/e_specialty/e_specialty",
+    "pages/e_ welfare/e_ welfare",
+    "component/top/index"
   ],
+  "tabBar": {
+    "color": "#808080",
+    "selectedColor": "#fe5ba9",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "images/home-active.png",
+        "iconPath": "images/home.png",
+        "pagePath": "pages/e_home/home",
+        "text": "善家购"
+      },
+      {
+        "selectedIconPath": "images/specialty-active.png",
+        "iconPath": "images/specialty.png",
+        "pagePath": "pages/e_specialty/e_specialty",
+        "text": "家乡特产"
+      },
+      {
+        "selectedIconPath": "images/welfare-active.png",
+        "iconPath": "images/welfare.png",
+        "pagePath": "pages/e_ welfare/e_ welfare",
+        "text": "善家公益"
+      },
+      {
+        "selectedIconPath": "images/shop-active.png",
+        "iconPath": "images/shop.png",
+        "pagePath": "pages/e_shoping/shoping",
+        "text": "购物车"
+      },
+      {
+        "selectedIconPath": "images/mine-active.png",
+        "iconPath": "images/mine.png",
+        "pagePath": "pages/e_mine/mine",
+        "text": "我的"
+      }
+    ]
+  },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#ff4e17",
+    "navigationBarTitleText": "善家购",
+    "navigationBarTextStyle": "white"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"
