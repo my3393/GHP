@@ -1,33 +1,21 @@
-// pages/e_ welfare/e_ welfare.js
-import Canvas from '../../utils/tcanvas.js'
+// pages/person/person .js
 Page({
-  ...Canvas.options,
+
   /**
    * 页面的初始数据
    */
   data: {
-    tag:[
-      {name:'全部',id:"0"},
-      {name:'筹集中',id:"0"},
-      {name:'带筹集',id:"0"},
-      {name:'已完成',id:"0"},
-    ],
-    tar:'0',
-    photos:[
-      "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
-      "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
-      "https://graph.baidu.com/resource/116b9dee63af0f77fcb8f01572947716.jpg",
-      "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
-    ],
-    ...Canvas.data,
-    shao:'80'
+     sex:[
+       {id:'1',name:'男'},
+       {id:'2',name:'女'}
+     ],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.draw('runCanvas',this.data.shao,1000);
+
   },
 
   /**
@@ -78,11 +66,27 @@ Page({
   onShareAppMessage: function () {
 
   },
-  tag(e){
-    console.log(e)
+   //性别选择
+   sexChange(e){
+   
     let that = this;
     that.setData({
-      tar:e.currentTarget.dataset.idx
+      sexs: that.data.sex[e.detail.value].name,
+      sexid: that.data.sex[e.detail.value].id,
+    })
+   },
+    //出生日期选择
+  dayChange(e){
+    console.log(e)
+    this.setData({
+      day:e.detail.value
+    })
+    console.log(this.data.day)
+  },
+  //用户昵称
+  name(){
+    wx.navigateTo({
+      url: '../person_name/person_name',
     })
   }
 })

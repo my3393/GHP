@@ -1,2 +1,204 @@
-<!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+<view class="tops" hidden="{{isshow}}">
+    <view class="tops-t" >
+        <view class="tops-img"><image src="../../images/tx.png" /></view>
+        <view class="tops-n">正国</view>
+    </view>
+</view>
+<view class="res"></view>
+<view class="top"  hidden="{{!isshow}}">
+    <view class="top-tx">
+        <view class="tx">
+            <image src="../../images/tx.png" />
+        </view>
+        <!-- <view class="dengl">
+           点击登录
+           <view class='chak'>查看编辑个人资料</view>
+       </view> -->
+        <view class="person" hidden="{{!isshow}}">
+            <view>
+                <view class="per-n">正国</view>
+                <view class="hui">
+                    <image src="../../images/aix (3).png" />
+                </view>
+            </view>
+            <view>
+                <view class="gongy">公益大使</view>
+                <view class="hui aix">
+                    <image src="../../images/aix (1).png" />
+                </view>
+            </view>
+            <view class="jies">怀念家乡，回馈感恩，饮水思源，滴水之恩</view>
+        </view>
+        <view class="members">
+            <view class="kait">
+                <image src="../../images/aix2.png" />
+            </view>
+            <view class="kait-n">开通会员</view>
+        </view>
+        <view class="shouyi">
+           
+                <view class="shouy-z">
+                    <view>645894</view>
+                    <view class="shouy-n">分销收益</view>
+                </view>
+                <view class="heng"></view>
+                <view class="shouy-z">
+                    <view>212</view>
+                    <view class="shouy-n"> 艺呗</view>
+                </view>
+            
+        </view>
+        <view class="t-bottom"></view>
+    </view>
+</view>
+<view class="nav">
+    <view class="m-h1">我的订单</view>
+    <view class="m-right">
+        <view class='m-r-q'>全部订单</view>
+        <view class="m-r-img">
+            <image src="../../images/right.png" />
+        </view>
+    </view>
+    <view class="dind">
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/d-fk.png" />
+                <view class="hong">9</view>
+            </view>
+            <view>待付款</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/d-fh.png" />
+                 <view class="hong">9</view>
+            </view>
+            <view>待发货</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/d-sh.png" />
+                 <view class="hong">9</view>
+            </view>
+            <view>待收货</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/d-tk.png" />
+                 <view class="hong">9</view>
+            </view>
+            <view>退款/售后</view>
+        </view>
+    </view>
+</view>
+ <view>
+   <swiper class="banner"  indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
+    <block wx:for='{{photos}}'>
+      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
+        <image class="banner_img" src="{{item}}"></image>
+      </swiper-item>
+    </block> 
+  </swiper>
+</view>
+<view class="nav nav-t">
+    <view class="m-h1">我的善家</view>
+   
+    <view class="dind">
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/d-fk.png" />
+               
+            </view>
+            <view>我的钱包</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/hy.png" />
+                 
+            </view>
+            <view>会员中心</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/jx.png" />
+                
+            </view>
+            <view>家乡公益</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/sc.png" />
+                 
+            </view>
+            <view>我的收藏</view>
+        </view>
+    </view>
+</view>
+<view class="nav nav-t">
+    <view class="m-h1">我的服务</view>
+   
+    <view class="dind">
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/sjrz.png" />
+               
+            </view>
+            <view>商家入驻</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/gfkf.png" />
+                 
+            </view>
+            <view>官方客服</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/shdz.png" />
+                
+            </view>
+            <view>收货地址</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/yjfk.png" />
+                 
+            </view>
+            <view>意见反馈</view>
+        </view>
+    </view>
+    <view class="dind">
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/zhaq.png" />
+               
+            </view>
+            <view>账号安全</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/fxsj.png" />
+                 
+            </view>
+            <view>分享善家</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/gzgzh.png" />
+                
+            </view>
+            <view>关注公众号</view>
+        </view>
+        <view class="din-1">
+            <view class="din-img">
+                <image src="../../images/shez.png" />
+                 
+            </view>
+            <view>设置</view>
+        </view>
+    </view>
+</view>
+
+<view class="foot-boot">
+    <view >善家购</view>
+    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+</view>

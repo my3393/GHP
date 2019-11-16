@@ -10,4 +10,19 @@
 
   z-index: 9
 } 
+.dan{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
 .clearfix:after {content: ""; display: block; height:0; clear:both; visibility: hidden;}
+.foot-boot{
+  width: 100%;
+  margin: 50rpx 0;
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+}
+.foot-boot-m{
+  font-size: 22rpx;
+}

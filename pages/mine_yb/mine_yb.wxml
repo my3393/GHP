@@ -1,0 +1,22 @@
+<!-- pages/mine_yb/mine_yb.wxml -->
+<view class="top">
+    <view class="title">我的艺呗</view>
+    <view class="shuom">使用说明？</view>
+    <view>
+        <view class="num">2345</view>
+        <view class="znum">赚艺呗</view>
+    </view>
+    <view class="bootm">
+       收支明细
+       <view class="bootm-img">
+           <image  src="../../images/right.png" />
+       </view>
+    </view>
+</view>
+
+<view class="list">
+    <view >艺呗获取渠道</view>
+    <view >1.购买特产成交赠送固定比例的艺呗数量；</view>
+    <view >2.开通会员赠送10倍数量的艺呗；</view>
+    <view >3.更多赚取艺呗的方式敬请期待</view>
+</view>

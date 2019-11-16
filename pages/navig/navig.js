@@ -1,11 +1,11 @@
-// component/top/index.js
+// pages/navig/navig.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    showIcon: true,
   },
 
   /**

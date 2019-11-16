@@ -1,0 +1,64 @@
+/* pages/mine_yb/mine_yb.wxss */
+page{
+    background: #f9f9f9;
+    font-size: 26rpx;
+}
+.top{
+    padding: 20rpx;
+    box-sizing: border-box;
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    margin-top: 40rpx; 
+    background: #fff;
+    border-radius: 12rpx;
+}
+.title{
+    display: inline-block;
+}
+.shuom{
+    float: right;
+    color: #999999;
+    font-size: 24rpx;
+}
+.num{
+    margin-top: 30rpx;
+    color: #333;
+    font-size: 40rpx;
+    display: inline-block;
+}
+.znum{
+    margin-top: 30rpx;
+    width: 110rpx;
+    height: 46rpx;
+    font-size: 22rpx;
+    text-align: center;
+    line-height: 46rpx;
+    color: #fff;
+    float: right;
+    border-radius: 30rpx;
+    background:linear-gradient(to right, #f12200, #ff4e17); 
+}
+.bootm{
+    border-top:1rpx solid #f9f9f9 ;
+    margin-top: 30rpx;
+    padding-top: 20rpx;
+    box-sizing: border-box;
+}
+.bootm-img{
+    width: 20rpx;
+    height: 20rpx;
+    float: right;
+}
+.bootm-img image{
+    width: 100%;
+    height: 100%;
+}
+.list{
+    margin-left: 20rpx;
+    color: #333333;
+    font-size: 24rpx;
+    margin-top: 50rpx;
+}
+.list view{
+    line-height: 40rpx;
+}

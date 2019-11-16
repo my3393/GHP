@@ -22,9 +22,9 @@ Page({
 
       goodsinfo: [{
 
-        goodsname: '商铺1的产品1',
+        goodsname: '商铺1的产品1cart-thumb商铺1的产品1cart',
 
-        specification: '规格',
+        specification: '银川市 西夏区 贺兰山西路街道',
 
         price: '100.22',
 
@@ -89,13 +89,13 @@ Page({
   */
 
   onLoad: function (options) {
-      wx.showToast({
-        title: '价值',
-        icon:'warn',
-        //image:'../../images/head.png',
+      // wx.showToast({
+      //   title: '价值',
+      //   icon:'warn',
+      //   //image:'../../images/head.png',
         
-        duration:3000
-      })
+      //   duration:3000
+      // })
     //获取购物车信息
 
   },

@@ -1,2 +1,88 @@
-<!--pages/e_ welfare/e_ welfare.wxml-->
-<text>pages/e_ welfare/e_ welfare.wxml</text>
+<view class="top">
+    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
+        <block wx:for='{{photos}}'>
+            <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
+                <image class="banner_img" src="{{item}}"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+<view class="progre">
+    <view class="pro-t">
+        <view class="pro-left">
+            <view class='canvasBox'>
+                <view class='bigCircle'></view>
+                <view class='littleCircle'></view>
+                <canvas canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
+            </view>
+        </view>
+        <view class="pro-rig">
+            <view>
+                <view class="money">
+                    <image src="../../images/money.png" />
+                </view>
+                <text style="vertical-align: middle;color: #666666;">累计金额</text>
+                <view class="money-m">
+                    <text class="money-s">￥</text>
+                    259475
+                </view>
+            </view>
+            <view>
+                <view class="money">
+                    <image src="../../images/zhuc.png" />
+                </view>
+                <text style="vertical-align: middle;color: #666666;">支出金额</text>
+                <view class="money-m">
+                    <text class="money-s">￥</text>
+                    259475
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="jiao">了解更多</view>
+</view>
+<view class="project">
+    <view class="h2">公益项目</view>
+    <view class="pro-r">
+        <view class="pro-n">寻找老乡</view>
+        <view class="pro-r-img">
+            <image src="../../images/right.png" />
+        </view>
+    </view>
+    <view>
+        <view wx:for="{{tag}}" wx:for-index="idx" data-idx='{{idx}}' class="tag  {{tar == idx ? 'active' : ''}} " bind:tap="tag">
+            {{item.name}}
+        </view>
+    </view>
+    <view class="nav">
+        <view class="g-banner">
+            <image src="https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg" />
+        </view>
+        <view class="g-h1 dan">大国小镇”计划，助力四个贫困产业扶持大国小镇”计划，助力四个贫困产业扶</view>
+        <view class="g-h2">送温暖献爱心，为家乡做公益送温暖献爱心送温暖献爱心送温暖
+献爱心送温暖献爱心送温暖献爱心。</view>
+        <view class="jindu">
+           <progress stroke-width="5" active percent="80.00" font-size='12' activeColor='#F22702'  show-info='true' border-radius='4'></progress>
+        </view>
+        <view class="g-bott">
+           <view class="g-bo">
+             <view class='g-bott-j'>
+               35957
+             </view>
+             <view class='g-boot-y'>目标金额/元</view>
+           </view>
+           <view class="g-bo">
+             <view class='g-bott-j'>
+               35957
+             </view>
+             <view class='g-boot-y'>已筹款/元</view>
+           </view>
+           <view class="g-bo">
+             <view class='g-bott-j'>
+               35
+             </view>
+             <view class='g-boot-y'>项目票数</view>
+           </view>
+        </view>
+    </view>
+</view>

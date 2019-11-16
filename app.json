@@ -1,15 +1,20 @@
 {
   "pages": [
+    "pages/navig/navig",
+    "pages/mine_yb/mine_yb",
+    "pages/person/person ",
+    "pages/e_mine/mine",
+    "pages/e_shoping/shoping",
+    "pages/e_ welfare/e_ welfare",
+    
+    "pages/e_specialty/e_specialty",
     "pages/e_home/home",
     "pages/good_detail/good_detail",
-    "pages/e_shoping/shoping",
     "pages/canvas/canvas",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/e_mine/mine",
-    "pages/e_specialty/e_specialty",
-    "pages/e_ welfare/e_ welfare",
-    "component/top/index"
+    "component/top/index",
+    "pages/person_name/person_name"
   ],
   "tabBar": {
     "color": "#808080",

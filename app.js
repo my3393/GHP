@@ -50,6 +50,6 @@ App({
   },
   
   globalData: {
-    userInfo: null
+    statusBarHeight:wx.getSystemInfoSync()['statusBarHeight']
   }
 })

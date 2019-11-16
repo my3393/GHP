@@ -1,0 +1,60 @@
+/* pages/person/person .wxss */
+page{
+    background: #F9F9F9;
+    font-size: 28rpx;
+}
+.top{
+    width: 100%;
+    height: 70rpx;
+    line-height: 70rpx;
+    margin-left: 10rpx;
+    color: #999;
+    font-size: 24rpx;
+}
+.nav{
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    background: #fff;
+}
+.nav-list{
+    height: 100rpx;
+    border-bottom: 1rpx #f9f9f9 solid;
+    line-height: 100rpx;
+    
+}
+.nav-l-t{
+    display: inline-block;
+}
+.list-t{
+    float:right;
+}
+.list-img{
+    width: 70rpx;
+    height: 70rpx;
+    display: inline-block;
+    margin-right: 20rpx;
+}
+.list-img image{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle; 
+
+}
+.list-n{
+    float: left;
+    margin-top: 29rpx;
+   margin-right: 20rpx;
+}
+.list-n input{
+    text-align: right;
+}
+.list-right{
+    width: 22rpx;
+    height: 22rpx;
+    display: inline-block;
+}
+.list-right image{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
