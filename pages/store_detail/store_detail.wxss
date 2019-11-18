@@ -1,0 +1,41 @@
+/* pages/store_detail/store_detail.wxss */
+page{
+    background: #f9f9f9;
+    font-size: 28rpx;
+    }
+    .inpu{
+      position: absolute;
+      bottom: 15rpx;
+      left:200rpx;
+      width: 330rpx;
+      font-size: 28rpx;
+      border: 1rpx #e5e5e5 solid;
+      border-radius: 40rpx;
+      height: 60rpx;
+    }
+    .inpu input{
+      height: 100%;
+      text-align: left;
+      margin-left: 20rpx;
+      display: inline-block;
+      width: 80%;
+    }
+    .dete{
+      width: 28rpx;
+      height: 28rpx;
+      margin-top: -10rpx;
+      display: inline-block;
+      position: relative;
+      top: -16rpx;
+    }
+    .dete image{
+      width: 100%;
+      height: 100%;
+    }
+
+    .top_dao{
+        width: 180rpx;
+        height: 60rpx;
+        border-radius: 40rpx;
+        background: #f12200;
+    }

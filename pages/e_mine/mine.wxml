@@ -1,3 +1,6 @@
+<!-- <view style="height:{{titleBarHeight}}px;padding-top:{{statusBarHeight}}px">
+  <view class="header"></view>
+</view> -->
 <view class="tops" hidden="{{isshow}}">
     <view class="tops-t" >
         <view class="tops-img"><image src="../../images/tx.png" /></view>

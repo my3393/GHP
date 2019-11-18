@@ -1,0 +1,194 @@
+<!-- pages/search_name/search_name.wxml -->
+<view class='a-nav bg-white' style='height:{{navH}}px'>
+  <view class='a-nav-title'>
+    <view class="inpu">
+      <input placeholder="商家，店铺名称"></input>
+      <view class="dete">
+        <image src="../../images/detele.png"></image>
+      </view>
+    </view>
+    <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image>
+  </view>
+</view>
+<!-- 综合排序 -->
+<view class="top">
+  <view class="top-list">
+    <view class="top-z">
+      <view>
+        <view class="you-n">价格最低</view>
+        <view class="you">
+          <image src="../../images/shai.png" />
+        </view>
+      </view>
+      <view>
+        <view class="you-n">销量</view>
+        <view class="you">
+          <image src="../../images/shai.png" />
+        </view>
+      </view>
+      <view>
+        <view class="you-n">地区</view>
+        <view class="you">
+          <image src="../../images/shai.png" />
+        </view>
+      </view>
+      <view bindtap="off_canvas">
+        <view class="you-n">筛选</view>
+        <view class="you">
+          <image src="../../images/shai.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="switch">
+    <image src="../../images/switch.png" />
+  </view>
+</view>
+<view class="total">
+  <view>
+    <view class="total_n">综合排序</view>
+    <view class='total_right'>
+      <image src="../../images/gou.png" />
+    </view>
+  </view>
+  <view>
+    <view class="total_n">最新上架</view>
+    <view class='total_right'>
+      <image src="../../images/gou.png" />
+    </view>
+  </view>
+  <view>
+    <view class="total_n">价格最高</view>
+    <view class='total_right'>
+      <image src="../../images/gou.png" />
+    </view>
+  </view>
+  <view>
+    <view class="total_n">价格最低</view>
+    <view class='total_right'>
+      <image src="../../images/gou.png" />
+    </view>
+  </view>
+</view>
+<!-- 地区 -->
+<view class="totals"  style='top:{{navH + 45}}px'>
+    <scroll-view class="region" scroll-y="true">
+        <view class="region-list">
+           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+           <view class="region_name">宁夏刘正国</view>
+        </view>
+         <view class="region-list">
+           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+           <view class="region_name">宁夏刘正国</view>
+        </view>
+         <view class="region-list">
+           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+           <view class="region_name">宁夏刘正国</view>
+        </view>
+         <view class="region-list">
+           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+           <view class="region_name">宁夏刘正国</view>
+        </view>
+         <view class="region-list">
+           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+           <view class="region_name">宁夏刘正国</view>
+        </view>
+      
+    </scroll-view>
+    <view class="region_bot">
+       <view class="chongs">重置</view>
+       <view class="ques">确定</view>
+    </view>
+</view>
+<!-- 商品列表 -->
+<view class='list'>
+  <view class="goods-list clearfix">
+    <view class="goods-img clearfix">
+      <image src="../../images/te.png"></image>
+    </view>
+    <view class="goods-n">
+      <view class="goods-j">青海特产可可西里藏獒特色牛.青海特产可可西里藏獒特色牛...</view>
+      <view class="goods-q dan">银川市 西夏区 贺兰山西路街道银川市 西夏区 贺兰山西路街道</view>
+      <view class="goods-q">银川市 西夏区 贺兰山西路街道</view>
+      <view class="goods-t">
+        <view class="goods-p">
+          <text style="font-size:22rpx">￥</text>
+          28
+        </view>
+        <view class="goods-g">
+          <image src="../../images/shop.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="nav-list">
+    <view class="list-img">
+      <image src="../../images/tui.jpg" />
+    </view>
+    <view class="list-j">就磨灭我就将额外</view>
+    <view class="list-qu">宁夏 九儿外网</view>
+    <view class="class-t-p ctp">
+      <text style="font-size:22rpx">￥</text>
+      28
+    </view>
+    <view class="list-rig">
+      <image src="../../images/shop.png" />
+    </view>
+  </view>
+  <view class="nav-list">
+    <view class="list-img">
+      <image src="../../images/tui.jpg" />
+    </view>
+    <view class="list-j">就磨灭我就将额外</view>
+    <view class="list-qu">宁夏 九儿外网</view>
+    <view class="class-t-p ctp">
+      <text style="font-size:22rpx">￥</text>
+      28
+    </view>
+    <view class="list-rig">
+      <image src="../../images/shop.png" />
+    </view>
+  </view>
+</view>
+
+<!-- 筛选 -->
+<view class="page">
+
+ <view class="page-top {{open ? 'page-top-show' : ''}}" style='top:{{navH}}px'>
+   <view class="page-h1">特产品类</view>
+   <view class="page-list">
+      地方特产
+   </view>
+   <view class="page-list">
+      地方特产
+   </view>
+   <view class="page-list">
+      地方特产
+   </view>
+   <view class="page-list">
+      地方特产
+   </view>
+   <view class="page-list">
+      地方特产
+   </view>
+   <view class="page-list">
+      地方特产
+   </view>
+   <view class="page-footer">
+       <view class='chong'>重置</view>
+       <view class="que" bindtap="open_list">确定</view>
+   </view>
+  <view class="nav-list" wx:for-items="{{nav_list}}" bindtap="open_list" data-title="{{item}}">
+   <text>{{item}}</text>
+  </view>
+ </view>
+ <view class="page-bottom">
+  
+  <!-- <view class="page-bottom-content" bindtap="off_canvas">
+   <text>{{text}}</text>
+  </view> -->
+  <view class="page-mask {{open ? '' : 'page-mask-hide'}}" bindtap="off_canvas" style='top:{{navH}}px'></view>
+ </view>
+</view>
+
+<view class="mask" hidden="{{ismask}}" style='top:{{navH}}px'></view>

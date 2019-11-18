@@ -1,0 +1,386 @@
+/* pages/search_name/search_name.wxss */
+page{
+background: #f9f9f9;
+font-size: 28rpx;
+}
+.inpu{
+  position: absolute;
+  bottom: 15rpx;
+  left:80rpx;
+  width: 430rpx;
+  font-size: 28rpx;
+  border: 1rpx #e5e5e5 solid;
+  border-radius: 40rpx;
+  height: 60rpx;
+}
+.inpu input{
+  height: 100%;
+  text-align: left;
+  margin-left: 20rpx;
+  display: inline-block;
+  width: 80%;
+}
+.dete{
+  width: 28rpx;
+  height: 28rpx;
+  margin-top: -10rpx;
+  display: inline-block;
+  position: relative;
+  top: -16rpx;
+}
+.dete image{
+  width: 100%;
+  height: 100%;
+}
+.top{
+  height: 90rpx;
+  width: 100%;
+  background: #fff;
+  margin: 1rpx 0;
+}
+.top-z{
+  display: flex;
+  justify-content: space-between;
+  line-height: 90rpx;
+}
+.you-n{
+  display: inline-block;
+  vertical-align:top;
+  font-size: 24rpx;
+  margin-right: 10rpx;
+}
+.you{
+  width: 22rpx;
+  height: 22rpx;
+  display: inline-block;
+}
+.you image{
+  width: 100%;
+  height: 100%;
+  vertical-align:middle;
+}
+.top-list{
+  width: 80%;
+  display: inline-block;
+  margin-left: 30rpx;
+}
+.switch{
+ 
+  float: right;
+  margin-right: 30rpx;
+  width: 26rpx;
+  height: 26rpx;
+  margin-left: 50rpx;
+  line-height: 90rpx;
+}
+.switch image{
+  width: 100%;
+  height: 100%;
+  
+}
+.total{
+  position: relative;
+  top: 1rpx;
+  width: 100%;
+  padding: 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+  display: none;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+}
+.total>view{
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.total_n{
+  display: inline-block;
+}
+.total_right{
+  width: 28rpx;
+  height: 28rpx;
+  float: right;
+
+}
+.total_right image{
+  width: 100%;
+  height: 100%;
+}
+.list{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+}
+.goods-list{
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.goods-img{
+  width: 220rpx;
+  height: 220rpx;
+  float: left;
+  margin-right: 18rpx;
+}
+.goods-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.goods-j{
+  margin-top: 10rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size: 26rpx;
+}
+.goods-q{
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+.goods-t{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60rpx;
+}
+.goods-p{
+  color: #f12200;
+ 
+}
+.goods-g{
+  width: 38rpx;
+  height: 38rpx;
+  background: #f3f3f3;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 38rpx;
+}
+.goods-g image{
+  width: 21rpx;
+  height: 23rpx;
+}
+
+/*  */
+.nav-list{
+  width: calc((100% - 60rpx)/2);
+  margin-left: 20rpx;
+  background: #fff;
+  margin-top: 30rpx;
+  display: inline-block;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+}
+.list-img{
+  width: 100%;
+  height: 339rpx;
+}
+.list-img image{
+  width: 100%;
+  height: 100%;
+}
+.list-j{
+  margin-left: 20rpx;
+  width: 100%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size: 26rpx;
+  margin-top: 20rpx;
+}
+.list-qu{
+  color: #999999;
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  margin-left: 20rpx;
+}
+.ctp{
+  margin-left: 20rpx;
+  display: inline-block;
+}
+.list-rig{
+  float: right;
+  background: #f3f3f3;
+  width: 38rpx;
+  height: 38rpx;
+  border-radius: 50%;
+  line-height: 38rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+.list-rig image{
+  display: block;
+  margin-top: 11rpx;
+  margin-left: 8rpx;
+  width: 20rpx;
+  height: 21rpx;
+}
+.class-t-p{
+  color: #F12200;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+}
+
+/* 筛选 */
+.page-top{
+  position: fixed;
+  width: calc(100% - 150rpx);
+  height: 95%;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+  transform: rotate(0deg) scale(1) translate(130%,0%);
+  -webkit-transform: rotate(0deg) scale(1) translate(130%,0%);
+  transition: all 0.3s ease;
+  z-index: 998;
+ }
+ .page-top-show{
+  transform: rotate(0deg) scale(1) translate(0%,0%);
+  -webkit-transform: rotate(0deg) scale(1) translate(0%,0%);
+ }
+ .nav-list{
+  padding: 30rpx 0 30rpx 40rpx;
+  color:#fff;
+ }
+ /*右侧展示 */
+ .page-bottom{
+  height: 100%;
+  background-color: rgb(57, 125, 230);
+  position: relative;
+ }
+ .off-nav-list{
+  position: fixed;
+  width: 60rpx;
+  height: 50rpx;
+  top: 20rpx;
+  left:20rpx;
+ }
+ .page-bottom-content{
+  padding:100rpx 20rpx 30rpx;
+  color: #fff;
+ }
+ .page-mask{
+  width: 100%;
+  height: 100%;
+  background-color:rgba(0,0,0,0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+ }
+ .page-mask-hide{
+  display: none;
+ }
+ .page-h1{
+   margin: 20rpx;
+   font-size: 32rpx;
+ }
+ .page-list{
+   padding: 10rpx 20rpx;
+   box-sizing: border-box;
+   border-radius: 26rpx;
+   background: #e5e5e5;
+   color: #666;
+   display: inline-block;
+   margin-top: 20rpx;
+   margin-left: 20rpx;
+ }
+ .page-list-active{
+   background: #FEE8E5;
+   color: #f12200;
+   border: 1rpx #f12200 solid;
+ }
+ .page-footer{
+   position: absolute;
+   bottom: 100rpx;
+   left: 0;
+   width: 100%;
+ }
+ .page-footer>view{
+   width: calc((100% - 60rpx)/2);
+   margin-left: 20rpx;
+ }
+ .chong{
+   display: inline-block;
+   
+   height: 70rpx;
+   text-align: center;
+   line-height: 70rpx;
+   border: 1rpx #F12200 solid;
+   color: #F12200;
+   border-radius: 40rpx;
+ }
+ .que{
+  display: inline-block;
+  
+  height: 72rpx;
+  text-align: center;
+  line-height: 72rpx;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  color: #fff;
+  border-radius: 40rpx;
+  margin-left: 30rpx;
+}
+.mask{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.3;
+}
+/* 地区 */
+.totals{
+  position: absolute;
+  top: 1rpx;
+  width: 100%;
+  padding-top: 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 9;
+  display: none;
+}
+.region{
+  background: #fff;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  height: 520rpx;
+}
+.region-list{
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 50%;
+  display: inline-block;
+  border-bottom: 1rpx #F3F3F3 solid;
+}
+.cart_ic{
+  
+  float: left;
+  position: relative;
+  top: 20rpx;
+  margin-right: 10rpx;
+}
+.region_name{
+  display: inline-block;
+}
+.region_bot>view{
+  width: 50%;
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  color: #F12200;
+  display: inline-block;
+}
+.region_bot>view:nth-child(1){
+  border-bottom-left-radius: 20rpx;
+
+}
+
+.ques{
+ background: #F12200;
+ color: #fff!important;
+
+  border-bottom-right-radius: 20rpx;
+}

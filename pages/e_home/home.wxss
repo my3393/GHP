@@ -97,7 +97,7 @@ white-space: nowrap;
 }
 .class-one{
   text-align: center;
-  width: 90rpx;
+  width: calc((100% - 60rpx)/3);
   margin-right: 20rpx;
   display: inline-block;
 }
@@ -189,12 +189,16 @@ white-space: nowrap;
 }
 .nav{
   margin-top: 30rpx;
+  
 }
 .nav-list{
   width: calc((100% - 60rpx)/2);
   margin-left: 20rpx;
   background: #fff;
-
+  margin-top: 30rpx;
+  display: inline-block;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
 }
 .list-img{
   width: 100%;

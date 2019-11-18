@@ -1,0 +1,122 @@
+<!-- pages/search_store/search_store.wxml -->
+<view class='a-nav bg-white' style='height:{{navH}}px'>
+  <view class='a-nav-title'>
+    <view class="inpu">
+      <input placeholder="商家，店铺名称"></input>
+      <view class="dete">
+        <image src="../../images/detele.png"></image>
+      </view>
+    </view>
+    <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image>
+  </view>
+</view>
+<view class="list">
+  <view class="list-nav clearfix">
+    <view class="store-img">
+      <image src="../../images/te.png" />
+    </view>
+    <view class="list-name">
+      <view>宁夏枸杞</view>
+      <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+    </view>
+    <view class="list-g">进店</view>
+    <view class="classify" style="padding:0;margin-top: 20rpx; ">
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+   </view>
+  </view>
+  <view class="list-nav clearfix">
+    <view class="store-img">
+      <image src="../../images/te.png" />
+    </view>
+    <view class="list-name">
+      <view>宁夏枸杞</view>
+      <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+    </view>
+    <view class="list-g">进店</view>
+    <view class="classify" style="padding:0;margin-top: 20rpx; ">
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+       <view class="class-two">
+         <view class="class-t-img"><image src="../../images/te.png" /></view>
+         <view class="class-t-n">
+           零食食品坚果干肌肤而价格
+         </view>
+         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
+       </view>
+   </view>
+  </view>
+</view>

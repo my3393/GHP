@@ -1,18 +1,22 @@
-// pages/e_ specialty/e_ specialty.js
+// pages/search/search.js
+const App = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    showIcon:true,
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      navH: App.globalData.navHeight
+    })
   },
 
   /**

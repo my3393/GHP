@@ -1,19 +1,21 @@
 {
   "pages": [
+    "pages/store_detail/store_detail",
+    "pages/search_store/search_store",
+    "pages/search_name/search_name",
+    "pages/search/search",
+    "pages/e_home/home",
     "pages/navig/navig",
     "pages/mine_yb/mine_yb",
     "pages/person/person ",
     "pages/e_mine/mine",
     "pages/e_shoping/shoping",
     "pages/e_ welfare/e_ welfare",
-    
     "pages/e_specialty/e_specialty",
-    "pages/e_home/home",
     "pages/good_detail/good_detail",
     "pages/canvas/canvas",
     "pages/index/index",
     "pages/logs/logs",
-    "component/top/index",
     "pages/person_name/person_name"
   ],
   "tabBar": {

@@ -1,0 +1,89 @@
+/* pages/search/search.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+
+.inpu{
+  position: absolute;
+  bottom: 15rpx;
+  left:80rpx;
+  width: 430rpx;
+  font-size: 28rpx;
+  border: 1rpx #e5e5e5 solid;
+  border-radius: 40rpx;
+  height: 60rpx;
+}
+.inpu input{
+  height: 100%;
+  text-align: left;
+  margin-left: 20rpx
+}
+.host{
+  margin-top: 60rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+.nav-h1{
+  display: inline-block;
+}
+.detele{
+  width: 24rpx;
+  height: 24rpx;
+  float: right;
+}
+.detele image{
+  width: 100%;
+  height: 100%;
+}
+.list-n{
+  background: #f5f5f5;
+  padding: 10rpx 22rpx;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  color: #666666;
+}
+.store{
+  height: 100rpx;
+  width: 100%;
+  background: #fff;
+  margin-top: 1rpx;
+  line-height: 100rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.store-img{
+  width: 24rpx;
+  height: 24rpx;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.store-img image{
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+.store-n{
+  display: inline-block;
+  vertical-align: middle;
+  width: 88%;
+}
+.store-name{
+  display: inline-block;
+  width: 88%;
+}
+.store-right{
+  float: right;
+  width: 26rpx;
+  height: 26rpx;
+}
+.store-right image{
+  width: 100%;
+  height: 100%;
+}
+

@@ -1,0 +1,17 @@
+<view class="top-img">
+    <view class='a-nav bg-white' style='height:{{navH}}px'>
+        <view class='a-nav-title'>
+            <view class="inpu">
+                <input placeholder="商家，店铺名称"></input>
+                <view class="dete">
+                    <image src="../../images/detele.png"></image>
+                </view>
+            </view>
+            <view class="top_dao">
+                <view ><image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image></view>
+                <view ><image src='../../images/daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image></view>
+            </view>
+            <!-- <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image> -->
+        </view>
+    </view>
+</view>
