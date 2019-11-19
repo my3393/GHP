@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-     isshow:true,
+    isshow: true,
     statusBarHeight: 0,
     titleBarHeight: 0,
   },
@@ -95,17 +95,17 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onPageScroll: function(e) {
+  onPageScroll: function (e) {
     console.log(e.scrollTop)
     let that = this
-    if(e.scrollTop > 40){
-       that.setData({
-         isshow:false,
-       })
-    }else{
+    if (e.scrollTop > 40) {
       that.setData({
-        isshow:true
+        isshow: false,
+      })
+    } else {
+      that.setData({
+        isshow: true
       })
     }
-}
+  }
 })

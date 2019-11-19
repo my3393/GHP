@@ -9,6 +9,11 @@
           <image src='../../images/h_daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image>
         </view>
       </view>
+      <view class="top_center" hidden="{{is_top}}">
+         <text >商品</text>
+         <text >评价</text>
+         <text >详情</text>
+      </view>
     </view>
   </view>
 </view>
@@ -212,33 +217,200 @@
     </view>
   </scroll-view>
 </view>
+<view class="list_nav clearfix">
+  <view class="store-img">
+    <image src="../../images/te.png" />
+  </view>
+  <view class="list-name">
+    <view>宁夏枸杞</view>
+    <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+  </view>
+  <view class="list-g">进店</view>
+  <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two" style="vertical-align: top;">
+      <view class="class-t-img">
+        <image src="../../images/chakan.png" />
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<view class="list_nav clearfix">
+  <view class="store-img">
+    <image src="../../images/te.png" />
+  </view>
+  <view class="list-name">
+    <view>宁夏枸杞</view>
+    <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+  </view>
+  <view class="list-g">进店</view>
+  <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two" style="vertical-align: top;">
+      <view class="class-t-img">
+        <image src="../../images/chakan.png" />
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<view class="list_nav clearfix">
+  <view class="store-img">
+    <image src="../../images/te.png" />
+  </view>
+  <view class="list-name">
+    <view>宁夏枸杞</view>
+    <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+  </view>
+  <view class="list-g">进店</view>
+  <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two" style="vertical-align: top;">
+      <view class="class-t-img">
+        <image src="../../images/chakan.png" />
+      </view>
+    </view>
+  </scroll-view>
+</view>
 <!-- 底部 -->
 <view class="foot">
-  <view class="foot-left">
+  <view class="foot_left">
     <view>
-      <view class="f_l_img">
-          <image src="../../iamges/xinxin_n.png" />
-      </view>
+      <image src="../../images/xinxin_n.png" />
       <view>收藏</view>
     </view>
     <view>
-      <view class="f_l_img">
-          <image src="../../iamges/store.png" />
-      </view>
+      <image src="../../images/store.png" />
       <view>店铺</view>
     </view>
     <view>
-      <view class="f_l_img">
-          <image src="../../iamges/shop.png" />
-      </view>
+      <image src="../../images/shop.png" />
       <view>购物车</view>
     </view>
   </view>
-  <view class="foot-right">
-    <view >加入购物车</view>
-    <view >立即购买</view>
+  <view class="foot_right">
+    <view class="joincart">加入购物车</view>
+    <view class="buynow">立即购买</view>
   </view>
 </view>
+<!-- 滚轮显示 -->
+
 <!-- <view class="goodsdetialtwo">
   <view class='guige' bindtap='guigeselect'>
     <view style='color:#676767;'>规格：</view>

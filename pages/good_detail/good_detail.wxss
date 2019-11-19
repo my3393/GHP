@@ -2,6 +2,16 @@ page {
     background: #f9f9f9;
     font-size: 24rpx;
   }
+  .top_center{
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    font-size: 28rpx;
+    
+  }
+  .top_center>text{
+    margin-right: 14rpx;
+  }
   .top_dao{
         position: relative;
         position: absolute;
@@ -287,34 +297,41 @@ overflow: hidden;
     position: fixed;
     bottom: 0;
     left: 0;
-  }
-  .foot>view{
-    display: inline-block;
-    width: 50%;
-  }
-  .f_l_img{
-    width: 41rpx;
-    height: 41rpx;
-  }
-  .f_l_img image{
-    width: 100%;
-    height: 100%;
+    padding-top: 10rpx;
+    box-sizing: border-box;
   }
   .foot_left{
+    float: left;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    width: 49%;
   }
-  .foot-right>view{
-    width: 20%;
-    height: 70rpx;
-    border-radius:40rpx ;
+  .foot_left>view{
     text-align: center;
-    line-height: 70rpx;
   }
-  .foot-right>view:nth-child(1){
+  .foot image{
+    width: 41rpx;
+    height: 41rpx;
+  }  
+  .foot_right{
+    float: right;
+    width: 50%;
+  }
+
+  .foot_right>view{
+    width: 42%;
+    display: inline-block;
+    height: 70rpx;
+    color: #fff;
+    border-radius: 40rpx;
+    line-height: 70rpx;
+    text-align: center;
+    margin-left: 20rpx;
+  }
+  .joincart{
     background:linear-gradient(to right, #FFC64D, #FFD33B);   
   }
-  .foot-right>view:nth-child(2){
+  .buynow{
     background:linear-gradient(to right, #f12200, #ff4e17);   
   }
   .guige {

@@ -1,7 +1,7 @@
 const App = getApp();
 Page({
   data: {
-    
+     is_top:true,
     photos: [
       "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
       "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
@@ -276,4 +276,17 @@ Page({
       })
     }
   }, 
+  onPageScroll: function (e) {
+    console.log(e.scrollTop)
+    let that = this
+    if (e.scrollTop > 200) {
+      that.setData({
+        is_top: false,
+      })
+    } else {
+      that.setData({
+        is_top: true
+      })
+    }
+  }
 })
