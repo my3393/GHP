@@ -1,7 +1,322 @@
 page {
-    background: #fff;
+    background: #f9f9f9;
+    font-size: 24rpx;
   }
-   
+  .top_dao{
+        position: relative;
+        position: absolute;
+        bottom:18rpx;
+        left: 10rpx;
+        width: 160rpx;
+        height: 62rpx;
+        border-radius: 40rpx;
+        background: #fff;
+        /* background: rgba(0, 0, 0, 0.3); */
+        
+    }
+    .top_dao image{
+        width: 32rpx;
+        height: 32rpx;
+    }
+    .b_back{
+        position: absolute;
+        left: 20rpx;
+        top: 16rpx;
+    }
+    .daoh{
+        position: absolute;
+        right: 30rpx;
+        top: 16rpx;
+    }
+  .banner_top{
+    position: relative;
+  }
+  .banner{
+    width: 100%;
+    height: 747rpx;
+    
+  }
+  .plays{
+    position: relative;
+  }
+  .play{
+    width: 82rpx;
+    height: 82rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%)
+  }
+  .banner image{
+    width: 100%;
+    height: 100%;
+  }
+   .banner_num {
+        position: absolute;
+        bottom: 30rpx;
+        right: 20rpx;
+        width: 92rpx;
+        font-size: 22rpx;
+        height: 42rpx;
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+        border-radius: 21rpx;
+        text-align: center;
+        line-height: 42rpx;
+  
+    }
+    /* 导航 */
+    .naviga{
+      position: fixed;
+      left: 60rpx;
+      background: #fff;
+      padding: 20rpx;
+      box-sizing: border-box;
+      border-radius: 12rpx;
+      width: 190rpx;
+      font-size: 24rpx;
+      display: none;
+    }
+    .naviga_list{
+      height: 70rpx;
+      line-height: 70rpx;
+      border-bottom: 1rpx #f9f9f9 solid;
+    }
+    .naviga_img{
+      width: 26rpx;
+      height: 26rpx;
+      float: left;
+      margin-top: 4rpx;
+      margin-right: 16rpx;
+    }
+    .naviga_img image{
+      width: 100%;
+      height: 100%;
+    }
+    .conter{
+      padding: 20rpx;
+      box-sizing: border-box;
+      background: #fff;
+
+    }
+   .w_price{
+     color: #f12200;
+     display: inline-block;
+   }
+   .fenx{
+     float: right;
+     width: 34rpx;
+     height: 34rpx;
+   }
+   .fenx image{
+     width: 100%;
+     height: 100%;
+   }
+   .huiy{
+     margin-top: 40rpx;
+     background: #f3f3f3;
+     font-size: 22rpx;
+     padding: 20rpx;
+     box-sizing: border-box;
+     border-radius: 6rpx;
+   }
+   .huiyj{
+     padding: 4rpx 10rpx;
+     margin-right: 14rpx;
+     box-sizing: border-box;
+     background:linear-gradient(to right, #f12200, #ff4e17);
+     border-radius: 8rpx;
+     color: #fff;
+     
+   }
+   .kait{
+     float: right;
+     color: #f12200;
+   }
+   .kaith{
+     color: #666666;
+     margin-top: 16rpx;
+   }
+   .sp_j{
+     margin-top: 20rpx;
+   }
+   .sp_jj{
+     color: #999;
+     font-size: 24rpx;
+     margin-top: 20rpx;
+     display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+overflow: hidden;
+   }
+   .can{
+  
+     height: 70rpx;
+     width: 100%;
+     border-top: 1rpx #f9f9f9 solid;
+     line-height: 70rpx;
+   }
+   .candi{
+     color: #999;
+     margin-right: 40rpx;
+   }
+   .right{
+     width: 18rpx;
+     height: 18rpx;
+     float: right;
+
+   }
+   .ping{
+     height: 70rpx;
+     line-height: 70rpx;
+     background: #fff;
+     padding: 0 20rpx;
+     box-sizing: border-box;
+   }
+   .pingj{
+     display: inline-block;
+     
+   }
+   .rights{
+     float: right;
+     font-size: 24rpx;
+     color: #666;
+   }
+   .right image{
+     width: 100%;
+     height: 100%;
+   }
+   .pj_dao{
+     width: 518rpx;
+     height: 210rpx;
+     background: #fff;
+     box-shadow:2px 2px 5px #333333 ;
+     margin-left: 30rpx;
+     display: inline-block;
+     border-radius: 12rpx;
+     padding: 20rpx;
+     box-sizing: border-box;
+     margin-bottom: 20rpx;
+   }
+   .pj_dao_tx{
+     width: 60rpx;
+     height: 60rpx;
+     float: left;
+     margin-right: 16rpx;
+   }
+   .pj_dao_tx image{
+     width: 100%;
+     height: 100%;
+   }
+   .xinxin{
+     width: 18rpx;
+     height: 18rpx;
+   }
+   .xinxin image{
+     width: 100%;
+     height: 100%;
+     margin-left: 10rpx;
+   }
+   .xinxin image:nth-child(1){
+    margin-left: 0;
+   }
+   .pj_wen{
+     margin-top: 20rpx;
+     width: 300rpx;
+     float: left;
+     white-space: initial; 
+     display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+overflow: hidden;
+   }
+   .scroll{
+     background: #fff;
+   }
+   scroll-view {
+    width: 100%;
+    white-space: nowrap; 
+   }
+   .pj_dao_img{
+     width: 170rpx;
+     height: 170rpx;
+     float: right;
+   }
+   .pj_dao_img image{
+     width: 100%;
+     height: 100%;
+   }
+   .list_nav{
+     margin-top: 40rpx;
+     background: #fff;
+     padding: 20rpx;
+     box-sizing: border-box;
+   }
+   .store-img{
+     width: 70rpx;
+     height: 70rpx;
+     float: left;
+     margin-right: 20rpx;
+   }
+   .store-img image{
+     width: 100%;
+     height: 100%;
+   }
+   .list-name{
+    display: inline-block;
+  }
+  .list-q{
+    font-size: 22rpx;
+    color: #999;
+  }
+  .list-g{
+    float: right;
+    border: 1rpx #f12200 solid;
+    width: 120rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    color: #f12200;
+    border-radius: 30rpx;
+  }
+  /* 底部 */
+  .foot{
+    width: 100%;
+    height: 90rpx;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  .foot>view{
+    display: inline-block;
+    width: 50%;
+  }
+  .f_l_img{
+    width: 41rpx;
+    height: 41rpx;
+  }
+  .f_l_img image{
+    width: 100%;
+    height: 100%;
+  }
+  .foot_left{
+    display: flex;
+    justify-content: space-between;
+  }
+  .foot-right>view{
+    width: 20%;
+    height: 70rpx;
+    border-radius:40rpx ;
+    text-align: center;
+    line-height: 70rpx;
+  }
+  .foot-right>view:nth-child(1){
+    background:linear-gradient(to right, #FFC64D, #FFD33B);   
+  }
+  .foot-right>view:nth-child(2){
+    background:linear-gradient(to right, #f12200, #ff4e17);   
+  }
   .guige {
     height: 80rpx;
     line-height: 80rpx;

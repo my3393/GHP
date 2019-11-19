@@ -1,7 +1,7 @@
 //canvas/canvas.js
 Page({
   data: {
-    code: '../../images/head.png', //如果是服务器图片一定要先下载到本地
+    code: '../../images/ma.png', //如果是服务器图片一定要先下载到本地
     imgSrc: '',
     canva:true,
     res:'你的'

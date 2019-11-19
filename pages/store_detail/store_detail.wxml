@@ -1,17 +1,218 @@
-<view class="top-img">
+<view class="top_img" style="background-image: url({{Img}})">
     <view class='a-nav bg-white' style='height:{{navH}}px'>
         <view class='a-nav-title'>
             <view class="inpu">
-                <input placeholder="商家，店铺名称"></input>
+                <input placeholder="本店特产" placeholder-style="color:#f9f9f9;"></input>
                 <view class="dete">
                     <image src="../../images/detele.png"></image>
                 </view>
             </view>
             <view class="top_dao">
-                <view ><image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image></view>
-                <view ><image src='../../images/daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image></view>
+                <view>
+                    <image src='../../images/b_left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
+                </view>
+                <view>
+                    <image src='../../images/daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image>
+                </view>
             </view>
             <!-- <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image> -->
         </view>
+    </view>
+    <view class="store" style='margin-top:{{navH}}px'>
+        <view class='store_img'>
+            <image src="../../images/te.png" />
+        </view>
+        <view class="store_name">
+            <view>觅果旗舰店</view>
+        </view>
+        <view>
+            <view class="biao_img">
+                <image src="../../images/aix.png" />
+            </view>
+            <view class="focus">1.8万人关注</view>
+        </view>
+        <view style="width:560rpx">怀念家乡，回馈感恩，饮水思源，滴水之恩</view>
+    </view>
+    <view class="foc" style='margin-top:{{navH + 10}}px'>+ 关注</view>
+    <view class="mask_t"></view>
+</view>
+<!-- 首页 -->
+  <view wx:if='{{tar == 0}}'>
+    <view class='goods'>
+        <view class="rescom">
+            <text class="rescom-w">特产推荐</text>
+            <text class="h1_b">感受他乡风情，享受地方特产</text>
+        </view>
+        <scroll-view class="classify" scroll-x="true">
+            <view class="class-two">
+                <view class="class-t-img">
+                    <image src="../../images/te.png" />
+                </view>
+                <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+                <view class="class-t-p">
+                    <text style="font-size:22rpx">￥</text>
+                    28
+                </view>
+            </view>
+            <view class="class-two">
+                <view class="class-t-img">
+                    <image src="../../images/te.png" />
+                </view>
+                <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+                <view class="class-t-p">
+                    <text style="font-size:22rpx">￥</text>
+                    28
+                </view>
+            </view>
+            <view class="class-two">
+                <view class="class-t-img">
+                    <image src="../../images/te.png" />
+                </view>
+                <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+                <view class="class-t-p">
+                    <text style="font-size:22rpx">￥</text>
+                    28
+                </view>
+            </view>
+            <view class="class-two">
+                <view class="class-t-img">
+                    <image src="../../images/te.png" />
+                </view>
+                <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+                <view class="class-t-p">
+                    <text style="font-size:22rpx">￥</text>
+                    28
+                </view>
+            </view>
+            <view class="class-two">
+                <view class="class-t-img">
+                    <image src="../../images/te.png" />
+                </view>
+                <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+                <view class="class-t-p">
+                    <text style="font-size:22rpx">￥</text>
+                    28
+                </view>
+            </view>
+            <view class="class-two">
+                <view class="class-t-img">
+                    <image src="../../images/te.png" />
+                </view>
+                <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+                <view class="class-t-p">
+                    <text style="font-size:22rpx">￥</text>
+                    28
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="tag">
+        <view>综合</view>
+        <view>价格</view>
+        <view>销量</view>
+        <view>上新</view>
+        <view class="switch">
+            <image src="../../images/switch.png" />
+        </view>
+    </view>
+    <view class="store_nav_list">
+        <view class="nav-list">
+            <view class="list-img">
+                <image src="../../images/tui.jpg" />
+            </view>
+            <view class="list-j">就磨灭我就将额外</view>
+            <view class="list-qu">宁夏 九儿外网</view>
+            <view class="class-t-p ctp">
+                <text style="font-size:22rpx">￥</text>
+                28
+            </view>
+            <view class="list-rig">
+                <image src="../../images/shop.png" />
+            </view>
+        </view>
+        <view class="nav-list">
+            <view class="list-img">
+                <image src="../../images/tui.jpg" />
+            </view>
+            <view class="list-j">就磨灭我就将额外</view>
+            <view class="list-qu">宁夏 九儿外网</view>
+            <view class="class-t-p ctp">
+                <text style="font-size:22rpx">￥</text>
+                28
+            </view>
+            <view class="list-rig">
+                <image src="../../images/shop.png" />
+            </view>
+        </view>
+        <view class="nav-list">
+            <view class="list-img">
+                <image src="../../images/tui.jpg" />
+            </view>
+            <view class="list-j">就磨灭我就将额外</view>
+            <view class="list-qu">宁夏 九儿外网</view>
+            <view class="class-t-p ctp">
+                <text style="font-size:22rpx">￥</text>
+                28
+            </view>
+            <view class="list-rig">
+                <image src="../../images/shop.png" />
+            </view>
+        </view>
+        <view class="nav-list">
+            <view class="list-img">
+                <image src="../../images/tui.jpg" />
+            </view>
+            <view class="list-j">就磨灭我就将额外</view>
+            <view class="list-qu">宁夏 九儿外网</view>
+            <view class="class-t-p ctp">
+                <text style="font-size:22rpx">￥</text>
+                28
+            </view>
+            <view class="list-rig">
+                <image src="../../images/shop.png" />
+            </view>
+        </view>
+    </view>
+  </view>
+  <!-- 特产分类 -->
+  <view wx:if='{{tar == 1}}'>
+      <view class="goods">
+          <view class="tec_list">
+               全部商品 
+              <view class='tec'>
+                 <image src="../../images/right.png" />
+              </view>
+          </view>
+           <view class="tec_list">
+               全部商品 
+              <view class='tec'>
+                 <image src="../../images/right.png" />
+              </view>
+          </view>
+           <view class="tec_list">
+               全部商品 
+              <view class='tec'>
+                 <image src="../../images/right.png" />
+              </view>
+          </view>
+           <view class="tec_list">
+               全部商品 
+              <view class='tec'>
+                 <image src="../../images/right.png" />
+              </view>
+          </view>
+          
+      </view>
+  </view>
+<!-- 底部 -->
+<view class="store_footer">
+    <view class="{{tar == idx ? 'tag_a': ''}}" wx:for="{{tag}}" wx:for-index="idx" bind:tap="tag" data-index='{{idx}}'>
+        <view wx:if='{{tar == idx}}'>
+            <image src="{{item.imgs}}" />
+        </view>
+        <view wx:else>
+            <image src="{{item.img}}" />
+        </view>
+        <view>{{item.name}}</view>
     </view>
 </view>

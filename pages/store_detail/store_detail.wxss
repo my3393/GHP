@@ -5,9 +5,10 @@ page{
     }
     .inpu{
       position: absolute;
-      bottom: 15rpx;
+      bottom: 18rpx;
       left:200rpx;
-      width: 330rpx;
+      width: 300rpx;
+      background: rgba(0, 0, 0, 0.3);
       font-size: 28rpx;
       border: 1rpx #e5e5e5 solid;
       border-radius: 40rpx;
@@ -34,8 +35,174 @@ page{
     }
 
     .top_dao{
-        width: 180rpx;
-        height: 60rpx;
+        position: relative;
+        position: absolute;
+        bottom:18rpx;
+        left: 10rpx;
+        width: 160rpx;
+        height: 62rpx;
         border-radius: 40rpx;
-        background: #f12200;
+        background: rgba(0, 0, 0, 0.3);
+        
+    }
+    .top_dao image{
+        width: 32rpx;
+        height: 32rpx;
+    }
+    .b_back{
+        position: absolute;
+        left: 20rpx;
+        top: 16rpx;
+    }
+    .daoh{
+        position: absolute;
+        right: 30rpx;
+        top: 16rpx;
+    }
+    .top_img{
+        width: 100%;
+        height: 370rpx;
+         background-size: cover;
+    }
+    .mask_t{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 370rpx;
+        background: #000;
+        opacity: 0.2;
+    }
+    .store_img{
+        width: 100rpx;
+        height: 100rpx;
+        border-radius: 8rpx;
+        overflow: hidden;
+        float: left;
+        margin-right: 14rpx;
+    }
+    .store_name{
+        font-size: 28rpx;
+    }
+    .store_img image{
+        width: 100%;
+        height: 100%;
+    }
+    .store{
+        display: inline-block;
+        margin-top: 10rpx;
+        padding: 20rpx;
+        box-sizing: border-box;
+        color: #fff;
+        font-size: 22rpx;
+    }
+    .biao_img{
+        width: 22rpx;
+        height: 22rpx;
+        display: inline-block;
+    }
+    .biao_img image{
+        width: 100%;
+        height: 100%;
+    }
+    .focus{
+        display: inline-block;
+        margin-left: 20rpx;
+       
+    }
+    .foc{
+        width: 110rpx;
+        height: 46rpx;
+        float: right;
+        color: #fff;
+        text-align: center;
+        line-height: 46rpx;
+        border-radius: 20rpx;
+        margin-right: 30rpx;
+        font-size: 22rpx;
+        margin-top: 30rpx;
+        background:linear-gradient(to right, #f12200, #ff4e17);
+    }
+    .goods{
+        background: #fff;
+        border-radius: 20rpx;
+        width: calc(100% - 40rpx);
+        margin-left: 20rpx;
+        position: relative;
+        top: -50rpx;
+        padding: 20rpx;
+        box-sizing: border-box;
+    }
+    .tecan_h1{
+        font-weight: 550;
+        display: inline-block;
+        margin-right: 20rpx;
+    }
+    .h1_b{
+        font-size: 22rpx;
+        color: #999;
+    }
+    .classify{
+        padding-bottom: 20rpx;
+        box-sizing: border-box;
+    }
+    .tag{
+        padding: 0 20rpx;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+    }
+    .switch{
+        width: 26rpx;
+        height: 26rpx;
+        float: right;
+        margin-top: 5rpx;
+
+    }
+    .switch image{
+        width: 100%;
+        height: 100%;
+    }
+    .store_footer{
+        display: flex;
+        height: 98rpx;
+        background: #fff;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        justify-content: space-around;
+    }
+    .store_footer>view{
+        text-align: center;
+        font-size: 22rpx;
+        margin-top: 10rpx;
+    }
+    .store_footer image{
+        width: 46rpx;
+        height: 46rpx;
+    }
+    .tag_a{
+        color: #f12200; 
+    }
+    .store_nav_list{
+        padding-bottom: 100rpx;
+        box-sizing: border-box;
+
+    }
+    .tec_list{
+        height: 90rpx;
+        border-bottom: 1rpx #f9f9f9 solid;
+        line-height: 90rpx;
+    }
+    .tec_list:last-child{
+        border: 0;
+    }
+    .tec{
+        width: 20rpx;
+        height: 22rpx;
+        float: right;
+    }
+    .tec image{
+        width: 100%;
+        height: 100%;
     }

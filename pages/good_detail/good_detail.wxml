@@ -1,4 +1,245 @@
-<view class="goodsdetialtwo">
+<view>
+  <view class='a-nav bg-white' style='height:{{navH}}px'>
+    <view class='a-nav-title'>
+      <view class="top_dao">
+        <view>
+          <image src='../../images/left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
+        </view>
+        <view>
+          <image src='../../images/h_daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="banner_top">
+  <swiper bindchange="swiperChange" class="banner" circular="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
+    <block>
+      <swiper-item class='plays'>
+        <image src="../../images/tui.jpg"></image>
+        <view class="play">
+          <image src="../../images/play.png"></image>
+        </view>
+      </swiper-item>
+      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{photos}}'>
+        <image class="banner_img" src="{{item}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="banner_num">{{current+1}} / {{photos.length + 1}}</view>
+</view>
+<view class="naviga" style='top:{{navH}}px'>
+  <view class="naviga_list">
+    <view class="naviga_img">
+      <image src="../../images/searchs.png" />
+    </view>
+    搜索特产
+  </view>
+  <view class="naviga_list">
+    <view class="naviga_img">
+      <image src="../../images/specialty.png" />
+    </view>
+    家乡特产
+  </view>
+  <view class="naviga_list">
+    <view class="naviga_img">
+      <image src="../../images/mine.png" />
+    </view>
+    个人中心
+  </view>
+  <view class="naviga_list">
+    <view class="naviga_img">
+      <image src="../../images/yjfk.png" />
+    </view>
+    意见反馈
+  </view>
+</view>
+<view class="conter">
+  <view class="w_price">
+    <text style="font-size:20rpx;">￥</text>
+    28 - 128
+  </view>
+  <view class='fenx'>
+    <image src="../../images/fenx.png" />
+  </view>
+  <view class="huiy">
+    <view class="w_price">
+      <text class='huiyj'>会员价</text>
+      ￥28 - 128
+    </view>
+    <view class="kait">立即开通 ></view>
+    <view class="kaith">分享成交预计可收入￥13.25</view>
+  </view>
+  <view class="dan sp_j">宁安堡枸杞子宁夏特级枸杞500g免洗小袋宁苟杞茶2斤</view>
+  <view class="sp_jj">宁夏枸杞，精选枸杞，特级精选宁夏</view>
+  <view class="can">
+    <text class="candi">产地</text>
+    宁夏回族自治区 银川市 西夏区 贺兰山街道
+  </view>
+  <view class="can">
+    <text class="candi">保障</text>
+    宁夏回族自治区 银川市 西夏区 贺兰山街道
+    <view class="right">
+      <image src="../../images/right.png" />
+    </view>
+  </view>
+</view>
+<view class="ping">
+  <view class="pingj">用户评价（2）</view>
+  <view class="rights">更多 ></view>
+</view>
+<scroll-view scroll-x="{{true}}" class="scroll">
+  <view class="pj_dao clearfix">
+    <view style="display:inline-block">
+      <view class="clearfix">
+        <view class="pj_dao_tx">
+          <image src="../../images/head.png" />
+        </view>
+        <view class="pj_dao_name">刘正国</view>
+        <view class="xinxin">
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+        </view>
+      </view>
+      <view class="pj_wen">包装很精美，质量很棒，物美物质量很棒，物美物价廉，值得推荐，赞赞赞赞...</view>
+    </view>
+    <view class="pj_dao_img">
+      <image src="../../images/te.png" />
+    </view>
+  </view>
+  <view class="pj_dao clearfix">
+    <view style="display:inline-block">
+      <view class="clearfix">
+        <view class="pj_dao_tx">
+          <image src="../../images/head.png" />
+        </view>
+        <view class="pj_dao_name">刘正国</view>
+        <view class="xinxin">
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+        </view>
+      </view>
+      <view class="pj_wen">包装很精美，质量很棒，物美物质量很棒，物美物
+美价廉，值得推荐，赞赞赞赞...</view>
+    </view>
+    <view class="pj_dao_img">
+      <image src="../../images/te.png" />
+    </view>
+  </view>
+  <view class="pj_dao clearfix">
+    <view style="display:inline-block">
+      <view class="clearfix">
+        <view class="pj_dao_tx">
+          <image src="../../images/head.png" />
+        </view>
+        <view class="pj_dao_name">刘正国</view>
+        <view class="xinxin">
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+          <image src="../../images/xinxin.png" />
+        </view>
+      </view>
+      <view class="pj_wen">包装很精美，质量很棒，物美物质量很棒，物美物
+美价廉，值得推荐，赞赞赞赞...</view>
+    </view>
+    <view class="pj_dao_img">
+      <image src="../../images/te.png" />
+    </view>
+  </view>
+</scroll-view>
+<view class="list_nav clearfix">
+  <view class="store-img">
+    <image src="../../images/te.png" />
+  </view>
+  <view class="list-name">
+    <view>宁夏枸杞</view>
+    <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+  </view>
+  <view class="list-g">进店</view>
+  <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two">
+      <view class="class-t-img">
+        <image src="../../images/te.png" />
+      </view>
+      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-p">
+        <text style="font-size:22rpx">￥</text>
+        28
+      </view>
+    </view>
+    <view class="class-two" style="vertical-align: top;">
+      <view class="class-t-img">
+        <image src="../../images/chakan.png" />
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<!-- 底部 -->
+<view class="foot">
+  <view class="foot-left">
+    <view>
+      <view class="f_l_img">
+          <image src="../../iamges/xinxin_n.png" />
+      </view>
+      <view>收藏</view>
+    </view>
+    <view>
+      <view class="f_l_img">
+          <image src="../../iamges/store.png" />
+      </view>
+      <view>店铺</view>
+    </view>
+    <view>
+      <view class="f_l_img">
+          <image src="../../iamges/shop.png" />
+      </view>
+      <view>购物车</view>
+    </view>
+  </view>
+  <view class="foot-right">
+    <view >加入购物车</view>
+    <view >立即购买</view>
+  </view>
+</view>
+<!-- <view class="goodsdetialtwo">
   <view class='guige' bindtap='guigeselect'>
     <view style='color:#676767;'>规格：</view>
     <view style='width:80%;'>
@@ -43,4 +284,4 @@
       确定
     </view>
   </view>
-</view>
+</view> -->

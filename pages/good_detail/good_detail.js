@@ -1,5 +1,13 @@
+const App = getApp();
 Page({
   data: {
+    
+    photos: [
+      "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
+      "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
+      "https://graph.baidu.com/resource/116b9dee63af0f77fcb8f01572947716.jpg",
+      "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
+    ],
     //数据格式
     result: {
       "goods": {
@@ -128,9 +136,13 @@ Page({
     arrName: [],
     textStates: ["view-btns-text-normal", "view-btns-text-select"],
     num:1,
+    current: 0
   },
  
   onLoad: function(options) {
+    this.setData({
+      navH: App.globalData.navHeight
+    })
     let that = this;
     let guilists = that.data.guilist;
     guilists.price = that.data.result.goods.shop_price;
@@ -255,5 +267,13 @@ Page({
     that.setData({
       animationData: animal1.export()
     })
-  }
+  },
+  swiperChange: function (e) {
+    var that = this;
+    if (e.detail.source == 'touch') {
+      that.setData({
+        current: e.detail.current
+      })
+    }
+  }, 
 })

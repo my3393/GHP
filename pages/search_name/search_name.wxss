@@ -159,10 +159,11 @@ font-size: 28rpx;
 .goods-g image{
   width: 21rpx;
   height: 23rpx;
+  
 }
 
 /*  */
-.nav-list{
+/* .nav-list{
   width: calc((100% - 60rpx)/2);
   margin-left: 20rpx;
   background: #fff;
@@ -220,7 +221,7 @@ font-size: 28rpx;
   color: #F12200;
   font-size: 28rpx;
   margin-top: 20rpx;
-}
+} */
 
 /* 筛选 */
 .page-top{
