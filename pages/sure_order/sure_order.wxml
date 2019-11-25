@@ -1,0 +1,145 @@
+<!--pages/sure_order/sure_order.wxml-->
+<view class="top">
+    <view class="top_img">
+        <image  src="../../images/hyjlb.png" />
+    </view>
+    <view class="top_n">
+        开通会员，预计本单最高可为您节省￥56.78
+    </view>
+    <view class="top_r">
+        >
+    </view>
+</view>
+<view wx:if="{{address}}">
+    <view class="address" >
+        
+        <view class="add_address">
+            + 添加收货地址
+        </view>
+        <view class="address_cent_r">
+            >
+        </view>
+       
+    </view>
+    <view class="address_t">
+        <image src="../../images/address_t.png" />
+    </view>
+</view>
+<view wx:else>
+    <view class="address" >
+        <view class="address_top">
+            <text class="mor">默认</text>
+            广东省深圳市宝安区西乡街道
+        </view>
+        <view class="address_cent">
+            西乡前进二路134号 808 
+        </view>
+        <view class="address_cent_r">
+            >
+        </view>
+        <view class="address_bott">
+            杨先生 <text style='color:#999'> 18245915649</text>
+        </view>
+    </view>
+    <view class="address_t">
+        <image src="../../images/address_t.png" />
+    </view>
+</view>
+
+<view class="nav">
+   <view class="list">
+        <view class="nav_top">
+        <view class="sotre_img">
+            <image src="../../images/store.png" />
+        </view>
+        良品铺子
+        <view class="store_r">
+            <image src="../../images/right.png" />
+        </view>
+        </view>
+        <view >
+            <view class="good_img">
+                <image src="../../images/te.png" />
+            </view>
+            <view class="good_list">
+                <view class='goodsname dan'>青海特产可可西里藏獒特色牛...</view>
+            <text class='specification'>银川市 西夏区 贺兰山西路街道</text>
+            <view class="guig">
+                <view class='gui-g'>袋装500g</view>
+            </view>
+            <text class='price'><text class="yuan">￥</text>29.9</text>
+            <view class="good_num">*2</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 订单备注 -->
+
+<view class="beiz">
+    <view class="beiz_h1">
+        订单备注
+    </view>
+    <view class="inpu">
+        <input placeholder="选填，请先跟商家沟通确认" />
+    </view>
+</view>
+<view class="list clearfix">
+    <view class="price_list">
+        商品总额
+        <view class="price_r">
+            ￥56.00
+        </view>
+    </view>
+    <view class="price_list">
+        会员优惠
+        <view class="price_r yan">
+            ￥56.00
+        </view>
+    </view>
+    <view class="price_list">
+        运费
+        <view class="price_r">
+            ￥56.00
+        </view>
+    </view>
+    <view class="z_right">
+        需付费:<text class="yan font">￥56</text>
+    </view>
+</view>
+
+<view class="badge">
+  <view >
+    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-n">助力家乡</view>
+  </view>
+  <view >
+    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-n">家乡公益</view>
+  </view>
+  <view >
+    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-n">服务保障</view>
+  </view>
+  <view >
+    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-n">担保交易</view>
+  </view>
+</view>
+
+<view class="foot-boot">
+     善家购
+     <view class="foot-boot-m">
+      大爱无疆，感恩家乡
+     </view>
+</view>
+<view class='footer'>
+ <view >
+     合计：<view class="price" style="display:inline-block">
+         <text class="yuan">￥</text>56
+     </view>
+ </view>
+ <view class="pay">
+    微信支付 
+ </view>
+</view>

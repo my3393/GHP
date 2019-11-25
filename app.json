@@ -1,5 +1,14 @@
 {
   "pages": [
+    "pages/hometown/hometown",
+    "pages/welfare_det/welfare_det",
+    "pages/order_all/order_all",
+    "pages/order_detail/order_detail",
+    "pages/welfare_detail/welfare_detail",
+    "pages/add_address/add_address",
+    "pages/address/address",
+    "pages/sure_order/sure_order",
+    "pages/goods_evaluation/goods_evaluation",
     "pages/good_detail/good_detail",
     "pages/store_detail/store_detail",
     "pages/search_store/search_store",
@@ -13,11 +22,11 @@
     "pages/e_shoping/shoping",
     "pages/e_ welfare/e_ welfare",
     "pages/e_specialty/e_specialty",
-    
     "pages/canvas/canvas",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/person_name/person_name"
+    "pages/person_name/person_name",
+    "pages/store_search/store_search"
   ],
   "tabBar": {
     "color": "#808080",

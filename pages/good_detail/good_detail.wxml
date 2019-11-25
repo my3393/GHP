@@ -1,5 +1,5 @@
 <view>
-  <view class='a-nav bg-white' style='height:{{navH}}px'>
+  <view class='a-nav {{is_top ? "" : "bg-white"}} ' style='height:{{navH}}px'>
     <view class='a-nav-title'>
       <view class="top_dao">
         <view>
@@ -10,9 +10,10 @@
         </view>
       </view>
       <view class="top_center" hidden="{{is_top}}">
-         <text >商品</text>
-         <text >评价</text>
-         <text >详情</text>
+         <text class="{{issrcoll == 1 ? 'center_a' :''}}">商品</text>
+         <text class="{{issrcoll == 2 ? 'center_a' :''}}">评价</text>
+         <text class="{{issrcoll == 3 ? 'center_a' :''}}">详情</text>
+            
       </view>
     </view>
   </view>
@@ -26,7 +27,7 @@
           <image src="../../images/play.png"></image>
         </view>
       </swiper-item>
-      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{photos}}'>
+      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{photos}}' wx:key="{{item.ids}}">
         <image class="banner_img" src="{{item}}"></image>
       </swiper-item>
     </block>
@@ -61,8 +62,8 @@
 </view>
 <view class="conter">
   <view class="w_price">
-    <text style="font-size:20rpx;">￥</text>
-    28 - 128
+    <text style="font-size:24rpx;">￥</text>
+    28-128
   </view>
   <view class='fenx'>
     <image src="../../images/fenx.png" />
@@ -89,9 +90,10 @@
     </view>
   </view>
 </view>
+ <!-- 评价 -->
 <view class="ping">
   <view class="pingj">用户评价（2）</view>
-  <view class="rights">更多 ></view>
+  <view class="rights" bind:tap='evaluation'>更多 ></view>
 </view>
 <scroll-view scroll-x="{{true}}" class="scroll">
   <view class="pj_dao clearfix">
@@ -405,8 +407,9 @@
     </view>
   </view>
   <view class="foot_right">
-    <view class="joincart">加入购物车</view>
-    <view class="buynow">立即购买</view>
+    <button size="mini"   class="joincart">加入购物车</button>
+    <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button>
+    <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:else>立即购买</button>
   </view>
 </view>
 <!-- 滚轮显示 -->

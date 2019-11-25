@@ -1,0 +1,91 @@
+/* pages/goods_evaluation/goods_evaluation.wxss */
+page{
+    background: #f9f9f9;
+    font-size: 28rpx;
+}
+.top{
+    width: 100%;
+    height: 80rpx;
+    background: #fff;
+    
+}
+.top>view{
+    padding: 14rpx 16rpx;
+    box-sizing: border-box;
+    color: #666;
+    font-size: 24rpx;
+    background: #ccc;
+    display: inline-block;
+    margin-left: 30rpx;
+    margin-top: 12rpx;
+    border-radius: 30rpx;
+}
+.top_a{
+    background:linear-gradient(to right, #f12200, #ff4e17) !important;
+    color: #fff !important;
+}
+.nav_img{
+    width: 63rpx;
+    height: 63rpx;
+    float: left;
+    margin-right: 12rpx;
+}
+.nav_img image{
+    width: 100%;
+    height: 100%;
+}
+.nav{
+    margin-top: 20rpx;
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    font-size: 26rpx;
+    background: #fff;
+    padding: 20rpx;
+    box-sizing: border-box;
+    border-radius: 8rpx;
+}
+  .xinxin image{
+    width: 18rpx;
+    height: 18rpx;
+    margin-left: 10rpx;
+  }
+  .xinxin image:nth-child(1){
+   margin-left: 0;
+  }
+  .nav_contet{
+      font-size: 24rpx;
+      margin-top: 20rpx;
+  }
+  .nav_list_img{
+      width: 100%;
+  }
+  .nav_list_img image{
+      width: 30%;
+      height: 210rpx;
+      margin-right: 20rpx;
+  }
+  .nav_bott{
+      margin-top: 20rpx;
+
+  }
+  .nav_date{
+      display: inline-block;
+      color: #999;
+      font-size: 22rpx;
+  }
+  .dianz{
+      float: right;
+      color: #999;
+      font-size: 22rpx;
+      margin-top: 4rpx;
+  }
+  .dianz_img{
+      width: 21rpx;
+      height: 20rpx;
+      float: left;
+      margin-right: 6rpx;
+  }
+  .dianz_img image{
+      width: 100%;
+      height: 100%;
+  }

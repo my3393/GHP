@@ -1,5 +1,5 @@
 <view class="container" >
-  <canvas canvas-id="posterCanvas" class="canva-top"  style="width:280px;height:450px;"></canvas>
+  <canvas canvas-id="posterCanvas" class="canva-top"  style="width:calc(100% -300rpx);height:450px;"></canvas>
   <view bindtap="savePoster" class="back">保存海报</view>
 </view>
 <!-- <view bindtap="tap">绘制海报</view> -->

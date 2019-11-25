@@ -1,0 +1,54 @@
+/* pages/hometown/hometown.wxss */
+.nav {
+    padding: 20rpx;
+    box-sizing: border-box;
+
+}
+
+.tag {
+    padding: 10rpx 24rpx;
+    box-sizing: border-box;
+    background: #F5F5F5;
+    font-size: 24rpx;
+    display: inline-block;
+    border-radius: 30rpx;
+    margin-left: 20rpx;
+    margin-top: 20rpx;
+    color: #666666;
+}
+
+.page-footer {
+    position: absolute;
+    bottom: 100rpx;
+    left: 0;
+    width: 100%;
+}
+
+.page-footer>view {
+    width: calc((100% - 60rpx)/2);
+    margin-left: 20rpx;
+    font-size: 28rpx;
+}
+
+.chong {
+    display: inline-block;
+
+    height: 70rpx;
+    text-align: center;
+    line-height: 70rpx;
+    border: 1rpx #F12200 solid;
+    color: #F12200;
+    border-radius: 40rpx;
+}
+
+.que {
+    display: inline-block;
+
+    height: 72rpx;
+    text-align: center;
+    line-height: 72rpx;
+    background: linear-gradient(to right, #f12200, #ff4e17);
+    color: #fff;
+    border-radius: 40rpx;
+    margin-left: 30rpx;
+}

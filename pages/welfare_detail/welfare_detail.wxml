@@ -1,0 +1,69 @@
+<!-- pages/welfare_detail/welfare_detail.wxml -->
+<view class="top">
+  <image src="../../images/tui.jpg" />
+</view>
+<view class="bot">
+  <view class="progre">
+    <view class="pro-t">
+      <view class="pro-left">
+        <view class='canvasBox'>
+          <view class='bigCircle'></view>
+          <view class='littleCircle'></view>
+          <canvas canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
+        </view>
+      </view>
+      <view class="pro-rig">
+        <view>
+          <view class="money">
+            <image src="../../images/money.png" />
+          </view>
+          <text style="vertical-align: middle;color: #666666;font-size:24rpx">累计金额</text>
+          <view class="money-m">
+            <text class="money-s">￥</text> 259475
+          </view>
+        </view>
+        <view>
+          <view class="money">
+            <image src="../../images/zhuc.png" />
+          </view>
+          <text style="vertical-align: middle;color: #666666; font-size:24rpx">支出金额</text>
+          <view class="money-m">
+            <text class="money-s">￥</text> 259475
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="title">
+  <view class="title_h1 ">关于善家公益</view>
+  <view class="title_tab {{isduo ? 'duo' : ''}}">
+    2019年，我们又见到了这群让我们日思夜想的孩子们 ——河南濮阳葛霍李小学的学生们。这个夏天，我们将夏令营带到这里，与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩子们陆陆续续走进校园，听着嬉笑打闹的 声音，夏令营的早晨就这样如期而至。将夏令营带到这里与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩 与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩
+  </view>
+</view>
+<view class="title_all" bindtap="gend" wx:if="{{isduo}}">
+  展开全部
+  <image src="../../images/bottom.png" />
+</view>
+<view class="title_all" bindtap="gend" wx:else>
+  收起
+  <!-- <image src="../../images/bottom.png" /> -->
+</view>
+<view class="nav">
+  <view class="title">
+    <view class="title_h1">公益善款资助公示</view>
+    <view class="title_h2">资助“大国小镇”计划，助力四个贫困产业扶持项目”项目项目项目</view>
+    <view class="mone">
+      资助金额：
+      <text class="chu">￥ 12000</text>
+    </view>
+    <view class="title_t">项目经善家公益核实，真实有效，受到众多 爱心人士关注项目经善家公益 核实，真实有效，受到众多爱心人士关
+    </view>
+    <view class='title_img'>
+      <image src="../../images/te.png" />
+      <image src="../../images/te.png" />
+      <image src="../../images/te.png" />
+    </view>
+    <view class="title_date">2019-10-13 18:30:58</view>
+  </view>
+</view>

@@ -59,30 +59,23 @@
             <image src="https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg" />
         </view>
         <view class="g-h1 dan">大国小镇”计划，助力四个贫困产业扶持大国小镇”计划，助力四个贫困产业扶</view>
-        <view class="g-h2">送温暖献爱心，为家乡做公益送温暖献爱心送温暖献爱心送温暖
-献爱心送温暖献爱心送温暖献爱心。</view>
+        <view class="g-h2">送温暖献爱心，为家乡做公益送温暖献爱心送温暖献爱心送温暖献爱心送温暖献爱心送温暖献爱心。</view>
         <view class="jindu">
-           <progress stroke-width="5" active percent="80.00" font-size='12' activeColor='#F22702'  show-info='true' border-radius='4'></progress>
+            <progress stroke-width="5" active percent="80.00" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
         </view>
         <view class="g-bott">
-           <view class="g-bo">
-             <view class='g-bott-j'>
-               35957
-             </view>
-             <view class='g-boot-y'>目标金额/元</view>
-           </view>
-           <view class="g-bo">
-             <view class='g-bott-j'>
-               35957
-             </view>
-             <view class='g-boot-y'>已筹款/元</view>
-           </view>
-           <view class="g-bo">
-             <view class='g-bott-j'>
-               35
-             </view>
-             <view class='g-boot-y'>项目票数</view>
-           </view>
+            <view class="g-bo">
+                <view class='g-bott-j'>35957</view>
+                <view class='g-boot-y'>目标金额/元</view>
+            </view>
+            <view class="g-bo">
+                <view class='g-bott-j'>35957</view>
+                <view class='g-boot-y'>已筹款/元</view>
+            </view>
+            <view class="g-bo">
+                <view class='g-bott-j'>35</view>
+                <view class='g-boot-y'>项目票数</view>
+            </view>
         </view>
     </view>
 </view>

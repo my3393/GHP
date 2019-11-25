@@ -1,37 +1,32 @@
-// pages/store_detail/store_detail.js
+// pages/welfare_det/welfare_det.js
 const App = getApp();
+let top1 = '';
+let top2 = '';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    istag:true,
+    current: 0,
+    is_top: true,
+    issrcoll: '1',
+    iscanvan: true,
     code: '../../images/ma.png', //如果是服务器图片一定要先下载到本地
-    imgSrc: '',
-    iscanvan:true,
-    canva:true,
-    ismask:true,
-    res:'你的',
-    tag:[
-      {name:'店铺',img:'../../images/store.png',imgs:'../../images/store_active.png'},
-      {name:'特产分类',img:'../../images/switch.png',imgs:'../../images/tes_active.png'},
-      {name:'特色介绍',img:'../../images/tsjs.png',imgs:'../../images/tsjs_active.png'},
-      {name:'分享',img:'../../images/fenx.png',imgs:'../../images/fenx.png'},
+    ismask: true,
+    istag:true,
+    photos: [
+      "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
+      "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
+      "https://graph.baidu.com/resource/116b9dee63af0f77fcb8f01572947716.jpg",
+      "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
     ],
-    tar:'',
-   Img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574139227810&di=19a2595df93625bf1bfcc027b4bcd79c&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a22859b248a5a801211d25d63b72.jpg%401280w_1l_2o_100sh.jpg",
   },
-  fenx(){
-        
-     let that =this;
-   this.setData({ istag: !that.data.istag });
-   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     this.setData({
       navH: App.globalData.navHeight
     })
@@ -48,7 +43,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var query = wx.createSelectorQuery();
+    //选择id
+    var that = this;
+    query.select('.top1').boundingClientRect(function (rect) {
+      console.log(rect)
 
+      top1 = rect.top
+
+    }).exec();
+    query.select('.top2').boundingClientRect(function (rect) {
+      console.log(rect)
+
+      top2 = rect.top
+
+    }).exec();
   },
 
   /**
@@ -85,21 +94,95 @@ Page({
   onShareAppMessage: function () {
 
   },
+  swiperChange: function (e) {
+    var that = this;
+    if (e.detail.source == 'touch') {
+      that.setData({
+        current: e.detail.current
+      })
+    }
+  },
+  //查看更多
+  gend: function (e) {
+    let that = this
+    this.setData({
+      isduo: !that.data.isduo,
+    })
+  },
+  move() {
 
+  },
+  // 滚轮显示
+  scrollto() {
+    wx.pageScrollTo({
+      scrollTop: 301,
+      duration: 300
+    })
+  },
+  scrollto1() {
+    wx.pageScrollTo({
+      selector: '.top1',
+      duration: 300
+    })
+  },
+  scrollto2() {
+    wx.pageScrollTo({
+      selector: '.top2',
+      duration: 300
+    })
+  },
+  onPageScroll: function (e) {
+    console.log(e.scrollTop)
+    let that = this
+    if (e.scrollTop > 300) {
+
+      that.setData({
+        is_top: false,
+      })
+    } else {
+
+      that.setData({
+        is_top: true
+      })
+    }
+    if (e.scrollTop < 400) {
+
+      that.setData({
+        issrcoll: 1
+      })
+    } else if (top1 - 10 < e.scrollTop && e.scrollTop < top2 - 10) {
+
+      that.setData({
+        issrcoll: 2
+      })
+
+    } else if (top2 - 10 < e.scrollTop) {
+      console.log(top1)
+      console.log(top2)
+      that.setData({
+        issrcoll: 3
+      })
+    }
+  },
+  // 分享
+  fenx() {
+    let that = this;
+    this.setData({ istag: !that.data.istag });
+  },
   //绘制海报
-  huizi(){
+  huizi() {
     this.canvasPoster(this.data.code);
     this.setData({
-      iscanvan:false,
-      istag:!this.data.istag,
-      ismask:false
+      iscanvan: false,
+      istag: !this.data.istag,
+      ismask: false
     })
   },
   //取消分享
-  qufenx(){
+  qufenx() {
     this.setData({
-      iscanvan:true,
-      ismask:true
+      iscanvan: true,
+      ismask: true
     })
   },
   canvasPoster(code) { //canvas绘制图片，code是动态小程序码，可看我上一篇文章
@@ -110,23 +193,23 @@ Page({
     let that = this;
     let ctx = wx.createCanvasContext('posterCanvas', this);
     ctx.setFillStyle('white');
-    ctx.fillRect(0, 0, 400, 450,40);
-    ctx.arc(360, 40, 40, Math.PI*2, Math.PI * 1.5)
+    ctx.fillRect(0, 0, 400, 450, 40);
+    ctx.arc(360, 40, 40, Math.PI * 2, Math.PI * 1.5)
     ctx.clip();
     ctx.setFontSize(12);
     ctx.setFillStyle('#666666');
-    ctx.fillText('用户名', 50, 30);
+    ctx.fillText('用户名', 70, 30);
     ctx.setFillStyle('#333333');
-    ctx.fillText('给您推荐了一个热门的店铺', 50, 50);
+    ctx.fillText('给您推荐了一个待资助的项目', 130, 50);
     ctx.drawImage('../../images/tui.jpg', 15, 70, 220, 200);
     //动态生成的小程序码（ps：网络图片一定要先下载到本地）
     ctx.drawImage(code, 20, 280, 60, 60);
     ctx.setFontSize(10);
     ctx.setTextAlign('center');
     ctx.setFillStyle('#333333');
-    ctx.fillText('长按图片识别，立即进店', 140, 300);
+    ctx.fillText('长按图片识别，立即查看', 140, 300);
     ctx.setFillStyle('#999');
-    ctx.fillText('分享自 善家购特产商城', 140, 325);
+    ctx.fillText('分享自 善家购', 115, 325);
     ctx.setFillStyle('#000000');
     ctx.save();
     ctx.beginPath();
@@ -143,7 +226,7 @@ Page({
         canvasId: 'posterCanvas',
         fileType: 'png',
         success: (canvasImgRes) => {
-         
+
           this.setData({
             imgSrc: canvasImgRes.tempFilePath
           });
@@ -153,10 +236,10 @@ Page({
   },
   canvasWorkBreak(maxWidth, fontSize, text) {
     const maxLength = maxWidth / fontSize
-  const textLength = text.length
-  let textRowArr = []
-  let tmp = 0
-  while(1) {
+    const textLength = text.length
+    let textRowArr = []
+    let tmp = 0
+    while (1) {
       textRowArr.push(text.substr(tmp, maxLength))
       tmp += maxLength
       if (tmp >= textLength) {
@@ -164,17 +247,4 @@ Page({
       }
     }
   },
-  tag(e){
-    console.log(e)
-    let that = this;
-    let index = e.currentTarget.dataset.index
-    if(index == 3){
-       that.fenx()
-    }else{
-      that.setData({
-        tar:e.currentTarget.dataset.index
-     })
-    }
-    
-  }
 })

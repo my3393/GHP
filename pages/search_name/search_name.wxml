@@ -7,11 +7,11 @@
         <image src="../../images/detele.png"></image>
       </view>
     </view>
-    <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image>
+    <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='off_order'></image>
   </view>
 </view>
 <!-- 综合排序 -->
-<view class="top">
+<view class="top" style='margin-top:{{navH}}px'>
   <view class="top-list">
     <view class="top-z">
       <view>
@@ -192,3 +192,4 @@
 </view>
 
 <view class="mask" hidden="{{ismask}}" style='top:{{navH}}px'></view>
+

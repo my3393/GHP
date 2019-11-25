@@ -40,7 +40,7 @@
   <view wx:if='{{tar == 0}}'>
     <view class='goods'>
         <view class="rescom">
-            <text class="rescom-w">特产推荐</text>
+            <text class="rescom-w"  bindtap="guan">特产推荐</text>
             <text class="h1_b">感受他乡风情，享受地方特产</text>
         </view>
         <scroll-view class="classify" scroll-x="true">
@@ -216,3 +216,39 @@
         <view>{{item.name}}</view>
     </view>
 </view>
+ <!-- 关注弹窗 -->
+  <!-- <view class="popup">
+        <view class="popup_h1">请确认你当前操作</view>
+        <view class="popup_content">取消关注将无法在我的收藏中快捷进入店铺</view>
+        <view class="popup_btn">
+              <view >取消</view>
+              <view >确定</view>
+        </view>
+  </view> -->
+<!-- 弹窗底部 -->
+<view class="page">
+   <view class="order {{!istag ? 'order_show' : ''}}">
+       <view class="order_tu">
+           <view >
+               <view class="wx_img"><image src="../../images/wxapp.png" /></view>
+                <view >分享好友或微信群</view>
+           </view>
+           <view bind:tap="huizi">
+               <view class="wx_img"><image src="../../images/pengyq.png" /></view>
+                <view >生成分享海报 </view>
+           </view>
+       </view>
+      <view class="order_bott" bind:tap="fenx">
+          取消
+      </view>
+   </view>
+</view>
+<!-- 绘制海报 -->
+<view class="canva_top" hidden="{{iscanvan}}">
+    <view class="x" bind:tap="qufenx">
+        <image src="../../images/x.png" />
+    </view>
+  <canvas canvas-id="posterCanvas" class="canva_tops"  style=""></canvas>
+  <view bindtap="savePoster" class="backs">保存图片，分享朋友圈</view>
+</view>
+<!-- <view class="mask" hidden="{{xismask}}"></view> -->

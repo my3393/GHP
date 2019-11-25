@@ -1,0 +1,36 @@
+<!--pages/hometown/hometown.wxml-->
+<view class="nav">
+   <view >选择省份</view>
+   <view >
+        <view class="tag">
+           全部
+       </view>
+       <view class="tag">
+           广东
+       </view>
+       <view class="tag">
+           广东
+       </view>
+       <view class="tag">
+           广东
+       </view>
+       <view class="tag">
+           广东
+       </view>
+       <view class="tag">
+           广东
+       </view>
+       <view class="tag">
+           广东
+       </view>
+       <view class="tag">
+           广东
+       </view>
+   </view>
+   <view ></view>
+</view>
+
+<view class="page-footer">
+       <view class='chong'>重置</view>
+       <view class="que" bindtap="open_list">筛选老乡</view>
+   </view>

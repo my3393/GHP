@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+ 
+  "usingComponents": {
+    "circle": "/components/circle/circle"
+  }
 }

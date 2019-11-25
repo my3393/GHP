@@ -1,36 +1,21 @@
-// pages/search_name/search_name.js
-const App = getApp();
+// pages/welfare_detail/welfare_detail.js
+import Canvas from '../../utils/tcanvas.js'
 Page({
-
+  ...Canvas.options,
   /**
    * 页面的初始数据
    */
   data: {
-    ismask:true,
-  nav_list: ['ES6学习之路', 'CSS特效', 'VUE实战','微信小程序'],
-  open: false,
-  
- },
-
- //列表的操作函数
- open_list: function(opts){
-  this.setData({ text: opts.currentTarget.dataset.title,open: false});
-  this.setData({ismask:true})
- },
-
- //左侧导航的开关函数
- off_canvas: function(){
-  this.data.open ? this.setData({open: false}) :this.setData({open: true});
-  this.setData({ismask:false})
- },
+    ...Canvas.data,
+    shao: '30',
+    isduo:true
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      navH: App.globalData.navHeight
-    })
+    this.draw('runCanvas', this.data.shao, 1000);
   },
 
   /**
@@ -80,5 +65,12 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  //查看更多
+  gend:function(e){
+    let that = this
+     this.setData({
+      isduo:!that.data.isduo,
+     })
+  },
 })

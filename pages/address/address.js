@@ -1,36 +1,18 @@
-// pages/search_name/search_name.js
-const App = getApp();
+// pages/address/address.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ismask:true,
-  nav_list: ['ES6学习之路', 'CSS特效', 'VUE实战','微信小程序'],
-  open: false,
-  
- },
 
- //列表的操作函数
- open_list: function(opts){
-  this.setData({ text: opts.currentTarget.dataset.title,open: false});
-  this.setData({ismask:true})
- },
-
- //左侧导航的开关函数
- off_canvas: function(){
-  this.data.open ? this.setData({open: false}) :this.setData({open: true});
-  this.setData({ismask:false})
- },
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      navH: App.globalData.navHeight
-    })
+
   },
 
   /**
@@ -80,5 +62,25 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  add(){
+     wx.navigateTo({
+       url: '../add_address/add_address',
+     })
+  },
+  wx_add(){
+    wx.chooseAddress({
+      success(res) {
+        console.log(res)
+        console.log(res.userName)
+        console.log(res.postalCode)
+        console.log(res.provinceName)
+        console.log(res.cityName)
+        console.log(res.countyName)
+        console.log(res.detailInfo)
+        console.log(res.nationalCode)
+        console.log(res.telNumber)
+      }
+    })
   }
 })

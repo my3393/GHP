@@ -1,7 +1,10 @@
 const App = getApp();
 Page({
   data: {
+     istag:true,
      is_top:true,
+     issrcoll:'1',
+     loading:false,
     photos: [
       "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
       "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
@@ -138,10 +141,13 @@ Page({
     num:1,
     current: 0
   },
- 
+  
   onLoad: function(options) {
     this.setData({
       navH: App.globalData.navHeight
+    })
+    wx.showShareMenu({
+      withShareTicket: true
     })
     let that = this;
     let guilists = that.data.guilist;
@@ -276,16 +282,56 @@ Page({
       })
     }
   }, 
+  // 查看评价
+  evaluation(){
+    wx.navigateTo({
+      url: '../goods_evaluation/goods_evaluation',
+    })
+  },
+  //分享弹窗
+  off_order(){
+    console.log(111)
+    let that =this;
+    this.setData({ istag: !that.data.istag });
+    console.log(that.data.istag)
+  },
+  // 购买
+  buy(){
+    let that = this;
+    that.setData({
+      loading:!that.data.loading
+    })
+  },
+  // 滚轮显示
   onPageScroll: function (e) {
     console.log(e.scrollTop)
     let that = this
     if (e.scrollTop > 200) {
+
       that.setData({
         is_top: false,
       })
     } else {
+
       that.setData({
         is_top: true
+      })
+    }
+    if(e.scrollTop < 400){
+      
+      that.setData({
+        issrcoll:1
+      })  
+    }else if(400 < e.scrollTop && e.scrollTop < 700){
+
+      that.setData({
+        issrcoll:2
+      })
+     
+    }else if(700 < e.scrollTop){
+     
+      that.setData({
+        issrcoll:3
       })
     }
   }

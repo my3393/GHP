@@ -1,0 +1,223 @@
+/* pages/order_detail/order_detail.wxss */
+page{
+    background: #f9f9f9;
+    font-size: 26rpx;
+}
+.top{
+    width: 100%;
+    background: #f12200;
+    padding: 20rpx;
+    padding-bottom: 60rpx;
+    box-sizing: border-box;
+}
+.top_tu{
+    width: 26rpx;
+    height: 26rpx;
+    float: left;
+    margin-right: 15rpx;
+    margin-top: 7rpx;
+}
+.top_tu image{
+    width: 100%;
+    height: 100%;
+}
+.top_n{
+    color: #fff;
+    font-size: 30rpx;
+}
+.top_tit{
+    
+    margin: 20rpx 0;
+    margin-left: 41rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+.logistics{
+    position: relative;
+    top: -40rpx;
+    background: #fff;
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+    border-radius: 12rpx;
+}
+.logistics_img{
+    float: left;
+    margin-top: 2rpx;
+margin-right: 20rpx
+}
+.logistics_img image{
+    width: 21rpx;
+    height: 29rpx;
+}
+.logistics_diz{
+    color: #666;
+    margin-top: 20rpx;
+    font-size: 24rpx;
+    margin-left: 41rpx;
+}
+/*  */
+.nav_top{
+    height: 65rpx;
+    line-height: 65rpx;
+    margin-bottom: 20rpx;
+    border-bottom: 1rpx #f2f2f2 solid;
+}
+.sotre_img{
+    width: 28rpx;
+    height: 28rpx;
+    float: left;
+    margin-top: 4rpx;
+    margin-right: 6rpx;
+}
+.sotre_img image{
+    width: 100%;
+    height: 100%;
+}
+.store_r{
+  display: inline-block;
+}
+.store_r image{
+    width: 20rpx;
+    height: 23rpx;
+}
+.good_img{
+    width: 156rpx;
+    height: 156rpx;
+    float: left;
+    margin-right: 20rpx;
+}
+.good_img image{
+    width: 100%;
+    height: 100%;
+}
+.goodsname{
+    width: 400rpx;
+    font-size: 26rpx;
+  }
+  .specification{
+    color: #999;
+    margin-top: 10rpx;
+    font-size: 22rpx;
+  }
+  .guig{
+    height: 80rpx;
+   
+  }
+  .gui-g{
+    margin-top: 20rpx;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    background: #f3f3f3;
+    display: inline-block;
+    border-radius: 22rpx;
+    font-size: 20rpx;
+    color: #999999;
+  }
+.good{
+    margin-bottom: 30rpx;
+}
+.price{
+    margin-top: 5rpx;font-size: 29rpx;color: #F12200;
+    font-weight: 600;
+    display: inline-block;
+}
+.yuan{
+    font-size: 20rpx;
+}
+.good_num{
+    float: right;
+}
+.list{
+    padding: 20rpx;
+    box-sizing: border-box;
+    background: #fff;
+    margin-top: 20rpx;
+}
+.price_r{
+    float: right;
+}
+.yan{
+    color: #F12200;
+}
+.price_list{
+   height: 60rpx;
+   line-height: 60rpx;
+}
+.z_right{
+   float: right;
+   margin-top: 20rpx;
+}
+.font{
+   font-size: 32rpx;
+}
+.nav{
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    border-radius: 12rpx;
+    background: #fff;
+}
+.dind{
+    line-height: 70rpx;
+    margin-left: 20rpx;
+}
+.logistics_date{
+    font-size: 22rpx;
+    color: #999;
+    margin-left: 50rpx;
+    margin-top: 10rpx;
+    margin-bottom: 40rpx;
+}
+.logistics_right{
+   position: absolute;
+   top: 25rpx;
+   right: 30rpx;
+}
+.logistics_right image{
+    width: 20rpx;
+    height: 22rpx;
+}
+.chak{
+   position: relative;
+}
+.tuik{
+    width: 155rpx;
+    height: 55rpx;
+    border-radius: 40rpx;
+    line-height: 55rpx;
+    text-align: center;
+    border: 1rpx solid #e7e7e7;
+    font-size: 22rpx;
+    float: right;
+    margin-top: 20rpx;
+}
+.lix{
+    float: left;
+}
+.phone{
+    width: 26rpx;
+    height: 26rpx;
+    float: left;
+    margin-top: 4rpx;
+    margin-right: 10rpx;
+}
+.phone image{
+    width: 100%;
+    height: 100%;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100rpx;
+    background: #fff;
+}
+.footer_r{
+    float: right;
+}
+.footer_r>view{
+    display: inline-block;
+    margin-right: 30rpx;
+}

@@ -1,0 +1,41 @@
+<!-- pages/goods_evaluation/goods_evaluation.wxml -->
+<view class="top">
+    <view class="{{tab == 1 ? 'top_a' : ''}}" data-tab='{{1}}' bind:tap="tag">全部（24）</view>
+    <view class="{{tab == 2 ? 'top_a' : ''}}" data-tab='{{2}}' bind:tap="tag">有图（10）</view>
+</view>
+<view class="nav">
+    <view>
+        <view class="nav_img">
+            <image src="../../images/tx.png" />
+        </view>
+        <view >
+            <view>南下</view>
+            <view class="xinxin">
+                <image src="../../images/xinxin.png" />
+                <image src="../../images/xinxin.png" />
+                <image src="../../images/xinxin.png" />
+                <image src="../../images/xinxin.png" />
+                <image src="../../images/xinxin.png" />
+            </view>
+        </view>
+    </view>
+    <view class="nav_contet">
+        包装很精美，质量很棒，物美价廉，值得推荐，赞赞赞！
+    </view>
+    <view class="nav_list_img">
+        <image src="../../images/te.png" />
+        <image src="../../images/te.png" />
+        <image src="../../images/te.png" />
+    </view>
+    <view class="nav_bott">
+        <view class="nav_date">
+            2019-11-20 就问  房价款接通挂机发
+        </view>
+        <view class="dianz">
+            <view class="dianz_img">
+                <image src="../../images/dianz.png" />
+            </view>
+            点赞
+        </view>
+    </view>
+</view>

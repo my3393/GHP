@@ -1,0 +1,136 @@
+/* pages/add_address/add_address.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.top{
+  margin-top: 4rpx;
+}
+.infor{
+  background: #fff;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  border-top: 2rpx solid #f2f2f2;
+  line-height: 100rpx;
+  position: relative;
+}
+.inform{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+.inforin{
+  display: inline-block;
+  vertical-align: middle;
+}
+.inforin input{
+  width: 560rpx;
+  letter-spacing: 2rpx;
+}
+.forin{
+  margin-left: 30rpx;
+}
+.enter{
+  position: absolute;
+  right: 24rpx ;
+  top: 8rpx;
+}
+.enter image{
+  margin-left: 25rpx;
+  width: 20rpx;
+  height: 26rpx;
+}
+.enter image:nth-child(2){
+  width: 30rpx;
+  height: 30rpx;
+}
+.pick{
+  display: inline-block;
+  color: #666;
+  width: 540rpx;
+}
+.mor{
+  width: 100%;
+  height: 100rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  line-height: 100rpx;
+  background: #fff;
+  margin-top: 20rpx;
+}
+.switch{
+  float:right;
+}
+.sub{
+  margin-top: 60rpx;
+}
+.wx-switch-input{width:84rpx !important;height:40rpx !important;}
+.wx-switch-input::before{width:82rpx !important;height: 40rpx !important;}
+.wx-switch-input::after{ width: 36rpx !important;height: 36rpx !important;}
+
+
+/* 地址选择 */
+.adres{
+  width: 100%;
+  height: 780rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0rpx;
+  background: #fff;
+  padding: 30rpx;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+  font-family: PingFang-SC-Bold;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+
+}
+.adres_h1{
+  font-size: 32rpx;
+}
+.detel{
+  float: right;
+  width: 36rpx;
+  height: 36rpx;
+  background: red;
+}
+.detel image{
+  width: 100%;
+  height: 100%;
+}
+.adre_bott{
+  margin-top: 40rpx;
+  font-size: 26rpx;
+}
+.adre_bott>view{
+  margin-right: 42rpx;
+  display: inline-block;
+}
+.srcoll{
+  width: 100%;
+  height: 600rpx;
+  margin-top: 30rpx;
+}
+.adres_list{
+  height: 82rpx;
+  line-height: 82rpx;
+  font-size: 26rpx;
+}
+.adres_r{
+  float: right;
+  width: 26rpx;
+  height: 24rpx;
+}
+.adres_r image{
+  width: 100%;
+  height: 100%;
+}
+.hong{
+  color: #F12200;
+  height: 60rpx;
+  display: inline-block;
+  border-bottom: 4rpx solid #f12200;
+}
+.tas_a{
+  color: #f12200 !important;
+}

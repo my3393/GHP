@@ -1,36 +1,18 @@
-// pages/search_name/search_name.js
-const App = getApp();
+// pages/order_detail/order_detail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ismask:true,
-  nav_list: ['ES6学习之路', 'CSS特效', 'VUE实战','微信小程序'],
-  open: false,
-  
- },
 
- //列表的操作函数
- open_list: function(opts){
-  this.setData({ text: opts.currentTarget.dataset.title,open: false});
-  this.setData({ismask:true})
- },
-
- //左侧导航的开关函数
- off_canvas: function(){
-  this.data.open ? this.setData({open: false}) :this.setData({open: true});
-  this.setData({ismask:false})
- },
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      navH: App.globalData.navHeight
-    })
+
   },
 
   /**

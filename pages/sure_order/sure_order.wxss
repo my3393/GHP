@@ -1,0 +1,244 @@
+/* pages/sure_order/sure_order.wxss */
+page{
+    background: #f9f9f9;
+    font-size: 24rpx;
+}
+.top{
+    width: 100%;
+    height: 60rpx;
+    background: #fff;
+    line-height: 60rpx;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+.top_img{
+    width: 36rpx;
+    height: 31rpx;
+    float: left;
+    margin-top: 4rpx;
+    margin-right: 10rpx;
+}
+.top_img image{
+    width: 100%;
+    height: 100%;
+}
+.top_n{
+    color: #DF9D18;
+    font-size: 24rpx;
+    display: inline-block;
+}
+.top_r{
+    float: right;
+    color: #DF9D18;
+}
+.address{
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    background: #fff;
+    border-radius: 12rpx;
+    padding: 30rpx 20rpx;
+    box-sizing: border-box;
+    margin-top: 20rpx;
+}
+.address_top{
+    font-size: 22rpx;
+    margin-bottom: 16rpx;
+}
+.mor{
+    border: 1rpx #F12200 solid;
+    color: #F12200;
+    border-radius: 4rpx;
+    padding: 2rpx 4rpx;
+    box-sizing: border-box;
+    margin-right: 12rpx;
+}
+
+.address_cent{
+    font-size: 26rpx;
+    display: inline-block;
+    
+}
+.address_cent_r{
+    float: right;
+}
+.address_bott{
+    font-size: 24rpx;
+    color: #666;
+    margin-top: 12rpx;
+}
+.address_t{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  height: 7rpx;
+  position: relative;
+  top: -37rpx;  
+}
+.address_t image{
+    width: 100%;
+    height: 100%;
+}
+.add_address{
+    text-align: center;
+    display: inline-block;
+    width: 95%;
+    font-size: 26rpx;
+    color: #333;
+    margin-bottom: 25rpx;
+}
+
+/* 商品列表 */
+.nav_top{
+    height: 65rpx;
+    line-height: 65rpx;
+    margin-bottom: 20rpx;
+    border-bottom: 1rpx #f2f2f2 solid;
+}
+.sotre_img{
+    width: 28rpx;
+    height: 28rpx;
+    float: left;
+    margin-top: 4rpx;
+    margin-right: 6rpx;
+}
+.sotre_img image{
+    width: 100%;
+    height: 100%;
+}
+.store_r{
+  display: inline-block;
+}
+.store_r image{
+    width: 20rpx;
+    height: 23rpx;
+}
+.good_img{
+    width: 156rpx;
+    height: 156rpx;
+    float: left;
+    margin-right: 20rpx;
+}
+.good_img image{
+    width: 100%;
+    height: 100%;
+}
+.goodsname{
+    width: 400rpx;
+    font-size: 26rpx;
+  }
+  .specification{
+    color: #999;
+    margin-top: 10rpx;
+    font-size: 22rpx;
+  }
+  .guig{
+    height: 80rpx;
+   
+  }
+  .gui-g{
+    margin-top: 20rpx;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    background: #f3f3f3;
+    display: inline-block;
+    border-radius: 22rpx;
+    font-size: 20rpx;
+    color: #999999;
+  }
+
+.price{
+    margin-top: 5rpx;font-size: 29rpx;color: #F12200;
+    font-weight: 600;
+}
+.yuan{
+    font-size: 20rpx;
+}
+.good_num{
+    float: right;
+}
+.list{
+    padding: 20rpx;
+    box-sizing: border-box;
+    background: #fff;
+    margin-top: 20rpx;
+}
+.beiz{
+    width: 100%;
+    height: 120rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+    line-height: 90rpx;
+    background: #fff;
+    margin-top: 20rpx;
+ }
+ .beiz_h1{
+     float: left;
+     margin-right: 20rpx;
+     margin-top: 2rpx;
+ }
+ .inpu{
+     display: inline-block;
+     vertical-align: middle;
+ }
+ .price_r{
+     float: right;
+ }
+ .yan{
+     color: #F12200;
+ }
+.price_list{
+    height: 60rpx;
+    line-height: 60rpx;
+}
+.z_right{
+    float: right;
+    margin-top: 20rpx;
+}
+.font{
+    font-size: 32rpx;
+}
+
+.badge{
+    margin-top: 60rpx;
+    display: flex;
+    justify-content: space-around;
+  }
+  .badge-img{
+    width: 21rpx;
+    height: 15rpx;
+    display: inline-block;
+  }
+  .badge-img image{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .badge-n{
+    margin-left: 4rpx;
+    font-size: 20rpx;
+    display: inline-block;
+    vertical-align: middle;
+    color: #999999;
+  }
+  .footer{
+      width: 100%;
+      height: 98rpx;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 30rpx;
+      box-sizing: border-box;
+      line-height: 98rpx;
+  }
+  .pay{
+     width: 180rpx;
+     height: 70rpx;
+     border-radius: 40rpx;
+     color: #fff;
+     line-height: 70rpx;
+     text-align: center;
+     background:linear-gradient(to right, #f12200, #ff4e17);
+     margin-top: 15rpx;
+  }

@@ -1,0 +1,130 @@
+<!-- pages/order_detail/order_detail.wxml -->
+<view class='top'>
+    <view>
+        <view class="top_tu">
+            <image src="../../images/d-sh.png" />
+        </view>
+        <view class="top_n">等待买家付款</view>
+    </view>
+    <view class="top_tit">订单剩余支付时间23分56秒超时将自动关闭</view>
+</view>
+<view class="logistics">
+    <view class="chak">
+        <view>
+            <view class="logistics_img">
+                <image src="../../images/shdz.png" />
+            </view>
+            <view class='logistics_n'>【广州市】 已到达广州分拨中心</view>
+        </view>
+        <view class="logistics_date">2019-10-18 16:45:41</view>
+        <view class="logistics_right">
+            <image src="../../images/right.png" />
+        </view>
+    </view>
+    <view>
+        <view>
+            <view class="logistics_img">
+                <image src="../../images/shdz.png" />
+            </view>
+            <view class='logistics_n'>
+                杨先生
+                <text>18245917584</text>
+            </view>
+        </view>
+        <view class="logistics_diz">广东省深圳市宝安区顾淑芳金额uwi154894维尔康破你个人VR而过</view>
+    </view>
+</view>
+<view class="nav">
+    <view class="list">
+        <view class="nav_top">
+            <view class="sotre_img">
+                <image src="../../images/store.png" />
+            </view>
+            良品铺子
+            <view class="store_r">
+                <image src="../../images/right.png" />
+            </view>
+        </view>
+        <view class="good clearfix">
+            <view class="good_img">
+                <image src="../../images/te.png" />
+            </view>
+            <view class="good_list">
+                <view class='goodsname dan'>青海特产可可西里藏獒特色牛...</view>
+                <text class='specification'>银川市 西夏区 贺兰山西路街道</text>
+                <view class="guig">
+                    <view class='gui-g'>袋装500g</view>
+                </view>
+                <view>
+                    <view class='price'>
+                        <text class="yuan">￥</text>
+                        29.9
+                    </view>
+                    <view class="good_num">*2</view>
+                </view>
+                <view class="tuik">退款</view>
+            </view>
+        </view>
+        <view>
+            <view class="good_img">
+                <image src="../../images/te.png" />
+            </view>
+            <view class="good_list">
+                <view class='goodsname dan'>青海特产可可西里藏獒特色牛...</view>
+                <text class='specification'>银川市 西夏区 贺兰山西路街道</text>
+                <view class="guig">
+                    <view class='gui-g'>袋装500g</view>
+                </view>
+                <view class='price'>
+                    <text class="yuan">￥</text>
+                    29.9
+                </view>
+                <view class="good_num">*2</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='nav'>
+    <view class="list clearfix">
+        <view class="price_list">
+            商品总额
+            <view class="price_r">￥56.00</view>
+        </view>
+        <view class="price_list">
+            会员优惠
+            <view class="price_r yan">￥56.00</view>
+        </view>
+        <view class="price_list">
+            运费
+            <view class="price_r">￥56.00</view>
+        </view>
+        <view class="z_right">
+            需付费:
+            <text class="yan font">
+                <text style="font-size:22rpx">￥</text>
+                56
+            </text>
+        </view>
+    </view>
+</view>
+<view class="nav">
+    <view class="dind">订单编号：4848487484648978</view>
+    <view class="dind">下单时间：4848487484648978</view>
+    <view class="dind">
+        <view class="lix">
+            联系商家：
+        </view>
+        <view class="phone">
+            <image src="../../images/gfkf.png" />
+        </view>
+        拨打电话
+    </view>
+</view>
+
+<view class="footer">
+    <view class="footer_r">
+
+        <view class="tuik">确认收货</view>
+                <view class="tuik">查看物流</view>
+    </view>
+</view>
