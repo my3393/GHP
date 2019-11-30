@@ -1,4 +1,6 @@
 const App = getApp();
+let top1 = '';
+let top2 = '';
 Page({
   data: {
      istag:true,
@@ -160,6 +162,26 @@ Page({
       guilist: guilists
     })
   },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    var query = wx.createSelectorQuery();
+    //选择id
+    var that = this;
+    query.select('.top1').boundingClientRect(function (rect) {
+      console.log(rect)
+
+      top1 = rect.top
+
+    }).exec();
+    query.select('.top2').boundingClientRect(function (rect) {
+      console.log(rect)
+
+      top2 = rect.top
+
+    }).exec();
+  },
   selectGuige(e) {
     let that = this,
       // 获取第一个循环的index
@@ -303,6 +325,24 @@ Page({
     })
   },
   // 滚轮显示
+  scrollto() {
+    wx.pageScrollTo({
+      scrollTop: 201,
+      duration: 300
+    })
+  },
+  scrollto1() {
+    wx.pageScrollTo({
+      scrollTop: top1-60,
+      duration: 300
+    })
+  },
+  scrollto2() {
+    wx.pageScrollTo({
+      selector: '.top2',
+      duration: 300
+    })
+  },
   onPageScroll: function (e) {
     console.log(e.scrollTop)
     let that = this

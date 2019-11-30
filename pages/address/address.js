@@ -1,4 +1,5 @@
 // pages/address/address.js
+const app = getApp();
 Page({
 
   /**

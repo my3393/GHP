@@ -1,157 +1,113 @@
 <!--pages/home/home.wxml-->
-
-<view class="top-back clearfix" >
-  <!-- <view class="h-titlie">
-    <view class="h-t-img"><image src="../../images/home.png"></image></view>
-    <view class="h-name">善家购</view>
-  </view> -->
-  <view class="top-sear">
-    <view class="sear-img">
-      <image src="../../images/search.png"></image>
+<skeleton selector="skeleton"
+          loading="spin"
+          bgcolor="#FFF"
+          wx:if="{{showSkeleton}}"></skeleton>
+ <view class="skeleton">
+  <view class="top-back clearfix" >
+    <!-- <view class="h-titlie">
+      <view class="h-t-img"><image src="../../images/home.png"></image></view>
+      <view class="h-name">善家购</view>
+    </view> -->
+    <view class="top-sear">
+      <view class="sear-img">
+        <image src="../../images/search.png"></image>
+      </view>
+      <view class="sea"><input class="search" placeholder="商品，店铺"></input></view>
     </view>
-    <view class="sea"><input class="search" placeholder="商品，店铺"></input></view>
+    <view>
+    <swiper  class="banner"  indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
+      <block wx:for='{{banner}}' wx:key="{{item.id}}">
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'>
+          <image class="banner_img skeleton-rect" src="{{ item.bannerImgOss}}" lazy-load="true"></image>
+        </swiper-item>
+      </block>
+    </swiper>
   </view>
-  <view>
-   <swiper class="banner"  indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-    <block wx:for='{{photos}}'>
-      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
-        <image class="banner_img" src="{{item}}"></image>
-      </swiper-item>
-    </block> 
-  </swiper>
-</view>
-</view>
+  </view>
 
 
-<view class="badge">
-  <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
-    <view class="badge-n">助力家乡</view>
+  <view class="badge">
+    <view >
+      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+      <view class="badge-n">助力家乡</view>
+    </view>
+    <view >
+      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+      <view class="badge-n">家乡公益</view>
+    </view>
+    <view >
+      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+      <view class="badge-n">服务保障</view>
+    </view>
+    <view >
+      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+      <view class="badge-n">担保交易</view>
+    </view>
   </view>
-  <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
-    <view class="badge-n">家乡公益</view>
-  </view>
-  <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
-    <view class="badge-n">服务保障</view>
-  </view>
-  <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
-    <view class="badge-n">担保交易</view>
-  </view>
-</view>
 
-<view class="classify">
-  <view class="class-one">
-    <view class="class-img"><image src="../../images/te.png"></image></view>
-    <view class="class-n">水果特产</view>
-  </view>
-  <view class="class-one">
-    <view class="class-img"><image src="../../images/te.png"></image></view>
-    <view class="class-n">水果特产</view>
-  </view>
-  <view class="class-one">
-    <view class="class-img"><image src="../../images/te.png"></image></view>
-    <view class="class-n">水果特产</view>
-  </view>
-  <view class="class-one">
-    <view class="class-img"><image src="../../images/te.png"></image></view>
-    <view class="class-n">水果特产</view>
-  </view>
-  <view class="class-one">
-    <view class="class-img"><image src="../../images/te.png"></image></view>
-    <view class="class-n">水果特产</view>
-  </view>
-  <view class="class-one">
-    <view class="class-img"><image src="../../images/te.png"></image></view>
-    <view class="class-n">水果特产</view>
-  </view>
-  <view class="class-one">
-    <view class="class-img"><image src="../../images/te.png"></image></view>
-    <view class="class-n">水果特产</view>
-  </view>
-</view>
-<view class="recommended">
-   <view class="rescom">
-     <text class="rescom-w">特产推荐</text>
-     <text >感受他乡风情，享受地方特产</text>
-   </view>
-   <view class="classify" style="padding:0;margin-top: 20rpx; ">
-       <view class="class-two">
-         <view class="class-t-img"><image src="../../images/te.png" /></view>
-         <view class="class-t-n">
-           零食食品坚果干肌肤而价格
-         </view>
-         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
-       </view>
-       <view class="class-two">
-         <view class="class-t-img"><image src="../../images/te.png" /></view>
-         <view class="class-t-n">
-           零食食品坚果干肌肤而价格
-         </view>
-         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
-       </view>
-       <view class="class-two">
-         <view class="class-t-img"><image src="../../images/te.png" /></view>
-         <view class="class-t-n">
-           零食食品坚果干肌肤而价格
-         </view>
-         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
-       </view>
-       <view class="class-two">
-         <view class="class-t-img"><image src="../../images/te.png" /></view>
-         <view class="class-t-n">
-           零食食品坚果干肌肤而价格
-         </view>
-         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
-       </view>
-       <view class="class-two">
-         <view class="class-t-img"><image src="../../images/te.png" /></view>
-         <view class="class-t-n">
-           零食食品坚果干肌肤而价格
-         </view>
-         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
-       </view>
-       <view class="class-two">
-         <view class="class-t-img"><image src="../../images/te.png" /></view>
-         <view class="class-t-n">
-           零食食品坚果干肌肤而价格
-         </view>
-         <view class="class-t-p"><text style="font-size:22rpx">￥</text> 28</view>
-       </view>
-   </view>
-</view>
+  <view class="classify">
+    <view class="class-one" wx:for="{{className}}" wx:key="{{item.id}}" data-id='{{item.id}}'>
+      <view class="class-img "><image class="skeleton-radius" src="{{item.classifyImgOss}}"></image></view>
+      <view class="class-n">{{item.classifyName}}</view>
+    </view>
 
-<view >
-    <view class="rescom res-two" >
+  </view>
+  <view class="advert" wx:for='{{advert}}' wx:key="{{item.id}}">
+    <image src="{{item.advertiseImgOss}}" />
+  </view>
+  <view class="recommended">
+    <view class="rescom">
       <text class="rescom-w">精选特产</text>
-      <text >精选特产，为您推荐</text>
-   </view>
-</view>
+      <text >感受他乡风情，享受地方特产</text>
+    </view>
+    <view class="huan" bind:tap="huan">换一换</view>
+    <view class="classify" style="padding:0;margin-top: 20rpx; ">
+        <view class="class-two" wx:for="{{recommend}}" wx:key="{{item.id}}" data-id='{{item.id}}'>
+          <view class="class-t-img skeleton-rect"><image src="{{item.productDefaultImgOss}}" /></view>
+          <view class="class-t-n">
+            {{item.productName}}
+          </view>
+          <view class="class-t-p"><text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+        </view>
 
-<view class="tag">
-    <view  wx:for="{{tag}}" wx:for-index="index" bindtap="tag" data-num='{{index}}' class='{{tar == index?"active":""}}'>
-    {{item.name}}
+    </view>
   </view>
-</view>
 
-<view class="nav">
-  <view class="nav-list">
-    <view class="list-img"> <image src="../../images/tui.jpg" /></view>
-    <view class="list-j">就磨灭我就将额外</view>
-    <view class="list-qu">宁夏 九儿外网</view>
-   
-      <view class="class-t-p ctp"><text style="font-size:22rpx">￥</text> 28</view>
-      <view class="list-rig"><image src="../../images/shop.png"/> </view>
+  <view >
+      <view class="rescom res-two" >
+        <text class="rescom-w">热门特产</text>
+        <text >精选特产，为您推荐</text>
+    </view>
   </view>
-</view>
 
-<view class="gend">
-  查看更多特产
-  <view class="gend-img"><image src="../../images/shop.png" /> </view>
-</view>
-<view class="b-logo">
-   <view >善家购</view>
-   <view >大爱无疆，感谢家乡</view>
+  <scroll-view scroll-x="true" class="tag">
+      <view  wx:for="{{type}}" wx:key="{{item.id}}" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
+          {{item.typeName}}
+      </view>
+  </scroll-view>
+
+  <view class="nav">
+    <view class="nav-list" wx:for="{{detail}}" wx:key="{{item.id}}" data-id='{{item.id}}'>
+      <view class="list-img"> <image src="{{item.productDefaultImgOss}}" /></view>
+      <view class="list-j">{{item.productName}}</view>
+      <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>
+
+        <view class="class-t-p ctp"><text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+        <view class="list-rig"><image src="../../images/shop.png"/> </view>
+    </view>
+  </view>
+
+  <view class="gend">
+    查看更多特产
+    <view class="gend-img"><image src="../../images/right.png" /> </view>
+  </view>
+
+  <view class="ztop" hidden="{{istop}}" bind:tap="top">
+    <image src="../../images/ztop.png" />
+  </view>
+  <view class="b-logo">
+    <view >善家购</view>
+    <view >大爱无疆，感谢家乡</view>
+  </view>
 </view>

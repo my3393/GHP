@@ -1,0 +1,73 @@
+/* pages/wallet_withdrawal/wallet_withdrawal.wxss */
+page{
+    background: #f9f9f9;
+}
+.nav{
+    margin: 20rpx 20rpx;
+    background: #fff;
+    padding: 20rpx;
+    box-sizing: border-box;
+
+}
+.hei{
+    color: #666;
+    margin-right: 20rpx;
+}
+.menr{
+    font-size: 60rpx;
+    margin-top: 20rpx;
+    display: inline-block;
+}
+.yana{
+    float: left;
+}
+.inpu{
+    display: inline-block;
+    width: 70%;
+    height: 70rpx;
+}
+.inpu input{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.dete{
+    float: right;
+    margin-top: -60rpx;
+}
+.dete image{
+    width: 30rpx;
+    height: 30rpx;
+}
+.fuw{
+    margin-top: 20rpx;
+    color: #999;
+    font-size: 24rpx;
+}
+.fuw_r{
+    float: right;
+}
+.tis{
+    margin: 30rpx 20rpx;
+    font-size: 24rpx;
+    color: #999999;
+}
+.ke{
+    font-size: 24rpx;
+    color: #333;
+    margin-top: 20rpx;
+}
+.submit{
+    margin-top: 100rpx;
+    width:calc(100% - 80rpx);
+    margin-left: 40rpx;
+    border-radius: 40rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    color: #fff;
+    background:linear-gradient(to right, #f12200, #ff4e17);
+}
+.foot-boot{
+    margin-top: 270rpx;
+  }

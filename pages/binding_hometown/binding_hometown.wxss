@@ -1,0 +1,2 @@
+/* pages/binding_hometown/binding_hometown.wxss */
+@import '../add_address/add_address';

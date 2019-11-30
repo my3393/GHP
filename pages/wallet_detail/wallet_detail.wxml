@@ -1,0 +1,18 @@
+<!--pages/wallet_detail/wallet_detail.wxml-->
+<view class="top">
+    <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}">
+       {{item.name}}
+    </view>
+</view>
+<view class="li">
+    <view class="list">
+    <view >
+        <view class='list_tit dan'>Zara牛仔裤南潮牌直筒蓝色浅蓝牛仔裤南...</view>
+        <view class="list_r yan">+228.00</view>
+    </view>
+    <view class="list_date">
+        <view >2019-09-23 16:35:35</view>
+        <view class="list_r">已结算</view>
+    </view>
+</view>
+</view>

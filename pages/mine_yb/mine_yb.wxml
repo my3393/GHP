@@ -4,7 +4,8 @@
     <view class="shuom">使用说明？</view>
     <view>
         <view class="num">2345</view>
-        <view class="znum">赚艺呗</view>
+        <!-- <view class="znum">赚艺呗</view> -->
+         <view class="znum">爱心投票</view>
     </view>
     <view class="bootm">
        收支明细

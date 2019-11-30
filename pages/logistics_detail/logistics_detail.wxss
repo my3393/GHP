@@ -1,0 +1,66 @@
+/* pages/logistics_detail/logistics_detail.wxss */
+@import '../refund_schedule/refund_schedule';
+.top{
+  width: 100%;
+  background: #fff;
+  height: 60rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  line-height: 60rpx;
+}
+.top_a{
+  color: #f12200;
+  border-bottom: 2rpx solid #f12200;
+}
+.getAddress-icon{
+  width: 21rpx;
+  height: 30rpx;
+  background: #fff;
+  margin-left: 85rpx;
+}
+.getAddress-icon image{
+  width: 100%;
+  height: 100%;
+}
+.g_con{
+  margin-top: 70rpx;
+}
+.topExpress{
+  display: flex;
+  height: 160rpx;
+  font-size: 24rpx;
+}
+.topExpress-left {
+  width: 120rpx;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+}
+.topExpress-left image{
+  width: 120rpx;
+  height: 120rpx;
+}
+.topExpress-rights {
+  font-size: 26rpx;
+  color: #333;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20rpx 0;
+}
+
+.topExpress-right-middle {
+  
+  margin: 10rpx 0;
+}
+
+.topExpress-right-bottom {
+
+  color: #666;
+}

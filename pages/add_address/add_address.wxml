@@ -44,7 +44,7 @@
 
 <view class="adres" hidden="{{address}}">
   <view class="adres_h1">
-    选择地址
+    选择地区
     <view class="detel">
     </view>
   </view>

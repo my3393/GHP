@@ -1,0 +1,44 @@
+/* pages/wallet_detail/wallet_detail.wxss */
+page{
+    background: #f9f9f9;
+    font-size: 26rpx;
+}
+.top{
+    width: 100%;
+    background: #fff;
+    height: 60rpx;
+    position: fixed;
+    top: 2rpx;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    line-height: 60rpx;
+  }
+  .top_a{
+    color: #f12200;
+    border-bottom: 2rpx solid #f12200;
+  }
+  .li{
+      margin-top: 60rpx;
+  }
+  .list{
+      margin-top: 2rpx;
+      background: #fff;
+      padding:20rpx;
+      box-sizing: border-box;
+  }
+  .list_tit{
+      width: 80%;
+      display: inline-block;
+  }
+  .list_r{
+      float: right;
+  }
+  .list_date{
+      margin-top: 8rpx;
+  }
+  .list_date>view{
+      display: inline-block;
+      color: #999;
+
+  }

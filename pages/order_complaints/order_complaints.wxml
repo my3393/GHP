@@ -1,0 +1,52 @@
+<!-- pages/order_refund/order_refund.wxml -->
+<!-- <view class='infor'>
+  <view class='inform'>申请类型</view>
+  <view class='inforin '>
+    <picker range="{{refunds}}" bindchange="bindrefund">
+      <input disabled='true' type='text' value='{{refund}}'></input>
+    </picker>
+  </view>
+  <view class='enter'>
+    <image src='../../images/enter.png'></image>
+  </view>
+</view> -->
+<view class='infor'>
+  <view class='inform'>申请原因</view>
+  <view class='inforin '>
+    <picker value="{{index}}" range="{{cancels}}" range-key="name" bindchange="bindcancel">
+      <input disabled='true' type='text' value='{{cancel}}' placeholder="请点击选择申请原因"></input>
+    </picker>
+  </view>
+  <view class='enter'>
+    <image src='../../images/enter.png'></image>
+  </view>
+</view>
+<view class='infor' style="margin-top:20rpx">
+  <view class='inform'>退款金额</view>
+  <view class="yuan yan">￥28.8</view>
+</view>
+<view class="nav">
+  <view>
+    申请说明
+    <view class="shu_r">{{sum}}/100</view>
+  </view>
+  <textarea class="texta" placeholder="请输入订单投诉理由（必填）" maxlength="100" bindinput="valueChange"></textarea>
+  <view>
+    <view class="tu_img">
+      <image src="../../images/te.png" />
+      <view class="detele">
+        <image src="../../images/deteles.png" />
+      </view>
+    </view>
+    <view class="zhao">
+      <view class="zhao_img">
+        <image src="../../images/zhao.png"></image>
+      </view>
+      <view>{{num}}/3</view>
+    </view>
+  </view>
+</view>
+
+<view class="footer">
+   <view class="submit">提交申请</view>
+</view>

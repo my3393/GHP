@@ -1,5 +1,5 @@
 // pages/welfare_det/welfare_det.js
-const App = getApp();
+const app = getApp();
 let top1 = '';
 let top2 = '';
 Page({
@@ -28,7 +28,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      navH: App.globalData.navHeight
+      navH: app.globalData.navHeight
     })
   },
 

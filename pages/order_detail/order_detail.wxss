@@ -48,7 +48,7 @@ page{
 margin-right: 20rpx
 }
 .logistics_img image{
-    width: 21rpx;
+    width: 19rpx;
     height: 29rpx;
 }
 .logistics_diz{
@@ -98,7 +98,8 @@ margin-right: 20rpx
   }
   .specification{
     color: #999;
-    margin-top: 10rpx;
+    display: inline-block;
+    margin-top: 16rpx;
     font-size: 22rpx;
   }
   .guig{
@@ -122,6 +123,7 @@ margin-right: 20rpx
     margin-top: 5rpx;font-size: 29rpx;color: #F12200;
     font-weight: 600;
     display: inline-block;
+    margin-left: 170rpx;
 }
 .yuan{
     font-size: 20rpx;
@@ -151,6 +153,8 @@ margin-right: 20rpx
 }
 .font{
    font-size: 32rpx;
+   display: inline-block;
+   font-weight: 550;
 }
 .nav{
     width: calc(100% - 40rpx);
@@ -220,4 +224,15 @@ margin-right: 20rpx
 .footer_r>view{
     display: inline-block;
     margin-right: 30rpx;
+}
+.fuk{
+  color: #fff;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+}
+.picker{
+  display: inline-block;
+}
+.d_sh image{
+  width: 30rpx;
+  height: 24rpx;
 }

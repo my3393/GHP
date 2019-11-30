@@ -1,0 +1,19 @@
+@import '../mine_yb/mine_yb';
+.num{
+  color: #f12200;
+}
+.top{
+  margin-top: 20rpx;
+}
+.tops>view{
+  line-height: 60rpx;
+}
+.hei{
+  color: #666;
+}
+.tix{
+   opacity: 0.5;
+}
+.foot-boot{
+  margin-top: 250rpx;
+}

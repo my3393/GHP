@@ -26,6 +26,9 @@ page{
     display: flex;
     justify-content: space-around;
 }
+.progress{
+  color: #f12200;
+}
 .money{
     display: inline-block;
     width: 28rpx;

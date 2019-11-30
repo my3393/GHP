@@ -1,5 +1,6 @@
 // pages/e_ welfare/e_ welfare.js
-import Canvas from '../../utils/tcanvas.js'
+import Canvas from '../../utils/tcanvas.js';
+const app = getApp();
 Page({
   ...Canvas.options,
   /**

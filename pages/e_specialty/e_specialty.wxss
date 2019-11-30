@@ -15,6 +15,9 @@ page{
   color: #333;
   font-size: 22rpx;
 }
+.tags{
+  font-size: 24rpx;
+}
 .top-img{
   width: 22rpx;
   height: 22rpx;
@@ -38,8 +41,8 @@ page{
   position:absolute;
   left:0;
   width:25%;
-  height:100%;
-  background-color:#eee;
+  height:85%;
+  background-color:#F9F9F9;
   font-size:15px;
 }
 .left-navbar view{
@@ -47,16 +50,13 @@ page{
   line-height: 88rpx;
   text-align:center;
 }
-.active{
-  background-color:#FFF;
-  color:red;
-  font-size:17px;
-}
+
 #right{
   position:absolute;
   right:0;
   width:75%;
-  height:90%;
+  height:95%;
+
   padding: 0 20rpx;
   box-sizing: border-box;
 }
@@ -77,9 +77,11 @@ page{
   width: 100%;
   height: 100%;
 }
-.goods-n{
- 
-}
+/* .goods{
+ position: absolute;
+ right: 20rpx;
+ width: 70%;
+} */
 .goods-j{
   margin-top: 10rpx;
   overflow: hidden;
@@ -115,9 +117,43 @@ page{
 .banner{
   margin: 24rpx 0;
   height: 180rpx;
-  
+
 }
 .banner image{
   width: 100%;
   height: 100%;
+}
+.active{
+  background: #fff;
+  color: #333;
+  border-left: 4rpx solid #f12200;
+}
+.kong{
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+}
+.kong_img{
+  width: 300rpx;
+  height: 250rpx;
+}
+.kong_img image{
+  width: 100%;
+  height: 100%;
+}
+.bangd{
+  width: 170rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  border-radius: 30rpx;
+  margin-top: 30rpx;
+  display: inline-block;
+  font-size: 24rpx;
+  background:linear-gradient(to right, #f12200, #ff4e17);
 }

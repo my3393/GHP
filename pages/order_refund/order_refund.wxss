@@ -1,0 +1,129 @@
+/* pages/order_refund/order_refund.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.infor{
+  background: #fff;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  border-bottom: 2 rpx solid #F3F3F3;
+  line-height: 100rpx;
+  position: relative;
+}
+.inform{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20rpx;
+}
+.inforin{
+  float: right;
+  margin-top: 30rpx;
+  margin-right: 40rpx;
+}
+.inforin input{
+  width: 400rpx;
+  text-align: right;
+  letter-spacing: 2rpx;
+}
+.forin{
+  margin-left: 30rpx;
+}
+.enter{
+  position: absolute;
+  right: 20rpx;
+   width: 24rpx;
+  height: 24rpx;
+  top: 5 rpx;
+}
+.enter image{
+  width: 14rpx;
+  height: 26rpx;
+}
+.pick{
+  display: inline-block;
+  color: #666;
+  width: 540rpx;
+}
+.yuan{
+  display: inline-block;
+  vertical-align: middle;
+}
+.nav{
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+.shu_r{
+  float: right;
+  color: #999
+}
+.texta{
+  margin-top: 30rpx;
+  width: 100%;
+  height: 220rpx;
+}
+.zhao{
+  width: 140rpx;
+  height: 140rpx;
+  border: 1rpx solid #CCCCCC;
+  border-radius: 8rpx;
+  text-align: center;
+  color: #999999;
+  font-size: 22rpx;
+  display: inline-block;
+  box-sizing: border-box;
+}
+.zhao_img{
+  width: 46rpx;
+  height: 46rpx; 
+  display: inline-block;
+  margin-top: 30rpx; 
+}
+.zhao_img image{
+  width: 100%;
+  height: 100%;
+}
+.tu_img{
+  width: 140rpx;
+  height: 140rpx;
+  float: left;
+  position: relative;
+  margin-right: 20rpx;
+}
+.tu_img image{
+  width: 100%;
+  height: 100%;
+}
+.detele{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+
+}
+.detele image{
+  width: 100%;
+  height: 100%;
+}
+.footer{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  height: 100rpx;
+}
+.submit{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+  text-align: center;
+  line-height: 80rpx;
+  height: 80rpx;
+  color: #fff;
+   background:linear-gradient(to right, #f12200, #ff4e17);
+   border-radius: 40rpx;
+}

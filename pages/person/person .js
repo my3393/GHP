@@ -1,4 +1,5 @@
 // pages/person/person .js
+const app = getApp();
 Page({
 
   /**

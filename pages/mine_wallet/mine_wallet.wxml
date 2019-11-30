@@ -1,0 +1,43 @@
+<view class="top">
+    <view class="title">我的艺呗</view>
+    <view class="shuom">使用说明？</view>
+    <view>
+        <view class="num">2345</view>
+        <!-- <view class="znum">提现</view> -->
+         <view class="znum tix">提现</view>
+    </view>
+    <view class="bootm">
+       金额明细
+       <view class="bootm-img">
+           <image  src="../../images/right.png" />
+       </view>
+    </view>
+</view>
+
+<view class="top tops">
+  <view>未结算</view>
+  <view><text class="hei">订单笔数：</text>11</view>
+  <view><text class="hei">分销收益：</text>11<text>元</text></view>
+</view>
+
+<view class="top tops">
+  <view>已结算</view>
+ <view><text class="hei">订单笔数：</text>11</view>
+  <view><text class="hei">分销收益：</text>11<text>元</text></view>
+</view>
+
+<view class="foot-boot">
+    <view >善家购</view>
+    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+</view>
+
+ <view class="popup" hidden="{{iscertfica}}">
+        <view class="popup_h1">请先进行实名认证</view>
+        <view class="popup_content">认证通过后才能提现到微信钱包</view>
+        <view class="popup_btn">
+              <view bindtap="cancel_delete">稍后认证</view>
+              <view bindtap="confirm_delete">立即认证</view>
+        </view>
+  </view>
+
+  <view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>

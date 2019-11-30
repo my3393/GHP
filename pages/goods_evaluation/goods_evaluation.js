@@ -1,4 +1,5 @@
 // pages/goods_evaluation/goods_evaluation.js
+const app = getApp();
 Page({
 
   /**

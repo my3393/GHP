@@ -13,7 +13,7 @@ page {
     background: #fff;
   }
   .top_center>text{
-    margin-right: 14rpx;
+    margin-right: 20rpx;
   }
   .top_dao{
         position: relative;
@@ -80,6 +80,10 @@ page {
     }
     .center_a{
       color: #f12200;
+      padding-bottom: 10rpx;
+      box-sizing: border-box;
+     
+      border-bottom: 4rpx solid #f12200;
     }
     /* 导航 */
     .naviga{

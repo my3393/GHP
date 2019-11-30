@@ -1,0 +1,2 @@
+/* pages/order_complaints/order_complaints.wxss */
+@import '../order_refund/order_refund';

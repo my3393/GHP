@@ -1,4 +1,5 @@
 // pages/order_all/order_all.js
+const app = getApp();
 Page({
 
   /**

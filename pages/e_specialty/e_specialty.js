@@ -1,10 +1,17 @@
 // pages/e_specialty/e_specialty.js
+const app = getApp();
+let grade = 1;
+let id = '';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+
+    tar:'',
+    isBang:true,
     photos: [
       "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
       "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
@@ -20,47 +27,11 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-    //获得分类筛选
-    // request.sendRrquest(API_queryClassify, 'POST', { flag: 0 })
-    //   .then(function (res) {
-    //     console.log("返回数据：");
-    //     var screenArray = res.data.data.screenArray;
-    //     var screenId = screenArray[0].screenId;
-    //     that.setData({
-    //       screenArray: screenArray,
-    //       screenId: screenId,
-    //     })
-    //     console.log(screenArray);
-    //     request.sendRrquest(API_queryClassify, 'POST', { flag: 1, screenId: screenId })
-    //       .then(function (res) {
-    //         console.log("返回数据：");
-    //         that.setData({
-    //           childrenArray: res.data.data.screenArray[0],
-    //         })
-    //         console.log(that.data.childrenArray);
-    //       }, function (error) { console.log("返回失败"); });
-    //   }, function (error) { console.log("返回失败"); });
+    that.getType();
+
   },
 
-  navbarTap: function (e) {
-    var that = this;
-    console.log(e);
-    this.setData({
-      currentTab: e.currentTarget.id,   //按钮CSS变化
-      screenId: e.currentTarget.dataset.screenid,
-      scrollTop: 0,   //切换导航后，控制右侧滚动视图回到顶部
-    })
-    //刷新右侧内容的数据
-    var screenId = this.data.screenId;
-    request.sendRrquest(API_queryClassify, 'POST', { flag: 1, screenId: screenId })
-      .then(function (res) {
-        console.log("返回数据：");
-        that.setData({
-          childrenArray: res.data.data.screenArray[0],
-        })
-        console.log(that.data.childrenArray);
-      }, function (error) { console.log("返回失败"); });
-  },
+
 
 
   /**
@@ -110,5 +81,84 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  getType(){
+    let that = this;
+    let data = {
+      grade:grade
+    }
+    app.res.req('app-web/home/grade/type', data, (res) => {
+      console.log(res.data)
+       if(res.status == 1000){
+        id = res.data[0].id
+            that.setData({
+              type:res.data,
+
+            })
+          that.getlist();
+       }else if(res.status == 1004 || res.status == 1005){
+           wx.redirectTo({
+             url: '../login/login',
+           })
+       } else {
+         wx.showToast({
+           title: res.msg,
+           icon: 'none'
+         })
+       }
+    })
+  },
+  //商品列表
+  getlist(){
+    let that = this;
+    let data = {
+      typeId:id
+    }
+    app.res.req('app-web/home/choiceness/product', data, (res) => {
+      console.log(res.data)
+       if(res.status == 1000){
+            that.setData({
+              list:res.data,
+
+            })
+
+       }else if(res.status == 1004 || res.status == 1005){
+           wx.redirectTo({
+             url: '../login/login',
+           })
+       } else {
+         wx.showToast({
+           title: res.msg,
+           icon: 'none'
+         })
+       }
+    })
+  },
+   //商品切换
+   tag: function (e) {
+    var that = this;
+    id =  e.currentTarget.dataset.id;
+    var nowTime = new Date();
+    if (nowTime - this.data.tapTime < 500) {
+      console.log('阻断')
+      return;
+    }
+    console.log(e.currentTarget);
+    that.getlist();
+    this.setData({
+      tapTime: nowTime
+    });
+
+    that.setData({
+      tar: e.currentTarget.dataset.num,
+    })
+
+
+  },
+  //绑定家乡
+  bang(){
+    wx.navigateTo({
+      url: '../binding_hometown/binding_hometown',
+    })
   }
 })

@@ -21,21 +21,21 @@ page{
     font-size: 24rpx;
 }
 .num{
-    margin-top: 30rpx;
+    margin-top: 45rpx;
     color: #333;
     font-size: 40rpx;
     display: inline-block;
 }
 .znum{
     margin-top: 30rpx;
-    width: 110rpx;
-    height: 46rpx;
+    width: 170rpx;
+    height: 70rpx;
     font-size: 22rpx;
     text-align: center;
-    line-height: 46rpx;
+    line-height: 70rpx;
     color: #fff;
     float: right;
-    border-radius: 30rpx;
+    border-radius: 40rpx;
     background:linear-gradient(to right, #f12200, #ff4e17); 
 }
 .bootm{

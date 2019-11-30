@@ -1,0 +1,30 @@
+<!--pages/certification/certification.wxml-->
+<view class="nop">
+    身份信息
+  </view>
+  <view class='infor'>
+    <view class='inform'>身份信息</view>
+    <view class='inforin'>
+      <input type='text' placeholder='输入你的真实姓名' bindinput='names'></input>
+    </view>
+  </view>
+  <view class='infor'>
+    <view class='inform'>身份证号</view>
+    <view class='inforin'>
+      <input type='idcard' placeholder='输入你的身份证号' bindinput='card'></input>
+    </view>
+  </view>
+<view class="nop">
+    上传身份证信息（只用于平台商家身份认证）
+  </view>
+
+  <view class="nav">
+     <view>
+       <view class="zhao">
+      <view class="zhao_img">
+        <image src="../../images/zhao.png"></image>
+      </view>
+      <view>点击上传</view>
+    </view>
+     </view>
+  </view>

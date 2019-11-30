@@ -2,7 +2,7 @@
 <view class='top'>
     <view>
         <view class="top_tu">
-            <image src="../../images/d-sh.png" />
+            <image src="../../images/daojis.png" />
         </view>
         <view class="top_n">等待买家付款</view>
     </view>
@@ -11,8 +11,8 @@
 <view class="logistics">
     <view class="chak">
         <view>
-            <view class="logistics_img">
-                <image src="../../images/shdz.png" />
+            <view class="logistics_img d_sh">
+                <image src="../../images/d-sh.png" />
             </view>
             <view class='logistics_n'>【广州市】 已到达广州分拨中心</view>
         </view>
@@ -24,7 +24,7 @@
     <view>
         <view>
             <view class="logistics_img">
-                <image src="../../images/shdz.png" />
+                <image src="../../images/weizi.png" />
             </view>
             <view class='logistics_n'>
                 杨先生
@@ -62,7 +62,7 @@
                     </view>
                     <view class="good_num">*2</view>
                 </view>
-                <view class="tuik">退款</view>
+                <view class="tuik" bindtap="refund">退款</view>
             </view>
         </view>
         <view>
@@ -92,7 +92,7 @@
         </view>
         <view class="price_list">
             会员优惠
-            <view class="price_r yan">￥56.00</view>
+            <view class="price_r">￥56.00</view>
         </view>
         <view class="price_list">
             运费
@@ -100,10 +100,10 @@
         </view>
         <view class="z_right">
             需付费:
-            <text class="yan font">
+            <view class="yan font">
                 <text style="font-size:22rpx">￥</text>
                 56
-            </text>
+            </view>
         </view>
     </view>
 </view>
@@ -121,10 +121,58 @@
     </view>
 </view>
 
-<view class="footer">
+<!-- 未付款 -->
+<!-- <view class="footer">
     <view class="footer_r">
 
-        <view class="tuik">确认收货</view>
+        <view class="tuik fuk">付款 38:36</view>
+               <picker class="picker" mode ='selector' value="{{index}}" range="{{cancel}}" range-key="name" bindchange="bindcancel" >
+                  <view class="tuik">取消订单</view>
+               </picker>
+    </view>
+</view> -->
+<!-- 删除订单 -->
+ <view class="popup" hidden="{{isdelete}}">
+        <view class="popup_h1">确认删除订单？</view>
+        <view class="popup_content">删除之后无法找回，请确认当前操作</view>
+        <view class="popup_btn">
+              <view bindtap="cancel_delete">取消</view>
+              <view bindtap="confirm_delete">确定</view>
+        </view>
+  </view>
+  <!-- 确认签收 -->
+   <view class="popup" hidden="{{isqianshou}}">
+        <view class="popup_h1">是否确认签收？</view>
+        <!-- <view class="popup_content">删除之后无法找回，请确认当前操作</view> -->
+        <view class="popup_btn">
+              <view bindtap="cancel_delete">取消</view>
+              <view bindtap="confirm_delete">确定</view>
+        </view>
+  </view>
+<!-- 付款后 -->
+<!-- <view class="footer">
+    <view class="footer_r">
+
+        <view class="tuik">确认签收</view>
                 <view class="tuik">查看物流</view>
     </view>
-</view>
+</view> -->
+<!-- 确认收货后 -->
+<!-- <view class="footer">
+    <view class="footer_r">
+
+        <view class="tuik">立即评价</view>
+                <view class="tuik">查看物流</view>
+    </view>
+</view> -->
+<!-- 提醒发货     -->
+<!-- 删除订单 -->
+<!-- <view class="footer">
+    <view class="footer_r">
+
+        <view class="tuik" bindtap="delete">删除订单</view>
+                
+    </view>
+</view> -->
+
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true' style="margin-top:{{navH}}px"></view>

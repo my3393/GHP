@@ -1,4 +1,5 @@
 // pages/hometown/hometown.js
+const app = getApp();
 Page({
 
   /**

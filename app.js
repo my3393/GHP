@@ -1,5 +1,9 @@
 //app.js
+var http = require('utils/http.js')  
 App({
+  data: {
+    urlmall: "http://192.168.123.164:8080/"
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -45,5 +49,10 @@ App({
   
   globalData: {
     navHeight: 0
+  },
+  //封装请求
+   res: {
+    req: http.req  //这里配置我们需要的方法
   }
+
 })

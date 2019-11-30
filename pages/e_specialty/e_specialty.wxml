@@ -1,72 +1,84 @@
-<view class="top">
-   <view class="top-left">
-     <view class="top-img"><image src="../../images/trumpe.png" /></view>
-     <text style=" vertical-align: middle;">家乡善款￥28,000.00 | </text>
-   </view>
-   <view class="top-r">
-     用户188****3352为家乡成功捐款￥1.58 
-   </view>
-</view>
-<view class="classify">
-  <!-- 分类导航栏 -->
-  <scroll-view class='left-navbar' scroll-y="true">
-    <!-- <view wx:for="{{screenArray}}" class="{{ currentTab == index ? 'active' : '' }}" wx:key="unique" bindtap="{{ currentTab != index ? 'navbarTap':'' }}" id="{{index}}" data-screenId="{{item.screenId}}">{{item.screenName}}
-    </view> -->
-    <view>特产干货</view>
-    <view>特产干货</view>
-    <view>特产干货</view>
-    <view>特产干货</view>
-    <view>特产干货</view>
-    <view>特产干货</view>
-  </scroll-view>
-  <!-- <view >
-    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-      <block wx:for='{{photos}}'>
-        <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
-          <image class="banner_img" src="{{item}}"></image>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view> -->
-  <scroll-view id="right" scroll-y="true" scroll-top="{{scrollTop}}">
-    <!-- 顶部图片 -->
-    <!-- <view class="goods-banner">
-      <image class="img-banner" src="{{childrenArray.showImageUrl}}" wx:if="{{childrenArray.showImageUrl}}" mode="scaleToFill"></image>
-    </view> -->
-    <!-- 商品展示 -->
-    <!-- <view class="goods-list" wx:for="{{childrenArray.childrenScreenArray}}" wx:key="unique">
-      <view class="goods-title">{{item.screenName}}</view>
-      <view wx:for="{{item.childrenScreenArray}}" class="goods" wx:key="unique" bindtap="ToSearchResult" id="{{item.screenName}}">
-        <image class="img" src="{{item.showImageUrl}}" wx:if="{{item.showImageUrl}}"></image>
-        <text>{{item.screenName}}</text>
+<view hidden="{{isBang}}">
+  <view class="top">
+    <view class="top-left">
+      <view class="top-img">
+        <image src="../../images/trumpe.png" />
       </view>
+      <text style=" vertical-align: middle;">家乡善款￥28,000.00 |</text>
+    </view>
+    <view class="top-r">用户188****3352为家乡成功捐款￥1.58</view>
+  </view>
+  <view class="classify clearfix">
+    <!-- 分类导航栏 -->
+    <scroll-view class='left-navbar' scroll-y="true">
+      <!-- <view wx:for="{{screenArray}}" class="{{ currentTab == index ? 'active' : '' }}" wx:key="unique" bindtap="{{ currentTab != index ? 'navbarTap':'' }}" id="{{index}}" data-screenId="{{item.screenId}}">{{item.screenName}}
       </view> -->
-    <view class="goods" >
+      <view wx:for="{{type}}" wx:key="{{item.id}}" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
+        {{item.typeName}}
+      </view>
+    </scroll-view>
+    <!-- <view class="goods">
       <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-        <block wx:for='{{photos}}'>
+        <block wx:for='{{photos}}' wx:key="{{item.id}}">
           <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
             <image class="banner_img" src="{{item}}"></image>
           </swiper-item>
         </block>
       </swiper>
-    </view>
-    <view class="goods-list">
-      <view class="goods-img">
-        <image src="../../images/te.png"></image>
+    </view> -->
+    <scroll-view id="right" scroll-y="true" scroll-top="{{scrollTop}}">
+      <!-- 顶部图片 -->
+      <!-- <view class="goods-banner">
+        <image class="img-banner" src="{{childrenArray.showImageUrl}}" wx:if="{{childrenArray.showImageUrl}}" mode="scaleToFill"></image>
+      </view> -->
+      <!-- 商品展示 -->
+      <!-- <view class="goods-list" wx:for="{{childrenArray.childrenScreenArray}}" wx:key="unique">
+        <view class="goods-title">{{item.screenName}}</view>
+        <view wx:for="{{item.childrenScreenArray}}" class="goods" wx:key="unique" bindtap="ToSearchResult" id="{{item.screenName}}">
+          <image class="img" src="{{item.showImageUrl}}" wx:if="{{item.showImageUrl}}"></image>
+          <text>{{item.screenName}}</text>
+        </view>
+        </view> -->
+      <view class="goods" >
+        <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
+          <block wx:for='{{photos}}'>
+            <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
+              <image class="banner_img" src="{{item}}"></image>
+            </swiper-item>
+          </block>
+        </swiper>
       </view>
-      <view class="goods-n">
-        <view class="goods-j">青海特产可可西里藏獒特色牛.青海特产可可西里藏獒特色牛...</view>
-        <view class="goods-q">银川市 西夏区 贺兰山西路街道</view>
-        <view class="goods-t">
-          <view class="goods-p">
-            <text style="font-size:22rpx">￥</text>
-            28
-          </view>
-          <view class="goods-g">
-            <image src="../../images/shop.png" />
+      <view class="goods-list" wx:for="{{list}}" wx:key="{{item.id}}">
+        <view class="goods-img">
+          <image src="{{item.productDefaultImgOss}}"></image>
+        </view>
+        <view class="goods-n">
+          <view class="goods-j">{{item.productName}}</view>
+          <view class="goods-q">{{item.provinceName}} {{item.cityName}} {{item.areaName}} {{item.townName}}</view>
+          <view class="goods-t">
+            <view class="goods-p">
+              <text style="font-size:22rpx">￥</text>
+              {{item.lowestPrice}}
+            </view>
+            <view class="goods-g">
+              <image src="../../images/shop.png" />
+            </view>
           </view>
         </view>
       </view>
-    </view>
-  </scroll-view>
+    </scroll-view>
+  </view>
+</view>
+
+<view hidden="{{!isBang}}">
+  <view class="kong">
+      <view class="kong_img">
+        <image src="../../images/noplay.png" />
+      </view>
+      <view >绑定家乡</view>
+      <view >随时随地选购家乡特产</view>
+      <view class="bangd" bind:tap="bang">
+        立即绑定
+      </view>
+  </view>
 </view>

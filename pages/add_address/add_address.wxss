@@ -92,7 +92,7 @@ page{
   float: right;
   width: 36rpx;
   height: 36rpx;
-  background: red;
+ 
 }
 .detel image{
   width: 100%;

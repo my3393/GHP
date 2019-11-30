@@ -1,4 +1,5 @@
 // pages/mine_yb/mine_yb.js
+const app = getApp();
 Page({
 
   /**

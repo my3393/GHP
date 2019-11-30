@@ -257,4 +257,4 @@
     确定
   </view>
 </view>
-<view class="mask" hidden="{{ismask}}" style="margin-top:{{navH}}px"></view>
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true' style="margin-top:{{navH}}px"></view>

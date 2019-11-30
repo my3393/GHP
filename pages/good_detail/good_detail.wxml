@@ -10,9 +10,9 @@
         </view>
       </view>
       <view class="top_center" hidden="{{is_top}}">
-         <text class="{{issrcoll == 1 ? 'center_a' :''}}">商品</text>
-         <text class="{{issrcoll == 2 ? 'center_a' :''}}">评价</text>
-         <text class="{{issrcoll == 3 ? 'center_a' :''}}">详情</text>
+         <text class="{{issrcoll == 1 ? 'center_a' :''}}" bindtap="scrollto">商品</text>
+         <text class="{{issrcoll == 2 ? 'center_a' :''}}" bindtap="scrollto1">评价</text>
+         <text class="{{issrcoll == 3 ? 'center_a' :''}}" bindtap="scrollto2">详情</text>
             
       </view>
     </view>
@@ -92,7 +92,7 @@
 </view>
  <!-- 评价 -->
 <view class="ping">
-  <view class="pingj">用户评价（2）</view>
+  <view class="pingj top1">用户评价（2）</view>
   <view class="rights" bind:tap='evaluation'>更多 ></view>
 </view>
 <scroll-view scroll-x="{{true}}" class="scroll">
@@ -391,7 +391,7 @@
   </scroll-view>
 </view>
 <!-- 底部 -->
-<view class="foot">
+<view class="foot top2">
   <view class="foot_left">
     <view>
       <image src="../../images/xinxin_n.png" />

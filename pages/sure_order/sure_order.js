@@ -1,11 +1,12 @@
 // pages/sure_order/sure_order.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    address:true,
+    address:false,
   },
 
   /**

@@ -43,7 +43,7 @@ Page({
     ctx.restore();
     ctx.setFontSize(30);
     ctx.setFillStyle('#e65099');
-    ctx.fillText('￥28', 50, 310)
+    ctx.fillText('￥28', 50, 210)
     ctx.setFontSize(20);
     ctx.fillText(that.data.res, 50, 340)
     ctx.draw(false, () => {
