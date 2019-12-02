@@ -1,10 +1,12 @@
 {
   "pages": [
+    "pages/e_home/home",
+    "pages/members/members",
+    "pages/mine_collection/mine_collection",
     "pages/certification/certification",
     "pages/wallet_detail/wallet_detail",
     "pages/wallet_withdrawal/wallet_withdrawal",
     "pages/mine_wallet/mine_wallet",
-    "pages/e_home/home",
    
     "pages/store_refund/store_refund",
     "pages/sure_order/sure_order",

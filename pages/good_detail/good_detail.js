@@ -1,138 +1,27 @@
-const App = getApp();
+const app = getApp();
 let top1 = '';
 let top2 = '';
+let id; //商品id
+var selectIndex; //选择的大规格key
+var attrIndex; //选择的小规格的key
+var selectIndexArray = []; //选择属性名字的数组
+var selectAttrid = []; //选择的属性id
+var a = [];
+var ds = false;
 Page({
   data: {
-     istag:true,
-     is_top:true,
-     issrcoll:'1',
-     loading:false,
+    naviga: true,
+    istag: true,
+    is_top: true,
+    issrcoll: '1',
+    loading: false,
     photos: [
       "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
       "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
       "https://graph.baidu.com/resource/116b9dee63af0f77fcb8f01572947716.jpg",
       "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
     ],
-    //数据格式
-    result: {
-      "goods": {
-        "unit": "件",
-        "goods_id": 436886,
-        "store_count": 158,
-        "market_price": "10.00",
-        "shop_price": "0.01",
-        "cost_price": "10.00",
-        "goods_name": "小龙虾221",
-        "original_img": "http://boweisou.oss-cn-shenzhen.aliyuncs.com/images/170/2018/06/o49599VttZZU84VkczGt1j9t5Tcu4t.jpg",
-        "goods_attr_list": [],
-        "goods_spec_list": [
-          [{
-              "spec_name": "颜色",
-              "item_id": 535385,
-              "item": "白色",
-              "src": "",
-              "isClick": 0
-            },
-            {
-              "spec_name": "颜色",
-              "item_id": 535386,
-              "item": "黑色",
-              "src": "",
-              "isClick": 0
-            }
-          ],
-          [{
-              "spec_name": "尺寸",
-              "item_id": 535692,
-              "item": "170",
-              "src": "",
-              "isClick": 0
-            },
-            {
-              "spec_name": "尺寸",
-              "item_id": 535693,
-              "item": "180",
-              "src": "",
-              "isClick": 0
-            }
-          ],
-          [{
-              "spec_name": "哈哈",
-              "item_id": 552569,
-              "item": "去",
-              "src": "",
-              "isClick": 0
-            },
-            {
-              "spec_name": "哈哈",
-              "item_id": 552570,
-              "item": "不",
-              "src": "",
-              "isClick": 0
-            }
-          ]
-        ]
-      },
-      "spec_goods_price": [{
-          "id": 1018269,
-          "key": "535385_535692_552569",
-          "price": "10.00",
-          "productprice": "0.00",
-          "store_count": 20
-        },
-        {
-          "id": 1018270,
-          "key": "535385_535692_552570",
-          "price": "20.00",
-          "productprice": "0.00",
-          "store_count": 20
-        },
-        {
-          "id": 1018271,
-          "key": "535385_535693_552569",
-          "price": "30.00",
-          "productprice": "0.00",
-          "store_count": 20
-        },
-        {
-          "id": 1018272,
-          "key": "535385_535693_552570",
-          "price": "40.00",
-          "productprice": "0.00",
-          "store_count": 20
-        },
-        {
-          "id": 1018273,
-          "key": "535386_535692_552569",
-          "price": "50.00",
-          "productprice": "0.00",
-          "store_count": 20
-        },
-        {
-          "id": 1018274,
-          "key": "535386_535692_552570",
-          "price": "60.00",
-          "productprice": "0.00",
-          "store_count": 20
-        },
-        {
-          "id": 1018275,
-          "key": "535386_535693_552569",
-          "price": "70.00",
-          "productprice": "0.00",
-          "store_count": 20
-        },
-        {
-          "id": 1018276,
-          "key": "535386_535693_552570",
-          "price": "80.00",
-          "productprice": "0.00",
-          "store_count": 18
-        }
-      ],
-      "goods_attr_list": [],
-      "comment": [],
-    },
+
     //微信小程序动画
     animationData: {},
     animationisno: false,
@@ -140,43 +29,34 @@ Page({
     arrId: [],
     arrName: [],
     textStates: ["view-btns-text-normal", "view-btns-text-select"],
-    num:1,
+    num: 1,
     current: 0
   },
-  
+
   onLoad: function(options) {
+    console.log(options)
     this.setData({
-      navH: App.globalData.navHeight
+      navH: app.globalData.navHeight
     })
-    wx.showShareMenu({
-      withShareTicket: true
-    })
-    let that = this;
-    let guilists = that.data.guilist;
-    guilists.price = that.data.result.goods.shop_price;
-    guilists.store_count = that.data.result.goods.store_count;
-    that.setData({
-      goodsList: that.data.result.goods,
-      goods_spec: that.data.result.goods.goods_spec_list,
-      spec_goods_price: that.data.result.spec_goods_price,
-      guilist: guilists
-    })
+    id = options.id
+    this.getDetail();
+    this.getSku()
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var query = wx.createSelectorQuery();
     //选择id
     var that = this;
-    query.select('.top1').boundingClientRect(function (rect) {
-      console.log(rect)
+    query.select('.top1').boundingClientRect(function(rect) {
+
 
       top1 = rect.top
 
     }).exec();
-    query.select('.top2').boundingClientRect(function (rect) {
-      console.log(rect)
+    query.select('.top2').boundingClientRect(function(rect) {
+
 
       top2 = rect.top
 
@@ -204,7 +84,7 @@ Page({
       // 当i等于当前点击的规格时，设置isClick=1
       if (i == chindex) {
         goods_spec[fuindex][i].isClick = 1;
-      } 
+      }
       // 否则设置其他的isClick=0
       else {
         goods_spec[fuindex][i].isClick = 0;
@@ -296,32 +176,191 @@ Page({
       animationData: animal1.export()
     })
   },
-  swiperChange: function (e) {
+  swiperChange: function(e) {
     var that = this;
     if (e.detail.source == 'touch') {
       that.setData({
         current: e.detail.current
       })
     }
-  }, 
+  },
+
+  //规格选择
+  pack: function(e) {
+    var that = this;
+    ds = false;
+    console.log(e);
+    var selectIndex = e.currentTarget.dataset.selectIndex; //当前点击下标
+    var attrIndex = e.currentTarget.dataset.attrIndex; //当前点击对象下标
+    var spec = this.data.spec;
+    var count = spec[selectIndex].entries.length;
+    for (var i = 0; i < count; i++) {
+      spec[selectIndex].entries[i].isSelect = false;
+    }
+    spec[selectIndex].entries[attrIndex].isSelect = true;
+    selectIndexArray[selectIndex] = spec[selectIndex].entries[attrIndex].value;
+    if (selectAttrid.length == 0) {
+      selectAttrid.push(spec[selectIndex].entries[attrIndex].id)
+    } else {
+      selectAttrid[selectIndex] = spec[selectIndex].entries[attrIndex].id;
+    }
+
+
+    this.setData({
+      spec: spec, //变换选择框
+      selected: selectIndexArray.join("-"),
+      selectAttrid: selectAttrid.join(','),
+    });
+    console.log(selectIndexArray.join(","))
+    console.log(that.data.selectAttrid)
+    if (selectAttrid.length == that.data.detail.specificationItems.length) {
+      console.log(selectAttrid);
+
+      for (let i in that.data.sku) {
+        if (JSON.stringify(that.data.selectAttrid) === JSON.stringify(that.data.sku[i].ids)) {
+          that.setData({
+            price: that.data.sku[i].price,
+            goodId: that.data.sku[i].id
+          })
+          return ds = true;
+        }
+      }
+      if (ds == false) {
+        wx.showToast({
+          title: '该商品没有库存',
+          icon: 'none'
+        })
+      }
+    }
+  },
+  //规格
+  getSku() {
+    let that = this;
+    let data = {
+      productId: id
+    }
+
+    app.res.req("app-web/product/sku", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        for (var i in res.data) {
+          a = [];
+          for (var j in res.data[i].skus) {
+            a.push(res.data[i].skus[j].id)
+            res.data[i].ids = a.join(",")
+          }
+        }
+        that.setData({
+          sku: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //收藏
+  Collection() {
+    let that = this;
+    let data = {
+      productId: id
+    }
+
+    app.res.req("app-web/product/collection", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getDetail();
+
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  getDetail() {
+    let that = this;
+    let data = {
+      productId: id
+    }
+
+    app.res.req("app-web/product/detail", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+
+
+        that.setData({
+          detail: res.data,
+          spec: res.data.specificationItems
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //返回上一页
+  navBack() {
+    wx.navigateBack({
+      data: 1
+    })
+  },
+  //顶部导航栏
+  nav() {
+    this.setData({
+      naviga: !this.data.naviga
+    })
+  },
   // 查看评价
-  evaluation(){
+  evaluation() {
     wx.navigateTo({
       url: '../goods_evaluation/goods_evaluation',
     })
   },
   //分享弹窗
-  off_order(){
+  off_order() {
     console.log(111)
-    let that =this;
-    this.setData({ istag: !that.data.istag });
+    let that = this;
+    this.setData({
+      istag: !that.data.istag
+    });
     console.log(that.data.istag)
   },
   // 购买
-  buy(){
+  buy() {
     let that = this;
     that.setData({
-      loading:!that.data.loading
+      loading: !that.data.loading
     })
   },
   // 滚轮显示
@@ -333,7 +372,7 @@ Page({
   },
   scrollto1() {
     wx.pageScrollTo({
-      scrollTop: top1-60,
+      scrollTop: top1 - 60,
       duration: 300
     })
   },
@@ -343,8 +382,8 @@ Page({
       duration: 300
     })
   },
-  onPageScroll: function (e) {
-    console.log(e.scrollTop)
+  onPageScroll: function(e) {
+
     let that = this
     if (e.scrollTop > 200) {
 
@@ -357,22 +396,42 @@ Page({
         is_top: true
       })
     }
-    if(e.scrollTop < 400){
-      
-      that.setData({
-        issrcoll:1
-      })  
-    }else if(400 < e.scrollTop && e.scrollTop < 700){
+    if (e.scrollTop < 400) {
 
       that.setData({
-        issrcoll:2
+        issrcoll: 1
       })
-     
-    }else if(700 < e.scrollTop){
-     
+    } else if (400 < e.scrollTop && e.scrollTop < 700) {
+
       that.setData({
-        issrcoll:3
+        issrcoll: 2
+      })
+
+    } else if (700 < e.scrollTop) {
+
+      that.setData({
+        issrcoll: 3
       })
     }
-  }
+  },
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+    this.setData({
+      selectName: "", //已选的属性名字
+      selectAttrid: [], //选择的属性id
+      selected: "",
+      price: '', //价格
+      goodId: '',
+    })
+    selectIndex; //选择的大规格key
+    attrIndex; //选择的小规格的key
+    selectIndexArray = []; //选择属性名字的数组
+    selectAttrid = [];
+    // a = [];
+    detail_id;
+    ds = false;
+  },
+
 })

@@ -86,6 +86,13 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //查看商品详情
+  detail(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.dataset.id,
+    })
+  },
   //商品列表
   getDetail(){
     let that =this;
@@ -260,6 +267,7 @@ Page({
            that.getType();
            that.getRecommend();
        }else if(res.status == 1004 || res.status == 1005){
+         console.log(1)
            wx.redirectTo({
              url: '../login/login',
            })

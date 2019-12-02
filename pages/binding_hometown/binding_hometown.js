@@ -23,14 +23,19 @@ Page({
     isprov: true,
     iscity: false,
     isqu: false,
-    isjie: false
+    isjie: false,
+    iscitys: false,  
+    isqus: false,
+    isjies: false,
+    ismask:true,
+    name:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getprov();
+   // this.getprov();
   },
 
   /**
@@ -81,10 +86,17 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //隐藏
+  detel(){
+    this.setData({
+      address:false,
+    })
+  },
   diz(){
     this.getprov();
      this.setData({
-       address:false
+       address:false,
+       ismask:false,
      })
   },
   x_prov() {
@@ -134,13 +146,14 @@ Page({
     let that = this;
     let data = {
       grade: 1,
+      id:''
     }
     app.res.req('app-web/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        for (var i in res.data.data) {
-          province.push(res.data.data[i])
-        }
+       
+          province.push(...res.data)
+       
         that.setData({
           province: province
         })
@@ -156,36 +169,7 @@ Page({
         })
       }
     })
-    // wx.request({
-    //   url: app.data.urlmall + "app-web/region/list",
-    //   data: {
-    //     grade: 1,
-       
-    //   },
-    //   method: 'POST',
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded',
-    //    'token': wx.getStorageSync('token'),
-    //   },
-    //   dataType: 'json',
-    //   success: function (res) {
-    //     console.log(res.data.data)
-    //     if (res.data.status === 100) {
-    //       for (var i in res.data.data) {
-    //         province.push(res.data.data[i])
-    //       }
-    //       that.setData({
-    //         province: province
-    //       })
-
-    //     } else {
-    //       wx.showToast({
-    //         title: res.data.msg,
-    //         icon: 'none'
-    //       })
-    //     }
-    //   }
-    // })
+    
   },
   // 省跳市
   getprovs: function (e) {
@@ -199,7 +183,8 @@ Page({
       tas2: 999,
       tas3: 999,
       tas4: 999,
-      tar: 9
+      tar: 9,
+      
     })
 
     var nowTime = new Date();
@@ -218,15 +203,15 @@ Page({
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        token: wx.getStorageSync('token'),
+         token: wx.getStorageSync('token'),
       },
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status == 100) {
-          for (var i in res.data.data) {
-            city.push(res.data.data[i])
-          }
+        if (res.data.status == 1000) {
+         
+            city.push(...res.data.data)
+         
           that.setData({
             citys: city,
             city: '',
@@ -284,10 +269,10 @@ Page({
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status == 100) {
-          for (var i in res.data.data) {
-            area.push(res.data.data[i])
-          }
+        if (res.data.status == 1000) {
+        
+            area.push(...res.data.data)
+        
           that.setData({
             areas: area,
             area: '',
@@ -342,10 +327,10 @@ Page({
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status == 100) {
-          for (var i in res.data.data) {
-            town.push(res.data.data[i])
-          }
+        if (res.data.status == 1000) {
+         
+            town.push(...res.data.data)
+         
           let a = { name: '-' }
           town.push(a)
           that.setData({
@@ -375,8 +360,10 @@ Page({
     town_id = e.currentTarget.id;
 
     that.setData({ //给变量赋值
+      ismask:true,
       tas4: e.currentTarget.dataset.index,
-      isardess: true,
+      name: that.data.prov + '-' + that.data.city + '-' + that.data.area + '-' + e.currentTarget.dataset.name,
+      address: true,
       town: e.currentTarget.dataset.name
     })
   },

@@ -2,7 +2,7 @@
  <view class='infor' bindtap="diz">
       <view class='inform'>所在地区</view>
       <view class='inforin '>
-        <input disabled='true' type='text' value='{{addres}}' placeholder='请选择所居住的地址' bindtap='showlabel'></input>
+        <input disabled='true' type='text' value='{{name}}' placeholder='请选择所居住的地址' bindtap='showlabel'></input>
       </view>
       <view class='enter'>
         <image src='../../images/enter.png'></image>
@@ -14,8 +14,8 @@
 <view class="adres" hidden="{{address}}">
   <view class="adres_h1">
     选择地址
-    <view class="detel">
-      <image src="../../images/x.png"></image>
+    <view class="detel" bindtap="detel">
+      <image src="../../images/xxx.png"></image>
     </view>
   </view>
   <view class="adre_bott">
@@ -47,7 +47,7 @@
     <view wx:if="{{isprov}}">
       <view class="adres_list {{tas1 == idx ? 'tas_a' : ''}}" wx:for="{{province}}" wx:key="{{item.id}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getprovs">{{item.name}}
         <view class="adres_r" wx:if="{{tas1 == idx}}">
-          <image src="../../images/dui.png"></image>
+          <image src="../../images/gou.png"></image>
         </view>
       </view>
     </view>
@@ -55,7 +55,7 @@
     <view wx:if="{{iscity}}">
       <view class="adres_list {{tas2 == idx ? 'tas_a' : ''}}" wx:for="{{citys}}" wx:key="{{item.id}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getcity">{{item.name}}
         <view class="adres_r" wx:if="{{tas2 == idx}}">
-          <image src="../../images/dui.png"></image>
+          <image src="../../images/gou.png"></image>
         </view>
       </view>
     </view>
@@ -63,7 +63,7 @@
     <view wx:if="{{isqu}}">
       <view class="adres_list {{tas3 == idx ? 'tas_a' : ''}}" wx:for="{{areas}}" wx:key="{{item.id}}" wx:for-index='idx' id="{{item.id}}" data-index="{{idx}}" data-name="{{item.name}}" bindtap="getarea" data-index="{{idx}}">{{item.name}}
         <view class="adres_r" wx:if="{{tas3 == idx}}">
-          <image src="../../images/dui.png"></image>
+          <image src="../../images/gou.png"></image>
         </view>
       </view>
     </view>
@@ -71,10 +71,13 @@
     <view wx:if="{{isjie}}">
       <view class="adres_list {{tas4 == idx ? 'tas_a' : ''}}" wx:for="{{towns}}" wx:key="{{item.id}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="gettown">{{item.name}}
         <view class="adres_r" wx:if="{{tas4 == idx}}">
-          <image src="../../images/dui.png"></image>
+          <image src="../../images/gou.png"></image>
         </view>
       </view>
     </view>
 
   </scroll-view>
 </view>
+
+
+  <view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>

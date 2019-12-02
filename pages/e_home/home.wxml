@@ -63,7 +63,7 @@
     </view>
     <view class="huan" bind:tap="huan">换一换</view>
     <view class="classify" style="padding:0;margin-top: 20rpx; ">
-        <view class="class-two" wx:for="{{recommend}}" wx:key="{{item.id}}" data-id='{{item.id}}'>
+        <view class="class-two" wx:for="{{recommend}}" wx:key="{{item.id}}" data-id='{{item.id}}' bindtap="detail">
           <view class="class-t-img skeleton-rect"><image src="{{item.productDefaultImgOss}}" /></view>
           <view class="class-t-n">
             {{item.productName}}
@@ -88,7 +88,7 @@
   </scroll-view>
 
   <view class="nav">
-    <view class="nav-list" wx:for="{{detail}}" wx:key="{{item.id}}" data-id='{{item.id}}'>
+    <view class="nav-list" wx:for="{{detail}}" wx:key="{{item.id}}" data-id='{{item.id}}' bindtap="detail">
       <view class="list-img"> <image src="{{item.productDefaultImgOss}}" /></view>
       <view class="list-j">{{item.productName}}</view>
       <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>

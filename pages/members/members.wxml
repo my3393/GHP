@@ -1,0 +1,111 @@
+<!--pages/members/members.wxml-->
+<view class="top_img" style="background-image: url({{Img}})">
+  <view class='a-nav bg-white clearfix' style='height:{{navH}}px'>
+    <view class='a-nav-title'>
+      <view class="inpu">
+        会员中心
+      </view>
+      <view class="top_dao">
+        <view>
+          <image src='../../images/b_left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
+        </view>
+        <view>
+          <image src='../../images/daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image>
+        </view>
+      </view>
+      <!-- <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image> -->
+    </view>
+  </view>
+  <view style='top:{{navH +10}}px' class="head">
+    <view class="tx">
+      <image src="../../images/head.png"></image>
+    </view>
+    <view class="tx_n"> 南下</view>
+    <view class="biaos">未开通</view>
+  </view>
+
+ 
+</view>
+<view class='test'>
+  <swiper display-multiple-items='1' circular previous-margin='10px' next-margin='10px' bindchange='change' current='{{current}}'>
+    <block wx:for="{{imgUrls}}" wx:key='{{index}}'>
+      <swiper-item>
+        <view class="box" data-index='{{index}}' animation="{{index == current?animationData:animationData2}}">
+          <image src='{{item}}'></image>
+
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+
+    <view>
+      <view class="qy">
+        <image src="../../images/member_qy.png"></image>
+      </view>
+
+      <view class="dind">
+        <view class="din-1">
+          <view class="din-img">
+            <image src="../../images/member01.png" />
+
+          </view>
+          <view>分享收益</view>
+        </view>
+        <view class="din-1">
+          <view class="din-img">
+            <image src="../../images/member02.png" />
+
+          </view>
+          <view>订单15%分红</view>
+        </view>
+        <view class="din-1">
+          <view class="din-img">
+            <image src="../../images/member03.png" />
+
+          </view>
+          <view>购物15%折扣</view>
+        </view>
+        <view class="din-1">
+          <view class="din-img">
+            <image src="../../images/member04.png" />
+
+          </view>
+          <view>尊享标识</view>
+        </view>
+        <view class="din-1">
+          <view class="din-img">
+            <image src="../../images/member05.png" />
+
+          </view>
+          <view>赚10倍艺呗</view>
+        </view>
+        <view class="din-1">
+          <view class="din-img">
+            <image src="../../images/member06.png" />
+
+          </view>
+          <view>敬请期待</view>
+        </view>
+      </view>
+     <view class="shuom"> 
+         <view>会员说明</view>
+        <view>· 开通即表示您已阅读并同意《善家购会员服务协议》</view>
+        <view>· 会员服务一经开关不支持取消/退款，敬请谅解</view>
+     </view>
+     <view class="submit">立即开通￥365</view>
+    </view>
+  
+</view>
+
+<!-- 弹窗 -->
+<view class="popup" hidden="{{isdelete}}">
+        <view class="popup_h1">恭喜你，会员开通成功</view>
+        <view class="popup_content">分销可享订单收益</view>
+        <view class="popup_btn">
+              <view bindtap="cancel_delete">先看看</view>
+              <view bindtap="confirm_delete">立即分销</view>
+        </view>
+  </view>
+
+  <view class="mask" hidden="{{ismask}}" catchtouchmove='true' style="margin-top:{{navH}}px"></view>

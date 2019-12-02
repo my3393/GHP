@@ -1,4 +1,4 @@
-let sUrl = "http://192.168.123.164:8080/";
+let sUrl = "http://sjg.api.xingtu-group.cn/";
 function getData(url, data, nb) {
   wx.request({
     url: sUrl + url,

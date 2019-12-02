@@ -71,34 +71,34 @@
   </view>
 </view>
 <!-- 地区 -->
-<view class="totals"  style='top:{{navH + 45}}px'>
-    <scroll-view class="region" scroll-y="true">
-        <view class="region-list">
-           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
-           <view class="region_name">宁夏刘正国</view>
-        </view>
-         <view class="region-list">
-           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
-           <view class="region_name">宁夏刘正国</view>
-        </view>
-         <view class="region-list">
-           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
-           <view class="region_name">宁夏刘正国</view>
-        </view>
-         <view class="region-list">
-           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
-           <view class="region_name">宁夏刘正国</view>
-        </view>
-         <view class="region-list">
-           <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
-           <view class="region_name">宁夏刘正国</view>
-        </view>
-      
-    </scroll-view>
-    <view class="region_bot">
-       <view class="chongs">重置</view>
-       <view class="ques">确定</view>
+<view class="totals" style='top:{{navH + 45}}px'>
+  <scroll-view class="region" scroll-y="true">
+    <view class="region-list">
+      <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+      <view class="region_name">宁夏刘正国</view>
     </view>
+    <view class="region-list">
+      <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+      <view class="region_name">宁夏刘正国</view>
+    </view>
+    <view class="region-list">
+      <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+      <view class="region_name">宁夏刘正国</view>
+    </view>
+    <view class="region-list">
+      <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+      <view class="region_name">宁夏刘正国</view>
+    </view>
+    <view class="region-list">
+      <icon size="20" class="cart_ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" />
+      <view class="region_name">宁夏刘正国</view>
+    </view>
+
+  </scroll-view>
+  <view class="region_bot">
+    <view class="chongs">重置</view>
+    <view class="ques">确定</view>
+  </view>
 </view>
 <!-- 商品列表 -->
 <view class='list'>
@@ -112,8 +112,7 @@
       <view class="goods-q">银川市 西夏区 贺兰山西路街道</view>
       <view class="goods-t">
         <view class="goods-p">
-          <text style="font-size:22rpx">￥</text>
-          28
+          <text style="font-size:22rpx">￥</text> 28
         </view>
         <view class="goods-g">
           <image src="../../images/shop.png" />
@@ -128,8 +127,7 @@
     <view class="list-j">就磨灭我就将额外</view>
     <view class="list-qu">宁夏 九儿外网</view>
     <view class="class-t-p ctp">
-      <text style="font-size:22rpx">￥</text>
-      28
+      <text style="font-size:22rpx">￥</text> 28
     </view>
     <view class="list-rig">
       <image src="../../images/shop.png" />
@@ -142,8 +140,7 @@
     <view class="list-j">就磨灭我就将额外</view>
     <view class="list-qu">宁夏 九儿外网</view>
     <view class="class-t-p ctp">
-      <text style="font-size:22rpx">￥</text>
-      28
+      <text style="font-size:22rpx">￥</text> 28
     </view>
     <view class="list-rig">
       <image src="../../images/shop.png" />
@@ -154,42 +151,41 @@
 <!-- 筛选 -->
 <view class="page">
 
- <view class="page-top {{open ? 'page-top-show' : ''}}" style='top:{{navH}}px'>
-   <view class="page-h1">特产品类</view>
-   <view class="page-list">
+  <view class="page-top {{open ? 'page-top-show' : ''}}" style='top:{{navH}}px'>
+    <view class="page-h1">特产品类</view>
+    <view class="page-list">
       地方特产
-   </view>
-   <view class="page-list">
+    </view>
+    <view class="page-list">
       地方特产
-   </view>
-   <view class="page-list">
+    </view>
+    <view class="page-list">
       地方特产
-   </view>
-   <view class="page-list">
+    </view>
+    <view class="page-list">
       地方特产
-   </view>
-   <view class="page-list">
+    </view>
+    <view class="page-list">
       地方特产
-   </view>
-   <view class="page-list">
+    </view>
+    <view class="page-list">
       地方特产
-   </view>
-   <view class="page-footer">
-       <view class='chong'>重置</view>
-       <view class="que" bindtap="open_list">确定</view>
-   </view>
-  <view class="nav-list" wx:for-items="{{nav_list}}" bindtap="open_list" data-title="{{item}}">
-   <text>{{item}}</text>
+    </view>
+    <view class="page-footer">
+      <view class='chong'>重置</view>
+      <view class="que" bindtap="open_list">确定</view>
+    </view>
+    <view class="nav-list" wx:for-items="{{nav_list}}" bindtap="open_list" data-title="{{item}}">
+      <text>{{item}}</text>
+    </view>
   </view>
- </view>
- <view class="page-bottom">
-  
-  <!-- <view class="page-bottom-content" bindtap="off_canvas">
+  <view class="page-bottom">
+
+    <!-- <view class="page-bottom-content" bindtap="off_canvas">
    <text>{{text}}</text>
   </view> -->
-  <view class="page-mask {{open ? '' : 'page-mask-hide'}}" bindtap="off_canvas" style='top:{{navH}}px'></view>
- </view>
+    <view class="page-mask {{open ? '' : 'page-mask-hide'}}" bindtap="off_canvas" style='top:{{navH}}px'></view>
+  </view>
 </view>
 
 <view class="mask" hidden="{{ismask}}" style='top:{{navH}}px'></view>
-

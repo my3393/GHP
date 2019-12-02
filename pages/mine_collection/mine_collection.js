@@ -1,23 +1,26 @@
-// pages/certification/certification.js
+// pages/mine_collection/mine_collection.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    loading: false,
-    post1: true,
-    post2: true,
-    audit: 2,
-    number:'36233019960918874',
-    name:'刘郑国'
+    tag: [
+      { name: '商品收藏', id: '1' },
+      { name: '店铺收藏', id: '2' },
+    
+
+    ],
+    tar: 0,
+    detail:[],
+    store:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.get();
+
   },
 
   /**
@@ -68,32 +71,11 @@ Page({
   onShareAppMessage: function () {
 
   },
-  submit() {
+  tag(e){
+    console.log(e)
     let that = this;
     that.setData({
-      loading: !that.data.loading
+      tar: e.currentTarget.dataset.index
     })
-  },
-  get(){
-    let that = this;
-
-
-    let result = that.plusXing( that.data.number,1,1)
-    let name = that.plusXing(that.data.name,0,2)
-    that.setData({
-      number:result,
-      name:name
-    })
-    console.log(result)
-  },
-   plusXing (str,frontLen,endLen) {
-     var len = str.length-frontLen-endLen;
-     var xing = '';
-     for (var i=0;i<len;i++) {
-     xing+='*';
-    }
-     return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
-     }
-
-
+  }
 })

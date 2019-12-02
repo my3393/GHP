@@ -2,7 +2,7 @@
 var http = require('utils/http.js')  
 App({
   data: {
-    urlmall: "http://192.168.123.164:8080/"
+    urlmall: "http://sjg.api.xingtu-group.cn/"
   },
   onLaunch: function () {
     // 展示本地存储能力

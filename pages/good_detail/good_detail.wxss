@@ -95,7 +95,7 @@ page {
       border-radius: 12rpx;
       width: 190rpx;
       font-size: 24rpx;
-      display: none;
+      z-index: 13;
     }
     .naviga_list{
       height: 70rpx;
@@ -483,3 +483,159 @@ overflow: hidden;
   .num {
     display: inline-block;
   }
+  .disp{
+    display: inline-block;
+  }
+
+  /* 规格 */
+
+  /* 商品规格 */
+.mark{
+  z-index: 12;
+}
+.close{
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  position: absolute;
+  right: 24rpx;
+  top: 24rpx;
+  
+}
+.close>image{
+  width: 100%;
+  height: 100%;
+}
+
+.gug{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  height: 860rpx;
+  padding: 20rpx 20rpx 0 20rpx;
+  box-sizing: border-box;
+  z-index: 12;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+}
+.guige{
+  width: 100%;
+  height: 100%;
+}
+.ggtup{
+  width: 200rpx;
+  height: 200rpx;
+  position: absolute;
+  border-radius: 14rpx;
+  overflow: hidden;
+  top: -40rpx;
+  left: 20rpx;
+  margin-right: 30rpx;
+}
+.ggtup>image{
+  width: 100%;
+  height: 100%;
+}
+.pric{
+  margin-top: 60rpx;
+  line-height: 40rpx;
+  margin-left: 230rpx;
+  color: #f12200;
+  font-size: 36rpx;
+  display: inline-block;
+}
+.chos{
+  font-size: 24rpx;
+   margin-left: 230rpx;
+   line-height: 40rpx;
+}
+.gund{
+  width: 100%;
+  height: 500rpx;
+  margin-top: 50rpx;
+  overflow-y:scroll;
+}
+.chim{
+  display: inline-block;
+  margin-right: 20rpx;
+}
+.yans{
+  display: inline-block;
+}
+.chima{
+  font-size: 24rpx;
+  color: #333;
+ 
+}
+.cm{
+  margin-top: 37rpx;
+  margin-bottom: 24rpx;
+}
+.dax{
+ 
+  padding: 0 30rpx;
+  box-sizing: border-box;
+
+  background: #F5F5F5;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  line-height: 55rpx;
+  color: #666;
+  display: inline-block;
+  margin-right: 44rpx;
+  margin-bottom: 20rpx;
+}
+.clickxz{
+  color: #e65009;
+  border: 1rpx solid #e65009;
+}
+.shul{
+  height: 144rpx;
+  font-size: 24rpx;
+  color: #333;
+  border-bottom: 1rpx #ccc solid;
+  display: flex;
+  margin-bottom: 10rpx;
+  justify-content: space-between;
+}
+.shul>view{
+  margin-top: 46rpx;
+  display: inline-block;
+}
+.jis{
+  font-size:34rpx;
+ 
+}
+.beij{
+  text-align: center;
+  width:60rpx;
+  line-height: 40rpx;
+  margin-right: 2rpx;
+  height: 40rpx;
+  background: #f3f3f3;
+  display: inline-block;
+}
+.duih{
+  position: fixed;
+  bottom: 20rpx;
+  left: 0;
+  width: calc(100% - 80rpx);
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  margin-left: 40rpx;
+  border-radius: 40rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  color: #fff;
+  text-align: center;
+}
+.duos{
+  background: #fff;
+  font-size: 26rpx;
+}
+.active{
+  border: 1rpx solid #f12200;
+  color: #f12200;
+}

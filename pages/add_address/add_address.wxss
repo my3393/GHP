@@ -15,8 +15,8 @@ page{
   position: relative;
 }
 .inform{
-  display: inline-block;
-  vertical-align: middle;
+ float: left;
+ margin-top: 3rpx;
   margin-right: 20rpx;
 }
 .inforin{
@@ -83,7 +83,7 @@ page{
   font-family: PingFang-SC-Bold;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
-
+  z-index: 12;
 }
 .adres_h1{
   font-size: 32rpx;

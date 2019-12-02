@@ -1,0 +1,120 @@
+<!--pages/mine_collection/mine_collection.wxml-->
+<view class="top">
+  <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}" bindtap="tag" data-index="{{idx}}">
+    {{item.name}}
+  </view>
+</view>
+<view class="list" wx:if="{{tar == 0}}">
+  <view wx:if="{{detail.length == 0}}">
+          <view class="kong">
+             <view class="kong_img">
+                <image src="../../images/noplay.png"></image>
+             </view>
+             <view >没有相关收藏</view>
+             <view class="xuang">选购特产</view>
+             <view class="foot-boot">
+    <view >善家购</view>
+    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+</view>
+          </view>
+  </view>
+  <view class="goods-list clearfix" wx:else>
+    <view class="goods-img clearfix">
+      <image src="../../images/te.png"></image>
+      <view class="yishi">已失效</view>
+    </view>
+    <view class="goods-n">
+      <view class="goods-j">青海特产可可西里藏獒特色牛.青海特产可可西里藏獒特色牛...</view>
+      <view class="goods-q dan">银川市 西夏区 贺兰山西路街道银川市 西夏区 贺兰山西路街道</view>
+      <view class="goods-q">银川市 西夏区 贺兰山西路街道</view>
+      <view class="goods-t">
+        <view class="goods-p">
+          <text style="font-size:22rpx">￥</text> 28
+        </view>
+        <view class="goods-g">
+          <image src="../../images/shop.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{tar == 1}}" style="margin-top:100rpx;">
+  <view class="list-nav clearfix">
+    <view class="store-img">
+      <image src="../../images/te.png" />
+    </view>
+    <view class="list-name">
+      <view>宁夏枸杞</view>
+      <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+    </view>
+    <view class="list-g">进店</view>
+    <view class="classify" style="padding:0;margin-top: 20rpx; ">
+      <view class="class-two">
+        <view class="class-t-img">
+          <image src="../../images/te.png" />
+        </view>
+        <view class="class-t-n">
+          零食食品坚果干肌肤而价格
+        </view>
+        <view class="class-t-p">
+          <text style="font-size:22rpx">￥</text> 28</view>
+      </view>
+      <view class="class-two">
+        <view class="class-t-img">
+          <image src="../../images/te.png" />
+        </view>
+        <view class="class-t-n">
+          零食食品坚果干肌肤而价格
+        </view>
+        <view class="class-t-p">
+          <text style="font-size:22rpx">￥</text> 28</view>
+      </view>
+      <view class="class-two">
+        <view class="class-t-img">
+          <image src="../../images/te.png" />
+        </view>
+        <view class="class-t-n">
+          零食食品坚果干肌肤而价格
+        </view>
+        <view class="class-t-p">
+          <text style="font-size:22rpx">￥</text> 28</view>
+      </view>
+      <view class="class-two">
+        <view class="class-t-img">
+          <image src="../../images/te.png" />
+        </view>
+        <view class="class-t-n">
+          零食食品坚果干肌肤而价格
+        </view>
+        <view class="class-t-p">
+          <text style="font-size:22rpx">￥</text> 28</view>
+      </view>
+      <view class="class-two">
+        <view class="class-t-img">
+          <image src="../../images/te.png" />
+        </view>
+        <view class="class-t-n">
+          零食食品坚果干肌肤而价格
+        </view>
+        <view class="class-t-p">
+          <text style="font-size:22rpx">￥</text> 28</view>
+      </view>
+      <view class="class-two">
+        <view class="class-t-img">
+          <image src="../../images/te.png" />
+        </view>
+        <view class="class-t-n">
+          零食食品坚果干肌肤而价格
+        </view>
+        <view class="class-t-p">
+          <text style="font-size:22rpx">￥</text> 28</view>
+      </view>
+      <view class="class-two" style="vertical-align: top;">
+        <view class="class-t-img">
+          <image src="../../images/chakan.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
