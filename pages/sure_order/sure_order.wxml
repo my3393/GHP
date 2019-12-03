@@ -10,7 +10,48 @@
         >
     </view>
 </view>
-<view wx:if="{{address}}">
+
+<view wx:if='{{adress.length != 0}}' bindtap='choose'>
+    <view class="address" >
+        <view class="address_top">
+            <text class="mor">默认</text>
+            {{adress.provinceName}}  {{adress.cityName}}  {{adress.areaName}}  {{adress.townName}}
+        </view>
+        <view class="address_cent">
+           {{adress.detailAddress}}
+        </view>
+        <view class="address_cent_r">
+            >
+        </view>
+        <view class="address_bott">
+            {{adress.consigneeName}} <text style='color:#999'>  {{adress.consigneePhone}}</text>
+        </view>
+    </view>
+    <view class="address_t">
+        <image src="../../images/address_t.png" />
+    </view>
+</view>
+<view wx:elif='{{defalutaddres}}' bindtap='choose'>
+    <view class="address" >
+        <view class="address_top">
+            <text class="mor">默认</text>
+            {{defalutaddres.provinceName}}  {{defalutaddres.cityName}}  {{defalutaddres.areaName}}  {{defalutaddres.townName}}
+        </view>
+        <view class="address_cent">
+           {{defalutaddres.detailAddress}}
+        </view>
+        <view class="address_cent_r">
+            >
+        </view>
+        <view class="address_bott">
+            {{defalutaddres.consigneeName}} <text style='color:#999'> {{defalutaddres.consigneePhone}}</text>
+        </view>
+    </view>
+    <view class="address_t">
+        <image src="../../images/address_t.png" />
+    </view>
+</view>
+<view wx:else>
     <view class="address" >
         
         <view class="add_address">
@@ -25,50 +66,29 @@
         <image src="../../images/address_t.png" />
     </view>
 </view>
-<view wx:else>
-    <view class="address" >
-        <view class="address_top">
-            <text class="mor">默认</text>
-            广东省深圳市宝安区西乡街道
-        </view>
-        <view class="address_cent">
-            西乡前进二路134号 808 隔热拗口is看饿哦我符文你借我能发
-        </view>
-        <view class="address_cent_r">
-            >
-        </view>
-        <view class="address_bott">
-            杨先生 <text style='color:#999'> 18245915649</text>
-        </view>
-    </view>
-    <view class="address_t">
-        <image src="../../images/address_t.png" />
-    </view>
-</view>
-
 <view class="nav">
    <view class="list">
         <view class="nav_top">
         <view class="sotre_img">
             <image src="../../images/store.png" />
         </view>
-        良品铺子
+        {{detail.storeName}}
         <view class="store_r">
             <image src="../../images/right.png" />
         </view>
         </view>
-        <view >
+        <view>
             <view class="good_img">
-                <image src="../../images/te.png" />
+                <image src="{{detail.productImgOss}}" />
             </view>
             <view class="good_list">
-                <view class='goodsname dan'>青海特产可可西里藏獒特色牛...</view>
-            <text class='specification'>银川市 西夏区 贺兰山西路街道</text>
-            <view class="guig">
-                <view class='gui-g'>袋装500g</view>
+                <view class='goodsname dan'>{{detail.productName}}</view>
+            <text class='specification'>{{detail.provinceName}} {{detail.cityName}}</text>
+            <view class="guig" wx:for='{{sku.skus}}'>
+                <view class='gui-g'>{{item.value}}</view>
             </view>
-            <text class='price'><text class="yuan">￥</text>29.9</text>
-            <view class="good_num">*2</view>
+            <text class='price'><text class="yuan">￥</text>{{sku.salePrice}}</text>
+            <view class="good_num">×{{buyNum}}</view>
             </view>
         </view>
     </view>
@@ -100,7 +120,7 @@
     <view class="price_list">
         运费
         <view class="price_r">
-            ￥56.00
+            ￥{{detail.expressFee}}
         </view>
     </view>
     <view class="z_right">

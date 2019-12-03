@@ -90,12 +90,13 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+  
+  //收货地址
+   address(){
+     wx.navigateTo({
+       url: '../address/address',
+     })
+   },
   onPageScroll: function (e) {
     console.log(e.scrollTop)
     let that = this

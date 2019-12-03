@@ -5,7 +5,7 @@ const app = getApp();
 Page({
     data: {
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        saiid:''
+        detail_id:''
     },
     onLoad(options) {
       console.log(options)
@@ -46,11 +46,9 @@ Page({
                   console.log(res.code)
                   setTimeout(function () {
                     wx.request({
-                      url: "https://yisai.xcx.1v.0.xingtu-group.cn/yisai-api-service/appcomeptition/xcx/login.do",
+                      url: "http://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
                       data: {
                         code: res.code,
-                        nickName: avater.nickName,
-                        avatarUrl: avater.avatarUrl,
                         encryptedData: encryptedData,
                         iv: iv
                       },
@@ -130,11 +128,9 @@ Page({
                         console.log(res.code)
                         setTimeout(function () {
                           wx.request({
-                            url: "https://yisai.xcx.1v.0.xingtu-group.cn/yisai-api-service/appcomeptition/xcx/login.do",
+                            url: "http://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
                             data: {
-                              code: res.code,
-                              nickName: avater.nickName,
-                              headimgurl: avater.avatarUrl,
+                              code: res.code,                          
                               encryptedData: encryptedData,
                               iv: iv
                             },
@@ -146,30 +142,30 @@ Page({
                             success: function (res) {
                               console.log(res.data.data);
 
-                              if (res.data.status == 100) {
+                              if (res.data.status == 1000) {
                                 wx.hideLoading()
                                 wx.setStorage({
-                                  key: 'etoken',
+                                  key: 'token',
                                   data: res.data.data.token,
                                 })
 
                                 wx.setStorage({
                                   key: 'userinfo',
-                                  data: res.data.data.user,
+                                  data: res.data.data,
                                 })
-                                if (res.data.data.user.phone == null || res.data.data.user.phone == '') {
+                                if (res.data.data.phone == null || res.data.data.phone == '') {
                                   wx.redirectTo({
                                     url: '../bindphone/bindphone',
                                   })
                                 } else {
                                   console.log(11)
-                                  if(that.data.saiid != ''){
+                                  if (that.data.detail_id != ''){
                                     wx.redirectTo({
-                                      url: '../e_detail/e_detail?id=' + that.data.saiid
+                                      url: '../good_detail/good_detail?id=' + that.data.detail_id
                                     })
                                   }else{
-                                    wx.redirectTo({
-                                      url: '../e_home/e_home'
+                                    wx.switchTab({
+                                      url: '../e_home/home'
                                     })
                                   }
                                   
@@ -200,7 +196,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: app.data.urlmall + "appcomeptition/default/token.do",
+      url: "http://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
       data: {
 
       },
@@ -211,17 +207,17 @@ Page({
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status === 100) {
+        if (res.data.status === 1000) {
           wx.setStorage({
-            key: 'etoken',
+            key: 'token',
             data: res.data.data.token,
           })
           wx.setStorage({
             key: 'userinfo',
             data: res.data.data.user,
           })
-          wx.redirectTo({
-            url: '../e_home/e_home'
+          wx.switchTab({
+            url: '../e_home/home'
           })
           console.log(111)
         } else if (res.data.status === 103) {

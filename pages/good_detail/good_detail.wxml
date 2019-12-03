@@ -34,6 +34,7 @@
   </swiper>
   <view class="banner_num">{{current+1}} / {{detail.productImgOss.length + 1}}</view>
 </view>
+<!-- 顶部导航 -->
 <view class="naviga" style='top:{{navH}}px' hidden="{{naviga}}">
   <view class="naviga_list">
     <view class="naviga_img">
@@ -60,15 +61,16 @@
     意见反馈
   </view>
 </view>
+<!-- 价格 会员价 -->
 <view class="conter">
   <view class="w_price">
     <text style="font-size:24rpx;">￥</text>
     <view wx:if='{{detail.isSpecificaton == 0}}' class="disp">
       {{detail.lowestPrice}}
-     </view>
+    </view>
     <view wx:else class="disp">
-      {{detail.lowestPrice}} - {{detail.topPrice}} 
-     </view>
+      {{detail.lowestPrice}} - {{detail.topPrice}}
+    </view>
   </view>
   <view class='fenx'>
     <image src="../../images/fenx.png" />
@@ -77,11 +79,11 @@
     <view class="w_price">
       <text class='huiyj'>会员价</text>
       <view wx:if='{{detail.isSpecificaton == 0}}' class="disp">
-       ￥{{detail.lowestPrice}}
-     </view>
+        ￥{{detail.lowestPrice}}
+      </view>
       <view wx:else class="disp">
-      ￥{{detail.lowestMemberPrice}} - {{detail.topMemberPrice}} 
-     </view>
+        ￥{{detail.lowestMemberPrice}} - {{detail.topMemberPrice}}
+      </view>
     </view>
     <view class="kait">立即开通 ></view>
     <view class="kaith">分享成交预计可收入￥13.25</view>
@@ -89,11 +91,14 @@
   <view class="dan sp_j">{{detail.productName}}</view>
   <view class="sp_jj">{{detail.productTitle}}</view>
   <view class="can">
-    <text class="candi">产地</text>
-    {{detail.provinceName}} {{detail.cityName}} {{detail.areaName}} {{detail.townName}}
+    <text class="candi">产地</text> {{detail.provinceName}} {{detail.cityName}} {{detail.areaName}} {{detail.townName}}
   </view>
-  <view class="can">
-    <text class="candi">保障</text> 宁夏回族自治区 银川市 西夏区 贺兰山街道
+  <view class="can" bind:tap="security">
+    <text class="candi">保障</text>
+    <text wx:if="{{detail.isServiceCommitment == 1}}"> 7天无理由退款  </text>
+    <text wx:if="{{detail.deliveryTimeType == 1}}"> 当日发货</text>
+    <text wx:if="{{detail.deliveryTimeType == 2}}"> 24小时</text>
+    <text wx:if="{{detail.deliveryTimeType == 3}}"> 48小时</text>
     <view class="right">
       <image src="../../images/right.png" />
     </view>
@@ -148,8 +153,9 @@
       <image src="../../images/te.png" />
     </view>
   </view>
- 
+
 </scroll-view>
+<!-- 店铺 -->
 <view class="list_nav clearfix">
   <view class="store-img">
     <image src="../../images/te.png" />
@@ -203,13 +209,23 @@
     </view>
   </scroll-view>
 </view>
+<!-- 商品详情 -->
+<view class="shop_detail">
+   <view class="detail_h1">图文详情</view>
+   <view class="detail_tit">
+     {{detail.productDescribe}}
+   </view>
+   <view class="detail_img" wx:for='{{detail.detailImgOss}}'>
+      <image src="{{item}}" />
+   </view>
+</view>
 <view style="height:120rpx;"></view>
 <!-- 底部 -->
 <view class="foot top2">
   <view class="foot_left">
     <view bindtap="Collection">
       <image wx:if='{{detail.isCollection == 0}}' src="../../images/xinxin_n.png" />
-       <image wx:else src="../../images/xinxin.png" />
+      <image wx:else src="../../images/xinxin.png" />
       <view>收藏</view>
     </view>
     <view>
@@ -222,109 +238,122 @@
     </view>
   </view>
   <view class="foot_right">
-    <button size="mini" class="joincart">加入购物车</button>
+    <button size="mini" class="joincart" bind:tap="showgg">加入购物车</button>
     <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button>
     <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:else>立即购买</button>
   </view>
 </view>
-<!-- 滚轮显示 -->
-
-<!-- <view class="goodsdetialtwo">
-  <view class='guige' bindtap='guigeselect'>
-    <view style='color:#676767;'>规格：</view>
-    <view style='width:80%;'>
-      请选择
-      <text style='margin-right:20rpx;' wx:for="{{goods_spec}}" wx:key>{{item[0].spec_name}}</text>
-    </view>
-    <image src='../../images/jian.png'></image>
-  </view>
-  <view animation="{{animationData}}" class='animation' catchtouchmove='noMove'>
-    <view class='tophead'>
-      <view class='topimg'>
-        <image src='{{goodsList.original_img}}'></image>
-      </view>
-      <view class='topright'>
-        <view>{{goodsList.goods_name}}</view>
-        <view class='imgcha'>
-          <view style='color:#ef5426;'>{{guilist.price}}</view>
-          <image src='../../images/cha.png' bindtap='guigeno'></image>
-        </view>
-        <view style='margin:10rpx 0;color:#999999;'>库存:{{guilist.store_count}}</view>
-        <view>规格:
-          <text style="margin-right:20rpx;" wx:for="{{selectGuigeName}}" wx:key>{{item}}</text>
-        </view>
-      </view>
-    </view>
-    <view class='guigeclass' wx:for="{{goods_spec}}" wx:for-index="fuindex" wx:key>
-      <view class='ggtitle'>{{item[0].spec_name}}</view>
-      <view class='xuanze'>
-        <view class="selectkuai {{textStates[items.isClick]}}" catchtap='selectGuige' wx:for-index="chindex" wx:for-item="items" data-fuindex="{{fuindex}}" data-chindex="{{chindex}}" data-id="{{items.item_id}}" data-item="{{items.item}}" wx:for="{{item}}" wx:key>{{items.item}}</view>
-      </view>
-      <view style='height:2rpx; width:100%;background-color:#eeeeee;'></view>
-    </view>
-    <view class='guigecount'>
-      <view class='countname'>数量</view>
-      <view class='countright'>
-       <view class="num">
-            <i-input-number value="{{ num }}" min="1" max="999999" bindchange="numChange" />
-          </view>
-      </view>
-    </view>
-    <view class='yesyes' catchtap='queDing'>
-      确定
-    </view>
-  </view>
-</view> -->
 
 
 <!-- 规格选择 -->
 <view hidden='{{ishidegg}}' class='mark'>
-  <view class='gug clearfix'>
-    
-      <view class='close' bindtap='showgg'>
-        <image src='../../images/xxx.png'></image>
+  <view class="gug clearfix {{!isgug ? 'gug_show' : ''}} ">
+
+    <view class='close' bindtap='showgg'>
+      <image src='../../images/xx.png'></image>
+    </view>
+    <view class='gouwtu'>
+      <view class='ggtup'>
+        <image src='{{title_img}}'></image>
       </view>
-      <view class='gouwtu'>
-        <view class='ggtup'>
-          <image src='{{detail.productDefaultImgOss}}'></image>
-        </view>
-        <view class='pric'>
-         <text style="font-size:22rpx;">￥</text>
-        {{detail.lowestPrice}}</view>
-        <view class='chos'>
-          请选择：
-          <view class='chim'>{{selected}}</view>
-
-        </view>
+      <view class='pric'>
+        <text style="font-size:22rpx;">￥</text> {{price}}
       </view>
+      <view class='chos'>
+        请选择：
+        <view class='chim'>{{selected}}</view>
 
-      <!-- 规格型号 -->
+      </view>
+    </view>
 
-      <view class='gund'>
-        <view class='chima clearfix ' wx:for='{{spec}}' wx:for-index='idx'>
-          <view class='cm' bindtap='size'>{{spec[idx].name}}</view>
-          <view>
-            <view class='dax {{item.isSelect ?"active":""}}' bindtap='pack' wx:for='{{spec[idx].entries}}' wx:for-index='ids' data-attr-id='{{item.id}}' data-attr-value='{{item.value}}' data-select-index="{{idx}}" data-attr-index="{{ids}}">
-              {{spec[idx].entries[ids].value}}
-            </view>
+    <!-- 规格型号 -->
 
+    <view class='gund'>
+      <view class='chima clearfix ' wx:for='{{spec}}' wx:for-index='idx'>
+        <view class='cm' bindtap='size'>{{spec[idx].name}}</view>
+        <view>
+          <view class='dax {{item.isSelect ?"active":""}}' bindtap='pack' wx:for='{{spec[idx].entries}}' wx:for-index='ids' data-attr-id='{{item.id}}' data-attr-value='{{item.value}}' data-select-index="{{idx}}" data-attr-index="{{ids}}">
+            {{spec[idx].entries[ids].value}}
           </view>
+
         </view>
-        <view class='shul'>
-          <view>购买数量</view>
-          <view class='jis'>
-            <view class='beij' bindtap='reduction'>-</view>
-            <view class='duos beij'>{{num}}</view>
-            <view class='beij' bindtap='add'>+</view>
-          </view>
+      </view>
+      <view class='shul'>
+        <view>购买数量</view>
+        <view class='jis'>
+          <view class='beij' bindtap='reduction'>-</view>
+          <view class='duos beij'>{{num}}</view>
+          <view class='beij' bindtap='add'>+</view>
         </view>
-       
       </view>
-      <view class='duih' bindtap='showgg'>
-        确定
-      </view>
-  
+
+    </view>
+    <view class='duih' bindtap='confirm'>
+      确定
+    </view>
+
   </view>
 </view>
 
-  <view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>
+
+<!-- 保障 -->
+<view class='mark' >
+  <view class="gug clearfix {{!isSecurity ? 'gug_show' : ''}} ">
+    <view class='close' bindtap='security'>
+      <image src='../../images/xx.png'></image>
+    </view>
+    <view class="secu_h1">服务保障</view>
+    <view style="height:30rpx"></view>
+    <view class="secur_l" >
+      <view class="secur_img">
+        <image src="../../images/gx.png" />
+      </view>
+      <view class="secur_list">
+        特产产地
+        <view class="candi" style="line-height:60rpx;">
+          {{detail.provinceName}} {{detail.cityName}} {{detail.areaName}} {{detail.townName}}
+        </view>
+      </view>
+    </view>
+    <view class="secur_l">
+      <view class="secur_img">
+        <image src="../../images/gx.png" />
+      </view>
+      <view class="secur_list">
+        发货时间
+        <view class="candi" style="line-height:60rpx;">
+          <text wx:if="{{detail.deliveryTimeType == 1}}">承诺当日为你发货</text>
+          <text wx:if="{{detail.deliveryTimeType == 2}}">承诺24小时为你发货</text>
+          <text wx:if="{{detail.deliveryTimeType == 3}}">承诺48小时为你发货</text>
+        </view>
+      </view>
+    </view>
+    <view class="secur_l" wx:if="{{detail.isServiceCommitment == 1}}">
+      <view class="secur_img">
+        <image src="../../images/gx.png" />
+      </view>
+      <view class="secur_list">
+        7天无理由退换
+        <view class="candi" style="line-height:60rpx;">
+          支持7天无理由退换
+        </view>
+      </view>
+    </view>
+    <view class="secur_l">
+      <view class="secur_img">
+        <image src="../../images/gx.png" />
+      </view>
+      <view class="secur_list">
+        免基础配送费
+        <view class="candi" style="line-height:60rpx;">
+          全国包邮/包邮，偏远地区除外（港澳台、新疆西藏）
+        </view>
+      </view>
+    </view>
+    <view class='duih' bindtap='security'>
+      确定
+    </view>
+
+  </view>
+</view>
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>

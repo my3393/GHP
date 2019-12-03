@@ -11,41 +11,38 @@
 </view>
 
 <view wx:else>
-   <view class="list">
+   <view class="list" wx:for="{{detail}}" wx:key="{{item.id}}" data-id="{{item.id}}">
        <view class="list_name">
-           正国 <text > 18856497845</text>
+           {{item.consigneeName}} <text > {{item.consigneePhone}}</text>
        </view>
-       <view class="list_q">
-           
-                            广东省 深圳市 宝安区 西乡街道 西乡前进二路134号 808西乡
-前进二路134号 808前进二路134号 808
-                        
+       <view class="list_q">{{item.provinceName}} {{item.cityName}} {{item.areaName}} {{item.townName}}
+          {{item.detailAddress}}
        </view>
        <view class="list_bott">
-           <view class="switch">
-               <switch color="#f12200"  />
+           <view class="switch"  >
+               <switch color="#f12200" checked='{{item.checked}}' bindchange="checked" data-id="{{item.id}}" />
            </view>
            <view class="bott_r">
                <view >编辑</view>
-               <view >删除</view>
+               <view  bind:tap="detel" data-id="{{item.id}}">删除</view>
            </view>
        </view>
-   </view> 
+   </view>
 </view>
 
 <view style="height:120rpx"></view>
 
 <!-- <view class="footer">
     <view >
-       
+
         <text > + </text>
-      
+
         新增地址
     </view>
     <view bindtap="wx_add">
         <view class="wx_img">
           <image src="../../images/wxapp.png" />
-        </view> 
+        </view>
         导入微信地址
     </view>
 </view> -->

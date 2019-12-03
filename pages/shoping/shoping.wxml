@@ -1,0 +1,66 @@
+<view class="all-top">
+  <view class='storehed'>
+    <icon type="{{item.selected ? 'success':'circle'}}" data-index="{{idx}}" />
+    <text>全选</text>
+  </view>
+  <view class="bi">编辑</view>
+</view>
+<view class="good">
+   <view class='cartallview'>
+  <view class="cart-box" wx:for="{{cartsdata}}" wx:key="{{index}}" wx:for-index="idx">
+    <!-- wx:for 购物车信息列表 头部商家名称 -->
+    <view class='storehed'>
+      <icon color="#e65099" type="{{item.selected ? 'success':'circle'}}" bindtap="storeselected" data-index="{{idx}}" />
+      <view class="store-img">
+        <image src="../../images/store.png" />
+      </view>
+      <text>{{item.storename}}</text>
+      <view class="store-img">
+        <image src="../../images/right.png" />
+      </view>
+    </view>
+    <!-- goodslist -->
+    <view>
+      <!-- 商品组键 -->
+      <view class='shopgoodlist' wx:for="{{item.goodsinfo}}" wx:key="{{index}}">
+        <!-- wx:if 是否选择显示不同图标 -->
+        <icon class="cart-ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" data-index="{{index}}" data-select-index="{{idx}}" />
+        <!-- 点击商品图片可跳转到商品详情 -->
+        <image class="cart-thumb" src="../../images/noplay.png"></image>
+        <view class='goodsdata'>
+          <text class='goodsname dan'>{{item.goodsname}}</text>
+          <text class='specification'>{{item.specification}}</text>
+          <view class="guig">
+            <view class='gui-g'>500g</view>
+          </view>
+          <text class='price'><text class="yuan">￥</text>{{item.price}}</text>
+          <!-- 增加减少数量按钮 -->
+          <view class='goodsnum'>
+            <view class="suan" bindtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}" bindtap='minusCount'>
+              -
+            </view>
+            <view class="shu">{{item.num}}</view>
+            <view class="suan" bindtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" bindtap='addCount'>
+              +
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+</view>
+<!-- 合计 提交订单 -->
+<view class='allselected'>
+  <view>
+    <!-- <icon  type="{{allselected ? 'success':'circle'}}" bindtap="tapallallprices" /> -->
+    <!-- <text>已选（{{allnum}}）</text> -->
+    <text >合计：</text>
+    <text class='allprices'><text class="yuan">￥</text>{{allprices}}</text>
+  </view>
+  <view class='placeanorder'>
+    结算({{allnum}})
+    
+   
+  </view>
+</view>

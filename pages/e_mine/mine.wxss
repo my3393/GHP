@@ -190,7 +190,7 @@ page{
     width: calc(100% - 40rpx);
     margin-left: 20rpx;
     margin-top: 100rpx;
-    padding-bottom: 30rpx;
+    padding-bottom: 50rpx;
 }
 .m-h1{
     color: #333333;
@@ -220,12 +220,14 @@ page{
 .dind{
     font-size: 22rpx;
     color: #999;
-    display: flex;
-    justify-content: space-around;
+    
      margin-top: 40rpx;
 }
 .din-1{
     text-align: center;
+    width: 25%;
+     display: inline-block;
+
 }
 .din-img{
     width: 48rpx;

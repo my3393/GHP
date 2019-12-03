@@ -18,11 +18,12 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.2",
-	"appid": "wx88ef7c06f56e8ab7",
+	"appid": "wxd01b5807647c44d9",
 	"projectname": "xian",
 	"debugOptions": {
 		"hidedInDevtools": []

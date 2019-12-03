@@ -10,30 +10,20 @@ var a = [];
 var ds = false;
 Page({
   data: {
-    naviga: true,
+
+    isSecurity:true,//保障
+    ismask: true,
+    isgug: true,//规格
+    naviga: true,//顶部导航栏
     istag: true,
     is_top: true,
     issrcoll: '1',
     loading: false,
-    photos: [
-      "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
-      "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
-      "https://graph.baidu.com/resource/116b9dee63af0f77fcb8f01572947716.jpg",
-      "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
-    ],
-
-    //微信小程序动画
-    animationData: {},
-    animationisno: false,
-    guilist: {},
-    arrId: [],
-    arrName: [],
-    textStates: ["view-btns-text-normal", "view-btns-text-select"],
     num: 1,
     current: 0
   },
 
-  onLoad: function(options) {
+  onLoad: function (options) {
     console.log(options)
     this.setData({
       navH: app.globalData.navHeight
@@ -45,138 +35,68 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     var query = wx.createSelectorQuery();
     //选择id
     var that = this;
-    query.select('.top1').boundingClientRect(function(rect) {
+    query.select('.top1').boundingClientRect(function (rect) {
 
 
       top1 = rect.top
 
     }).exec();
-    query.select('.top2').boundingClientRect(function(rect) {
+    query.select('.top2').boundingClientRect(function (rect) {
 
 
       top2 = rect.top
 
     }).exec();
   },
-  selectGuige(e) {
-    let that = this,
-      // 获取第一个循环的index
-      fuindex = e.currentTarget.dataset.fuindex,
-      // 获取第二个循环的index
-      chindex = e.currentTarget.dataset.chindex,
-      // 获取当前点击的id
-      selectId = e.currentTarget.dataset.id,
-      // 获取当前点击的规格名称
-      selectName = e.currentTarget.dataset.item,
-      //  初始化arrId
-      arrId = that.data.arrId,
-      //  初始化arrName
-      arrName = that.data.arrName,
-      guilists = {},
-      goods_spec = that.data.goods_spec;
-    // 通过循环来判断点击了哪一个规格，根据数据结构来；
-    // goods_spec[fuindex]根据fuindex来判断点击了哪一种类型的规格
-    for (let i = 0; i < goods_spec[fuindex].length; i++) {
-      // 当i等于当前点击的规格时，设置isClick=1
-      if (i == chindex) {
-        goods_spec[fuindex][i].isClick = 1;
-      }
-      // 否则设置其他的isClick=0
-      else {
-        goods_spec[fuindex][i].isClick = 0;
-      }
-    };
-    // 把点击的规格名称和规格id存起来
-    arrId[fuindex] = selectId;
-    arrName[fuindex] = selectName;
-    // 拼接规格id，（后台返回的数据是这个）
-    let selectGuigeId = arrId.join('_');
-    for (let i = 0; i < that.data.spec_goods_price.length; i++) {
-      // 找对应的规格组合
-      if (that.data.spec_goods_price[i].key == selectGuigeId) {
-        guilists = that.data.spec_goods_price[i];
-      }
-    }
-    that.setData({
-      goods_spec: goods_spec,
-      arrId,
-      guilist: guilists,
-      selectGuigeName: arrName
-    })
-  },
-  numChange(e) {
-    this.setData({
-      num: e.detail.value
-    })
-  },
-  queDing() {
+  //加入购物车
+  cart() {
+
     let that = this;
-    let selectguigeid = that.data.arrId.join('_');
-    for (let i = 0; i < that.data.spec_goods_price.length; i++) {
-      // 判断是否选择规格
-      if (that.data.spec_goods_price[i].key == selectguigeid) {
-        wx.showModal({
-          showCancel: false,
-          content: '选择成功',
-          success: function(res) {}
-        });
-        // 判断库存是否充足
-        if (selectguigeid.store_count <= 0) {
-          wx.showModal({
-            showCancel: false,
-            content: '库存不足',
-            success: function(res) {}
-          });
-        }
-        // 两种情况满足跳转
-        else {
-          wx.showModal({
-            showCancel: false,
-            content: '跳转页面',
-            success: function(res) {}
-          });
-        }
-        return
-      } else {
-        wx.showModal({
-          showCancel: false,
-          content: '请选择规格',
-          success: function(res) {
-            if (res.confirm) {}
-          }
+    let data = {
+
+      skuId:that.data.goodId,
+      buyCount:that.data.num,
+      productId:id
+    }
+
+    app.res.req('app-web/shopcart/addproduct', data, (res) => {
+      console.log(res.data)
+       if(res.status == 1000){
+        wx.showToast({
+          title: '成功加入购物车',
+          duration:3000
         })
-      }
-    }
-  },
-  // 选择规格页面弹出   微信小程序动画
-  guigeselect: function() {
-    let that = this;
-    let animal1 = wx.createAnimation({
-      timingFunction: 'ease-in'
-    }).translate(0, -600).step({
-      duration: 300
-    })
-    that.setData({
-      animationData: animal1.export(),
+
+       }else if(res.status == 1004 || res.status == 1005 || res.status == 1018 ){
+           wx.redirectTo({
+             url: '../login/login',
+           })
+       } else {
+         wx.showToast({
+           title: res.msg,
+           icon: 'none'
+         })
+       }
     })
   },
-  // 选择规格页面隐藏   微信小程序动画
-  guigeno: function() {
-    let that = this
-    let animal1 = wx.createAnimation({
-      timingFunction: 'ease-in'
-    }).translate(0, 600).step({
-      duration: 300
-    })
-    that.setData({
-      animationData: animal1.export()
-    })
+  //显示隐藏购物车
+  showgg() {
+    let that =this
+     if(this.data.detail.isSpecificaton == 1){
+      this.setData({
+        ismask: !this.data.ismask,
+        isgug: !this.data.isgug
+      })
+     }else{
+        that.cart();
+     }
+
   },
-  swiperChange: function(e) {
+  swiperChange: function (e) {
     var that = this;
     if (e.detail.source == 'touch') {
       that.setData({
@@ -184,9 +104,31 @@ Page({
       })
     }
   },
+  //加
+  add: function (e) {
+    var that = this;
+    that.setData({
+      num: ++that.data.num,
+    })
 
+  },
+  //减
+  reduction: function (e) {
+    var that = this;
+    if (that.data.num == 1) {
+      wx.showToast({
+        title: '最少选择一件',
+        icon: 'none'
+      })
+    } else {
+      that.setData({
+        num: that.data.num - 1,
+      })
+
+    }
+  },
   //规格选择
-  pack: function(e) {
+  pack: function (e) {
     var that = this;
     ds = false;
     console.log(e);
@@ -203,6 +145,7 @@ Page({
       selectAttrid.push(spec[selectIndex].entries[attrIndex].id)
     } else {
       selectAttrid[selectIndex] = spec[selectIndex].entries[attrIndex].id;
+
     }
 
 
@@ -218,9 +161,16 @@ Page({
 
       for (let i in that.data.sku) {
         if (JSON.stringify(that.data.selectAttrid) === JSON.stringify(that.data.sku[i].ids)) {
+          console.log(that.data.sku[i])
+          if(that.data.sku[i].productImgOss){
+            that.setData({
+              title_img: that.data.sku[i].productImgOss,
+            })
+          }
           that.setData({
             price: that.data.sku[i].price,
-            goodId: that.data.sku[i].id
+            goodId: that.data.sku[i].id,
+
           })
           return ds = true;
         }
@@ -271,6 +221,79 @@ Page({
       }
     })
   },
+  // 购买
+  buy() {
+    let that = this;
+
+    console.log(selectIndexArray.length)
+  
+    if (selectIndexArray.length === that.data.spec.length) {
+      if (ds == true) {
+        wx.navigateTo({
+        url: '../sure_order/sure_order?id=' + id + '&num=' +that.data.num
+          + '&selectIndexArray=' + selectIndexArray
+          + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+        })
+      } else {
+        wx.showToast({
+          title: '该商品没有库存',
+          icon: 'none'
+        })
+        return false;
+      }
+    } else {
+      wx.showToast({
+        title: '请选择商品规格',
+        icon: 'none'
+      })
+
+      that.setData({
+        isgug: !that.data.isgug,
+        ismask:!that.data.ismask
+      })
+      return false;
+    }
+    that.setData({
+      loading: !that.data.loading
+    })
+  },
+  //确定
+  confirm() {
+    let that =this
+    if (selectIndexArray.length === that.data.spec.length) {
+      if (ds == true) {
+
+        that.setData({
+          ismask: !this.data.ismask,
+          isgug: !this.data.isgug
+        })
+        that.cart();
+
+      } else {
+        wx.showToast({
+          title: '该商品没有库存',
+          icon: 'none'
+        })
+        return false;
+      }
+    } else {
+      wx.showToast({
+        title: '请选择商品规格',
+        icon: 'none'
+      })
+
+
+      return false;
+    }
+  },
+  //保障弹窗
+  security(){
+    this.setData({
+      ismask: !this.data.ismask,
+      isSecurity: !this.data.isSecurity,
+
+    })
+  },
   //收藏
   Collection() {
     let that = this;
@@ -280,7 +303,7 @@ Page({
 
     app.res.req("app-web/product/collection", data, (res) => {
       console.log(res.data)
-      if (res.status == 1000) {
+      if (res.status == 1016 || res.status == 1017) {
         that.getDetail();
 
 
@@ -314,7 +337,9 @@ Page({
 
         that.setData({
           detail: res.data,
-          spec: res.data.specificationItems
+          spec: res.data.specificationItems,
+          price: res.data.lowestPrice,
+          title_img: res.data.productDefaultImgOss
         })
 
       } else if (res.status == 1004 || res.status == 1005) {
@@ -356,13 +381,7 @@ Page({
     });
     console.log(that.data.istag)
   },
-  // 购买
-  buy() {
-    let that = this;
-    that.setData({
-      loading: !that.data.loading
-    })
-  },
+
   // 滚轮显示
   scrollto() {
     wx.pageScrollTo({
@@ -382,7 +401,7 @@ Page({
       duration: 300
     })
   },
-  onPageScroll: function(e) {
+  onPageScroll: function (e) {
 
     let that = this
     if (e.scrollTop > 200) {
@@ -417,7 +436,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     this.setData({
       selectName: "", //已选的属性名字
       selectAttrid: [], //选择的属性id
@@ -429,8 +448,8 @@ Page({
     attrIndex; //选择的小规格的key
     selectIndexArray = []; //选择属性名字的数组
     selectAttrid = [];
-    // a = [];
-    detail_id;
+     a = [];
+    // detail_id;
     ds = false;
   },
 

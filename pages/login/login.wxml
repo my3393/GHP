@@ -1,6 +1,8 @@
 <!--pages/login/login.wxml-->
+  <view class="login">
+      <image src='../../images/login.png' class='logos'></image>
+  </view>
 
-<image src='../../images/loginbg.png' class='logos'></image>
 <view class='titles'>申请获得以下权限</view>
 <view class='stipss'>·获得您的公开信息(昵称、头像等)</view>
 <!-- 需要使用 button 来授权登录 -->
@@ -10,6 +12,6 @@
   bindgetuserinfo="bindGetUserInfo"
  
 >
-  授权登录
+  微信授权登录
 </button>
 <view wx:else>请升级微信版本</view>

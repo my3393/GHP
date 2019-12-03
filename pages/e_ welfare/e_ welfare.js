@@ -28,6 +28,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getDateil();
     this.draw('runCanvas',this.data.shao,1000);
   },
 
@@ -73,17 +74,41 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  },
   tag(e){
     console.log(e)
     let that = this;
     that.setData({
       tar:e.currentTarget.dataset.idx
     })
+  },
+  //
+  getDateil(){
+    let that = this;
+    let data = {
+
+    }
+    app.res.req('app-web/home/banner', data, (res) => {
+      console.log(res.data)
+       if(res.status == 1000){
+            that.setData({
+              detail:res.data,
+
+            })
+
+       }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
+         console.log(1)
+           wx.redirectTo({
+             url: '../login/login',
+           })
+       } else {
+         console.log(111)
+         wx.showToast({
+           title: res.msg,
+           icon: 'none'
+         })
+       }
+    })
+
   }
 })

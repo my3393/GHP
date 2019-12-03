@@ -98,7 +98,7 @@ page{
     width: 28rpx;
     height: 28rpx;
     float: left;
-    margin-top: 4rpx;
+    margin-top: 6rpx;
     margin-right: 6rpx;
 }
 .sotre_img image{

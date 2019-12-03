@@ -162,11 +162,11 @@ page{
   /* background-color: #f5f5f5; */
 }
 .bigCircle{
-  width: 184rpx;
-  height: 184rpx;
+  width: 194rpx;
+  height: 204rpx;
   border-radius: 50%;
   position: absolute;
-  top:12rpx;
+  top:2rpx;
   bottom: 0;
   left:-15rpx;
   right: 0;
@@ -178,7 +178,7 @@ page{
   height: 178rpx;
   border-radius: 50%;
   position: absolute;
-  top:12rpx;
+  top:0rpx;
   bottom: 0;
   left:-15rpx;
   right: 0;
@@ -186,8 +186,8 @@ page{
   background-color: #eee;
 }
 .canvas{
-  width: 210rpx;
-  height: 210rpx;
+  width: 215rpx;
+  height: 215rpx;
   position: absolute;
   left: 0;
   top: 0;

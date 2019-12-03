@@ -7,7 +7,6 @@
     "pages/wallet_detail/wallet_detail",
     "pages/wallet_withdrawal/wallet_withdrawal",
     "pages/mine_wallet/mine_wallet",
-   
     "pages/store_refund/store_refund",
     "pages/sure_order/sure_order",
     "pages/order_complaints/order_complaints",
@@ -40,7 +39,8 @@
     "pages/logs/logs",
     "pages/person_name/person_name",
     "pages/store_search/store_search",
-    "pages/binding_hometown/binding_hometown"
+    "pages/binding_hometown/binding_hometown",
+    "pages/shoping/shoping"
   ],
   "tabBar": {
     "color": "#808080",

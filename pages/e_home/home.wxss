@@ -221,7 +221,7 @@ white-space: nowrap;
   height: 100%;
 }
 .list-j{
-  margin-left: 20rpx;
+  margin-left: 10rpx;
   width: 100%;
   overflow: hidden;
   text-overflow:ellipsis;
@@ -233,7 +233,7 @@ white-space: nowrap;
   color: #999999;
   margin-top: 12rpx;
   font-size: 22rpx;
-  margin-left: 20rpx;
+  margin-left: 10rpx;
 }
 .ctp{
   margin-left: 20rpx;

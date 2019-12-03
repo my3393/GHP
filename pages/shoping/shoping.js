@@ -91,13 +91,13 @@ Page({
   */
 
   onLoad: function (options) {
-      // wx.showToast({
-      //   title: '价值',
-      //   icon:'warn',
-      //   //image:'../../images/head.png',
+    // wx.showToast({
+    //   title: '价值',
+    //   icon:'warn',
+    //   //image:'../../images/head.png',
 
-      //   duration:3000
-      // })
+    //   duration:3000
+    // })
     //获取购物车信息
 
   },
@@ -279,7 +279,7 @@ Page({
       cartsdata[index].selected = true
       //改变当前店铺所有商品状态
       for (var i in thisstoredata) {
-      cartsdata[index].goodsinfo[i].selected = true
+        cartsdata[index].goodsinfo[i].selected = true
       }
     }
 
@@ -391,37 +391,37 @@ Page({
     this.getallprices();
 
   },
-  getDateil(){
+  getDateil() {
     let that = this;
     let data = {
 
     }
     app.res.req('app-web/shopcart/list', data, (res) => {
       console.log(res.data)
-       if(res.status == 1000){
-            for(var i in res.data){
-                res.data[i].selected = false
-                for (var j in res.data[i].products){
-                  res.data[i].products.selected = false
-                }
-            }
-            that.setData({
-              cartsdata:res.data,
+      if (res.status == 1000) {
+        for (var i in res.data) {
+          res.data[i].selected = false
+          for (var j in res.data[i].products) {
+            res.data[i].products.selected = false
+          }
+        }
+        that.setData({
+          cartsdata: res.data,
 
-            })
+        })
 
-       }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
-         console.log(1)
-           wx.redirectTo({
-             url: '../login/login',
-           })
-       } else {
-         console.log(111)
-         wx.showToast({
-           title: res.msg,
-           icon: 'none'
-         })
-       }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
 
   }

@@ -154,7 +154,7 @@
             </view>
             <view>官方客服</view>
         </view>
-        <view class="din-1">
+        <view class="din-1" bindtap="address">
             <view class="din-img">
                 <image src="../../images/shdz.png" />
                 

@@ -8,13 +8,15 @@ let province_id = '';
 let city_id = '';
 let area_id = '';
 let town_id = '';
+let sum = 1
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      show:true,
+      ismask:true,
+      show:false,
       address:true,
       prov: '',
       city: '',
@@ -23,7 +25,13 @@ Page({
       isprov: true,
       iscity: false,
       isqu: false,
-      isjie: false
+      isjie: false,
+      names:'',
+      phone:'',
+      minute:'',
+      town:'',
+      sum:1,
+      checked:true,
   },
 
   /**
@@ -81,14 +89,118 @@ Page({
   // onShareAppMessage: function () {
 
   // },
-  sub(){
-    wx.chooseLocation({
-      
-      success(res) {
-        console.log(res)
-        
-      }
+  check(){
+    this.setData({
+        checked:!that.data.checked
     })
+    if(this.data.checked == true){
+     
+       sum=1
+     
+    }else{
+      
+        sum= 0
+      
+    }
+  },
+  names(e){
+    this.setData({
+      names:e.detail.value
+    })
+  },
+  //s手机号
+  phone(e){
+    this.setData({
+      phone: e.detail.value
+    })
+  },
+  //详细地址
+  minute(e){
+    this.setData({
+      minute: e.detail.value
+    })
+  },
+  diz() {
+    this.getprov();
+    this.setData({
+      address: false,
+      ismask: false,
+    })
+  },
+  sub(){
+    var that = this;
+   
+    var phonetel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (that.data.names == '') {
+      wx.showToast({
+        title: '请输入收件人姓名',
+        icon: 'none',
+        duration: 1000,
+        mask: true
+      })
+      return false
+    } else if (that.data.phone == '') {
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    } else if (that.data.town == '') {
+      wx.showToast({
+        title: '请选择所在地区',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    } else if (that.data.minute == '') {
+      wx.showToast({
+        title: '请输入详细地址',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    } else if (that.data.phone.length != 11) {
+      wx.showToast({
+        title: '手机号长度有误！',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }else  if (!phonetel.test(that.data.phone)) {
+      wx.showToast({
+        title: '手机号有误！',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }else{
+    
+      let data = {
+          consigneeName:that.data.names,
+          consigneePhone: that.data.phone,
+          provinceId: province_id,
+          cityId: city_id,
+          areaId: area_id,
+          townId: town_id,
+          detailAddress: that.data.minute,
+          isDefault: sum
+      }
+      app.res.req('app-web/useraddress/add', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.navigateTo({
+            url: '../address/address',
+          })
+        } else {
+          console.log(111)
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
   },
   x_prov() {
     let that = this;
@@ -132,37 +244,35 @@ Page({
   },
   //省
   getprov: function () {
-    var that = this;
-    province = []
-    wx.request({
-      url: app.data.urlmall + "/apparea/nextlist.do",
-      data: {
-        grade: "1",
-        token: wx.getStorageSync('etoken'),
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      dataType: 'json',
-      success: function (res) {
-        console.log(res.data.data)
-        if (res.data.status === 100) {
-          for (var i in res.data.data) {
-            province.push(res.data.data[i])
-          }
-          that.setData({
-            province: province
-          })
 
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        }
+    province = []
+    let that = this;
+    let data = {
+      grade: 1,
+      id: ''
+    }
+    app.res.req('app-web/region/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+
+        province.push(...res.data)
+
+        that.setData({
+          province: province
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
       }
     })
+
   },
   // 省跳市
   getprovs: function (e) {
@@ -176,7 +286,8 @@ Page({
       tas2: 999,
       tas3: 999,
       tas4: 999,
-      tar: 9
+      tar: 9,
+
     })
 
     var nowTime = new Date();
@@ -186,23 +297,24 @@ Page({
     }
     // 获取所有市
     wx.request({
-      url: app.data.urlmall + "/apparea/nextlist.do",
+      url: app.data.urlmall + "app-web/region/list",
       data: {
         grade: '2',
         id: province_id,
-        token: wx.getStorageSync('etoken'),
+
       },
       method: 'POST',
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token'),
       },
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status == 100) {
-          for (var i in res.data.data) {
-            city.push(res.data.data[i])
-          }
+        if (res.data.status == 1000) {
+
+          city.push(...res.data.data)
+
           that.setData({
             citys: city,
             city: '',
@@ -246,23 +358,24 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "/apparea/nextlist.do",
+      url: app.data.urlmall + "app-web/region/list",
       data: {
         grade: '3',
         id: city_id,
-        token: wx.getStorageSync('etoken'),
+
       },
       method: 'POST',
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token'),
       },
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status == 100) {
-          for (var i in res.data.data) {
-            area.push(res.data.data[i])
-          }
+        if (res.data.status == 1000) {
+
+          area.push(...res.data.data)
+
           that.setData({
             areas: area,
             area: '',
@@ -303,23 +416,24 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "/apparea/nextlist.do",
+      url: app.data.urlmall + "app-web/region/list",
       data: {
         grade: '4',
         id: area_id,
-        token: wx.getStorageSync('etoken'),
+
       },
       method: 'POST',
       header: {
-        'content-type': 'application/x-www-form-urlencoded'
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token'),
       },
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status == 100) {
-          for (var i in res.data.data) {
-            town.push(res.data.data[i])
-          }
+        if (res.data.status == 1000) {
+
+          town.push(...res.data.data)
+
           let a = { name: '-' }
           town.push(a)
           that.setData({
@@ -349,8 +463,10 @@ Page({
     town_id = e.currentTarget.id;
 
     that.setData({ //给变量赋值
+      ismask: true,
       tas4: e.currentTarget.dataset.index,
-      isardess: true,
+      name: that.data.prov + '-' + that.data.city + '-' + that.data.area + '-' + e.currentTarget.dataset.name,
+      address: true,
       town: e.currentTarget.dataset.name
     })
   },
