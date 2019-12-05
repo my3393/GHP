@@ -20,30 +20,30 @@
 <view class="banner_top" style='margin-top:{{navH}}px'>
   <swiper bindchange="swiperChange" class="banner" circular="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
     <block>
-      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{photos}}' wx:key="{{item.ids}}">
+      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{detail.infoImgOss}}' wx:key="{{item.ids}}">
         <image class="banner_img" src="{{item}}"></image>
       </swiper-item>
     </block>
   </swiper>
-  <view class="banner_num">{{current+1}} / {{photos.length + 1}}</view>
+  <view class="banner_num">{{current+1}} / {{detail.infoImgOss.length + 1}}</view>
 </view>
 <view class="nav">
-  <view class="g-h1 dan">大国小镇”计划，助力四个贫困产业扶持大国小镇”计划，助力四个贫困产业扶</view>
-  <view class="g-h2">送温暖献爱心，为家乡做公益送温暖献爱心送温暖献爱心送温暖献爱心送温暖献爱心送温暖献爱心。</view>
+  <view class="g-h1 dan">{{detail.projectTitle}}</view>
+  <view class="g-h2">{{detail.projectExplain}}</view>
   <view class="jindu">
     <progress stroke-width="5" active percent="80.00" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
   </view>
   <view class="g-bott">
     <view class="g-bo">
-      <view class='g-bott-j'>35957</view>
+      <view class='g-bott-j'>{{detail.targetAmount}}</view>
       <view class='g-boot-y'>目标金额/元</view>
     </view>
     <view class="g-bo">
-      <view class='g-bott-j'>35957</view>
+      <view class='g-bott-j'>{{detail.raiseAmount}}</view>
       <view class='g-boot-y'>已筹款/元</view>
     </view>
     <view class="g-bo">
-      <view class='g-bott-j'>35</view>
+      <view class='g-bott-j'>{{detail.voteNum}}</view>
       <view class='g-boot-y'>项目票数</view>
     </view>
   </view>
@@ -51,7 +51,7 @@
 <view class="title">
   <view class="title_h1 ">项目背景</view>
   <view class="title_tab {{isduo ? 'duo' : ''}}">
-    2019年，我们又见到了这群让我们日思夜想的孩子们 ——河南濮阳葛霍李小学的学生们。这个夏天，我们将夏令营带到这里，与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩子们陆陆续续走进校园，听着嬉笑打闹的 声音，夏令营的早晨就这样如期而至。将夏令营带到这里与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩 与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩与孩子们共同度过美好时光。当清晨迎着第一缕阳光，孩
+    {{detail.introduce}}
   </view>
 </view>
 <view class="title_all" bindtap="gend" wx:if="{{isduo}}">
@@ -64,26 +64,24 @@
 </view>
 <view class="title">
   <view class="title_h1 top1">公益善款资助公示</view>
-  <view class="t_kong" wx:if='{{detail.length == 0}}'>
+  <view class="t_kong" wx:if='{{list.length == 0}}'>
     <image src="../../images/noplay.png" />
     <view>项目还未被资助</view>
   </view>
   <view wx:else>
     <view class="title">
 
-      <view class="title_h2">资助“大国小镇”计划，助力四个贫困产业扶持项目”项目项目项目</view>
+      <view class="title_h2">{{list.publicityTitle}}</view>
       <view class="mone">
         资助金额：
-        <text class="chu">￥ 12000</text>
+        <text class="chu">￥ {{list.grantAmount}}</text>
       </view>
-      <view class="title_t">项目经善家公益核实，真实有效，受到众多 爱心人士关注项目经善家公益 核实，真实有效，受到众多爱心人士关
+      <view class="title_t">{{list.publicityContent}}
       </view>
-      <view class='title_img'>
-        <image src="../../images/te.png" />
-        <image src="../../images/te.png" />
-        <image src="../../images/te.png" />
+      <view class='title_img' wx:for='{{list.publicityImgOss}}' wx:key="{{item.ids}}">
+        <image src="{{item}}" />
       </view>
-      <view class="title_date">2019-10-13 18:30:58</view>
+      <view class="title_date">{{list.createDate}}</view>
     </view>
   </view>
 </view>
@@ -91,170 +89,147 @@
   <view class="title_h1 top2">爱心投票（20）</view>
   <view class="neir">
     目前
-    <text class="yan">全国共有20个</text> 申请被资助的项目，
-    <text class="yan">当前项目位于总项目的第18位</text> ，快来位TA投票吧，项目票数越多，越容易受到平台关注，得到资助呦！
+    <text class="yan">全国共有{{pai.totalProjectCount}}个</text> 申请被资助的项目，
+    <text class="yan">当前项目位于总项目的第{{pai.currentRank}}位</text> ，快来位TA投票吧，项目票数越多，越容易受到平台关注，得到资助呦！
   </view>
-  <view class="top">
-    <view class="top_2">
-      <view class="top_tx">
-        <image src="../../images/head.png" />
-        <view class="top_img">
-          <image src="../../images/top_2.png" />
+  <view hidden="{{istop}}">
+    <view class="top">
+      <view class="top_2">
+        <view class="top_tx">
+          <image src="{{top_2.headImgUrl}}" />
+          <view class="top_img">
+            <image src="../../images/top_2.png" />
+          </view>
+        </view>
+        <view class='tp_n'>{{top_2.userName}}</view>
+        <view class="tp_s">
+          贡献
+          <text class="yan">{{top_2.voteNum}}</text> 票
         </view>
       </view>
-      <view class='tp_n'>正国单位</view>
-      <view class="tp_s">
-        贡献
-        <text class="yan">14</text> 票
-      </view>
-    </view>
-    <view class="top_2">
-      <view class="top_tx">
-        <image src="../../images/head.png" />
-        <view class="top_img">
-          <image src="../../images/top_1.png" />
+      <view class="top_2">
+        <view class="top_tx">
+          <image src="{{top_1.headImgUrl}}" />
+          <view class="top_img">
+            <image src="../../images/top_1.png" />
+          </view>
+        </view>
+        <view class='tp_n'>{{top_1.userName}}</view>
+        <view class="tp_s">
+          贡献
+          <text class="yan">{{top_1.voteNum}}</text> 票
         </view>
       </view>
-      <view class='tp_n'>正国单位</view>
-      <view class="tp_s">
-        贡献
-        <text class="yan">14</text> 票
-      </view>
-    </view>
-    <view class="top_2">
-      <view class="top_tx">
-        <image src="../../images/head.png" />
-        <view class="top_img">
-          <image src="../../images/top_3.png" />
+      <view class="top_2">
+        <view class="top_tx">
+          <image src="{{top_3.headImgUrl}}" />
+          <view class="top_img">
+            <image src="../../images/top_3.png" />
+          </view>
+        </view>
+        <view class='tp_n'>{{top_3.userName}}</view>
+        <view class="tp_s">
+          贡献
+          <text class="yan">{{top_3.voteNum}}</text> 票
         </view>
       </view>
-      <view class='tp_n'>正国单位</view>
-      <view class="tp_s">
-        贡献
-        <text class="yan">14</text> 票
+    </view>
+    <view class="top_list" wx:for='{{ranklist}}' wx:key='{{item.id}}'>
+      <view class="top_list_img">
+        <image src="{{item.headImgUrl}}" />
       </view>
+      <view class="top_list_name">
+        {{item.userName}}贡献了
+        <text class="yan">{{item.voteNum}}</text> 票
+      </view>
+      <view class="top_list_date">{{item.createDate}}</view>
     </view>
   </view>
-  <view class="top_list">
-    <view class="top_list_img">
-      <image src="../../images/head.png" />
+  <view hidden="{{!isrank}}">
+    <view class="top_list" wx:for='{{ranklist}}' wx:key='{{item.id}}'>
+      <view class="top_list_img">
+        <image src="{{item.headImgUrl}}" />
+      </view>
+      <view class="top_list_name">
+        {{item.userName}}贡献了
+        <text class="yan">{{item.voteNum}}</text> 票
+      </view>
+      <view class="top_list_date">{{item.createDate}}</view>
     </view>
-    <view class="top_list_name">
-      正国单位贡献了
-      <text class="yan">14</text> 票
-    </view>
-    <view class="top_list_date">1分钟前</view>
   </view>
-  <view class="top_list">
-    <view class="top_list_img">
-      <image src="../../images/head.png" />
+  <view class="foot-boot">
+    善家购
+    <view class="foot-boot-m">
+      大爱无疆，感恩家乡
     </view>
-    <view class="top_list_name">
-      正国单位贡献了
-      <text class="yan">14</text> 票
-    </view>
-    <view class="top_list_date">1分钟前</view>
   </view>
-  <view class="top_list">
-    <view class="top_list_img">
-      <image src="../../images/head.png" />
+  <view style='height:100rpx'></view>
+  <view class="footer">
+    <view bindtap="fenx">
+      <view class="fenx">
+        <image src="../../images/fenx.png" />
+
+      </view>
+      <view>分享</view>
     </view>
-    <view class="top_list_name">
-      正国单位贡献了
-      <text class="yan">14</text> 票
+    <view class="submit" bindtap="vote">
+      帮TA投票
     </view>
-    <view class="top_list_date">1分钟前</view>
-  </view>
-  <view class="top_list">
-    <view class="top_list_img">
-      <image src="../../images/head.png" />
-    </view>
-    <view class="top_list_name">
-      正国单位贡献了
-      <text class="yan">14</text> 票
-    </view>
-    <view class="top_list_date">1分钟前</view>
-  </view>
-  <view class="top_list">
-    <view class="top_list_img">
-      <image src="../../images/head.png" />
-    </view>
-    <view class="top_list_name">
-      正国单位贡献了
-      <text class="yan">14</text> 票
-    </view>
-    <view class="top_list_date">1分钟前</view>
   </view>
 </view>
-<view class="foot-boot">
-  善家购
-  <view class="foot-boot-m">
-    大爱无疆，感恩家乡
-  </view>
-</view>
-<view style='height:100rpx'></view>
-<view class="footer">
-  <view bindtap="fenx">
-    <view class="fenx">
-      <image src="../../images/fenx.png" />
-
+  <!-- 关注弹窗 -->
+  <view class="popup" hidden="{{isvote}}">
+    <view class="popup_h1">项目票数越高，容易获得更多关注</view>
+    <view class="popup_content">确认投票后将消耗您100艺呗</view>
+    <view class="popup_btn">
+      <view bindtap="cance">取消</view>
+      <view bindtap="que">确定</view>
     </view>
-    <view>分享</view>
   </view>
-  <view class="submit">
-    帮TA投票
-  </view>
-</view>
 
-<!-- 关注弹窗 -->
-<!-- <view class="popup" >
-        <view class="popup_h1">项目票数越高，容易获得更多关注</view>
-        <view class="popup_content">确认投票后将消耗您100艺呗</view>
-        <view class="popup_btn">
-              <view >取消</view>
-              <view >确定</view>
-        </view>
-  </view> -->
-
-<!--   -->
+  <!--  
 
 <!-- 弹窗底部 -->
-<view class="page">
-   <view class="order {{!istag ? 'order_show' : ''}}">
-       <view class="order_tu">
-           <view >
-               <view class="wx_img"><image src="../../images/wxapp.png" /></view>
-                <view >分享好友或微信群</view>
-           </view>
-           <view bind:tap="huizi">
-               <view class="wx_img"><image src="../../images/pengyq.png" /></view>
-                <view >生成分享海报 </view>
-           </view>
-       </view>
-      <view class="order_bott" bind:tap="fenx">
-          取消
+  <view class="page">
+    <view class="order {{!istag ? 'order_show' : ''}}">
+      <view class="order_tu">
+        <view>
+          <view class="wx_img">
+            <image src="../../images/wxapp.png" />
+          </view>
+          <view>分享好友或微信群</view>
+        </view>
+        <view bind:tap="huizi">
+          <view class="wx_img">
+            <image src="../../images/pengyq.png" />
+          </view>
+          <view>生成分享海报 </view>
+        </view>
       </view>
-   </view>
-</view>
-<!-- 绘制海报 -->
-<view class="canva_top" hidden="{{iscanvan}}">
-    <view class="x" bind:tap="qufenx">
-        <image src="../../images/x.png" />
+      <view class="order_bott" bind:tap="fenx">
+        取消
+      </view>
     </view>
-  <canvas canvas-id="posterCanvas" class="canva_tops"  style=""></canvas>
-  <view bindtap="savePoster" class="backs">保存图片，分享朋友圈</view>
-</view>
+  </view>
+  <!-- 绘制海报 -->
+  <view class="canva_top" hidden="{{iscanvan}}">
+    <view class="x" bind:tap="qufenx">
+      <image src="../../images/x.png" />
+    </view>
+    <canvas canvas-id="posterCanvas" class="canva_tops" style=""></canvas>
+    <view bindtap="savePoster" class="backs">保存图片，分享朋友圈</view>
+  </view>
 
-<!-- 投票艺呗不足 -->
-<view class="defic">
-  <view >艺呗不足,无法进行助力哦</view>
-  <view style="font-size:24rpx;">您可通过以下方式获取</view>
-  <view class='kait yan'>
-    开通联盟会员赠送10倍艺呗
+  <!-- 投票艺呗不足 -->
+  <view class="defic" hidden="{{buzu}}">
+    <view>艺呗不足,无法进行助力哦</view>
+    <view style="font-size:24rpx;">您可通过以下方式获取</view>
+    <view class='kait yan'>
+      开通联盟会员赠送10倍艺呗
+    </view>
+    <view class="yan">购物消费赠送等额艺呗</view>
+    <view class="que">
+      确定
+    </view>
   </view>
-  <view class="yan">购物消费赠送等额艺呗</view>
-  <view class="que">
-    确定
-  </view>
-</view>
-<view class="mask" hidden="{{ismask}}" catchtouchmove='true' style="margin-top:{{navH}}px"></view>
+  <view class="mask" hidden="{{ismask}}" catchtouchmove='true' style="margin-top:{{navH}}px"></view>

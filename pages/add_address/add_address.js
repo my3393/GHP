@@ -189,9 +189,16 @@ Page({
       app.res.req('app-web/useraddress/add', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
-          wx.navigateTo({
-            url: '../address/address',
+          wx.showToast({
+            title: '添加成功',
+            icon: 'success',
+            duration: 1000
           })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1,
+            })
+          }, 1000)
         } else {
           console.log(111)
           wx.showToast({

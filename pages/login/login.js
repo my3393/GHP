@@ -10,9 +10,9 @@ Page({
     onLoad(options) {
       console.log(options)
       let that = this;
-       if(options.saiid){
+       if(options.id){
           that.setData({
-            saiid:options.saiid
+            detail_id:options.id
           })
        }
       // 查看是否授权
@@ -41,46 +41,46 @@ Page({
                   key: 'code',
                   data: res.code,
                 })
-                if (res.code) {
-                  console.log(1)
-                  console.log(res.code)
-                  setTimeout(function () {
-                    wx.request({
-                      url: "http://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
-                      data: {
-                        code: res.code,
-                        encryptedData: encryptedData,
-                        iv: iv
-                      },
-                      method: 'POST',
-                      header: {
-                        'content-type': 'application/x-www-form-urlencoded'
-                      },
-                      dataType: 'json',
-                      success: function (res) {
-                        console.log(res.data.data);
-                        wx.setStorage({
-                          key: 'etoken',
-                          data: res.data.data.token,
-                        })
-                        wx.setStorage({
-                          key: 'userinfo',
-                          data: res.data.data.user,
-                        })
-                        if (res.data.data.user.phone == null ||                                                                            res.data.data.user.phone == '') {
-                            wx.redirectTo({
-                                url: '../bindphone/bindphone',
-                            })
-                        } else {
+                // if (res.code) {
+                //   console.log(1)
+                //   console.log(res.code)
+                //   setTimeout(function () {
+                //     wx.request({
+                //       url: "http://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
+                //       data: {
+                //         code: res.code,
+                //         encryptedData: encryptedData,
+                //         iv: iv
+                //       },
+                //       method: 'POST',
+                //       header: {
+                //         'content-type': 'application/x-www-form-urlencoded'
+                //       },
+                //       dataType: 'json',
+                //       success: function (res) {
+                //         console.log(res.data.data);
+                //         wx.setStorage({
+                //           key: 'token',
+                //           data: res.data.token,
+                //         })
+                //         wx.setStorage({
+                //           key: 'userinfo',
+                //           data: res.data.data,
+                //         })
+                //         if (res.data.data.phone == null ||                                                                            res.data.data.phone == '') {
+                //             wx.redirectTo({
+                //                 url: '../bindphone/bindphone',
+                //             })
+                //         } else {
                           
-                        }
+                //         }
                         
-                      }
-                    })
-                  }, 500)
+                //       }
+                //     })
+                //   }, 500)
 
 
-                }
+                // }
               }
             });
           }
@@ -140,7 +140,7 @@ Page({
                             },
                             dataType: 'json',
                             success: function (res) {
-                              console.log(res.data.data);
+                              console.log(res.data);
 
                               if (res.data.status == 1000) {
                                 wx.hideLoading()
@@ -154,9 +154,15 @@ Page({
                                   data: res.data.data,
                                 })
                                 if (res.data.data.phone == null || res.data.data.phone == '') {
-                                  wx.redirectTo({
-                                    url: '../bindphone/bindphone',
-                                  })
+                                  console.log('未绑定手机号')
+                                  // wx.redirectTo({
+                                  //   url: '../bindphone/bindphone',
+                                  // })
+                                 
+                                    wx.redirectTo({
+                                      url: '../good_detail/good_detail?id=' + that.data.detail_id
+                                    })
+                                  
                                 } else {
                                   console.log(11)
                                   if (that.data.detail_id != ''){
@@ -164,6 +170,7 @@ Page({
                                       url: '../good_detail/good_detail?id=' + that.data.detail_id
                                     })
                                   }else{
+                                    console.log(2)
                                     wx.switchTab({
                                       url: '../e_home/home'
                                     })

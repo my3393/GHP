@@ -90,7 +90,12 @@ Page({
 
   },
 
-  
+  //我的钱包
+  wallet(){
+     wx.navigateTo({
+       url: '../mine_wallet/mine_wallet',
+     })
+  },
   //收货地址
    address(){
      wx.navigateTo({

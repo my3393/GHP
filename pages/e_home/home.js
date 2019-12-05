@@ -86,6 +86,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //搜索
+  search(){
+    wx.navigateTo({
+      url: '../search/search',
+    })
+  },
   //查看商品详情
   detail(e){
     console.log(e)

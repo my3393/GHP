@@ -24,11 +24,12 @@ Page({
     iscity: false,
     isqu: false,
     isjie: false,
-    iscitys: false,  
+    iscitys: false, 
     isqus: false,
     isjies: false,
     ismask:true,
     name:'',
+    img:'https://graph.baidu.com/resource/116877509f357d436cd2101575547725.jpg'
   },
 
   /**

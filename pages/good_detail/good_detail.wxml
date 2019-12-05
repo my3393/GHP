@@ -96,13 +96,14 @@
   <view class="can" bind:tap="security">
     <text class="candi">保障</text>
     <text wx:if="{{detail.isServiceCommitment == 1}}"> 7天无理由退款  </text>
-    <text wx:if="{{detail.deliveryTimeType == 1}}"> 当日发货</text>
-    <text wx:if="{{detail.deliveryTimeType == 2}}"> 24小时</text>
-    <text wx:if="{{detail.deliveryTimeType == 3}}"> 48小时</text>
+    <text wx:if="{{detail.deliveryTimeType == 1}}">  · 当日发货</text>
+    <text wx:if="{{detail.deliveryTimeType == 2}}">  · 24小时</text>
+    <text wx:if="{{detail.deliveryTimeType == 3}}">  · 48小时</text>
     <view class="right">
       <image src="../../images/right.png" />
     </view>
   </view>
+   
 </view>
 <!-- 评价 -->
 <view class="ping">
@@ -161,45 +162,18 @@
     <image src="../../images/te.png" />
   </view>
   <view class="list-name">
-    <view>宁夏枸杞</view>
-    <view class="list-q">宁夏 银川市 西夏区 贺兰山街道</view>
+    <view>{{store.storeName}}</view>
+    <view class="list-q">{{store.provinceName}} {{store.cityName}} {{store.areaName}} {{store.townName}}</view>
   </view>
-  <view class="list-g">进店</view>
+  <view class="list-g" bindtap="store" id="{{store.id}}">进店</view>
   <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
-    <view class="class-two">
+    <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="detail">
       <view class="class-t-img">
-        <image src="../../images/te.png" />
+        <image src="{{item.productDefaultImgOss}}" />
       </view>
-      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
+      <view class="class-t-n">{{item.productName}}</view>
       <view class="class-t-p">
-        <text style="font-size:22rpx">￥</text> 28
-      </view>
-    </view>
-    <view class="class-two">
-      <view class="class-t-img">
-        <image src="../../images/te.png" />
-      </view>
-      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
-      <view class="class-t-p">
-        <text style="font-size:22rpx">￥</text> 28
-      </view>
-    </view>
-    <view class="class-two">
-      <view class="class-t-img">
-        <image src="../../images/te.png" />
-      </view>
-      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
-      <view class="class-t-p">
-        <text style="font-size:22rpx">￥</text> 28
-      </view>
-    </view>
-    <view class="class-two">
-      <view class="class-t-img">
-        <image src="../../images/te.png" />
-      </view>
-      <view class="class-t-n">零食食品坚果干肌肤而价格</view>
-      <view class="class-t-p">
-        <text style="font-size:22rpx">￥</text> 28
+        <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}
       </view>
     </view>
     <view class="class-two" style="vertical-align: top;">

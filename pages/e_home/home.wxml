@@ -13,7 +13,7 @@
       <view class="sear-img">
         <image src="../../images/search.png"></image>
       </view>
-      <view class="sea"><input class="search" placeholder="商品，店铺"></input></view>
+      <view class="sea"><input class="search" placeholder="商品，店铺" disabled="true" bindtap="search"></input></view>
     </view>
     <view>
     <swiper  class="banner"  indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">

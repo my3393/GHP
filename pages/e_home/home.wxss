@@ -1,8 +1,10 @@
 /* pages/home/home.wxss */
 page{
-  background: #fff;
+  background: #f9f9f9;
   color: PingFang-SC-Regular;
+ 
 }
+
 .top-back{
   width: 100%;
   height: 320rpx;
@@ -174,7 +176,8 @@ white-space: nowrap;
   margin-left: 20rpx;
 }
 .tag{
-  margin-left: 20rpx;
+ padding-left: 20rpx;
+box-sizing: border-box;
   margin-top: 28rpx;
   white-space: nowrap;
   display: flex;

@@ -1,0 +1,159 @@
+<!-- pages/sure_order/sure_order.wxml -->
+<view class="top">
+    <view class="top_img">
+        <image src="../../images/hyjlb.png" />
+    </view>
+    <view class="top_n">开通会员，预计本单最高可为您节省￥56.78</view>
+    <view class="top_r">></view>
+</view>
+<view wx:if='{{adress.length != 0}}' bindtap='choose'>
+    <view class="address">
+        <view class="address_top">
+            <!-- <text class="mor">默认</text> -->
+            {{adress.provinceName}}  {{adress.cityName}}  {{adress.areaName}}  {{adress.townName}}
+        </view>
+        <view class="address_cent">{{adress.detailAddress}}</view>
+        <view class="address_cent_r">></view>
+        <view class="address_bott">
+            {{adress.consigneeName}}
+            <text style='color:#999'>{{adress.consigneePhone}}</text>
+        </view>
+    </view>
+    <view class="address_t">
+        <image src="../../images/address_t.png" />
+    </view>
+</view>
+<view wx:elif='{{defalutaddres.length != 0}}' bindtap='choose'>
+    <view class="address">
+        <view class="address_top">
+            <text class="mor">默认</text>
+            {{defalutaddres.provinceName}}  {{defalutaddres.cityName}}  {{defalutaddres.areaName}}  {{defalutaddres.townName}}
+        </view>
+        <view class="address_cent">{{defalutaddres.detailAddress}}</view>
+        <view class="address_cent_r">></view>
+        <view class="address_bott">
+            {{defalutaddres.consigneeName}}
+            <text style='color:#999'>{{defalutaddres.consigneePhone}}</text>
+        </view>
+    </view>
+    <view class="address_t">
+        <image src="../../images/address_t.png" />
+    </view>
+</view>
+<view wx:else bindtap="choose">
+    <view class="address">
+        <view class="add_address">+ 添加收货地址</view>
+        <view class="address_cent_r">></view>
+    </view>
+    <view class="address_t">
+        <image src="../../images/address_t.png" />
+    </view>
+</view>
+<view class="nav">
+    <view class="list clearfix" wx:for="{{detail}}" wx:key="{{item.id}}">
+        <view class="nav_top">
+            <view class="sotre_img">
+                <image src="../../images/store.png" />
+            </view>
+            {{item.storeName}}
+            <view class="store_r">
+                <image src="../../images/right.png" />
+            </view>
+        </view>
+        <view wx:for="{{item.products}}">
+            <view class="good_img">
+                <image src="{{item.productImgOss}}" />
+            </view>
+            <view class="good_list">
+                <view class='goodsname dan'>{{item.productName}}</view>
+                <text class='specification'>{{item.provinceName}} {{item.cityName}}</text>
+                <view class="guig" wx:if='{{item.isSpecification == 0}}'>
+                    <!-- <view class='gui-g'></view> -->
+                </view>
+                 <view class="guig" wx:else >
+                    <view class='gui-g'>{{item.specification}}</view>
+                </view>
+                <view class='price'>
+                    <text class="yuan">￥</text>
+                    {{item.salePrice}}
+                </view>
+                <view class="good_num">×{{item.buyCount}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 订单备注 -->
+<view class="beiz">
+    <view class="beiz_h1">订单备注</view>
+    <view class="inpu">
+        <input placeholder="选填，请先跟商家沟通确认" bindinput="inpu" />
+    </view>
+</view>
+<view class="list clearfix">
+    <view class="price_list">
+        商品总额
+        <view class="price_r">￥{{Price.totalPrice}}</view>
+    </view>
+    <view class="price_list">
+        会员优惠
+        <view class="price_r yan" wx:if="{{user.memberType == 0}}">￥0.00</view>
+        <view class="price_r yan" wx:else>￥{{member_p}}</view>
+    </view>
+    <view class="price_list">
+        运费
+        <view class="price_r">￥{{Price.totalExpressFee}}</view>
+    </view>
+    <view class="z_right" wx:if='{{user.memberType == 0}}'>
+        需付费:
+        <text class="yan font">￥{{Price.payPrice}}</text>
+    </view>
+    <view class="z_right" wx:else>
+        需付费:
+        <text class="yan font">￥{{Price.memberPayPrice}}</text>
+    </view>
+</view>
+<view class="badge">
+    <view>
+        <view class="badge-img">
+            <image src="../../images/badge.png"></image>
+        </view>
+        <view class="badge-n">助力家乡</view>
+    </view>
+    <view>
+        <view class="badge-img">
+            <image src="../../images/badge.png"></image>
+        </view>
+        <view class="badge-n">家乡公益</view>
+    </view>
+    <view>
+        <view class="badge-img">
+            <image src="../../images/badge.png"></image>
+        </view>
+        <view class="badge-n">服务保障</view>
+    </view>
+    <view>
+        <view class="badge-img">
+            <image src="../../images/badge.png"></image>
+        </view>
+        <view class="badge-n">担保交易</view>
+    </view>
+</view>
+<view class="foot-boot">
+    善家购
+    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+</view>
+<view style="height:120rpx;"></view>
+<view class='footer'>
+    <view>
+        合计：
+        <view wx:if="{{user.memberType == 0}}" class="price" style="display:inline-block" >
+            <text class="yuan">￥</text>
+            {{Price.payPrice}}
+        </view>
+         <view wx:else class="price" style="display:inline-block" >
+            <text class="yuan">￥</text>
+             {{Price.memberPayPrice}}
+        </view>
+    </view>
+    <view class="pay" bindtap="pay">微信支付</view>
+</view>

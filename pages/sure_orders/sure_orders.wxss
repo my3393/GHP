@@ -1,0 +1,2 @@
+/* pages/sure_orders/sure_orders.wxss */
+@import '../sure_order/sure_order'

@@ -149,6 +149,7 @@ page{
 .price{
     margin-top: 5rpx;font-size: 29rpx;color: #F12200;
     font-weight: 600;
+    display: inline-block;
 }
 .yuan{
     font-size: 20rpx;
@@ -179,7 +180,7 @@ page{
  .inpu{
      display: inline-block;
      vertical-align: middle;
-     width: 85%;
+     width: 78%;
  }
  .price_r{
      float: right;

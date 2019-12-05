@@ -2,6 +2,8 @@
 const app = getApp();
 let top1 = '';
 let top2 = '';
+let id;
+let ranklist = [];
 Page({
 
   /**
@@ -9,6 +11,10 @@ Page({
    */
   data: {
     current: 0,
+    isrank:true,//排名多少显示
+    isvote:true,
+    ranklist:[],
+    buzu:true,//一杯不足
     is_top: true,
     issrcoll: '1',
     iscanvan: true,
@@ -27,9 +33,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    id = options.id
     this.setData({
       navH: app.globalData.navHeight
     })
+    this.getDetail();
   },
 
   /**
@@ -47,13 +55,13 @@ Page({
     //选择id
     var that = this;
     query.select('.top1').boundingClientRect(function (rect) {
-      console.log(rect)
+      
 
       top1 = rect.top
 
     }).exec();
     query.select('.top2').boundingClientRect(function (rect) {
-      console.log(rect)
+      
 
       top2 = rect.top
 
@@ -94,6 +102,189 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //取消
+  cance(){
+    this.setData({
+      ismask: !this.data.ismask,
+      isvote: !this.data.isvote
+    })
+  },
+  //确定
+  que(){
+    this.getVote();
+    this.setData({
+      ismask: !this.data.ismask,
+      isvote: !this.data.isvote
+    })
+  },
+  vote(){
+    this.setData({
+      ismask:!this.data.ismask,
+      isvote:!this.data.isvote
+    })
+  },
+  getVote(){
+    let that = this;
+    let data = {
+      projectId: id,
+
+    }
+
+    app.res.req("app-web/project/projectvote", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+
+        that.setData({
+          pai: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //投票列表
+  getranklist() {
+    let that = this;
+    let data = {
+      projectId: id,
+
+    }
+
+    app.res.req("app-web/project/projectvote", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+         if(res.data.length < 3){
+           that.setData({
+             ranklist: res.data,
+             
+           })
+         }else{
+           if (that.data.currentPage == 1) {
+             that.setData({
+               top_1: res.data.data.splice(0, 1)[0],
+               top_2: res.data.data.splice(0, 1)[0],
+               top_3: res.data.data.splice(0, 1)[0],
+
+             })
+           }
+           reanklist.push(...res.data)
+           that.setData({
+             ranklist: ranklist,
+             currentPage: res.data.currentPage,
+             isrank:false,
+           })
+         }
+       
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //商品详情
+  getDetail() {
+    let that = this;
+    let data = {
+      id: id
+    }
+
+    app.res.req("app-web/project/detail", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getList();
+
+        that.setData({
+          detail: res.data,
+        
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //项目公式
+  
+  getList() {
+    let that = this;
+    let data = {
+      projectId: id,
+      currentPage:1
+    }
+
+    app.res.req("app-web/project/publicitylist", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getPai();
+        that.setData({
+          list: res.data,
+         
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //项目排名
+  getPai() {
+    let that = this;
+    let data = {
+      projectId: id,
+      
+    }
+
+    app.res.req("app-web/project/projectrank", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+
+        that.setData({
+          pai: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   swiperChange: function (e) {
     var that = this;
     if (e.detail.source == 'touch') {
@@ -107,6 +298,12 @@ Page({
     let that = this
     this.setData({
       isduo: !that.data.isduo,
+    })
+  },
+  //返回上一页
+  navBack(){
+    wx.navigateBack({
+      data:1
     })
   },
   move() {
@@ -132,7 +329,7 @@ Page({
     })
   },
   onPageScroll: function (e) {
-    console.log(e.scrollTop)
+   // console.log(e.scrollTop)
     let that = this
     if (e.scrollTop > 300) {
 

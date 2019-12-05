@@ -28,10 +28,14 @@ page{
 }
 .cart-ic{
   line-height:218rpx;
+  margin-right: 10rpx;
+
 }
 .cart-thumb{
   width: 156rpx;
   height: 156rpx;
+  border-radius: 14rpx;
+  overflow: hidden;
 }
 .storehed{
    display: flex;
@@ -40,6 +44,7 @@ page{
    font-size: 30rpx;
   
 }
+
 /* 单页全局 */
 
 icon{margin-left: 20rpx;

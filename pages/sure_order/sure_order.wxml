@@ -31,7 +31,7 @@
         <image src="../../images/address_t.png" />
     </view>
 </view>
-<view wx:elif='{{defalutaddres}}' bindtap='choose'>
+<view wx:elif='{{defalutaddres.length != 0}}' bindtap='choose'>
     <view class="address" >
         <view class="address_top">
             <text class="mor">默认</text>
@@ -51,23 +51,23 @@
         <image src="../../images/address_t.png" />
     </view>
 </view>
-<view wx:else>
+<view wx:else bindtap="choose">
     <view class="address" >
-        
+
         <view class="add_address">
             + 添加收货地址
         </view>
         <view class="address_cent_r">
             >
         </view>
-       
+
     </view>
     <view class="address_t">
         <image src="../../images/address_t.png" />
     </view>
 </view>
 <view class="nav">
-   <view class="list">
+   <view class="list clearfix">
         <view class="nav_top">
         <view class="sotre_img">
             <image src="../../images/store.png" />
@@ -79,15 +79,15 @@
         </view>
         <view>
             <view class="good_img">
-                <image src="{{detail.productImgOss}}" />
+                <image src="{{detail.productDefaultImgOss}}" />
             </view>
             <view class="good_list">
                 <view class='goodsname dan'>{{detail.productName}}</view>
             <text class='specification'>{{detail.provinceName}} {{detail.cityName}}</text>
-            <view class="guig" wx:for='{{sku.skus}}'>
+            <view class="guig" wx:for='{{sku.skus}}' wx:key="{{item.id}}">
                 <view class='gui-g'>{{item.value}}</view>
             </view>
-            <text class='price'><text class="yuan">￥</text>{{sku.salePrice}}</text>
+            <text class='price'><text class="yuan">￥</text>{{sku.price}}</text>
             <view class="good_num">×{{buyNum}}</view>
             </view>
         </view>
@@ -101,20 +101,20 @@
         订单备注
     </view>
     <view class="inpu">
-        <input placeholder="选填，请先跟商家沟通确认" />
+        <input placeholder="选填，请先跟商家沟通确认" bindinput="inpu" />
     </view>
 </view>
 <view class="list clearfix">
     <view class="price_list">
         商品总额
         <view class="price_r">
-            ￥56.00
+            ￥{{prices}}
         </view>
     </view>
     <view class="price_list">
         会员优惠
         <view class="price_r yan">
-            ￥56.00
+            ￥{{member_p}}
         </view>
     </view>
     <view class="price_list">
@@ -124,7 +124,7 @@
         </view>
     </view>
     <view class="z_right">
-        需付费:<text class="yan font">￥56</text>
+        需付费:<text class="yan font">￥{{z_price}}</text>
     </view>
 </view>
 
@@ -153,13 +153,14 @@
       大爱无疆，感恩家乡
      </view>
 </view>
+<view style="height:120rpx;"></view>
 <view class='footer'>
  <view >
      合计：<view class="price" style="display:inline-block">
-         <text class="yuan">￥</text>56
+         <text class="yuan">￥</text>{{z_price}}
      </view>
  </view>
- <view class="pay">
-    微信支付 
+ <view class="pay" bindtap="pay">
+    微信支付
  </view>
 </view>

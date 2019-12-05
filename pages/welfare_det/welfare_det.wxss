@@ -414,7 +414,7 @@ overflow: hidden;
   background: #fff;
   padding: 20rpx 30rpx;
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   width: calc(100% - 300rpx);
  
   top: 50%;

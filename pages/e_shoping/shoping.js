@@ -1,5 +1,6 @@
 const app = getApp();
 let cartsdata = [];
+let ids = [];
 Page({
 
   /**
@@ -9,78 +10,15 @@ Page({
   */
 
   data: {
-
+    detel: true,
+    isdetel:true,
     allselected: false,
 
     allnum: 0,
 
-    allprices: 0,
+    allprices: 0.00,
 
-    cartsdata: [{
 
-      storename: '测试商家1',
-
-      selected: false,
-
-      goodsinfo: [{
-
-        goodsname: '商铺1的产品1cart-thumb商铺1的产品1cart',
-
-        specification: '银川市 西夏区 贺兰山西路街道',
-
-        price: '100.22',
-
-        num: '1',
-
-        selected: false
-
-      }, {
-
-        goodsname: '商铺1的产品2',
-
-        specification: '规格',
-
-        price: '100',
-
-        num: '1',
-
-        selected: false
-
-      }]
-
-    }, {
-
-      storename: '测试商家2',
-
-      selected: false,
-
-      goodsinfo: [{
-
-        goodsname: '商铺2的产品1',
-
-        specification: '规格',
-
-        price: '100',
-
-        num: '1',
-
-        selected: false
-
-      }, {
-
-        goodsname: '商铺2的产品2',
-
-        specification: '规格',
-
-        price: '100',
-
-        num: '1',
-
-        selected: false
-
-      }]
-
-    }]
 
   },
 
@@ -91,13 +29,13 @@ Page({
   */
 
   onLoad: function (options) {
-      // wx.showToast({
-      //   title: '价值',
-      //   icon:'warn',
-      //   //image:'../../images/head.png',
+    // wx.showToast({
+    //   title: '价值',
+    //   icon:'warn',
+    //   //image:'../../images/head.png',
 
-      //   duration:3000
-      // })
+    //   duration:3000
+    // })
     //获取购物车信息
 
   },
@@ -119,7 +57,7 @@ Page({
   */
 
   onShow: function () {
-
+    this.getDateil();
   },
 
   /**
@@ -129,7 +67,7 @@ Page({
   */
 
   onHide: function () {
-
+     ids = []
   },
 
   /**
@@ -183,13 +121,13 @@ Page({
 
     for (var i = 0; i < cartsdata.length; i++) {
       // console.log()
-      var goodsinfo = cartsdata[i].goodsinfo
-      for (var a = 0; a < goodsinfo.length; a++) {
-        if (goodsinfo[a].selected) {
+      var products = cartsdata[i].products
+      for (var a = 0; a < products.length; a++) {
+        if (products[a].selected) {
           //当前商品价格*数量 +
-          let price = Number(goodsinfo[a].price)
+          let price = Number(products[a].salePrice)
 
-          let num = parseInt(goodsinfo[a].num) //防止num为字符 *1或parseInt Number
+          let num = parseInt(products[a].buyCount) //防止num为字符 *1或parseInt Number
 
           allprices += price * num
 
@@ -227,8 +165,10 @@ Page({
     }
     if (storenum == allselectednum) {
       allselected = true
+
     } else {
       allselected = false
+
     }
     this.setData({
       allselected: allselected
@@ -243,15 +183,31 @@ Page({
     var cartsdata = this.data.cartsdata //购物车数据
     if (allselected) {
       allselected = false
+      this.setData({
+        isdetel: true
+      })
+      ids = [];
     } else {
       allselected = true
+      this.setData({
+        isdetel: false
+      })
+      for (var i = 0; i < cartsdata.length; i++) {
+
+        var products = cartsdata[i].products
+        for (var a = 0; a < products.length; a++) {
+          ids.push(products[a].id)
+        }
+      }
+
     }
     //选择
     for (var i = 0; i < cartsdata.length; i++) {
       cartsdata[i].selected = allselected
-      var goodsinfo = cartsdata[i].goodsinfo
-      for (var a = 0; a < goodsinfo.length; a++) {
-        goodsinfo[a].selected = allselected
+      var products = cartsdata[i].products
+      for (var a = 0; a < products.length; a++) {
+        products[a].selected = allselected
+
       }
     }
     this.setData({
@@ -259,7 +215,7 @@ Page({
       allselected: allselected
     })
     this.getallprices();
-
+    console.log(ids)
   },
 
   // 店铺的选中
@@ -267,48 +223,85 @@ Page({
   storeselected: function (e) {
     var cartsdata = this.data.cartsdata //购物车数据
     let index = e.currentTarget.dataset.index //当前店铺下标
-    var thisstoredata = cartsdata[index].goodsinfo //当前店铺商品数据
+    var thisstoredata = cartsdata[index].products //当前店铺商品数据
     //改变当前店铺状态
     if (cartsdata[index].selected) {
       cartsdata[index].selected = false
+
       //改变当前店铺所有商品状态
       for (var i in thisstoredata) {
-        cartsdata[index].goodsinfo[i].selected = false
+        let dete = this.contains(ids,thisstoredata[i].id)
+        ids.splice(dete,1)
+        cartsdata[index].products[i].selected = false
       }
     } else {
       cartsdata[index].selected = true
+
       //改变当前店铺所有商品状态
       for (var i in thisstoredata) {
-      cartsdata[index].goodsinfo[i].selected = true
+        cartsdata[index].products[i].selected = true
+        let de = this.contains(ids, thisstoredata[i].id)
+        console.log(de)
+        console.log(de == false)
+        if ( de === false){
+          ids.push(thisstoredata[i].id)
+        }
+
       }
     }
-
+    //选择删除的商品是否为空
+    if (ids.length == 0) {
+      this.setData({
+        isdetel: true
+      })
+    } else {
+      this.setData({
+        isdetel: false
+      })
+    }
+    console.log(ids)
     this.setData({
       cartsdata: cartsdata //店铺下商品的数量
     })
     this.getallprices();
     this.allallprices();
   },
-
+  contains(a, obj) {
+    var i = a.length;
+    while (i--) {
+      if (a[i] === obj) {
+        return i;
+      }
+     }
+     return false;
+  },
+  editor(){
+    this.setData({
+      detel:!this.data.detel
+    })
+  },
   // 商品的选中
 
   goodsselected: function (e) {
     var cartsdata = this.data.cartsdata //购物车数据
     let index = e.currentTarget.dataset.index //当前商品所在店铺中的下标
     let idx = e.currentTarget.dataset.selectIndex //当前店铺下标
-    let cai = cartsdata[idx].goodsinfo; //当前商品的店铺data.goodsinfo
+    let cai = cartsdata[idx].products; //当前商品的店铺data.goodsinfo
     let curt = cai[index]; //当前商品数组
     if (curt.selected) {
-      cartsdata[idx].goodsinfo[index].selected = false //点击后当前店铺下当前商品的状态
+      cartsdata[idx].products[index].selected = false //点击后当前店铺下当前商品的状态
       cartsdata[idx].selected = false
+      let dete = this.contains(ids, cartsdata[idx].products[index].id)
+      ids.splice(dete, 1)
     } else {
-      cartsdata[idx].goodsinfo[index].selected = true //点击后当前店铺下当前商品的状态
+      cartsdata[idx].products[index].selected = true //点击后当前店铺下当前商品的状态
+      ids.push(cartsdata[idx].products[index].id)
       //当店铺选中商品数量与店铺总数量相等时 改变店铺状态
-      var storegoodsleg = cartsdata[idx].goodsinfo.length
-      var goodsinfo = cartsdata[idx].goodsinfo
+      var storegoodsleg = cartsdata[idx].products.length
+      var products = cartsdata[idx].products
       var selectedleg = 0
-      for (var i in goodsinfo) {
-        if (goodsinfo[i].selected == true) {
+      for (var i in products) {
+        if (products[i].selected == true) {
           selectedleg++
         }
       }
@@ -316,7 +309,17 @@ Page({
         cartsdata[idx].selected = true
       }
     }
+     if(ids.length == 0){
+       this.setData({
+         isdetel:true
+       })
+     }else{
+       this.setData({
+         isdetel: false
+       })
+     }
 
+    console.log(ids)
     // 更新
 
     this.setData({
@@ -329,29 +332,51 @@ Page({
   // 点击+号，num加1，点击-号，如果num > 1，则减1
 
   addCount: function (e) {
-
+    let that = this;
+    console.log(e)
     var cartsdata = this.data.cartsdata //购物车数据
 
     let index = e.currentTarget.dataset.index //当前商品所在店铺中的下标
 
     let idx = e.currentTarget.dataset.selectIndex //当前店铺下标
 
-    let cai = cartsdata[idx].goodsinfo; //当前商品的店铺data.goodsinfo
+    let cai = cartsdata[idx].products; //当前商品的店铺data.goodsinfo
 
     let curt = cai[index]; //当前商品数组
 
-    var num = curt.num; //当前商品的数量
+    var num = curt.buyCount; //当前商品的数量
 
     num++;
+    console.log(num)
+    //  cartsdata[idx].products[index].buyCount = num //点击后当前店铺下当前商品的数量
 
-    cartsdata[idx].goodsinfo[index].num = num //点击后当前店铺下当前商品的数量
+    // this.setData({
 
-    this.setData({
+    //   cartsdata: cartsdata //店铺下商品的数量
 
-      cartsdata: cartsdata //店铺下商品的数量
-
+    // })
+    let data = {
+      shopProductId: cartsdata[idx].products[index].id,
+      buyCount: num
+    }
+    app.res.req('app-web/shopcart/editbuycount', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getDateil();
+        //console.log(that.data.cartsdata)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
-
     //计算总价格
 
     this.getallprices();
@@ -366,11 +391,11 @@ Page({
 
     let idx = e.currentTarget.dataset.selectIndex //当前店铺下标
 
-    let cai = cartsdata[idx].goodsinfo; //当前商品的店铺data.goodsinfo
+    let cai = cartsdata[idx].products; //当前商品的店铺data.goodsinfo
 
     let curt = cai[index]; //当前商品数组
 
-    var num = curt.num; //当前商品的数量
+    var num = curt.buyCount; //当前商品的数量
 
     if (num <= 1) {
 
@@ -380,51 +405,118 @@ Page({
 
     num--;
 
-    cartsdata[idx].goodsinfo[index].num = num //点击后当前店铺下当前商品的数量
+    cartsdata[idx].products[index].buyCount = num //点击后当前店铺下当前商品的数量
 
-    this.setData({
+    // this.setData({
 
-      cartsdata: cartsdata //店铺下商品的数量
+    //   cartsdata: cartsdata //店铺下商品的数量
 
+    // })
+    let data = {
+      shopProductId: cartsdata[idx].products[index].id,
+      buyCount: num
+    }
+    app.res.req('app-web/shopcart/editbuycount', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getDateil();
+        //console.log(that.data.cartsdata)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
-
     this.getallprices();
 
   },
-  getDateil(){
+  pay(){
+    let that = this;
+    if(ids.length == 0){
+
+    }else{
+      wx.navigateTo({
+        url: '../sure_orders/sure_orders?ids=' + ids,
+      })
+
+      let data = {
+        shopProductIds: ids
+      }
+
+     
+    }
+
+  },
+  //删除商品
+  delete(){
+    let that = this;
+    let data ={
+      shopProductIds:ids
+    }
+    app.res.req('app-web/shopcart/delete', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        ids = []
+        that.setData({
+          allnum: 0,
+          allprices: 0.00,
+        })
+       that.getDateil();
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  getDateil() {
     let that = this;
     let data = {
 
     }
     app.res.req('app-web/shopcart/list', data, (res) => {
       console.log(res.data)
-       if(res.status == 1000){
-            for(var i in res.data){
-                res.data[i].selected = false
-                for (var j in res.data[i].products){
-                  res.data[i].products.selected = false
-                }
-            }
-            that.setData({
-              cartsdata:res.data,
+      if (res.status == 1000) {
+        for (var i in res.data) {
+          res.data[i].selected = false
+          for (var j in res.data[i].products[i]) {
+            res.data[i].products[i].selected = false
+          }
+        }
+        that.setData({
+          cartsdata: res.data,
 
-            })
-
-       }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
-         console.log(1)
-           wx.redirectTo({
-             url: '../login/login',
-           })
-       } else {
-         console.log(111)
-         wx.showToast({
-           title: res.msg,
-           icon: 'none'
-         })
-       }
+        })
+        console.log(that.data.cartsdata)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
 
-  }
+  },
 
 })
 

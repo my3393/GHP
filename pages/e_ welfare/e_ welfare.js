@@ -1,6 +1,9 @@
 // pages/e_ welfare/e_ welfare.js
 import Canvas from '../../utils/tcanvas.js';
 const app = getApp();
+let currentPage = 1;
+let status = 0;
+let list = [];
 Page({
   ...Canvas.options,
   /**
@@ -9,9 +12,9 @@ Page({
   data: {
     tag:[
       {name:'全部',id:"0"},
-      {name:'筹集中',id:"0"},
-      {name:'带筹集',id:"0"},
-      {name:'已完成',id:"0"},
+      {name:'筹集中',id:"1"},
+      {name:'带筹集',id:"2"},
+      {name:'已完成',id:"3"},
     ],
     tar:'0',
     photos:[
@@ -29,6 +32,7 @@ Page({
    */
   onLoad: function (options) {
     this.getDateil();
+    this.getList();
     this.draw('runCanvas',this.data.shao,1000);
   },
 
@@ -74,10 +78,18 @@ Page({
 
   },
 
-
+  //查看详情
+  detail(e){
+    wx.navigateTo({
+      url: '../welfare_det/welfare_det?id=' + e.currentTarget.id,
+    })
+  },
   tag(e){
     console.log(e)
     let that = this;
+    status = e.currentTarget.dataset.idx;
+    currentPage = 1;
+
     that.setData({
       tar:e.currentTarget.dataset.idx
     })
@@ -88,14 +100,16 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/home/banner', data, (res) => {
+    app.res.req('app-web/project/sjgamount', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
+         let num = res.data.withdrawalTotalAmount / res.data.shareTotalAmount
+          console.log(num)
             that.setData({
-              detail:res.data,
-
+              meney:res.data,
+              num: num.toFixed(2)
             })
-
+           console.log(that.data.num)
        }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
          console.log(1)
            wx.redirectTo({
@@ -110,5 +124,39 @@ Page({
        }
     })
 
+  },
+  //项目列表
+  getList(){
+    let that = this;
+    let data = {
+      status:status,
+      currentPage: currentPage
+    }
+    app.res.req('app-web/project/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+         for(var i in res.data){
+           let num = (res.data[i].raiseAmount / res.data[i].targetAmount ) * 100
+           res.data[i].num = num.toFixed(2)
+         }
+         list.push(...res.data)
+        that.setData({
+          list: list,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   }
 })

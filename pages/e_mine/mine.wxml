@@ -106,7 +106,7 @@
     <view class="m-h1">我的善家</view>
    
     <view class="dind">
-        <view class="din-1">
+        <view class="din-1" bindtap="wallet">
             <view class="din-img">
                 <image src="../../images/d-fk.png" />
                
@@ -125,7 +125,7 @@
                 <image src="../../images/jx.png" />
                 
             </view>
-            <view>家乡公益</view>
+            <view>资助申请</view>
         </view>
         <view class="din-1">
             <view class="din-img">

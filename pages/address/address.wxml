@@ -5,13 +5,13 @@
 <!-- 地址为空 -->
 <view class="kong" wx:if='{{detail.length == 0}}'>
     <view class="kong_img">
-        <image src="../../images/tui.jpg" />
+        <image src="../../images/address.png" />
     </view>
     <view >您暂时还未添加收货地址</view>
 </view>
 
 <view wx:else>
-   <view class="list" wx:for="{{detail}}" wx:key="{{item.id}}" data-id="{{item.id}}">
+   <view class="list" wx:for="{{detail}}" wx:key="{{item.id}}"wx:for-index="idx" data-index='{{idx}}' bindtap='choose' id='{{item.id}}'>
        <view class="list_name">
            {{item.consigneeName}} <text > {{item.consigneePhone}}</text>
        </view>
@@ -20,7 +20,7 @@
        </view>
        <view class="list_bott">
            <view class="switch"  >
-               <switch color="#f12200" checked='{{item.checked}}' bindchange="checked" data-id="{{item.id}}" />
+               <switch color="#f12200" checked='{{item.checked}}' catchtap="checked" data-id="{{item.id}}" />
            </view>
            <view class="bott_r">
                <view >编辑</view>

@@ -14,7 +14,7 @@ export default{
       that.data.ctx2.setLineCap("butt");
       that.data.ctx2.stroke();
       that.data.ctx2.beginPath();
-      that.data.ctx2.setFontSize(20); //注意不要加引号
+      that.data.ctx2.setFontSize(18); //注意不要加引号
       that.data.ctx2.setFillStyle("#ff5000");
       that.data.ctx2.setTextAlign("center");
       that.data.ctx2.setTextBaseline("middle");

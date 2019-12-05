@@ -40,7 +40,9 @@
     "pages/person_name/person_name",
     "pages/store_search/store_search",
     "pages/binding_hometown/binding_hometown",
-    "pages/shoping/shoping"
+    "pages/shoping/shoping",
+    "pages/sure_orders/sure_orders",
+    "pages/apply_fund/apply_fund"
   ],
   "tabBar": {
     "color": "#808080",

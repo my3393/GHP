@@ -8,6 +8,8 @@ var selectIndexArray = []; //选择属性名字的数组
 var selectAttrid = []; //选择的属性id
 var a = [];
 var ds = false;
+let user;
+let sex = 0;//判断是不是从立即购买打开的规格
 Page({
   data: {
 
@@ -20,7 +22,8 @@ Page({
     issrcoll: '1',
     loading: false,
     num: 1,
-    current: 0
+    current: 0,
+    goodId:0
   },
 
   onLoad: function (options) {
@@ -36,6 +39,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    //获取id距离窗口高度
     var query = wx.createSelectorQuery();
     //选择id
     var that = this;
@@ -51,6 +55,17 @@ Page({
       top2 = rect.top
 
     }).exec();
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        
+      
+          user= res.data
+        
+      //  /  console.log(bcode)
+      },
+    })
   },
   //加入购物车
   cart() {
@@ -85,7 +100,8 @@ Page({
   },
   //显示隐藏购物车
   showgg() {
-    let that =this
+    let that =this;
+    sex = 0;
      if(this.data.detail.isSpecificaton == 1){
       this.setData({
         ismask: !this.data.ismask,
@@ -226,37 +242,44 @@ Page({
     let that = this;
 
     console.log(selectIndexArray.length)
-  
-    if (selectIndexArray.length === that.data.spec.length) {
-      if (ds == true) {
-        wx.navigateTo({
-        url: '../sure_order/sure_order?id=' + id + '&num=' +that.data.num
-          + '&selectIndexArray=' + selectIndexArray
-          + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
-        })
+    if(user.id == null){
+      wx.navigateTo({
+        url: '../login/login?id=' + id,
+      })
+    }else{
+      if (selectIndexArray.length === that.data.spec.length) {
+        if (ds == true) {
+          wx.navigateTo({
+            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num
+              + '&selectIndexArray=' + selectIndexArray
+              + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+          })
+        } else {
+          wx.showToast({
+            title: '该商品没有库存',
+            icon: 'none'
+          })
+          return false;
+        }
       } else {
         wx.showToast({
-          title: '该商品没有库存',
+          title: '请选择商品规格',
           icon: 'none'
+        })
+        sex = 1
+        that.setData({
+          isgug: !that.data.isgug,
+          ismask: !that.data.ismask
         })
         return false;
       }
-    } else {
-      wx.showToast({
-        title: '请选择商品规格',
-        icon: 'none'
-      })
-
       that.setData({
-        isgug: !that.data.isgug,
-        ismask:!that.data.ismask
+        loading: !that.data.loading
       })
-      return false;
     }
-    that.setData({
-      loading: !that.data.loading
-    })
+    
   },
+ 
   //确定
   confirm() {
     let that =this
@@ -267,7 +290,16 @@ Page({
           ismask: !this.data.ismask,
           isgug: !this.data.isgug
         })
-        that.cart();
+        if(sex == 1){
+          wx.navigateTo({
+            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num
+              + '&selectIndexArray=' + selectIndexArray
+              + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+          })
+        }else{
+          that.cart();
+        }
+       
 
       } else {
         wx.showToast({
@@ -324,6 +356,74 @@ Page({
       }
     })
   },
+  //进店
+  store(e){
+     wx.navigateTo({
+       url: '../store_detail/store_detail?id=' + e.currentTarget.id,
+     })
+  },
+  //店铺详情
+  getStore(){
+    let that = this;
+    let data = {
+      storeId: that.data.detail.storeId
+    }
+
+    app.res.req("app-web/store/detail", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+         that.setData({
+           store:res.data
+         })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //店铺推荐
+  getCommed() {
+    let that = this;
+    let data = {
+      storeId: that.data.detail.storeId
+    }
+
+    app.res.req("app-web/store/recommendproduct", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          store_recommended: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   getDetail() {
     let that = this;
     let data = {
@@ -341,7 +441,8 @@ Page({
           price: res.data.lowestPrice,
           title_img: res.data.productDefaultImgOss
         })
-
+        that.getStore();
+        that.getCommed();
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',

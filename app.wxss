@@ -251,3 +251,31 @@ white-space: nowrap;
 .yan{
   color: #f12200;
 }
+
+/* 缺省页 */
+.kong{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+   color: #666;
+  font-size: 24rpx;
+}
+.kong_img{
+  width: 295rpx;
+  height: 250rpx;
+  text-align: center;
+ 
+}
+.kong_img image{
+  width: 100%;
+  height: 100%;
+}
+.kong>view:nth-child(2){
+  margin-top: 40rpx;
+
+}
+.option{
+  opacity: 0.3;
+}

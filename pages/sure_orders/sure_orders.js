@@ -1,6 +1,6 @@
 // pages/sure_order/sure_order.js
 const app = getApp();
-let id;
+let ids = [];
 let user;
 let setTime = null;
 Page({
@@ -21,11 +21,10 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.getDefaultaddress();
-    id = options.id;
-    this.setData({
-      buyNum: options.num,
-      goodId: options.goodId
-    })
+    let idn = options.ids
+
+    ids = idn.split(',')
+    console.log(ids)
     this.getDetail();
   },
 
@@ -53,8 +52,10 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
+      that.setData({
+        user : res.data
+      })
 
-        user = res.data
 
       },
     })
@@ -145,19 +146,16 @@ Page({
   getDetail() {
     let that = this;
     let data = {
-      productId: id
+      shopProductIds: ids
     }
 
-    app.res.req("app-web/product/detail", data, (res) => {
+    app.res.req("app-web/shopcart/placeorder", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.getSku();
-
         that.setData({
-          detail: res.data,
-          spec: res.data.specificationItems,
-          price: res.data.lowestPrice,
-          title_img: res.data.productDefaultImgOss
+          detail: res.data.carts,
+          Price:res.data,
+          member_p: res.data.payPrice - res.data.memberPayPrice
         })
 
       } else if (res.status == 1004 || res.status == 1005) {
@@ -280,9 +278,8 @@ Page({
       return false
     }
     let data = {
-      productId: id,
-      skuId: that.data.goodId,
-      buyCount: that.data.buyNum,
+      productId: ids,
+      
       addressId: that.data.addressId,
       leaveMessage: that.data.inpu,
       terminal: '小程序'
@@ -294,9 +291,9 @@ Page({
         setTime = setInterval(function () {
           that.pays();
         }, 1000)
-        setTimeout(function(){
+        setTimeout(function () {
           clearInterval(setTime)
-        },8000)
+        }, 8000)
       } else {
 
         wx.showToast({
@@ -308,7 +305,7 @@ Page({
 
   },
   //调取支付
-  pays(){
+  pays() {
     let that = this;
     let data = {
 
@@ -324,7 +321,7 @@ Page({
           signType: 'MD5',
           paySign: res.data.sign.paySign,
           success(res) {
-            
+
             wx.showToast({
               title: '支付成功',
               icon: 'none',
@@ -343,7 +340,7 @@ Page({
           }
         })
 
-      //   interval = null;
+        //   interval = null;
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -356,6 +353,7 @@ Page({
         })
       }
     })
-  }
+  },
+
 
 })

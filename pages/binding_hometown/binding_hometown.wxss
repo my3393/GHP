@@ -1,2 +1,19 @@
 /* pages/binding_hometown/binding_hometown.wxss */
 @import '../add_address/add_address';
+.img{
+  width: 100%;
+}
+.infor{
+  margin-top: 40rpx;
+}
+.submit{
+  margin-top: 30rpx;
+  width: calc(100% - 80rpx);
+  margin-left: 40rpx;
+  height: 80rpx;
+  color: #fff;
+  line-height: 80rpx;
+  text-align: center;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  border-radius: 40rpx;
+}

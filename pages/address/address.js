@@ -1,5 +1,6 @@
 // pages/address/address.js
 const app = getApp();
+let sex;
 Page({
 
   /**
@@ -13,6 +14,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.sex) {
+      sex = options.sex
+    }
      this.getDateil();
   },
 
@@ -84,11 +88,40 @@ Page({
       }
     })
   },
-  //删除地址
-  detel(e){
+  //选择地址
+  choose(e){
     let that = this;
     let data = {
+      id: e.currentTarget.id
+    }
+    app.res.req('app-web/useraddress/addressdetail', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'address',
+          data: res.data,
+        })
+        if (sex) {
+          wx.navigateBack({
+            delta: 1,
+          })
+        }
 
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //删除地址
+  detel(e){
+    console.log(e)
+    let that = this;
+    let data = {
+        id:e.currentTarget.dataset.id
     }
     app.res.req('app-web/useraddress/delete', data, (res) => {
       console.log(res.data)
@@ -108,9 +141,9 @@ Page({
   checked(e) {
     let that = this;
     let data = {
-      id:e.curr
+      id:e.currentTarget.dataset.id
     }
-    app.res.req('app-web/useraddress/addressdetail', data, (res) => {
+    app.res.req('app-web/useraddress/setdefaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.getDateil();

@@ -1,15 +1,16 @@
 <!--pages/binding_hometown/binding_hometown.wxml-->
- <view class='infor' bindtap="diz">
-      <view class='inform'>所在地区</view>
-      <view class='inforin '>
-        <input disabled='true' type='text' value='{{name}}' placeholder='请选择所居住的地址' bindtap='showlabel'></input>
-      </view>
-      <view class='enter'>
-        <image src='../../images/enter.png'></image>
-        
-      </view>
-    </view>
+<image src="{{img}}" class="img"></image>
+<view class='infor' bindtap="diz">
+  <view class='inform'>所在地区</view>
+  <view class='inforin '>
+    <input disabled='true' type='text' value='{{name}}' placeholder='请选择所居住的地址' bindtap='showlabel'></input>
+  </view>
+  <view class='enter'>
+    <image src='../../images/enter.png'></image>
 
+  </view>
+</view>
+ <view class="submit">确定绑定</view>
 
 <view class="adres" hidden="{{address}}">
   <view class="adres_h1">
@@ -80,4 +81,4 @@
 </view>
 
 
-  <view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>

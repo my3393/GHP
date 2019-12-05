@@ -12,12 +12,7 @@ Page({
 
     tar:'',
     isBang:true,
-    photos: [
-      "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
-      "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
-      "https://graph.baidu.com/resource/116b9dee63af0f77fcb8f01572947716.jpg",
-      "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
-    ],
+    
     currentTab: 0,  //对应样式变化
     scrollTop: 0,  //用作跳转后右侧视图回到顶部
     screenArray: [], //左侧导航栏内容
