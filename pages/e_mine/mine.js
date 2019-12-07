@@ -22,37 +22,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    if (app.globalData && app.globalData.statusBarHeight && app.globalData.titleBarHeight) {
-      this.setData({
-        statusBarHeight: app.globalData.statusBarHeight,
-        titleBarHeight: app.globalData.titleBarHeight
-      });
-    } else {
-      let that = this
-      wx.getSystemInfo({
-        success: function (res) {
-          if (!app.globalData) {
-            app.globalData = {}
-          }
-          if (res.model.indexOf('iPhone') !== -1) {
-            app.globalData.titleBarHeight = 44
-          } else {
-            app.globalData.titleBarHeight = 48
-          }
-          app.globalData.statusBarHeight = res.statusBarHeight
-          that.setData({
-            statusBarHeight: app.globalData.statusBarHeight,
-            titleBarHeight: app.globalData.titleBarHeight
-          });
-        },
-        failure() {
-          that.setData({
-            statusBarHeight: 0,
-            titleBarHeight: 0
-          });
-        }
-      })
-    }
+   
   },
 
   /**
@@ -89,11 +59,28 @@ Page({
   onReachBottom: function () {
 
   },
-
+  //资助申请
+  mine_fund(){
+    wx.navigateTo({
+      url: '../mine_fund/mine_fund',
+    })
+  },
+  //联系客服
+  phone(){
+    wx.makePhoneCall({
+      phoneNumber: '18818553353',
+    })
+  },
   //我的钱包
   wallet(){
      wx.navigateTo({
        url: '../mine_wallet/mine_wallet',
+     })
+  },
+  //商家入驻
+  store_refund(){
+     wx.navigateTo({
+       url: '../store_refund/store_refund',
      })
   },
   //收货地址

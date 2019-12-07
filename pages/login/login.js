@@ -148,20 +148,23 @@ Page({
                                   key: 'token',
                                   data: res.data.data.token,
                                 })
-
+                                wx.setStorage({
+                                  key: 'sessionkey',
+                                  data: res.data.data.sessionkey,
+                                })
                                 wx.setStorage({
                                   key: 'userinfo',
                                   data: res.data.data,
                                 })
                                 if (res.data.data.phone == null || res.data.data.phone == '') {
                                   console.log('未绑定手机号')
-                                  // wx.redirectTo({
-                                  //   url: '../bindphone/bindphone',
-                                  // })
+                                  wx.redirectTo({
+                                    url: '../bindphone/login',
+                                  })
                                  
-                                    wx.redirectTo({
-                                      url: '../good_detail/good_detail?id=' + that.data.detail_id
-                                    })
+                                    // wx.redirectTo({
+                                    //   url: '../good_detail/good_detail?id=' + that.data.detail_id
+                                    // })
                                   
                                 } else {
                                   console.log(11)

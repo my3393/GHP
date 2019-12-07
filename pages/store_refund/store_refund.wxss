@@ -3,16 +3,32 @@
 page{
   background: #f9f9f9;
   font-size: 24rpx;
+  --color-caption: #fff;
+  --color-default: #000;
+  --color-primary: #f12200;
+  --color-warn: #ff6f61;
+  --color-info: #b3b7bf;
+  --color-link: #3989ff;
+  --color-gray: #888;
+  --color-background: #fafafa;
+  --color-disabled: #dfdfdf;
+  --color-red: #ff2a2a;
 }
 .nop{
   height: 60rpx;
   line-height: 60rpx;
   color: #999;
   margin-left: 20rpx;
+  margin-top: 2rpx;
+
 }
 .infor_r input{
   text-align: right;
   width: 540rpx;
+}
+.pick{
+  display: inline-block;
+  vertical-align: middle;
 }
 .infor_img{
   width: 70rpx;
@@ -52,6 +68,7 @@ page{
    width: 140rpx;
   height: 140rpx;
   margin-bottom: 20rpx;
+  float: left;
 }
 .tu_img image{
   width: 100%;
@@ -74,6 +91,7 @@ page{
 .texta{
   width: 100%;
   height: 200rpx;
+  color: #333;
 }
 .agree{
   margin: 40rpx 20rpx;
@@ -119,11 +137,12 @@ page{
 /*  */
 .audit{
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%,-50%);
   text-align: center;
   color: #999;
+  width: 700rpx;
 }
 .kong_img{
   width: 295rpx;
@@ -137,7 +156,7 @@ page{
 }
 .pc{
   margin: 20rpx 0;
-  width:710rpx;
+  width:calc(100% - 40rpx);
   margin-left: 20rpx;
   background: #f3f3f3;
   text-align: left;
@@ -162,4 +181,40 @@ page{
 }
 .bott{
   margin-top: 200rpx;
+}
+
+/* 截图 */
+.container {
+  border-top: 1px solid #f2f2f2;
+}
+
+.take {
+  padding-left: 30rpx;
+  line-height: 100rpx;
+  height: 100rpx;
+  background-color: #fff;
+}
+
+imgcut {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 90rpx;
+  width: 100%;
+}
+
+.footer {
+  line-height: 90rpx;
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 36rpx;
+}
+.footer view{
+  color: var(--color-primary);
+  padding: 0 20rpx;
+  box-sizing: border-box;
 }

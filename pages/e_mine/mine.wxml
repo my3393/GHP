@@ -8,7 +8,7 @@
     </view>
 </view>
 <view class="res"></view>
-<view class="top"  hidden="{{!isshow}}">
+<view class="top"  >
     <view class="top-tx">
         <view class="tx">
             <image src="../../images/tx.png" />
@@ -120,7 +120,7 @@
             </view>
             <view>会员中心</view>
         </view>
-        <view class="din-1">
+        <view class="din-1" bindtap="mine_fund">
             <view class="din-img">
                 <image src="../../images/jx.png" />
                 
@@ -140,14 +140,14 @@
     <view class="m-h1">我的服务</view>
    
     <view class="dind">
-        <view class="din-1">
+        <view class="din-1" bindtap="store_refund">
             <view class="din-img">
                 <image src="../../images/sjrz.png" />
                
             </view>
             <view>商家入驻</view>
         </view>
-        <view class="din-1">
+        <view class="din-1" bindtap="phone">
             <view class="din-img">
                 <image src="../../images/gfkf.png" />
                  

@@ -1,0 +1,17 @@
+<!--plugin/imgcut/imgcut.wxml-->
+<view class="wrapper-box" capture-catch:touchstart="onMove" capture-catch:touchmove="onMove" capture-catch:touchend="onMove" capture-catch:touchcancel="onMove">
+  <view class="wrapper {{opacity?'opacity':''}}">
+    <view class="wrapper-top"></view>
+    <view class="wrapper-body">
+      <view class="wrapper-left"></view>
+      <view class="wrapper-transparent" style="height:{{height}}px;width:{{width}}px">
+        <view style="height:{{img_height}}px;width:{{img_width}}px;{{transform}}">
+          <image binderror="onimgerr" class="image" style="{{scaleform}}" src="{{src}}" bindload="onimgLoad"></image>
+        </view>
+      </view>
+      <view class="wrapper-right"></view>
+    </view>
+    <view class="wrapper-bottom"></view>
+  </view>
+</view>
+<canvas class="canvas" style="height:{{img_height*max_scale}}px;width:{{img_width*max_scale}}px" canvas-id="canvas"></canvas>

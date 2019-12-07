@@ -67,6 +67,10 @@ Page({
       },
     })
   },
+  //获取手机号
+  // getPhoneNumber(e){
+  //    console.log(e)
+  // },
   //加入购物车
   cart() {
 

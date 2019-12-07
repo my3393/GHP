@@ -1,0 +1,30 @@
+/* pages/mine_fund/mine_fund.wxss */
+@import "../e_ welfare/e_ welfare";
+.fund_bot{
+  display: flex;
+  justify-content: space-around;
+  margin: 30rpx 0;
+}
+.fund_tag{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content: space-around;
+  line-height: 80rpx;
+}
+.fund_active{
+  color: #f12200;
+  border-bottom: 4rpx solid #f12200;
+}
+.tix{
+  float: right;
+  width: 150rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  color: #fff;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  margin: 30rpx 0;
+  margin-right: 20rpx;
+ 
+}

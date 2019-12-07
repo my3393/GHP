@@ -67,7 +67,10 @@ Page({
   */
 
   onHide: function () {
-     ids = []
+     ids = [],
+     this.setData({
+       allselected: false,
+     })
   },
 
   /**
@@ -108,6 +111,13 @@ Page({
 
   onShareAppMessage: function () {
 
+  },
+  //进入店铺
+  store(e){
+    
+    wx.navigateTo({
+      url: '../store_detail/store_detail?id=' + e.currentTarget.id,
+    })
   },
 
   //计算总价格  所有选中商品的 （价格*数量）相加

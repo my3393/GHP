@@ -1,11 +1,17 @@
 // pages/store_detail/store_detail.js
-const App = getApp();
+const app = getApp();
+let id;
+let currentPage =1;
+let type= 0;
+let keyword = '';
+let productType = 0;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    ress:'',
     istag:true,
     code: '../../images/ma.png', //如果是服务器图片一定要先下载到本地
     imgSrc: '',
@@ -32,8 +38,11 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    id = options.id
+    this.getStore();
+    this.getCommed();
     this.setData({
-      navH: App.globalData.navHeight
+      navH: app.globalData.navHeight
     })
   },
 
@@ -85,7 +94,139 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //收藏店铺
+  collection(){
+    let that = this;
+    let data = {
+      productId: id
+    }
 
+    app.res.req("app-web/store/collection", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+       
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //返回上一页
+  navBack(){
+    wx.navigateBack({
+      data:1
+    })
+  },
+  //店铺详情
+  getStore() {
+    let that = this;
+    let data = {
+      storeId: id,
+      currentPage: currentPage,
+      type: type,
+      keyword: keyword,
+      productType: productType,
+    }
+
+    app.res.req("app-web/store/detail", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          store: res.data
+        })
+       that.getList();
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //商品列表
+ 
+  getList() {
+    let that = this;
+    let data = {
+      storeId: id
+    }
+
+    app.res.req("app-web/store/productlist", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          list: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //店铺推荐
+  getCommed() {
+    let that = this;
+    let data = {
+      storeId:id
+    }
+
+    app.res.req("app-web/store/recommendproduct", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          store_recommended: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //绘制海报
   huizi(){
     this.canvasPoster(this.data.code);
@@ -153,10 +294,10 @@ Page({
   },
   canvasWorkBreak(maxWidth, fontSize, text) {
     const maxLength = maxWidth / fontSize
-  const textLength = text.length
-  let textRowArr = []
-  let tmp = 0
-  while(1) {
+    const textLength = text.length
+    let textRowArr = []
+    let tmp = 0
+    while(1) {
       textRowArr.push(text.substr(tmp, maxLength))
       tmp += maxLength
       if (tmp >= textLength) {
@@ -176,5 +317,21 @@ Page({
      })
     }
     
-  }
+  },
+  onPageScroll: function (e) {
+    console.log(e.scrollTop)
+    let that = this
+    if (e.scrollTop > 200) {
+
+      that.setData({
+        ress: '#fff',
+      })
+    } else {
+
+      that.setData({
+        ress:''
+      })
+    }
+   
+  },
 })

@@ -1,0 +1,71 @@
+/* pages/login/login.wxss */
+.header {
+    margin: 90rpx 0 90rpx 50rpx;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    width: 650rpx;
+    height: 300rpx;
+    line-height: 450rpx;
+}
+ 
+.header image {
+    width: 200rpx;
+    height: 200rpx;
+}
+ 
+.content {
+    margin-left: 50rpx;
+    margin-bottom: 90rpx;
+}
+ 
+.content text {
+    display: block;
+    color: #9d9d9d;
+    margin-top: 40rpx;
+}
+ 
+.bottom {
+    border-radius: 80rpx;
+    margin: 70rpx 50rpx;
+    font-size: 35rpx;
+}
+.login{
+  width: 100%;
+  text-align: center;
+  margin: 150rpx 0;
+}
+.logos{
+    display: inline-block;
+    width: 150rpx;
+    height: 150rpx;
+}
+.titles{
+    width: 100%;
+    font-size: 30rpx;
+    color: #000;
+    padding: 21rpx 44rpx 26rpx 44rpx;
+    box-sizing: border-box;
+    letter-spacing: 2rpx;
+}
+.stipss{
+    font-size: 24rpx;
+    color: #808080;
+    padding: 0rpx 45rpx 96rpx 45rpx;
+    box-sizing: border-box;
+    letter-spacing: 2rpx;
+}
+button{
+    width: calc(100% - 90rpx) !important;
+    height: 80rpx !important;
+    margin-left: 45rpx;
+    line-height: 80rpx!important;
+    border-radius: 78rpx;
+    color: white;
+    background-color: #06C15F;
+    padding: 0;
+    font-size: 30rpx;
+}
+/* button:active{
+    background-color: #fe5ba9;
+    color: white;
+} */

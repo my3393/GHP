@@ -42,7 +42,8 @@
     "pages/binding_hometown/binding_hometown",
     "pages/shoping/shoping",
     "pages/sure_orders/sure_orders",
-    "pages/apply_fund/apply_fund"
+    "pages/apply_fund/apply_fund",
+    "pages/mine_fund/mine_fund"
   ],
   "tabBar": {
     "color": "#808080",

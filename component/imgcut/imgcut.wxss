@@ -1,0 +1,95 @@
+/* plugin/imgcut/imgcut.wxss */
+
+.wrapper-box {
+  position: absolute;
+  top: 0%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper .wrapper-body {
+  display: flex;
+}
+
+.wrapper .wrapper-transparent {
+  height: 500rpx;
+  width: 300rpx;
+}
+
+.wrapper .wrapper-transparent .image {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.wrapper-top, .wrapper-bottom, .wrapper-left, .wrapper-right {
+  flex-grow: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+  transition: background-color 0.3s;
+}
+
+.wrapper-left, .wrapper-right {
+  z-index: 2;
+}
+
+.opacity .wrapper-top, .opacity .wrapper-bottom, .opacity .wrapper-left,
+.opacity .wrapper-right {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.wrapper-left::before, .wrapper-left::after, .wrapper-right::before,
+.wrapper-right::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 15px;
+  height: 15px;
+  z-index: 3;
+  border: 3px solid var(--color-primary);
+}
+
+.wrapper-left::before {
+  right: -15px;
+  top: -3px;
+  border-width: 3px 0 0 3px;
+}
+
+.wrapper-left::after {
+  right: -15px;
+  bottom: -3px;
+  border-width: 0 0 3px 3px;
+}
+
+.wrapper-right::before {
+  left: -15px;
+  top: -3px;
+  border-width: 3px 3px 0 0;
+}
+
+.wrapper-right::after {
+  left: -15px;
+  bottom: -3px;
+  border-width: 0 3px 3px 0;
+}
+
+.canvas {
+  position: fixed;
+  background-color: #000;
+  top: -5500px;
+  left: -5000px;
+}

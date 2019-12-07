@@ -4,6 +4,10 @@ const app = getApp();
 let currentPage = 1;
 let status = 0;
 let list = [];
+let provinceId = '';
+let cityId = '';
+let areaId = '';
+let townId ='';
 Page({
   ...Canvas.options,
   /**
@@ -130,7 +134,12 @@ Page({
     let that = this;
     let data = {
       status:status,
-      currentPage: currentPage
+      currentPage: currentPage,
+      provinceId:provinceId,
+      cityId: cityId,
+      areaId: areaId,
+      townId: townId,
+    
     }
     app.res.req('app-web/project/list', data, (res) => {
       console.log(res.data)

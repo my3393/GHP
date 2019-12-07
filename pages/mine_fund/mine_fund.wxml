@@ -1,0 +1,63 @@
+<!--pages/mine_fund/mine_fund.wxml-->
+<view class="fund_tag">
+  <view wx:for="{{tag}}" wx:for-index="idx" data-idx='{{idx}}' class="  {{tar == idx ? 'fund_active' : ''}} " bind:tap="tag">
+    {{item.name}}
+  </view>
+</view>
+<view class="nav" wx:for='{{detail}}' wx:key='{{item.id}}' id="{{item.id}}" bind:tap="detail">
+  <view class="g-banner">
+    <image src="{{item.defaultImgOss}}" />
+  </view>
+  <view class="g-h1 dan">{{item.projectTitle}}</view>
+  <view class="g-h2">{{item.projectExplain}}</view>
+  <view class="jindu">
+    <progress class="progress" stroke-width="5" active percent="{{item.num}}" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
+  </view>
+  <view class="g-bott">
+    <view class="g-bo">
+      <view class='g-bott-j'>{{item.targetAmount}}</view>
+      <view class='g-boot-y'>目标金额/元</view>
+    </view>
+    <view class="g-bo">
+      <view class='g-bott-j'>{{item.raiseAmount}}</view>
+      <view class='g-boot-y'>已筹款/元</view>
+    </view>
+    <view class="g-bo">
+      <view class='g-bott-j'>{{item.voteNum}}</view>
+      <view class='g-boot-y'>项目票数</view>
+    </view>
+  </view>
+  <view class="fund_bot" wx:if='{{item.projectStatus == 0}}'>
+    <view>目标金额 : {{item.targetAmount}} 元 </view>
+    <view class="fund_right">
+      项目审核中
+    </view>
+
+  </view>
+  <view class="tix" wx:if='{{item.projectStatus == 1 && item.donationUseStatus == 0}}'>
+    申请提现
+  </view>
+  <view class="fund_right" wx:if='{{item.projectStatus == 1 && item.donationUseStatus == 1}}'>
+    提现审核中
+  </view>
+  <view class="fund_right" wx:if='{{item.projectStatus == 1 && item.donationUseStatus == 2}}'>
+    <view>
+      驳回原因：尼福认为将会
+    </view>
+    <view class="tix">
+      重新提交
+    </view>
+  </view>
+  <view class="fund_bot" wx:if='{{item.projectStatus == 2}}'>
+    <view>目标金额 : {{item.targetAmount}} 元 </view>
+    <view class="fund_right">
+      项目审核中
+    </view>
+    <view wx:if='{{item.projectStatus == 2}}'>审核驳回</view>
+  </view>
+  <view wx:if='{{item.projectStatus == 2}}'>驳回理由：您的资料存在作假嫌疑或证据不充足，平台无法确认真实性，请修改后重新提交。</view>
+
+   <!-- <view wx:if='{{item.projectStatus == 3}}'>审核驳回</view> -->
+ 
+
+</view>

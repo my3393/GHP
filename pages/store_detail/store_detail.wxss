@@ -61,16 +61,16 @@ page{
     }
     .top_img{
         width: 100%;
-        height: 370rpx;
+        height: 400rpx;
          background-size: cover;
     }
     .mask_t{
         position: absolute;
         top: 0;
         width: 100%;
-        height: 370rpx;
-        background: #000;
-        opacity: 0.2;
+        height: 400rpx;
+        background: rgba(0, 0, 0, 0.3);
+        
     }
     .store_img{
         width: 100rpx;
@@ -79,6 +79,8 @@ page{
         overflow: hidden;
         float: left;
         margin-right: 14rpx;
+        
+
     }
     .store_name{
         font-size: 28rpx;
@@ -94,6 +96,8 @@ page{
         box-sizing: border-box;
         color: #fff;
         font-size: 22rpx;
+        position: absolute;
+        z-index: 12;
     }
     .biao_img{
         width: 22rpx;
@@ -110,14 +114,16 @@ page{
        
     }
     .foc{
+       position: absolute;
+        z-index: 12;
         width: 110rpx;
         height: 46rpx;
-        float: right;
+        right: 30rpx;
         color: #fff;
         text-align: center;
         line-height: 46rpx;
         border-radius: 20rpx;
-        margin-right: 30rpx;
+       
         font-size: 22rpx;
         margin-top: 30rpx;
         background:linear-gradient(to right, #f12200, #ff4e17);

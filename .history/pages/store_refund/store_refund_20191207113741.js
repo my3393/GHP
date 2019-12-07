@@ -1,4 +1,5 @@
-// pages/add_address/add_address.js
+// pages/store_refund/store_refund.js
+var url;
 const app = getApp();
 let province = [];
 let city = [];
@@ -8,37 +9,39 @@ let province_id = '';
 let city_id = '';
 let area_id = '';
 let town_id = '';
-let sum = 1
+let ed
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      ismask:true,
-      show:false,
-      address:true,
-      prov: '',
-      city: '',
-      area: '',
-      town: '',
-      isprov: true,
-      iscity: false,
-      isqu: false,
-      isjie: false,
-      names:'',
-      phone:'',
-      minute:'',
-      town:'',
-      sum:1,
-      checked:true,
+    num:0,
+    isshow:true,
+    isg:true,
+    audit:1,
+    post1:'../../images/head.png',
+    name:'',
+    ismask: true,
+    address: true,
+    prov: '',
+    city: '',
+    area: '',
+    town: '',
+    isprov: true,
+    iscity: false,
+    isqu: false,
+    isjie: false,
+    zhao1:true,
+    zhao2:true,
+    zhao3:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     this.getType();
   },
 
   /**
@@ -86,45 +89,160 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  // onShareAppMessage: function () {
+  onShareAppMessage: function () {
 
-  // },
+  },
   //取消
-  detel(){
+  detel() {
     this.setData({
       address: true,
       ismask: true,
     })
   },
-  check(){
-    this.setData({
-        checked:!that.data.checked
-    })
-    if(this.data.checked == true){
-     
-       sum=1
-     
-    }else{
-      
-        sum= 0
-      
-    }
-  },
+  //店铺名称
   names(e){
+     this.setData({
+       name:e.detail.value
+     })
+  },
+  //宣言
+  xuan(e){
     this.setData({
-      names:e.detail.value
+      xuan:e.detail.value
     })
   },
-  //s手机号
-  phone(e){
-    this.setData({
-      phone: e.detail.value
+  //类型
+  type(e){
+     console.log(e)
+     this.setData({
+       typ: this.data.type[e.detail.value].classifyName,
+       typeId: this.data.type[e.detail.value].id,
+     })
+  },
+   getType(){
+     let that = this;
+     let data = {
+     }
+
+     app.res.req('app-web/home/classify', data, (res) => {
+       console.log(res.data)
+       if (res.status == 1000) {
+         that.setData({
+           type:res.data
+         })
+
+       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+         wx.redirectTo({
+           url: '../login/login',
+         })
+       } else {
+         wx.showToast({
+           title: res.msg,
+           icon: 'none'
+         })
+       }
+     })
+   },
+   //特产上传
+
+  //LOGO
+  chooseImage(e) {
+    var that = this;
+   // id = e.currentTarget.id,
+    wx.chooseImage({
+      count: 1,
+      success: (res) => {
+        this.setData({
+          src: res.tempFilePaths[0],
+          isshow: !that.data.isshow,
+        })
+      },
+    })
+
+  },
+  //裁剪
+  chooseimg() {
+    wx.chooseImage({
+      count: 1,
+      success: (res) => {
+        this.setData({
+          src: res.tempFilePaths[0]
+        })
+      },
     })
   },
-  //详细地址
-  minute(e){
+  cut() {
+    var that = this;
+    this.selectComponent('#imgcut').cut().then(r => {
+      // wx.previewImage({
+      //   urls: [r],
+      // })
+      wx.showLoading({
+        title: '上传中',
+        mask:true
+      })
+      url = r
+      that.setData({
+        isshow: !that.data.isshow,
+        ishidden: !that.data.ishidden
+      })
+      wx.uploadFile({
+        url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+        filePath: url,
+        name: 'file',
+        header: {
+          "Content-Type": "multipart/form-data",
+          'accept': 'application/json',
+          'token': wx.getStorageSync('token')
+        },
+        formData: {
+          'token': wx.getStorageSync('token')
+        },
+        dataType: 'json',
+        success(res) {
+          let datas = JSON.parse(res.data)
+          console.log(datas)
+         if(res.status == 1000){
+           wx.showToast({
+             title: '上传成功',
+             icon: 'none'
+           })
+
+           that.setData({
+             post1: datas.data.url,
+             post1_name: datas.data.fileName,
+             isshow: false
+           })
+         }else{
+           wx.showToast({
+             title: res.msg,
+             icon: 'none'
+           })
+         }
+
+        }
+
+      })
+
+    }).catch(e => {
+      wx.showModal({
+        title: '',
+        content: e.errMsg,
+        showCancel: false
+      })
+    })
+  },
+  //勾选
+  gx(){
+    let that = this;
+    that.setData({
+      isg:!that.data.isg
+    })
+  },
+  valueChange(e) {
+    console.log(e.detail.value.length)
     this.setData({
-      minute: e.detail.value
+      num: e.detail.value.length
     })
   },
   diz() {
@@ -133,88 +251,6 @@ Page({
       address: false,
       ismask: false,
     })
-  },
-  sub(){
-    var that = this;
-   
-    var phonetel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
-    if (that.data.names == '') {
-      wx.showToast({
-        title: '请输入收件人姓名',
-        icon: 'none',
-        duration: 1000,
-        mask: true
-      })
-      return false
-    } else if (that.data.phone == '') {
-      wx.showToast({
-        title: '请输入手机号',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    } else if (that.data.town == '') {
-      wx.showToast({
-        title: '请选择所在地区',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    } else if (that.data.minute == '') {
-      wx.showToast({
-        title: '请输入详细地址',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    } else if (that.data.phone.length != 11) {
-      wx.showToast({
-        title: '手机号长度有误！',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    }else  if (!phonetel.test(that.data.phone)) {
-      wx.showToast({
-        title: '手机号有误！',
-        icon: 'none',
-        duration: 1500
-      })
-      return false;
-    }else{
-    
-      let data = {
-          consigneeName:that.data.names,
-          consigneePhone: that.data.phone,
-          provinceId: province_id,
-          cityId: city_id,
-          areaId: area_id,
-          townId: town_id,
-          detailAddress: that.data.minute,
-          isDefault: sum
-      }
-      app.res.req('app-web/useraddress/add', data, (res) => {
-        console.log(res.data)
-        if (res.status == 1000) {
-          wx.showToast({
-            title: '添加成功',
-            icon: 'success',
-            duration: 1000
-          })
-          setTimeout(function () {
-            wx.navigateBack({
-              delta: 1,
-            })
-          }, 1000)
-        } else {
-          console.log(111)
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
-          })
-        }
-      })
-    }
   },
   x_prov() {
     let that = this;
@@ -479,7 +515,7 @@ Page({
     that.setData({ //给变量赋值
       ismask: true,
       tas4: e.currentTarget.dataset.index,
-      name: that.data.prov + '-' + that.data.city + '-' + that.data.area + '-' + e.currentTarget.dataset.name,
+      addres: that.data.prov + '-' + that.data.city + '-' + that.data.area + '-' + e.currentTarget.dataset.name,
       address: true,
       town: e.currentTarget.dataset.name
     })

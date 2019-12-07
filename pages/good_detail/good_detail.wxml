@@ -159,7 +159,7 @@
 <!-- 店铺 -->
 <view class="list_nav clearfix">
   <view class="store-img">
-    <image src="../../images/te.png" />
+    <image src="{{store.storeLogoOss}}" />
   </view>
   <view class="list-name">
     <view>{{store.storeName}}</view>
@@ -214,7 +214,7 @@
   <view class="foot_right">
     <button size="mini" class="joincart" bind:tap="showgg">加入购物车</button>
     <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button>
-    <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:else>立即购买</button>
+    <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:else >立即购买</button>
   </view>
 </view>
 

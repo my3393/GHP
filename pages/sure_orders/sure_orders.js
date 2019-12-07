@@ -12,7 +12,7 @@ Page({
     address: false,
     defalutaddres: [], //默认地址
     adress: [], //选择的地址
-    inpu: '',
+    inpu: '模拟额',
   },
 
   /**
@@ -144,31 +144,69 @@ Page({
   },
   //商品详情
   getDetail() {
+    console.log(ids)
     let that = this;
-    let data = {
-      shopProductIds: ids
-    }
 
-    app.res.req("app-web/shopcart/placeorder", data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-        that.setData({
-          detail: res.data.carts,
-          Price:res.data,
-          member_p: res.data.payPrice - res.data.memberPayPrice
-        })
+    let fordata = [];
+   
+    console.log(fordata.length)
+    // for(var i in ids){
+    //   let obj ={}
+    //   obj.shopProductIds = ids[i]
+    //   fordata.push(obj)
+    // }
+    // console.log(fordata)
+    // let data = fordata
+    wx.request({
+      url: "192.168.123.171:8080/appcomeptition/default/token.do",
+      data: {
+        shopProductIds:ids 
+      },
+      processData:false,
+      contentType:false,
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'token':'618702588586_c2c9b266c11659253b3071c62aa988bd'
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data.data)
+        if (res.data.status === 100) {
 
-      } else if (res.status == 1004 || res.status == 1005) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+        } else if (res.data.status === 103) {
+          wx.redirectTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+        }
       }
     })
+    // app.res.req("app-web/shopcart/placeorder", data, (res) => {
+    //   console.log(res.data)
+    //   if (res.status == 1000) {
+    //     that.setData({
+    //       detail: res.data.carts,
+    //       Price:res.data,
+    //       member_p: res.data.payPrice - res.data.memberPayPrice
+    //     })
+
+    //   } else if (res.status == 1004 || res.status == 1005) {
+    //     wx.redirectTo({
+    //       url: '../login/login',
+    //     })
+    //   } else {
+    //     wx.showToast({
+    //       title: res.msg,
+    //       icon: 'none'
+    //     })
+    //   }
+    // })
   },
   //获取默认地址
   getDefaultaddress() {
@@ -278,14 +316,14 @@ Page({
       return false
     }
     let data = {
-      productId: ids,
+      shopProductIds: ids,
       
       addressId: that.data.addressId,
-      leaveMessage: that.data.inpu,
-      terminal: '小程序'
+      leaveMessages: that.data.inpu,
+      terminal: 'xx'
 
     }
-    app.res.req('app-web/order/productsubmit', data, (res) => {
+    app.res.req('app-web/order/shopcartsubmit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         setTime = setInterval(function () {

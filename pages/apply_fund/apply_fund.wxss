@@ -1,2 +1,11 @@
 /* pages/apply_fund/apply_fund.wxss */
-@import '../store_refund/store_refund'
+@import '../store_refund/store_refund';
+.enters{
+  top: 4rpx;
+  position: absolute;
+  right: 24rpx;
+}
+.tu_img{
+  display: inline-block;
+  margin-right: 20rpx;
+}
