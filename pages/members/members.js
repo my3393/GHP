@@ -17,6 +17,7 @@ Page({
     animationData2: {},
     Img:'../../images/member_b.png',
     ismask:true,
+    isdelete:true,
   },
 
   /**

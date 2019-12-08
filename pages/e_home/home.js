@@ -38,39 +38,8 @@ Page({
         showSkeleton: false
       })
     }, 1000)
-    wx.request({
-      url: "http://192.168.123.171:8080/app-web/shopcart/placeorder",
-      data: {
-        shopProductIds: ['143','123'],
-        leaveMessages:[],
-        addressId:9,
-        terminal:'xx'
-      },
-      processData: false, // 告诉jQuery不要去处理发送的数据
-      
-      method: 'POST',
-      header: {
-       
-        'token': '618702588586_c2c9b266c11659253b3071c62aa988bd'
-      },
-      dataType: 'json',
-      success: function (res) {
-        console.log(res.data.data)
-        if (res.data.status === 100) {
-
-        } else if (res.data.status === 103) {
-          wx.redirectTo({
-            url: '/pages/login/login',
-          })
-
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        }
-      }
-    })
+    let ids = [130,151]
+    var schoolStr = JSON.stringify(ids);
   },
 
   /**

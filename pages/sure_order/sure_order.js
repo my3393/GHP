@@ -335,11 +335,10 @@ Page({
             })
           },
           fail(res) {
-            wx.showToast({
-              title: '支付失败',
-              icon: 'none',
-              duration: 1000
-            })
+             wx.redirectTo({
+               url: '../order_all/order_all',
+             })
+
           }
         })
 

@@ -1,178 +1,214 @@
 <!-- pages/order_detail/order_detail.wxml -->
 <view class='top'>
+  <view wx:if='{{detail.orderStatus == 0}}'>
     <view>
-        <view class="top_tu">
-            <image src="../../images/daojis.png" />
-        </view>
-        <view class="top_n">等待买家付款</view>
+      <view class="top_tu">
+        <image src="../../images/daojis.png" />
+      </view>
+      <view class="top_n">等待买家付款</view>
     </view>
-    <view class="top_tit">订单剩余支付时间23分56秒超时将自动关闭</view>
+    <view class="top_tit">订单剩余支付时间{{hours}} 时{{min}} 分将自动关闭</view>
+  </view>
+  <view wx:if='{{detail.orderStatus == 1}}'>
+    <view>
+      <view class="top_tu">
+        <image src="../../images/daojis.png" />
+      </view>
+      <view class="top_n">买家已付款</view>
+    </view>
+    <view class="top_tit">请耐心等待卖家在1天23分内为你发货</view>
+  </view>
+  <view wx:if='{{detail.orderStatus == 2}}'>
+    <view>
+      <view class="top_tu">
+        <image src="../../images/daojis.png" />
+      </view>
+      <view class="top_n">卖家已发货</view>
+    </view>
+    <view class="top_tit">还剩1天3时23分订单将自动确认收货</view>
+  </view>
+  <view wx:if='{{detail.orderStatus == 3}}'>
+    <view>
+      <view class="top_tu">
+        <image src="../../images/daojis.png" />
+      </view>
+      <view class="top_n">交易完成</view>
+    </view>
+
+  </view>
+  <view wx:if='{{detail.orderStatus == 4}}'>
+    <view>
+      <view class="top_tu">
+        <image src="../../images/daojis.png" />
+      </view>
+      <view class="top_n">交易关闭</view>
+    </view>
+
+  </view>
 </view>
 <view class="logistics">
-    <view class="chak">
-        <view>
-            <view class="logistics_img d_sh">
-                <image src="../../images/d-sh.png" />
-            </view>
-            <view class='logistics_n'>【广州市】 已到达广州分拨中心</view>
-        </view>
-        <view class="logistics_date">2019-10-18 16:45:41</view>
-        <view class="logistics_right">
-            <image src="../../images/right.png" />
-        </view>
-    </view>
+  <view wx:if='{{detail.orderStatus == 2 || detail.orderStatus == 3}}' class="chak">
     <view>
-        <view>
-            <view class="logistics_img">
-                <image src="../../images/weizi.png" />
-            </view>
-            <view class='logistics_n'>
-                杨先生
-                <text>18245917584</text>
-            </view>
-        </view>
-        <view class="logistics_diz">广东省深圳市宝安区顾淑芳金额uwi154894维尔康破你个人VR而过</view>
+      <view class="logistics_img d_sh">
+        <image src="../../images/d-sh.png" />
+      </view>
+      <view class='logistics_n'>【广州市】 已到达广州分拨中心</view>
     </view>
+    <view class="logistics_date">2019-10-18 16:45:41</view>
+    <view class="logistics_right">
+      <image src="../../images/right.png" />
+    </view>
+  </view>
+  <view>
+    <view>
+      <view class="logistics_img">
+        <image src="../../images/weizi.png" />
+      </view>
+      <view class='logistics_n'>
+        {{detail.consigneeName}}
+        <text>{{detail.consigneePhone}}</text>
+      </view>
+    </view>
+    <view class="logistics_diz">{{detail.provinceName}} {{detail.cityName}} {{detail.areaName}} {{detail.townName}} {{detail.detailAddress}}</view>
+  </view>
 </view>
 <view class="nav">
-    <view class="list">
-        <view class="nav_top">
-            <view class="sotre_img">
-                <image src="../../images/store.png" />
-            </view>
-            良品铺子
-            <view class="store_r">
-                <image src="../../images/right.png" />
-            </view>
-        </view>
-        <view class="good clearfix">
-            <view class="good_img">
-                <image src="../../images/te.png" />
-            </view>
-            <view class="good_list">
-                <view class='goodsname dan'>青海特产可可西里藏獒特色牛...</view>
-                <text class='specification'>银川市 西夏区 贺兰山西路街道</text>
-                <view class="guig">
-                    <view class='gui-g'>袋装500g</view>
-                </view>
-                <view>
-                    <view class='price'>
-                        <text class="yuan">￥</text>
-                        29.9
-                    </view>
-                    <view class="good_num">*2</view>
-                </view>
-                <view class="tuik" bindtap="refund">退款</view>
-            </view>
+  <view class="list" >
+    <view class="nav_top">
+      <view class="sotre_img">
+        <image src="../../images/store.png" />
+      </view>
+       {{detail.storeName}}
+      <view class="store_r">
+        <image src="../../images/right.png" />
+      </view>
+    </view>
+    <view class="good clearfix" wx:for='{{detail.details}}' wx:key='{{item.id}}'>
+      <view class="good_img">
+        <image src="{{item.productImgOss}}" />
+      </view>
+      <view class="good_list">
+        <view class='goodsname dan'> {{item.productName}}</view>
+        <text class='specification'> {{item.provinceName}}  {{item.cityName}}  {{item.areaName}}  {{item.detailAddress}}</text>
+        <view class="guig" >
+          <view class='gui-g' wx:if='{{item.isSpecification == 1}}'>{{item.specification}}</view>
         </view>
         <view>
-            <view class="good_img">
-                <image src="../../images/te.png" />
-            </view>
-            <view class="good_list">
-                <view class='goodsname dan'>青海特产可可西里藏獒特色牛...</view>
-                <text class='specification'>银川市 西夏区 贺兰山西路街道</text>
-                <view class="guig">
-                    <view class='gui-g'>袋装500g</view>
-                </view>
-                <view class='price'>
-                    <text class="yuan">￥</text>
-                    29.9
-                </view>
-                <view class="good_num">*2</view>
-            </view>
+          <view class='price'>
+            <text class="yuan">￥</text>  {{item.salePrice}}
+          </view>
+          <view class="good_num">* {{item.buyCount}}</view>
         </view>
+        <view class="tuik" bindtap="refund" wx:if='{{detail.orderStatus == 1 || detail.orderStatus == 2}}'>退款</view>
+      </view>
     </view>
+    
+  </view>
 </view>
 <view class='nav'>
-    <view class="list clearfix">
-        <view class="price_list">
-            商品总额
-            <view class="price_r">￥56.00</view>
-        </view>
-        <view class="price_list">
-            会员优惠
-            <view class="price_r">￥56.00</view>
-        </view>
-        <view class="price_list">
-            运费
-            <view class="price_r">￥56.00</view>
-        </view>
-        <view class="z_right">
-            需付费:
-            <view class="yan font">
-                <text style="font-size:22rpx">￥</text>
-                56
-            </view>
-        </view>
+  <view class="list clearfix">
+    <view class="price_list">
+      商品总额
+      <view class="price_r">￥{{detail.productTotalFee}}</view>
     </view>
+    <view class="price_list">
+      会员优惠
+      <view class="price_r">￥{{}}</view>
+    </view>
+    <view class="price_list">
+      运费
+      <view class="price_r">￥{{detail.freight}}</view>
+    </view>
+    <view class="z_right">
+      需付费:
+      <view class="yan font">
+        <text style="font-size:22rpx">￥</text> {{detail.payMoney}}
+      </view>
+    </view>
+  </view>
 </view>
 <view class="nav">
-    <view class="dind">订单编号：4848487484648978</view>
-    <view class="dind">下单时间：4848487484648978</view>
-    <view class="dind">
-        <view class="lix">
-            联系商家：
-        </view>
-        <view class="phone">
-            <image src="../../images/gfkf.png" />
-        </view>
-        拨打电话
+  <view class="dind" >订单编号：{{detail.orderNo}}</view>
+  <view class="dind" wx:if='{{detail.createTime != null}}'>下单时间：{{detail.createTime}}</view>
+  <view class="dind" wx:if='{{detail.payTime != null}}'>付款时间：{{detail.payTime}}</view>
+  <view class="dind" wx:if='{{detail.sendTime != null}}'>发货时间：{{detail.sendTime}}</view>
+  <view class="dind" wx:if='{{detail.closeTime != null}}'>关闭时间：{{detail.closeTime}}</view>
+  <view class="dind" wx:if='{{detail.cancelTime != null}}'>取消时间：{{detail.cancelTime}}</view>
+  
+  <view class="dind" bindtap="phone">
+    <view class="lix">
+      联系商家：
     </view>
+    <view class="phone">
+      <image src="../../images/gfkf.png" />
+    </view>
+    拨打电话
+  </view>
 </view>
-
+<view style='height:120rpx;'></view>
 <!-- 未付款 -->
-<!-- <view class="footer">
+<view class="footer"  wx:if='{{detail.orderStatus == 0}}'>
+  <view class="footer_r">
+
+    <view class="tuik fuk" bindtap="pay">付款 {{hours}}:{{min}}</view>
+    <picker class="picker" mode='selector' value="{{index}}" range="{{cancel}}" range-key="name" bindchange="bindcancel">
+      <view class="tuik" bindtap="cance_dd">取消订单</view>
+    </picker>
+  </view>
+</view>
+<!-- 未发货 -->
+<view class="footer" wx:if='{{detail.orderStatus == 1}}'>
     <view class="footer_r">
 
-        <view class="tuik fuk">付款 38:36</view>
-               <picker class="picker" mode ='selector' value="{{index}}" range="{{cancel}}" range-key="name" bindchange="bindcancel" >
-                  <view class="tuik">取消订单</view>
-               </picker>
+        <view class="tuik">提醒发货</view>
+                
     </view>
-</view> -->
-<!-- 删除订单 -->
- <view class="popup" hidden="{{isdelete}}">
-        <view class="popup_h1">确认删除订单？</view>
-        <view class="popup_content">删除之后无法找回，请确认当前操作</view>
-        <view class="popup_btn">
-              <view bindtap="cancel_delete">取消</view>
-              <view bindtap="confirm_delete">确定</view>
-        </view>
-  </view>
-  <!-- 确认签收 -->
-   <view class="popup" hidden="{{isqianshou}}">
-        <view class="popup_h1">是否确认签收？</view>
-        <!-- <view class="popup_content">删除之后无法找回，请确认当前操作</view> -->
-        <view class="popup_btn">
-              <view bindtap="cancel_delete">取消</view>
-              <view bindtap="confirm_delete">确定</view>
-        </view>
-  </view>
-<!-- 付款后 -->
-<!-- <view class="footer">
+</view>
+<!-- 发货后 -->
+<view class="footer" wx:if='{{detail.orderStatus == 2}}'>
     <view class="footer_r">
 
         <view class="tuik">确认签收</view>
                 <view class="tuik">查看物流</view>
     </view>
-</view> -->
+</view>
 <!-- 确认收货后 -->
-<!-- <view class="footer">
+<view class="footer" wx:if='{{detail.orderStatus == 3}}'>
     <view class="footer_r">
 
         <view class="tuik">立即评价</view>
                 <view class="tuik">查看物流</view>
     </view>
-</view> -->
-<!-- 提醒发货     -->
+</view>
 <!-- 删除订单 -->
-<!-- <view class="footer">
+<view class="footer" wx:if='{{detail.orderStatus == 4}}'>
     <view class="footer_r">
 
         <view class="tuik" bindtap="delete">删除订单</view>
                 
     </view>
-</view> -->
+</view>
+<!-- 删除订单 -->
+<view class="popup" hidden="{{isdelete}}">
+  <view class="popup_h1">确认删除订单？</view>
+  <view class="popup_content">删除之后无法找回，请确认当前操作</view>
+  <view class="popup_btn">
+    <view bindtap="cancel_delete">取消</view>
+    <view bindtap="confirm_delete">确定</view>
+  </view>
+</view>
+<!-- 确认签收 -->
+<view class="popup" hidden="{{isqianshou}}">
+  <view class="popup_h1">是否确认签收？</view>
+  <!-- <view class="popup_content">删除之后无法找回，请确认当前操作</view> -->
+  <view class="popup_btn">
+    <view bindtap="cancel_delete">取消</view>
+    <view bindtap="confirm_delete">确定</view>
+  </view>
+</view>
+
+
+<!-- 提醒发货     -->
+
 
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true' style="margin-top:{{navH}}px"></view>

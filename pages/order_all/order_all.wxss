@@ -98,6 +98,8 @@ page{
     box-sizing: border-box;
     background: #fff;
     margin-top: 20rpx;
+    border-radius: 14rpx;
+    
 }
 .price_r{
     float: right;
@@ -121,7 +123,7 @@ page{
     margin-top: 100rpx;
     margin-left: 20rpx;
     border-radius: 12rpx;
-    background: #fff;
+  
 } 
 .store_d{
     float: right;

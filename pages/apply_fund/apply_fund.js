@@ -170,7 +170,7 @@ Page({
       areaId: area_id,
       townId: town_id,
       qualificationImg: zhao1,
-      infoImgs: that.data.images,
+      infoImgs: simages,
       projectExplain: num,
       introduce: nums,
     }

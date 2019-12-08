@@ -56,13 +56,13 @@
 </view>
 <view class="nav">
     <view class="m-h1">我的订单</view>
-    <view class="m-right">
+    <view class="m-right" bindtap="all" id="{{0}}">
         <view class='m-r-q'>全部订单</view>
         <view class="m-r-img">
             <image src="../../images/right.png" />
         </view>
     </view>
-    <view class="dind">
+    <view class="dind"  bindtap="all" id="{{1}}">
         <view class="din-1">
             <view class="din-img">
                 <image src="../../images/d-fk.png" />
@@ -70,21 +70,21 @@
             </view>
             <view>待付款</view>
         </view>
-        <view class="din-1">
+        <view class="din-1"  bindtap="all" id="{{2}}">
             <view class="din-img">
                 <image src="../../images/d-fh.png" />
                  <view class="hong">9</view>
             </view>
             <view>待发货</view>
         </view>
-        <view class="din-1">
+        <view class="din-1"  bindtap="all" id="{{3}}">
             <view class="din-img">
                 <image src="../../images/d-sh.png" />
                  <view class="hong">9</view>
             </view>
             <view>待收货</view>
         </view>
-        <view class="din-1">
+        <view class="din-1"  bindtap="all" id="{{4}}">
             <view class="din-img">
                 <image src="../../images/d-tk.png" />
                  <view class="hong">9</view>
@@ -113,7 +113,7 @@
             </view>
             <view>我的钱包</view>
         </view>
-        <view class="din-1">
+        <view class="din-1" bindtap="member">
             <view class="din-img">
                 <image src="../../images/hy.png" />
                  

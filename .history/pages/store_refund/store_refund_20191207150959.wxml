@@ -178,7 +178,7 @@
     </view>
 
 
-
+  
 </view>
 <view class='container' hidden='{{isshow}}'>
   <imgcut id='imgcut' src='{{src}}' width='350' height='350'></imgcut>

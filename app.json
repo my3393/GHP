@@ -43,7 +43,8 @@
     "pages/shoping/shoping",
     "pages/sure_orders/sure_orders",
     "pages/apply_fund/apply_fund",
-    "pages/mine_fund/mine_fund"
+    "pages/mine_fund/mine_fund",
+    "pages/order_z_detail/order_z_detail"
   ],
   "tabBar": {
     "color": "#808080",

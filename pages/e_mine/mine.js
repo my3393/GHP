@@ -59,6 +59,18 @@ Page({
   onReachBottom: function () {
 
   },
+  //会员
+  member(){
+    wx.navigateTo({
+      url: '../members/members',
+    })
+  },
+  //查看订单
+  all(e){
+    wx.navigateTo({
+      url: '../order_all/order_all?id=' + e.currentTarget.id,
+    })
+  },
   //资助申请
   mine_fund(){
     wx.navigateTo({
@@ -101,5 +113,5 @@ Page({
         isshow: true
       })
     }
-  }
+  },
 })

@@ -17,7 +17,7 @@ Page({
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
-        sessionkey: wx.getStorageSync('sessionkey')
+        sessionKey: wx.getStorageSync('sessionkey')
       },
       method: 'POST',
       header: {
@@ -27,7 +27,7 @@ Page({
       dataType: 'json',
       success: function (res) {
         console.log(res.data.data)
-        if (res.data.status === 100) {
+        if (res.data.status === 1000) {
           wx.setStorage({
             key: 'token',
             data: res.data.data.token,

@@ -1,5 +1,8 @@
 // pages/order_all/order_all.js
 const app = getApp();
+let currentPage = 1;
+let orderType = 0;
+let detail = [];
 Page({
 
   /**
@@ -14,16 +17,18 @@ Page({
        {name:'已完成',id:'4'},
      ],
      tar:0,
-     detail:[
-       {}
-     ],
+     detail:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    orderType = options.id,
+    this.setData({
+      tar: options.id
+    })
+     this.getDetail();
   },
 
   /**
@@ -74,11 +79,49 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //订单详情
+  order_detail(e){
+     wx.navigateTo({
+       url: '../order_detail/order_detail?id=' + e.currentTarget.id,
+     })
+  },
+  getDetail() {
+    let that = this;
+    let data = {
+      orderType:orderType,
+      currentPage: currentPage
+    }
+
+    app.res.req('app-web/userorder/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        detail.push(...res.data)
+        that.setData({
+          detail: detail
+        })
+       console.log(detail)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //切换
   tag(e){
     let that = this;
+    orderType = e.currentTarget.dataset.index,
+    currentPage = 1,
+    detail = [];
     that.setData({
       tar:e.currentTarget.dataset.index,
+      
     })
+    this.getDetail()
   }
 })

@@ -87,24 +87,6 @@ Page({
     this.setData({
       cance:this.data.cancel[e.detail.value].name
     })
-    let data = {
-      id: that.data.detail.id,
-      cancelReason: this.data.cancel[e.detail.value].name
-    }
-    app.res.req('app-web/userorder/cancel', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-
-         that.getDetail();
-
-
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
-    })
 
   },
   //删除订单
@@ -114,7 +96,6 @@ Page({
       ismask:!this.data.ismask,
     })
   },
-  
   cancel_delete(){
     this.setData({
       isdelete: !this.data.isdelete,
@@ -122,83 +103,15 @@ Page({
     })
   },
   confirm_delete(){
-    let that = this;
     this.setData({
       isdelete: !this.data.isdelete,
       ismask: !this.data.ismask,
-    })
-    let data = {
-      id: that.data.detail.id,
-      
-    }
-    app.res.req('app-web/userorder/delete', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-
-        
-
-
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
     })
   },
   //退款
   refund(){
     wx.navigateTo({
       url: '../order_refund/order_refund',
-    })
-  },
-  //付款
-  pay(){
-    let that = this;
-    let data = {
-      id: that.data.detail.id
-    }
-
-    app.res.req('app-web/pay/gopay', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-        wx.requestPayment({
-          timeStamp: res.data.sign.timeStamp,
-          nonceStr: res.data.sign.nonceStr,
-          package: res.data.sign.package,
-          signType: 'MD5',
-          paySign: res.data.sign.paySign,
-          success(res) {
-
-            wx.showToast({
-              title: '支付成功',
-              icon: 'none',
-              duration: 1000
-            })
-            wx.navigateBack({
-              delta: 1
-            })
-          },
-          fail(res) {
-            wx.redirectTo({
-              url: '../order_all/order_all',
-            })
-
-          }
-        })
-        
-        
-
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
     })
   },
   //付款时间
@@ -250,11 +163,11 @@ Page({
     var date1 = new Date(that.data.detail.createTime);
     //发货时间
 
-    var sm1 = date1.getFullYear() + "/" + (date1.getMonth() + 1) + "/" + date1.getDate() + " " + date1.getHours() + ":" + date1.getMinutes() + ":" + date1.getSeconds()
+    var sm1 = date1.getFullYear() + "/" + (date1.getMonth() + 1) + "/" + date1.getDate() + " " + date1.getHours() + ":" + date1.getMinutes()
     console.log(sm1)
     var date2 = new Date(date1);
     date2.setDate(date1.getDate() + 7);
-    var sm2 = date2.getFullYear() + "/" + (date2.getMonth() + 1) + "/" + date2.getDate() + " " + date2.getHours() + ":" + date2.getMinutes() + ":" + date2.getSeconds();
+    var sm2 = date2.getFullYear() + "/" + (date2.getMonth() + 1) + "/" + date2.getDate() + " " + date2.getHours() + ":" + date2.getMinutes();
     console.log(sm2);
 
     var nspt = time.split(' ')
@@ -266,7 +179,7 @@ Page({
     var timer1 = spt[0].split('/');
     var timer2 = spt[1].split(':');
     var end = new Date(timer1[0], timer1[1], timer1[2], timer2[0], timer2[1], timer2[2])
-    var oft = Math.round((end - start) / 1000);
+    var oft = Math.round((start - end) / 1000);
     var ofd = parseInt(oft / 3600 / 24);
     var ofh = parseInt((oft % (3600 * 24)) / 3600);
     var ofm = parseInt((oft % 3600) / 60);

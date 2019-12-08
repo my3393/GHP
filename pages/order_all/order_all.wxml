@@ -1,75 +1,87 @@
 <!-- pages/order_all/order_all.wxml -->
 <view class='orders'>
-    <view wx:for="{{tag}}" wx:for-index="idx" bind:tap="tag" data-index='{{idx}}' class="{{tar  == idx? 'tag_a' : ''}}">
-        {{item.name}}
-    </view>
+  <view wx:for="{{tag}}" wx:for-index="idx" bind:tap="tag" data-index='{{idx}}' class="{{tar  == idx? 'tag_a' : ''}}">
+    {{item.name}}
+  </view>
 </view>
 <view wx:if='{{detail.length == 0}}' class="kong">
-    <view class="kong_img">
-        <image src="../../images/noplay.png" />
-    </view>
-    <view>没有相关订单</view>
-    <view class='home'>立即选购</view>
-    <view class="foot-boot foot-boots">
-        善家购
-        <view class="foot-boot-m">大爱无疆，感恩家乡</view>
-    </view>
+  <view class="kong_img">
+    <image src="../../images/noplay.png" />
+  </view>
+  <view>没有相关订单</view>
+  <view class='home'>立即选购</view>
+  <view class="foot-boot foot-boots">
+    善家购
+    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+  </view>
 </view>
 <view wx:else class="nav">
-    <view class="list">
-        <view class="nav_top">
-            <view class="sotre_img">
-                <image src="../../images/store.png" />
-            </view>
-            良品铺子
-            <view class="store_r">
-                <image src="../../images/right.png" />
-            </view>
-            <!-- <view class="store_d yan">等待买家付款</view> -->
-            <view class="store_d ">买家已付款</view>
-        </view>
-        <view class="good clearfix">
-            <view class="good_img">
-                <image src="../../images/te.png" />
-            </view>
-            <view class="good_list">
-                <view class='goodsname dan'>青海特产可可西里藏獒特色牛...</view>
-                <text class='specification'>银川市 西夏区 贺兰山西路街道</text>
-                <view class="guig">
-                    <view class='gui-g'>袋装500g</view>
-                     <view class="tuik">退款中</view>
-                </view>
-                
-                <view>
-                    <view class='price'>
-                        <text class="yuan">￥</text>
-                        29.9
-                    </view>
-                    <view class="good_num">*2</view>
-                </view>
-                <view class="zai_r">
-                    <view class="good_sp">
-                        共一件商品，订单金额：
-                        <view class="font good_pric">
-                            <text style="font-size:22rpx">￥</text>
-                            56
-                        </view>
-                    </view>
-                    <!-- <view class="pay">付款 24:38</view> -->
-                    <!-- <view class="wuliu">
-                       
-                        <view class="quer">
-                            确认收货
-                        </view>
-                         <view >
-                            查看物流
-                        </view>
-                    </view> -->
-                    <view class="wuliu">
-                        <view>删除订单</view>
-                    </view>
-                </view>
-            </view>
-        </view>
+  <view class="list clearfix" wx:for='{{detail}}' wx:key='{{item.id}}' id="{{item.id}}" bindtap="order_detail">
+    <view class="nav_top">
+      <view class="sotre_img">
+        <image src="../../images/store.png" />
+      </view>
+      <text bindtap="store" id="{{item.storeId}}" >{{item.storeName}}</text>
+      <view class="store_r">
+        <image src="../../images/right.png" />
+      </view>
+      <view wx:if='{{item.orderStatus == 0}}' class="store_d yan">等待买家付款</view>
+      <view wx:if='{{item.orderStatus == 1}}' class="store_d ">买家已付款</view>
+      <view wx:if='{{item.orderStatus == 1}}' class="store_d ">卖家已发货</view>
+      <view wx:if='{{item.orderStatus == 1}}' class="store_d ">已完成</view>
+      <view wx:if='{{item.orderStatus == 1}}' class="store_d ">已关闭</view>
     </view>
+    <view class="good clearfix" wx:for='{{item.orders}}' wx:key='{{item.id}}' id="{{item.id}}" bindtap="">
+      <view class="good_img">
+        <image src="{{item.productImgOss}}" />
+      </view>
+      <view class="good_list">
+        <view class='goodsname dan'>{{item.productName}}</view>
+        <!-- <text class='specification'>{{item.}} {{item.}} {{item.}} {{item.}}</text> -->
+        <view class="guig">
+          <view class='gui-g'>{{item.specification}}</view>
+          <view class="tuik" wx:if='{{item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15}}'>退款中</view>
+          <view class="tuik" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9 || item.orderStatus == 12 || item.orderStatus == 16}}'>退款成功</view>
+        </view>
+
+        <view>
+          <view class='price'>
+            <text class="yuan">￥</text> {{item.salePrice}}
+          </view>
+          <view class="good_num">*{{item.buyCount}}</view>
+        </view>
+
+      </view>
+    </view>
+    <view class="zai_r">
+      <view class="good_sp">
+        共{{item.productNumber}}件商品，订单金额：
+        <view class="font good_pric">
+          <text style="font-size:22rpx">￥</text> {{item.payMoney}}
+        </view>
+      </view>
+      <view class="pay" wx:if='{{item.orderStatus == 0}}'>付款 24:38</view>
+      <view class="wuliu" wx:if='{{item.orderStatus == 2}}'>
+
+        <view class="quer" >
+          确认收货
+        </view>
+        <view>
+          查看物流
+        </view>
+      </view>
+       <view class="wuliu" wx:if='{{item.orderStatus == 3}}'>
+
+        <view class="quer" >
+          立即评价
+        </view>
+        <view> 
+          查看物流
+        </view>
+      </view>
+      <view class="wuliu" wx:if='{{item.orderStatus == 4}}'>
+        <view>删除订单</view>
+      </view>
+    </view>
+  </view>
 </view>

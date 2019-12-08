@@ -150,63 +150,37 @@ Page({
     let fordata = [];
    
     console.log(fordata.length)
-    // for(var i in ids){
-    //   let obj ={}
-    //   obj.shopProductIds = ids[i]
-    //   fordata.push(obj)
-    // }
-    // console.log(fordata)
-    // let data = fordata
-    wx.request({
-      url: "192.168.123.171:8080/appcomeptition/default/token.do",
-      data: {
-        shopProductIds:ids 
-      },
-      processData:false,
-      contentType:false,
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'token':'618702588586_c2c9b266c11659253b3071c62aa988bd'
-      },
-      dataType: 'json',
-      success: function (res) {
-        console.log(res.data.data)
-        if (res.data.status === 100) {
+    for(var i in ids){
+      let obj ={}
+      obj.shopProductIds = ids[i]
+      fordata.push(obj)
+    }
+    console.log(fordata)
+    //let data = fordata
+    var schoolStr = JSON.stringify(ids);
+    let data={
+      shopProductIds: schoolStr
+    }
+    app.res.req("app-web/shopcart/placeorder", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          detail: res.data.carts,
+          Price:res.data,
+          member_p: res.data.payPrice - res.data.memberPayPrice
+        })
 
-        } else if (res.data.status === 103) {
-          wx.redirectTo({
-            url: '/pages/login/login',
-          })
-
-        } else {
-          wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
-          })
-        }
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
       }
     })
-    // app.res.req("app-web/shopcart/placeorder", data, (res) => {
-    //   console.log(res.data)
-    //   if (res.status == 1000) {
-    //     that.setData({
-    //       detail: res.data.carts,
-    //       Price:res.data,
-    //       member_p: res.data.payPrice - res.data.memberPayPrice
-    //     })
-
-    //   } else if (res.status == 1004 || res.status == 1005) {
-    //     wx.redirectTo({
-    //       url: '../login/login',
-    //     })
-    //   } else {
-    //     wx.showToast({
-    //       title: res.msg,
-    //       icon: 'none'
-    //     })
-    //   }
-    // })
   },
   //获取默认地址
   getDefaultaddress() {
