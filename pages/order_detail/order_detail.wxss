@@ -236,3 +236,7 @@ margin-right: 20rpx
   width: 30rpx;
   height: 24rpx;
 }
+.zhong{
+  border:1rpx solid #f12200;
+  color: #f12200;
+}

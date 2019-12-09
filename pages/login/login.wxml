@@ -1,6 +1,6 @@
 <!--pages/login/login.wxml-->
   <view class="login">
-      <image src='../../images/login.png' class='logos'></image>
+      <image src='https://www.xingtu-group.cn/xcx_img/shanjiagou_logo.png' class='logos'></image>
   </view>
 
 <view class='titles'>申请获得以下权限</view>

@@ -1,5 +1,5 @@
 // pages/members/members.js
-const App = getApp();
+const app = getApp();
 Page({
 
   /**
@@ -24,9 +24,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.Detail();
     this.stretch(330)
     this.setData({
-      navH: App.globalData.navHeight
+      navH: app.globalData.navHeight
     })
   },
 
@@ -71,12 +72,103 @@ Page({
   onReachBottom: function () {
 
   },
+  //购买会员
+   pay(e){
+     console.log(e.currentTarget.id)
+     let that = this;
+     let data = {
+       memberType: e.currentTarget.id
+     }
 
-  /**
-   * 用户点击右上角分享
-   */
-   
+     app.res.req('app-web/order/membersubmit', data, (res) => {
+       console.log(res.data)
+       if (res.status == 1000) {
+         app.res.req("app-web/pay/xcxpay", data, (res) => {
+           console.log(res.data)
+           if (res.status == 1000) {
+            
+             wx.requestPayment({
+               timeStamp: res.data.sign.timeStamp,
+               nonceStr: res.data.sign.nonceStr,
+               package: res.data.sign.package,
+               signType: 'MD5',
+               paySign: res.data.sign.paySign,
+               success(res) {
+
+                 wx.showToast({
+                   title: '支付成功',
+                   icon: 'none',
+                   duration: 1000
+                 })
+                 that.setData({
+                   isdelete:!that.data.isdelete,
+                   ismask:!that.data.ismask
+                 })
+               },
+               fail(res) {
+                 wx.showToast({
+                   title: '支付失败',
+                   icon: 'none',
+                   duration: 1000
+                 })
+
+               }
+             })
+
+             //   interval = null;
+
+           } else if (res.status == 1004 || res.status == 1005) {
+             wx.redirectTo({
+               url: '../login/login',
+             })
+           } else {
+             wx.showToast({
+               title: res.msg,
+               icon: 'none'
+             })
+           }
+         })
+
+       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+         wx.redirectTo({
+           url: '../login/login',
+         })
+       } else {
+         wx.showToast({
+           title: res.msg,
+           icon: 'none'
+         })
+       }
+     })
+   },
+  //会员详情
+  Detail(){
+    let that = this;
+    let data = {
+    
+    }
+
+    app.res.req('app-web/member/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          detail: res.data
+        })
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   change(e) {
+    console.log(e.detail.current)
     this.setData({
       current: e.detail.current
     })

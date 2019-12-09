@@ -19,6 +19,7 @@ Page({
      isdelete:true,//删除订单
      ismask:true,
     isqianshou:true,//确认签收
+    member_p:0,
 
   },
 
@@ -83,6 +84,7 @@ Page({
   },
   //取消原因
   bindcancel(e){
+    let that = this;
     console.log(e)
     this.setData({
       cance:this.data.cancel[e.detail.value].name
@@ -114,7 +116,12 @@ Page({
       ismask:!this.data.ismask,
     })
   },
-  
+  //退款中
+  zhong(e){
+     wx.navigateTo({
+       url: '../refund_detail/refund_detail?id=' + e.currentTarget.id + '&storeId=' + this.data.detail.storeId,
+     })
+  },
   cancel_delete(){
     this.setData({
       isdelete: !this.data.isdelete,
@@ -147,13 +154,13 @@ Page({
     })
   },
   //退款
-  refund(){
+  refund(e){
     wx.navigateTo({
-      url: '../order_refund/order_refund',
+      url: '../order_refund/order_refund?id=' + e.currentTarget.id + '&status=' + this.data.detail.orderStatus, 
     })
   },
   //付款
-  pay(){
+  pay(e) {
     let that = this;
     let data = {
       id: that.data.detail.id
@@ -162,32 +169,49 @@ Page({
     app.res.req('app-web/pay/gopay', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.requestPayment({
-          timeStamp: res.data.sign.timeStamp,
-          nonceStr: res.data.sign.nonceStr,
-          package: res.data.sign.package,
-          signType: 'MD5',
-          paySign: res.data.sign.paySign,
-          success(res) {
+        app.res.req("app-web/pay/xcxpay", data, (res) => {
+          console.log(res.data)
+          if (res.status == 1000) {
+            wx.requestPayment({
+              timeStamp: res.data.sign.timeStamp,
+              nonceStr: res.data.sign.nonceStr,
+              package: res.data.sign.package,
+              signType: 'MD5',
+              paySign: res.data.sign.paySign,
+              success(res) {
 
-            wx.showToast({
-              title: '支付成功',
-              icon: 'none',
-              duration: 1000
+                wx.showToast({
+                  title: '支付成功',
+                  icon: 'none',
+                  duration: 1000
+                })
+                that.setData({
+                  isdelete: !that.data.isdelete,
+                  ismask: !that.data.ismask
+                })
+              },
+              fail(res) {
+                wx.showToast({
+                  title: '支付失败',
+                  icon: 'none',
+                  duration: 1000
+                })
+
+              }
             })
-            wx.navigateBack({
-              delta: 1
-            })
-          },
-          fail(res) {
+
+          } else if (res.status == 1004 || res.status == 1005) {
             wx.redirectTo({
-              url: '../order_all/order_all',
+              url: '../login/login',
             })
-
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
           }
         })
-        
-        
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({

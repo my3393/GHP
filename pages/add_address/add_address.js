@@ -8,7 +8,9 @@ let province_id = '';
 let city_id = '';
 let area_id = '';
 let town_id = '';
-let sum = 1
+let sum = 1;
+let id = '';
+let address;
 Page({
 
   /**
@@ -30,7 +32,7 @@ Page({
       phone:'',
       minute:'',
       town:'',
-      sum:1,
+     
       checked:true,
   },
 
@@ -38,7 +40,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+      if(options.id){
+        id = options.id
+         this.bian();
+      }
   },
 
   /**
@@ -89,6 +95,48 @@ Page({
   // onShareAppMessage: function () {
 
   // },
+  //编辑地址
+  bian(){
+    let that = this;
+    let data = {
+      id
+    }
+    app.res.req('app-web/useraddress/addressdetail', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        address = res.data
+        that.bianji()
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  bianji(){
+     this.setData({
+       names: address.consigneeName,
+       phone: address.consigneePhone,
+       prov: address.provinceName,
+       city: address.cityName,
+       area: address.areaName,
+       town: address.townName,
+       minute: address.detailAddress,
+       name: address.provinceName + '-' + address.cityName + '-' + address.areaName + '-' + address.townName
+     })
+    province_id = address.provinceId
+    city_id = address.cityId
+    area_id = address.areaId
+    town_id = address.townId
+    if (address.isDefault == 0){
+         sum = 0
+      this.setData({
+        checked: false,
+      })
+    }
+  },
   //取消
   detel(){
     this.setData({
@@ -182,9 +230,10 @@ Page({
       })
       return false;
     }else{
-    
-      let data = {
-          consigneeName:that.data.names,
+      if(id){
+        let data = {
+          id:id,
+          consigneeName: that.data.names,
           consigneePhone: that.data.phone,
           provinceId: province_id,
           cityId: city_id,
@@ -192,28 +241,64 @@ Page({
           townId: town_id,
           detailAddress: that.data.minute,
           isDefault: sum
-      }
-      app.res.req('app-web/useraddress/add', data, (res) => {
-        console.log(res.data)
-        if (res.status == 1000) {
-          wx.showToast({
-            title: '添加成功',
-            icon: 'success',
-            duration: 1000
-          })
-          setTimeout(function () {
-            wx.navigateBack({
-              delta: 1,
-            })
-          }, 1000)
-        } else {
-          console.log(111)
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
-          })
         }
-      })
+        app.res.req('app-web/useraddress/edit', data, (res) => {
+          console.log(res.data)
+          if (res.status == 1000) {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'success',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }, 1000)
+          } else {
+            console.log(111)
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
+        })
+      }else{
+        let data = {
+          
+          consigneeName: that.data.names,
+          consigneePhone: that.data.phone,
+          provinceId: province_id,
+          cityId: city_id,
+          areaId: area_id,
+          townId: town_id,
+          detailAddress: that.data.minute,
+          isDefault: sum
+        }
+        app.res.req('app-web/useraddress/add', data, (res) => {
+          console.log(res.data)
+          if (res.status == 1000) {
+            wx.showToast({
+              title: '添加成功',
+              icon: 'success',
+              duration: 1000
+            })
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }, 1000)
+          } else {
+            console.log(111)
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
+        })
+      }
+      
+     
     }
   },
   x_prov() {

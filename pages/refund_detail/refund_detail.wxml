@@ -12,26 +12,26 @@
     <view class="top_n">退款申请已提交，商家处理中</view>
   </view>
   <view class="tuik_succ" wx:if='{{status == 5  || status == 9  || status == 12  || status == 16}}'>
-     退款金额：￥56.00
+     退款金额：￥{{detail.refundPrice}}
   </view>
    <view class="tuik_succ" wx:if='{{status == 6  || status == 10  || status == 14  || status == 18}}'>
      关闭原因:  买家主动撤销仅退款申请，仅退款关闭。
   </view>
   <view wx:if='{{status == 7 || status == 3  || status == 15}}'>
-    <view class="top_tit">剩
+    <!-- <view class="top_tit">剩
       <text class="yan">1</text>天
       <text class="yan">25</text>小时
-      <text class="yan">78</text>分</view>
+      <text class="yan">78</text>分</view> -->
     <view class="jtuik">
       <view> · 若商家确认后，系统将退款至买家支付账户</view>
       <view>· 若商家拒绝后，您可重新修改退货退款信息或申请善家购平台客服介入协调处理。</view>
     </view>
   </view>
     <view wx:if='{{status == 8  || status == 4  || status == 13   || status == 17}}'>
-    <view class="jujue">拒绝理由：商品已发货，请耐心等待物流信息，为您带来的不便敬请谅解</view>
+    <view class="jujue">拒绝理由：{{detail.refuseReason}}</view>
 
     <view class="jtuik">
-      <view >您需要在<text class="yan">6</text>天<text class="yan"></text>小时<text class="yan">15</text>分内重新发起退款申请或主动撤销退款申请,超时未响应，仅退款申请将自动关闭。</view>
+      <view >您需要在<text class="yan">6</text>天<text class="yan"></text>小时<text class="yan">15</text>分内重新发起退款申请或主动撤销退款申请,超时未响应，退款申请将自动关闭。</view>
 
     </view>
   </view>
@@ -44,133 +44,70 @@
 </view>
 
 <view class="top tops">
-  <view class="nav">
+  <view class="nav" wx:if='{{detail.refundType == 1}}'>
+    申请类型：我要退款
+  </view>
+  <view class="nav" wx:if='{{detail.refundType == 2}}'>
     申请类型：仅退款
   </view>
+  <view class="nav" wx:if='{{detail.refundType == 3}}'>
+    申请类型：退货退款
+  </view>
   <view class="nav">
-   退款金额: ￥56.00
+   退款金额: ￥{{detail.refundPrice}}
   </view>
   <view class="nav">
    货物状态: 未收到货
   </view>
+  
   <view class="nav">
-    货物状态: 未收到货
+    <view style="float:left">退款说明：</view> <view class="tuik_shuo">{{detail.refundExplain}}</view>
   </view>
-  <view class="nav">
-    <view style="float:left">退款说明：</view> <view class="tuik_shuo">不想要了发货慢不想要了发货慢不想要了发货慢不想要了发货慢不想要了发货慢。</view>
+  <view class="tuik_img" >
+    <image wx:for='{{detail.refundImgOss}}' wx:key='{{item.id}}' src="{{item}}"></image>
   </view>
-  <view class="tuik_img">
-    <image src="../../images/te.png"></image>
-  </view>
-  <view class="diz" wx:if='{{status == 12  || status == 17}}'>退回地址：南下 18818553353 广东省深圳市宝安区西乡街道西乡
-前进二路134号 808
+  <view class="diz" wx:if='{{status == 12  || status == 17}}'>退回地址：{{sotre.consigneeName}}  {{sotre.consigneePhone}} {{sotre.provinceName}} {{sotre.cityName}} {{sotre.areaName}}  {{sotre.townName}}  {{sotre.detailAddress}} 
 </view>
 
                             
 </view>
 <view class="footer">
-<view class="footer_r" wx:if='{{status == 3}}'>
+<view class="footer_r" wx:if='{{status == 3 || status == 7 || status == 11 || status == 15 }}'>
          
         <view class="tuik">退款进度</view>
-        <view class="tuik">撤销申请</view>
-         <view class="tuik">订单投诉</view>
+        <view class="tuik" bindtap="chexiao">撤销申请</view>
+         <view class="tuik" bindtap="complain">订单投诉</view>
     </view>
- <view class="footer_r" wx:if='{{status == 4}}'>
+ <view class="footer_r" wx:if='{{status == 4 || status == 8 || status == 13 || status == 17 }}'>
          <view class="tuik xiug">修改申请</view>
         <view class="tuik">退款进度</view>
-        <view class="tuik">撤销申请</view>
-         <view class="tuik">订单投诉</view>
+        <view class="tuik" bindtap="chexiao">撤销申请</view>
+         <view class="tuik" bindtap="complain">订单投诉</view>
     </view>
-     <view class="footer_r" wx:if='{{status == 5}}'>
+     <view class="footer_r" wx:if='{{status == 5 || status == 9 || status == 12 || status == 16 }}'>
 
         <view class="tuik">退款进度</view>
 
     </view>
-     <view class="footer_r" wx:if='{{status == 6}}'>
+     <view class="footer_r" wx:if='{{status == 6 || status == 10 || status == 14 || status == 18 }}'>
 
         <view class="tuik">退款进度</view>
-        <view class="tuik">撤销申请</view>
-         <view class="tuik">订单投诉</view>
+        <view class="tuik" bindtap="chexiao">撤销申请</view>
+         <view class="tuik" bindtap="complain">订单投诉</view>
     </view>
-    <view class="footer_r" wx:if='{{status == 7}}'>
-
-        <view class="tuik">退款进度</view>
-        <view class="tuik">撤销申请</view>
-         <view class="tuik">订单投诉</view>
-    </view>
-    <view class="footer_r" wx:if='{{status == 8}}'>
-
-        <view class="tuik">退款进度</view>
-        <view class="tuik">撤销申请</view>
-         <view class="tuik">订单投诉</view>
-          <view class="tuik xiug">修改申请</view>
-    </view>
-    <view class="footer_r" wx:if='{{status == 9}}'>
-
-        <view class="tuik">退款进度</view>
-
-    </view>
-     <view class="footer_r" wx:if='{{status == 10}}'>
-         <view class="tuik">重新申请</view>
-        <view class="tuik">退款进度</view>
-
-         <view class="tuik">订单投诉</view>
-
-    </view>
-     <view class="footer_r" wx:if='{{status == 11}}'>
-
-        <view class="tuik">退款进度</view>
-           <view class="tuik">撤销申请</view>
-         <view class="tuik">订单投诉</view>
-
-    </view>
-    <view class="footer_r" wx:if='{{status == 12}}'>
-
-        <view class="tuik">退款进度</view>
-
-    </view>
-    <view class="footer_r" wx:if='{{status == 13}}'>
-         <view class="tuik xiug">修改申请</view>
-         <view class="tuik">撤销申请</view>
-         <view class="tuik">退款进度</view>
-
-         <view class="tuik">订单投诉</view>
-
-    </view>
-    <view class="footer_r" wx:if='{{status == 14}}'>
-
-         <view class="tuik">重新申请</view>
-         <view class="tuik">退款进度</view>
-
-         <view class="tuik">订单投诉</view>
-
-    </view>
-     <view class="footer_r" wx:if='{{status == 15}}'>
-
-
-         <view class="tuik">退款进度</view>
-
-
-
-    </view>
-     <view class="footer_r" wx:if='{{status == 16}}'>
-         <view class="tuik">退款进度</view>
-    </view>
-     <view class="footer_r" wx:if='{{status == 17}}'>
-         <view class="tuik xiug">修改申请</view>
-         <view class="tuik">重新申请</view>
-         <view class="tuik">退款进度</view>
-
-         <view class="tuik">订单投诉</view>
-
-    </view>
-     <view class="footer_r" wx:if='{{status == 18}}'>
-
-         <view class="tuik">重新申请</view>
-         <view class="tuik">退款进度</view>
-
-         <view class="tuik">订单投诉</view>
-
-    </view>
+     
 
 </view>
+
+<!-- 撤销申请 -->
+<view class="popup" hidden="{{ischexiao}}">
+  <view class="popup_h1">确定要撤销退款申请吗？</view>
+  <view class="popup_content">撤销后你还有{{chexiao_num}}次申请退款的机会</view>
+  <view class="popup_btn">
+    <view bindtap="cx_cancel">取消</view>
+    <view bindtap="cx_confirm">确定</view>
+  </view>
+</view>
+
+
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>

@@ -57,14 +57,18 @@
             <image src="../../images/member02.png" />
 
           </view>
-          <view>订单15%分红</view>
+          <view wx:if='{{current == 0}}'>订单{{detail[2].memberDiscount}}%分红</view>
+          <view wx:if='{{current == 1}}'>订单{{detail[1].memberDiscount}}%分红</view>
+          <view wx:if='{{current == 2}}'>订单{{detail[0].memberDiscount}}%分红</view>
         </view>
         <view class="din-1">
           <view class="din-img">
             <image src="../../images/member03.png" />
 
           </view>
-          <view>购物15%折扣</view>
+          <view wx:if='{{current == 0}}' >购物{{detail[2].memberShareRatio}}%折扣</view>
+          <view wx:if='{{current == 1}}'>购物{{detail[1].memberShareRatio}}%折扣</view>
+          <view wx:if='{{current == 2}}'>购物{{detail[0].memberShareRatio}}%折扣</view>
         </view>
         <view class="din-1">
           <view class="din-img">
@@ -78,7 +82,7 @@
             <image src="../../images/member05.png" />
 
           </view>
-          <view>赚10倍艺呗</view>
+          <view >赚10倍艺呗</view>
         </view>
         <view class="din-1">
           <view class="din-img">
@@ -93,7 +97,9 @@
         <view>· 开通即表示您已阅读并同意《善家购会员服务协议》</view>
         <view>· 会员服务一经开关不支持取消/退款，敬请谅解</view>
      </view>
-     <view class="submit">立即开通￥365</view>
+     <view class="submit" wx:if='{{current == 0}}' bindtap="pay" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</view>
+     <view class="submit" wx:if='{{current == 1}}' bindtap="pay" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</view>
+     <view class="submit" wx:if='{{current == 2}}' bindtap="pay" id="{{3}}">立即开通￥{{detail[0].memberPrice}}</view>
     </view>
   
 </view>

@@ -23,7 +23,7 @@
                <switch color="#f12200" checked='{{item.checked}}' catchtap="checked" data-id="{{item.id}}" />
            </view>
            <view class="bott_r">
-               <view >编辑</view>
+               <view catchtap="bianji" id="{{item.id}}">编辑</view>
                <view  bind:tap="detel" data-id="{{item.id}}">删除</view>
            </view>
        </view>

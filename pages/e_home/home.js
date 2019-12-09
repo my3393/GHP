@@ -24,8 +24,8 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    that.getClass();
-    that.getAdvert();
+    
+  
     if (wx.getStorageSync('token')) {
       that.getbanner();
       console.log('token存在')
@@ -276,6 +276,7 @@ Page({
            that.getDetail();
            that.getType();
            that.getRecommend();
+           that.getAdvert();
        }else if(res.status == 1004 || res.status == 1005){
          console.log(1)
            wx.redirectTo({

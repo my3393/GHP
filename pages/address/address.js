@@ -73,6 +73,11 @@ Page({
       url: '../add_address/add_address',
     })
   },
+  bianji(e){
+    wx.navigateTo({
+      url: '../add_address/add_address?id=' + e.currentTarget.id,
+    })
+  },
   wx_add() {
     wx.chooseAddress({
       success(res) {

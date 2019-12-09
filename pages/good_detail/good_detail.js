@@ -247,6 +247,7 @@ Page({
 
     console.log(selectIndexArray.length)
     if(user.id == null){
+      console.log(selectIndexArray.length)
       wx.navigateTo({
         url: '../login/login?id=' + id,
       })

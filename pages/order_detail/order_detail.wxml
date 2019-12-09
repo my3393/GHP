@@ -7,7 +7,7 @@
       </view>
       <view class="top_n">等待买家付款</view>
     </view>
-    <view class="top_tit">订单剩余支付时间{{hours}} 时{{min}} 分将自动关闭</view>
+    <view class="top_tit">订单剩余支付时间 {{hours}} 时 {{min}} 分将自动关闭</view>
   </view>
   <view wx:if='{{detail.orderStatus == 1}}'>
     <view>
@@ -99,7 +99,8 @@
           </view>
           <view class="good_num">* {{item.buyCount}}</view>
         </view>
-        <view class="tuik" bindtap="refund" wx:if='{{detail.orderStatus == 1 || detail.orderStatus == 2}}'>退款</view>
+        <view class="tuik" bindtap="refund" id="{{item.id}}" wx:if='{{item.orderStatus == 1}}'>退款</view>
+        <view class="tuik zhong" bindtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15}}'>退款中</view>
       </view>
     </view>
     
@@ -113,7 +114,7 @@
     </view>
     <view class="price_list">
       会员优惠
-      <view class="price_r">￥{{}}</view>
+      <view class="price_r">￥{{member_p}}</view>
     </view>
     <view class="price_list">
       运费
@@ -140,7 +141,7 @@
       联系商家：
     </view>
     <view class="phone">
-      <image src="../../images/gfkf.png" />
+      <image src="../../images/boda.png" />
     </view>
     拨打电话
   </view>
@@ -160,7 +161,7 @@
 <view class="footer" wx:if='{{detail.orderStatus == 1}}'>
     <view class="footer_r">
 
-        <view class="tuik">提醒发货</view>
+        <view class="tuik" >提醒发货</view>
                 
     </view>
 </view>

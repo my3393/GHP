@@ -1,7 +1,7 @@
 <!-- <view style="height:{{titleBarHeight}}px;padding-top:{{statusBarHeight}}px">
   <view class="header"></view>
 </view> -->
-<view class="top_img" style="background-image: url(https://www.xingtu-group.cn/xcx_img/mine_top.png)">
+<view class="top_img" style="background-image: url(../../images/mine_top.png)">
   <view class="tops" hidden="{{isshow}}">
     <view class="tops-t">
       <view class="tops-img">
@@ -30,25 +30,15 @@
         </view>
       </view>
     </view>
-    <view class="top-tx" wx:else bindtap="">
-      <view class="tx" wx:if='{{uesr.headImgUrl == null}}'>
+    <view class="top-tx" wx:else>
+      <view class="tx">
         <image src="../../images/tx.png" />
-      </view>
-      <view class="tx" wx:else>
-        <image src="{{user.headImgUrl}}" />
       </view>
       <view class="person">
         <view>
-          <view class="per-n" wx:if='{{user.userName == null}}'>{{phone}}</view>
-          <view class="per-n" wx:else>{{user.userName}}</view>
-          <view class="hui" wx:if='{{user.memberType == 1}}'>
+          <view class="per-n">正国</view>
+          <view class="hui">
             <image src="../../images/aix (3).png" />
-          </view>
-           <view class="hui" wx:if='{{user.memberType == 2}}'>
-            <image src="../../images/aix0.png" />
-          </view>
-           <view class="hui" wx:if='{{user.memberType == 3}}'>
-            <image src="../../images/aix (4).png" />
           </view>
         </view>
         <view>
@@ -57,22 +47,21 @@
             <image src="../../images/aix (1).png" />
           </view>
         </view>
-        <view class="jies" wx:if='{{user.publicSlogan}}'>{{user.publicSlogan}}</view>
-        <view class="jies" wx:else>请设置你的公益宣言</view>
+        <view class="jies">怀念家乡，回馈感恩，饮水思源，滴水之恩</view>
       </view>
       <view class="members">
         <view class="kait">
           <image src="../../images/aix2.png" />
         </view>
-        <view class="kait-n" wx:if='{{user.memberType == 0}}'>开通会员</view>
+        <view class="kait-n">开通会员</view>
       </view>
       <view class="shouyi">
         <view class="shouy-z">
-          <view>{{user.transactionFinishAmount}}</view>
+          <view>645894</view>
           <view class="shouy-n">分销收益</view>
         </view>
         <view class="shouy-z">
-          <view>{{user.integral}}</view>
+          <view>212</view>
           <view class="shouy-n">艺呗</view>
         </view>
       </view>
