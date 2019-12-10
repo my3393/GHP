@@ -47,7 +47,7 @@
   </view>
 
   <view class="classify">
-    <view class="class-one" wx:for="{{className}}" wx:key="{{item.id}}" data-id='{{item.id}}'>
+    <view class="class-one" wx:for="{{className}}" wx:key="{{item.id}}" data-id='{{item.id}}' bindtap="search">
       <view class="class-img "><image class="skeleton-radius" src="{{item.classifyImgOss}}"></image></view>
       <view class="class-n">{{item.classifyName}}</view>
     </view>

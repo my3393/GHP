@@ -160,6 +160,7 @@ page {
 .expressRecord-status-address {
     font-size: 22rpx;
     color: #999;
+    line-height: 40rpx;
 }
 
 .expressRecord-dating {

@@ -8,9 +8,9 @@ Page({
   data: {
 
     imgUrls: [
-      '../../images/member1.png',
-      '../../images/member2.png',
-      '../../images/member3.png'
+      'https://www.xingtu-group.cn/xcx_img/member1.png',
+      'https://www.xingtu-group.cn/xcx_img/member2.png',
+      'https://www.xingtu-group.cn/xcx_img/member3.png'
     ],
     current: 0,
     animationData: {},

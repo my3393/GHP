@@ -45,7 +45,7 @@
 <view class="adres" hidden="{{address}}">
   <view class="adres_h1">
     选择地区
-    <view class="detel">
+    <view class="detel" bindtap="detel">
     <image src="../../images/xxx.png"></image>
     </view>
   </view>

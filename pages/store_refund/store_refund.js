@@ -125,6 +125,44 @@ Page({
        typeId: this.data.type[e.detail.value].id,
      })
   },
+  //入驻提交
+  submit(){
+    let that = this;
+    let data = {
+      storeLogo: that.data.post1_name,
+        storeName:that.data.name,
+      classifyId:that.data.typeId,
+        provinceId:province_id,
+      cityId:city_id,
+        areaId:area_id,
+      townId:town_id,
+        publicSlogan:that.data.xuan,
+      saleImg:zhao1,
+        foodImg:zhao2,
+      businessImg:zhao3,
+        introduce:that.data.value,
+    }
+
+    app.res.req('app-web/store/submitapply', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          audits: res.data,
+          audit: 2
+        })
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //重新提交
   again(){
     province_id = this.data.audits.provinceId;
@@ -293,6 +331,76 @@ Page({
         showCancel: false
       })
     })
+  },
+  //图片上传
+  chooseImages(e) {
+    var that = this;
+
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      success: res => {
+        // console.log(res.tempFilePaths[0]);
+        var tempFilePaths = res.tempFilePaths;
+        wx.showLoading();
+        const uploadTask = wx.uploadFile({
+          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          filePath: tempFilePaths[0],
+          name: 'file',
+          header: {
+            "Content-Type": "multipart/form-data",
+            'accept': 'application/json',
+            'token': wx.getStorageSync("token")
+          },
+          formData: {
+            // 'token': wx.getStorageSync("etoken")
+          },
+          // UploadTask.onProgressUpdate(function callback)
+          dataType: 'json',
+          success(res) {
+
+            let datas = JSON.parse(res.data)
+            console.log(datas)
+            if (e.currentTarget.id == 0) {
+              that.setData({
+                zhaos1: datas.data.url,
+                zhao1: false
+              })
+              zhao1 = datas.data.fileName
+            } else if (e.currentTarget.id == 1) {
+              images.push(datas.data.url)
+              simages.push(datas.data.fileName)
+              that.setData({
+                images: images,
+                img_num: images.length
+              })
+              if (simages.length == 9) {
+                that.setData({
+                  img_show: !that.data.img_show
+                })
+              }
+            }
+            wx.hideLoading();
+            // do something
+            wx.showToast({
+              title: '上传成功',
+              icon: 'none'
+            })
+          }
+        })
+        uploadTask.onProgressUpdate((res) => {
+          console.log('上传进度', res.progress)
+          console.log('已经上传的数据长度', res.totalBytesSent)
+          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+        })
+        that.setData({
+          postersies: res.tempFilePaths[0]
+        })
+      }
+    })
+
+
   },
   //勾选
   gx(){

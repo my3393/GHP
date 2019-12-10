@@ -1,5 +1,5 @@
 <!--pages/sure_order/sure_order.wxml-->
-<view class="top">
+<view class="top" wx:if='{{user.memberType == 0}}'>
     <view class="top_img">
         <image  src="../../images/hyjlb.png" />
     </view>
@@ -84,8 +84,8 @@
             <view class="good_list">
                 <view class='goodsname dan'>{{detail.productName}}</view>
             <text class='specification'>{{detail.provinceName}} {{detail.cityName}}</text>
-            <view class="guig" wx:for='{{sku.skus}}' wx:key="{{item.id}}">
-                <view class='gui-g'>{{item.value}}</view>
+            <view class="guig">
+                <view class='gui-g'  wx:for='{{sku.skus}}' wx:key="{{item.id}}">{{item.value}}</view>
             </view>
             <text class='price'><text class="yuan">￥</text>{{sku.price}}</text>
             <view class="good_num">×{{buyNum}}</view>

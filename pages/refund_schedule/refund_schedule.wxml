@@ -1,114 +1,123 @@
 <view class='g_con'>
-    <view class='topExpress'>
-        <view class="topExpress_t">订单编号：813291235464788594</view>
-        <view class="topExpress_b">退款进度：<text class="yan">商家处理中</text> </view>
-    </view>
-    <!-- 物流时间轴 -->
-    <view class='expressRecord'>
-        <!-- 顶部收货地址 -->
-        <view class='expressRecord-getAddress'>
-            <view class='expressRecord-top'>
-                <view class='getAddress-icon'>收</view>
-                <view class='getAddress-text'>[收货地址] 广东省深圳市南山区 南山街道 亿利达大厦</view>
-            </view>
-        </view>
-        <!-- 顶部收货地址半个时间轴线 -->
-        <view class='noReach-online-top-close'></view>
-        <!-- 单个物流记录点时间轴：当前正在进行的物流状态 -->
-        <view class='expressRecord-single-close'>
-            <!-- 左边子容器 -->
-            <view class='expressRecord-single-noReach-online-top-close'>
-                <!-- 正在进行的时间轴上半个时间线 -->
-                <view class='online-top-closing'></view>
-                <!-- 正在进行的时间轴点 -->
-                <view class='dot-closing'></view>
-                <!-- 正在进行的时间轴下半个时间线 -->
-                <view class='online-bottom'></view>
-            </view>
-            <!-- 右边子容器 -->
-            <view class='expressRecord-text'>
-                <view class='expressRecord-statusing'>运输中</view>
-                <view class='expressRecord-status-addressing'>武汉转运中心公司 已发出，下一站 深圳转运中心</view>
-            </view>
-            <!-- 相对父级容器绝对定位的日期 -->
-            <!-- <view class='expressRecord-dating'>
+  <view class='topExpress'>
+    <view class="topExpress_t">订单编号：{{orderNo}}</view>
+    <view class="topExpress_b">退款进度：
+      <text class="yan">{{title}}</text> </view>
+  </view>
+  <!-- 物流时间轴 -->
+  <view class='expressRecord'>
+    <!-- 顶部收货地址 -->
+    <!-- <view class='expressRecord-getAddress'>
+      <view class='expressRecord-top'>
+        <view class='getAddress-icon'>收</view>
+        <view class='getAddress-text'>[收货地址] 广东省深圳市南山区 南山街道 亿利达大厦</view>
+      </view>
+    </view> -->
+    <!-- 顶部收货地址半个时间轴线 -->
+    <!-- <view class='noReach-online-top-close'></view> -->
+    <!-- 单个物流记录点时间轴：当前正在进行的物流状态 -->
+    <view class='expressRecord-single-close'>
+      <!-- 左边子容器 -->
+      <view class='expressRecord-single-noReach-online-top-close'>
+        <!-- 正在进行的时间轴上半个时间线 -->
+        <!-- <view class='online-top-closing'></view> -->
+        <view style="height:80rpx;"></view>
+        <!-- 正在进行的时间轴点 -->
+        <view class='dot-closing'></view>
+        <!-- 正在进行的时间轴下半个时间线 -->
+        <view class='online-bottom'></view>
+      </view>
+      <!-- 右边子容器 -->
+      <view class='expressRecord-text'>
+        <view class='expressRecord-statusing'>{{top_1.title}}</view>
+        <view class='expressRecord-status-address' wx:if='{{top_1.content1 != null}}'>{{top_1.content1}}</view>
+        <view class='expressRecord-status-address' wx:if='{{top_1.content2 != null}}'>{{top_1.content2}}</view>
+       
+        <view class='expressRecord-status-address'>{{top_1.createDate}}</view>
+      </view>
+      <!-- 相对父级容器绝对定位的日期 -->
+      <!-- <view class='expressRecord-dating'>
                 <view class='expressRecord-date-text'>昨天</view>
                 <view class='expressRecord-date-time'>20:39</view>
             </view> -->
-        </view>
-        <!-- 单个物流记录点时间轴：已经过去的物流状态 -->
-        <view class='expressRecord-single-close'>
-            <view class='expressRecord-single-noReach-online-top-close'>
-                <view class='online-top-close'></view>
-                <view class='dot-close'></view>
-                <view class='online-bottom'></view>
-            </view>
-            <view class='expressRecord-text'>
-                <view class='expressRecord-status'></view>
-                <view class='expressRecord-status-address'>武汉转运中心公司 已收入</view>
-            </view>
-
-        </view>
-        <view class='expressRecord-single-close'>
-            <view class='expressRecord-single-noReach-online-top-close'>
-                <view class='online-top-close'></view>
-                <view class='dot-close'></view>
-                <view class='online-bottom'></view>
-            </view>
-            <view class='expressRecord-text'>
-                <view class='expressRecord-status'></view>
-                <view class='expressRecord-status-address'>湖北省孝感市汉川市公司 已打包</view>
-                <view class="date reason">  2019-09-19 17:03:53 </view>
-            </view>
-
-        </view>
-         <view class='expressRecord-single-close'>
-            <view class='expressRecord-single-noReach-online-top-close'>
-                <view class='online-top-close'></view>
-                <view class='dot-close'></view>
-                <view class='online-bottom'></view>
-            </view>
-            <view class='expressRecord-text'>
-                <view class='expressRecord-status'></view>
-                <view class='expressRecord-status-address'>湖北省孝感市汉川市公司 已打包</view>
-                <view class="date reason">  2019-09-19 17:03:53 </view>
-            </view>
-
-        </view>
-
-        <view class='expressRecord-single-close'>
-            <view class='expressRecord-single-noReach-online-top-close'>
-                <view class='online-top-close'></view>
-                <view class='dot-close'></view>
-                <view class='online-bottom'></view>
-            </view>
-            <view class='expressRecord-text'>
-                <view class='expressRecord-status'>已揽件</view>
-                <view class='expressRecord-status-address'>湖北省孝感市汉川市公司 已收件</view>
-                <view class="date reason">  2019-09-19 17:03:53 </view>
-            </view>
-
-        </view>
-        <view class='expressRecord-single-close'>
-            <view class='expressRecord-single-noReach-online-top-close'>
-                <view class='online-top-close'></view>
-                <view class='dot-close'></view>
-                <!-- 起始位置，下半个时间轴线不用 -->
-                <view class='online-bottom-start'></view>
-            </view>
-            <view class='expressRecord-text bottom_sta'>
-                <view class='expressRecord-status'>
-                                您的退款申请已提交
-                            </view>
-                <!-- <view class='expressRecord-status-address'>卖家发货</view> -->
-                <view class="reason">理由：卖家未按约定时间发货</view>
-                <view class="reason">补充说明</view>
-                <view class="date reason">  2019-09-19 17:03:53 </view>
-            </view>
-            <!-- <view class='expressRecord-date'>
-                <view class='expressRecord-date-text'>昨天</view>
-                <view class='expressRecord-date-time'>13:50</view>
-            </view> -->
-        </view>
     </view>
+    <!-- 单个物流记录点时间轴：已经过去的物流状态 -->
+    <view class='expressRecord-single-close' wx:for='{{detail}}' wx:key='item'>
+      <view class='expressRecord-single-noReach-online-top-close'>
+        <view class='online-top-close'></view>
+        <view class='dot-close'></view>
+        <view class='online-bottom'></view>
+      </view>
+      <view class='expressRecord-text'>
+        <view class='expressRecord-status'>{{item.title}}</view>
+        <view class='expressRecord-status-address' wx:if='{{item.content1 != null}}'>{{item.content1}}</view>
+        <view class='expressRecord-status-address' wx:if='{{item.content2 != null}}'>{{item.content2}}</view>
+       
+        <view class='expressRecord-status-address'>{{item.createDate}}</view>
+      </view>
+
+    </view>
+
+  </view>
 </view>
+
+
+
+<!-- <view class='expressRecord-single-close'>
+  <view class='expressRecord-single-noReach-online-top-close'>
+    <view class='online-top-close'></view>
+    <view class='dot-close'></view>
+    <view class='online-bottom'></view>
+  </view>
+  <view class='expressRecord-text'>
+    <view class='expressRecord-status'></view>
+    <view class='expressRecord-status-address'>湖北省孝感市汉川市公司 已打包</view>
+    <view class="date reason"> 2019-09-19 17:03:53 </view>
+  </view>
+
+</view>
+<view class='expressRecord-single-close'>
+  <view class='expressRecord-single-noReach-online-top-close'>
+    <view class='online-top-close'></view>
+    <view class='dot-close'></view>
+    <view class='online-bottom'></view>
+  </view>
+  <view class='expressRecord-text'>
+    <view class='expressRecord-status'></view>
+    <view class='expressRecord-status-address'>湖北省孝感市汉川市公司 已打包</view>
+    <view class="date reason"> 2019-09-19 17:03:53 </view>
+  </view>
+
+</view>
+
+<view class='expressRecord-single-close'>
+  <view class='expressRecord-single-noReach-online-top-close'>
+    <view class='online-top-close'></view>
+    <view class='dot-close'></view>
+    <view class='online-bottom'></view>
+  </view>
+  <view class='expressRecord-text'>
+    <view class='expressRecord-status'>已揽件</view>
+    <view class='expressRecord-status-address'>湖北省孝感市汉川市公司 已收件</view>
+    <view class="date reason"> 2019-09-19 17:03:53 </view>
+  </view>
+
+</view>
+<view class='expressRecord-single-close'>
+  <view class='expressRecord-single-noReach-online-top-close'>
+    <view class='online-top-close'></view>
+    <view class='dot-close'></view>
+    起始位置，下半个时间轴线不用
+    <view class='online-bottom-start'></view>
+  </view>
+  <view class='expressRecord-text bottom_sta'>
+    <view class='expressRecord-status'>
+      您的退款申请已提交
+    </view>
+    <view class='expressRecord-status-address'>卖家发货</view>
+    <view class="reason">理由：卖家未按约定时间发货</view>
+    <view class="reason">补充说明</view>
+    <view class="date reason"> 2019-09-19 17:03:53 </view>
+  </view>
+
+</view> -->

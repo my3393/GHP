@@ -21,6 +21,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.getDefaultaddress();
+   
     let idn = options.ids
 
     ids = idn.split(',')
@@ -147,20 +148,48 @@ Page({
     console.log(ids)
     let that = this;
 
-    let fordata = [];
-   
-    console.log(fordata.length)
-    for(var i in ids){
-      let obj ={}
-      obj.shopProductIds = ids[i]
-      fordata.push(obj)
+    var Str = JSON.stringify(ids);
+    let data ={
+      shopProductIdJson: Str,  
     }
-    console.log(fordata)
-    //let data = fordata
-    var schoolStr = JSON.stringify(ids);
-    let data={
-      shopProductIds: schoolStr
-    }
+    // wx.request({
+    //   url: "http://192.168.123.171:8080/app-web/shopcart/placeorder",
+    //   data: {
+        
+    //     shopProductIdJson : Str, 
+    //   },
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'token': wx.getStorageSync('token'),
+    //   },
+    //   dataType: 'json',
+    //   success: function (res) {
+    //     console.log(res.data.data)
+    //     if (res.data.status === 100) {
+    //       narea.push(...res.data.data)
+
+
+    //       that.setData({
+    //         narea: narea
+    //       })
+    //     } else if (res.data.status === 103) {
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: 'none'
+    //       })
+    //       wx.redirectTo({
+    //         url: '/pages/login/login',
+    //       })
+
+    //     } else {
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: 'none'
+    //       })
+    //     }
+    //   }
+    // })
     app.res.req("app-web/shopcart/placeorder", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
@@ -289,11 +318,13 @@ Page({
       })
       return false
     }
+    var Str = JSON.stringify(ids);
+    var input = JSON.stringify(that.data.inpu)
     let data = {
-      shopProductIds: ids,
+      shopProductIdJson : Str,
       
       addressId: that.data.addressId,
-      leaveMessages: that.data.inpu,
+      leaveMessageJson: that.data.inpu,
       terminal: 'xx'
 
     }
@@ -339,15 +370,20 @@ Page({
               icon: 'none',
               duration: 1000
             })
-            wx.navigateBack({
-              delta: 1
-            })
+            if (that.data.user.memberType == 0){
+              wx.redirectTo({
+                url: '../pay_success/pay_success?id=' + that.data.Price.payPrice,
+              })
+            }else{
+              wx.redirectTo({
+                url: '../pay_success/pay_success?id=' + that.data.Price.memberPayPrice,
+              })
+            }
+
           },
           fail(res) {
-            wx.showToast({
-              title: '支付失败',
-              icon: 'none',
-              duration: 1000
+            wx.redirectTo({
+              url: '../order_all/order_all',
             })
           }
         })

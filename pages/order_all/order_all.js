@@ -83,11 +83,41 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //查看物流
+  wul(e){
+    wx.navigateTo({
+      url: '../logistics_detail/logistics_detail?id=' + e.currentTarget.id,
+    })
+  },
   //订单详情
   order_detail(e){
      wx.navigateTo({
        url: '../order_detail/order_detail?id=' + e.currentTarget.id,
      })
+  },
+  //确认签收
+  quer(e) {
+    let that = this;
+    let data = {
+      id:e.currentTarget.id
+    }
+
+    app.res.req('app-web/userorder/confirmreceipt', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        detail = []
+        that.getDetail();
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   getDetail() {
     let that = this;

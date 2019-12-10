@@ -128,7 +128,7 @@ Page({
                         console.log(res.code)
                         setTimeout(function () {
                           wx.request({
-                            url: "http://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
+                            url: "https://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
                             data: {
                               code: res.code,                          
                               encryptedData: encryptedData,

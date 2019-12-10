@@ -19,11 +19,26 @@ Page({
       { name: '商家缺货' },
       { name: '其他原因' },
     ],
+    cargos:[
+      { name: '未收到货' },
+      { name: '已收到货' }, 
+    ],
+    tuiks:[
+      { name: '多买/买错/不想要' },
+      { name: '快递无记录' },
+      { name: '少货/空包裹' },
+      { name: '商家发错货' },
+      { name: '未按约定时间' },
+      { name: '快递一直未送达' },
+      { name: '商品描述与实物不符' },
+      { name: '其他' },
+    ],
     refundType:'',
     cancel:'',
     sum:0,
     img_num:0,
     isshow:false,
+    isHuo:true,
   },
 
   /**
@@ -33,12 +48,15 @@ Page({
     console.log(options)
      id = options.id,
      status = options.status
-     if(options.status == 1){
+     this.setData({
+       z_status : options.z_status
+     })
+     if(options.z_status == 0){
        this.setData({
          refunds: [{ name: '我要退款',id:'1'}],
          refundType:1
        })
-     }else if(options.status == 2){
+     }else if(options.z_status == 1){
        this.setData({
          refunds: [{ name: '退货退款', id: '3' }, { name: '仅退款',id:'2'}],
          refund: '退货退款',
@@ -107,6 +125,9 @@ Page({
       refund: this.data.refunds[e.detail.value].name,
       refundType: this.data.refunds[e.detail.value].id
     })
+    if(e.detail.value == 1 && this.data.z_status == 1){
+       this.setData({isHuo:false})
+    }
   },
   //说明
   valueChange(e){

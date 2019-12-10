@@ -1,8 +1,8 @@
 <!-- pages/order_refund/order_refund.wxml -->
-<view class='infor'>
+<view class='infor' style="margin-top:20rpx;">
   <view class='inform'>申请类型</view>
   <view class='inforin '>
-    <picker range="{{refunds}}" range-key="name"  bindchange="bindrefund">
+    <picker range="{{refunds}}" range-key="name" bindchange="bindrefund">
       <input disabled='true' type='text' value='{{refund}}'></input>
     </picker>
   </view>
@@ -10,20 +10,41 @@
     <image src='../../images/enter.png'></image>
   </view>
 </view>
- <view style="margin-top:20rpx;">
-   <view class='infor'>
-  <view class='inform'>申请原因</view>
-  <view class='inforin '>
-    <picker value="{{index}}" range="{{cancels}}" range-key="name" bindchange="bindcancel">
-      <input disabled='true' type='text' value='{{cancel}}' placeholder="请点击选择申请原因"></input>
-    </picker>
+   <view class='infor' wx:if='{{z_status == 0}}'>
+    <view class='inform'>申请原因</view>
+    <view class='inforin '>
+      <picker value="{{index}}" range="{{cancels}}" range-key="name" bindchange="bindcancel">
+        <input disabled='true' type='text' value='{{cancel}}' placeholder="请点击选择申请原因"></input>
+      </picker>
+    </view>
+    <view class='enter'>
+      <image src='../../images/enter.png'></image>
+    </view>
   </view>
-  <view class='enter'>
-    <image src='../../images/enter.png'></image>
+  <view class='infor' wx:if='{{z_status == 1}}'>
+    <view class='inform'>退款原因</view>
+    <view class='inforin '>
+      <picker value="{{index}}" range="{{tuiks}}" range-key="name" bindchange="bindtuik">
+        <input disabled='true' type='text' value='{{tuik}}' placeholder="请点击选择退款原因"></input>
+      </picker>
+    </view>
+    <view class='enter'>
+      <image src='../../images/enter.png'></image>
+    </view>
   </view>
-</view>
- </view>
-<view class='infor' style="margin-top:20rpx">
+  <view class='infor' hidden="{{isHuo}}">
+    <view class='inform'>货物状态</view>
+    <view class='inforin '>
+      <picker value="{{index}}" range="{{cancels}}" range-key="name" bindchange="bindcancel">
+        <input disabled='true' type='text' value='{{cancel}}' placeholder="请点击选择申请原因"></input>
+      </picker>
+    </view>
+    <view class='enter'>
+      <image src='../../images/enter.png'></image>
+    </view>
+  </view>
+
+<view class='infor'>
   <view class='inform'>退款金额</view>
   <view class="yuan yan">￥{{price}}</view>
 </view>
@@ -50,6 +71,5 @@
 </view>
 
 <view class="footer">
-   <view class="submit" bindtap="submit">提交申请</view>
+  <view class="submit" bindtap="submit">提交申请</view>
 </view>
-

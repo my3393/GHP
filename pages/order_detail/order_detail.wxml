@@ -47,14 +47,14 @@
   </view>
 </view>
 <view class="logistics">
-  <view wx:if='{{detail.orderStatus == 2 || detail.orderStatus == 3}}' class="chak">
+  <view wx:if='{{detail.orderStatus == 2 || detail.orderStatus == 3}}' class="chak" bindtap="wul">
     <view>
       <view class="logistics_img d_sh">
         <image src="../../images/d-sh.png" />
       </view>
-      <view class='logistics_n'>【广州市】 已到达广州分拨中心</view>
+      <view class='logistics_n'>{{logistics.status}}</view>
     </view>
-    <view class="logistics_date">2019-10-18 16:45:41</view>
+    <view class="logistics_date">{{logistics.time}}</view>
     <view class="logistics_right">
       <image src="../../images/right.png" />
     </view>
@@ -99,7 +99,7 @@
           </view>
           <view class="good_num">* {{item.buyCount}}</view>
         </view>
-        <view class="tuik" bindtap="refund" id="{{item.id}}" wx:if='{{item.orderStatus == 1}}'>退款</view>
+        <view class="tuik" bindtap="refund" data-status='{{item.orderStatus}}' id="{{item.id}}" wx:if='{{detail.orderStatus != 0 && item.orderStatus == 0 || item.orderStatus == 1}}'>退款</view>
         <view class="tuik zhong" bindtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15}}'>退款中</view>
       </view>
     </view>
@@ -170,7 +170,7 @@
     <view class="footer_r">
 
         <view class="tuik">确认签收</view>
-                <view class="tuik">查看物流</view>
+                <view class="tuik" bindtap="wul" >查看物流</view>
     </view>
 </view>
 <!-- 确认收货后 -->
@@ -178,7 +178,7 @@
     <view class="footer_r">
 
         <view class="tuik">立即评价</view>
-                <view class="tuik">查看物流</view>
+                <view class="tuik" bindtap="wul">查看物流</view>
     </view>
 </view>
 <!-- 删除订单 -->

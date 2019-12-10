@@ -1,5 +1,8 @@
 /* pages/logistics_detail/logistics_detail.wxss */
 @import '../refund_schedule/refund_schedule';
+page{
+  font-size: 24rpx;
+}
 .top{
   width: 100%;
   background: #fff;
@@ -10,16 +13,20 @@
   display: flex;
   justify-content: space-around;
   line-height: 60rpx;
+  z-index: 9;
 }
 .top_a{
   color: #f12200;
   border-bottom: 2rpx solid #f12200;
 }
+.expressRecord {
+  padding-bottom: 90rpx
+}
 .getAddress-icon{
   width: 21rpx;
   height: 30rpx;
   background: #fff;
-  margin-left: 85rpx;
+  margin-left: 25rpx;
 }
 .getAddress-icon image{
   width: 100%;
@@ -64,3 +71,47 @@
 
   color: #666;
 }
+
+/* 追踪 */
+
+/* 下部分 */
+.logistics_centent{
+  position: absolute;
+  left: 100rpx;
+  font-size: 24rpx;
+  color: #666;
+
+}
+.icon{
+  width: 20rpx;
+  height: 20rpx;
+  background: white;
+  border-radius: 50%;
+  display: inline-block;
+  margin:0rpx 20rpx 0rpx 40rpx;
+}
+.in{
+  border: 1rpx solid red;
+  animation: my_animation 2s infinite;
+}
+@keyframes my_animation{
+    100% {  
+    transform: scale(2);  
+    background-color: transparent;  
+    }  
+}
+ 
+.no_in{
+  border: 1rpx solid #d0d0d0;
+}
+.on{
+  background: #d0d0d0;
+  height: 160rpx;
+  width: 1px;
+  margin-left: 50rpx;
+}
+.stats{
+  color: #000!important;
+  margin-bottom: 40rpx;
+}
+

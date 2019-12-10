@@ -90,8 +90,9 @@ Page({
           duration:3000
         })
 
-       }else if(res.status == 1004 || res.status == 1005 || res.status == 1018 ){
-           wx.redirectTo({
+       }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
+         console.log('未登录')
+           wx.navigateTo({
              url: '../login/login',
            })
        } else {
@@ -245,8 +246,9 @@ Page({
   buy() {
     let that = this;
 
-    console.log(selectIndexArray.length)
+   
     if(user.id == null){
+      
       console.log(selectIndexArray.length)
       wx.navigateTo({
         url: '../login/login?id=' + id,
@@ -331,6 +333,7 @@ Page({
 
     })
   },
+ 
   //收藏
   Collection() {
     let that = this;

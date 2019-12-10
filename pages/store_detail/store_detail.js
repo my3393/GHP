@@ -169,7 +169,11 @@ Page({
   getList() {
     let that = this;
     let data = {
-      storeId: id
+      storeId: id,
+      currentPage: currentPage,
+      type: type,
+      keyword: keyword,
+      productType: productType
     }
 
     app.res.req("app-web/store/productlist", data, (res) => {

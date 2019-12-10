@@ -1,9 +1,9 @@
 <!-- pages/sure_order/sure_order.wxml -->
-<view class="top">
+<view class="top" wx:if='{{user.memberType == 0}}'>
     <view class="top_img">
         <image src="../../images/hyjlb.png" />
     </view>
-    <view class="top_n">开通会员，预计本单最高可为您节省￥56.78</view>
+    <view class="top_n">开通会员，预计本单最高可为您节省￥{{detail.payPrice - detail.memberPayPrice}}</view>
     <view class="top_r">></view>
 </view>
 <view wx:if='{{adress.length != 0}}' bindtap='choose'>
@@ -60,7 +60,7 @@
                 <image src="../../images/right.png" />
             </view>
         </view>
-        <view wx:for="{{item.products}}">
+        <view wx:for="{{item.products}}" style="margin-top:40rpx;">
             <view class="good_img">
                 <image src="{{item.productImgOss}}" />
             </view>

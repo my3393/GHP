@@ -75,6 +75,12 @@ Page({
   onReachBottom: function () {
 
   },
+  //查看物流
+  wul(e) {
+    wx.navigateTo({
+      url: '../logistics_detail/logistics_detail?id=' + id,
+    })
+  },
   //拨打电话
   phone(){
     let that = this;
@@ -156,7 +162,7 @@ Page({
   //退款
   refund(e){
     wx.navigateTo({
-      url: '../order_refund/order_refund?id=' + e.currentTarget.id + '&status=' + this.data.detail.orderStatus, 
+      url: '../order_refund/order_refund?id=' + e.currentTarget.id + '&status=' + this.data.detail.orderStatus + '&z_status=' + e.currentTarget.dataset.status, 
     })
   },
   //付款
@@ -321,10 +327,14 @@ Page({
     app.res.req('app-web/userorder/detail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-
+        let logistics=JSON.parse(res.data.logisticsInfo)
+        console.log(logistics)
         that.setData({
-          detail: res.data
+          detail: res.data,
+          logistics: logistics.result.list[0]
         })
+       
+        console.log(that.data.logistics)
         that.PaymentTime();
         that.PaymentTimes();
 

@@ -77,6 +77,18 @@ Page({
   onReachBottom: function () {
 
   },
+  //实名认证
+  certification(){
+    wx.navigateTo({
+      url: '../certification/certification',
+    })
+  },
+  //我的收藏
+  collection(){
+    wx.navigateTo({
+      url: '../mine_collection/mine_collection',
+    })
+  },
   //会员
   member(){
     wx.navigateTo({

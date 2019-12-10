@@ -1,9 +1,7 @@
 // pages/logistics_detail/logistics_detail.js
 const app = getApp();
-import {
-  Base64
-} from '../../utils/base64.js';
-const base64 = new Base64();
+let id
+
 Page({
 
   /**
@@ -21,7 +19,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    id = options.id
+   this.getDetail();
    // const base64 = new Base64();
    //console.log(data)
   },
@@ -74,5 +73,34 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
+  getDetail() {
+    let that = this;
+    let data = {
+      id
+    }
+
+    app.res.req('app-web/userorder/logisticsinfo', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.hideLoading()
+       
+        that.setData({
+          isshow: false,
+          detail:res.data[0],
+          details:res.data[0].details[0],
+          logistics: JSON.parse(res.data[0].logisticsDetail)
+        })
+        console.log(that.data.logistics)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

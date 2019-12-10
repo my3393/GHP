@@ -138,7 +138,7 @@ Page({
     }
   },
   //取消
-  detel(){
+  detel() {
     this.setData({
       address: true,
       ismask: true,

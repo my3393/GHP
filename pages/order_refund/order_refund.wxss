@@ -34,7 +34,7 @@ page{
   right: 20rpx;
    width: 24rpx;
   height: 24rpx;
-  top: 5 rpx;
+  top: 7rpx;
 }
 .enter image{
   width: 14rpx;

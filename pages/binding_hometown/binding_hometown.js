@@ -87,12 +87,20 @@ Page({
   onShareAppMessage: function () {
 
   },
-  //隐藏
-  detel(){
-    this.setData({
-      address:false,
+  //选购特产
+  home(){
+    wx.switchTab({
+      url: '../e_home/home',
     })
   },
+  //取消
+  detel() {
+    this.setData({
+      address: true,
+      ismask: true,
+    })
+  },
+ 
   diz(){
     this.getprov();
      this.setData({

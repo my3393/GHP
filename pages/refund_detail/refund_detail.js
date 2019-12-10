@@ -63,6 +63,12 @@ Page({
   onReachBottom: function () {
 
   },
+  //退款进度
+  jind(){
+    wx.navigateTo({
+      url: '../refund_schedule/refund_schedule?id=' + id + '&orderNo=' + this.data.detail.orderNo,
+    })
+  },
   //订单投诉
   complain(){
      wx.navigateTo({
@@ -111,7 +117,7 @@ Page({
     app.res.req('app-web/userorder/revocationcount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-         if(res.data == 0){
+         if(res.data == 2){
           wx.showToast({
             title: '当前撤销机会已用完，不能撤销',
             icon:'none',

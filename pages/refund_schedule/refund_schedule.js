@@ -1,5 +1,7 @@
 // pages/refund_schedule/refund_schedule.js
 const app = getApp();
+let id;
+let top_1;
 Page({
 
   /**
@@ -13,7 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+     id = options.id
+     this.setData({
+       orderNo: options.orderNo
+     })
+     this.getDetail();
   },
 
   /**
@@ -57,11 +63,34 @@ Page({
   onReachBottom: function () {
 
   },
+  getDetail() {
+    let that = this;
+    let data = {
+      id: id
+    }
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+    app.res.req('app-web/userorder/refundprogress', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        top_1 = res.data.splice((res.data.length - 1), 1)[0]
+        console.log(res.data)
+        console.log(top_1)
+        that.setData({
+          top_1:top_1,
+          detail: res.data,
+          title: top_1.title
+        })
 
-  }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

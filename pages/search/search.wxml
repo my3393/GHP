@@ -3,7 +3,7 @@
   <view class='a-nav bg-white' style='height:{{navH}}px'>
     <view class='a-nav-title'>
       <view class="inpu">
-        <input placeholder="商家，店铺名称"></input>
+        <input placeholder="商家，店铺名称" value="{{value}}" bindinput="value"></input>
       </view>
 
       <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image>
@@ -63,15 +63,15 @@
     </view>
   </view> -->
   <view style='margin-top:{{navH}}px'>
-    <view class="store">
+    <view class="store" wx:for='{{store}}' wx:key='item' bindtap="store" id="{{item.id}}">
       <view class="store-img">
         <image src="../../images/store.png"></image>
       </view>
       <view class="store-n dan">搜索
-        <text style="color:#f12200">枸杞Niewjn 你和我你覅uewjhnfr的妞儿发呢牛围观热分为发改委</text>店铺</view>
+        <text style="color:#f12200">{{item.storeName}}</text>店铺</view>
     </view>
-    <view class="store">
-      <view class='store-name dan'>紧密为附近额外</view>
+    <view class="store" wx:for='{{detail}}' wx:key='item' id="{{item.id}}" bindtap="good">
+      <view class='store-name dan'>{{item.productName}}</view>
       <view class="store-right">
         <image src="../../images/right.png" />
       </view>

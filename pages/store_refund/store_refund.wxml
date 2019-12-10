@@ -138,14 +138,14 @@
 
     <view class="audit" wx:if="{{audit == 0}}">
         <view class="kong_img">
-          <image src="../../images/noplay.png"></image>
+          <image src="../../images/store_z.png"></image>
         </view>
         <view> 商家入驻审核中</view>
         <view>平台将在1~3个工作日反馈审核结果</view>
     </view>
     <view class="audit" wx:if="{{audit == 1}}">
       <view class="kong_img">
-        <image src="../../images/noplay.png"></image>
+        <image src="../../images/store_true.png"></image>
       </view>
       <view> 恭喜您，成功入驻善家购</view>
       <view class="pc">
@@ -160,7 +160,7 @@
     </view>
     <view class="audit" wx:if='{{audit == 2}}'>
       <view class="kong_img">
-        <image src="../../images/noplay.png"></image>
+        <image src="../../images/store_no.png"></image>
       </view>
       <view> 商家入驻审核未通过</view>
       <view class="pc">

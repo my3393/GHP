@@ -41,7 +41,7 @@
           <!-- <text class='specification'>{{item.}} {{item.}} {{item.}} {{item.}}</text> -->
           <view class="guig">
             <view class='gui-g'>{{item.specification}}</view>
-            <view class="tuik" wx:if='{{item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15}}'>退款中</view>
+            <view class="tuik" wx:if='{{detail.orderStatus != 3 && detail.orderStatus != 4 && item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15}}'>退款中</view>
             <view class="tuik" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9 || item.orderStatus == 12 || item.orderStatus == 16}}'>退款成功</view>
           </view>
 
@@ -64,24 +64,24 @@
         <view class="pay" wx:if='{{item.orderStatus == 0}}' catchtap="pay" id="{{item.id}}">立即付款</view>
         <view class="wuliu" wx:if='{{item.orderStatus == 2}}'>
 
-          <view class="quer" >
+          <view class="quer" catchtap="quer" id="{{item.id}}">
             确认收货
           </view>
-          <view>
+          <view catchtap="wul" id="{{item.id}}"> 
             查看物流
           </view>
         </view>
         <view class="wuliu" wx:if='{{item.orderStatus == 3}}'>
 
-          <view class="quer" >
+          <view class="quer" catchtap="pinj" id="{{item.id}}">
             立即评价
           </view>
-          <view> 
+          <view catchtap="wul" id="{{item.id}}">  
             查看物流
           </view>
         </view>
         <view class="wuliu" wx:if='{{item.orderStatus == 4}}'>
-          <view>删除订单</view>
+          <view catchtap="cance" id="{{item.id}}">删除订单</view>
         </view>
       </view>
     </view>

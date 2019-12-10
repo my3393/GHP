@@ -44,11 +44,13 @@
     "pages/sure_orders/sure_orders",
     "pages/apply_fund/apply_fund",
     "pages/mine_fund/mine_fund",
-    "pages/order_z_detail/order_z_detail"
+    "pages/login/login",
+    "pages/order_z_detail/order_z_detail",
+    "pages/pay_success/pay_success"
   ],
   "tabBar": {
     "color": "#808080",
-    "selectedColor": "#fe5ba9",
+    "selectedColor": "#f12200",
     "borderStyle": "white",
     "list": [
       {
@@ -85,7 +87,7 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ff4e17",
+    "navigationBarBackgroundColor": "#f12200",
     "navigationBarTitleText": "善家购",
     "navigationBarTextStyle": "white"
   },

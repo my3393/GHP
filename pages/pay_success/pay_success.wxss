@@ -1,0 +1,46 @@
+/* pages/pay_success/pay_success.wxss */
+.top{
+  width: 100%;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+.top_img{
+  display: inline-block;
+}
+.top_img image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.xiao{
+  margin: 40rpx 0;
+  font-size: 26rpx;
+}
+.menoy{
+  font-size: 48rpx;
+  margin-bottom: 40rpx;
+}
+.chak{
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 500rpx;
+  display: inline-block;
+  border-radius: 45rpx;
+}
+.home{
+  border: 1rpx solid #ccc;
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  text-align: center;
+  height: 80rpx;
+  line-height: 80rpx;
+  width: 500rpx;
+  display: inline-block;
+  border-radius: 45rpx;
+}

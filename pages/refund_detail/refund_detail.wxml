@@ -7,7 +7,7 @@
     </view>
     <view class="top_tu" wx:else>
    
-      <image src="../../images/daojis.png" />
+      <image src="../../images/daojis_h.png" />
     </view>
     <view class="top_n">退款申请已提交，商家处理中</view>
   </view>
@@ -74,24 +74,24 @@
 <view class="footer">
 <view class="footer_r" wx:if='{{status == 3 || status == 7 || status == 11 || status == 15 }}'>
          
-        <view class="tuik">退款进度</view>
+        <view class="tuik" bindtap="jind">退款进度</view>
         <view class="tuik" bindtap="chexiao">撤销申请</view>
          <view class="tuik" bindtap="complain">订单投诉</view>
     </view>
  <view class="footer_r" wx:if='{{status == 4 || status == 8 || status == 13 || status == 17 }}'>
          <view class="tuik xiug">修改申请</view>
-        <view class="tuik">退款进度</view>
+        <view class="tuik" bindtap="jind">退款进度</view>
         <view class="tuik" bindtap="chexiao">撤销申请</view>
          <view class="tuik" bindtap="complain">订单投诉</view>
     </view>
      <view class="footer_r" wx:if='{{status == 5 || status == 9 || status == 12 || status == 16 }}'>
 
-        <view class="tuik">退款进度</view>
+        <view class="tuik" bindtap="jind">退款进度</view>
 
     </view>
      <view class="footer_r" wx:if='{{status == 6 || status == 10 || status == 14 || status == 18 }}'>
 
-        <view class="tuik">退款进度</view>
+        <view class="tuik" bindtap="jind">退款进度</view>
         <view class="tuik" bindtap="chexiao">撤销申请</view>
          <view class="tuik" bindtap="complain">订单投诉</view>
     </view>

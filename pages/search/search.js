@@ -1,5 +1,7 @@
 // pages/search/search.js
-const App = getApp();
+const app = getApp();
+let keyword;
+let currentPage=1
 Page({
 
   /**
@@ -15,7 +17,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      navH: App.globalData.navHeight
+      navH: app.globalData.navHeight
     })
   },
 
@@ -71,5 +73,94 @@ Page({
     wx.navigateBack({
       data:1
     })
-  }
+  },
+  //搜索
+  value(e){
+    keyword = e.detail.value
+    this.getdetail()
+    this.getStore();
+  },
+  //搜索店铺
+  getStore() {
+    let that = this;
+    let data = { 
+      currentPage: currentPage,
+      keyword: keyword,
+    }
+
+    app.res.req("app-web/store/list", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          store: res.data
+        })
+        
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //商品详情
+  good(e){
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.id,
+    })
+  },
+  //店铺详情
+  store(e) {
+    wx.navigateTo({
+      url: '../store_detail/store_detail?id=' + e.currentTarget.id,
+    })
+  },
+  //搜索商品
+  getdetail() {
+    let that = this;
+    let data = {
+      currentPage: currentPage,
+      keyword: keyword,
+      provinceId:'',
+        cityId:'',
+      areaId:'',
+        townId:'',
+      classifyId:'',
+        typeId:'',
+      sortType:0
+    }
+
+    app.res.req("app-web/product/list", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          detail: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

@@ -60,11 +60,11 @@
         <view class="jies" wx:if='{{user.publicSlogan}}'>{{user.publicSlogan}}</view>
         <view class="jies" wx:else>请设置你的公益宣言</view>
       </view>
-      <view class="members">
+      <view class="members" bindtap="member" wx:if='{{user.memberType == 0}}'>
         <view class="kait">
           <image src="../../images/aix2.png" />
         </view>
-        <view class="kait-n" wx:if='{{user.memberType == 0}}'>开通会员</view>
+        <view class="kait-n"  > 开通会员</view>
       </view>
       <view class="shouyi">
         <view class="shouy-z">
@@ -120,9 +120,9 @@
 </view>
 <view>
   <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-    <block wx:for='{{photos}}'>
-      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
-        <image class="banner_img" src="{{item}}"></image>
+    <block >
+      <swiper-item id="{{item.ids}}" bindtap="member" class='swiper'>
+        <image class="banner_img" src="../../images/go_member.png"></image>
       </swiper-item>
     </block>
   </swiper>
@@ -148,7 +148,7 @@
       </view>
       <view>资助申请</view>
     </view>
-    <view class="din-1">
+    <view class="din-1" bindtap="collection">
       <view class="din-img">
         <image src="../../images/sc.png" />
       </view>
@@ -184,12 +184,12 @@
       <view>意见反馈</view>
     </view>
   </view>
-  <view class="dind">
-    <view class="din-1">
+  <view class="dind" >
+    <view class="din-1" bindtap="certification">
       <view class="din-img">
         <image src="../../images/zhaq.png" />
       </view>
-      <view>账号安全</view>
+      <view>实名认证</view>
     </view>
     <view class="din-1">
       <view class="din-img">

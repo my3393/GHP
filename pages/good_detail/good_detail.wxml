@@ -85,7 +85,7 @@
         ￥{{detail.lowestMemberPrice}} - {{detail.topMemberPrice}}
       </view>
     </view>
-    <view class="kait">立即开通 ></view>
+    <view class="kait" wx:if='{{user}}'>立即开通 ></view>
     <view class="kaith">分享成交预计可收入￥13.25</view>
   </view>
   <view class="dan sp_j">{{detail.productName}}</view>
@@ -95,10 +95,10 @@
   </view>
   <view class="can" bind:tap="security">
     <text class="candi">保障</text>
-    <text wx:if="{{detail.isServiceCommitment == 1}}"> 7天无理由退款  </text>
-    <text wx:if="{{detail.deliveryTimeType == 1}}">  · 当日发货</text>
-    <text wx:if="{{detail.deliveryTimeType == 2}}">  · 24小时</text>
-    <text wx:if="{{detail.deliveryTimeType == 3}}">  · 48小时</text>
+    <text wx:if="{{detail.isServiceCommitment == 1}}"> 7天无理由退款 ·  </text>
+    <text wx:if="{{detail.deliveryTimeType == 1}}">  当日发货</text>
+    <text wx:if="{{detail.deliveryTimeType == 2}}">   24小时</text>
+    <text wx:if="{{detail.deliveryTimeType == 3}}">   48小时</text>
     <view class="right">
       <image src="../../images/right.png" />
     </view>
@@ -331,3 +331,4 @@
   </view>
 </view>
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
+

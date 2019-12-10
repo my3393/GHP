@@ -73,7 +73,7 @@
 <view hidden="{{!isBang}}">
   <view class="kong">
       <view class="kong_img">
-        <image src="../../images/noplay.png" />
+        <image src="../../images/jiax.png" />
       </view>
       <view >绑定家乡</view>
       <view >随时随地选购家乡特产</view>

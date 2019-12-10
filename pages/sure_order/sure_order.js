@@ -330,8 +330,8 @@ Page({
               icon: 'none',
               duration: 1000
             })
-            wx.navigateBack({
-              delta: 1
+            wx.redirectTo({
+              url: '../pay_success/pay_success?id=' + that.data.z_price,
             })
           },
           fail(res) {
