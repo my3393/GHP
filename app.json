@@ -46,7 +46,11 @@
     "pages/mine_fund/mine_fund",
     "pages/login/login",
     "pages/order_z_detail/order_z_detail",
-    "pages/pay_success/pay_success"
+    "pages/pay_success/pay_success",
+    "pages/apply_withdrawal/apply_withdrawal",
+    "pages/apply_with_one/apply_with_one",
+    "pages/apply_bind/apply_bind",
+    "pages/apply_menoy/apply_menoy"
   ],
   "tabBar": {
     "color": "#808080",

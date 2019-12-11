@@ -87,6 +87,64 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //绑定
+   submit(){
+     let that = this;
+      if(town_id == ''){
+        wx.showToast({
+          title: '请选择绑定的地址',
+          icon:'none'
+        })
+      }else{
+        let data ={
+          provinceId:province_id,
+            cityId:city_id,
+          areaId:area_id,
+            townId:town_id,
+        }
+        app.res.req('app-web/user/bindregion', data, (res) => {
+          console.log(res.data)
+          if (res.status == 1000) {
+             that.getuser();
+          } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+            console.log(1)
+            wx.redirectTo({
+              url: '../login/login',
+            })
+          } else {
+            console.log(111)
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
+        })
+      }
+   },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('app-web/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+        wx.switchTab({
+          url: '../e_specialty/e_specialty',
+        })
+      }
+    })
+  },
   //选购特产
   home(){
     wx.switchTab({

@@ -1,5 +1,8 @@
 // pages/mine_fund/mine_fund.js
+const app = getApp();
 let status = 0;
+let detail = [];
+let currentPage = 1;
 Page({
 
   /**
@@ -63,18 +66,37 @@ Page({
   onReachBottom: function () {
 
   },
+
+  //重新提交
+  chongx(e){
+     wx.navigateTo({
+       url: '../apply_fund/apply_fund?id=' + e.currentTarget.id ,
+     })
+  },
+  //提现
+  tix(e){
+    wx.navigateTo({
+      url: '../apply_menoy/apply_menoy?id=' + e.currentTarget.id,
+    })
+  },
   //详情
   getDetail() {
     let that = this;
     let data = {
-       status:status
+       status,
+      currentPage
     }
 
     app.res.req('app-web/userproject/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        for (var i in res.data) {
+          let num = (res.data[i].raiseAmount / res.data[i].targetAmount) * 100
+          res.data[i].num = num.toFixed(2)
+        }
+        detail.push(...res.data)
         that.setData({
-          detail: res.data
+          detail: detail
         })
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
@@ -94,9 +116,10 @@ Page({
     let that = this;
     status = e.currentTarget.dataset.idx;
     currentPage = 1;
-
+    detail =[];
     that.setData({
       tar: e.currentTarget.dataset.idx
     })
+    that.getDetail();
   },
 })

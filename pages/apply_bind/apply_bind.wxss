@@ -1,0 +1,2 @@
+/* pages/apply_bind/apply_bind.wxss */
+@import '../store_refund/store_refund';

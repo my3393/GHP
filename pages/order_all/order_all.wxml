@@ -10,7 +10,7 @@
       <image src="../../images/dind.png" />
     </view>
     <view>没有相关订单</view>
-    <view class='home'>立即选购</view>
+    <view class='home' bindtap="home">立即选购</view>
     <view class="foot-boot foot-boots">
       善家购
       <view class="foot-boot-m">大爱无疆，感恩家乡</view>

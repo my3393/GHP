@@ -21,12 +21,7 @@ Page({
     code: '../../images/ma.png', //如果是服务器图片一定要先下载到本地
     ismask: true,
     istag:true,
-    photos: [
-      "https://graph.baidu.com/resource/11629b5b21495fc38faf001572947644.jpg",
-      "https://graph.baidu.com/resource/116e3b442899944bd09e901572947676.jpg",
-      "https://graph.baidu.com/resource/116b9dee63af0f77fcb8f01572947716.jpg",
-      "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
-    ],
+    
   },
 
   /**
@@ -133,16 +128,18 @@ Page({
     app.res.req("app-web/project/projectvote", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-
-        that.setData({
-          pai: res.data,
-
-        })
-
+        
+        
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
         })
+      }else if(res.status == 1027){
+         that.setData({
+           buzu:!that.data.buzu,
+           ismask:!that.data.ismask
+         })
+          
       } else {
         wx.showToast({
           title: res.msg,
@@ -240,7 +237,7 @@ Page({
       if (res.status == 1000) {
         that.getPai();
         that.setData({
-          list: res.data,
+          list: res.data[0],
          
         })
 

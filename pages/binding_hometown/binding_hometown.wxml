@@ -10,7 +10,7 @@
 
   </view>
 </view>
- <view class="submit">确定绑定</view>
+ <view class="submit" bindtap="submit">确定绑定</view>
 
 <view class="adres" hidden="{{address}}">
   <view class="adres_h1">

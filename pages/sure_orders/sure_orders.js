@@ -196,7 +196,7 @@ Page({
         that.setData({
           detail: res.data.carts,
           Price:res.data,
-          member_p: res.data.payPrice - res.data.memberPayPrice
+          member_p: (res.data.payPrice - res.data.memberPayPrice).toFixed(2)
         })
 
       } else if (res.status == 1004 || res.status == 1005) {
@@ -253,15 +253,15 @@ Page({
       if (res.status == 1000) {
         if (user.memberType == 1) {
           that.setData({
-            member_p: res.data.member1Discount * that.data.prices
+            member_p:( res.data.member1Discount * that.data.prices).toFixed(2)
           })
         } else if (user.memberType == 2) {
           that.setData({
-            member_p: res.data.member2Discount * that.data.prices
+            member_p: (res.data.member2Discount * that.data.prices).toFixed(2)
           })
         } else if (user.memberType == 3) {
           that.setData({
-            member_p: res.data.member3Discount * that.data.prices
+            member_p: (res.data.member3Discount * that.data.prices).toFixed(2)
           })
         } else {
           that.setData({
@@ -331,12 +331,19 @@ Page({
     app.res.req('app-web/order/shopcartsubmit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        setTime = setInterval(function () {
-          that.pays();
-        }, 1000)
-        setTimeout(function () {
-          clearInterval(setTime)
-        }, 8000)
+        if(res.data.index == 1007){
+          wx.showToast({
+            title: res.data.msg,
+          })
+        }else{
+          setTime = setInterval(function () {
+            that.pays();
+          }, 1000)
+          setTimeout(function () {
+            clearInterval(setTime)
+          }, 8000)
+        } 
+       
       } else {
 
         wx.showToast({

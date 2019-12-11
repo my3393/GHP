@@ -87,14 +87,14 @@
     <view class="nop_rs">{{num}}/30</view>
   </view>
   <view class="nav">
-    <textarea class="texta" value="{{sum}}" placeholder="请简要描述您当前最想解决的问题" maxlength="30" bindinput="valueChange"></textarea>
+    <textarea class="texta" placeholder="请简要描述您当前最想解决的问题" maxlength="30" bindinput="valueChange"></textarea>
   </view>
   <view class="nop">
     求助说明
     <view class="nop_rs">{{nums}}/500</view>
   </view>
   <view class="nav">
-    <textarea class="texta" value="{{sums}}" placeholder="请输入求助说明" maxlength="500" bindinput="valueChanges"></textarea>
+    <textarea class="texta" placeholder="请输入求助说明" maxlength="500" bindinput="valueChanges"></textarea>
   </view>
   <view class="submit" bindtap="submit">提交申请</view>
   <view style="height:120rpx;"></view>

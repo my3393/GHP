@@ -146,7 +146,7 @@ Page({
   },
   check(){
     this.setData({
-        checked:!that.data.checked
+        checked:!this.data.checked
     })
     if(this.data.checked == true){
      

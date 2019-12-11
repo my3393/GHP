@@ -11,7 +11,7 @@
     </view>
   </view>
   <view class="top" hidden="{{!isshow}}">
-    <view class="top-tx" wx:if='{{user.id == null}}'>
+    <view class="top-tx" wx:if='{{user.id == null}}' bindtap="login">
       <view class="tx">
         <image src="../../images/tx.png" />
       </view>

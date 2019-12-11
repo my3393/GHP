@@ -24,7 +24,6 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    console.log(JSON.parse('{"status":"0","msg":"ok","result":{"number":"9896749586139","type":"EMS","list":[{"time":"2019-11-03 16:17:46","status":"已签收,他人代收：丰巢,投递员:张松田,电话:18566260959"},{"time":"2019-11-03 14:34:33","status":"【深圳市宝安区寄递事业部机场营业部】安排投递,投递员:张松田,电话:18566260959"},{"time":"2019-11-03 14:19:53","status":"到达【深圳市宝安区寄递事业部机场营业部】"},{"time":"2019-11-03 12:54:47","status":"离开【邮政深圳市处理中心】,下一站【深圳市宝安区寄递事业部机场营业部】"},{"time":"2019-11-03 07:51:21","status":"到达【邮政深圳市处理中心】"},{"time":"2019-11-02 06:00:48","status":"离开【重庆中心】,下一站【邮政深圳市处理中心】"},{"time":"2019-11-01 10:29:02","status":"离开【永川大宗营业部】,下一站【重庆中心】"},{"time":"2019-11-01 10:22:06","status":"【永川大宗营业部】已收件,揽投员:汤自勇,电话:13271966726"}],"deliverystatus":"3","issign":"1","expName":"EMS","expSite":"www.ems.com.cn ","expPhone":"11183","logo":"http:\/\/img3.fegine.com\/express\/ems.png","courier":"张松田","courierPhone":"18566260959","updateTime":"2019-11-03 16:17:46","takeTime":"2天5小时55分"}}'))
   
     if (wx.getStorageSync('token')) {
       that.getbanner();
@@ -53,7 +52,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        if (res.data.bindProvinceId != null) {
+           wx.setTabBarItem({
+             index: 1,
+             text: res.data.bindCityName,
+           })
+        }
 
+      },
+    })
   },
 
   /**
@@ -119,8 +129,8 @@ Page({
              detail:detail,
 
            })
-          that.getClass();
-          that.getAdvert();
+         
+         
       }else if(res.status == 1004 || res.status == 1005){
           wx.redirectTo({
             url: '../login/login',
@@ -173,7 +183,8 @@ Page({
             className:res.data,
 
            })
-
+        that.getDetail();
+        that.getType();
       }else if(res.status == 1004 || res.status == 1005){
           wx.redirectTo({
             url: '../login/login',
@@ -273,10 +284,10 @@ Page({
               banner:res.data,
 
             })
-           that.getDetail();
-           that.getType();
-           that.getRecommend();
            that.getAdvert();
+           
+           that.getRecommend();
+           that.getClass();
        }else if(res.status == 1004 || res.status == 1005){
          console.log(1)
            wx.redirectTo({

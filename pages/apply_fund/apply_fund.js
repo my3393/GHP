@@ -11,6 +11,7 @@ let images = [];
 let simages = [];
 let num = '';
 let nums = '';
+let id
 Page({
 
   /**
@@ -18,7 +19,7 @@ Page({
    */
   data: {
     name:'',
-    ismask: true,
+    ismask: false,
     address: true,
     prov: '',
     city: '',
@@ -31,6 +32,7 @@ Page({
     zhao1:true,
     img_num:0,
     img_show:false,
+    isdelete:false,
     num:0,
     nums:0,
     type:[
@@ -45,7 +47,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+     if(options.id){
+       id = options.id
+       this.getagain();
+     }
   },
 
   /**
@@ -96,6 +102,13 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //
+  quer(){
+    this.setData({
+      isdelete:true,
+      ismask:true,
+    })
+  },
   //取消
   detel() {
     this.setData({
@@ -145,60 +158,156 @@ Page({
   valueChange(e) {
     console.log(e.detail.value.length)
     this.setData({
-      num: e.detail.value.length
+      num: e.detail.value.length,
+      sum: e.detail.value,
     })
-    num =  e.detail.value
+    
   },
   valueChanges(e) {
     console.log(e.detail.value.length)
     this.setData({
-      nums: e.detail.value.length
+      nums: e.detail.value.length,
+      sums: e.detail.value
     })
-    nums =  e.detail.value
+    
   },
-  //提交
-  submit() {
+  //重新提交信息
+  getagain(){
     let that = this;
     let data = {
-      projectTitle:that.data.title,
-      targetAmount: that.data.menoy,
-      applyName: that.data.name,
-      applyUserPhone: that.data.phone,
-      applyBody: that.data.typ,
-      provinceId: province_id,
-      cityId: city_id,
-      areaId: area_id,
-      townId: town_id,
-      qualificationImg: zhao1,
-      infoImgs: simages,
-      projectExplain: num,
-      introduce: nums,
-    }
+      id
 
-    app.res.req('app-web/project/subapply', data, (res) => {
+    }
+    app.res.req('app-web/userproject/applydetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.showToast({
-          title: '提交成功，请等待审核',
-          icon:'none',
-          duration:2000
-        })
-        setTimeout(function(){
-          wx.navigateBack({
-            data: 1
-          })
-        },2000)
+         that.setData({
+           title: res.data.projectTitle,
+           menoy: res.data.targetAmount,
+           name: res.data.applyName,
+           phone: res.data.applyUserPhone,
+           typ: res.data.applyBody,      
+           sum: res.data.projectExplain,
+           sums: res.data.introduce,
+           prov: res.data.provinceName,
+           city: res.data.cityName,
+           area: res.data.areaName,
+           town: res.data.townName,
+           addres: res.data.provinceName + '-' + res.data.cityName + '-' + res.data.areaName + '-' + res.data.townName,
+           zhaos1: res.data.qualificationImgOss,
+           
+           img_num: res.data.qualificationImgOss.length,
+           zhao1:false,
+           images: res.data.infoImgOss,
+         })
+          province_id = res.data.provinceId
+          city_id = res.data.cityId
+          area_id = res.data.areaId
+          town_id = res.data.townId
+          zhao1 = res.data.qualificationImg
+          simages = res.data.infoImgs
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
         wx.redirectTo({
           url: '../login/login',
         })
       } else {
+
         wx.showToast({
           title: res.msg,
           icon: 'none'
         })
       }
     })
+  },
+  //提交
+  submit() {
+    let that = this;
+    var Str = JSON.stringify(simages);
+    if(id){
+      let data = {
+        id:id,
+        projectTitle: that.data.title,
+        targetAmount: that.data.menoy,
+        applyName: that.data.name,
+        applyUserPhone: that.data.phone,
+        applyBody: that.data.typ,
+        provinceId: province_id,
+        cityId: city_id,
+        areaId: area_id,
+        townId: town_id,
+        qualificationImg: zhao1,
+        infoImgJson: Str,
+        projectExplain: that.data.sum,
+        introduce: that.data.sums,
+      }
+
+      app.res.req('app-web/userproject/againsubmit', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '重新提交成功，请等待审核',
+            icon: 'none',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              data: 1
+            })
+          }, 2000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }else{
+      let data = {
+        projectTitle: that.data.title,
+        targetAmount: that.data.menoy,
+        applyName: that.data.name,
+        applyUserPhone: that.data.phone,
+        applyBody: that.data.typ,
+        provinceId: province_id,
+        cityId: city_id,
+        areaId: area_id,
+        townId: town_id,
+        qualificationImg: zhao1,
+        infoImgJson: Str,
+        projectExplain: that.data.sum,
+        introduce: that.data.sums,
+      }
+
+      app.res.req('app-web/project/subapply', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '提交成功，请等待审核',
+            icon: 'none',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              data: 1
+            })
+          }, 2000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
   },
    getType(){
      let that = this;
@@ -263,6 +372,7 @@ Page({
             } else if (e.currentTarget.id == 1) {
               images.push(datas.data.url)
               simages.push(datas.data.fileName)
+              console.log(simages)
               that.setData({
                 images:images,
                 img_num:images.length
@@ -282,6 +392,10 @@ Page({
           }
         })
         uploadTask.onProgressUpdate((res) => {
+          wx.showToast({
+            title: res.progress,
+            icon: 'none'
+          })
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)
           console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)

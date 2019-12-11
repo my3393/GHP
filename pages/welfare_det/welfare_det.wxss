@@ -73,7 +73,7 @@ page {
 
 .banner_num {
   position: absolute;
-  bottom: 30rpx;
+  bottom: 55rpx;
   right: 20rpx;
   width: 92rpx;
   font-size: 22rpx;

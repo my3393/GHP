@@ -55,7 +55,11 @@ page{
     font-weight: 550;
     
 }
-
+.tit_bot{
+  width: 100%;
+  height: 20rpx;
+  background: #f9f9f9;
+}
 /* pages/canvasDemo/canvasDemo.wxss */
 .canvasBox{
   height: 240rpx;

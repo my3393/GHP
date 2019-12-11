@@ -39,7 +39,7 @@
             </view>
         </view>
     </view>
-    <view class="jiao">了解更多</view>
+    <view class="jiao" bindtap="ljgeng">了解更多</view>
 </view>
 <view class="project">
     <view class="h2">公益项目</view>
@@ -78,4 +78,8 @@
             </view>
         </view>
     </view>
+</view>
+
+<view class="appl" bindtap="appl">
+  <image src="../../images/apply_refund.png"> </image>
 </view>

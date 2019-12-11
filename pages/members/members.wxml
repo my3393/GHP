@@ -1,27 +1,38 @@
 <!--pages/members/members.wxml-->
-<view class="top_img" style="background-image: url({{Img}})">
+<view class="top_img" style="background-image: url(https://www.xingtu-group.cn/xcx_img/member_b.png)">
   <view class='a-nav bg-white clearfix' style='height:{{navH}}px'>
     <view class='a-nav-title'>
       <view class="inpu">
         会员中心
       </view>
-      <view class="top_dao">
+      <!-- <view class="top_dao">
         <view>
           <image src='../../images/b_left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
         </view>
         <view>
           <image src='../../images/daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image>
         </view>
-      </view>
-      <!-- <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image> -->
+      </view> -->
+      <image src='../../images/b_left.png' mode='aspectFit' class='back' bindtap='navBack'></image>
     </view>
   </view>
-  <view style='top:{{navH +10}}px' class="head">
+  <view style='top:{{navH +10}}px' class="head" wx:if='{{user.id == null}}'>
     <view class="tx">
-      <image src="../../images/head.png"></image>
+      <image src="../../images/tx.png"></image>
     </view>
     <view class="tx_n"> 南下</view>
     <view class="biaos">未开通</view>
+  </view>
+  <view style='top:{{navH +10}}px' class="head" wx:else>
+    <view class="tx" wx:if='{{user.headImgUrl == null}}'>
+      <image src="../../images/tx.png"></image>
+    </view>
+     <view class="tx" wx:else>
+      <image src="{{user.headImgUrl}}"></image>
+    </view>
+    <view class="tx_n"  wx:if='{{user.userName == null}}'> {{phone}}</view>
+    <view class="tx_n" wx:else> {{user.userName}}</view>
+    <view class="biaos" wx:if='{{user.memberType == 0}}'>未开通</view>
   </view>
 
  
@@ -112,6 +123,6 @@
               <view bindtap="cancel_delete">先看看</view>
               <view bindtap="confirm_delete">立即分销</view>
         </view>
-  </view>
+</view>
 
   <view class="mask" hidden="{{ismask}}" catchtouchmove='true' style="margin-top:{{navH}}px"></view>

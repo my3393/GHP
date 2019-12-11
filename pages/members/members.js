@@ -42,7 +42,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        if (res.data.phone != null) {
+          var phone = that.plusXing(res.data.phone, 3, 4)
+          that.setData({
+            phone: phone
+          })
+        }
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -71,6 +86,11 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+  navBack(){
+     wx.navigateBack({
+       data:1
+     })
   },
   //购买会员
    pay(e){
@@ -199,5 +219,14 @@ Page({
     this.setData({
       animationData2: animation2.export()
     })
+  },
+  //信息大码
+  plusXing(str, frontLen, endLen) {
+    var len = str.length - frontLen - endLen;
+    var xing = '';
+    for (var i = 0; i < len; i++) {
+      xing += '*';
+    }
+    return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
   },
 })

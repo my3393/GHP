@@ -1,0 +1,10 @@
+<!--pages/apply_menoy/apply_menoy.wxml-->
+<view class="nav">
+  <view>善款金额（元）</view>
+  <view class="res clearfix">
+     <view class="num">{{num}}</view>
+     <view class="right {{isshow ? 'tou':''}}" bindtap="tix">
+        提现
+     </view>
+  </view>
+</view>

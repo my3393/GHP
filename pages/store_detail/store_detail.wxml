@@ -18,7 +18,7 @@
             <!-- <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image> -->
         </view>
     </view>
-    <view class="store" style='top:{{navH}}px'>
+    <view class="store" style='top:{{navH +15}}px'>
         <view class='store_img'>
             <image src="{{store.storeLogoOss}}" />
         </view>
@@ -33,7 +33,7 @@
         </view>
         <view style="width:560rpx">{{store.publicSlogan}}</view>
     </view>
-    <view class="foc" style='top:{{navH + 10}}px' bindtap="collection">+ 关注</view>
+    <view class="foc" style='top:{{navH + 25}}px' bindtap="collection">+ 关注</view>
     <view class="mask_t"></view>
 </view>
 <!-- 首页 -->

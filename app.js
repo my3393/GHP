@@ -2,7 +2,7 @@
 var http = require('utils/http.js')  
 App({
   data: {
-    urlmall: "http://sjg.api.xingtu-group.cn/"
+    urlmall: "https://sjg.api.xingtu-group.cn/"
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -53,6 +53,7 @@ App({
   //封装请求
    res: {
     req: http.req  //这里配置我们需要的方法
-  }
+  },
+  
 
 })

@@ -2,8 +2,16 @@
 @import "../e_ welfare/e_ welfare";
 .fund_bot{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 30rpx 0;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.g-h1{
+  margin-left: 20rpx;
+}
+g-h2{
+  margin-left: 20rpx;
 }
 .fund_tag{
   width: 100%;
@@ -11,6 +19,10 @@
   display: flex;
   justify-content: space-around;
   line-height: 80rpx;
+  position: fixed;
+  top: 0;
+  background: #fff;
+  z-index: 9;
 }
 .fund_active{
   color: #f12200;
@@ -26,5 +38,42 @@
   background:linear-gradient(to right, #f12200, #ff4e17);
   margin: 30rpx 0;
   margin-right: 20rpx;
- 
+  font-size: 24rpx;
+  border-radius: 30rpx;
+}
+.nav{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+}
+.g-banner{
+  position: relative;
+}                   
+.g_banner_diz{
+  position: absolute;
+  bottom: 0rpx;
+  left: 0rpx;
+  padding:  20rpx;
+  box-sizing: border-box;
+  background: rgba(0, 0,0, 0.3);
+  color: #fff;
+  font-size: 24rpx;
+  
+  width: 100%;
+}
+.g-bott{
+  padding: 0 20rpx;
+  padding-bottom: 30rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #f3f3f3;
+  
+}
+.cuss{
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+
+}
+.cuss image{
+  width: 160rpx;
+  height: 140rpx;
 }

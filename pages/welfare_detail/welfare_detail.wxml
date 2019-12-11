@@ -1,6 +1,6 @@
 <!-- pages/welfare_detail/welfare_detail.wxml -->
 <view class="top">
-  <image src="../../images/tui.jpg" />
+  <image src="https://www.xingtu-group.cn/xcx_img/shanjiagou_logo.png" />
 </view>
 <view class="bot">
   <view class="progre">
@@ -19,7 +19,7 @@
           </view>
           <text style="vertical-align: middle;color: #666666;font-size:24rpx">累计金额</text>
           <view class="money-m">
-            <text class="money-s">￥</text> 259475
+            <text class="money-s">￥</text> {{money.shareTotalAmount}}
           </view>
         </view>
         <view>
@@ -28,7 +28,7 @@
           </view>
           <text style="vertical-align: middle;color: #666666; font-size:24rpx">支出金额</text>
           <view class="money-m">
-            <text class="money-s">￥</text> 259475
+            <text class="money-s">￥</text> {{money.withdrawalTotalAmount}}
           </view>
         </view>
       </view>
@@ -52,18 +52,19 @@
 <view class="nav">
   <view class="title">
     <view class="title_h1">公益善款资助公示</view>
-    <view class="title_h2">资助“大国小镇”计划，助力四个贫困产业扶持项目”项目项目项目</view>
-    <view class="mone">
-      资助金额：
-      <text class="chu">￥ 12000</text>
+    <view wx:for='{{list}}' wx:key='item'>
+      <view class="title_h2">{{item.publicityTitle}}</view>
+      <view class="mone">
+        资助金额：
+        <text class="chu">￥ {{item.grantAmount}}</text>
+      </view>
+      <view class="title_t">{{item.publicityContent}}
+      </view>
+      <view class='title_img'>
+        <image wx:for='{{item.publicityImgOss}}' src="{{item}}" />
+      </view>
+      <view class="title_date">{{item.createDate}}</view>
+      <view class="tit_bot"></view>
     </view>
-    <view class="title_t">项目经善家公益核实，真实有效，受到众多 爱心人士关注项目经善家公益 核实，真实有效，受到众多爱心人士关
-    </view>
-    <view class='title_img'>
-      <image src="../../images/te.png" />
-      <image src="../../images/te.png" />
-      <image src="../../images/te.png" />
-    </view>
-    <view class="title_date">2019-10-13 18:30:58</view>
   </view>
 </view>

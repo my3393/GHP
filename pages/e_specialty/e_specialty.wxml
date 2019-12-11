@@ -14,7 +14,7 @@
       <!-- <view wx:for="{{screenArray}}" class="{{ currentTab == index ? 'active' : '' }}" wx:key="unique" bindtap="{{ currentTab != index ? 'navbarTap':'' }}" id="{{index}}" data-screenId="{{item.screenId}}">{{item.screenName}}
       </view> -->
       <view wx:for="{{type}}" wx:key="{{item.id}}" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
-        {{item.typeName}}
+        {{item.classifyName}}
       </view>
     </scroll-view>
     <!-- <view class="goods">
@@ -48,7 +48,7 @@
           </block>
         </swiper>
       </view>
-      <view class="goods-list" wx:for="{{list}}" wx:key="{{item.id}}">
+      <view class="goods-list" wx:for="{{list}}" wx:key="{{item.id}}" id="{{item.id}}" bindtap="detail">
         <view class="goods-img">
           <image src="{{item.productDefaultImgOss}}"></image>
         </view>

@@ -1,0 +1,45 @@
+<!--pages/apply_bind/apply_bind.wxml-->
+<view class='infor'>
+  <view class='inform'>银行卡</view>
+  <view class='inforin infor_r'>
+    <picker class="pick" range="{{type}}" range-key="name" value="{{index}}" bindchange="type">
+          <input disabled='true' type='text' value='{{typ}}' placeholder='请选择所属银行' ></input>
+    </picker>
+  </view>
+  <view class='enter'>
+    <image src='../../images/enter.png'></image>
+  </view>
+</view>
+<view class='infor' bindtap="diz">
+      <view class='inform'>开户地址</view>
+      <view class='inforin infor_r'>
+        <input disabled='true' type='text' value='{{addres}}' placeholder='请选择开户所在地址' bindtap='showlabel'></input>
+      </view>
+      <view class='enter'>
+        <image src='../../images/enter.png'></image>
+      </view>
+</view>
+<view class='infor'>
+  <view class='inform'>卡号</view>
+  <view class='inforin'>
+    <input type='text' placeholder='请输入银行卡号' bindinput='phone'></input>
+  </view>
+</view>
+<view class='infor'>
+  <view class='inform'>持卡人</view>
+  <view class='inforin'>
+    <input type='text' placeholder='请输入持卡人真实姓名' bindinput='name'></input>
+  </view>
+</view>
+<view class='infor'>
+  <view class='inform'>身份证号</view>
+  <view class='inforin'>
+    <input type='text' placeholder='请输入持卡人身份证号' bindinput='phone'></input>
+  </view>
+</view>
+
+<view class="nav">
+温馨提示：为了您能及时使用善款，请确保提现账号为项目申请人本人账号且信息真实有效
+</view>
+
+<view class="submit" bindtap="submit">确定绑定</view>

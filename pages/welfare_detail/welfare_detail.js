@@ -1,5 +1,9 @@
 // pages/welfare_detail/welfare_detail.js
-import Canvas from '../../utils/tcanvas.js'
+import Canvas from '../../utils/tcanvas.js';
+const app = getApp();
+let id ='';
+let list = [];
+let currentPage = 1
 Page({
   ...Canvas.options,
   /**
@@ -16,6 +20,8 @@ Page({
    */
   onLoad: function (options) {
     this.draw('runCanvas', this.data.shao, 1000);
+
+    this.getDateil();
   },
 
   /**
@@ -73,4 +79,76 @@ Page({
       isduo:!that.data.isduo,
      })
   },
+  //
+  getDateil() {
+    let that = this;
+    let data = {
+
+    }
+    app.res.req('app-web/project/sjgamount', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getList();
+        if (res.data.withdrawalTotalAmount != 0) {
+          let num = (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount)
+          that.setData({
+            num: num.toFixed(2)
+          })
+          console.log(num)
+        }
+
+        that.setData({
+          money: res.data,
+
+        })
+     
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+
+  },
+  //项目列表
+  getList() {
+    let that = this;
+    let data = {
+      projectId:id,
+      currentPage: currentPage
+    }
+    app.res.req('app-web/project/publicitylist', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        for (var i in res.data) {
+          let num = (res.data[i].raiseAmount / res.data[i].targetAmount) * 100
+          res.data[i].num = num.toFixed(2)
+        }
+        list.push(...res.data)
+        that.setData({
+          list: list,
+
+        })
+        console.log(list)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  }
 })

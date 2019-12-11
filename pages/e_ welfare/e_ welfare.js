@@ -28,7 +28,7 @@ Page({
       "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
     ],
     ...Canvas.data,
-    shao:'80'
+    num:'8'
   },
 
   /**
@@ -37,7 +37,7 @@ Page({
   onLoad: function (options) {
     this.getDateil();
     this.getList();
-    this.draw('runCanvas',this.data.shao,1000);
+    this.draw('runCanvas',this.data.num,1000);
   },
 
   /**
@@ -81,7 +81,18 @@ Page({
   onReachBottom: function () {
 
   },
-
+  //申请资助
+  appl(){
+    wx.navigateTo({
+      url: '../apply_fund/apply_fund',
+    })
+  },
+  //了解更多
+  ljgeng(){
+    wx.navigateTo({
+      url: '../welfare_detail/welfare_detail',
+    })
+  },
   //查看详情
   detail(e){
     wx.navigateTo({
@@ -93,10 +104,11 @@ Page({
     let that = this;
     status = e.currentTarget.dataset.idx;
     currentPage = 1;
-
+    list = [];
     that.setData({
       tar:e.currentTarget.dataset.idx
     })
+    that.getList();
   },
   //
   getDateil(){
@@ -107,11 +119,17 @@ Page({
     app.res.req('app-web/project/sjgamount', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
-         let num = res.data.withdrawalTotalAmount / res.data.shareTotalAmount
-          console.log(num)
+         if (res.data.withdrawalTotalAmount != 0){
+           let num = (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount)
+           that.setData({
+             num: num.toFixed(2)
+           })
+           console.log(num)
+         }
+         
             that.setData({
-              meney:res.data,
-              num: num.toFixed(2)
+              money:res.data,
+              
             })
            console.log(that.data.num)
        }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
@@ -153,7 +171,7 @@ Page({
           list: list,
 
         })
-
+       console.log(list)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
         wx.redirectTo({

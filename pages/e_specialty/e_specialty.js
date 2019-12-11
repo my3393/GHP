@@ -2,7 +2,8 @@
 const app = getApp();
 let grade = 1;
 let id = '';
-
+let currentPage = 1;
+let list = [];
 Page({
 
   /**
@@ -22,7 +23,7 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-    that.getType();
+   
 
   },
 
@@ -40,7 +41,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+     let that =this;
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          user: res.data
+        })
+        if (res.data.bindProvinceId != null){
+          that.setData({
+            isBang:false
+          })
+        }
 
+      },
+    })
+    that.getType();
   },
 
   /**
@@ -77,12 +94,18 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //商品详情
+  detail(e){
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.id,
+    })
+  },
   getType(){
     let that = this;
     let data = {
-      grade:grade
+      
     }
-    app.res.req('app-web/home/grade/type', data, (res) => {
+    app.res.req('app-web/home/classify', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
         id = res.data[0].id
@@ -107,13 +130,22 @@ Page({
   getlist(){
     let that = this;
     let data = {
-      typeId:id
+      currentPage: currentPage,
+        provinceId: that.data.user.bindProvinceId,
+      cityId: that.data.user.bindCityId,
+        areaId:'',
+      townId:'',
+        classifyId:id,
+      typeId:'',
+        sortType:0,
+      keyword:''
     }
-    app.res.req('app-web/home/choiceness/product', data, (res) => {
+    app.res.req('app-web/product/list', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
+         list.push(...res.data)
             that.setData({
-              list:res.data,
+              list:list,
 
             })
 
@@ -155,5 +187,27 @@ Page({
     wx.navigateTo({
       url: '../binding_hometown/binding_hometown',
     })
-  }
+  },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('app-web/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+
+      }
+    })
+  },
 })

@@ -83,6 +83,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //home
+  home(){
+    wx.switchTab({
+      url: '../e_home/home',
+    })
+  },
   //查看物流
   wul(e){
     wx.navigateTo({

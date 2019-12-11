@@ -25,7 +25,7 @@
         <view class="store-img">
           <image src="../../images/store.png" />
         </view>
-        <text bindtap="store" id="{{store.id}}">{{item.storeName}}</text>
+        <text bindtap="store" id="{{item.storeId}}">{{item.storeName}}</text>
         <view class="store-img" bindtap="store" id="{{store.id}}">
           <image src="../../images/right.png" />
         </view>

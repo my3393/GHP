@@ -125,6 +125,12 @@ Page({
        url: '../store_refund/store_refund',
      })
   },
+  //登录
+  login(){
+     wx.navigateTo({
+       url: '../login/login',
+     })
+  },
   //收货地址
    address(){
      wx.navigateTo({
@@ -162,17 +168,17 @@ Page({
       }
     })
   },
-  onPageScroll: function (e) {
-    console.log(e.scrollTop)
-    let that = this
-    if (e.scrollTop > 40) {
-      that.setData({
-        isshow: false,
-      })
-    } else {
-      that.setData({
-        isshow: true
-      })
-    }
-  },
+  // onPageScroll: function (e) {
+  //   console.log(e.scrollTop)
+  //   let that = this
+  //   if (e.scrollTop > 40) {
+  //     that.setData({
+  //       isshow: false,
+  //     })
+  //   } else {
+  //     that.setData({
+  //       isshow: true
+  //     })
+  //   }
+  // },
 })

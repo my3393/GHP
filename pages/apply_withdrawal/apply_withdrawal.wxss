@@ -1,0 +1,2 @@
+/* pages/apply_withdrawal/apply_withdrawal.wxss */
+@import '../wallet_withdrawal/wallet_withdrawal'

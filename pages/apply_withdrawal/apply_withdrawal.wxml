@@ -1,0 +1,59 @@
+<!--pages/wallet_withdrawal/wallet_withdrawal.wxml-->
+
+<view class="nav">
+   <view ><text class='hei'>提现至</text> 微信钱包</view>
+   <view style="margin-top:40rpx;">
+      <text style="color:#666">提现金额</text>
+      <text style="color:#999">(最低提现￥100.00)</text>
+   </view>
+   <view >
+      <view class="menr">
+        <view class="yana">
+            ￥
+        </view>
+        <view class='inpu'>
+              <input  type="number" />
+           </view>
+      </view>
+      <view class="dete">
+          <image src="../../images/x.png" />
+      </view>
+      <view class="ke">当前可提现金额¥228.00 <text class="yan">  全部提现</text> </view>
+      <view class="fuw">
+         <view >
+             服务费
+             <view class='fuw_r ' style="margin-right:10rpx;">￥10.0  </view>
+         </view>
+         <view >
+             费率
+             <view class='fuw_r'> 0.10%（最低￥0.10）</view>
+         </view>
+      </view>
+   </view>
+</view>
+
+<view class="tis">温馨提示：发起提现时，微信财付通平台将收取一定比例的提现手续费，到账金额请以实际到账金额为准。</view>
+
+<view class="submit">
+确认提现
+</view>
+
+<view class="foot-boot">
+    <view >善家购</view>
+    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+</view>
+
+
+
+<view class="popup" hidden="{{isdelete}}">
+        <view class="popup_h1">善款提现申请须知</view>
+        <view class="popup_content">1.本项目已筹款项由平台暂为保管，为保障项目善款切实的使用在申请者，若您需使用项目已筹款项，需项目申请人在平台下载善款申请模板，向其所在地的街道/村委/乡镇等地方政府部门开具贫困证明及盖章，填写审核人等相关信息提交平台，平台将在第一时间予以复核，审核通过后，款项自动打到申请人提供的银行账号中，请予以配合及理解。</view>
+        <view class="popup_content">
+        2.若上传的是非项目所在市出具的证明或虚拟伪造证明上传者，第一次予以警告，第二次将拉入善家公益黑名单；若申请人上传虚假伪造或非本市开具的证明，平台则有权将项目终止，所得善款用于资助其他项目。               
+        </view>
+        <view class="popup_content">3.申请证明确认需保证真实有效，提交申请后请将证明原件寄回平台。</view>
+        <view class="popup_btn">
+              <view bindtap="cancel">取消</view>
+              <view bindtap="confirm">确定</view>
+        </view>
+</view>
