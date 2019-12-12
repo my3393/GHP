@@ -1,18 +1,18 @@
-<view class="top">
+<!-- <view class="top">
     <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}">
        {{item.name}}
     </view>
-</view>
+</view> -->
 <view class='g_con'>
   <view class='topExpress'>
 
     <view class='topExpress-left'>
-      <image src='{{detail.productImgOss}}'></image>
+      <image src='{{details.productImgOss}}'></image>
     </view>
     <view class='topExpress-rights'>
-      <view class='topExpress-right-top'>订单编号：962374652347</view>
-      <view class='topExpress-right-middle'> 物流公司：韵达快递   23452345343</view>
-      <view class='topExpress-right-bottom'>物流状态：<text class="yan">已发货</text>               </view>
+      <view class='topExpress-right-top'>订单编号：{{detail.orderNo}}</view>
+      <view class='topExpress-right-middle'> 物流公司：{{detail.expressName}}   {{detail.logisticsCode}}</view>
+      <view class='topExpress-right-bottom'>物流状态：<text class="yan">{{title}}</text>               </view>
     </view>
 
   </view>

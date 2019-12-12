@@ -70,6 +70,9 @@ Page({
      ids = [],
      this.setData({
        allselected: false,
+       allnum: 0,
+       allprices: 0.00,
+       isdetel:true,
      })
   },
 

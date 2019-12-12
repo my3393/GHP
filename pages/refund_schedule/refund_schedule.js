@@ -72,7 +72,7 @@ Page({
     app.res.req('app-web/userorder/refundprogress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        top_1 = res.data.splice((res.data.length - 1), 1)[0]
+        top_1 = res.data.splice(0, 1)[0]
         console.log(res.data)
         console.log(top_1)
         that.setData({

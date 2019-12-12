@@ -246,7 +246,7 @@ Page({
   buy() {
     let that = this;
 
-   
+    console.log(user.id)
     if(user.id == null){
       
       console.log(selectIndexArray.length)

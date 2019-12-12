@@ -30,7 +30,7 @@
         </view>
       </view>
     </view>
-    <view class="top-tx" wx:else bindtap="">
+    <view class="top-tx" wx:else >
       <view class="tx" wx:if='{{uesr.headImgUrl == null}}'>
         <image src="../../images/tx.png" />
       </view>

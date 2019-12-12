@@ -10,7 +10,7 @@
     <image src='../../images/enter.png'></image>
   </view>
 </view>
-   <view class='infor' wx:if='{{z_status == 0}}'>
+   <view class='infor' wx:if='{{z_status == 0 || z_status == 4 || z_status == 6}}'>
     <view class='inform'>申请原因</view>
     <view class='inforin '>
       <picker value="{{index}}" range="{{cancels}}" range-key="name" bindchange="bindcancel">
@@ -21,7 +21,7 @@
       <image src='../../images/enter.png'></image>
     </view>
   </view>
-  <view class='infor' wx:if='{{z_status == 1}}'>
+  <view class='infor' wx:if='{{z_status == 1 || z_status == 8 || z_status == 10 || z_status == 13 || z_status == 14 || z_status == 17 || z_status == 18 }}'>
     <view class='inform'>退款原因</view>
     <view class='inforin '>
       <picker value="{{index}}" range="{{tuiks}}" range-key="name" bindchange="bindtuik">
@@ -35,8 +35,8 @@
   <view class='infor' hidden="{{isHuo}}">
     <view class='inform'>货物状态</view>
     <view class='inforin '>
-      <picker value="{{index}}" range="{{cancels}}" range-key="name" bindchange="bindcancel">
-        <input disabled='true' type='text' value='{{cancel}}' placeholder="请点击选择申请原因"></input>
+      <picker value="{{index}}" range="{{cargos}}" range-key="name" bindchange="bindhuo">
+        <input disabled='true' type='text' value='{{cargo}}' placeholder="请点击选择货物状态"></input>
       </picker>
     </view>
     <view class='enter'>

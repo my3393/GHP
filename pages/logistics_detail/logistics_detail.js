@@ -85,10 +85,12 @@ Page({
         wx.hideLoading()
        
         that.setData({
+          
           isshow: false,
           detail:res.data[0],
           details:res.data[0].details[0],
-          logistics: JSON.parse(res.data[0].logisticsDetail)
+          logistics: JSON.parse(res.data[0].logisticsDetail),
+          title: JSON.parse(res.data[0].logisticsDetail).result.list[0].status
         })
         console.log(that.data.logistics)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

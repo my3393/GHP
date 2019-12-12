@@ -50,7 +50,8 @@
     "pages/apply_withdrawal/apply_withdrawal",
     "pages/apply_with_one/apply_with_one",
     "pages/apply_bind/apply_bind",
-    "pages/apply_menoy/apply_menoy"
+    "pages/apply_menoy/apply_menoy",
+    "pages/order_evaluation/order_evaluation"
   ],
   "tabBar": {
     "color": "#808080",

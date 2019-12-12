@@ -1,0 +1,15 @@
+<!--pages/order_evaluation/order_evaluation.wxml-->
+<view>
+  <view class="nav">
+     <view class="nav_top">
+        <view class="top_img">
+           <image src="../../images/head.png"></image>
+        </view>
+        <view class="top_r">
+           <view class="top_r_t">
+             基恩武庚纪看个人口位OK了fkwle-0可考虑范围看，王菲；离开的我们的佛个王嘉尔符文戹
+           </view>
+        </view>
+     </view>
+  </view>
+</view>

@@ -1,7 +1,9 @@
 // pages/apply_with_one/apply_with_one.js
 const app = getApp();
-let id ;
+let id;
 let zhao1 = '';
+let sqId;
+let tru;
 Page({
 
   /**
@@ -9,16 +11,20 @@ Page({
    */
   data: {
     isdelete: false,
-    ismask:false, 
-    zhao1:true,
+    ismask: false,
+    zhao1: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     console.log(options)
-     id = options.id
+    console.log(options)
+    id = options.id
+    if (options.tru) {
+      tru = options.tru
+      this.again();
+    }
   },
 
   /**
@@ -49,9 +55,9 @@ Page({
 
   },
   //姓名
-  name(e){
+  name(e) {
     this.setData({
-      name:e.detail.value
+      name: e.detail.value
     })
   },
   //职位
@@ -73,35 +79,31 @@ Page({
       ismask: true,
     })
   },
-  //提交
-  submit(){
+  //重新提交信息
+  again() {
     let that = this;
-   
     let data = {
-      projectId:id,
-        certificateImg:zhao1,
-      proveUserName:that.data.name,
-        proveUserPosition:that.data.zhiwei,
-      phone:that.data.phone,
+      projectId: id
     }
 
-    app.res.req('app-web/userproject/donationapply', data, (res) => {
+    app.res.req("app-web/userproject/donationapplyinfo", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.showToast({
-          title: '提交成功，审核通过后即可进行提现',
-          icon: 'none',
-          duration: 3000
+        sqId = res.data.id;
+        id = res.data.projectId;
+        zhao1 =  res.data.certificateImg,
+        that.setData({
+          
+          
+             zhao1:false,
+             zhaos1: res.data.certificateImgOss,
+             name: res.data.proveUserName,
+             zhiwie: res.data.proveUserPosition,
+             phone: res.data.phone
+         
         })
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 2
-          })
-        }, 3000)
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
+
+
       } else {
         wx.showToast({
           title: res.msg,
@@ -109,6 +111,80 @@ Page({
         })
       }
     })
+  },
+
+  //提交
+  submit() {
+    let that = this;
+    if(tru){
+      let data = {
+        projectId: id,
+        certificateImg: zhao1,
+        proveUserName: that.data.name,
+        proveUserPosition: that.data.zhiwie,
+        phone: that.data.phone,
+        id:sqId
+      }
+
+      app.res.req('app-web/userproject/resubmitdonationapply', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '重新提交成功，审核通过后即可进行提现',
+            icon: 'none',
+            duration: 3000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 2
+            })
+          }, 3000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }else{
+      let data = {
+        projectId: id,
+        certificateImg: zhao1,
+        proveUserName: that.data.name,
+        proveUserPosition: that.data.zhiwei,
+        phone: that.data.phone,
+      }
+
+      app.res.req('app-web/userproject/donationapply', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '提交成功，审核通过后即可进行提现',
+            icon: 'none',
+            duration: 3000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 2
+            })
+          }, 3000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
+    
   },
   //图片上传
   chooseImages(e) {
@@ -140,14 +216,14 @@ Page({
 
             let datas = JSON.parse(res.data)
             console.log(datas)
-           
-              that.setData({
-                zhaos1: datas.data.url,
-                zhao1: false
-              })
-              zhao1 = datas.data.fileName
-            
-            
+
+            that.setData({
+              zhaos1: datas.data.url,
+              zhao1: false
+            })
+            zhao1 = datas.data.fileName
+
+
             wx.hideLoading();
             // do something
             wx.showToast({

@@ -1,2 +1,20 @@
 /* pages/apply_withdrawal/apply_withdrawal.wxss */
-@import '../wallet_withdrawal/wallet_withdrawal'
+@import '../wallet_withdrawal/wallet_withdrawal';
+.hei{
+ float: left;
+}
+.hei_r{
+  display: inline-block;
+  width: 80%;
+}
+.hei_img{
+  width: 20rpx;
+  height: 22rpx;
+  float: right;
+  margin-top: 10rpx;
+}
+.dks{
+  font-size: 22rpx;
+  color: #666;
+  margin-top: 12rpx;
+}

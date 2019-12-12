@@ -2,7 +2,7 @@
 const app = getApp();
 let status;
 let id;
-let value;
+let value = '';
 let images = [];
 let simages = [];
 Page({
@@ -12,18 +12,18 @@ Page({
    */
   data: {
     refunds: [{ name: '我要退款', id: '1' }],
-      refund:'我要退款',
+    refund: '我要退款',
     cancels: [
       { name: '不想买了' },
       { name: '地址信息填写有误，重新购买' },
       { name: '商家缺货' },
       { name: '其他原因' },
     ],
-    cargos:[
+    cargos: [
       { name: '未收到货' },
-      { name: '已收到货' }, 
+      { name: '已收到货' },
     ],
-    tuiks:[
+    tuiks: [
       { name: '多买/买错/不想要' },
       { name: '快递无记录' },
       { name: '少货/空包裹' },
@@ -33,12 +33,12 @@ Page({
       { name: '商品描述与实物不符' },
       { name: '其他' },
     ],
-    refundType:'',
-    cancel:'',
-    sum:0,
-    img_num:0,
-    isshow:false,
-    isHuo:true,
+    refundType: '',
+    cancel: '',
+    sum: 0,
+    img_num: 0,
+    isshow: false,
+    isHuo: true,
   },
 
   /**
@@ -46,24 +46,24 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-     id = options.id,
-     status = options.status
-     this.setData({
-       z_status : options.z_status
-     })
-     if(options.z_status == 0){
-       this.setData({
-         refunds: [{ name: '我要退款',id:'1'}],
-         refundType:1
-       })
-     }else if(options.z_status == 1){
-       this.setData({
-         refunds: [{ name: '退货退款', id: '3' }, { name: '仅退款',id:'2'}],
-         refund: '退货退款',
-         refundType:3
-       })
-     }
-    this.getDetail(); 
+    id = options.id,
+      status = options.status
+    this.setData({
+      z_status: options.z_status
+    })
+    if (options.z_status == 0 || options.z_status == 4 || options.z_status == 6) {
+      this.setData({
+        refunds: [{ name: '我要退款', id: '1' }],
+        refundType: 1
+      })
+    } else if (options.z_status == 1 || options.z_status == 8 || options.z_status == 10 || options.z_status == 13 || options.z_status == 14 || options.z_status == 17 || that.data.z_status == 18) {
+      this.setData({
+        refunds: [{ name: '退货退款', id: '3' }, { name: '仅退款', id: '2' }],
+        refund: '退货退款',
+        refundType: 3
+      })
+    }
+    this.getDetail();
   },
 
   /**
@@ -91,10 +91,12 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-     simages = [];
-     this.setData({
-       images:[]
-     })
+    simages = [];
+    images = [];
+    this.setData({
+      images: [],
+      simgs: []
+    })
   },
 
   /**
@@ -111,7 +113,7 @@ Page({
 
   },
 
- 
+
   //申请原因
   bindcancel(e) {
     console.log(e)
@@ -120,93 +122,156 @@ Page({
     })
 
   },
-  bindrefund(e){
+  //货物状态
+  bindhuo(e) {
+    console.log(e)
+    this.setData({
+      cargo: this.data.cargos[e.detail.value].name
+    })
+
+  },
+  bindtuik(e) {
+    console.log(e)
+    this.setData({
+      tuik: this.data.tuiks[e.detail.value].name
+    })
+
+  },
+  bindrefund(e) {
     this.setData({
       refund: this.data.refunds[e.detail.value].name,
       refundType: this.data.refunds[e.detail.value].id
     })
-    if(e.detail.value == 1 && this.data.z_status == 1){
-       this.setData({isHuo:false})
+    if (e.detail.value == 1 && this.data.z_status == 1) {
+      this.setData({ isHuo: false })
+    } else {
+      this.setData({ isHuo: true })
     }
   },
   //说明
-  valueChange(e){
+  valueChange(e) {
     console.log(e.detail.value.length)
     value = e.detail.value
     this.setData({
-      sum : e.detail.value.length
+      sum: e.detail.value.length
     })
+    console.log(value)
   },
   //提交申请
-  submit(){
+  submit() {
     let that = this;
     var schoolStr = JSON.stringify(simages);
-    let data = {
-      refundType: that.data.refundType,
-      orderDetailId:id,
-      refundReason:that.data.cancel,
-      refundExplain:value,
-      refundImgs: schoolStr
-    }
-    wx.request({
-      url: "http://192.168.123.171:8080/app-web/userorder/applyrefund",
-      data: {
+    if (that.data.z_status == 1 || that.data.z_status == 8 || that.data.z_status == 10 || that.data.z_status == 14 || that.data.z_status == 13 || that.data.z_status == 17 || that.data.z_status == 18) {
+      let data = {
+        refundType: that.data.refundType,
+        orderDetailId: id,
+        refundReason: that.data.tuik,
+        refundExplain: value,
+        refundImgs: schoolStr
+      }
+      app.res.req('app-web/userorder/applyrefund', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'none',
+            duration: 2000,
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 2
+            })
+          }, 2000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    } else {
+      let data = {
         refundType: that.data.refundType,
         orderDetailId: id,
         refundReason: that.data.cancel,
         refundExplain: value,
-        refundImgs: simages
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'token':wx.getStorageSync('token')
-      },
-      dataType: 'json',
-      success: function (res) {
-        console.log(res.data.data)
-        if (res.data.status === 100) {
-          for (var i in res.data.data.data) {
-            splayer.push(res.data.data.data[i])
-          }
-          that.setData({
-            splayer: splayer,
-            x_totalPage: res.data.data.totalPage
-          })
-
-
-        } else if (res.data.status === 103) {
+        refundImgs: schoolStr
+      }
+      app.res.req('app-web/userorder/applyrefund', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
           wx.showToast({
-            title: res.data.msg,
-            icon: 'none'
+            title: '提交成功',
+            icon: 'none',
+            duration: 2000,
           })
-          wx.navigateTo({
-            url: '/pages/login/login',
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 2
+            })
+          }, 2000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
           })
-
         } else {
           wx.showToast({
-            title: res.data.msg,
+            title: res.msg,
             icon: 'none'
           })
         }
-      }
-    })
-    // app.res.req('app-web/userorder/applyrefund', data, (res) => {
-    //   console.log(res.data)
-    //   if (res.status == 1000) {
+      })
+    }
 
-    //   } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-    //     wx.redirectTo({
-    //       url: '../login/login',
-    //     })
-    //   } else {
-    //     wx.showToast({
-    //       title: res.msg,
-    //       icon: 'none'
-    //     })
+    // wx.request({
+    //   url: "http://192.168.123.171:8080/app-web/userorder/applyrefund",
+    //   data: {
+    //     refundType: that.data.refundType,
+    //     orderDetailId: id,
+    //     refundReason: that.data.cancel,
+    //     refundExplain: value,
+    //     refundImgs: simages
+    //   },
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'token':wx.getStorageSync('token')
+    //   },
+    //   dataType: 'json',
+    //   success: function (res) {
+    //     console.log(res.data.data)
+    //     if (res.data.status === 100) {
+    //       for (var i in res.data.data.data) {
+    //         splayer.push(res.data.data.data[i])
+    //       }
+    //       that.setData({
+    //         splayer: splayer,
+    //         x_totalPage: res.data.data.totalPage
+    //       })
+
+
+    //     } else if (res.data.status === 103) {
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: 'none'
+    //       })
+    //       wx.navigateTo({
+    //         url: '/pages/login/login',
+    //       })
+
+    //     } else {
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: 'none'
+    //       })
+    //     }
     //   }
     // })
+    
   },
   //图片上传
   chooseImage(e) {
@@ -238,19 +303,19 @@ Page({
 
             let datas = JSON.parse(res.data)
             console.log(datas)
-            
-              images.push(datas.data.url)
-              simages.push(datas.data.fileName)
+
+            images.push(datas.data.url)
+            simages.push(datas.data.fileName)
+            that.setData({
+              simgs: images,
+              img_num: images.length
+            })
+            if (images.length == 3) {
               that.setData({
-                simgs: images,
-                img_num: images.length
+                isshow: !that.data.isshow
               })
-             if(images.length == 3){
-               that.setData({
-                 isshow:!that.data.isshow
-               })
-             }
-          
+            }
+
             wx.hideLoading();
             // do something
             wx.showToast({
@@ -285,7 +350,7 @@ Page({
         that.setData({
           price: res.data.payPrice
         })
-      
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({

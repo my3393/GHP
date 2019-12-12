@@ -130,6 +130,7 @@ margin-right: 20rpx
 }
 .good_num{
     float: right;
+    margin-top: 4rpx;
 }
 .list{
     padding: 20rpx;

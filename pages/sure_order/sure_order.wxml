@@ -124,7 +124,7 @@
         </view>
     </view>
     <view class="z_right">
-        需付费:<text class="yan font">￥{{z_price}}</text>
+        实付费:<text class="yan font">￥{{z_price}}</text>
     </view>
 </view>
 
@@ -160,7 +160,10 @@
          <text class="yuan">￥</text>{{z_price}}
      </view>
  </view>
- <view class="pay" bindtap="pay">
+ <button class="pay" size="mini" bindtap="pay" loading="{{!loading}}" wx:if='{{loading}}'>
     微信支付
- </view>
+ </button>
+ <button size="mini" wx:else class="pay" loading="{{!loading}}" bindtap="pro">
+      
+ </button>
 </view>

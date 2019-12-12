@@ -33,7 +33,7 @@ page{
   height: 100%;
 }
 .g_con{
-  margin-top: 70rpx;
+  margin-top: 20rpx;
 }
 .topExpress{
   display: flex;
@@ -113,5 +113,8 @@ page{
 .stats{
   color: #000!important;
   margin-bottom: 40rpx;
+}
+.order{
+  background: #fff;
 }
 

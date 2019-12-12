@@ -1,27 +1,18 @@
-// pages/apply_menoy/apply_menoy.js
-let id;
-const app = getApp();
-let status;
-
+// pages/order_evaluation/order_evaluation.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    num:'0.00',
-    isshow:false,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-       id = options.id
-       status = options.status
-       this.setData({
-         num:options.money
-       })
+
   },
 
   /**
@@ -52,18 +43,24 @@ Page({
 
   },
 
-  tix(){
-    if(status == 3){
-      wx.navigateTo({
-        url: '../apply_withdrawal/apply_withdrawal?id=' + id + '&money=' + this.data.num ,
-      })
-    }else{
-      wx.navigateTo({
-        url: '../apply_with_one/apply_with_one?id=' + id,
-      })
-    }
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
   },
 
-  
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
 
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })

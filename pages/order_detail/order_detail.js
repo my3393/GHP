@@ -75,6 +75,29 @@ Page({
   onReachBottom: function () {
 
   },
+  //确认签收
+  quer(){
+    let that = this;
+    let data = {
+      id: that.data.detail.id,
+    }
+
+    app.res.req('app-web/userorder/confirmreceipt', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getDetail()
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //查看物流
   wul(e) {
     wx.navigateTo({
@@ -125,7 +148,7 @@ Page({
   //退款中
   zhong(e){
      wx.navigateTo({
-       url: '../refund_detail/refund_detail?id=' + e.currentTarget.id + '&storeId=' + this.data.detail.storeId,
+       url: '../refund_detail/refund_detail?id=' + e.currentTarget.id + '&storeId=' + this.data.detail.storeId + '&status=' + this.data.detail.orderStatus,
      })
   },
   cancel_delete(){
@@ -148,7 +171,7 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
 
-        
+        that.getDetail()
 
 
       } else {
@@ -327,14 +350,22 @@ Page({
     app.res.req('app-web/userorder/detail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        let logistics=JSON.parse(res.data.logisticsInfo)
-        console.log(logistics)
+        if (res.data.logistics){
+          let logistics = JSON.parse(res.data.logisticsInfo)
+           console.log(that.data.logistics)
+          that.setData({
+           
+            logistics: logistics.result.list[0]
+          })
+        }
+        
+        
         that.setData({
           detail: res.data,
-          logistics: logistics.result.list[0]
+          
         })
        
-        console.log(that.data.logistics)
+       
         that.PaymentTime();
         that.PaymentTimes();
 

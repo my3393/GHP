@@ -94,6 +94,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //商品详情
+  good_detail(e){
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.id,
+    })
+  },
   //收藏店铺
   collection(){
     let that = this;

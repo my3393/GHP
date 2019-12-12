@@ -1,10 +1,21 @@
 <!--pages/wallet_withdrawal/wallet_withdrawal.wxml-->
 
 <view class="nav">
-   <view ><text class='hei'>提现至</text> 微信钱包</view>
+   <view >
+     <view class='hei'>提现至</view>
+     <view class="hei_r" wx:if='{{isExist}}' bindtap="bangd">
+       +绑定收款账号
+       <image class="hei_img" src="../../images/right.png"></image>
+     </view>
+     <view class="hei_r" wx:else>
+       {{detail.bankCard}}（{{sum}}）
+       <image class="hei_img" src="../../images/right.png"></image>
+       <view class="dks">平台审核通过后3-5个工作日进行打款</view>
+     </view>
+    </view>
    <view style="margin-top:40rpx;">
       <text style="color:#666">提现金额</text>
-      <text style="color:#999">(最低提现￥100.00)</text>
+      <!-- <text style="color:#999">(最低提现￥100.00)</text> -->
    </view>
    <view >
       <view class="menr">
@@ -12,14 +23,14 @@
             ￥
         </view>
         <view class='inpu'>
-              <input  type="number" />
+              <input bindinput="money" value="{{money}}"  type="number" />
            </view>
       </view>
       <view class="dete">
           <image src="../../images/x.png" />
       </view>
-      <view class="ke">当前可提现金额¥228.00 <text class="yan">  全部提现</text> </view>
-      <view class="fuw">
+      <view class="ke">当前可提现金额¥{{z_num}} <text class="yan" bindtap="all">  全部提现</text> </view>
+      <!-- <view class="fuw">
          <view >
              服务费
              <view class='fuw_r ' style="margin-right:10rpx;">￥10.0  </view>
@@ -28,13 +39,13 @@
              费率
              <view class='fuw_r'> 0.10%（最低￥0.10）</view>
          </view>
-      </view>
+      </view> -->
    </view>
 </view>
 
 <view class="tis">温馨提示：发起提现时，微信财付通平台将收取一定比例的提现手续费，到账金额请以实际到账金额为准。</view>
 
-<view class="submit">
+<view class="submit" bindtap="submit">
 确认提现
 </view>
 
@@ -43,7 +54,7 @@
     <view class="foot-boot-m">大爱无疆，感恩家乡</view>
 </view>
 
-
+ <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
 
 <view class="popup" hidden="{{isdelete}}">
         <view class="popup_h1">善款提现申请须知</view>

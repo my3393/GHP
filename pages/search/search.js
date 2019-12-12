@@ -77,8 +77,13 @@ Page({
   //搜索
   value(e){
     keyword = e.detail.value
-    this.getdetail()
-    this.getStore();
+    if (keyword == ''){
+
+    }else{
+      this.getdetail()
+      this.getStore();
+    }
+    
   },
   //搜索店铺
   getStore() {

@@ -304,7 +304,7 @@ box-sizing: border-box;
   width: calc(100% - 40rpx);
    overflow: hidden;
   border-radius: 70rpx;
-  height: 150rpx;
+  height: 160rpx;
   margin: 20rpx 0;
   margin-left: 20rpx;
 }

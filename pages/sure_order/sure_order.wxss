@@ -237,12 +237,15 @@ page{
       z-index: 9;
   }
   .pay{
-     width: 180rpx;
-     height: 70rpx;
-     border-radius: 40rpx;
-     color: #fff;
-     line-height: 70rpx;
-     text-align: center;
-     background:linear-gradient(to right, #f12200, #ff4e17);
-     margin-top: 15rpx;
+     width: 180rpx!important;
+     height: 70rpx!important;
+     border-radius: 40rpx!important;
+     color: #fff!important;
+     line-height: 70rpx!important;
+     text-align: center!important;
+     background:linear-gradient(to right, #f12200, #ff4e17)!important;
+     margin-top: 15rpx!important;
+     float: right;
+     margin: 0;
+     font-size: 26rpx!important;
   }

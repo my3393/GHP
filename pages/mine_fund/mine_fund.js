@@ -50,7 +50,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    detail = [];
   },
 
   /**
@@ -76,7 +76,12 @@ Page({
   //提现
   tix(e){
     wx.navigateTo({
-      url: '../apply_menoy/apply_menoy?id=' + e.currentTarget.id,
+      url: '../apply_menoy/apply_menoy?id=' + e.currentTarget.id + '&status=' + e.currentTarget.dataset.status + '&money=' + e.currentTarget.dataset.money ,
+    })
+  },
+  tix_c(e) {
+    wx.navigateTo({
+      url: '../apply_with_one/apply_with_one?id=' + e.currentTarget.id + '&tru=' + 1, 
     })
   },
   //详情

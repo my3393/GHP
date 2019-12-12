@@ -108,8 +108,14 @@ Page({
       if (res.status == 1000) {
          wx.showToast({
            title: '投诉成功',
-           icon:'none'
-         })
+           icon:'none',
+          duration: 2000,
+        })
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 2
+          })
+        }, 2000)
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({

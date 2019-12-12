@@ -12,6 +12,6 @@
   bindgetphonenumber="getPhoneNumber"
  
 >
-  微信授权登录
+  绑定手机号
 </button>
 <view wx:else>请升级微信版本</view>

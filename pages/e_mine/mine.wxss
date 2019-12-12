@@ -161,7 +161,7 @@ page{
     /* border-bottom-left-radius: 60rpx;
     border-bottom-right-radius: 60rpx; */
     position: absolute;
-    bottom: 0rpx;
+    bottom: 15rpx;
     left: 10rpx;
    
     border-radius: 12rpx;

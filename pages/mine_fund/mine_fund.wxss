@@ -77,3 +77,7 @@ g-h2{
   width: 160rpx;
   height: 140rpx;
 }
+.fund_r{
+  float: right;
+  margin: 30rpx 0;
+}

@@ -2,6 +2,7 @@
 const app = getApp();
 let id;
 let storeId
+let status
 Page({
 
   /**
@@ -19,7 +20,9 @@ Page({
   onLoad: function (options) {
      id = options.id,
      storeId = options.storeId 
+     status = options.status
      this.getDetail();
+    this.chexiao_nums()
   },
 
   /**
@@ -63,6 +66,13 @@ Page({
   onReachBottom: function () {
 
   },
+  //修改申请
+  xiugai(){
+    wx.navigateTo({
+      url: '../order_refund/order_refund?id=' + this.data.detail.id + '&status=' + status + '&z_status=' + this.data.detail.orderStatus,
+    })
+    
+  },
   //退款进度
   jind(){
     wx.navigateTo({
@@ -89,11 +99,18 @@ Page({
     app.res.req('app-web/userorder/revocation', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-
-        that.setData({
-          detail: res.data,
-          status: res.data.orderStatus
+        
+        // that.setData({
+        //   detail: res.data,
+        //   status: res.data.orderStatus
+        // })
+        wx.showToast({
+          title: '撤销成功',
+          icon:'none',
+          duration:2000,
         })
+        that.getDetail();
+        that.chexiao_nums()
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
@@ -117,6 +134,7 @@ Page({
     app.res.req('app-web/userorder/revocationcount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+          
          if(res.data == 2){
           wx.showToast({
             title: '当前撤销机会已用完，不能撤销',
@@ -124,9 +142,15 @@ Page({
             duration:2000
           })
          }else{
-           that.setData({
-             chexiao_num: res.data
-           })
+           if(res.data == 0){
+             that.setData({
+               chexiao_num: 1
+             })
+           }else{
+             that.setData({
+               chexiao_num:0
+             })
+           }
            that.setData({
              ismask: !that.data.ismask,
              ischexiao: !that.data.ischexiao
@@ -146,10 +170,43 @@ Page({
       }
     })
   },
+  chexiao_nums() {
+    let that = this;
+    let data = {
+      id: id
+    }
+
+    app.res.req('app-web/userorder/revocationcount', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+
+        that.setData({
+          chexiao_nums: res.data
+        })
+        
+
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //确定撤销
   cx_confirm(){
+    let that = this;
       this.chexiaos();
      this.setData({
+      ismask: !that.data.ismask,
+      ischexiao: !that.data.ischexiao
+    })
+  },
+  cx_cancel() {
+    let that = this;
+    
+    this.setData({
       ismask: !that.data.ismask,
       ischexiao: !that.data.ischexiao
     })

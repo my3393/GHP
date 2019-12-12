@@ -1,0 +1,20 @@
+/* pages/order_evaluation/order_evaluation.wxss */
+page{
+  background: #f9f9f9;
+}
+.nav{
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+.top_img{
+  float: left;
+}
+.top_img image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.top_r{
+  display: inline-block;
+}

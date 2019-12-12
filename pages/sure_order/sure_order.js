@@ -13,6 +13,7 @@ Page({
     defalutaddres: [], //默认地址
     adress: [], //选择的地址
     inpu: '',
+    loading:true,
   },
 
   /**
@@ -214,15 +215,15 @@ Page({
       if (res.status == 1000) {
         if (user.memberType == 1) {
           that.setData({
-            member_p: res.data.member1Discount * that.data.prices
+            member_p: (that.data.prices - res.data.member1Discount * that.data.prices).toFixed(2)
           })
         } else if (user.memberType == 2) {
           that.setData({
-            member_p: res.data.member2Discount * that.data.prices
+            member_p: (that.data.prices - res.data.member2Discount * that.data.prices).toFixed(2)
           })
         } else if (user.memberType == 3) {
           that.setData({
-            member_p: res.data.member3Discount * that.data.prices
+            member_p: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
           })
         } else {
           that.setData({
@@ -230,7 +231,7 @@ Page({
           })
         }
         that.setData({
-          z_price: that.data.prices - that.data.member_p
+          z_price: (that.data.prices - that.data.member_p).toFixed(2)
         })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -279,6 +280,14 @@ Page({
       })
       return false
     }
+    var nowTime = new Date();
+    if (nowTime - this.data.tapTime < 1000) {
+      console.log('阻断')
+      return;
+    }
+    that.setData({
+      loading:!that.data.loading
+    })
     let data = {
       productId: id,
       skuId: that.data.goodId,
@@ -305,7 +314,7 @@ Page({
         })
       }
     })
-
+    this.setData({ tapTime: nowTime });
   },
   //调取支付
   pays(){
@@ -331,12 +340,12 @@ Page({
               duration: 1000
             })
             wx.redirectTo({
-              url: '../pay_success/pay_success?id=' + that.data.z_price,
+              url: '../pay_success/pay_success?id=' + that.data.z_price ,
             })
           },
           fail(res) {
              wx.redirectTo({
-               url: '../order_all/order_all',
+               url: '../order_all/order_all?id=' + 0,
              })
 
           }
@@ -354,6 +363,11 @@ Page({
           icon: 'none'
         })
       }
+    })
+  },
+  por(){
+    this.setData({
+      loading: !this.data.loading
     })
   }
 

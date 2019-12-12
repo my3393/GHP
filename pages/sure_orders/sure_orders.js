@@ -12,7 +12,7 @@ Page({
     address: false,
     defalutaddres: [], //默认地址
     adress: [], //选择的地址
-    inpu: '模拟额',
+    inpu: [''],
   },
 
   /**
@@ -320,14 +320,51 @@ Page({
     }
     var Str = JSON.stringify(ids);
     var input = JSON.stringify(that.data.inpu)
+    
     let data = {
       shopProductIdJson : Str,
       
-      addressId: that.data.addressId,
-      leaveMessageJson: that.data.inpu,
-      terminal: 'xx'
-
+       
+      // leaveMessageJson:input,
+     
+       terminal: 'xx',
+       addressIdStr: that.data.addressId,
     }
+    // wx.request({
+    //   url: "http://192.168.123.171:8080/app-web/order/shopcartsubmit",
+    //   data: {
+    //     shopProductIdJson: Str,
+
+
+    //     leaveMessageJson: that.data.inpu,
+
+    //     terminal: 'xx',
+    //     addressId: that.data.addressId,
+    //   },
+    //   method: 'POST',
+    //   header: {
+    //     'content-type': 'json',
+    //     'token':wx.getStorageSync('token')
+    //   },
+    //   dataType: 'json',
+    //   success: function (res) {
+    //     console.log(res.data.data)
+    //     if (res.data.status === 100) {
+          
+    //     } else if (res.data.status === 103) {
+    //       wx.redirectTo({
+    //         url: '/pages/login/login',
+    //       })
+
+    //     } else {
+    //       wx.showToast({
+    //         title: res.data.msg,
+    //         icon: 'none'
+    //       })
+    //     }
+    //   }
+    // })
+
     app.res.req('app-web/order/shopcartsubmit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
@@ -390,7 +427,7 @@ Page({
           },
           fail(res) {
             wx.redirectTo({
-              url: '../order_all/order_all',
+              url: '../order_all/order_all?id=' + 0,
             })
           }
         })

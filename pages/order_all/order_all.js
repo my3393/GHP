@@ -25,6 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     orderType = options.id,
     wx.showLoading({
       title: '加载中',
@@ -60,21 +61,27 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+     detail=[];
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+      detail = [];
+      currentPage = 1;
+      this.getDetail();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    let that = this;
+     
+        currentPage = currentPage +1
+        that.getDetail();
+    
   },
 
   /**
@@ -82,6 +89,30 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  //删除订单
+  cance(e){
+    let that = this;
+    let data = {
+      id: e.currentTarget.id
+    }
+
+    app.res.req('app-web/userorder/delete', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        detail = []
+        that.getDetail();
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   //home
   home(){
@@ -99,6 +130,12 @@ Page({
   order_detail(e){
      wx.navigateTo({
        url: '../order_detail/order_detail?id=' + e.currentTarget.id,
+     })
+  },
+  //立即评价
+  pinj(e){
+     wx.navigateTo({
+       url: '../order_evaluation/order_evaluation?id=' + e.currentTarget.id,
      })
   },
   //确认签收
@@ -185,7 +222,8 @@ Page({
               signType: 'MD5',
               paySign: res.data.sign.paySign,
               success(res) {
-
+                detail = []
+                that.getDetail();
                 wx.showToast({
                   title: '支付成功',
                   icon: 'none',

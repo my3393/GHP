@@ -44,7 +44,7 @@
             <text class="h1_b">感受他乡风情，享受地方特产</text>
         </view>
         <scroll-view class="classify" scroll-x="true">
-            <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="detail">
+            <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
                 <view class="class-t-img">
                     <image src="{{item.productDefaultImgOss}}" />
                 </view>
@@ -58,16 +58,16 @@
         </scroll-view>
     </view>
     <view class="tag">
-        <view>综合</view>
-        <view>价格</view>
-        <view>销量</view>
-        <view>上新</view>
+        <view class="{{tas == 0 ? 'yan' :''}}" id="{{0}}" bindtap="paix">综合</view>
+        <view class="{{tas == 0 ? 'yan' :''}}" id="{{0}}" bindtap="paix"> 价格</view>
+        <view class="{{tas == 0 ? 'yan' :''}}" id="{{0}}" bindtap="paix">销量</view>
+        <view class="{{tas == 0 ? 'yan' :''}}" id="{{0}}" bindtap="paix">上新</view>
         <view class="switch">
             <image src="../../images/switch.png" />
         </view>
     </view>
     <view class="store_nav_list">
-        <view class="nav-list" wx:for='{{list}}' wx:key='{{item.id}}' id="{{item.id}}">
+        <view class="nav-list" wx:for='{{list}}' wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
             <view class="list-img">
                 <image src="{{item.productDefaultImgOss}}" />
             </view>
