@@ -423,6 +423,7 @@ overflow: hidden;
   text-align: center;
   transform: translate(-50%,-50%);
   font-size: 26rpx;
+  z-index: 12
 }
 .defic>view{
   line-height: 50rpx;

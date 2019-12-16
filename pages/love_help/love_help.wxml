@@ -1,0 +1,46 @@
+<view class="top">
+    <view class="title">爱心助力金额</view>
+   
+    <view>
+        <view class="num">{{detail.remainTotalAmount}}</view>
+        
+         <view class="znum tix" wx:if="{{user.memberType == 0 || detail.remainTotalAmount}}">爱心助力</view>
+         <view class="znum" wx:else>爱心助力</view>
+    </view>
+     <view class="bootm">
+       爱心助力明细
+       <view class="bootm-img">
+           <image  src="../../images/right.png" />
+       </view>
+    </view>
+</view>
+
+ <view>
+   目前<text class="yan">全国共有20,000名</text>老乡已为家乡爱心助力，您当前在老乡中<text class="yan">排行第18位</text>，购物消费可贡献更多爱心助力金哦 ，排名更靠前，连续排名前3的家乡游子，有机会获得家乡“爱心助力大使”荣誉称号！                                        
+ </view>
+
+<view class="foot-boot">
+    <view >善家购</view>
+    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+</view>
+
+ <view class="popup" hidden="{{iscertfica}}">
+        <view class="popup_h1">请先进行实名认证</view>
+        <view class="popup_content">认证通过后才能提现到微信钱包</view>
+        <view class="popup_btn">
+              <view bindtap="cancel_delete">稍后认证</view>
+              <view bindtap="confirm_delete">立即认证</view>
+        </view>
+  </view>
+
+  <view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>
+
+  <!-- 弹窗 -->
+<view class="popup" hidden="{{isdelete}}">
+        <view class="popup_h1">你暂时还未开通会员身份</view>
+        <view class="popup_content">开通会员即可赚取分享收益</view>
+        <view class="popup_btn">
+              <view bindtap="cancel">先看看</view>
+              <view bindtap="confirm">立即开通</view>
+        </view>
+</view>

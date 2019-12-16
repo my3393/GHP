@@ -1,0 +1,168 @@
+<!--pages/person/person .wxml-->
+<view hidden="{{!isshow}}">
+  <view class="top">
+      基本信息
+  </view>
+  <view class="nav">
+      <view class="nav_list_l">
+          <view class="nav-l-t">
+              修改头像
+          </view>
+          <view class="list-t">
+              <view class="list-img" bindtap="chooseImage">
+                  <image src="{{post1}}" />
+              </view>
+              <view class="list-right">
+                  <image src="../../images/right.png" />
+              </view>
+          </view>
+      </view>
+      <view class="nav_list_l dandu">
+          <view class="nav-l-t">
+              用户昵称
+          </view>
+          <view class="list-t " bind:tap="name">
+              <view style="display:inline-block;margin-right: 20rpx">
+                {{name}}
+              </view>
+              <view class="list-right">
+                  <image src="../../images/right.png" />
+              </view>
+          </view>
+      </view>
+      <view class="nav_list_l">
+          <view class="nav-l-t">
+              性别
+          </view>
+          <view class="list-t">
+              <view class="list-n">
+                  <picker mode = "selector" bindchange="sexChange" id='{{sex[index].id}}' value="{{index}}" range="{{sex}}" range-key="{{'name'}}"> 
+                      <input type="text" disabled="{{true}}" placeholder="请选择" value='{{sexs}}' />  
+                  </picker>
+                
+              </view>
+              <view class="list-right">
+                  <image src="../../images/right.png" />
+              </view>
+          </view>
+      </view>
+      <view class="nav_list_l">
+          <view class="nav-l-t">
+              生日
+          </view>
+          <view class="list-t">
+              <view class="list-n">
+                  <picker mode="date" start="1920-1-1" end="2100-12-31" bindchange="dayChange"  value="{{index}}"> 
+                      <input type="text" disabled="{{true}}" value='{{day}}' placeholder="请选择" />  
+                  </picker>
+                
+              </view>
+              <view class="list-right">
+                  <image src="../../images/right.png" />
+              </view>
+          </view>
+      </view>
+      
+  </view>
+  <!-- <view class="top">
+      绑定家乡
+  </view>
+  <view class="nav">
+      <view class="nav_list_l">
+          <view class="nav-l-t">
+              绑定家乡
+          </view>
+          <view class="list-t">
+              <view class="list-n" bindtap="diz">
+                 
+                      <input type="text" disabled="{{true}}" value='{{addres}}' placeholder="请选择" />  
+                 
+                
+              </view>
+              <view class="list-right">
+                  <image src="../../images/right.png" />
+              </view>
+          </view>
+      </view>
+  </view> -->
+</view>
+
+<view class='container' hidden='{{isshow}}'>
+  <imgcut id='imgcut' src='{{src}}' width='350' height='350'></imgcut>
+  <view class="footer">
+    <view bindtap="chooseimg">选择图片</view>
+    <view bindtap="cut">保存</view>
+  </view>
+</view>
+
+<!-- 选择地址 -->
+
+<view class="adres" hidden="{{address}}">
+  <view class="adres_h1">
+    选择地区
+    <view class="detel" bindtap="detel">
+      <image src="../../images/xxx.png"></image>
+    </view>
+  </view>
+  <view class="adre_bott">
+    <view wx:if="{{prov.length == 0}}" class="{{isprov ? 'hong': ''}}">请选择</view>
+    <view wx:else bindtap="x_prov">
+      <text class="{{tar == 1 ? 'hong': ''}}">{{prov}}</text>
+    </view>
+    <view wx:if="{{iscitys}}">
+      <view wx:if="{{city.length == 0}}" class="{{iscity ? 'hong': ''}}">请选择</view>
+      <view wx:else bindtap="x_city">
+        <text class="{{tar == 2 ? 'hong': ''}}">{{city}}</text>
+      </view>
+    </view>
+    <view wx:if="{{isqus}}">
+      <view wx:if="{{area.length == 0}}" class="{{isqu ? 'hong': ''}}">请选择</view>
+      <view wx:else bindtap="x_qu">
+        <text class="{{tar == 3 ? 'hong': ''}}">{{area}}</text>
+      </view>
+    </view>
+    <view wx:if="{{isjies}}">
+      <view wx:if="{{town.length == 0}}" class="{{isjie ? 'hong': ''}}">请选择</view>
+      <view wx:else bindtap="x_jie">
+        <text class="{{tar == 4 ? 'hong': ''}}">{{town}}</text>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" class="srcoll">
+    <!-- 省 -->
+    <view wx:if="{{isprov}}">
+      <view class="adres_list {{tas1 == idx ? 'tas_a' : ''}}" wx:for="{{province}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getprovs">{{item.name}}
+        <view class="adres_r" wx:if="{{tas1 == idx}}">
+          <image src="../../images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 市 -->
+    <view wx:if="{{iscity}}">
+      <view class="adres_list {{tas2 == idx ? 'tas_a' : ''}}" wx:for="{{citys}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getcity">{{item.name}}
+        <view class="adres_r" wx:if="{{tas2 == idx}}">
+          <image src="../../images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 区 -->
+    <view wx:if="{{isqu}}">
+      <view class="adres_list {{tas3 == idx ? 'tas_a' : ''}}" wx:for="{{areas}}" wx:for-index='idx' id="{{item.id}}" data-index="{{idx}}" data-name="{{item.name}}" bindtap="getarea" data-index="{{idx}}">{{item.name}}
+        <view class="adres_r" wx:if="{{tas3 == idx}}">
+          <image src="../../images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 街道-->
+    <view wx:if="{{isjie}}">
+      <view class="adres_list {{tas4 == idx ? 'tas_a' : ''}}" wx:for="{{towns}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="gettown">{{item.name}}
+        <view class="adres_r" wx:if="{{tas4 == idx}}">
+          <image src="../../images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>
+</view>
+
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>

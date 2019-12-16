@@ -82,6 +82,8 @@ swiper-item image{
     .tx image{
       width: 80rpx;
       height: 80rpx;
+      overflow: hidden;
+      border-radius: 50%;
     }
     .tx_n{
       color: #fff;

@@ -5,12 +5,18 @@ const app = getApp();
 Page({
     data: {
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        detail_id:''
+        detail_id:'',
+        userid:''
     },
     onLoad(options) {
       console.log(options)
       let that = this;
-       if(options.id){
+      if(options.id && options.userid){
+        that.setData({
+          detail_id: options.id,
+          userid: options.userid
+        })
+      }else if(options.id){
           that.setData({
             detail_id:options.id
           })
@@ -166,19 +172,21 @@ Page({
                                     //   url: '../good_detail/good_detail?id=' + that.data.detail_id
                                     // })
                                   
-                                } else {
+                                } else if (that.data.detail_id != '' && that.data.userid != ''){
                                   console.log(11)
-                                  if (that.data.detail_id != ''){
-                                    wx.redirectTo({
-                                      url: '../good_detail/good_detail?id=' + that.data.detail_id
-                                    })
-                                  }else{
-                                    console.log(2)
-                                    wx.switchTab({
-                                      url: '../e_home/home'
-                                    })
-                                  }
+                                   wx.redirectTo({
+                                     url: '../good_detail/good_detail?id=' + that.data.detail_id + '&userid=' + that.data.userid,
+                                   })
                                   
+                                } else if (that.data.detail_id != '') {
+                                  wx.redirectTo({
+                                    url: '../good_detail/good_detail?id=' + that.data.detail_id
+                                  })
+                                } else {
+                                  console.log(2)
+                                  wx.switchTab({
+                                    url: '../e_home/home'
+                                  })
                                 }
 
                               } else {

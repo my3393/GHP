@@ -3,11 +3,11 @@
     <view class="tops {{istrue ? 'active' : ''}}">
         <view class="top-n">用户昵称</view>
         <view class="inpu">
-            <input type="text" placeholder="请输入2~8位中文或英文的昵称" />
+            <input value="{{name}}" bindinput="name" type="text" placeholder="请输入2~8位中文或英文的昵称" />
         </view>
     </view>
 </view>
  <view class="xian">请输入2~8位中文或英文的昵称</view>
-<view class="submit">
+<view class="submit" bindtap="submit">
     保存
 </view>

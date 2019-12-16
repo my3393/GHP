@@ -54,9 +54,9 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-
-        user = res.data
-
+       that.setData({
+         user: res.data
+       })
       },
     })
   },
@@ -152,7 +152,7 @@ Page({
     app.res.req("app-web/product/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.getSku();
+       
 
         that.setData({
           detail: res.data,
@@ -160,7 +160,15 @@ Page({
           price: res.data.lowestPrice,
           title_img: res.data.productDefaultImgOss
         })
-
+        if (res.data.isSpecificaton == 1){
+          that.getSku();
+        }else{
+          that.setData({
+            prices: res.data.lowestPrice * that.data.buyNum,
+          })
+          that.checked();
+        }
+        
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
@@ -213,15 +221,15 @@ Page({
     app.res.req('app-web/member/discount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        if (user.memberType == 1) {
+        if (that.data.user.memberType == 1) {
           that.setData({
             member_p: (that.data.prices - res.data.member1Discount * that.data.prices).toFixed(2)
           })
-        } else if (user.memberType == 2) {
+        } else if (that.data.user.memberType == 2) {
           that.setData({
             member_p: (that.data.prices - res.data.member2Discount * that.data.prices).toFixed(2)
           })
-        } else if (user.memberType == 3) {
+        } else if (that.data.user.memberType == 3) {
           that.setData({
             member_p: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
           })
@@ -231,7 +239,7 @@ Page({
           })
         }
         that.setData({
-          z_price: (that.data.prices - that.data.member_p).toFixed(2)
+          z_price: (that.data.prices - that.data.member_p + that.data.detail.expressFee).toFixed(2)
         })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -285,9 +293,9 @@ Page({
       console.log('阻断')
       return;
     }
-    that.setData({
-      loading:!that.data.loading
-    })
+    // that.setData({
+    //   loading:!that.data.loading
+    // })
     let data = {
       productId: id,
       skuId: that.data.goodId,
@@ -300,12 +308,15 @@ Page({
     app.res.req('app-web/order/productsubmit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        setTime = setInterval(function () {
-          that.pays();
-        }, 1000)
+       
+         wx.showLoading({
+           mask:true
+         })
+       
         setTimeout(function(){
-          clearInterval(setTime)
-        },8000)
+          wx.hideLoading()
+          that.pays();
+        },2000)
       } else {
 
         wx.showToast({
@@ -369,6 +380,55 @@ Page({
     this.setData({
       loading: !this.data.loading
     })
-  }
+  },
+  //绑定手机号
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.datatoken,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data,
+          })
+          setTimeout(function () {
+            that.pay();
+          }, 1000)
 
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
+  },
 })

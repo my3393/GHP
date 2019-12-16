@@ -1,15 +1,11 @@
-// pages/person/person .js
-const app = getApp();
+// pages/love_help/love_help.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-     sex:[
-       {id:'1',name:'男'},
-       {id:'2',name:'女'}
-     ],
+
   },
 
   /**
@@ -66,28 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-   //性别选择
-   sexChange(e){
-   
-    let that = this;
-    that.setData({
-      sexs: that.data.sex[e.detail.value].name,
-      sexid: that.data.sex[e.detail.value].id,
-    })
-   },
-    //出生日期选择
-  dayChange(e){
-    console.log(e)
-    this.setData({
-      day:e.detail.value
-    })
-    console.log(this.data.day)
-  },
-  //用户昵称
-  name(){
-    wx.navigateTo({
-      url: '../person_name/person_name',
-    })
   }
 })

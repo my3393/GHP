@@ -77,6 +77,13 @@ Page({
   onReachBottom: function () {
 
   },
+  //修改信息
+  person(){
+    console.log(111)
+    wx.navigateTo({
+      url: '../person/person',
+    })
+  },
   //实名认证
   certification(){
     wx.navigateTo({

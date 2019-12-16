@@ -24,7 +24,7 @@
            </view>
            <view class="bott_r">
                <view catchtap="bianji" id="{{item.id}}">编辑</view>
-               <view  bind:tap="detel" data-id="{{item.id}}">删除</view>
+               <view  catchtap="detel" data-id="{{item.id}}">删除</view>
            </view>
        </view>
    </view>

@@ -41,6 +41,7 @@ Page({
       {name:'企业'},
       {name:'政府'},
     ],
+    progre:0,
   },
 
   /**
@@ -65,7 +66,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -100,6 +111,36 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+
+  //删除个人照照片
+  detels(e) {
+    var that = this;
+    console.log(e)
+    console.log(that.data.imgs)
+    
+
+   if(e.currentTarget.dataset.num == 1){
+     simages.splice(e.currentTarget.dataset.index, 1)
+     images.splice(e.currentTarget.dataset.index, 1)
+     that.setData({
+       images: images,
+       img_num: that.data.img_num - 1
+     })
+     console.log(simages.length)
+     if (simages.length < 5) {
+       that.setData({
+         img_show: false
+       })
+     }
+   } else if (e.currentTarget.dataset.num == 0){
+     that.setData({
+       zhao1:true,
+       zhaos1:'',
+     })
+     zhao1 =''
+   }
 
   },
   //
@@ -171,6 +212,56 @@ Page({
     })
     
   },
+  //绑定手机号
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.data.token,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data,
+          })
+          setTimeout(function () {
+            that.submit();
+          }, 1000)
+
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
+  },
   //重新提交信息
   getagain(){
     let that = this;
@@ -189,7 +280,8 @@ Page({
            typ: res.data.applyBody,      
            sum: res.data.projectExplain,
            sums: res.data.introduce,
-           prov: res.data.provinceName,
+           num: res.data.projectExplain.length,
+           nums: res.data.introduce.length,
            city: res.data.cityName,
            area: res.data.areaName,
            town: res.data.townName,
@@ -344,7 +436,9 @@ Page({
       success: res => {
         // console.log(res.tempFilePaths[0]);
         var tempFilePaths = res.tempFilePaths;
-        wx.showLoading();
+        wx.showLoading({
+          title:that.data.progre
+        });
         const uploadTask = wx.uploadFile({
           url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
@@ -392,9 +486,8 @@ Page({
           }
         })
         uploadTask.onProgressUpdate((res) => {
-          wx.showToast({
-            title: res.progress,
-            icon: 'none'
+          that.setData({
+            progre: res.progress
           })
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)

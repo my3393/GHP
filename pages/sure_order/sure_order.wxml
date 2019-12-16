@@ -87,7 +87,8 @@
             <view class="guig">
                 <view class='gui-g'  wx:for='{{sku.skus}}' wx:key="{{item.id}}">{{item.value}}</view>
             </view>
-            <text class='price'><text class="yuan">￥</text>{{sku.price}}</text>
+            <text class='price' wx:if='{{detail.isSpecificaton == 0}}'><text class="yuan">￥</text>{{price}}</text>
+             <text class='price' wx:else><text class="yuan">￥</text>{{sku.price}}</text>
             <view class="good_num">×{{buyNum}}</view>
             </view>
         </view>
@@ -160,10 +161,11 @@
          <text class="yuan">￥</text>{{z_price}}
      </view>
  </view>
- <button class="pay" size="mini" bindtap="pay" loading="{{!loading}}" wx:if='{{loading}}'>
+ <button class="pay" size="mini" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" 
+  bindgetphonenumber="getPhoneNumber">
     微信支付
  </button>
- <button size="mini" wx:else class="pay" loading="{{!loading}}" bindtap="pro">
-      
+ <button size="mini" wx:else class="pay"  bindtap="pay">
+       微信支付
  </button>
 </view>

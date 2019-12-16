@@ -1,4 +1,5 @@
 // pages/mine_wallet/mine_wallet.js
+const app = getApp();
 Page({
 
   /**
@@ -7,13 +8,14 @@ Page({
   data: {
      iscertfica:true,
      ismask:true,
+    isdelete:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getinfor();
   },
 
   /**
@@ -27,7 +29,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this;
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
 
+        that.setData({
+          user: res.data
+        })
+        if (res.data.memberType == 0){
+           that.setData({
+             isdelete:false,
+             ismask:false,
+           })
+        }
+      }
+    })
   },
 
   /**
@@ -44,31 +61,56 @@ Page({
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+  getinfor() {
+    let that = this;
+    let data = {
 
+    }
+
+    app.res.req('app-web/user/walletinfo', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data != null) {
+          that.setData({
+            detail:res.data
+          })
+         
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  //开通会员
+  member(){
+    wx.navigateTo({
+      url: '../members/members',
+    })
   },
   cancel_delete(){
     let that =this;
     that.setData({
       iscertfica: !that.data.iscertfica,
       ismask:true,
+    })
+  },
+  cancel(){
+    that.setData({
+      isdelete: !that.data.isdelete,
+      ismask: true,
+    })
+  },
+  confirm() {
+    that.setData({
+      isdelete: !that.data.isdelete,
+      ismask: true,
     })
   }
 })

@@ -58,6 +58,16 @@ Page({
 
   onShow: function () {
     this.getDateil();
+    let that = this;
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        
+        that.setData({
+          user: res.data
+        })
+      }
+    })
   },
 
   /**
@@ -93,7 +103,8 @@ Page({
   */
 
   onPullDownRefresh: function () {
-
+     cartsdata = []
+     this.getDateil();
   },
 
   /**
@@ -397,7 +408,7 @@ Page({
   },
 
   minusCount: function (e) {
-
+    let that = this;
     var cartsdata = this.data.cartsdata //购物车数据
 
     let index = e.currentTarget.dataset.index //当前商品所在店铺中的下标
@@ -499,7 +510,7 @@ Page({
   getDateil() {
     let that = this;
     let data = {
-
+       
     }
     app.res.req('app-web/shopcart/list', data, (res) => {
       console.log(res.data)
@@ -510,6 +521,7 @@ Page({
             res.data[i].products[i].selected = false
           }
         }
+        cartsdata.push(...res.data)
         that.setData({
           cartsdata: res.data,
 
@@ -530,6 +542,55 @@ Page({
     })
 
   },
+  //绑定手机号
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.data.data.token,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data.data.user,
+          })
+          setTimeout(function () {
+            that.pay();
+          }, 1000)
 
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
+  },
 })
 

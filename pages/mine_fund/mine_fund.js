@@ -66,7 +66,24 @@ Page({
   onReachBottom: function () {
 
   },
-
+   //项目详情
+   detail(e){
+     if (e.currentTarget.dataset.status == 0) {
+       wx.showToast({
+         title: '审核中',
+         icon: 'none'
+       })
+     }else if(e.currentTarget.dataset.status == 2){
+       wx.showToast({
+         title: '审核驳回，请检查资料重新提交',
+         icon:'none'
+       })
+     } else if (e.currentTarget.dataset.status == 1 || e.currentTarget.dataset.status == 3 || e.currentTarget.dataset.status == 4 ){
+       wx.navigateTo({
+         url: '../welfare_det/welfare_det?id=' + e.currentTarget.id,
+       })
+     }
+   },
   //重新提交
   chongx(e){
      wx.navigateTo({

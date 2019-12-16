@@ -31,13 +31,13 @@
       </view>
     </view>
     <view class="top-tx" wx:else >
-      <view class="tx" wx:if='{{uesr.headImgUrl == null}}'>
+      <view class="tx" wx:if='{{uesr.headImgUrl == null}}' bindtap="person">
         <image src="../../images/tx.png" />
       </view>
-      <view class="tx" wx:else>
+      <view class="tx" wx:else bindtap="person">
         <image src="{{user.headImgUrl}}" />
       </view>
-      <view class="person">
+      <view class="person" bindtap="person">
         <view>
           <view class="per-n" wx:if='{{user.userName == null}}'>{{phone}}</view>
           <view class="per-n" wx:else>{{user.userName}}</view>
@@ -191,24 +191,24 @@
       </view>
       <view>实名认证</view>
     </view>
-    <view class="din-1">
+    <!-- <view class="din-1">
       <view class="din-img">
         <image src="../../images/fxsj.png" />
       </view>
       <view>分享善家</view>
-    </view>
+    </view> -->
     <view class="din-1">
       <view class="din-img">
         <image src="../../images/gzgzh.png" />
       </view>
       <view>关注公众号</view>
     </view>
-    <view class="din-1">
+    <!-- <view class="din-1">
       <view class="din-img">
         <image src="../../images/shez.png" />
       </view>
       <view>设置</view>
-    </view>
+    </view> -->
   </view>
 </view>
 <view class="foot-boot">

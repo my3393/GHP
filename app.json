@@ -29,7 +29,7 @@
     "pages/search/search",
     "pages/navig/navig",
     "pages/mine_yb/mine_yb",
-    "pages/person/person ",
+    "pages/person/person",
     "pages/e_mine/mine",
     "pages/e_shoping/shoping",
     "pages/e_ welfare/e_ welfare",
@@ -51,7 +51,10 @@
     "pages/apply_with_one/apply_with_one",
     "pages/apply_bind/apply_bind",
     "pages/apply_menoy/apply_menoy",
-    "pages/order_evaluation/order_evaluation"
+    "pages/order_evaluation/order_evaluation",
+    "pages/love_help/love_help",
+    "pages/mine_opinion/mine_opinion",
+    "pages/productList/producList"
   ],
   "tabBar": {
     "color": "#808080",
@@ -96,6 +99,5 @@
     "navigationBarTitleText": "善家购",
     "navigationBarTextStyle": "white"
   },
-  "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

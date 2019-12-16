@@ -47,11 +47,14 @@
   </view>
 
   <view class="classify">
-    <view class="class-one" wx:for="{{className}}" wx:key="{{item.id}}" data-id='{{item.id}}' bindtap="search">
+    <view class="class-one" wx:for="{{className}}" wx:key="{{item.id}}" data-name="{{item.classifyName}}" data-id='{{item.id}}' bindtap="search_product">
       <view class="class-img "><image class="skeleton-radius" src="{{item.classifyImgOss}}"></image></view>
       <view class="class-n">{{item.classifyName}}</view>
     </view>
-
+     <view class="class-one"  data-id='{{item.id}}' bindtap="search_name">
+      <view class="class-img "><image class="skeleton-radius" src="../../images/home_gengd.png"></image></view>
+      <view class="class-n">查看更多</view>
+    </view>
   </view>
   <view class="advert" wx:for='{{advert}}' wx:key="{{item.id}}">
     <image src="{{item.advertiseImgOss}}" />

@@ -63,5 +63,39 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  name(e){
+    this.setData({
+      name:e.detail.value
+    })
+  },
+  submit(){
+    let that =this;
+    let data = {
+      userName: that.data.name
+    }
+    console.log(this.data.day)
+    app.res.req('app-web/user/editusername', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+
+        wx.showToast({
+          title: '修改成功',
+          icon: 'none'
+        })
+        wx.navigateBack({
+           delat:2
+        })
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   }
 })

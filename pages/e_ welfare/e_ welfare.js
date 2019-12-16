@@ -28,7 +28,7 @@ Page({
       "https://graph.baidu.com/resource/1168b577d0799dcb13b6901572947760.jpg",
     ],
     ...Canvas.data,
-    num:'8'
+    num:'0'
   },
 
   /**
@@ -37,7 +37,7 @@ Page({
   onLoad: function (options) {
     this.getDateil();
     this.getList();
-    this.draw('runCanvas',this.data.num,1000);
+    
   },
 
   /**
@@ -120,7 +120,7 @@ Page({
       console.log(res.data)
        if(res.status == 1000){
          if (res.data.withdrawalTotalAmount != 0){
-           let num = (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount)
+           let num =( (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount)*100)
            that.setData({
              num: num.toFixed(2)
            })
@@ -131,6 +131,7 @@ Page({
               money:res.data,
               
             })
+         that.draw('runCanvas', this.data.num, 1000);
            console.log(that.data.num)
        }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
          console.log(1)

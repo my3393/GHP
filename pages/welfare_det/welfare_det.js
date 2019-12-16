@@ -61,6 +61,14 @@ Page({
       top2 = rect.top
 
     }).exec();
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -97,6 +105,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //去首页
+  home(){
+     wx.navigateTo({
+       url: '../e_home/home',
+     })
+  },
   //取消
   cance(){
     this.setData({
@@ -105,7 +119,14 @@ Page({
     })
   },
   //确定
-  que(){
+  que2(){
+    
+    this.setData({
+      ismask: !this.data.ismask,
+      buzu: !this.data.buzu
+    })
+  },
+  que() {
     this.getVote();
     this.setData({
       ismask: !this.data.ismask,
@@ -113,9 +134,37 @@ Page({
     })
   },
   vote(){
+    this.getvalue();
     this.setData({
       ismask:!this.data.ismask,
       isvote:!this.data.isvote
+    })
+  },
+  //艺呗值
+  getvalue() {
+    let that = this;
+    let data = {
+     
+
+    }
+
+    app.res.req("/app-web/member/voteyb", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+         that.setData({
+           yb_value: res.data.parameterValue
+         })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      }else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
   },
   getVote(){

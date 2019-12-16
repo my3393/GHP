@@ -5,7 +5,7 @@
   </view>
 </view>
 <view style="margin-top:100rpx;">
-  <view class="nav clearfix" wx:for='{{detail}}' wx:key='{{item.id}}' id="{{item.id}}" bind:tap="detail">
+  <view class="nav clearfix" wx:for='{{detail}}' wx:key='{{item.id}}' id="{{item.id}}" data-status='{{item.projectStatus}}' bind:tap="detail">
     <view class="g-banner">
       <image src="{{item.defaultImgOss}}" />
       <view class="g_banner_diz">

@@ -180,7 +180,7 @@
   <!-- 关注弹窗 -->
   <view class="popup" hidden="{{isvote}}">
     <view class="popup_h1">项目票数越高，容易获得更多关注</view>
-    <view class="popup_content">确认投票后将消耗您100艺呗</view>
+    <view class="popup_content">确认投票后将消耗您{{yb_value}}艺呗</view>
     <view class="popup_btn">
       <view bindtap="cance">取消</view>
       <view bindtap="que">确定</view>
@@ -224,11 +224,11 @@
   <view class="defic" hidden="{{buzu}}">
     <view>艺呗不足,无法进行助力哦</view>
     <view style="font-size:24rpx;">您可通过以下方式获取</view>
-    <view class='kait yan'>
+    <view class='kait yan' wx:if='{{user.memberType == 0}}'>
       开通联盟会员赠送10倍艺呗
     </view>
-    <view class="yan">购物消费赠送等额艺呗</view>
-    <view class="que">
+    <view class="yan" bindtap="home">购物消费赠送等额艺呗</view>
+    <view class="que" bindtap="que2">
       确定
     </view>
   </view>

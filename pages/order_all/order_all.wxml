@@ -73,9 +73,9 @@
         </view>
         <view class="wuliu" wx:if='{{item.orderStatus == 3}}'>
 
-          <view class="quer" catchtap="pinj" id="{{item.id}}">
+          <!-- <view class="quer" catchtap="pinj" id="{{item.id}}">
             立即评价
-          </view>
+          </view> -->
           <view catchtap="wul" id="{{item.id}}">  
             查看物流
           </view>

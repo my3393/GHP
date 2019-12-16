@@ -2,12 +2,12 @@
 <view class='a-nav bg-white' style='height:{{navH}}px'>
   <view class='a-nav-title'>
     <view class="inpu">
-      <input placeholder="商家，店铺名称"></input>
+      <input placeholder="商家，店铺名称" value="{{value}}"></input>
       <view class="dete">
         <image src="../../images/detele.png"></image>
       </view>
     </view>
-    <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='off_order'></image>
+    <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='n_back'></image>
   </view>
 </view>
 <!-- 综合排序 -->

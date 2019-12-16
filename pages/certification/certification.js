@@ -11,9 +11,10 @@ Page({
     loading: false,
     post1: true,
     post2: true,
-    audit: 1,
-    number:'36233019960918874',
-    name:'刘郑国'
+    audit: 3,
+    number:'',
+    name:'',
+    id:'',
   },
 
   /**
@@ -21,6 +22,7 @@ Page({
    */
   onLoad: function (options) {
     this.get();
+    this.getaudit();
   },
 
   /**
@@ -85,45 +87,135 @@ Page({
   },
   submit() {
     let that = this;
-    that.setData({
-      loading: !that.data.loading
-    })
-    let data ={
-      realName:that.data.name,
-      identityNo: that.data.card_id,
-      identityCard1:img_1,
-        identityCard2:img_2,
+    if(that.data.id){
+      let that = this;
+      that.setData({
+        loading: !that.data.loading
+      })
+      let data = {
+        id:that.data.id,
+        realName: that.data.name,
+        identityNo: that.data.card_id,
+        identityCard1: img_1,
+        identityCard2: img_2,
+      }
+      app.res.req('app-web/user/resubmitauthentication', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          that.setData({
+            loading: !that.data.loading
+          })
+          wx.showToast({
+            title: '重新提交成功，请等待平台审核',
+            icon: 'none',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              data: 1
+            })
+          }, 2000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          console.log(1)
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          console.log(111)
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }else{
+      
+      that.setData({
+        loading: !that.data.loading
+      })
+      let data = {
+        realName: that.data.name,
+        identityNo: that.data.card_id,
+        identityCard1: img_1,
+        identityCard2: img_2,
+      }
+      app.res.req('app-web/user/submitauthentication', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          that.setData({
+            loading: !that.data.loading
+          })
+          wx.showToast({
+            title: '提交成功，请等待平台审核',
+            icon: 'none',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              data: 1
+            })
+          }, 2000)
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          console.log(1)
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          console.log(111)
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
     }
-    app.res.req('app-web/user/submitauthentication', data, (res) => {
+
+  },
+  go(){
+    img_1 = this.data.audits.identityCard1,
+      img_2 = this.data.audits.identityCard2
+    this.setData({
+      name: this.data.audits.realName,
+      card_id: this.data.audits.identityNo,
+      img_1: this.data.audits.identityCard1Oss,
+      img_2: this.data.audits.identityCard2Oss,
+      audit:3,
+      post1:false,
+      post2:false,
+    })
+  },
+  //用户认证信息
+  
+  getaudit(){
+    let that = this;
+    let data = {
+      
+    }
+
+    app.res.req('app-web/user/authenticationinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.setData({
-          loading: !that.data.loading
-        })
-         wx.showToast({
-           title: '提交成功，请等待平台审核',
-           icon:'none',
-           duration:2000
-         })
-          setTimeout(function(){
-             wx.navigateBack({
-               data:1
-             })
-          },2000)
+          if(res.data != null){
+            that.setData({
+              audits: res.data,
+              audit: res.data.auditStatus,
+              name: res.data.realName,
+              number: res.data.identityNo,
+              id:res.data.id
+            })
+            that.get();
+          }
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        console.log(1)
         wx.redirectTo({
           url: '../login/login',
         })
       } else {
-        console.log(111)
         wx.showToast({
           title: res.msg,
           icon: 'none'
         })
       }
     })
-
   },
   get(){
     let that = this;

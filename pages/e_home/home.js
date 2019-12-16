@@ -39,8 +39,10 @@ Page({
     }, 1000)
     let ids = [130,151]
     var schoolStr = JSON.stringify(ids);
-  },
+    
 
+  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -55,7 +57,7 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-        if (res.data.bindProvinceId != null) {
+        if (res.data.bindProvinceId != '' || res.data.bindProvinceId != null) {
            wx.setTabBarItem({
              index: 1,
              text: res.data.bindCityName,
@@ -105,6 +107,17 @@ Page({
     wx.navigateTo({
       url: '../search/search',
     })
+  },
+  search_product(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name,
+    })
+  },
+  search_name(e){
+     wx.navigateTo({
+       url: '../search_name/search_name?id=' + e.currentTarget.id + '&name=' + e.currentTarget.dataset.name,
+     })
   },
   //查看商品详情
   detail(e){

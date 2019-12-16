@@ -12,7 +12,7 @@ page{
       font-size: 28rpx;
       border: 1rpx #e5e5e5 solid;
       border-radius: 40rpx;
-      height: 60rpx;
+      height: 54rpx;
     }
     .inpu input{
       height: 100%;
@@ -53,6 +53,9 @@ page{
         position: absolute;
         left: 20rpx;
         top: 16rpx;
+    }
+    .back{
+      bottom: 10rpx;
     }
     .daoh{
         position: absolute;

@@ -9,6 +9,7 @@
       <view class='inform'>店铺LOGO</view>
       <view class='inforin infor_img' bindtap="chooseImage">
         <image src="{{post1}}"></image>
+
       </view>
       <view class='enter'>
         <image src='../../images/enter.png'></image>
@@ -60,8 +61,13 @@
         </view>
         <view>上传</view>
       </view>
-      <view class="tu_img" wx:else>
-        <image src="{{zhaos1}}"></image>
+      <view wx:else class="clearfix">
+        <view class="tu_img" bindtap="chooseImages" id="{{0}}">
+          <image src="{{zhaos1}}"></image>
+          <view class="detele"   data-num="{{0}}" catchtap="detels">
+            <image src="../../images/deteles.png" />
+          </view>
+        </view>
       </view>
       <view>图片上传说明：</view>
       <view>1.请下载善家购平台店铺特产销售证明模板</view>
@@ -74,13 +80,18 @@
     </view>
     <view class="nav">
       <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
-          <view class="zhao_img">
-            <image src="../../images/zhao.png"></image>
-          </view>
-          <view>上传</view>
+        <view class="zhao_img">
+          <image src="../../images/zhao.png"></image>
         </view>
-      <view class="tu_img" wx:else>
-        <image src="{{zhaos2}}"></image>
+        <view>上传</view>
+      </view>
+      <view wx:else class="clearfix">
+        <view class="tu_img" bindtap="chooseImages" id="{{1}}">
+          <image src="{{zhaos2}}"></image>
+          <view class="detele"  data-num="{{1}}" catchtap="detels">
+            <image src="../../images/deteles.png" />
+          </view>
+        </view>
       </view>
       <view>图片上传说明：</view>
       <view>1.出于监管的要求，需要上传审核店铺的食品经营许可证。</view>
@@ -93,13 +104,18 @@
     </view>
     <view class="nav">
       <view class="zhao" wx:if='{{zhao3}}' bindtap="chooseImages" id="{{2}}">
-          <view class="zhao_img">
-            <image src="../../images/zhao.png"></image>
-          </view>
-          <view>上传</view>
+        <view class="zhao_img">
+          <image src="../../images/zhao.png"></image>
+        </view>
+        <view>上传</view>
       </view>
-      <view class="tu_img" wx:else>
-        <image src="{{zhaos3}}"></image>
+      <view wx:else class="clearfix">
+        <view class="tu_img" bindtap="chooseImages" id="{{2}}">
+          <image src="{{zhaos3}}"></image>
+          <view class="detele"  id="{{item}}" data-index='{{idx}}' data-num="{{2}}" catchtap="detels">
+            <image src="../../images/deteles.png" />
+          </view>
+        </view>
       </view>
       <view>图片上传说明：</view>
       <view>1.请确保身份证边框完整，字体清晰，证件号码清晰可见；</view>
@@ -112,7 +128,7 @@
     </view>
 
     <view class="nav">
-      <textarea class="texta" value="{{value}}" placeholder="选填" maxlength="100" bindinput="valueChange"></textarea>
+      <textarea class="texta" value="{{value}}" placeholder="选填" maxlength="500" bindinput="valueChange"></textarea>
     </view>
     <view class="agree">
       <view bindtap="gx">
@@ -130,52 +146,52 @@
       </view>
     </view>
 
-    <view class="submit" bindtap="submit">提交审核</view>
-
+    <button class="submit" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提交审核</button>
+    <button class="submit" bindtap="submit" wx:else>提交审核</button>
     <view style="height:120rpx;"></view>
   </view>
 
 
-    <view class="audit" wx:if="{{audit == 0}}">
-        <view class="kong_img">
-          <image src="../../images/store_z.png"></image>
-        </view>
-        <view> 商家入驻审核中</view>
-        <view>平台将在1~3个工作日反馈审核结果</view>
+  <view class="audit" wx:if="{{audit == 0}}">
+    <view class="kong_img">
+      <image src="../../images/store_z.png"></image>
     </view>
-    <view class="audit" wx:if="{{audit == 1}}">
-      <view class="kong_img">
-        <image src="../../images/store_true.png"></image>
-      </view>
-      <view> 恭喜您，成功入驻善家购</view>
-      <view class="pc">
-        <view>PC端管理后台</view>
-        <view>店铺地址：jnoireujhgijrepjgweiprjfwefewewrtgewrger</view>
-        <view>用户名：发热管仍</view>
-        <view>初始密码：ADF123456 （请及时修改密码）</view>
-      </view>
-      <view class="ru_enter">
-        进入我的店铺
-      </view>
+    <view> 商家入驻审核中</view>
+    <view>平台将在1~3个工作日反馈审核结果</view>
+  </view>
+  <view class="audit" wx:if="{{audit == 1}}">
+    <view class="kong_img">
+      <image src="../../images/store_true.png"></image>
     </view>
-    <view class="audit" wx:if='{{audit == 2}}'>
-      <view class="kong_img">
-        <image src="../../images/store_no.png"></image>
-      </view>
-      <view> 商家入驻审核未通过</view>
-      <view class="pc">
-        <view style="color:#333">未通过原因</view>
-        <view>{{audits.auditInfo}}</view>
+    <view> 恭喜您，成功入驻善家购</view>
+    <view class="pc">
+      <view>PC端管理后台</view>
+      <view>店铺地址：jnoireujhgijrepjgweiprjfwefewewrtgewrger</view>
+      <view>用户名：发热管仍</view>
+      <view>初始密码：ADF123456 （请及时修改密码）</view>
+    </view>
+    <view class="ru_enter">
+      进入我的店铺
+    </view>
+  </view>
+  <view class="audit" wx:if='{{audit == 2}}'>
+    <view class="kong_img">
+      <image src="../../images/store_no.png"></image>
+    </view>
+    <view> 商家入驻审核未通过</view>
+    <view class="pc">
+      <view style="color:#333">未通过原因</view>
+      <view>{{audits.auditInfo}}</view>
 
-      </view>
-      <view class="ru_enter" bindtap="again">
-        重新提交
-      </view>
-      <view class="bott">
-        <view>善家购</view>
-        <view>大爱无疆，感恩家乡</view>
-      </view>
     </view>
+    <view class="ru_enter" bindtap="again">
+      重新提交
+    </view>
+    <view class="bott">
+      <view>善家购</view>
+      <view>大爱无疆，感恩家乡</view>
+    </view>
+  </view>
 
 
 

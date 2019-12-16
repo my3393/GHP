@@ -69,12 +69,16 @@
       {{detail.lowestPrice}}
     </view>
     <view wx:else class="disp">
-      {{detail.lowestPrice}} - {{detail.topPrice}}
+      <text wx:if='{{detail.lowestPrice == detail.topPrice}}'>{{detail.lowestPrice}}</text>
+      <text wx:else>{{detail.lowestPrice}} - {{detail.topPrice}}</text>
     </view>
   </view>
-  <view class='fenx'>
+  <button open-type="share" class="fenxiang">
+      <view class='fenx' bindtap="fenx">
     <image src="../../images/fenx.png" />
   </view>
+  </button>
+ 
   <view class="huiy">
     <view class="w_price">
       <text class='huiyj'>会员价</text>
@@ -106,7 +110,7 @@
    
 </view>
 <!-- 评价 -->
-<view class="ping">
+<!-- <view class="ping">
   <view class="pingj top1">用户评价（2）</view>
   <view class="rights" bind:tap='evaluation'>更多 ></view>
 </view>
@@ -155,7 +159,7 @@
     </view>
   </view>
 
-</scroll-view>
+</scroll-view> -->
 <!-- 店铺 -->
 <view class="list_nav clearfix">
   <view class="store-img">
@@ -189,8 +193,8 @@
    <view class="detail_tit">
      {{detail.productDescribe}}
    </view>
-   <view class="detail_img" wx:for='{{detail.detailImgOss}}'>
-      <image src="{{item}}" />
+   <view class="detail_img" wx:for='{{detail.detailImgOss}}' >
+      <image src="{{item}}" mode="widthFix" />
    </view>
 </view>
 <view style="height:120rpx;"></view>
@@ -202,17 +206,19 @@
       <image wx:else src="../../images/xinxin.png" />
       <view>收藏</view>
     </view>
-    <view>
+    <view bindtap="store" id="{{store.id}}">
       <image src="../../images/store.png" />
       <view>店铺</view>
     </view>
-    <view>
+    <view bindtap="shop" class="shop">
       <image src="../../images/shop.png" />
+      <view class="hong" hidden="{{is_num}}">{{cart_num}}</view>
       <view>购物车</view>
     </view>
   </view>
   <view class="foot_right">
-    <button size="mini" class="joincart" bind:tap="showgg">加入购物车</button>
+    <button class="submit" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">加入购物车</button>
+    <button size="mini" class="joincart" wx:else  bind:tap="showgg">加入购物车</button>
     <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button>
     <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:else >立即购买</button>
   </view>

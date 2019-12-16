@@ -23,7 +23,9 @@ Page({
 
   onLoad: function (options) {
     var that = this;
-   
+    this.setData({
+      navH: app.globalData.navHeight
+    })
 
   },
 
@@ -49,15 +51,21 @@ Page({
         that.setData({
           user: res.data
         })
-        if (res.data.bindProvinceId != null){
+        
+        if (res.data.bindProvinceId == null || res.data.bindProvinceId == ''){
           that.setData({
             isBang:false
           })
         }
-
+        that.getType();
+        if (res.data.loginId == null) {
+            wx.navigateTo({
+              url: '../login/login',
+            })
+        }
       },
     })
-    that.getType();
+   
   },
 
   /**
@@ -92,7 +100,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var that = this;
+    //console.log(that.data.detail.name)
+    return {
+      title:'你的好友刘郑国想你了' ,
+      imageUrl: 'https://graph.baidu.com/resource/116877509f357d436cd2101575547725.jpg',
+      path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
+     
+    }
   },
   //商品详情
   detail(e){
@@ -102,18 +117,25 @@ Page({
   },
   getType(){
     let that = this;
+    console.log(that.data.user)
     let data = {
-      
+      provinceId: that.data.user.bindProvinceId
     }
-    app.res.req('app-web/home/classify', data, (res) => {
+    app.res.req('app-web/home/classifyprovince', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
-        id = res.data[0].id
+          if(res.data == ''){
+             that.setData({
+               Nostore:true,
+             })
+          }else{
+            id = res.data[0].id
             that.setData({
-              type:res.data,
+              type: res.data,
 
             })
-          that.getlist();
+            that.getlist();
+          }
        }else if(res.status == 1004 || res.status == 1005){
            wx.redirectTo({
              url: '../login/login',

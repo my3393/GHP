@@ -167,7 +167,7 @@ Page({
         orderDetailId: id,
         refundReason: that.data.tuik,
         refundExplain: value,
-        refundImgs: schoolStr
+        refundImgJson: schoolStr
       }
       app.res.req('app-web/userorder/applyrefund', data, (res) => {
         console.log(res.data)

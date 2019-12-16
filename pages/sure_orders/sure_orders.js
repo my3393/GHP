@@ -12,7 +12,7 @@ Page({
     address: false,
     defalutaddres: [], //默认地址
     adress: [], //选择的地址
-    inpu: [''],
+    inpu: [],
   },
 
   /**
@@ -239,7 +239,7 @@ Page({
   //留言
   inpu(e) {
     this.setData({
-      inpu: e.detail.value
+      // inpu: e.detail.value
     })
   },
   //会员折扣
@@ -325,7 +325,7 @@ Page({
       shopProductIdJson : Str,
       
        
-      // leaveMessageJson:input,
+       leaveMessageJson:input,
      
        terminal: 'xx',
        addressIdStr: that.data.addressId,
@@ -373,12 +373,14 @@ Page({
             title: res.data.msg,
           })
         }else{
-          setTime = setInterval(function () {
-            that.pays();
-          }, 1000)
+          wx.showLoading({
+            mask: true
+          })
+
           setTimeout(function () {
-            clearInterval(setTime)
-          }, 8000)
+            wx.hideLoading()
+            that.pays();
+          }, 2000)
         } 
        
       } else {

@@ -12,6 +12,8 @@ let town_id = '';
 let zhao1 = '';
 let zhao2 = '';
 let zhao3 = '';
+let images = [];
+let simages = [];
 Page({
 
   /**
@@ -21,8 +23,8 @@ Page({
     num:0,
     isshow:true,
     isg:true,
-    audit:1,
-    post1:'../../images/head.png',
+    audit:3,
+    post1:'../../images/store_logo.png',
     name:'',
     ismask: true,
     address: true,
@@ -33,13 +35,14 @@ Page({
     zhaos1: '',
     zhaos2: '',
     zhaos3: '',
-    isprov: '',
+    isprov:true,
     iscity: false,
     isqu: false,
     isjie: false,
     zhao1:true,
     zhao2:true,
     zhao3:true,
+    value:'',
   },
 
   /**
@@ -61,7 +64,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -98,6 +110,34 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //删除个人照照片
+  detels(e) {
+    var that = this;
+    console.log(e)
+    console.log(that.data.imgs)
+
+
+   if (e.currentTarget.dataset.num == 0) {
+      that.setData({
+        zhao1: true,
+        zhaos1: '',
+      })
+      zhao1 = ''
+   } else if (e.currentTarget.dataset.num == 1){
+     that.setData({
+       zhao2: true,
+       zhaos2: '',
+     })
+     zhao2 = ''
+   } else if (e.currentTarget.dataset.num == 2) {
+     that.setData({
+       zhao3: true,
+       zhaos3: '',
+     })
+     zhao3 = ''
+   }
+
+  },
   //取消
   detel() {
     this.setData({
@@ -131,7 +171,7 @@ Page({
     let data = {
       storeLogo: that.data.post1_name,
         storeName:that.data.name,
-      classifyId:that.data.typeId,
+       classifyId:that.data.typeId,
         provinceId:province_id,
       cityId:city_id,
         areaId:area_id,
@@ -139,18 +179,19 @@ Page({
         publicSlogan:that.data.xuan,
       saleImg:zhao1,
         foodImg:zhao2,
-      businessImg:zhao3,
+       businessImg:zhao3,
         introduce:that.data.value,
     }
 
     app.res.req('app-web/store/submitapply', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.setData({
-          audits: res.data,
-          audit: 2
-        })
-
+        // that.setData({
+        //   audits: res.data,
+        //   audit: 2
+        // })
+         that.getAudit();
+       
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
@@ -191,8 +232,58 @@ Page({
        zhao1: false,
        zhao2: false,
        zhao3: false,
+       isprov:true,
        audit:3,
      })
+  },
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.data.token,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data,
+          })
+          setTimeout(function () {
+            that.submit();
+          }, 1000)
+
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
   },
    getType(){
      let that = this;
@@ -226,10 +317,18 @@ Page({
       app.res.req('app-web/store/applyinfo', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
-          that.setData({
-            audits: res.data,
-            audit:2
-          })
+          if(res.data == null){
+            that.setData({
+              
+              audit:3
+            })
+          }else{
+            that.setData({
+              audits: res.data,
+              audit: res.data.auditStatus
+            })
+          }
+         
 
         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
           wx.redirectTo({
@@ -302,16 +401,18 @@ Page({
         success(res) {
           let datas = JSON.parse(res.data)
           console.log(datas)
-         if(res.status == 1000){
+          if (datas.status == 1000){
+           wx.hideLoading();
            wx.showToast({
              title: '上传成功',
              icon: 'none'
            })
-
+          
+          
            that.setData({
              post1: datas.data.url,
              post1_name: datas.data.fileName,
-             isshow: false
+             
            })
          }else{
            wx.showToast({
@@ -369,17 +470,17 @@ Page({
               })
               zhao1 = datas.data.fileName
             } else if (e.currentTarget.id == 1) {
-              images.push(datas.data.url)
-              simages.push(datas.data.fileName)
               that.setData({
-                images: images,
-                img_num: images.length
+                zhaos2: datas.data.url,
+                zhao2: false
               })
-              if (simages.length == 9) {
-                that.setData({
-                  img_show: !that.data.img_show
-                })
-              }
+              zhao2 = datas.data.fileName
+            }else{
+              that.setData({
+                zhaos3: datas.data.url,
+                zhao3: false
+              })
+              zhao3 = datas.data.fileName
             }
             wx.hideLoading();
             // do something
@@ -390,6 +491,15 @@ Page({
           }
         })
         uploadTask.onProgressUpdate((res) => {
+          
+          that.setData({
+            chang:res.progress
+          })
+          wx.showToast({
+            title: that.data.chang,
+            icon: 'none',
+            duration:3000,
+          })
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)
           console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)

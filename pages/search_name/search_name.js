@@ -1,5 +1,14 @@
 // pages/search_name/search_name.js
-const App = getApp();
+const app = getApp();
+let  currentPage = 1;
+let provinceId
+let cityId ='';
+let areaId='';
+let townId='';
+let classifyId='';
+let typeId= '';
+let sortType='';
+let keyword='';
 Page({
 
   /**
@@ -7,30 +16,27 @@ Page({
    */
   data: {
     ismask:true,
-  nav_list: ['ES6学习之路', 'CSS特效', 'VUE实战','微信小程序'],
+  
   open: false,
   
  },
 
- //列表的操作函数
- open_list: function(opts){
-  this.setData({ text: opts.currentTarget.dataset.title,open: false});
-  this.setData({ismask:true})
- },
-
- //左侧导航的开关函数
- off_canvas: function(){
-  this.data.open ? this.setData({open: false}) :this.setData({open: true});
-  this.setData({ismask:false})
- },
+ 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      navH: App.globalData.navHeight
+      navH: app.globalData.navHeight
     })
+    console.log(options)
+    if(options.name){
+      keyword = options.name
+      that.setData({
+        value:options.name,
+      })
+    }
   },
 
   /**
@@ -68,17 +74,20 @@ Page({
 
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  n_back(){
+     wx.navigateBack({
+       data:1
+     })
+  },
+  //列表的操作函数
+  open_list: function (opts) {
+    this.setData({ text: opts.currentTarget.dataset.title, open: false });
+    this.setData({ ismask: true })
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  //左侧导航的开关函数
+  off_canvas: function () {
+    this.data.open ? this.setData({ open: false }) : this.setData({ open: true });
+    this.setData({ ismask: false })
+  },
 })

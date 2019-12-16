@@ -15,6 +15,18 @@ page{
   color: #333;
   font-size: 22rpx;
 }
+.nac_top{
+  float: left;
+  font-size: 24rpx;
+  color: #fff;
+  margin-left: 20rpx;
+}
+.zhng{
+  font-size: 34rpx;
+  font-weight: bold;
+  
+
+}
 .tags{
   font-size: 24rpx;
 }
@@ -36,6 +48,9 @@ page{
   display: inline-block;
   margin-left: 20rpx;
   vertical-align: middle;
+}
+.bg-white{
+  background: #f12200;
 }
 .left-navbar{
   position:absolute;
@@ -146,7 +161,7 @@ page{
   height: 100%;
 }
 .bangd{
-  width: 170rpx;
+  width: 200rpx;
   height: 60rpx;
   text-align: center;
   line-height: 60rpx;

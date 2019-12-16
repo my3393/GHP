@@ -96,11 +96,12 @@ Page({
   },
    submit() {
     let that = this;
+     var schoolStr = JSON.stringify(simages);
     let data = {
       id:id,
       complaintReason: that.data.cancel,
       complaintExplain:value,
-        complaintImgs:simages
+      complaintImgJson: schoolStr
     }
 
      app.res.req('app-web/userorder/complaint', data, (res) => {

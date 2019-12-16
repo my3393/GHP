@@ -171,7 +171,9 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
 
-        that.getDetail()
+        wx.navigateBack({
+          data:1
+        })
 
 
       } else {
@@ -362,7 +364,7 @@ Page({
         
         that.setData({
           detail: res.data,
-          
+          member_p: (res.data.productTotalFee + res.data.freight - res.data.payMoney)
         })
        
        

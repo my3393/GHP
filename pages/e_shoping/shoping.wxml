@@ -68,11 +68,22 @@
       <text >合计：</text>
       <text class='allprices'><text class="yuan">￥</text>{{allprices}}</text>
     </view>
-    <view class='placeanorder {{isdetel ? "option" : ""}}' bindtap="pay">
+     <button size="mine" class='placeanorder option' wx:if="{{isdetel}}">
       结算({{allnum}})
       
     
-    </view>
+    </button>
+    <button size="mine" class='placeanorder' wx:elif='{{user.phone == null}}'  open-type="getPhoneNumber" 
+  bindgetphonenumber="getPhoneNumber">
+      结算({{allnum}})
+      
+    
+    </button>
+     <button size="mine" class='placeanorder' wx:else  bindtap="pay">
+      结算({{allnum}})
+      
+    
+    </button>
   </view>
   <view class='allselected' wx:else>
     <view>

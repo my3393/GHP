@@ -2,11 +2,18 @@
     <view class="title">我的艺呗</view>
     <view class="shuom">使用说明？</view>
     <view>
-        <view class="num">2345</view>
-        <!-- <view class="znum">提现</view> -->
-         <view class="znum tix">提现</view>
+        <view class="num">{{detail.remainTotalAmount}}</view>
+        
+         <view class="znum tix" wx:if="{{user.memberType == 0 || detail.remainTotalAmount}}">提现</view>
+         <view class="znum" wx:else>提现</view>
     </view>
-    <view class="bootm">
+    <view class="bootm yan" wx:if='{{user.memberType == 0}}' bindtap="member">
+       开通会员,分销赚收益
+       <view class="bootm-img">
+           <image  src="../../images/right.png" />
+       </view>
+    </view>
+     <view class="bootm" wx:else>
        金额明细
        <view class="bootm-img">
            <image  src="../../images/right.png" />
@@ -16,14 +23,14 @@
 
 <view class="top tops">
   <view>未结算</view>
-  <view><text class="hei">订单笔数：</text>11</view>
-  <view><text class="hei">分销收益：</text>11<text>元</text></view>
+  <view><text class="hei">订单笔数：</text>{{detail.noFinishOrderNum}}</view>
+  <view><text class="hei">分销收益：</text>{{detail.noFinishShareAmount}}<text>元</text></view>
 </view>
 
 <view class="top tops">
   <view>已结算</view>
- <view><text class="hei">订单笔数：</text>11</view>
-  <view><text class="hei">分销收益：</text>11<text>元</text></view>
+ <view><text class="hei">订单笔数：</text>{{detail.transactionFinishNum}}</view>
+  <view><text class="hei">分销收益：</text>{{detail.transactionFinishAmount}}<text>元</text></view>
 </view>
 
 <view class="foot-boot">
@@ -41,3 +48,13 @@
   </view>
 
   <view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>
+
+  <!-- 弹窗 -->
+<view class="popup" hidden="{{isdelete}}">
+        <view class="popup_h1">你暂时还未开通会员身份</view>
+        <view class="popup_content">开通会员即可赚取分享收益</view>
+        <view class="popup_btn">
+              <view bindtap="cancel">先看看</view>
+              <view bindtap="confirm">立即开通</view>
+        </view>
+</view>

@@ -108,9 +108,16 @@
         <view>· 开通即表示您已阅读并同意《善家购会员服务协议》</view>
         <view>· 会员服务一经开关不支持取消/退款，敬请谅解</view>
      </view>
-     <view class="submit" wx:if='{{current == 0}}' bindtap="pay" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</view>
-     <view class="submit" wx:if='{{current == 1}}' bindtap="pay" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</view>
-     <view class="submit" wx:if='{{current == 2}}' bindtap="pay" id="{{3}}">立即开通￥{{detail[0].memberPrice}}</view>
+      <view wx:if='{{user.phone == null}}'>
+        <button class="submit" wx:if='{{current == 0}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</button>
+        <button class="submit" wx:if='{{current == 1}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</button>
+        <button class="submit" wx:if='{{current == 2}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{3}}">立即开通￥{{detail[0].memberPrice}}</button>
+      </view>
+      <view wx:else>
+        <button class="submit" wx:if='{{current == 0}}' bindtap="pay" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</button>
+        <button class="submit" wx:if='{{current == 1}}' bindtap="pay" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</button>
+        <button class="submit" wx:if='{{current == 2}}' bindtap="pay" id="{{3}}">立即开通￥{{detail[0].memberPrice}}</button>
+      </view>
     </view>
   
 </view>

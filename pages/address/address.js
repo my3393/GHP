@@ -131,7 +131,9 @@ Page({
     app.res.req('app-web/useraddress/delete', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        wx.clearStorage('address')
         that.getDateil();
+
       } else {
         console.log(111)
         wx.showToast({

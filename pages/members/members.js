@@ -92,6 +92,56 @@ Page({
        data:1
      })
   },
+  //绑定手机号
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.data.token,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data,
+          })
+          setTimeout(function () {
+            that.pay();
+          }, 1000)
+
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
+  },
   //购买会员
    pay(e){
      console.log(e.currentTarget.id)
@@ -99,67 +149,74 @@ Page({
      let data = {
        memberType: e.currentTarget.id
      }
+     if(that.data.user.memberType == 0){
+       app.res.req('app-web/order/membersubmit', data, (res) => {
+         console.log(res.data)
+         if (res.status == 1000) {
+           app.res.req("app-web/pay/xcxpay", data, (res) => {
+             console.log(res.data)
+             if (res.status == 1000) {
 
-     app.res.req('app-web/order/membersubmit', data, (res) => {
-       console.log(res.data)
-       if (res.status == 1000) {
-         app.res.req("app-web/pay/xcxpay", data, (res) => {
-           console.log(res.data)
-           if (res.status == 1000) {
-            
-             wx.requestPayment({
-               timeStamp: res.data.sign.timeStamp,
-               nonceStr: res.data.sign.nonceStr,
-               package: res.data.sign.package,
-               signType: 'MD5',
-               paySign: res.data.sign.paySign,
-               success(res) {
+               wx.requestPayment({
+                 timeStamp: res.data.sign.timeStamp,
+                 nonceStr: res.data.sign.nonceStr,
+                 package: res.data.sign.package,
+                 signType: 'MD5',
+                 paySign: res.data.sign.paySign,
+                 success(res) {
 
-                 wx.showToast({
-                   title: '支付成功',
-                   icon: 'none',
-                   duration: 1000
-                 })
-                 that.setData({
-                   isdelete:!that.data.isdelete,
-                   ismask:!that.data.ismask
-                 })
-               },
-               fail(res) {
-                 wx.showToast({
-                   title: '支付失败',
-                   icon: 'none',
-                   duration: 1000
-                 })
+                   wx.showToast({
+                     title: '支付成功',
+                     icon: 'none',
+                     duration: 1000
+                   })
+                   that.setData({
+                     isdelete: !that.data.isdelete,
+                     ismask: !that.data.ismask
+                   })
+                 },
+                 fail(res) {
+                   wx.showToast({
+                     title: '支付失败',
+                     icon: 'none',
+                     duration: 1000
+                   })
 
-               }
-             })
+                 }
+               })
 
-             //   interval = null;
+               //   interval = null;
 
-           } else if (res.status == 1004 || res.status == 1005) {
-             wx.redirectTo({
-               url: '../login/login',
-             })
-           } else {
-             wx.showToast({
-               title: res.msg,
-               icon: 'none'
-             })
-           }
-         })
+             } else if (res.status == 1004 || res.status == 1005) {
+               wx.redirectTo({
+                 url: '../login/login',
+               })
+             } else {
+               wx.showToast({
+                 title: res.msg,
+                 icon: 'none'
+               })
+             }
+           })
 
-       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-         wx.redirectTo({
-           url: '../login/login',
-         })
-       } else {
-         wx.showToast({
-           title: res.msg,
-           icon: 'none'
-         })
-       }
-     })
+         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+           wx.redirectTo({
+             url: '../login/login',
+           })
+         } else {
+           wx.showToast({
+             title: res.msg,
+             icon: 'none'
+           })
+         }
+       })
+     }else{
+       wx.showToast({
+         title: '你已开通会员',
+         icon:'none'
+       })
+     }
+    
    },
   //会员详情
   Detail(){

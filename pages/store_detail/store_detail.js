@@ -5,6 +5,8 @@ let currentPage =1;
 let type= 0;
 let keyword = '';
 let productType = 0;
+let list = [];
+let rich;
 Page({
 
   /**
@@ -19,6 +21,7 @@ Page({
     canva:true,
     ismask:true,
     res:'你的',
+    tas:'0',
     tag:[
       {name:'店铺',img:'../../images/store.png',imgs:'../../images/store_active.png'},
       {name:'特产分类',img:'../../images/switch.png',imgs:'../../images/tes_active.png'},
@@ -71,21 +74,22 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    list= []
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+     currentPage = currentPage + 1;
+     this.getList();
   },
 
   /**
@@ -93,6 +97,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  sous(e){
+    
   },
   //商品详情
   good_detail(e){
@@ -149,10 +156,49 @@ Page({
     app.res.req("app-web/store/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+       
         that.setData({
           store: res.data
         })
        that.getList();
+        that.gettype();
+        if (res.data.introduce != null) {
+          rich = res.data.introduce.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
+          that.setData({
+            rich: rich
+          })
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //商品分类
+  gettype() {
+    let that = this;
+    let data = {
+      storeId: id,
+     
+    }
+
+    app.res.req("app-web/store/producttype", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          type: res.data
+        })
+        
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -170,6 +216,15 @@ Page({
       }
     })
   },
+  paix(e){
+    type = e.currentTarget.id;
+    this.setData({
+      tas:e.currentTarget.id
+    })
+    currentPage = 1;
+    list = [];
+    this.getList();
+  },
   //商品列表
  
   getList() {
@@ -185,8 +240,9 @@ Page({
     app.res.req("app-web/store/productlist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        list.push(...res.data)
         that.setData({
-          list: res.data
+          list: list
         })
 
 

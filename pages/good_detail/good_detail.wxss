@@ -124,9 +124,10 @@ page {
      display: inline-block;
    }
    .fenx{
-     float: right;
-     width: 34rpx;
-     height: 34rpx;
+    position: absolute;
+    right: 12rpx;
+     width: 40rpx;
+     height: 40rpx;
    }
    .fenx image{
      width: 100%;
@@ -178,6 +179,20 @@ page {
      border-top: 1rpx #f9f9f9 solid;
      line-height: 70rpx;
    }
+   .hong{
+    position: absolute;
+    top: -14rpx;
+    right: -10rpx;
+    width: 24rpx;
+    height: 24rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    background: red;
+    text-align: center;
+    line-height: 24rpx;
+    font-size: 14rpx;
+    color: #fff;
+}
    .candi{
      color: #999;
      margin-right: 40rpx;
@@ -316,7 +331,7 @@ overflow: hidden;
     float: left;
     display: flex;
     justify-content: space-around;
-    width: 49%;
+    width: 42%;
   }
   .foot_left>view{
     text-align: center;
@@ -327,11 +342,12 @@ overflow: hidden;
   }
   .foot_right{
     float: right;
-    width: 50%;
+    width: 56%;
+
   }
 
   .foot_right>button{
-    width: 42%;
+    width: 43%;
     display: inline-block;
     height: 70rpx;
     color: #fff;
@@ -339,7 +355,7 @@ overflow: hidden;
     line-height: 70rpx;
     text-align: center;
     margin-left: 20rpx;
-    font-size: 24rpx;
+    font-size: 23rpx;
   }
   .joincart{
     background:linear-gradient(to right, #FFC64D, #FFD33B);
@@ -676,6 +692,9 @@ overflow: hidden;
   background: #fff;
 
 }
+.shop{
+  position: relative;
+}
 .detail_h1{
   padding-left: 20rpx;
   padding-top: 20rpx;
@@ -691,8 +710,18 @@ overflow: hidden;
 }
 .detail_img{
   width: 100%;
+  height: 100%;
   margin-top: 30rpx;
 }
 .detail_img image{
   width: 100%;
+}
+.fenxiang:after{
+  border: none;
+}
+.fenxiang{
+  width: 40rpx;
+float: right;
+height: 61rpx;
+background: #fff;
 }

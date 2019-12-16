@@ -148,7 +148,8 @@ box-sizing: border-box;
 
 
  .placeanorder{
-width: 180rpx;
+  margin: 0!important;
+width: 180rpx!important;
 border-radius: 100rpx;
 background:linear-gradient(to right, #f12200, #ff4e17);
 text-align: center;

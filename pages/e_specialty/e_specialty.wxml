@@ -1,5 +1,16 @@
-<view hidden="{{isBang}}">
-  <view class="top">
+<view class='a-nav bg-white' style='height:{{navH}}px'>
+  <view class='a-nav-title'>
+    <view class="nac_top">
+      <text class="zhng" wx:if='{{isbang}}'>未绑定家乡</text>
+      <text class="zhng" wx:else>{{user.bindCityName}}</text>
+      <text>感恩家乡，怀念家乡味道</text>
+    </view>
+
+  </view>
+</view>
+
+<view hidden="{{!isBang}}" style='margin-top:{{navH}}px'>
+  <!-- <view class="top">
     <view class="top-left">
       <view class="top-img">
         <image src="../../images/trumpe.png" />
@@ -7,8 +18,21 @@
       <text style=" vertical-align: middle;">家乡善款￥28,000.00 |</text>
     </view>
     <view class="top-r">用户188****3352为家乡成功捐款￥1.58</view>
+  </view> -->
+  <view wx:if='{{Nostore}}'>
+    <view class="kong">
+      <view class="kong_img">
+        <image src="../../images/jiax.png" />
+      </view>
+      <view>你的家乡还没有绑定相关特产上架</view>
+      <view>你可邀请商家入驻</view>
+      <button open-type="share" class="bangd "  >
+        邀请商家入驻
+      </button>
+      <view bind:tap="bang" style="margin-top:30rpx; color:#333;">更换绑定</view>
+    </view>
   </view>
-  <view class="classify clearfix">
+  <view class="classify clearfix" wx:else>
     <!-- 分类导航栏 -->
     <scroll-view class='left-navbar' scroll-y="true">
       <!-- <view wx:for="{{screenArray}}" class="{{ currentTab == index ? 'active' : '' }}" wx:key="unique" bindtap="{{ currentTab != index ? 'navbarTap':'' }}" id="{{index}}" data-screenId="{{item.screenId}}">{{item.screenName}}
@@ -39,7 +63,7 @@
           <text>{{item.screenName}}</text>
         </view>
         </view> -->
-      <view class="goods" >
+      <view class="goods">
         <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
           <block wx:for='{{photos}}'>
             <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
@@ -57,8 +81,7 @@
           <view class="goods-q">{{item.provinceName}} {{item.cityName}} {{item.areaName}} {{item.townName}}</view>
           <view class="goods-t">
             <view class="goods-p">
-              <text style="font-size:22rpx">￥</text>
-              {{item.lowestPrice}}
+              <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}
             </view>
             <view class="goods-g">
               <image src="../../images/shop.png" />
@@ -70,15 +93,15 @@
   </view>
 </view>
 
-<view hidden="{{!isBang}}">
+<view hidden="{{isBang}}">
   <view class="kong">
-      <view class="kong_img">
-        <image src="../../images/jiax.png" />
-      </view>
-      <view >绑定家乡</view>
-      <view >随时随地选购家乡特产</view>
-      <view class="bangd" bind:tap="bang">
-        立即绑定
-      </view>
+    <view class="kong_img">
+      <image src="../../images/jiax.png" />
+    </view>
+    <view>绑定家乡</view>
+    <view>随时随地选购家乡特产</view>
+    <view class="bangd" bind:tap="bang">
+      立即绑定
+    </view>
   </view>
 </view>

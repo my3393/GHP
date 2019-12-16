@@ -1,0 +1,37 @@
+<!--pages/mine_opinion/mine_opinion.wxml-->
+<view class="top">
+    <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}">
+       {{item.name}}
+    </view>
+</view> 
+<view wx:if='{{tar == 0}}'>
+  <view class='infor'>
+    <view class='inform'>反馈类型</view>
+    <view class='inforin infor_r'>
+      <picker class="pick" range="{{type}}" range-key="name" value="{{index}}" bindchange="type">
+            <input disabled='true' type='text' value='{{typ}}' placeholder='请选择反馈类型' bindtap='showlabel'></input>
+      </picker>
+    </view>
+    <view class='enter'>
+      <image src='../../images/enter.png'></image>
+    </view>
+  </view>
+
+    <view class="nav">
+      <textarea class="texta" value="{{sum}}" placeholder="请输入你要反馈的问题或意见" maxlength="200" bindinput="valueChange"></textarea>
+      <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
+          <view class="zhao_img">
+            <image src="../../images/zhao.png"></image>
+          </view>
+          <view>上传</view>
+        </view>
+        <view wx:else class="clearfix">
+          <view class="tu_img" bindtap="chooseImages" id="{{1}}">
+            <image src="{{zhaos2}}"></image>
+          </view>
+        </view>
+    </view>
+
+  <view class="submit" bindtap="submit">确定绑定</view>
+</view>
+<view wx:if='{{tar == 1}}'></view>
