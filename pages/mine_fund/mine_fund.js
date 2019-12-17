@@ -66,6 +66,12 @@ Page({
   onReachBottom: function () {
 
   },
+  //申请项目
+  fa_home(){
+    wx.navigateTo({
+      url: '../apply_fund/apply_fund',
+    })
+  },
    //项目详情
    detail(e){
      if (e.currentTarget.dataset.status == 0) {

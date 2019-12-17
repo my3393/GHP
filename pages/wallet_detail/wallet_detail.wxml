@@ -1,18 +1,22 @@
 <!--pages/wallet_detail/wallet_detail.wxml-->
 <view class="top">
-    <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}">
-       {{item.name}}
-    </view>
+  <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}">
+    {{item.name}}
+  </view>
 </view>
 <view class="li">
-    <view class="list">
-    <view >
-        <view class='list_tit dan'>Zara牛仔裤南潮牌直筒蓝色浅蓝牛仔裤南...</view>
-        <view class="list_r yan">+228.00</view>
+  <view class="list" wx:for='{{detail}}' wx:key='{{index}}' >
+    <view>
+      <view class='list_tit dan'>{{item.recordInfo}}</view>
+      <view class="list_r yan">+{{item.amount}}</view>
     </view>
     <view class="list_date">
-        <view >2019-09-23 16:35:35</view>
-        <view class="list_r">已结算</view>
+      <view>{{item.createDate}}</view>
+      <view class="list_r" wx:if='{{item.recordStatus == 0}}'>待结算</view>
+       <view class="list_r" wx:if='{{item.recordStatus == 1}}'>已提现</view>
+        <view class="list_r" wx:if='{{item.recordStatus == 2}}'>提现审核中</view>
+         <view class="list_r" wx:if='{{item.recordStatus == 3}}'>提现驳回</view>
+
     </view>
-</view>
+  </view>
 </view>

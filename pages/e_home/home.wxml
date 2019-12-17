@@ -51,7 +51,7 @@
       <view class="class-img "><image class="skeleton-radius" src="{{item.classifyImgOss}}"></image></view>
       <view class="class-n">{{item.classifyName}}</view>
     </view>
-     <view class="class-one"  data-id='{{item.id}}' bindtap="search_name">
+     <view class="class-one"  data-id='{{item.id}}' bindtap="search_all">
       <view class="class-img "><image class="skeleton-radius" src="../../images/home_gengd.png"></image></view>
       <view class="class-n">查看更多</view>
     </view>

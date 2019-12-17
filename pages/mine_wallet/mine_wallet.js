@@ -101,6 +101,40 @@ Page({
       ismask:true,
     })
   },
+  // 提现
+  drawal(){
+    if (this.data.user.isRealName == 0){
+      this.setData({
+        iscertfica: !that.data.iscertfica,
+        ismask:false,
+      })
+    } else if (this.data.detail.remainTotalAmount == 0){
+      wx.showToast({
+        title: '当前金额为0',
+        icon:'none'
+      })
+    }else{
+       wx.navigateTo({
+         url: '../wallet_withdrawal/wallet_withdrawal?num=' + this.data.detail.remainTotalAmount,
+       })
+    }
+  },
+  //查看明细
+  wallet_detail(e){
+    wx.navigateTo({
+      url: '../wallet_detail/wallet_detail?id=' + e.currentTarget.id,
+    })
+  },
+  confirm_delete(){
+    let that = this;
+    that.setData({
+      iscertfica: !that.data.iscertfica,
+      ismask: true,
+    })
+    wx.navigateTo({
+      url: '../certification/certification',
+    })
+  },
   cancel(){
     that.setData({
       isdelete: !that.data.isdelete,
@@ -111,6 +145,9 @@ Page({
     that.setData({
       isdelete: !that.data.isdelete,
       ismask: true,
+    })
+    wx.navigateTo({
+      url: '../members/members',
     })
   }
 })

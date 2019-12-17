@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    isact:false,
   },
 
   /**
@@ -65,37 +65,58 @@ Page({
 
   },
   name(e){
+    if(e.detail.value == ''){
+      this.setData({
+         isact:false
+      })
+    }else{
+      this.setData({
+        isact: true
+      })
+    }
     this.setData({
       name:e.detail.value
     })
   },
   submit(){
     let that =this;
-    let data = {
-      userName: that.data.name
-    }
-    console.log(this.data.day)
-    app.res.req('app-web/user/editusername', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-
-        wx.showToast({
-          title: '修改成功',
-          icon: 'none'
-        })
-        wx.navigateBack({
-           delat:2
-        })
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+    if(that.data.name == ''){
+      wx.showToast({
+        title: '请输入名字',
+        icon:'none'
+      })
+    } else if (that.data.name.length > 8 || that.data.name.length < 2){
+      wx.showToast({
+        title: '请输入2~8位中文或英文的昵称',
+        icon: 'none'
+      })
+    }else{
+      let data = {
+        userName: that.data.name
       }
-    })
+
+      app.res.req('app-web/user/editusername', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+
+          wx.showToast({
+            title: '修改成功',
+            icon: 'none'
+          })
+          wx.navigateBack({
+            delat: 2
+          })
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
   }
 })

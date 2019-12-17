@@ -69,6 +69,14 @@ Page({
   onShareAppMessage: function () {
 
   },
+  bindconfirm(e){
+   console.log(e.detail.value)
+   if(e.detail.value != ''){
+     wx.navigateTo({
+       url: '../productList/producList?searchKey=' + e.detail.value,
+     })
+   }
+  },
   navBack(){
     wx.navigateBack({
       data:1

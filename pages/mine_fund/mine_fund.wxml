@@ -5,69 +5,82 @@
   </view>
 </view>
 <view style="margin-top:100rpx;">
-  <view class="nav clearfix" wx:for='{{detail}}' wx:key='{{item.id}}' id="{{item.id}}" data-status='{{item.projectStatus}}' bind:tap="detail">
-    <view class="g-banner">
-      <image src="{{item.defaultImgOss}}" />
-      <view class="g_banner_diz">
-        {{item.provinceName}} {{item.cityName}} {{item.areaName}} {{item.townName}}
-      </view>
-      <view class="cuss" wx:if='{{item.projectStatus == 4}}'>
-        <image src="../../images/certific_h.png"></image>
-      </view>
+  <view wx:if='{{detail.length == 0}}' class="kong">
+    <view class="kong_img">
+      <image src="../../images/mine_fund.png" />
     </view>
-    <view class="g-h1 dan">{{item.projectTitle}}</view>
-    <view class="g-h2">{{item.projectExplain}}</view>
-    <view class="jindu">
-      <progress class="progress" stroke-width="5" active percent="{{item.num}}" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
-    </view>
-    <view class="g-bott">
-      <view class="g-bo">
-        <view class='g-bott-j'>{{item.targetAmount}}</view>
-        <view class='g-boot-y'>目标金额/元</view>
+    <view>暂无相关项目信息</view>
+    <view class='fa_home' bindtap="fa_home">发起申请</view>
+    <!-- <view class="foot-boot foot-boots">
+      善家购
+      <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+    </view> -->
+  </view>
+  <view wx:else>
+    <view class="nav clearfix" wx:for='{{detail}}' wx:key='{{item.id}}' id="{{item.id}}" data-status='{{item.projectStatus}}' bind:tap="detail">
+      <view class="g-banner">
+        <image src="{{item.defaultImgOss}}" />
+        <view class="g_banner_diz">
+          {{item.provinceName}} {{item.cityName}} {{item.areaName}} {{item.townName}}
+        </view>
+        <view class="cuss" wx:if='{{item.projectStatus == 4}}'>
+          <image src="../../images/certific_h.png"></image>
+        </view>
       </view>
-      <view class="g-bo">
-        <view class='g-bott-j'>{{item.raiseAmount}}</view>
-        <view class='g-boot-y'>已筹款/元</view>
+      <view class="g-h1 dan">{{item.projectTitle}}</view>
+      <view class="g-h2">{{item.projectExplain}}</view>
+      <view class="jindu">
+        <progress class="progress" stroke-width="5" active percent="{{item.num}}" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
       </view>
-      <view class="g-bo">
-        <view class='g-bott-j'>{{item.voteNum}}</view>
-        <view class='g-boot-y'>项目票数</view>
+      <view class="g-bott">
+        <view class="g-bo">
+          <view class='g-bott-j'>{{item.targetAmount}}</view>
+          <view class='g-boot-y'>目标金额/元</view>
+        </view>
+        <view class="g-bo">
+          <view class='g-bott-j'>{{item.raiseAmount}}</view>
+          <view class='g-boot-y'>已筹款/元</view>
+        </view>
+        <view class="g-bo">
+          <view class='g-bott-j'>{{item.voteNum}}</view>
+          <view class='g-boot-y'>项目票数</view>
+        </view>
       </view>
-    </view>
-    <view class="fund_bot" wx:if='{{item.projectStatus == 0}}'>
-      <view>目标金额 : {{item.targetAmount}} 元 </view>
-      <view class="fund_right yan">
-        项目审核中
-      </view>
-
-    </view>
-
-    <view class="tix" bindtap="tix" id="{{item.id}}" data-money="{{item.currentAmount}}" data-status="{{item.donationUseStatus}}" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 0 || item.donationUseStatus == 3}}'>
-      申请提现
-    </view>
-    <view class="fund_r yan" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 1}}'>
-      提现审核中
-    </view>
-    <view class="fund_right" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 2}}'>
-      <view>
-        驳回原因：{{item.donationAuditInfo}}
-      </view>
-      <view class="tix" bindtap="tix_c" id="{{item.id}}">
-        重新提交
-      </view>
-    </view>
-    <view wx:if='{{item.projectStatus == 2}}'>
-      <view class="fund_bot">
+      <view class="fund_bot" wx:if='{{item.projectStatus == 0}}'>
         <view>目标金额 : {{item.targetAmount}} 元 </view>
+        <view class="fund_right yan">
+          项目审核中
+        </view>
 
-        <view>审核驳回</view>
       </view>
-      <view style="margin-left:20rpx;">驳回理由：{{item.auditInfo}}</view>
-      <view class="tix" bindtap="chongx" id="{{item.id}}">重新提交</view>
+
+      <view class="tix" bindtap="tix" id="{{item.id}}" data-money="{{item.currentAmount}}" data-status="{{item.donationUseStatus}}" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 0 || item.donationUseStatus == 3}}'>
+        申请提现
+      </view>
+      <view class="fund_r yan" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 1}}'>
+        提现审核中
+      </view>
+      <view class="fund_right" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 2}}'>
+        <view>
+          驳回原因：{{item.donationAuditInfo}}
+        </view>
+        <view class="tix" catchtap="tix_c" id="{{item.id}}">
+          重新提交
+        </view>
+      </view>
+      <view wx:if='{{item.projectStatus == 2}}'>
+        <view class="fund_bot">
+          <view>目标金额 : {{item.targetAmount}} 元 </view>
+
+          <view>审核驳回</view>
+        </view>
+        <view style="margin-left:20rpx;">驳回理由：{{item.auditInfo}}</view>
+        <view class="tix" catchtap="chongx" id="{{item.id}}">重新提交</view>
+      </view>
+
+      <!-- <view wx:if='{{item.projectStatus == 3}}'>审核驳回</view> -->
+
+
     </view>
-
-    <!-- <view wx:if='{{item.projectStatus == 3}}'>审核驳回</view> -->
-
-
   </view>
 </view>

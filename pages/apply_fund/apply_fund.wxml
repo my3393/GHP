@@ -3,13 +3,13 @@
 <view class='infor'>
   <view class='inform'>项目标题</view>
   <view class='inforin'>
-    <input type='text' value="{{title}}" placeholder='请输入项目标题（20个字以内）' bindinput='title'></input>
+    <input type='text' value="{{title}}" placeholder='请输入项目标题（20个字以内）' maxlength="20" bindinput='title'></input>
   </view>
 </view>
 <view class='infor'>
   <view class='inform'>目标金额</view>
   <view class='inforin '>
-    <input type='text' value="{{menoy}}" placeholder='请输入项目所需的目标金额' bindinput='menoy'></input>
+    <input type='text' value="{{menoy}}" placeholder='请输入项目所需的目标金额' maxlength="6" bindinput='menoy'></input>
   </view>
   <view class='enters'>元</view>
 </view>
@@ -22,60 +22,61 @@
 <view class='infor'>
   <view class='inform'>手机号码</view>
   <view class='inforin'>
-    <input type='text' value="{{phone}}" placeholder='请输入申请人手机号码' bindinput='phone'></input>
+    <input type='number' value="{{phone}}" placeholder='请输入申请人手机号码' maxlength="11" bindinput='phone'></input>
   </view>
 </view>
 <view class='infor'>
   <view class='inform'>申请主体</view>
   <view class='inforin infor_r'>
     <picker class="pick" range="{{type}}" range-key="name" value="{{index}}" bindchange="type">
-          <input disabled='true' type='text' value='{{typ}}' placeholder='请选择申请主体' bindtap='showlabel'></input>
+      <input disabled='true' type='text' value='{{typ}}' placeholder='请选择申请主体' bindtap='showlabel'></input>
     </picker>
   </view>
   <view class='enter'>
     <image src='../../images/enter.png'></image>
   </view>
 </view>
-  <view class='infor' bindtap="diz">
-      <view class='inform'>特产地址</view>
-      <view class='inforin infor_r'>
-        <input disabled='true' type='text' value='{{addres}}' placeholder='请绑定家乡特产所在地址' bindtap='showlabel'></input>
-      </view>
-      <view class='enter'>
-        <image src='../../images/enter.png'></image>
-      </view>
-    </view>
-  <view class="nop">
-    资助申请证明
-    <view class="nop_r">下载证明模板</view>
+<view class='infor' bindtap="diz">
+  <view class='inform'>特产地址</view>
+  <view class='inforin infor_r'>
+    <input disabled='true' type='text' value='{{addres}}' placeholder='请绑定家乡特产所在地址' bindtap='showlabel'></input>
   </view>
-  <view class="nav">
-    <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
-      <view class="zhao_img">
-        <image src="../../images/zhao.png"></image>
-      </view>
-      <view>资助证明</view>
+  <view class='enter'>
+    <image src='../../images/enter.png'></image>
+  </view>
+</view>
+<view class="nop">
+  资助申请证明
+  <view class="nop_r">下载证明模板</view>
+</view>
+<view class="nav">
+  <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
+    <view class="zhao_img">
+      <image src="../../images/zhao.png"></image>
     </view>
-    <view wx:else class="clearfix">
-        <view class="tu_img" >
+    <view>资助证明</view>
+  </view>
+  <view wx:else class="clearfix">
+    <view class="tu_img">
       <image src="{{zhaos1}}"></image>
-      <view class="detele"  id="{{item}}" data-index='{{idx}}' data-num="{{0}}" bindtap="detels">
+      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{0}}" bindtap="detels">
         <image src="../../images/deteles.png" />
-        </view>
+      </view>
     </view>
-    </view>
-    <view>图片上传说明：</view>
-    <view>1.请下载平台模板-资助申请证明</view>
-    <view>2.前往当地街道/政府/村委等政府机构开具申请资助证明</view>
-    <view>3.申请资助证明需保持字迹清晰，可辨别，弄虚作假者取消在平台申请资助的权利。</view>
   </view>
-  <view class="nop">相关照片</view>
-  <view class="nav">
+  <view>图片上传说明：</view>
+  <view>1.请下载平台模板-资助申请证明</view>
+  <view>2.前往当地街道/政府/村委等政府机构开具申请资助证明</view>
+  <view>3.申请资助证明需保持字迹清晰，可辨别，弄虚作假者取消在平台申请资助的权利。</view>
+</view>
+<view class="nop">相关照片</view>
+<view class="nav">
+  <view class="clearfix">
     <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
       <image src="{{item}}"></image>
-       <view class="detele"  id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
+      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
         <image src="../../images/deteles.png" />
-        </view>
+      </view>
     </view>
     <view class="zhao"  bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
       <view class="zhao_img">
@@ -85,34 +86,37 @@
       </view>
       <view>{{img_num}}/9</view>
     </view>
+  </view>
 
-    <view>图片上传说明：</view>
-    <view>1.第1张图为审核通过后的项目封面展示图</view>
-    <view>2.请上传最有说服力的图片资料，最多可上传9张</view>
-  </view>
-  <view class="nop">
-    求助说明（显示在标题下方，吸引更多爱心人士关注）
-    <view class="nop_rs">{{num}}/30</view>
-  </view>
-  <view class="nav">
-    <textarea class="texta" value="{{sum}}" placeholder="请简要描述您当前最想解决的问题" maxlength="30" bindinput="valueChange"></textarea>
-  </view>
-  <view class="nop">
-    项目介绍
-    <view class="nop_rs">{{nums}}/500</view>
-  </view>
-  <view class="nav">
-    <textarea class="texta" value="{{sums}}" placeholder="请输入求助说明" maxlength="500" bindinput="valueChanges"></textarea>
-  </view>
- <button class="submit" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提交审核</button>
-    <button class="submit" bindtap="submit" wx:else>提交审核</button>
-  <view style="height:120rpx;"></view>
+  <view style="width:100%;height:10rpx;"></view>
+  <view>图片上传说明：</view>
+  <view>1.第1张图为审核通过后的项目封面展示图</view>
+  <view>2.请上传最有说服力的图片资料，最多可上传9张</view>
+</view>
+<view class="nop">
+  求助说明（显示在标题下方，吸引更多爱心人士关注）
+  <view class="nop_rs">{{num}}/30</view>
+</view>
+<view class="nav">
+  <textarea class="texta" value="{{sum}}" placeholder="请简要描述您当前最想解决的问题" maxlength="30" bindinput="valueChange"></textarea>
+</view>
+<view class="nop">
+  项目介绍
+  <view class="nop_rs">{{nums}}/500</view>
+</view>
+<view class="nav">
+  <textarea class="texta" value="{{sums}}" placeholder="请输入求助说明" maxlength="500" bindinput="valueChanges"></textarea>
+</view>
+<button class="submit" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提交审核</button>
+<button class="submit" bindtap="submit" wx:else>提交审核</button>
+<view style="height:120rpx;"></view>
 
 
 
 <!-- 选择地址 -->
 
 <view class="adres" hidden="{{address}}">
+ <view class="adres_all" bindtap="adres_all"></view>
   <view class="adres_h1">
     选择地区
     <view class="detel" bindtap="detel">
@@ -146,7 +150,7 @@
   <scroll-view scroll-y="true" class="srcoll">
     <!-- 省 -->
     <view wx:if="{{isprov}}">
-      <view class="adres_list {{tas1 == idx ? 'tas_a' : ''}}"  wx:key='item' wx:for="{{province}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getprovs">{{item.name}}
+      <view class="adres_list {{tas1 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{province}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getprovs">{{item.name}}
         <view class="adres_r" wx:if="{{tas1 == idx}}">
           <image src="../../images/gou.png"></image>
         </view>
@@ -154,7 +158,7 @@
     </view>
     <!-- 市 -->
     <view wx:if="{{iscity}}">
-      <view class="adres_list {{tas2 == idx ? 'tas_a' : ''}}"  wx:key='item' wx:for="{{citys}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getcity">{{item.name}}
+      <view class="adres_list {{tas2 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{citys}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getcity">{{item.name}}
         <view class="adres_r" wx:if="{{tas2 == idx}}">
           <image src="../../images/gou.png"></image>
         </view>
@@ -162,7 +166,7 @@
     </view>
     <!-- 区 -->
     <view wx:if="{{isqu}}">
-      <view class="adres_list {{tas3 == idx ? 'tas_a' : ''}}"  wx:key='item' wx:for="{{areas}}" wx:for-index='idx' id="{{item.id}}" data-index="{{idx}}" data-name="{{item.name}}" bindtap="getarea" data-index="{{idx}}">{{item.name}}
+      <view class="adres_list {{tas3 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{areas}}" wx:for-index='idx' id="{{item.id}}" data-index="{{idx}}" data-name="{{item.name}}" bindtap="getarea" data-index="{{idx}}">{{item.name}}
         <view class="adres_r" wx:if="{{tas3 == idx}}">
           <image src="../../images/gou.png"></image>
         </view>
@@ -170,7 +174,7 @@
     </view>
     <!-- 街道-->
     <view wx:if="{{isjie}}">
-      <view class="adres_list {{tas4 == idx ? 'tas_a' : ''}}"  wx:key='item' wx:for="{{towns}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="gettown">{{item.name}}
+      <view class="adres_list {{tas4 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{towns}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="gettown">{{item.name}}
         <view class="adres_r" wx:if="{{tas4 == idx}}">
           <image src="../../images/gou.png"></image>
         </view>
@@ -184,15 +188,11 @@
 
 <!-- 弹窗 -->
 <view class="popup" hidden="{{isdelete}}">
-        <view class="popup_h1">资助协议说明</view>
-        <view class="popup_content">尊敬的用户，您好，在您提交资助申请前，请您先认真阅读以下说明：
-1.申请人发布申请时需下载由善家公益平台提供的资助申请模板，前往当地政府/街道/乡镇/村委会开具的相关资助证明。
-2.提交信息时，凡一切有利于向平台大众说明事实情况的资料、图片都可提交，资料越齐全，越能得到大家的资助。
-3.提交的资助信息需确保完整、真实、不得弄虚作假,经查明弄虚作假者，将取消其在善家购公益平台申请资助的权利。
-4.申请通过的项目需前往个人中心，我的项目中将证明原件寄回平台（不收到付件），申请提现时需下在善家公益平台提供的善款提现申请模板，前往当地市级政府开具善款使用证明；政府申请时需提供由上一级政府开具的善款使用证明，提交至平台审核，审核通过方可提现到账。
-5.平台所筹集的善款善家公益承诺将全部用于受助群体，每一笔善款使用将及时在平台公示，被资助人所得善款，不得挪为他用，一经发现，平台有权利收回善款，救济需要的人。请将证明原件寄回平台。
-                            </view>
-        <view class="que_btn" bindtap="quer">
-              确定
-        </view>
+  <view class="popup_h1">资助协议说明</view>
+  <view class="popup_content">尊敬的用户，您好，在您提交资助申请前，请您先认真阅读以下说明： 1.申请人发布申请时需下载由善家公益平台提供的资助申请模板，前往当地政府/街道/乡镇/村委会开具的相关资助证明。 2.提交信息时，凡一切有利于向平台大众说明事实情况的资料、图片都可提交，资料越齐全，越能得到大家的资助。 3.提交的资助信息需确保完整、真实、不得弄虚作假,经查明弄虚作假者，将取消其在善家购公益平台申请资助的权利。 4.申请通过的项目需前往个人中心，我的项目中将证明原件寄回平台（不收到付件），申请提现时需下在善家公益平台提供的善款提现申请模板，前往当地市级政府开具善款使用证明；政府申请时需提供由上一级政府开具的善款使用证明，提交至平台审核，审核通过方可提现到账。
+    5.平台所筹集的善款善家公益承诺将全部用于受助群体，每一笔善款使用将及时在平台公示，被资助人所得善款，不得挪为他用，一经发现，平台有权利收回善款，救济需要的人。请将证明原件寄回平台。
+  </view>
+  <view class="que_btn" bindtap="quer">
+    确定
+  </view>
 </view>

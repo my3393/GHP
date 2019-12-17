@@ -81,3 +81,15 @@ g-h2{
   float: right;
   margin: 30rpx 0;
 }
+
+.fa_home{
+  margin:30rpx 0;
+  display: inline-block;
+  width: 220rpx;
+  height: 65rpx;
+  text-align: center;
+  line-height: 65rpx;
+  color: #fff;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  border-radius: 32rpx;
+}

@@ -9,7 +9,7 @@
   visibility: hidden;
   transition: all 0.3s ease-in-out;
   z-index: 998;
-  top:0;
+  top:-100rpx;
   left: 0;
 }
 

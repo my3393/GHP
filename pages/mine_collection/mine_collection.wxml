@@ -19,7 +19,7 @@
     </view>
   </view>
   <view wx:else>
-    <view class="goods-list clearfix" wx:for='{{detail}}' wx:key='item'>
+    <view class="goods-list clearfix" wx:for='{{detail}}' wx:key='id' bindtap="good_detail" id="{{item.id}}" data-status="{{item.isShelf}}">
       <view class="goods-img">
         <image src="{{item.productDefaultImgOss}}"></image>
         <view class="yishi" wx:if='{{item.isShelf == 0}}'>已失效</view>
@@ -56,7 +56,7 @@
     </view>
   </view>
   <view wx:else>
-    <view class="list-nav clearfix" wx:for='{{store}}' wx:key='item'>
+    <view class="list-nav clearfix" wx:for='{{store}}' wx:key='item' bindtap="store_detail" id="{{item.id}}" >
       <view class="store-img">
         <image src="{{item.storeLogoOss}}" />
       </view>

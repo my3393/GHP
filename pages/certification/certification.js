@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    load:true,
     loading: false,
     post1: true,
     post2: true,
@@ -73,6 +74,30 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //删除个人照照片
+  detels(e) {
+    var that = this;
+    console.log(e)
+    console.log(that.data.imgs)
+
+
+    if (e.currentTarget.dataset.num == 0) {
+      img_1 = '';
+      that.setData({
+        img_1:'',
+        post1:true,
+      })
+      
+    } else if (e.currentTarget.dataset.num == 1) {
+      img_2 = '';
+      that.setData({
+        img_2: '',
+        post2: true,
+      })
+    }
+
+  },
+  //
   //名字
   name(e){
     this.setData({
@@ -188,6 +213,9 @@ Page({
   
   getaudit(){
     let that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     let data = {
       
     }
@@ -205,6 +233,10 @@ Page({
             })
             that.get();
           }
+          that.setData({
+            load:false,
+          })
+          wx.hideLoading()
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',

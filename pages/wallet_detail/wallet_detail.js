@@ -1,4 +1,7 @@
 // pages/wallet_detail/wallet_detail.js
+const app = getApp();
+let detail=[];
+let currentPage=1;
 Page({
 
   /**
@@ -6,10 +9,10 @@ Page({
    */
   data: {
     tag:[
-      { name: '全部',id:'1' },
-      {name:'待结算',id:'2'},
-      {name:'已结算',id:'3'},
-      {name:'已提现',id:'4'},
+      { name: '全部',id:'0' },
+      {name:'待结算',id:'1'},
+      {name:'已结算',id:'2'},
+      {name:'已提现',id:'3'},
 
     ],
     tar:0,
@@ -19,7 +22,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+     if(options.id == 2){
+       this.setData({tar:2})
+       this.getHas();
+     }
   },
 
   /**
@@ -63,11 +69,35 @@ Page({
   onReachBottom: function () {
 
   },
+  getHas() {
+    let that = this;
+    let data = {
+      currentPage
+    }
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+    app.res.req("app-web/user/settlementlist", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+       detail.push(...res.data)
+       that.setData({
+         detail:detail
+       })
+      
 
-  }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

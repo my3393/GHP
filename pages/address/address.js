@@ -1,12 +1,17 @@
 // pages/address/address.js
 const app = getApp();
 let sex;
+let currentPage = 1;
+let detail = [];
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+   detail:[],
+    isdelete:true,
+    ismask:true,
 
   },
 
@@ -59,7 +64,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+     currentPage = currentPage +1;
+     this.getDateil();
   },
 
   /**
@@ -124,13 +130,39 @@ Page({
   //删除地址
   detel(e){
     console.log(e)
+    this.setData({
+      ismask:!this.data.ismask,
+      isdelete:!this.data.isdelete,
+      id:e.currentTarget.dataset.id
+    })
+
+  },
+  cancel(e) {
+    console.log(e)
+    this.setData({
+      ismask: !this.data.ismask,
+      isdelete: !this.data.isdelete,
+      
+    })
+
+  },
+  confirm(){
     let that = this;
+    this.setData({
+      ismask: !this.data.ismask,
+      isdelete: !this.data.isdelete,
+      
+    })
     let data = {
-        id:e.currentTarget.dataset.id
+      id:that.data.id
     }
     app.res.req('app-web/useraddress/delete', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        wx.showToast({
+          title: '已删除',
+          icon:'none'
+        })
         wx.clearStorage('address')
         that.getDateil();
 
@@ -142,7 +174,6 @@ Page({
         })
       }
     })
-
   },
   //设置默认
   checked(e) {
@@ -168,7 +199,7 @@ Page({
   getDateil() {
     let that = this;
     let data = {
-
+      currentPage
     }
     app.res.req('app-web/useraddress/list', data, (res) => {
       console.log(res.data)
@@ -179,9 +210,11 @@ Page({
           } else {
             res.data[i].checked = false
           }
+         
         }
+        detail.push(...res.data)
         that.setData({
-          detail: res.data,
+          detail: detail,
 
         })
 
@@ -199,5 +232,17 @@ Page({
       }
     })
 
+  },
+  // 上个页面返回刷新
+  changeData: function () {
+    currentPage = 1;
+    detail = [];
+    this.setData({
+      
+    })
+    this.getDateil();
+    //var options = { 'id': this.data.id }
+    //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
+  
   },
 })

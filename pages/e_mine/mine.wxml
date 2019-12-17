@@ -31,7 +31,7 @@
       </view>
     </view>
     <view class="top-tx" wx:else >
-      <view class="tx" wx:if='{{uesr.headImgUrl == null}}' bindtap="person">
+      <view class="tx" wx:if='{{user.headImgUrl == null}}' bindtap="person">
         <image src="../../images/tx.png" />
       </view>
       <view class="tx" wx:else bindtap="person">
@@ -87,7 +87,7 @@
       <image src="../../images/right.png" />
     </view>
   </view>
-  <view class="dind" bindtap="all" id="{{1}}">
+  <view class="dind" catchtap="all" id="{{1}}">
     <view class="din-1">
       <view class="din-img">
         <image src="../../images/d-fk.png" />
@@ -95,14 +95,14 @@
       </view>
       <view>待付款</view>
     </view>
-    <view class="din-1" bindtap="all" id="{{2}}">
+    <view class="din-1" catchtap="all" id="{{2}}">
       <view class="din-img">
         <image src="../../images/d-fh.png" />
         <view class="hong">9</view>
       </view>
       <view>待发货</view>
     </view>
-    <view class="din-1" bindtap="all" id="{{3}}">
+    <view class="din-1" catchtap="all" id="{{3}}">
       <view class="din-img">
         <image src="../../images/d-sh.png" />
         <view class="hong">9</view>

@@ -30,6 +30,12 @@ Page({
     isqu: false,
     isjie: false,
     zhao1:true,
+    title:'',
+    menoy:'',
+    phone:'',
+    addres:'',
+    zhaos1:'',
+    images:[],
     img_num:0,
     img_show:false,
     isdelete:false,
@@ -90,7 +96,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+     images = [];
+     simages = [];
   },
 
   /**
@@ -129,7 +136,7 @@ Page({
        img_num: that.data.img_num - 1
      })
      console.log(simages.length)
-     if (simages.length < 5) {
+     if (simages.length < 9) {
        that.setData({
          img_show: false
        })
@@ -288,10 +295,11 @@ Page({
            addres: res.data.provinceName + '-' + res.data.cityName + '-' + res.data.areaName + '-' + res.data.townName,
            zhaos1: res.data.qualificationImgOss,
            
-           img_num: res.data.qualificationImgOss.length,
+           img_num: res.data.infoImgOss.length,
            zhao1:false,
            images: res.data.infoImgOss,
          })
+        images = res.data.infoImgOss
           province_id = res.data.provinceId
           city_id = res.data.cityId
           area_id = res.data.areaId
@@ -315,10 +323,66 @@ Page({
   //提交
   submit() {
     let that = this;
+    if(that.data.title == ''){
+      wx.showToast({
+        title: '项目标题不能为空',
+        icon:'none'
+      })
+    } else if (that.data.menoy == '') {
+      wx.showToast({
+        title: '所需目标金额不能为空',
+        icon: 'none'
+      })
+    } else if (that.data.name == '') {
+      wx.showToast({
+        title: '请填写申请人姓名',
+        icon: 'none'
+      })
+    } else if (that.data.phone == '') {
+      wx.showToast({
+        title: '请填写申请人手机号码',
+        icon: 'none'
+      })
+    } else if (that.data.typ == '') {
+      wx.showToast({
+        title: '请选择申请主体',
+        icon: 'none'
+      })
+    } else if (that.data.addres == '') {
+      wx.showToast({
+        title: '请选择所在地',
+        icon: 'none'
+      })
+    } else if (that.data.zhaos1 == '') {
+      wx.showToast({
+        title: '请上传资助申请证明',
+        icon: 'none'
+      })
+    } else if (that.data.images == '') {
+      wx.showToast({
+        title: '请上传相关图片',
+        icon: 'none'
+      })
+    } else if (that.data.sum == '') {
+      wx.showToast({
+        title: '请填写求助说明',
+        icon: 'none'
+      })
+    } else if (that.data.sums == '') {
+      wx.showToast({
+        title: '请填写项目介绍',
+        icon: 'none'
+      })
+    }else{
+      that.sub();
+    }
+  },
+  sub(){
+    let that = this;
     var Str = JSON.stringify(simages);
-    if(id){
+    if (id) {
       let data = {
-        id:id,
+        id: id,
         projectTitle: that.data.title,
         targetAmount: that.data.menoy,
         applyName: that.data.name,
@@ -358,7 +422,7 @@ Page({
           })
         }
       })
-    }else{
+    } else {
       let data = {
         projectTitle: that.data.title,
         targetAmount: that.data.menoy,
@@ -425,20 +489,54 @@ Page({
        }
      })
    },
+  getprogress() {
+    let that = this;
+    let data = {
+    }
+
+    app.res.req('app-web/oss/progress', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          progress: res.data
+        })
+        
+        if(res.data == 100){
+          wx.hideLoading();
+        }else{
+          wx.showLoading({
+            title: res.data + '%',
+            mask: true,
+          });
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
    //图片上传
    chooseImages(e) {
     var that = this;
-
+    
     wx.chooseImage({
       count: 1,
-      sizeType: ['original', 'compressed'], //可选择原图或压缩后的图片
+      sizeType: ['compressed'], //可选择原图或压缩后的图片
       sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
       success: res => {
         // console.log(res.tempFilePaths[0]);
         var tempFilePaths = res.tempFilePaths;
-        wx.showLoading({
-          title:that.data.progre
-        });
+        console.log(that.data.progre)
+       var test1 =   setInterval(function(){
+           that.getprogress();
+        },1000)
+        
         const uploadTask = wx.uploadFile({
           url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
@@ -477,12 +575,22 @@ Page({
                 })
               }
             }
-            wx.hideLoading();
+
+            clearTimeout(test1);
+           
             // do something
             wx.showToast({
               title: '上传成功',
               icon: 'none'
             })
+          },
+          fail(res){
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传失败,请检查网络',
+              icon:'none'
+            })
+            clearTimeout(test1);
           }
         })
         uploadTask.onProgressUpdate((res) => {
@@ -506,6 +614,15 @@ Page({
     this.setData({
       address: false,
       ismask: false,
+    })
+  },
+  //取消弹出层
+  adres_all() {
+    this.setData({
+
+      address: true,
+      ismask: true,
+
     })
   },
   x_prov() {

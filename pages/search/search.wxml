@@ -3,7 +3,7 @@
   <view class='a-nav bg-white' style='height:{{navH}}px'>
     <view class='a-nav-title'>
       <view class="inpu">
-        <input placeholder="商家，店铺名称" value="{{value}}" bindinput="value"></input>
+        <input type="text" bindconfirm="bindconfirm" placeholder="商家，店铺名称" confirm-type="search" value="{{value}}" bindinput="value"></input>
       </view>
 
       <image src='../../images/left.png' mode='aspectFit' class='back' bindtap='navBack'></image>

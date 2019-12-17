@@ -15,7 +15,7 @@ Page({
     tar: '',
     detail:[],
     istop:true,
-
+     res:'nide'
 
   },
 
@@ -24,7 +24,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-  
+    
     if (wx.getStorageSync('token')) {
       that.getbanner();
       console.log('token存在')
@@ -57,11 +57,14 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-        if (res.data.bindProvinceId != '' || res.data.bindProvinceId != null) {
-           wx.setTabBarItem({
-             index: 1,
-             text: res.data.bindCityName,
-           })
+        console.log(res.data.bindProvinceId)
+        if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
+          
+        }else{
+          wx.setTabBarItem({
+            index: 1,
+            text: res.data.bindCityName,
+          })
         }
 
       },
@@ -112,6 +115,11 @@ Page({
     console.log(e)
     wx.navigateTo({
       url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name,
+    })
+  },
+  search_all(){
+    wx.navigateTo({
+      url: '../productList/producList' ,
     })
   },
   search_name(e){

@@ -51,6 +51,7 @@ page{
 .bott_r>view{
    display: inline-block;
    margin-left: 30rpx;
+   font-size: 32rpx;
 }
 .bott_r>view:nth-child(2){
     color: #f12200;

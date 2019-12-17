@@ -20,6 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    load:true,//
     num:0,
     isshow:true,
     isg:true,
@@ -311,6 +312,9 @@ Page({
    },
     getAudit() {
       let that = this;
+      wx.showLoading({
+        title: '加载中',
+      })
       let data = {
       }
 
@@ -328,7 +332,10 @@ Page({
               audit: res.data.auditStatus
             })
           }
-         
+          that.setData({
+            load:false
+          })
+          wx.hideLoading()
 
         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
           wx.redirectTo({
@@ -343,7 +350,38 @@ Page({
       })
     },
    //特产上传
+  getprogress() {
+    let that = this;
+    let data = {
+    }
 
+    app.res.req('app-web/oss/progress', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          progress: res.data
+        })
+
+        if (res.data == 100) {
+          wx.hideLoading();
+        } else {
+          wx.showLoading({
+            title: res.data + '%',
+            mask: true,
+          });
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //LOGO
   chooseImage(e) {
     var that = this;
@@ -444,7 +482,9 @@ Page({
       success: res => {
         // console.log(res.tempFilePaths[0]);
         var tempFilePaths = res.tempFilePaths;
-        wx.showLoading();
+        var test1 = setInterval(function () {
+          that.getprogress();
+        }, 1000)
         const uploadTask = wx.uploadFile({
           url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
@@ -482,12 +522,20 @@ Page({
               })
               zhao3 = datas.data.fileName
             }
+            clearTimeout(test1);
             wx.hideLoading();
             // do something
             wx.showToast({
               title: '上传成功',
               icon: 'none'
             })
+          },fail(res) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传失败,请检查网络',
+              icon: 'none'
+            })
+            clearTimeout(test1);
           }
         })
         uploadTask.onProgressUpdate((res) => {

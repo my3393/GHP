@@ -52,7 +52,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+      detail = [];
+    currentPage = 1;
+    store = [];
   },
 
   /**
@@ -66,7 +68,37 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+      currentPage = currentPage + 1
+      if(this.data.tar == 0){
+        this.getdetail()
+      }else{
+        this.getstore();
+      }
+      
+  },
+  home(){
+     wx.switchTab({
+       url: '../e_home/home',
+     })
+  },
+  good_detail(e){
+    
+     if(e.currentTarget.dataset.status == 0){
+       wx.showToast({
+         title: '该商品已下架',
+         icon:'none'
+       })
+     }else{
+      
+       wx.navigateTo({
+         url: '../good_detail/good_detail?id=' + e.currentTarget.id,
+       })
+     }
+  },
+  store_detail(e){
+     wx.navigateTo({
+       url: '../store_detail/store_detail?id=' + e.currentTarget.id,
+     })
   },
   getdetail() {
     let that = this;

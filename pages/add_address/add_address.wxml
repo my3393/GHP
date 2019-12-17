@@ -20,7 +20,7 @@
       </view>
       <view class='enter'>
         <image src='../../images/enter.png'></image>
-        <image src="../../images/dinw.png" />
+        <!-- <image src="../../images/dinw.png" /> -->
       </view>
     </view>
     <view class='infor'>
@@ -43,6 +43,7 @@
 </view>
 
 <view class="adres" hidden="{{address}}">
+  <view class="adres_all" bindtap="adres_all"></view>
   <view class="adres_h1">
     选择地区
     <view class="detel" bindtap="detel">

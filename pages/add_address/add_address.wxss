@@ -85,6 +85,13 @@ page{
   border-top-right-radius: 20rpx;
   z-index: 12;
 }
+.adres_all{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 .adres_h1{
   font-size: 32rpx;
 }

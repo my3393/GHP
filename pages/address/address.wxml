@@ -52,3 +52,13 @@
     新增地址
    </view>
 </view>
+
+<view class="popup" hidden="{{isdelete}}">
+        <view class="popup_h1">确定删除该地址？</view>
+      
+        <view class="popup_btn">
+              <view bindtap="cancel">取消</view>
+              <view bindtap="confirm">确定</view>
+        </view>
+</view>
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
