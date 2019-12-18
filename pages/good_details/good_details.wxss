@@ -1,0 +1,2 @@
+/* pages/good_details/good_details.wxss */
+@import '../good_detail/good_detail'

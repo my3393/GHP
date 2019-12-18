@@ -57,9 +57,12 @@
     申请类型：退货退款
   </view>
   <view class="nav">
-   退款金额: ￥{{detail.refundPrice}}
+    申请原因：{{detail.refundReason}}
   </view>
   <view class="nav">
+   退款金额: ￥{{detail.refundPrice}}
+  </view>
+  <view class="nav" wx:if='{{detail.refundType == 2}}'>
    货物状态: 未收到货
   </view>
   
@@ -67,7 +70,7 @@
     <view style="float:left">退款说明：</view> <view class="tuik_shuo">{{detail.refundExplain}}</view>
   </view>
   <view class="tuik_img" >
-    <image wx:for='{{detail.refundImgOss}}' wx:key='{{item.id}}' src="{{item}}"></image>
+    <image wx:for='{{detail.refundImgOss}}'  wx:key='{{item.id}}' src="{{item}}" bindtap="Preview" id="{{item}}"></image>
   </view>
   <view class="diz" wx:if='{{status == 12  || status == 17}}'>退回地址：{{sotre.consigneeName}}  {{sotre.consigneePhone}} {{sotre.provinceName}} {{sotre.cityName}} {{sotre.areaName}}  {{sotre.townName}}  {{sotre.detailAddress}} 
 </view>
@@ -95,7 +98,7 @@
      <view class="footer_r" wx:if='{{status == 6 || status == 10 || status == 14 || status == 18 }}'>
 
         <view class="tuik" bindtap="jind">退款进度</view>
-        <view wx:if='{{chexiao_nums == 1}}' class="tuik xiug" bindtap="xiugai">修改申请</view>
+        <view wx:if='{{chexiao_nums == 1}}' class="tuik xiug" bindtap="xiugai">重新申请</view>
         <view class="tuik" bindtap="chexiao" wx:else>撤销申请</view>
          <view class="tuik" bindtap="complain">订单投诉</view>
     </view>

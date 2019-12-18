@@ -66,6 +66,18 @@ Page({
   onReachBottom: function () {
 
   },
+  //查看图片
+  Preview: function (e) {
+    var that = this;
+    var urlsa = [];
+    console.log(e)
+    urlsa.push(e.currentTarget.id)
+    console.log(urlsa)
+    wx.previewImage({
+      current: e.currentTarget.id,
+      urls: that.data.detail.refundImgOss
+    })
+  },
   //修改申请
   xiugai(){
     wx.navigateTo({
@@ -81,9 +93,16 @@ Page({
   },
   //订单投诉
   complain(){
-     wx.navigateTo({
-       url: '../order_complaints/order_complaints?id=' + id ,
-     })
+    if (this.data.detail.complaintExplain == null || this.data.detail.complaintExplain == ''){
+      wx.navigateTo({
+        url: '../order_complaints/order_complaints?id=' + id,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../order_complaints_d/order_complaints_d?id=' + id,
+      })
+    }
+    
   },
   //撤销申请
   chexiao(){

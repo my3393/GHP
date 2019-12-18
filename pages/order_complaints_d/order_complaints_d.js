@@ -1,29 +1,22 @@
-// pages/logistics_detail/logistics_detail.js
+// pages/order_complaints_d/order_complaints_d.js
 const app = getApp();
-let id
-
+let id;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-     tag:[
-       { name: '包裹1' },
-       {name:'包裹2'}
-     ],
-     tar:0,
+    ischexiao:true,
+    ismask:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    id = options.id
-   this.getDetail();
-   this.getdiz();
-   // const base64 = new Base64();
-   //console.log(data)
+     id = options.id
+     this.getDetail();
   },
 
   /**
@@ -74,30 +67,31 @@ Page({
   onShareAppMessage: function () {
 
   },
-  getDetail() {
-    let that = this;
+  //
+  submit(){
+    var schoolStr = JSON.stringify(simages);
     let data = {
-      id
+      id: id,
+      complaintReason: '撤销投诉',
+      complaintExplain: '撤销投诉',
+      complaintImgJson: '',
+      complaintType:1
     }
 
-    app.res.req('app-web/userorder/logisticsinfo', data, (res) => {
+    app.res.req('app-web/userorder/complaint', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.hideLoading()
-       
-        that.setData({
-          
-          isshow: false,
-          detail:res.data[0],
-          details:res.data[0].details[0],
-          logistics: JSON.parse(res.data[0].logisticsDetail),
-          title: JSON.parse(res.data[0].logisticsDetail).result.list[0].status
+        wx.showToast({
+          title: '投诉成功',
+          icon: 'none',
+          duration: 2000,
         })
-        console.log(that.data.logistics)
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 2
+          })
+        }, 2000)
+
       } else {
         wx.showToast({
           title: res.msg,
@@ -105,22 +99,22 @@ Page({
         })
       }
     })
+  
   },
-  getdiz() {
+  getDetail() {
     let that = this;
     let data = {
       id: id
     }
 
-    app.res.req('app-web/userorder/detail', data, (res) => {
+    app.res.req('app-web/userorder/suborderdetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+       
         that.setData({
-          diz: res.data,       
+          detail: res.data,
+          
         })
-
-
-        
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({

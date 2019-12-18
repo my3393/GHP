@@ -2,7 +2,7 @@
 const app = getApp();
 let isRefresh = 0; //精选特产刷新
 let detail = [];
-let classifyId ='';
+let classifyId =1;
 Page({
 
   /**
@@ -127,6 +127,21 @@ Page({
        url: '../search_name/search_name?id=' + e.currentTarget.id + '&name=' + e.currentTarget.dataset.name,
      })
   },
+  //banner跳转
+  banner(e){
+     console.log(e)
+     if(e.currentTarget.dataset.xcxurl == ''){
+
+     } else if (e.currentTarget.dataset.xcx.id == ''){
+       wx.navigateTo({
+         url: e.currentTarget.dataset.xcx.page,
+       })
+     }else{
+       wx.navigateTo({
+         url: e.currentTarget.dataset.xcx.page + e.currentTarget.dataset.xcx.id,
+       })
+     }
+  },
   //查看商品详情
   detail(e){
     console.log(e)
@@ -138,7 +153,15 @@ Page({
   getDetail(){
     let that =this;
     let data = {
-      classifyId:classifyId
+      classifyId:'',
+      currentPage:1,
+        provinceId:'',
+      cityId:'',
+        areaId:'',
+      townId:'',
+      typeId:classifyId,
+        sortType:0,
+      keyword:''
     }
 
     app.res.req("app-web/product/list", data, (res) => {
@@ -173,6 +196,12 @@ Page({
     app.res.req("app-web/home/advertise", data, (res) => {
       console.log(res.data)
       if(res.status == 1000){
+        for (var i in res.data) {
+          if (res.data[i].xcxUrl != '') {
+            res.data[i].xcx = JSON.parse(res.data[i].xcxUrl)
+          }
+
+        }
            that.setData({
             advert:res.data,
 
@@ -252,25 +281,20 @@ Page({
 
 
   },
-  //热门
+  //热门特产
   getType(){
     let that = this;
     let data = {
       grade:1
     }
-    let type = [
-      {
-        typeName:'全部',
-        id:'',
-      }
-    ]
+    
     app.res.req('app-web/home/grade/type', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
 
-           type.push(...res.data)
+          
             that.setData({
-              type,
+              type:res.data
 
             })
 
@@ -301,6 +325,13 @@ Page({
               icon: 'none'
             })
           }
+            for(var i in res.data){
+              if(res.data[i].xcxUrl != ''){
+                res.data[i].xcx = JSON.parse(res.data[i].xcxUrl)
+              }
+             
+            }
+           
             that.setData({
               banner:res.data,
 

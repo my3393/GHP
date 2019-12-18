@@ -46,7 +46,7 @@ Page({
   },
   chak(){
     wx.navigateTo({
-      url: '../order_all/order_all?id' + 0,
+      url: '../order_all/order_all?id=' + 0,
     })
   },
   home(){

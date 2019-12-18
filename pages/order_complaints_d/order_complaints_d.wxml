@@ -1,0 +1,48 @@
+<!--pages/refund_detail/refund_detail.wxml-->
+
+<view class='infor' style="margin-top:20rpx;">
+  <view class='inform'>投诉进度</view>
+  <view class='inforin '>
+    
+      <input disabled='true'  type='text' value='{{detail.complaintProgress}}'></input>
+   
+  </view>
+  <view class='enter'>
+    <image src='../../images/enter.png'></image>
+  </view>
+</view>
+<view class='infor' style="margin-top:10rpx;">
+  <view class='inform'>投诉原因</view>
+  <view class='you'>
+   {{detail.complaintReason}}
+  </view>
+</view>
+<view class="top tops">
+
+  
+  <view class="nav">
+    <view style="float:left">退款说明：</view> <view class="tuik_shuo">{{detail.complaintExplain}}</view>
+  </view>
+  <view class="tuik_img" >
+    <image wx:for='{{detail.complaintImgOss}}'  wx:key='{{item.id}}' src="{{item}}" bindtap="Preview" id="{{item}}"></image>
+  </view>
+ 
+
+                            
+</view>
+<view class="footer">
+  <view class="submit" bindtap="submit">撤销投诉</view>
+</view>
+
+<!-- 撤销申请 -->
+<view class="popup" hidden="{{ischexiao}}">
+  <view class="popup_h1">确定要撤销退款申请吗？</view>
+  <view class="popup_content">撤销后你还有{{chexiao_num}}次申请退款的机会</view>
+  <view class="popup_btn">
+    <view bindtap="cx_cancel">取消</view>
+    <view bindtap="cx_confirm">确定</view>
+  </view>
+</view>
+
+
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true' ></view>

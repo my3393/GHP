@@ -18,12 +18,16 @@ Page({
     tar: 0,
     detail:[],
     store:[],
+    load:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
       this.getdetail();
   },
 
@@ -111,9 +115,10 @@ Page({
       if (res.status == 1000) {
         detail.push(...res.data)
         that.setData({
-          detail: detail
+          detail: detail,
+          load:false,
         })
-
+        wx.hideLoading()
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',

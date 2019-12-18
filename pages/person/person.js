@@ -199,7 +199,7 @@ Page({
           title: '修改成功',
           icon: 'none'
         })
-
+        that.getuser();
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
@@ -233,10 +233,44 @@ Page({
     })
 
   },
+  getprogress() {
+    let that = this;
+    let data = {
+    }
+
+    app.res.req('app-web/oss/progress', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          progress: res.data
+        })
+
+        if (res.data == 100) {
+          wx.hideLoading();
+        } else {
+          wx.showLoading({
+            title: res.data + '%',
+            mask: true,
+          });
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //裁剪
   chooseimg() {
     wx.chooseImage({
       count: 1,
+      sizeType: ['compressed'], //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
       success: (res) => {
         this.setData({
           src: res.tempFilePaths[0]
@@ -250,10 +284,9 @@ Page({
       // wx.previewImage({
       //   urls: [r],
       // })
-      wx.showLoading({
-        title: '上传中',
-        mask: true
-      })
+      var test1 = setInterval(function () {
+        that.getprogress();
+      }, 1000)
       
       that.setData({
         isshow: !that.data.isshow,
@@ -277,11 +310,11 @@ Page({
           console.log(datas)
           if (datas.status == 1000) {
             wx.hideLoading();
-            wx.showToast({
-              title: '上传成功',
-              icon: 'none'
-            })
-
+            // wx.showToast({
+            //   title: '上传成功',
+            //   icon: 'none'
+            // })
+            clearTimeout(test1);
 
             that.setData({
               post1: datas.data.url,
@@ -296,6 +329,13 @@ Page({
             })
           }
 
+        }, fail(res) {
+          wx.hideLoading();
+          wx.showToast({
+            title: '上传失败,请检查网络',
+            icon: 'none'
+          })
+          clearTimeout(test1);
         }
 
       })
@@ -306,6 +346,28 @@ Page({
         content: e.errMsg,
         showCancel: false
       })
+    })
+  },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('app-web/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+
+      }
     })
   },
   diz() {

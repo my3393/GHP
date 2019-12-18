@@ -126,6 +126,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //商品详情
+  good_detail(e){
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.id,
+    })
+  },
   //进入店铺
   store(e){
     
@@ -481,13 +487,15 @@ Page({
   //删除商品
   delete(){
     let that = this;
+    var Str = JSON.stringify(ids);
     let data ={
-      shopProductIds:ids
+      shopProductIdJson: Str
     }
     app.res.req('app-web/shopcart/delete', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        ids = []
+        ids = [],
+        detail =[]
         that.setData({
           allnum: 0,
           allprices: 0.00,

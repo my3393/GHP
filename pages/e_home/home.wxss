@@ -282,29 +282,12 @@ box-sizing: border-box;
   text-align: center;
   color: #999999;
 }
-.ztop{
-  background: #fff;
-  width: 70rpx;
-  height: 70rpx;
-  position: fixed;
-  bottom: 80rpx;
-  right: 30rpx;
-  box-shadow: 2rpx 2rpx 2rpx #666;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 70rpx;
-}
-.ztop image{
-  width: 38rpx;
-  height: 38rpx;
-  margin-top: 18rpx;
-  margin-left: 5rpx;
-}
+
 .advert{
   width: calc(100% - 40rpx);
    overflow: hidden;
   border-radius: 70rpx;
-  height: 160rpx;
+  height: 170rpx;
   margin: 20rpx 0;
   margin-left: 20rpx;
 }

@@ -57,7 +57,7 @@
   <view>
     <view class="tu_img" wx:for='{{simgs}}' wx:key='{{item.id}}'>
       <image src="{{item}}" />
-      <view class="detele" bindtap="detele" id="{{item}}">
+      <view class="detele" id="{{item}}" data-index='{{idx}}'  bindtap="detels">
         <image src="../../images/deteles.png" />
       </view>
     </view>

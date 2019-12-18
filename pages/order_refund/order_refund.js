@@ -35,6 +35,7 @@ Page({
     ],
     refundType: '',
     cancel: '',
+    tuik:'',
     sum: 0,
     img_num: 0,
     isshow: false,
@@ -113,7 +114,29 @@ Page({
 
   },
 
+  //删除个人照照片
+  detels(e) {
+    var that = this;
+    console.log(e)
+  
 
+
+   
+      simages.splice(e.currentTarget.dataset.index, 1)
+      images.splice(e.currentTarget.dataset.index, 1)
+      that.setData({
+        images: images,
+        img_num: that.data.img_num - 1
+      })
+      console.log(simages.length)
+      if (simages.length < 3) {
+        that.setData({
+          img_show: false
+        })
+      }
+   
+
+  },
   //申请原因
   bindcancel(e) {
     console.log(e)
@@ -158,8 +181,8 @@ Page({
     console.log(value)
   },
   //提交申请
-  submit() {
-    let that = this;
+  submits(){
+     let that = this
     var schoolStr = JSON.stringify(simages);
     if (that.data.z_status == 1 || that.data.z_status == 8 || that.data.z_status == 10 || that.data.z_status == 14 || that.data.z_status == 13 || that.data.z_status == 17 || that.data.z_status == 18) {
       let data = {
@@ -199,7 +222,7 @@ Page({
         orderDetailId: id,
         refundReason: that.data.cancel,
         refundExplain: value,
-        refundImgs: schoolStr
+        refundImgJson: schoolStr
       }
       app.res.req('app-web/userorder/applyrefund', data, (res) => {
         console.log(res.data)
@@ -226,7 +249,24 @@ Page({
         }
       })
     }
-
+  },
+  submit() {
+    let that = this;
+     if(that.data.cancel == '' || that.data.tuik == ''){
+       wx.showToast({
+         title: '请选择退款或申请原因',
+         icon:'none'
+       })
+     }else if(that.data.isHuo == false && that.data.cargo == ''){
+       wx.showToast({
+         title: '请选择货物状态',
+         icon: 'none'
+       })
+     }
+     else{
+       that.submits();
+     }
+ 
     // wx.request({
     //   url: "http://192.168.123.171:8080/app-web/userorder/applyrefund",
     //   data: {
@@ -234,7 +274,7 @@ Page({
     //     orderDetailId: id,
     //     refundReason: that.data.cancel,
     //     refundExplain: value,
-    //     refundImgs: simages
+    //     refundImgjson: simages
     //   },
     //   method: 'POST',
     //   header: {
@@ -245,13 +285,7 @@ Page({
     //   success: function (res) {
     //     console.log(res.data.data)
     //     if (res.data.status === 100) {
-    //       for (var i in res.data.data.data) {
-    //         splayer.push(res.data.data.data[i])
-    //       }
-    //       that.setData({
-    //         splayer: splayer,
-    //         x_totalPage: res.data.data.totalPage
-    //       })
+         
 
 
     //     } else if (res.data.status === 103) {
@@ -272,6 +306,38 @@ Page({
     //   }
     // })
     
+  }, 
+  getprogress() {
+    let that = this;
+    let data = {
+    }
+
+    app.res.req('app-web/oss/progress', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          progress: res.data
+        })
+
+        if (res.data == 100) {
+          wx.hideLoading();
+        } else {
+          wx.showLoading({
+            title: res.data + '%',
+            mask: true,
+          });
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   //图片上传
   chooseImage(e) {
@@ -279,12 +345,14 @@ Page({
 
     wx.chooseImage({
       count: 1,
-      sizeType: ['original', 'compressed'], //可选择原图或压缩后的图片
+      sizeType: [ 'compressed'], //可选择原图或压缩后的图片
       sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
       success: res => {
         // console.log(res.tempFilePaths[0]);
         var tempFilePaths = res.tempFilePaths;
-        wx.showLoading();
+        var test1 = setInterval(function () {
+          that.getprogress();
+        }, 1000)
         const uploadTask = wx.uploadFile({
           url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
@@ -315,13 +383,20 @@ Page({
                 isshow: !that.data.isshow
               })
             }
-
+            clearTimeout(test1);
             wx.hideLoading();
             // do something
             wx.showToast({
               title: '上传成功',
               icon: 'none'
             })
+          }, fail(res) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传失败,请检查网络',
+              icon: 'none'
+            })
+            clearTimeout(test1);
           }
         })
         uploadTask.onProgressUpdate((res) => {

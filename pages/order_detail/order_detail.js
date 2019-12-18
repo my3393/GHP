@@ -75,6 +75,19 @@ Page({
   onReachBottom: function () {
 
   },
+  //商品详情
+  good_detail(e) {
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.id,
+    })
+  },
+  //进入店铺
+  store(e) {
+
+    wx.navigateTo({
+      url: '../store_detail/store_detail?id=' + e.currentTarget.id,
+    })
+  },
   //确认签收
   quer(){
     let that = this;
@@ -352,19 +365,20 @@ Page({
     app.res.req('app-web/userorder/detail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        if (res.data.logistics){
+        if (res.data.logisticsInfo){
           let logistics = JSON.parse(res.data.logisticsInfo)
            console.log(that.data.logistics)
           that.setData({
            
             logistics: logistics.result.list[0]
           })
+          console.log(that.data.logistics)
         }
         
         
         that.setData({
           detail: res.data,
-          member_p: (res.data.productTotalFee + res.data.freight - res.data.payMoney)
+          member_p: (res.data.productTotalFee + res.data.freight - res.data.payMoney).toFixed(2)
         })
        
        

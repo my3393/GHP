@@ -151,3 +151,7 @@
   <view bindtap="savePoster" class="backs">保存图片，分享朋友圈</view>
 </view>
 <!-- <view class="mask" hidden="{{xismask}}"></view> -->
+
+<view class="zstop" hidden="{{istop}}" bind:tap="top">
+    <image src="../../images/ztop.png" />
+  </view>

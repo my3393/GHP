@@ -105,7 +105,7 @@ Page({
   drawal(){
     if (this.data.user.isRealName == 0){
       this.setData({
-        iscertfica: !that.data.iscertfica,
+        iscertfica: !this.data.iscertfica,
         ismask:false,
       })
     } else if (this.data.detail.remainTotalAmount == 0){

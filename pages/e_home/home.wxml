@@ -17,8 +17,8 @@
     </view>
     <view>
     <swiper  class="banner"  indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-      <block wx:for='{{banner}}' wx:key="{{item.id}}">
-        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'>
+      <block>
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{banner}}' wx:key="{{item.id}}"                         data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
           <image class="banner_img skeleton-rect" src="{{ item.bannerImgOss}}" lazy-load="true"></image>
         </swiper-item>
       </block>
@@ -56,8 +56,15 @@
       <view class="class-n">查看更多</view>
     </view>
   </view>
-  <view class="advert" wx:for='{{advert}}' wx:key="{{item.id}}">
-    <image src="{{item.advertiseImgOss}}" />
+  <view >
+   <swiper  class="advert" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
+      <block>
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{advert}}' wx:key="{{item.id}}"                        data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+          <image  src="{{item.advertiseImgOss}}" lazy-load="true"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+   
   </view>
   <view class="recommended">
     <view class="rescom">
@@ -101,12 +108,12 @@
     </view>
   </view>
 
-  <view class="gend">
+  <view class="gend" bindtap="search_all">
     查看更多特产
     <view class="gend-img"><image src="../../images/right.png" /> </view>
   </view>
 
-  <view class="ztop" hidden="{{istop}}" bind:tap="top">
+  <view class="zstop" hidden="{{istop}}" bind:tap="top">
     <image src="../../images/ztop.png" />
   </view>
   <view class="b-logo">

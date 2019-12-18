@@ -43,7 +43,7 @@
       <swiper-item>
         <view class="box" data-index='{{index}}' animation="{{index == current?animationData:animationData2}}">
           <image src='{{item}}'></image>
-
+           <!-- <view class="boxs_i" wx:if='{{current == 2}}'>2020.10.10-2021.10.10</view> -->
         </view>
       </swiper-item>
     </block>

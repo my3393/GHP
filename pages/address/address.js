@@ -50,7 +50,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    detail = [];
   },
 
   /**
@@ -184,6 +184,7 @@ Page({
     app.res.req('app-web/useraddress/setdefaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        detail = [];
         that.getDateil();
       } else {
         console.log(111)

@@ -25,7 +25,7 @@ page{
     padding: 20rpx;
     box-sizing: border-box;
     border-radius: 8rpx;
-    box-shadow: 3rpx 4rpx 8rpx #999;
+    /* box-shadow: 3rpx 4rpx 8rpx #999; */
 }
 .pro-t{
     display: flex;

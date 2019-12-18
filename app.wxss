@@ -279,3 +279,22 @@ white-space: nowrap;
 .option{
   opacity: 0.3;
 }
+/* 回到顶部 */
+.zstop{
+  background: #fff;
+  width: 70rpx;
+  height: 70rpx;
+  position: fixed;
+  bottom: 80rpx;
+  right: 30rpx;
+  box-shadow: 2rpx 2rpx 2rpx #666;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 70rpx;
+}
+.zstop image{
+  width: 38rpx;
+  height: 38rpx;
+  margin-top: 18rpx;
+  margin-left: 5rpx;
+}

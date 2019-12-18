@@ -21,7 +21,7 @@
 <view class="banner_top">
   <swiper bindchange="swiperChange" class="banner" circular="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
     <block>
-      <swiper-item class='plays' wx:if='{{detail.productVideo != null}}'>
+      <swiper-item class='plays'>
         <image src="{{detail.productDefaultImgOss}}"></image>
         <view class="play">
           <image src="../../images/play.png"></image>
@@ -42,6 +42,12 @@
     </view>
     搜索特产
   </view>
+   <view class="naviga_list">
+    <view class="naviga_img">
+      <image src="../../images/specialty.png" />
+    </view>
+    善家购
+  </view>
   <view class="naviga_list">
     <view class="naviga_img">
       <image src="../../images/specialty.png" />
@@ -53,6 +59,12 @@
       <image src="../../images/mine.png" />
     </view>
     个人中心
+  </view>
+   <view class="naviga_list">
+    <view class="naviga_img">
+      <image src="../../images/mine.png" />
+    </view>
+    我的收藏
   </view>
   <view class="naviga_list">
     <view class="naviga_img">
@@ -171,7 +183,7 @@
   </view>
   <view class="list-g" bindtap="store" id="{{store.id}}">进店</view>
   <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
-    <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="detail">
+    <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
       <view class="class-t-img">
         <image src="{{item.productDefaultImgOss}}" />
       </view>
@@ -180,7 +192,7 @@
         <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}
       </view>
     </view>
-    <view class="class-two" style="vertical-align: top;">
+    <view class="class-two" style="vertical-align: top;" bindtap="store" id="{{store.id}}">
       <view class="class-t-img">
         <image src="../../images/chakan.png" />
       </view>
@@ -241,9 +253,7 @@
   </view>
 </view>
 
-<view class="zstop" hidden="{{istop}}" bind:tap="top">
-    <image src="../../images/ztop.png" />
-  </view>
+
 <!-- 规格选择 -->
 <view hidden='{{ishidegg}}' class='mark'>
   <!-- <view class="gug_all" bindtap="gug_all"></view> -->

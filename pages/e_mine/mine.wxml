@@ -24,6 +24,10 @@
           <view>0</view>
           <view class="shouy-n">分销收益</view>
         </view>
+         <view class="shouy-z">
+          <view>0</view>
+          <view class="shouy-n">大爱榜单</view>
+        </view>
         <view class="shouy-z">
           <view>0</view>
           <view class="shouy-n">艺呗</view>
@@ -72,6 +76,10 @@
           <view class="shouy-n">分销收益</view>
         </view>
         <view class="shouy-z">
+          <view>0</view>
+          <view class="shouy-n">大爱榜单</view>
+        </view>
+        <view class="shouy-z">
           <view>{{user.integral}}</view>
           <view class="shouy-n">艺呗</view>
         </view>
@@ -91,28 +99,28 @@
     <view class="din-1">
       <view class="din-img">
         <image src="../../images/d-fk.png" />
-        <view class="hong">9</view>
+        <!-- <view class="hong">9</view> -->
       </view>
       <view>待付款</view>
     </view>
     <view class="din-1" catchtap="all" id="{{2}}">
       <view class="din-img">
         <image src="../../images/d-fh.png" />
-        <view class="hong">9</view>
+        <!-- <view class="hong">9</view> -->
       </view>
       <view>待发货</view>
     </view>
     <view class="din-1" catchtap="all" id="{{3}}">
       <view class="din-img">
         <image src="../../images/d-sh.png" />
-        <view class="hong">9</view>
+        <!-- <view class="hong">9</view> -->
       </view>
       <view>待收货</view>
     </view>
     <view class="din-1" bindtap="all" id="{{4}}">
       <view class="din-img">
         <image src="../../images/d-tk.png" />
-        <view class="hong">9</view>
+        <!-- <view class="hong">9</view> -->
       </view>
       <view>退款/售后</view>
     </view>

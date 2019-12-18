@@ -54,7 +54,9 @@
     "pages/order_evaluation/order_evaluation",
     "pages/love_help/love_help",
     "pages/mine_opinion/mine_opinion",
-    "pages/productList/producList"
+    "pages/productList/producList",
+    "pages/good_details/good_details",
+    "pages/order_complaints_d/order_complaints_d"
   ],
   "tabBar": {
     "color": "#808080",

@@ -1,0 +1,44 @@
+/* pages/order_complaints_d/order_complaints_d.wxss */
+@import '../refund_detail/refund_detail';
+@import '../order_refund/order_refund';
+.you{
+  float: right;
+
+}
+.infor{
+  background: #fff;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  border-top: 2rpx solid #f2f2f2;
+  line-height: 100rpx;
+  position: relative;
+  height: 100rpx;
+}
+.inform{
+ float: left;
+ margin-top: 3rpx;
+  margin-right: 20rpx;
+}
+.inforin{
+  display: inline-block;
+  vertical-align: middle;
+}
+.inforin input{
+  width: 560rpx;
+  letter-spacing: 2rpx;
+  text-align: center;
+  color: red;
+}
+.forin{
+  margin-left: 30rpx;
+}
+.enter{
+  position: absolute;
+  right: 24rpx ;
+  top: 8rpx;
+}
+.enter image{
+  margin-left: 25rpx;
+  width: 20rpx;
+  height: 26rpx;
+}

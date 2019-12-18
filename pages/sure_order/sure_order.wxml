@@ -14,7 +14,7 @@
 <view wx:if='{{adress.length != 0}}' bindtap='choose'>
     <view class="address" >
         <view class="address_top">
-            <text class="mor">默认</text>
+            <!-- <text class="mor">默认</text> -->
             {{adress.provinceName}}  {{adress.cityName}}  {{adress.areaName}}  {{adress.townName}}
         </view>
         <view class="address_cent">

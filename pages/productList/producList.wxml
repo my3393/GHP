@@ -56,7 +56,7 @@
   <!--screen-->
 
   <!--list-->
-  <view class="tui-product-list" style="margin-top:68rpx">
+  <view class="tui-product-list" style="margin-top:72rpx">
     <view class="tui-product-container">
       <block wx:for="{{detail}}" wx:key="{{index}}" wx:if="{{(index+1)%2!=0 || isList}}">
         <template is="productItem" data="{{item,index:index,isList:isList}}" />
@@ -152,3 +152,7 @@
   <tui-nomore visible="{{!pullUpOn && isList}}" bgcolor="#f7f7f7"></tui-nomore>
   <!--加载loadding-->
 </view>
+
+<view class="zstop" hidden="{{istop}}" bind:tap="top">
+    <image src="../../images/ztop.png" />
+  </view>

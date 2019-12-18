@@ -96,39 +96,52 @@ Page({
   },
    submit() {
     let that = this;
-     var schoolStr = JSON.stringify(simages);
-    let data = {
-      id:id,
-      complaintReason: that.data.cancel,
-      complaintExplain:value,
-      complaintImgJson: schoolStr
-    }
-
-     app.res.req('app-web/userorder/complaint', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-         wx.showToast({
-           title: '投诉成功',
-           icon:'none',
-          duration: 2000,
-        })
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 2
-          })
-        }, 2000)
-
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+    if(that.data.cancel == ''){
+      wx.showToast({
+        title: '请选择投诉原因',
+        icon:"none"
+      })
+    }else if(that.data.sum == 0){
+      wx.showToast({
+        title: '请填写投诉说明',
+        icon: "none"
+      })
+    }else if(that.data.simgs == ''){
+      wx.showToast({
+        title: '请上传投诉照片',
+        icon: "none"
+      }) 
+    }else{
+      var schoolStr = JSON.stringify(simages);
+      let data = {
+        id: id,
+        complaintReason: that.data.cancel,
+        complaintExplain: value,
+        complaintImgJson: schoolStr
       }
-    })
+
+      app.res.req('app-web/userorder/complaint', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '投诉成功',
+            icon: 'none',
+            duration: 2000,
+          })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 2
+            })
+          }, 2000)
+
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
   },
   //图片上传
   chooseImage(e) {

@@ -33,9 +33,9 @@
       <!-- goodslist -->
       <view>
         <!-- 商品组键 -->
-        <view class='shopgoodlist' wx:for="{{item.products}}" wx:key="{{index}}">
+        <view class='shopgoodlist' wx:for="{{item.products}}" wx:key="{{index}}" bindtap="good_detail" id="{{item.productId}}">
           <!-- wx:if 是否选择显示不同图标 -->
-          <icon color="#f12200" class="cart-ic" type="{{item.selected ? 'success':'circle'}}" bindtap="goodsselected" data-index="{{index}}" data-select-index="{{idx}}" />
+          <icon color="#f12200" class="cart-ic" type="{{item.selected ? 'success':'circle'}}" catchtap="goodsselected" data-index="{{index}}" data-select-index="{{idx}}" />
           <!-- 点击商品图片可跳转到商品详情 -->
           <image class="cart-thumb" src="{{item.productImgOss}}"></image>
           <view class='goodsdata'>
@@ -47,11 +47,11 @@
             <text class='price'><text class="yuan">￥</text>{{item.salePrice}}</text>
             <!-- 增加减少数量按钮 -->
             <view class='goodsnum'>
-              <view class="suan" bindtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}" bindtap='minusCount'>
+              <view class="suan" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}" bindtap='minusCount'>
                 -
               </view>
               <view class="shu">{{item.buyCount}}</view>
-              <view class="suan" bindtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" bindtap='addCount'>
+              <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" bindtap='addCount'>
                 +
               </view>
             </view>

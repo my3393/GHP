@@ -15,6 +15,7 @@ let searchKey = '';//筛选字
 let product_id = '';
 Page({
   data: {
+    istop: true,
     searchKey: "", //搜索关键词
     width: 200, //header宽度
     height: 64, //header高度
@@ -348,6 +349,29 @@ Page({
     wx.navigateTo({
       url: '../good_detail/good_detail?id='+ e.currentTarget.id
     })
+  },
+  //置顶
+  top() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
+    })
+
+  },
+  onPageScroll: function (e) {
+
+    let that = this
+    if (e.scrollTop > 300) {
+
+      that.setData({
+        istop: false,
+      })
+    } else {
+
+      that.setData({
+        istop: true
+      })
+    }
   },
   //省
   getprov: function () {

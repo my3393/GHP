@@ -168,7 +168,7 @@ page{
 }
 .shouy-z{
     display: inline-block;
-    width: 47%;
+    width: 33%;
     color: #9F6F45;
     margin-top: 20rpx;
     text-align: center;

@@ -692,6 +692,9 @@ overflow: hidden;
   background: #fff;
 
 }
+.shop_details{
+  background: #f9f9f9
+}
 .shop{
   position: relative;
 }
@@ -724,4 +727,13 @@ overflow: hidden;
 float: right;
 height: 61rpx;
 background: #fff;
+}
+
+.gug_all{
+  position: fixed;
+  top: 0rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+ 
 }

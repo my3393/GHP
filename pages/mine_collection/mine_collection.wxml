@@ -1,5 +1,6 @@
 <!--pages/mine_collection/mine_collection.wxml-->
-<view class="top">
+<view hidden="{{load}}">
+   <view class="top">
   <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}" bindtap="tag" data-index="{{idx}}">
     {{item.name}}
   </view>
@@ -85,4 +86,5 @@
       </view>
     </view>
   </view>
+</view>
 </view>

@@ -36,6 +36,7 @@ page{
     margin-right: 20rpx;
     border-radius: 50%;
     overflow: hidden;
+    margin-top: 10rpx;
 }
 .dandu{
   display: flex;
@@ -46,7 +47,7 @@ width: 100%;
 .list-img image{
     width: 100%;
     height: 100%;
-    vertical-align: middle;
+   
 
 }
 .list-n{
@@ -60,7 +61,7 @@ width: 100%;
 .list-right{
     width: 22rpx;
     height: 22rpx;
-    display: inline-block;
+    float: right;
 }
 .list-right image{
     width: 100%;

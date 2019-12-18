@@ -188,10 +188,10 @@ color: #ffffff;
 }
 .suan{
   display: inline-block;
-  width: 34rpx;
-  height: 34rpx;
+  width: 50rpx;
+  height: 50rpx;
   background: #f3f3f3;
-  line-height: 34rpx;
+  line-height: 50rpx;
   text-align: center;
 }
 .shu{

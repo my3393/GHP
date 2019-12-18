@@ -24,7 +24,7 @@
         <view class='getAddress-icon'>
           <image src="../../images/weizi.png"></image>
         </view>
-        <view class='getAddress-text'>[收货地址] 广东省深圳市南山区 南山街道 亿利达大厦</view>
+        <view class='getAddress-text'>[收货地址] {{diz.provinceName}} {{diz.cityName}} {{diz.areaName}} {{diz.townName}} {{diz.detailAddress}}</view>
       </view>
     </view>
 

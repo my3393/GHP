@@ -13,6 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    istop: true,
     ress:'',
     istag:true,
     code: '../../images/ma.png', //如果是服务器图片一定要先下载到本地
@@ -292,6 +293,29 @@ Page({
         })
       }
     })
+  },
+  //置顶
+  top() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
+    })
+
+  },
+  onPageScroll: function (e) {
+
+    let that = this
+    if (e.scrollTop > 300) {
+
+      that.setData({
+        istop: false,
+      })
+    } else {
+
+      that.setData({
+        istop: true
+      })
+    }
   },
   //绘制海报
   huizi(){
