@@ -57,7 +57,7 @@ Page({
   },
   onLoad: function (options) {
     console.log(options)
-    
+    classifyId = options.id
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,
@@ -321,9 +321,10 @@ Page({
   },
   closeDrawer: function () {
     if(product_id){
-      
+      keyword = searchKey
       this.setData({
-        searchKey: searchKey
+        searchKey: searchKey,
+
       })
       detail = [];
       currentPage = 1
@@ -418,7 +419,7 @@ Page({
       classifyId: classifyId,
       typeId: typeId,
       sortType: sortType,
-      keyword: that.data.searchKey
+      keyword: keyword
     }
 
     app.res.req('app-web/product/list', data, (res) => {

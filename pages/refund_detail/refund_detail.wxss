@@ -76,6 +76,7 @@ page{
 }
 .footer_r{
     float: right;
+    width: 100%;
 }
 .footer_r>view{
     display: inline-block;
@@ -105,4 +106,14 @@ page{
   font-size: 24rpx;
   line-height: 40rpx;
   margin-top: 40rpx;
+}
+.wul_xx{
+  width: calc(100% - 80rpx);
+  margin-left: 40rpx;
+  height: 75rpx;
+  line-height: 75rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 40rpx;
+   background:linear-gradient(to right, #f12200, #ff4e17);
 }

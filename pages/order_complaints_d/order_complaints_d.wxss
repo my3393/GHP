@@ -24,9 +24,9 @@
   vertical-align: middle;
 }
 .inforin input{
-  width: 560rpx;
+  width: 500rpx;
   letter-spacing: 2rpx;
-  text-align: center;
+  text-align: right;
   color: red;
 }
 .forin{
@@ -34,7 +34,7 @@
 }
 .enter{
   position: absolute;
-  right: 24rpx ;
+  right: 40rpx ;
   top: 8rpx;
 }
 .enter image{

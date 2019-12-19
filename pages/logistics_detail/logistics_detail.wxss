@@ -37,7 +37,7 @@ page{
 }
 .topExpress{
   display: flex;
-  height: 160rpx;
+  /* height: 160rpx; */
   font-size: 24rpx;
 }
 .topExpress-left {

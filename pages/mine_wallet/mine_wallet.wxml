@@ -1,6 +1,6 @@
 <view class="top">
-    <view class="title">我的艺呗</view>
-    <view class="shuom">使用说明？</view>
+    <view class="title">账户金额（元）</view>
+    <!-- <view class="shuom">使用说明？</view> -->
     <view>
         <view class="num">{{detail.remainTotalAmount}}</view>
         

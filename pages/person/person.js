@@ -30,6 +30,7 @@ Page({
     iscity: false,
     isqu: false,
     isjie: false,
+    college:1
   },
 
   /**
@@ -120,6 +121,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  //
+  college(){
+     if(this.data.college == 1){
+       wx.navigateTo({
+         url: '../college/college',
+       })
+     }
   },
    //性别选择
    sexChange(e){

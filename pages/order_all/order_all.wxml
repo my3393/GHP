@@ -41,8 +41,8 @@
           <text class='specification'>{{item.provinceName}} {{item.cityName}}</text>
           <view class="guig">
             <view class='gui-g' wx:if='{{item.specification != ""}}'>{{item.specification}}</view>
-            <view class="tuik" wx:if='{{detail.orderStatus != 3 && detail.orderStatus != 4 && item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15}}'>退款中</view>
-            <view class="tuik" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9 || item.orderStatus == 12 || item.orderStatus == 16}}'>退款成功</view>
+            <view class="tuik" wx:if='{{detail.orderStatus != 3 && detail.orderStatus != 4 && item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15 || item.orderStatus == 12}}'>退款中</view>
+            <view class="tuik" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9  || item.orderStatus == 16}}'>退款成功</view>
           </view>
 
           <view>

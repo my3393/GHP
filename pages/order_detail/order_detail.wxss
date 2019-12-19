@@ -25,6 +25,10 @@ page{
     color: #fff;
     font-size: 30rpx;
 }
+.logistics_n{
+  width: 86%;
+  margin-left: 50rpx;
+}
 .top_tit{
     
     margin: 20rpx 0;
@@ -177,7 +181,7 @@ margin-right: 20rpx
 .logistics_right{
    position: absolute;
    top: 25rpx;
-   right: 30rpx;
+   right: 10rpx;
 }
 .logistics_right image{
     width: 20rpx;

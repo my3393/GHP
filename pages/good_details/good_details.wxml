@@ -1,3 +1,7 @@
+<view class="video_mask" hidden="{{isvideo}}">
+   <view><video id="good_video" class="video" autoplay="{{isplay}}" src="{{detail.productVideo}}"></video></view>
+   <view class="back_video" bindtap="play">退出播放</view>
+</view>
 <view>
   <view class='a-nav {{is_top ? "" : "bg-white"}} ' style='height:{{navH}}px'>
     <view class='a-nav-title'>

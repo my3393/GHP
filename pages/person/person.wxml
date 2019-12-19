@@ -62,7 +62,20 @@
               </view>
           </view>
       </view>
-      
+      <view class="nav_list_l dandu">
+          <view class="nav-l-t">
+              大学生身份认证
+          </view>
+          <view class="list-t " bind:tap="college">
+              <view style="display:inline-block;margin-right: 20rpx">
+                <text wx:if='{{ college == 1}}'>未认证</text>
+                <text wx:if='{{ college == 0}}'>已认证</text>
+              </view>
+              <view class="list-right">
+                  <image src="../../images/right.png" />
+              </view>
+          </view>
+      </view>
   </view>
   <!-- <view class="top">
       绑定家乡

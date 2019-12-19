@@ -13,6 +13,8 @@ let sex = 0;//判断是不是从立即购买打开的规格
 let userid;
 Page({
   data: {
+    isvideo:true,
+    isplay:false,
     istop: true,
     isSecurity:true,//保障
     ismask: true,
@@ -95,6 +97,13 @@ Page({
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id , 
 
     }
+  },
+  //播放视频
+  play(){
+     this.setData({
+       isvideo:!this.data.isvideo,
+       isplay: !this.data.isplay
+     })
   },
   //另一个商品
   good_detail(e){

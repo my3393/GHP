@@ -55,9 +55,9 @@
   </view>
   <textarea class="texta" placeholder="选填" maxlength="100" bindinput="valueChange"></textarea>
   <view>
-    <view class="tu_img" wx:for='{{simgs}}' wx:key='{{item.id}}'>
+    <view class="tu_img" wx:for='{{simgs}}' wx:key='{{item.id}}' wx:for-index='idx'>
       <image src="{{item}}" />
-      <view class="detele" id="{{item}}" data-index='{{idx}}'  bindtap="detels">
+      <view class="detele" id="{{item}}" data-index='{{idx}}'  bindtap="dete">
         <image src="../../images/deteles.png" />
       </view>
     </view>

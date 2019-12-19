@@ -90,26 +90,38 @@ Page({
   },
   //确认签收
   quer(){
+    
     let that = this;
-    let data = {
-      id: that.data.detail.id,
-    }
+    wx.showModal({
+      title: '提示',
+      content: '确定要签收吗？',
+      success(res) {
+        if (res.confirm) {
+          let data = {
+            id: that.data.detail.id,
+          }
 
-    app.res.req('app-web/userorder/confirmreceipt', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-        that.getDetail()
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+          app.res.req('app-web/userorder/confirmreceipt', data, (res) => {
+            console.log(res.data)
+            if (res.status == 1000) {
+              that.getDetail()
+            } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
+    
   },
   //查看物流
   wul(e) {

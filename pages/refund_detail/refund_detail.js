@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    load:true,
     status:3,
     ischexiao:true,//撤销申请
     ismask:true,
@@ -18,6 +19,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+     wx.showLoading({
+       title: '加载中',
+     })
      id = options.id,
      storeId = options.storeId 
      status = options.status
@@ -76,6 +80,12 @@ Page({
     wx.previewImage({
       current: e.currentTarget.id,
       urls: that.data.detail.refundImgOss
+    })
+  },
+  //填写快递
+  wul_xx(){
+    wx.navigateTo({
+      url: '../order_refund_s/order_refund_s?id=' + this.data.detail.id ,
     })
   },
   //修改申请
@@ -242,9 +252,10 @@ Page({
         that.getstore();
         that.setData({
           detail: res.data,
-          status: res.data.orderStatus
+          status: res.data.orderStatus,
+          load:false,
         })
-        
+        wx.hideLoading()
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',

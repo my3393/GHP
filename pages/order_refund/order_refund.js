@@ -114,14 +114,10 @@ Page({
 
   },
 
-  //删除个人照照片
-  detels(e) {
+  //删除
+  dete(e) {
     var that = this;
     console.log(e)
-  
-
-
-   
       simages.splice(e.currentTarget.dataset.index, 1)
       images.splice(e.currentTarget.dataset.index, 1)
       that.setData({
@@ -134,8 +130,6 @@ Page({
           img_show: false
         })
       }
-   
-
   },
   //申请原因
   bindcancel(e) {
@@ -252,9 +246,9 @@ Page({
   },
   submit() {
     let that = this;
-     if(that.data.cancel == '' || that.data.tuik == ''){
+     if(that.data.cancel == '' && that.data.tuik == ''){
        wx.showToast({
-         title: '请选择退款或申请原因',
+         title: '请选择退款原因或申请原因',
          icon:'none'
        })
      }else if(that.data.isHuo == false && that.data.cargo == ''){

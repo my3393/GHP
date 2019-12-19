@@ -11,7 +11,7 @@ page {
 
 .topExpress {
     width: 100% ;
-    height: 130rpx;
+   
     background: #fff;
     margin: 20rpx auto;
     padding: 20rpx;
@@ -62,7 +62,8 @@ page {
 }
 
 .getAddress-text {
-    margin-left: 20rpx;
+    margin-left: 40rpx;
+    width: 95%;
 }
 
 .noReach-online-top-close {

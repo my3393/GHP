@@ -126,6 +126,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //选购特产
+  non(){
+    wx.navigateTo({
+      url: '../e_home/home',
+    })
+  },
   //商品详情
   good_detail(e){
     wx.navigateTo({
@@ -488,32 +494,47 @@ Page({
   delete(){
     let that = this;
     var Str = JSON.stringify(ids);
-    let data ={
-      shopProductIdJson: Str
-    }
-    app.res.req('app-web/shopcart/delete', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-        ids = [],
-        detail =[]
-        that.setData({
-          allnum: 0,
-          allprices: 0.00,
-        })
-       that.getDateil();
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+    wx.showModal({
+      title: '提示',
+      content: '是否确认删除',
+      success(res) {
+        if (res.confirm) {
+          let data = {
+            shopProductIdJson: Str
+          }
+          app.res.req('app-web/shopcart/delete', data, (res) => {
+            console.log(res.data)
+            if (res.status == 1000) {
+              ids = [],
+                detail = []
+              that.setData({
+                allnum: 0,
+                allprices: 0.00,
+              })
+              wx.showToast({
+                title: '已删除',
+                icon: 'none'
+              })
+              that.getDateil();
+            } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
 
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
-        console.log(111)
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+              wx.redirectTo({
+                url: '../login/login',
+              })
+            } else {
+              console.log(111)
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
+    
   },
   getDateil() {
     let that = this;

@@ -1,8 +1,8 @@
 <!--pages/refund_detail/refund_detail.wxml-->
 
-<view class='infor' style="margin-top:20rpx;">
+<view class='infor' style="margin-top:20rpx;" bindtap="jind">
   <view class='inform'>投诉进度</view>
-  <view class='inforin '>
+  <view class='inforin' >
     
       <input disabled='true'  type='text' value='{{detail.complaintProgress}}'></input>
    
@@ -21,7 +21,7 @@
 
   
   <view class="nav">
-    <view style="float:left">退款说明：</view> <view class="tuik_shuo">{{detail.complaintExplain}}</view>
+    <view style="float:left">投诉说明：</view> <view class="tuik_shuo">{{detail.complaintExplain}}</view>
   </view>
   <view class="tuik_img" >
     <image wx:for='{{detail.complaintImgOss}}'  wx:key='{{item.id}}' src="{{item}}" bindtap="Preview" id="{{item}}"></image>

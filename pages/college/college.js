@@ -1,28 +1,24 @@
-// pages/certification/certification.js
-const app = getApp();
-let img_1 = '';
-let img_2 = '';
+// pages/college/college.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    load:true,
+    load: false,
     loading: false,
     post1: true,
     post2: true,
     audit: 3,
-    number:'',
-    name:'',
-    id:'',
+    number: '',
+    name: '',
+    id: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.get();
     this.getaudit();
   },
 
@@ -53,27 +49,6 @@ Page({
   onUnload: function () {
 
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-   
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
   //删除个人照照片
   detels(e) {
     var that = this;
@@ -84,10 +59,10 @@ Page({
     if (e.currentTarget.dataset.num == 0) {
       img_1 = '';
       that.setData({
-        img_1:'',
-        post1:true,
+        img_1: '',
+        post1: true,
       })
-      
+
     } else if (e.currentTarget.dataset.num == 1) {
       img_2 = '';
       that.setData({
@@ -99,32 +74,81 @@ Page({
   },
   //
   //名字
-  name(e){
+  name(e) {
     this.setData({
-      name:e.detail.value
+      name: e.detail.value
     })
   },
   //身份证号
-  card(e){
-   this.setData({
-     card_id:e.detail.value
-   })
+  card(e) {
+    this.setData({
+      card_id: e.detail.value
+    })
+  },
+  sub(){
+    let that = this;
+    if(that.data.names == ''){
+      wx.showToast({
+        title: '请填写真实姓名',
+        icon:'none'
+      })
+    } else if (that.data.phone == '') {
+      wx.showToast({
+        title: '请填写身份证号',
+        icon: 'none'
+      })
+    } else if (that.data.school == '') {
+      wx.showToast({
+        title: '请填写学校名称',
+        icon: 'none'
+      })
+    } else if (that.data.value == '') {
+      wx.showToast({
+        title: '请填写学历',
+        icon: 'none'
+      })
+    } else if (that.data.start == '') {
+      wx.showToast({
+        title: '请选择入学年份',
+        icon: 'none'
+      })
+    } else if (that.data.end == '') {
+      wx.showToast({
+        title: '请选择预计毕业年份',
+        icon: 'none'
+      })
+    } else if (img_1 == '') {
+      wx.showToast({
+        title: '请上传学生证或学生卡正面照',
+        icon: 'none'
+      })
+    } else if (img_2 == '') {
+      wx.showToast({
+        title: '请上传学生证或学生卡反面照',
+        icon: 'none'
+      })
+    }else{
+      that.submit();
+    }
   },
   submit() {
     let that = this;
-    if(that.data.id){
+    if (that.data.id) {
       let that = this;
-      that.setData({
-        loading: !that.data.loading
-      })
+     
       let data = {
-        id:that.data.id,
-        realName: that.data.name,
-        identityNo: that.data.card_id,
-        identityCard1: img_1,
-        identityCard2: img_2,
+        realName: that.data.names,
+        userPhone: that.data.phone,
+
+        schoolName: that.data.school,
+        educationLevel: that.data.value,
+        enrollmentYear: that.data.start,
+        graduationYear: that.data.end,
+        studentImg1: img_1,
+        studentImg2: img_2,
+
       }
-      app.res.req('app-web/user/resubmitauthentication', data, (res) => {
+      app.res.req('app-web/authentication/editcollege', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           that.setData({
@@ -153,8 +177,8 @@ Page({
           })
         }
       })
-    }else{
-      
+    } else {
+
       that.setData({
         loading: !that.data.loading
       })
@@ -164,7 +188,7 @@ Page({
         identityCard1: img_1,
         identityCard2: img_2,
       }
-      app.res.req('app-web/user/submitauthentication', data, (res) => {
+      app.res.req('app-web/authentication/submitcollege', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           that.setData({
@@ -196,7 +220,7 @@ Page({
     }
 
   },
-  go(){
+  go() {
     img_1 = this.data.audits.identityCard1,
       img_2 = this.data.audits.identityCard2
     this.setData({
@@ -204,39 +228,38 @@ Page({
       card_id: this.data.audits.identityNo,
       img_1: this.data.audits.identityCard1Oss,
       img_2: this.data.audits.identityCard2Oss,
-      audit:3,
-      post1:false,
-      post2:false,
+      audit: 3,
+      post1: false,
+      post2: false,
     })
   },
   //用户认证信息
-  
-  getaudit(){
+
+  getaudit() {
     let that = this;
     wx.showLoading({
       title: '加载中',
     })
     let data = {
-      
+
     }
 
-    app.res.req('app-web/user/authenticationinfo', data, (res) => {
+    app.res.req('app-web/authentication/collegeinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-          if(res.data != null){
-            that.setData({
-              audits: res.data,
-              audit: res.data.auditStatus,
-              name: res.data.realName,
-              number: res.data.identityNo,
-              id:res.data.id
-            })
-            that.get();
-          }
+        if (res.data != null) {
           that.setData({
-            load:false,
+            audits: res.data,
+            audit: res.data.auditStatus,
+
+            id: res.data.id
           })
-          wx.hideLoading()
+
+        }
+        that.setData({
+          load: false,
+        })
+        wx.hideLoading()
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
@@ -249,13 +272,13 @@ Page({
       }
     })
   },
-  get(){
+  get() {
     let that = this;
-    let result = that.plusXing( that.data.number,1,1)
-    let name = that.plusXing(that.data.name,0,2)
+    let result = that.plusXing(that.data.number, 1, 1)
+    let name = that.plusXing(that.data.name, 0, 2)
     that.setData({
-      number:result,
-      name:name
+      number: result,
+      name: name
     })
     console.log(result)
   },
@@ -297,13 +320,13 @@ Page({
                 post1: false
               })
               img_1 = datas.data.fileName
-            }else{
+            } else {
               that.setData({
                 img_2: datas.data.url,
                 post2: false
               })
               img_2 = datas.data.fileName
-            } 
+            }
             wx.hideLoading();
             // do something
             clearTimeout(test1);
@@ -333,15 +356,7 @@ Page({
 
 
   },
-   plusXing (str,frontLen,endLen) {
-     var len = str.length-frontLen-endLen;
-     var xing = '';
-     for (var i=0;i<len;i++) {
-     xing+='*';
-    }
-     return str.substring(0,frontLen)+xing+str.substring(str.length-endLen);
-  },
-   getprogress() {
+  getprogress() {
     let that = this;
     let data = {
     }
@@ -373,5 +388,12 @@ Page({
       }
     })
   },
-
+  plusXing(str, frontLen, endLen) {
+    var len = str.length - frontLen - endLen;
+    var xing = '';
+    for (var i = 0; i < len; i++) {
+      xing += '*';
+    }
+    return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+  }
 })

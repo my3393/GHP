@@ -13,7 +13,8 @@ let sex = 0;//判断是不是从立即购买打开的规格
 let userid;
 Page({
   data: {
-
+    isvideo: true,
+    isplay: false,
     isSecurity: true,//保障
     ismask: true,
     isgug: true,//规格
@@ -55,6 +56,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.videoContext = wx.createVideoContext('good_video')
     //获取id距离窗口高度
     var query = wx.createSelectorQuery();
     //选择id
@@ -95,6 +97,13 @@ Page({
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
 
     }
+  },
+  //播放视频
+  play() {
+    this.setData({
+      isvideo: !this.data.isvideo,
+      isplay: !this.data.isplay
+    })
   },
   //另一个商品
   good_detail(e) {

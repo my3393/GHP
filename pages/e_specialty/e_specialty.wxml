@@ -10,7 +10,7 @@
 </view>
 
 <view hidden="{{!isBang}}" style='margin-top:{{navH}}px'>
-  <!-- <view class="top">
+  <view class="top">
     <view class="top-left">
       <view class="top-img">
         <image src="../../images/trumpe.png" />
@@ -18,7 +18,7 @@
       <text style=" vertical-align: middle;">家乡善款￥28,000.00 |</text>
     </view>
     <view class="top-r">用户188****3352为家乡成功捐款￥1.58</view>
-  </view> -->
+  </view>
   <view wx:if='{{Nostore}}'>
     <view class="kong">
       <view class="kong_img">
@@ -65,9 +65,9 @@
         </view> -->
       <view class="goods">
         <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-          <block wx:for='{{photos}}'>
-            <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
-              <image class="banner_img" src="{{item}}"></image>
+          <block  >
+            <swiper-item  class='swiper' wx:for='{{banner}}' id="{{item.id}}" bindtap="banner">
+              <image class="banner_img" src="{{item.advertiseImgOss}}"></image>
             </swiper-item>
           </block>
         </swiper>
@@ -105,3 +105,4 @@
     </view>
   </view>
 </view>
+

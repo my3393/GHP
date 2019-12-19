@@ -65,7 +65,22 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    let that = this
 
+    detail = [];
+    wx.showLoading({
+      title: '刷新中',
+    })
+    currentPage = 1;
+    setTimeout(function () {
+
+      wx.stopPullDownRefresh() //停止下拉刷新
+      if (that.data.tar == 0) {
+        that.getdetail()
+      } else {
+        that.getstore();
+      }
+    }, 200)
   },
 
   /**

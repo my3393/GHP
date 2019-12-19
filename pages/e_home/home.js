@@ -114,7 +114,7 @@ Page({
   search_product(e){
     console.log(e)
     wx.navigateTo({
-      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name,
+      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name + '&id=' + e.currentTarget.id,
     })
   },
   search_all(){
@@ -168,9 +168,9 @@ Page({
       console.log(res.data)
       if(res.status == 1000){
 
-          detail.push(...res.data)
+          // detail.push(...res.data)
            that.setData({
-             detail:detail,
+             detail:res.data,
 
            })
          

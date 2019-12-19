@@ -1,7 +1,11 @@
+<view class="video_mask" hidden="{{isvideo}}">
+   <view><video class="video" autoplay="{{isplay}}" src="{{detail.productVideo}}" enable-play-gesture="{{true}}"></video></view>
+   <view class="back_video" bindtap="play">退出播放</view>
+</view>
 <view>
   <view class='a-nav {{is_top ? "" : "bg-white"}} ' style='height:{{navH}}px'>
     <view class='a-nav-title'>
-      <view class="top_dao">
+      <view class="top_dao {{isvideo?'':'top_daos'}}">
         <view>
           <image src='../../images/left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
         </view>
@@ -23,7 +27,7 @@
     <block>
       <swiper-item class='plays' wx:if='{{detail.productVideo != null}}'>
         <image src="{{detail.productDefaultImgOss}}"></image>
-        <view class="play">
+        <view class="play" bindtap="play">
           <image src="../../images/play.png"></image>
         </view>
       </swiper-item>

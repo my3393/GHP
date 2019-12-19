@@ -56,7 +56,10 @@
     "pages/mine_opinion/mine_opinion",
     "pages/productList/producList",
     "pages/good_details/good_details",
-    "pages/order_complaints_d/order_complaints_d"
+    "pages/order_complaints_d/order_complaints_d",
+    "pages/order_complaints_s/order_complaints_s",
+    "pages/order_refund_s/order_refund_s",
+    "pages/college/college"
   ],
   "tabBar": {
     "color": "#808080",

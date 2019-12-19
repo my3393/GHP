@@ -1,0 +1,9 @@
+/* pages/college/college.wxss */
+@import '../certification/certification';
+.infor_r{
+  float: right;
+  margin-right: 6rpx;
+}
+.inforin input{
+  width: 510rpx;
+}

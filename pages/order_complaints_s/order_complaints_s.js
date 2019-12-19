@@ -1,22 +1,25 @@
-// pages/order_complaints_d/order_complaints_d.js
+// pages/refund_schedule/refund_schedule.js
 const app = getApp();
 let id;
+let top_1;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ischexiao:true,
-    ismask:true,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     id = options.id
-     this.getDetail();
+    id = options.id
+    this.setData({
+      orderNo: options.orderNo
+    })
+    this.getDetail();
   },
 
   /**
@@ -60,65 +63,22 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  jind(){
-    wx.navigateTo({
-      url: '../order_complaints_s/order_complaints_s?id=' + id + '&orderNo=' + this.data.detail.orderNo,
-    })
-  },
-  //
-  submit(){
-    var schoolStr = JSON.stringify(simages);
-    let data = {
-      id: id,
-      complaintReason: '撤销投诉',
-      complaintExplain: '撤销投诉',
-      complaintImgJson: '',
-      complaintType:1
-    }
-
-    app.res.req('app-web/userorder/complaint', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-        wx.showToast({
-          title: '投诉成功',
-          icon: 'none',
-          duration: 2000,
-        })
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 2
-          })
-        }, 2000)
-
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
-    })
-  
-  },
   getDetail() {
     let that = this;
     let data = {
       id: id
     }
 
-    app.res.req('app-web/userorder/suborderdetail', data, (res) => {
+    app.res.req('app-web/userorder/complaintprogress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       
+        top_1 = res.data.splice(0, 1)[0]
+        console.log(res.data)
+        console.log(top_1)
         that.setData({
+          top_1: top_1,
           detail: res.data,
-          
+          title: top_1.title
         })
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

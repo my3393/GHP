@@ -26,7 +26,7 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
-
+    that.getbanner()
   },
 
 
@@ -109,6 +109,21 @@ Page({
      
     }
   },
+  //banner跳转
+  banner(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.xcxurl == '') {
+
+    } else if (e.currentTarget.dataset.xcx.id == '') {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page,
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page + e.currentTarget.dataset.xcx.id,
+      })
+    }
+  },
   //商品详情
   detail(e){
     wx.navigateTo({
@@ -183,6 +198,33 @@ Page({
        }
     })
   },
+  //轮播
+  getbanner() {
+    let that = this;
+    let data = {
+     
+    }
+    app.res.req('app-web/home/hometownadvertise', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+      
+        that.setData({
+          banner: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
    //商品切换
    tag: function (e) {
     var that = this;
@@ -193,6 +235,7 @@ Page({
       return;
     }
     console.log(e.currentTarget);
+    list = [];
     that.getlist();
     this.setData({
       tapTime: nowTime

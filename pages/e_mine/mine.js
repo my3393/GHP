@@ -77,6 +77,21 @@ Page({
   onReachBottom: function () {
 
   },
+  //banner跳转
+  banner(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.xcxurl == '') {
+
+    } else if (e.currentTarget.dataset.xcx.id == '') {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page,
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page + e.currentTarget.dataset.xcx.id,
+      })
+    }
+  },
   //修改信息
   person(){
     console.log(111)
