@@ -19,6 +19,7 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
+    this.getbanner();
   },
 
   /**
@@ -167,6 +168,33 @@ Page({
       xing += '*';
     }
     return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+  },
+  //轮播
+  getbanner() {
+    let that = this;
+    let data = {
+
+    }
+    app.res.req('app-web/home/personalcenteradvertise', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+
+        that.setData({
+          banner: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
    //获取用户信息
   getuser() {

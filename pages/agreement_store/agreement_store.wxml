@@ -1,0 +1,4 @@
+<!--pages/agreement_store/agreement_store.wxml-->
+     <web-view src="{{src}}"></web-view>
+ 
+

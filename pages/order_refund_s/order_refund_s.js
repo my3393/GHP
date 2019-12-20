@@ -34,6 +34,7 @@ Page({
    */
   onLoad: function (options) {
     id = options.id
+
   },
 
   /**
@@ -54,7 +55,12 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    simages = [];
+    images = [];
+    this.setData({
+      images: [],
+      simgs: []
+    })
   },
 
   /**
@@ -62,6 +68,23 @@ Page({
    */
   onUnload: function () {
 
+  },
+  //删除
+  detels(e) {
+    var that = this;
+    console.log(e)
+    simages.splice(e.currentTarget.dataset.index, 1)
+    images.splice(e.currentTarget.dataset.index, 1)
+    that.setData({
+      simgs: images,
+      img_num: that.data.img_num - 1
+    })
+    console.log(simages.length)
+    if (simages.length < 3) {
+      that.setData({
+        img_show: false
+      })
+    }
   },
   bindrefund(e) {
     this.setData({

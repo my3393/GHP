@@ -87,7 +87,7 @@
   <!-- 特产分类 -->
   <view wx:if='{{tar == 1}}'>
       <view class="goods">
-          <view class="tec_list" wx:for='{{type}}' wx:key='item' id="{{item.id}}" bindtap="sous">
+          <view class="tec_list" wx:for='{{type}}' data-name="{{item.typeName}}" wx:key='item' id="{{item.id}}" bindtap="sous">
                {{item.typeName}}
               <view class='tec'>
                  <image src="../../images/right.png" />

@@ -59,7 +59,9 @@
     "pages/order_complaints_d/order_complaints_d",
     "pages/order_complaints_s/order_complaints_s",
     "pages/order_refund_s/order_refund_s",
-    "pages/college/college"
+    "pages/college/college",
+    "pages/agreement_store/agreement_store",
+    "pages/order_refund_list/order_refund_list"
   ],
   "tabBar": {
     "color": "#808080",

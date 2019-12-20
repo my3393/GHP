@@ -57,7 +57,7 @@ Page({
         refunds: [{ name: '我要退款', id: '1' }],
         refundType: 1
       })
-    } else if (options.z_status == 1 || options.z_status == 8 || options.z_status == 10 || options.z_status == 13 || options.z_status == 14 || options.z_status == 17 || that.data.z_status == 18) {
+    } else if (options.z_status == 1 || options.z_status == 8 || options.z_status == 10 || options.z_status == 13 || options.z_status == 14 || options.z_status == 17 || options.z_status == 18) {
       this.setData({
         refunds: [{ name: '退货退款', id: '3' }, { name: '仅退款', id: '2' }],
         refund: '退货退款',
@@ -113,15 +113,17 @@ Page({
   onReachBottom: function () {
 
   },
-
+ dddd(e){
+   console.log(e)
+ },
   //删除
-  dete(e) {
+  detels(e) {
     var that = this;
     console.log(e)
       simages.splice(e.currentTarget.dataset.index, 1)
       images.splice(e.currentTarget.dataset.index, 1)
       that.setData({
-        images: images,
+        simgs: images,
         img_num: that.data.img_num - 1
       })
       console.log(simages.length)
@@ -309,9 +311,9 @@ Page({
     app.res.req('app-web/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.setData({
-          progress: res.data
-        })
+        // that.setData({
+        //   progress: res.data
+        // })
 
         if (res.data == 100) {
           wx.hideLoading();

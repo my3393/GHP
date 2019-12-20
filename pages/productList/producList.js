@@ -5,6 +5,7 @@ let provinceId = '';
 let cityId = '';
 let areaId = '';
 let townId = '';
+let storeId ='';
 let classifyId = '';
 let typeId = '';
 let sortType = 0;
@@ -57,7 +58,17 @@ Page({
   },
   onLoad: function (options) {
     console.log(options)
-    classifyId = options.id
+    if(options.id){
+      classifyId = options.id
+    }
+   
+    if(options.typeId){
+      typeId = options.typeId
+    }
+    //店铺id
+    if (options.storeId) {
+      storeId = options.storeId
+    }
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,
@@ -413,6 +424,7 @@ Page({
     let data = {
       currentPage: currentPage,
       provinceId: provinceId,
+      storeId: storeId,
       cityId: cityId,
       areaId: areaId,
       townId: townId,

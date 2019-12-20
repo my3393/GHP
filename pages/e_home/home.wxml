@@ -18,7 +18,7 @@
     <view>
     <swiper  class="banner"  indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
       <block>
-        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{banner}}' wx:key="{{item.id}}"                         data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{banner}}' wx:key="item"                         data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
           <image class="banner_img skeleton-rect" src="{{ item.bannerImgOss}}" lazy-load="true"></image>
         </swiper-item>
       </block>
@@ -47,7 +47,7 @@
   </view>
 
   <view class="classify">
-    <view class="class-one" wx:for="{{className}}" wx:key="{{item.id}}" data-name="{{item.classifyName}}" id='{{item.id}}' bindtap="search_product">
+    <view class="class-one" wx:for="{{className}}" wx:key="item" data-name="{{item.classifyName}}" id='{{item.id}}' bindtap="search_product">
       <view class="class-img "><image class="skeleton-radius" src="{{item.classifyImgOss}}"></image></view>
       <view class="class-n">{{item.classifyName}}</view>
     </view>
@@ -59,7 +59,7 @@
   <view >
    <swiper  class="advert" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
       <block>
-        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{advert}}' wx:key="{{item.id}}"                        data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{advert}}' wx:key="item"                        data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
           <image  src="{{item.advertiseImgOss}}" lazy-load="true"></image>
         </swiper-item>
       </block>
@@ -73,7 +73,7 @@
     </view>
     <view class="huan" bind:tap="huan">换一换</view>
     <view class="classify" style="padding:0;margin-top: 20rpx; ">
-        <view class="class-two" wx:for="{{recommend}}" wx:key="{{item.id}}" data-id='{{item.id}}' bindtap="detail">
+        <view class="class-two" wx:for="{{recommend}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
           <view class="class-t-img skeleton-rect"><image src="{{item.productDefaultImgOss}}" /></view>
           <view class="class-t-n">
             {{item.productName}}
@@ -92,13 +92,13 @@
   </view>
 
   <scroll-view scroll-x="true" class="tag">
-      <view  wx:for="{{type}}" wx:key="{{item.id}}" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
+      <view  wx:for="{{type}}" wx:key="item" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
           {{item.typeName}}
       </view>
   </scroll-view>
 
   <view class="nav">
-    <view class="nav-list" wx:for="{{detail}}" wx:key="{{item.id}}" data-id='{{item.id}}' bindtap="detail">
+    <view class="nav-list" wx:for="{{detail}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
       <view class="list-img"> <image src="{{item.productDefaultImgOss}}" /></view>
       <view class="list-j">{{item.productName}}</view>
       <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>

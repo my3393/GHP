@@ -45,7 +45,7 @@
         <view>
           <view class="per-n" wx:if='{{user.userName == null}}'>{{phone}}</view>
           <view class="per-n" wx:else>{{user.userName}}</view>
-          <view class="hui" wx:if='{{user.memberType == 1}}'>
+          <!-- <view class="hui" wx:if='{{user.memberType == 1}}'>
             <image src="../../images/aix (3).png" />
           </view>
            <view class="hui" wx:if='{{user.memberType == 2}}'>
@@ -53,16 +53,20 @@
           </view>
            <view class="hui" wx:if='{{user.memberType == 3}}'>
             <image src="../../images/aix (4).png" />
-          </view>
+          </view> -->
         </view>
         <view>
-          <view class="gongy">公益大使</view>
-          <view class="hui aix">
-            <image src="../../images/aix (1).png" />
+          <view class="gongy">
+             <image  src="../../images/mine_1.png"></image>
+             <image wx:if='{{user.isCollegeStudent == 1}}' src="../../images/mine_2.png"></image>
+             <image wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
+             <image wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
+             <image wx:if='{{user.memberType == 3}}' src="../../images/mine_5.png"></image>
           </view>
+          
         </view>
         <view class="jies" wx:if='{{user.publicSlogan}}'>{{user.publicSlogan}}</view>
-        <view class="jies" wx:else>请设置你的公益宣言</view>
+        <!-- <view class="jies" wx:else>请设置你的公益宣言</view> -->
       </view>
       <view class="members" bindtap="member" wx:if='{{user.memberType == 0}}'>
         <view class="kait">
@@ -129,8 +133,8 @@
 <view>
   <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
     <block >
-      <swiper-item id="{{item.ids}}" bindtap="member" class='swiper'>
-        <image class="banner_img" src="../../images/go_member.png"></image>
+      <swiper-item wx:for='{{banner}}' id="{{item.id}}" bindtap="banner" class='swiper'>
+        <image class="banner_img" src="{{item.advertiseImgOss}}"></image>
       </swiper-item>
     </block>
   </swiper>

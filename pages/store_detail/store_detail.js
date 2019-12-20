@@ -100,7 +100,9 @@ Page({
 
   },
   sous(e){
-    
+    wx.navigateTo({
+      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name + '&typeId=' + e.currentTarget.id,
+    })
   },
   //商品详情
   good_detail(e){

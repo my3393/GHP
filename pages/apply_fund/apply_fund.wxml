@@ -76,7 +76,7 @@
       <image src="{{item}}"></image>
       <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
         <image src="../../images/deteles.png" />
-      </view> 
+      </view>  
     </view>
     <view class="zhao"  bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
       <view class="zhao_img">

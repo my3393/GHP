@@ -1,4 +1,7 @@
 // pages/college/college.js
+const app = getApp();
+let img_1 = '';
+let img_2 = '';
 Page({
 
   /**
@@ -13,6 +16,7 @@ Page({
     number: '',
     name: '',
     id: '',
+    isg: true,
   },
 
   /**
@@ -395,5 +399,12 @@ Page({
       xing += '*';
     }
     return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
-  }
+  },
+  //勾选
+  gx() {
+    let that = this;
+    that.setData({
+      isg: !that.data.isg
+    })
+  },
 })

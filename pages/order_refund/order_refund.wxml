@@ -55,11 +55,11 @@
   </view>
   <textarea class="texta" placeholder="选填" maxlength="100" bindinput="valueChange"></textarea>
   <view>
-    <view class="tu_img" wx:for='{{simgs}}' wx:key='{{item.id}}' wx:for-index='idx'>
-      <image src="{{item}}" />
-      <view class="detele" id="{{item}}" data-index='{{idx}}'  bindtap="dete">
+    <view class="tu_img" wx:for='{{simgs}}' wx:for-index='idx' wx:key='item'>
+      <image src="{{item}}"></image>
+      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
         <image src="../../images/deteles.png" />
-      </view>
+      </view>  
     </view>
     <view class="zhao" bindtap="chooseImage" hidden="{{isshow}}">
       <view class="zhao_img">

@@ -121,6 +121,11 @@ page{
     color: #fff;
     display: inline-block;
 }
+.gongy image{
+  width: 100rpx;
+  height: 32rpx;
+  margin-right: 20rpx;
+}
 
 .aix image{
     margin-top: 5rpx;

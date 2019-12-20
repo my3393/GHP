@@ -162,8 +162,14 @@ Page({
   type(e){
      console.log(e)
      this.setData({
-       typ: this.data.type[e.detail.value].classifyName,
+       typ: this.data.type[e.detail.value].typeName,
        typeId: this.data.type[e.detail.value].id,
+     })
+  },
+  //查看协议
+  web(){
+     wx.navigateTo({
+       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.pdf',
      })
   },
   //入驻提交
@@ -288,17 +294,19 @@ Page({
   },
    getType(){
      let that = this;
+    
      let data = {
+       grade: 1
      }
 
-     app.res.req('app-web/home/classify', data, (res) => {
+     app.res.req('app-web/home/grade/type', data, (res) => {
        console.log(res.data)
        if (res.status == 1000) {
          that.setData({
-           type:res.data
+           type: res.data
          })
 
-       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+       } else if (res.status == 1004 || res.status == 1005) {
          wx.redirectTo({
            url: '../login/login',
          })

@@ -30,7 +30,7 @@
   </view>
   <textarea class="texta" placeholder="选填" maxlength="100" bindinput="valueChange"></textarea>
   <view>
-    <view class="tu_img" wx:for='{{simgs}}' wx:key='{{item.id}}'>
+    <view class="tu_img" wx:for='{{simgs}}' wx:key='item'>
       <image src="{{item}}" />
       <view class="detele" id="{{item}}" data-index='{{idx}}'  bindtap="detels">
         <image src="../../images/deteles.png" />

@@ -26,7 +26,7 @@
       <view class='infor'>
         <view class='inform'>主营类型</view>
         <view class='inforin infor_r'>
-          <picker class="pick" range="{{type}}" range-key="classifyName" value="{{index}}" bindchange="type">
+          <picker class="pick" range="{{type}}" range-key="typeName" value="{{index}}" bindchange="type">
             <input disabled='true' type='text' value='{{typ}}' placeholder='请选择主营商品类型' bindtap='showlabel'></input>
           </picker>
         </view>
@@ -75,11 +75,11 @@
         <view>2.前往当地街道/政府/村委等政府机构开具特产销售证明</view>
         <view>3.销售证明需保证字迹清晰，可辨别，凡作假行为一经查实将被列入平台黑名单，一年内不可再次申请入驻</view>
       </view>
-      <view class="nop">
+      <view class="nop" wx:if='{{typeId != 14}}'>
         食品经营许可证
 
       </view>
-      <view class="nav">
+      <view class="nav" wx:if='{{typeId != 14}}'>
         <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
           <view class="zhao_img">
             <image src="../../images/zhao.png"></image>
@@ -99,7 +99,7 @@
         <view>2.上传时请保证照片的清晰度，可辨别。</view>
 
       </view>
-
+      
       <view class="nop">
         店铺营业执照
       </view>
@@ -143,7 +143,7 @@
         </view>
         <view>
           <text class="hui">我已阅读并同意</text>
-          <text>《善家购家乡特产交易平台商家入驻协议及须知》</text>
+          <text bindtap="web">《善家购家乡特产交易平台商家入驻协议及须知》</text>
         </view>
       </view>
 

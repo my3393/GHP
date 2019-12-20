@@ -52,24 +52,24 @@
   </view>
   <view class="adre_bott">
     <view wx:if="{{prov.length == 0}}" class="{{isprov ? 'hong': ''}}">请选择</view>
-    <view wx:else bindtap="x_prov">
+    <view wx:else catchtap="x_prov">
       <text class="{{tar == 1 ? 'hong': ''}}">{{prov}}</text>
     </view>
     <view wx:if="{{iscitys}}">
       <view wx:if="{{city.length == 0}}" class="{{iscity ? 'hong': ''}}">请选择</view>
-      <view wx:else bindtap="x_city">
+      <view wx:else catchtap="x_city">
         <text class="{{tar == 2 ? 'hong': ''}}">{{city}}</text>
       </view>
     </view>
     <view wx:if="{{isqus}}">
       <view wx:if="{{area.length == 0}}" class="{{isqu ? 'hong': ''}}">请选择</view>
-      <view wx:else bindtap="x_qu">
+      <view wx:else catchtap="x_qu">
         <text class="{{tar == 3 ? 'hong': ''}}">{{area}}</text>
       </view>
     </view>
     <view wx:if="{{isjies}}">
       <view wx:if="{{town.length == 0}}" class="{{isjie ? 'hong': ''}}">请选择</view>
-      <view wx:else bindtap="x_jie">
+      <view wx:else catchtap="x_jie">
         <text class="{{tar == 4 ? 'hong': ''}}">{{town}}</text>
       </view>
     </view>

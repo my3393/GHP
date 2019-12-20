@@ -1,4 +1,17 @@
 /**app.wxss**/
+page{
+  font-size: 30rpx;
+  --color-caption: #fff;
+  --color-default: #000;
+  --color-primary: #00d8a0;
+  --color-warn: #ff6f61;
+  --color-info: #b3b7bf;
+  --color-link: #3989ff;
+  --color-gray: #888;
+  --color-background: #fafafa;
+  --color-disabled: #dfdfdf;
+  --color-red: #ff2a2a;
+}
 .container {
   height: 100%;
   display: flex;

@@ -77,7 +77,7 @@
     <view class="nav"  wx:if='{{status == 15}}'>
       联系电话：{{detail.refundUserPhone}}
     </view>
-    <view class="nav" wx:if='{{detail.refundExplain}}'>
+    <view class="nav" wx:if='{{detail.refundExplain != "" && detail.refundExplain != undefined }}'>
       <view style="float:left">退款说明：</view> <view class="tuik_shuo">{{detail.refundExplain}}</view>
     </view>
     <view class="tuik_img" >
@@ -95,13 +95,13 @@
   <view class="footer_r" wx:if='{{status == 3 || status == 7 || status == 11 || status == 15 }}'>
           
           <view class="tuik" bindtap="jind">退款进度</view>
-          <view class="tuik" bindtap="chexiao">撤销申请</view>
+          <view class="tuik" bindtap="chexiao" wx:if='{{chexiao_nums != 2}}'>撤销申请</view>
           <view class="tuik" bindtap="complain">订单投诉</view>
       </view>
   <view class="footer_r" wx:if='{{status == 4 || status == 8 || status == 13 || status == 17 }}'>
           <view class="tuik xiug" bindtap="xiugai">修改申请</view>
           <view class="tuik" bindtap="jind">退款进度</view>
-          <view class="tuik" bindtap="chexiao">撤销申请</view>
+          <view class="tuik" bindtap="chexiao" wx:if='{{chexiao_nums != 2}}'>撤销申请</view>
           <view class="tuik" bindtap="complain">订单投诉</view>
       </view>
       <view class="footer_r" wx:if='{{status == 5 || status == 9 || status == 12 || status == 16 }}'>
@@ -113,7 +113,7 @@
 
           <view class="tuik" bindtap="jind">退款进度</view>
           <view wx:if='{{chexiao_nums == 1}}' class="tuik xiug" bindtap="xiugai">重新申请</view>
-          <view class="tuik" bindtap="chexiao" wx:else>撤销申请</view>
+          <view class="tuik" bindtap="chexiao" wx:elif='{{chexiao_nums != 2}}'>撤销申请</view>
           <view class="tuik" bindtap="complain">订单投诉</view>
       </view>
       

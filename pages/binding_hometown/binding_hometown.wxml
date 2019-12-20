@@ -13,6 +13,7 @@
  <view class="submit" bindtap="submit">确定绑定</view>
 
 <view class="adres" hidden="{{address}}">
+   <view class="adres_all" bindtap="adres_all"></view>
   <view class="adres_h1">
     选择地址
     <view class="detel" bindtap="detel">

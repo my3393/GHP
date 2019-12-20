@@ -30,7 +30,8 @@ Page({
     iscity: false,
     isqu: false,
     isjie: false,
-    college:1
+    college:1,
+    bang_diz:'未绑定'
   },
 
   /**
@@ -83,7 +84,16 @@ Page({
             day: res.data.birthday
           })
         } 
-       
+        if (res.data.isCollegeStudent == 1) {
+          that.setData({
+            college: 0
+          })
+        } 
+        if (res.data.bindProvinceId != '' || res.data.bindProvinceId != null){
+          that.setData({
+            bang_diz: '已绑定'
+          })
+        }
       },
     })
   },
@@ -388,6 +398,7 @@ Page({
   },
   x_prov() {
     let that = this;
+    
     that.setData({
       isprov: true,
       iscity: false,
@@ -424,6 +435,23 @@ Page({
       isqu: false,
       isjie: true,
       tar: 4
+    })
+  },
+  //取消
+  detel() {
+    this.setData({
+      address: true,
+      ismask: true,
+    })
+  },
+  //取消弹出层
+  adres_all() {
+    console.log('科技破诶看见我')
+    this.setData({
+
+      address: true,
+      ismask: true,
+
     })
   },
   //省
@@ -669,6 +697,7 @@ Page({
         wx.showToast({
           title: '绑定成功',
         })
+        that.getuser();
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
         wx.redirectTo({
