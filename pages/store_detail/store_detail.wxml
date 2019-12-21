@@ -1,108 +1,111 @@
-<view class="top_img" style="background-image: url({{Img}})">
-    <view class='a-nav bg-white' style='height:{{navH}}px'>
-        <view class='a-nav-title'>
-            <view class="inpu">
-                <input placeholder="本店特产" placeholder-style="color:#f9f9f9;"></input>
-                <view class="dete">
-                    <image src="../../images/detele.png"></image>
-                </view>
-            </view>
-            <!-- <view class="top_dao">
-                <view>
-                    <image src='../../images/b_left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
-                </view>
-                <view>
-                    <image src='../../images/daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image>
-                </view>
-            </view> -->
-            <image src='../../images/b_left.png' mode='aspectFit' class='back' bindtap='navBack'></image>
-        </view>
-    </view>
-    <view class="store" style='top:{{navH +15}}px'>
-        <view class='store_img'>
-            <image src="{{store.storeLogoOss}}" />
-        </view>
-        <view class="store_name">
-            <view>{{store.storeName}}</view>
-        </view>
-        <view>
-            <view class="biao_img">
-                <image src="../../images/aix.png" />
-            </view>
-            <view class="focus">333人关注</view>
-        </view>
-        <view style="width:560rpx">{{store.publicSlogan}}</view>
-    </view>
-    <view class="foc" style='top:{{navH + 25}}px' bindtap="collection">+ 关注</view>
-    <view class="mask_t"></view>
-</view>
-<!-- 首页 -->
-  <view wx:if='{{tar == 0}}'>
-    <view class='goods'>
-        <view class="rescom">
-            <text class="rescom-w"  bindtap="guan">特产推荐</text>
-            <text class="h1_b">感受他乡风情，享受地方特产</text>
-        </view>
-        <scroll-view class="classify" scroll-x="true">
-            <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
-                <view class="class-t-img">
-                    <image src="{{item.productDefaultImgOss}}" />
-                </view>
-                <view class="class-t-n">{{item.productName}}</view>
-                <view class="class-t-p">
-                    <text style="font-size:22rpx">￥</text>
-                   {{item.lowestPrice}}
-                </view>
-            </view>
-          
-        </scroll-view>
-    </view>
-    <view class="tag">
-        <view class="{{tas == 0 ? 'yan' :''}}" id="{{0}}" bindtap="paix">综合</view>
-        <view class="{{tas == 1 ? 'yan' :''}}" id="{{1}}" bindtap="paix"> 价格</view>
-        <view class="{{tas == 2 ? 'yan' :''}}" id="{{2}}" bindtap="paix">销量</view>
-        <view class="{{tas == 3 ? 'yan' :''}}" id="{{3}}" bindtap="paix">上新</view>
-        <!-- <view class="switch">
-            <image src="../../images/switch.png" />
-        </view> -->
-    </view>
-    <view class="store_nav_list">
-        <view class="nav-list" wx:for='{{list}}' wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
-            <view class="list-img">
-                <image src="{{item.productDefaultImgOss}}" />
-            </view>
-            <view class="list-j">{{item.productTitle}}</view>
-            <view class="list-qu">{{item.provinceName}} {{item.cityName}} </view>
-            <view class="class-t-p ctp">
-                <text style="font-size:22rpx">￥</text>
-                {{item.lowestPrice}}
-            </view>
-            <view class="list-rig">
-                <image src="../../images/shop.png" />
-            </view>
-        </view>
-        
-    </view>
-  </view>
-  <!-- 特产分类 -->
-  <view wx:if='{{tar == 1}}'>
-      <view class="goods">
-          <view class="tec_list" wx:for='{{type}}' data-name="{{item.typeName}}" wx:key='item' id="{{item.id}}" bindtap="sous">
-               {{item.typeName}}
-              <view class='tec'>
-                 <image src="../../images/right.png" />
+<view hidden="{{load}}">
+  <view class="top_img" style="background-image: url({{Img}})">
+      <view class='a-nav bg-white' style='height:{{navH}}px'>
+          <view class='a-nav-title'>
+              <view class="inpu">
+                  <input type="text" bindinput="value" value="{{value}}" confirm-type="search" bindconfirm="bindconfirm" placeholder="本店特产" placeholder-style="color:#f9f9f9;"></input>
+                  <view class="dete" catchtap="dete">
+                      <image src="../../images/xxx.png"></image>
+                  </view>
               </view>
-          </view>     
+              <!-- <view class="top_dao">
+                  <view>
+                      <image src='../../images/b_left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
+                  </view>
+                  <view>
+                      <image src='../../images/daoh.png' mode='aspectFit' class='daoh' bindtap='navBack'></image>
+                  </view>
+              </view> -->
+              <image src='../../images/b_left.png' mode='aspectFit' class='back' bindtap='navBack'></image>
+          </view>
+      </view>
+      <view class="store" style='top:{{navH +15}}px'>
+          <view class='store_img'>
+              <image src="{{store.storeLogoOss}}" />
+          </view>
+          <view class="store_name">
+              <view>{{store.storeName}}</view>
+          </view>
+          <view>
+              <view class="biao_img">
+                  <image src="../../images/aix.png" />
+              </view>
+              <view class="focus">{{store.collectionNum}}人关注</view>
+          </view>
+          <view style="width:560rpx">{{store.publicSlogan}}</view>
+      </view>
+      <view class="foc" style='top:{{navH + 25}}px' bindtap="collection" wx:if="{{store.isCollection == 0}}">+ 关注</view>
+      <view class="foc" style='top:{{navH + 25}}px' bindtap="collection" wx:else>已关注</view>
+      <view class="mask_t"></view>
+  </view>
+  <!-- 首页 -->
+    <view wx:if='{{tar == 0}}'>
+      <view class='goods'>
+          <view class="rescom">
+              <text class="rescom-w"  bindtap="guan">特产推荐</text>
+              <text class="h1_b">感受他乡风情，享受地方特产</text>
+          </view>
+          <scroll-view class="classify" scroll-x="true">
+              <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
+                  <view class="class-t-img">
+                      <image src="{{item.productDefaultImgOss}}" />
+                  </view>
+                  <view class="class-t-n">{{item.productName}}</view>
+                  <view class="class-t-p">
+                      <text style="font-size:22rpx">￥</text>
+                    {{item.lowestPrice}}
+                  </view>
+              </view>
+            
+          </scroll-view>
+      </view>
+      <view class="tag">
+          <view class="{{tas == 0 ? 'yan' :''}}" id="{{0}}" bindtap="paix">综合</view>
+          <view class="{{tas == 1 ? 'yan' :''}}" id="{{1}}" bindtap="paix"> 价格</view>
+          <view class="{{tas == 2 ? 'yan' :''}}" id="{{3}}" bindtap="paix">销量</view>
+          <view class="{{tas == 3 ? 'yan' :''}}" id="{{4}}" bindtap="paix">上新</view>
+          <!-- <view class="switch">
+              <image src="../../images/switch.png" />
+          </view> -->
+      </view>
+      <view class="store_nav_list">
+          <view class="nav-list" wx:for='{{list}}' wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
+              <view class="list-img">
+                  <image src="{{item.productDefaultImgOss}}" />
+              </view>
+              <view class="list-j">{{item.productTitle}}</view>
+              <view class="list-qu">{{item.provinceName}} {{item.cityName}} </view>
+              <view class="class-t-p ctp">
+                  <text style="font-size:22rpx">￥</text>
+                  {{item.lowestPrice}}
+              </view>
+              <view class="list-rig">
+                  <image src="../../images/shop.png" />
+              </view>
+          </view>
           
       </view>
-  </view>
-  <view wx:if='{{tar == 2}}'>
-       <view class='introduce'>
-          <rich-text  nodes="{{rich}}">
-        
-          </rich-text>
+    </view>
+    <!-- 特产分类 -->
+    <view wx:if='{{tar == 1}}'>
+        <view class="goods">
+            <view class="tec_list" wx:for='{{type}}' data-name="{{item.typeName}}" wx:key='item' id="{{item.id}}" bindtap="sous">
+                {{item.typeName}}
+                <view class='tec'>
+                  <image src="../../images/right.png" />
+                </view>
+            </view>     
+            
         </view>
-  </view>
+    </view>
+    <view wx:if='{{tar == 2}}'>
+        <view class='introduce'>
+            <rich-text  nodes="{{rich}}">
+          
+            </rich-text>
+          </view>
+    </view>
+</view> 
 <!-- 底部 -->
 <view class="store_footer">
     <view class="{{tar == idx ? 'tag_a': ''}}" wx:for="{{tag}}" wx:for-index="idx" bind:tap="tag" data-index='{{idx}}'>

@@ -136,14 +136,14 @@ Page({
     })
   },
   cancel(){
-    that.setData({
-      isdelete: !that.data.isdelete,
+    this.setData({
+      isdelete: !this.data.isdelete,
       ismask: true,
     })
   },
   confirm() {
-    that.setData({
-      isdelete: !that.data.isdelete,
+    this.setData({
+      isdelete: !this.data.isdelete,
       ismask: true,
     })
     wx.navigateTo({

@@ -15,11 +15,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   this.getuser();
+   this.getbanner();
     this.setData({
       navH: app.globalData.navHeight
     })
-    this.getbanner();
+    
   },
 
   /**
@@ -118,6 +118,12 @@ Page({
       url: '../members/members',
     })
   },
+  //退款
+  order_refund_list(){
+    wx.navigateTo({
+      url: '../order_refund_list/order_refund_list',
+    })
+  },
   //查看订单
   all(e){
     wx.navigateTo({
@@ -183,6 +189,9 @@ Page({
           banner: res.data,
 
         })
+        setTimeout(function () {
+          that.getuser();
+        }, 200)
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -214,7 +223,7 @@ Page({
           key: 'userinfo',
           data: res.data,
         })
-
+       
       }
     })
   },

@@ -1,7 +1,7 @@
 <view class='a-nav bg-white' style='height:{{navH}}px'>
   <view class='a-nav-title'>
     <view class="nac_top">
-      <text class="zhng" wx:if='{{isbang}}'>未绑定家乡</text>
+      <text class="zhng s" wx:if='{{!isbang}}'>未绑定家乡</text>
       <text class="zhng" wx:else>{{user.bindCityName}}</text>
       <text>感恩家乡，怀念家乡味道</text>
     </view>

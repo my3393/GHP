@@ -1,0 +1,13 @@
+<!--pages/person_name/person_name.wxml-->
+<view class="top">
+    <view class="tops {{istrue ? 'active' : ''}}">
+        <view class="top-n">公益口号</view>
+        <view class="inpu">
+            <input value="{{name}}" bindinput="name" type="text" placeholder="请输入你的公益口号" />
+        </view>
+    </view>
+</view>
+ <!-- <view class="xian">请输入2~8位中文或英文的昵称</view> -->
+<view class="submit {{isact?'act':''}}" bindtap="submit" >
+    保存
+</view>

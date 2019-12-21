@@ -61,7 +61,8 @@
     "pages/order_refund_s/order_refund_s",
     "pages/college/college",
     "pages/agreement_store/agreement_store",
-    "pages/order_refund_list/order_refund_list"
+    "pages/order_refund_list/order_refund_list",
+    "pages/person_xy/person_xy"
   ],
   "tabBar": {
     "color": "#808080",

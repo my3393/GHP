@@ -40,7 +40,7 @@
   </view>
 </view>
 
-<view class="submit" bindtap="submit">提交申请</view>
+<view class="submit" bindtap="sub">提交申请</view>
 
 
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>

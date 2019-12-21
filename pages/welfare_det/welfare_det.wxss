@@ -400,12 +400,13 @@ overflow: hidden;
 }
 .title_img image{
   width: calc((100% - 40rpx)/3);
-  margin-left: 20rpx;
+  margin-right: 20rpx;
   height: 218rpx;
 }
-.title_img image:nth-child(1){
-  margin-left: 0;
+.title_img image:nth-child(3n){
+  margin-right: 0;
 }
+
 .title_date{
   font-size: 24rpx;
   color: #999;

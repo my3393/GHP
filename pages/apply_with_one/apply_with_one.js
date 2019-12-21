@@ -112,6 +112,32 @@ Page({
       }
     })
   },
+  sub(){
+    let that =this;
+    if(that.data.zhaos1 == ''){
+      wx.showToast({
+        title: '请上传善款使用证明',
+        icon:'none'
+      })
+    } else if (that.data.zhaos1 == '') {
+      wx.showToast({
+        title: '请填写证明人姓名',
+        icon: 'none'
+      })
+    } else if (that.data.zhaos1 == '') {
+      wx.showToast({
+        title: '请填写证明人职位',
+        icon: 'none'
+      })
+    } else if (that.data.zhaos1 == '') {
+      wx.showToast({
+        title: '请输入证明人电话',
+        icon: 'none'
+      })
+    }else{
+      that.submit();
+    }
+  },
 
   //提交
   submit() {
@@ -132,13 +158,13 @@ Page({
           wx.showToast({
             title: '重新提交成功，审核通过后即可进行提现',
             icon: 'none',
-            duration: 3000
+            duration: 2000
           })
           setTimeout(function () {
             wx.navigateBack({
               delta: 2
             })
-          }, 3000)
+          }, 2000)
         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
           wx.redirectTo({
             url: '../login/login',

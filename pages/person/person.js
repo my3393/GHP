@@ -31,7 +31,7 @@ Page({
     isqu: false,
     isjie: false,
     college:1,
-    bang_diz:'未绑定'
+    bang_diz:'已绑定'
   },
 
   /**
@@ -89,9 +89,9 @@ Page({
             college: 0
           })
         } 
-        if (res.data.bindProvinceId != '' || res.data.bindProvinceId != null){
+        if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null){
           that.setData({
-            bang_diz: '已绑定'
+            bang_diz: '未绑定'
           })
         }
       },
@@ -366,6 +366,13 @@ Page({
         showCancel: false
       })
     })
+  },
+  // //刷新报名
+  changeData: function () {
+   
+    //var options = { 'id': this.data.id }
+    //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
+    this.getuser();
   },
   //获取用户信息
   getuser() {

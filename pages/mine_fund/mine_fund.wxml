@@ -54,7 +54,7 @@
 
       </view>
 
-      <view class="tix" bindtap="tix" id="{{item.id}}" data-money="{{item.currentAmount}}" data-status="{{item.donationUseStatus}}" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 0 || item.donationUseStatus == 3}}'>
+      <view class="tix" catchtap="tix" id="{{item.id}}" data-money="{{item.currentAmount}}" data-status="{{item.donationUseStatus}}" wx:if='{{item.donationUseStatus == 0 || item.donationUseStatus == 3}}'>
         申请提现
       </view>
       <view class="fund_r yan" wx:if='{{item.projectStatus == 3 && item.donationUseStatus == 1}}'>

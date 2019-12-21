@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "个人资料",
   "usingComponents": {
     "imgcut": "/component/imgcut/imgcut"
   }

@@ -62,5 +62,35 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  getDetail() {
+    let that = this;
+    let data = {
+      orderType: orderType,
+      currentPage: currentPage
+    }
+
+    app.res.req('app-web/userorder/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.hideLoading()
+        detail.push(...res.data)
+        that.setData({
+          isshow: false,
+          detail: detail
+        })
+        wx.hideLoading()
+        console.log(detail)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

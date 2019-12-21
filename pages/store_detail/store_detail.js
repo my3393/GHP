@@ -13,6 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    load:true,
     istop: true,
     ress:'',
     istag:true,
@@ -23,6 +24,7 @@ Page({
     ismask:true,
     res:'你的',
     tas:'0',
+    value:'',
     tag:[
       {name:'店铺',img:'../../images/store.png',imgs:'../../images/store_active.png'},
       {name:'特产分类',img:'../../images/switch.png',imgs:'../../images/tes_active.png'},
@@ -43,6 +45,9 @@ Page({
   onLoad: function (options) {
     console.log(options)
     id = options.id
+    wx.showLoading({
+      title: '加载中',
+    })
     this.getStore();
     this.getCommed();
     this.setData({
@@ -99,11 +104,35 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //分类选择
+
   sous(e){
     wx.navigateTo({
-      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name + '&typeId=' + e.currentTarget.id,
+      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name + '&typeId=' + e.currentTarget.id + '&storeId=' + id,
     })
   },
+  //搜索
+  bindconfirm(e) {
+    console.log(e.detail.value)
+    if (e.detail.value != '') {
+      wx.navigateTo({
+        url: '../productList/producList?searchKey=' + e.detail.value + '&storeId=' + id + '&sea=' + 1,
+      })
+    }
+  },
+  value(e){
+     console.log(e.detail.value)
+     this.setData({
+       value:e.detail.value
+     })
+  },
+  dete(e){
+    console.log('删除')
+    this.setData({
+      value:''
+    })
+  },
+  
   //商品详情
   good_detail(e){
     wx.navigateTo({
@@ -114,16 +143,20 @@ Page({
   collection(){
     let that = this;
     let data = {
-      productId: id
+      storeId: id
     }
 
     app.res.req("app-web/store/collection", data, (res) => {
       console.log(res.data)
-      if (res.status == 1000) {
-       
+      if (res.status == 1016) {
+       that.getStore();
 
 
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+      }else if (res.status == 1017) {
+        that.getStore();
+
+
+      }else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
           title: '请先登录',
           icon: 'none'
@@ -161,7 +194,8 @@ Page({
       if (res.status == 1000) {
        
         that.setData({
-          store: res.data
+          store: res.data,
+          Img: res.data.storeLogoOss
         })
        that.getList();
         that.gettype();
@@ -220,10 +254,25 @@ Page({
     })
   },
   paix(e){
-    type = e.currentTarget.id;
-    this.setData({
-      tas:e.currentTarget.id
-    })
+    if (e.currentTarget.id == 1 && type == 1){
+      type = 2
+    }else{
+      type = e.currentTarget.id;
+    }
+    if (e.currentTarget.id == 3){
+      this.setData({
+        tas: 2
+      })
+    } else if (e.currentTarget.id == 4) {
+      this.setData({
+        tas: 3
+      })
+    }else{
+      this.setData({
+        tas: e.currentTarget.id
+      })
+    }
+    
     currentPage = 1;
     list = [];
     this.getList();
@@ -276,9 +325,10 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
-          store_recommended: res.data
+          store_recommended: res.data,
+          load:false,
         })
-
+        wx.hideLoading()
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({

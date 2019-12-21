@@ -1,2 +1,83 @@
-<!--pages/order_refund_list/order_refund_list.wxml-->
-<text>pages/order_refund_list/order_refund_list.wxml</text>
+<view hidden="{{isshow}}">
+  <view wx:if='{{detail.length == 0}}' class="kong">
+    <view class="kong_img">
+      <image src="../../images/dind.png" />
+    </view>
+    <view>没有相关订单</view>
+    <view class='home' bindtap="home">立即选购</view>
+    <view class="foot-boot foot-boots">
+      善家购
+      <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+    </view>
+  </view>
+  <view wx:else class="nav">
+    <view class="list clearfix" wx:for='{{detail}}' wx:key='{{item.id}}' id="{{item.id}}" bindtap="order_detail">
+      <view class="nav_top">
+        <view class="sotre_img">
+          <image src="../../images/store.png" />
+        </view>
+        <text bindtap="store" id="{{item.storeId}}" >{{item.storeName}}</text>
+        <view class="store_r">
+          <image src="../../images/right.png" />
+        </view>
+        <view wx:if='{{item.orderStatus == 0}}' class="store_d yan">等待买家付款</view>
+        <view wx:if='{{item.orderStatus == 1}}' class="store_d ">买家已付款</view>
+        <view wx:if='{{item.orderStatus == 2}}' class="store_d ">卖家已发货</view>
+        <view wx:if='{{item.orderStatus == 3}}' class="store_d ">已完成</view>
+        <view wx:if='{{item.orderStatus == 4}}' class="store_d ">已关闭</view>
+      </view>
+      <view class="good clearfix" wx:for='{{item.orders}}' wx:key='{{item.id}}' id="{{item.id}}" bindtap="">
+        <view class="good_img">
+          <image src="{{item.productImgOss}}" />
+        </view>
+        <view class="good_list">
+          <view class='goodsname dan'>{{item.productName}}</view>
+          <text class='specification'>{{item.provinceName}} {{item.cityName}}</text>
+          <view class="guig">
+            <view class='gui-g' wx:if='{{item.specification != ""}}'>{{item.specification}}</view>
+            <view class="tuik" wx:if='{{detail.orderStatus != 3 && detail.orderStatus != 4 && item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15 || item.orderStatus == 12}}'>退款中</view>
+            <view class="tuik" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9  || item.orderStatus == 16}}'>退款成功</view>
+          </view>
+
+          <view>
+            <view class='price'>
+              <text class="yuan">￥</text> {{item.salePrice}}
+            </view>
+            <view class="good_num">×{{item.buyCount}}</view>
+          </view>
+
+        </view>
+      </view>
+      <view class="zai_r">
+        <view class="good_sp">
+          共{{item.productNumber}}件商品，订单金额：
+          <view class="font good_pric">
+            <text style="font-size:22rpx">￥</text> {{item.payMoney}}
+          </view>
+        </view>
+        <view class="pay" wx:if='{{item.orderStatus == 0}}' catchtap="pay" id="{{item.id}}">立即付款</view>
+        <view class="wuliu" wx:if='{{item.orderStatus == 2}}'>
+
+          <view class="quer" catchtap="quer" id="{{item.id}}">
+            确认收货
+          </view>
+          <view catchtap="wul" id="{{item.id}}"> 
+            查看物流
+          </view>
+        </view>
+        <view class="wuliu" wx:if='{{item.orderStatus == 3}}'>
+
+          <!-- <view class="quer" catchtap="pinj" id="{{item.id}}">
+            立即评价
+          </view> -->
+          <view catchtap="wul" id="{{item.id}}">  
+            查看物流
+          </view>
+        </view>
+        <view class="wuliu" wx:if='{{item.orderStatus == 4}}'>
+          <view catchtap="cance" id="{{item.id}}">删除订单</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -36,10 +36,10 @@
     </view>
     <view class="top-tx" wx:else >
       <view class="tx" wx:if='{{user.headImgUrl == null}}' bindtap="person">
-        <image src="../../images/tx.png" />
+        <image src="../../images/tx.png" mode="widthFix" />
       </view>
       <view class="tx" wx:else bindtap="person">
-        <image src="{{user.headImgUrl}}" />
+        <image src="{{user.headImgUrl}}" mode="widthFix" />
       </view>
       <view class="person" bindtap="person">
         <view>
@@ -116,12 +116,12 @@
     </view>
     <view class="din-1" catchtap="all" id="{{3}}">
       <view class="din-img">
-        <image src="../../images/d-sh.png" />
+        <image src="../../images/d-sh.png"  />
         <!-- <view class="hong">9</view> -->
       </view>
       <view>待收货</view>
     </view>
-    <view class="din-1" bindtap="all" id="{{4}}">
+    <view class="din-1" bindtap="order_refund_list" >
       <view class="din-img">
         <image src="../../images/d-tk.png" />
         <!-- <view class="hong">9</view> -->

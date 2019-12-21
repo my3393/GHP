@@ -73,8 +73,9 @@ Page({
    console.log(e.detail.value)
    if(e.detail.value != ''){
      wx.navigateTo({
-       url: '../productList/producList?searchKey=' + e.detail.value,
+       url: '../productList/producList?searchKey=' + e.detail.value + 'k' + 1,
      })
+     
    }
   },
   navBack(){

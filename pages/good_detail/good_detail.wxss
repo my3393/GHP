@@ -757,7 +757,7 @@ background: #fff;
 .video{
   position: absolute;
   width: 100%;
-  top: 50%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%,-50%)
 }

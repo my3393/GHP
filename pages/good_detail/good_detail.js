@@ -378,9 +378,9 @@ Page({
     app.res.req("app-web/user/sharebinduser", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-          wx.showToast({
-            title: '绑定成功',
-          })
+          // wx.showToast({
+          //   title: '绑定成功',
+          // })
 
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

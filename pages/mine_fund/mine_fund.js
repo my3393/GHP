@@ -66,6 +66,10 @@ Page({
   onReachBottom: function () {
 
   },
+  changeData(){
+    detail = [];
+    this.getDetail();
+  },
   //申请项目
   fa_home(){
     wx.navigateTo({
@@ -98,9 +102,16 @@ Page({
   },
   //提现
   tix(e){
-    wx.navigateTo({
-      url: '../apply_menoy/apply_menoy?id=' + e.currentTarget.id + '&status=' + e.currentTarget.dataset.status + '&money=' + e.currentTarget.dataset.money ,
-    })
+    if(e.currentTarget.dataset.status == 3){
+      wx.navigateTo({
+        url: '../apply_menoy/apply_menoy?id=' + e.currentTarget.id + '&status=' + e.currentTarget.dataset.status + '&money=' + e.currentTarget.dataset.money,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../apply_with_one/apply_with_one?id=' + e.currentTarget.id,
+      })
+    }
+    
   },
   tix_c(e) {
     wx.navigateTo({

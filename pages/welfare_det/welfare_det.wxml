@@ -20,7 +20,7 @@
 <view class="banner_top" style='margin-top:{{navH}}px'>
   <swiper bindchange="swiperChange" class="banner" circular="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
     <block>
-      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{detail.infoImgOss}}' wx:key="{{item.ids}}">
+      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{detail.infoImgOss}}' wx:key="item">
         <image class="banner_img" src="{{item}}"></image>
       </swiper-item>
     </block>
@@ -31,7 +31,7 @@
   <view class="g-h1 dan">{{detail.projectTitle}}</view>
   <view class="g-h2">{{detail.projectExplain}}</view>
   <view class="jindu">
-    <progress stroke-width="5" active percent="80.00" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
+    <progress stroke-width="5" active percent="{{num}}" font-size='12' activeColor='#F22702' show-info='true' border-radius='6'></progress>
   </view>
   <view class="g-bott">
     <view class="g-bo">
@@ -65,21 +65,21 @@
 <view class="title">
   <view class="title_h1 top1">公益善款资助公示</view>
   <view class="t_kong" wx:if='{{list.length == 0}}'>
-    <image src="../../images/noplay.png" />
+    <image src="../../images/cart.png" />
     <view>项目还未被资助</view>
   </view>
   <view wx:else>
-    <view class="title">
+    <view class="title" wx:for='{{list}}'>
 
-      <view class="title_h2">{{list.publicityTitle}}</view>
+      <view class="title_h2">{{item.publicityTitle}}</view>
       <view class="mone">
         资助金额：
-        <text class="chu">￥ {{list.grantAmount}}</text>
+        <text class="chu">￥ {{item.grantAmount}}</text>
       </view>
-      <view class="title_t">{{list.publicityContent}}
+      <view class="title_t">{{item.publicityContent}}
       </view>
-      <view class='title_img' wx:for='{{list.publicityImgOss}}' wx:key="{{item.ids}}">
-        <image src="{{item}}" />
+      <view class='title_img' >
+        <image wx:for='{{item.publicityImgOss}}' wx:key="item" src="{{item}}" />
       </view>
       <view class="title_date">{{list.createDate}}</view>
     </view>

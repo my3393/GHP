@@ -2,7 +2,7 @@
     <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
         <block wx:for='{{photos}}' wx:key="{{item.id}}">
             <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
-                <image class="banner_img" src="{{item}}"></image>
+                <image class="banner_img" src="{{item}}" mode="widthFix"></image>
             </swiper-item>
         </block>
     </swiper>
@@ -56,7 +56,7 @@
     </view>
     <view class="nav" wx:for='{{list}}' wx:key='{{item.id}}' id="{{item.id}}" bind:tap="detail">
         <view class="g-banner">
-            <image src="{{item.defaultImgOss}}" />
+            <image src="{{item.defaultImgOss}}"  />
         </view>
         <view class="g-h1 dan">{{item.projectTitle}}</view>
         <view class="g-h2">{{item.projectExplain}}</view>

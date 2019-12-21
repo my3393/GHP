@@ -28,7 +28,7 @@
       <image src="../../images/tx.png"></image>
     </view>
      <view class="tx" wx:else>
-      <image src="{{user.headImgUrl}}"></image>
+      <image src="{{user.headImgUrl}}" mode="widthFix"></image>
     </view>
     <view class="tx_n"  wx:if='{{user.userName == null}}'> {{phone}}</view>
     <view class="tx_n" wx:else> {{user.userName}}</view>

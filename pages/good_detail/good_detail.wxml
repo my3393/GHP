@@ -175,7 +175,7 @@
   </view>
   <view class="list-g" bindtap="store" id="{{store.id}}">进店</view>
   <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
-    <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="detail">
+    <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
       <view class="class-t-img">
         <image src="{{item.productDefaultImgOss}}" />
       </view>

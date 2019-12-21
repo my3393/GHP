@@ -53,8 +53,20 @@ Page({
             phone: phone
           })
         }
+        if (res.data.memberType == 2){
+          that.setData({
+            current: 1,
+
+          })
+        } else if (res.data.memberType == 3) {
+          that.setData({
+            current: 2,
+
+          })
+        }
         that.setData({
-          user: res.data
+          user: res.data,
+         
         })
       },
     })

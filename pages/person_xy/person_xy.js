@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isact:false,
+    isact: false,
   },
 
   /**
@@ -64,38 +64,38 @@ Page({
   onShareAppMessage: function () {
 
   },
-  name(e){
-    if(e.detail.value == ''){
+  name(e) {
+    if (e.detail.value == '') {
       this.setData({
-         isact:false
+        isact: false
       })
-    }else{
+    } else {
       this.setData({
         isact: true
       })
     }
     this.setData({
-      name:e.detail.value
+      name: e.detail.value
     })
   },
-  submit(){
-    let that =this;
-    if(that.data.name == ''){
+  submit() {
+    let that = this;
+    if (that.data.name == '') {
       wx.showToast({
-        title: '请输入名字',
-        icon:'none'
-      })
-    } else if (that.data.name.length > 8 || that.data.name.length < 2){
-      wx.showToast({
-        title: '请输入2~8位中文或英文的昵称',
+        title: '请输入你的宣言',
         icon: 'none'
       })
-    }else{
+    } else if (that.data.name.length < 4) {
+      wx.showToast({
+        title: '请输入4位以上中文的文字',
+        icon: 'none'
+      })
+    } else {
       let data = {
-        userName: that.data.name
+        publicSlogan: that.data.name
       }
 
-      app.res.req('app-web/user/editusername', data, (res) => {
+      app.res.req('app-web/user/editpublicslogan', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
 
@@ -103,7 +103,7 @@ Page({
             title: '修改成功',
             icon: 'none'
           })
-          setTimeout(function(){
+          setTimeout(function () {
             var pages = getCurrentPages();//当前页面栈
             if (pages.length > 1) {
               var beforePage = pages[pages.length - 2];//获取上一个页面实例对象

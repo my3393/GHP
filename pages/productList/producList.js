@@ -58,15 +58,29 @@ Page({
   },
   onLoad: function (options) {
     console.log(options)
+    //首页分类
     if(options.id){
       classifyId = options.id
     }
-   
-    if(options.typeId){
-      typeId = options.typeId
+    //从搜索页
+    if(options.k){
+      keyword=options.searchKey
     }
-    //店铺id
+
+   
+    //从店铺进入
     if (options.storeId) {
+      //分类
+      if(options.typeId){
+        typeId = options.typeId
+      }
+      //搜索
+      if(options.sea){
+        keyword = options.searchKey
+         this.setData({
+           searchKey:options.searchKey
+         })
+      }
       storeId = options.storeId
     }
     let obj = wx.getMenuButtonBoundingClientRect();
@@ -135,10 +149,32 @@ Page({
     })
   },
   /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    detail = []
+    classifyId = '';
+    typeId = '';
+    sortType = 0;
+    keyword = '';
+    detail = [];
+    region = '';//地区选择的名字
+    searchKey = '';//筛选字
+    product_id = '';
+  },
+  /**
   * 生命周期函数--监听页面卸载
   */
   onUnload: function () {
-    detail =[]
+     detail =[]
+     classifyId = '';
+     typeId = '';
+     sortType = 0;
+     keyword = '';
+     detail = [];
+     region = '';//地区选择的名字
+     searchKey = '';//筛选字
+     product_id = '';
   },
   //地区筛选
   btnDropChange: function (e) {

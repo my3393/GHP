@@ -21,7 +21,8 @@ Page({
     code: '../../images/ma.png', //如果是服务器图片一定要先下载到本地
     ismask: true,
     istag:true,
-    
+    num:0,
+    list:[],
   },
 
   /**
@@ -253,13 +254,20 @@ Page({
     app.res.req("app-web/project/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        if (res.data.raiseAmount != 0) {
+          let num = ((res.data.raiseAmount) / (res.data.targetAmount) * 100)
+          that.setData({
+            num: num.toFixed(2)
+          })
+          console.log(num)
+        }
         that.getList();
-
+        
         that.setData({
           detail: res.data,
         
         })
-
+        console.log(res.data.infoImgOss)
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
@@ -286,7 +294,7 @@ Page({
       if (res.status == 1000) {
         that.getPai();
         that.setData({
-          list: res.data[0],
+          list: res.data,
          
         })
 
