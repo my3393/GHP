@@ -93,11 +93,23 @@ Page({
       })
     }
   },
+  //意见
+  option(){
+    wx.navigateTo({
+      url: '../mine_opinion/mine_opinion',
+    })
+  },
   //修改信息
   person(){
     console.log(111)
     wx.navigateTo({
       url: '../person/person',
+    })
+  },
+  //大学生认证
+  college(){
+    wx.navigateTo({
+      url: '../college/college',
     })
   },
   //实名认证
@@ -182,8 +194,14 @@ Page({
 
     }
     app.res.req('app-web/home/personalcenteradvertise', data, (res) => {
-      console.log(res.data)
+     
       if (res.status == 1000) {
+        for (var i in res.data) {
+          if (res.data[i].xcxUrl != '') {
+            res.data[i].xcx = JSON.parse(res.data[i].xcxUrl)
+          }
+
+        }
 
         that.setData({
           banner: res.data,

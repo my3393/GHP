@@ -26,7 +26,7 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
-    that.getbanner()
+   
   },
 
 
@@ -44,6 +44,10 @@ Page({
    */
   onShow: function () {
      let that =this;
+     that.setData({
+       isBang:true
+     })
+    that.getbanner()
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
@@ -86,7 +90,17 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    let that = this
+    wx.showLoading({
+      title: '刷新中',
+    })
+    currentPage = 1;
+    setTimeout(function () {
+      // wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      that.banner();
+      that.getType();
+    }, 200)
   },
 
   /**
@@ -103,7 +117,7 @@ Page({
     var that = this;
     //console.log(that.data.detail.name)
     return {
-      title:'你的好友刘郑国想你了' ,
+      title:'您的好友给您发送了一张商家入驻邀请函，点击【立即查看】' ,
       imageUrl: 'https://www.xingtu-group.cn/xcx_img/store_refund.png',
       path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
      
@@ -207,7 +221,12 @@ Page({
     app.res.req('app-web/home/hometownadvertise', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-      
+        for (var i in res.data) {
+          if (res.data[i].xcxUrl != '') {
+            res.data[i].xcx = JSON.parse(res.data[i].xcxUrl)
+          }
+
+        }
         that.setData({
           banner: res.data,
 

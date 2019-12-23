@@ -8,15 +8,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    load: false,
+    load: true,
     loading: false,
     post1: true,
     post2: true,
     audit: 3,
     number: '',
     name: '',
+    phone:'',
+    school:'',
     id: '',
     isg: true,
+    start:'',
+    end:'',
+    type:[
+      { name: '专科生' },
+      { name: '本科生' },
+      { name: '硕士生' },
+      { name: '博士生' },
+      
+    ],
+    typ:'',
   },
 
   /**
@@ -53,6 +65,12 @@ Page({
   onUnload: function () {
 
   },
+  //协议
+  web(){
+     wx.navigateTo({
+       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/4_service.pdf' ,
+     })
+  },
   //删除个人照照片
   detels(e) {
     var that = this;
@@ -77,21 +95,47 @@ Page({
 
   },
   //
+  type(e){
+     this.setData({
+       typ:this.data.type[e.detail.value].name
+     })
+  },
+  phone(e){
+    this.setData({
+      phone: e.detail.value
+    })
+  },
+  school(e){
+    this.setData({
+      school:e.detail.value
+    })
+  },
+  start(e){
+    console.log(e)
+    this.setData({
+      start:e.detail.value
+    })
+  },
+  end(e){
+    console.log(e)
+    this.setData({
+      end: e.detail.value
+    })
+  },
   //名字
   name(e) {
     this.setData({
       name: e.detail.value
     })
   },
-  //身份证号
-  card(e) {
-    this.setData({
-      card_id: e.detail.value
-    })
-  },
+ 
+ 
   sub(){
     let that = this;
-    if(that.data.names == ''){
+    var phonetel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    var idcardReg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+
+    if(that.data.name == ''){
       wx.showToast({
         title: '请填写真实姓名',
         icon:'none'
@@ -100,6 +144,11 @@ Page({
       wx.showToast({
         title: '请填写身份证号',
         icon: 'none'
+      })
+    } else if (!idcardReg.test(that.data.phone)) {
+      wx.showToast({
+        title: '身份证号有误',
+        icon: 'none',
       })
     } else if (that.data.school == '') {
       wx.showToast({
@@ -131,21 +180,27 @@ Page({
         title: '请上传学生证或学生卡反面照',
         icon: 'none'
       })
+    }else if (that.data.isg == false) {
+      wx.showToast({
+        title: '请同意服务说明',
+        icon: 'none'
+      })
     }else{
       that.submit();
     }
   },
   submit() {
     let that = this;
+   
     if (that.data.id) {
       let that = this;
-     
+
       let data = {
-        realName: that.data.names,
-        userPhone: that.data.phone,
+        realName: that.data.name,
+        identityNo: that.data.phone,
 
         schoolName: that.data.school,
-        educationLevel: that.data.value,
+        educationLevel: that.data.typ,
         enrollmentYear: that.data.start,
         graduationYear: that.data.end,
         studentImg1: img_1,
@@ -188,9 +243,14 @@ Page({
       })
       let data = {
         realName: that.data.name,
-        identityNo: that.data.card_id,
-        identityCard1: img_1,
-        identityCard2: img_2,
+        identityNo: that.data.phone,
+
+        schoolName: that.data.school,
+        educationLevel: that.data.typ,
+        enrollmentYear: that.data.start,
+        graduationYear: that.data.end,
+        studentImg1: img_1,
+        studentImg2: img_2,
       }
       app.res.req('app-web/authentication/submitcollege', data, (res) => {
         console.log(res.data)
@@ -205,10 +265,24 @@ Page({
           })
           setTimeout(function () {
             wx.navigateBack({
+              delta: 1
+            })
+          }, 2000)
+        } else if (res.status == 1034) {
+          that.setData({
+            loading: !that.data.loading
+          })
+          wx.showToast({
+            title: '已重新提交，请等待平台审核',
+            icon: 'none',
+            duration: 2000
+          })
+          setTimeout(function () {
+            wx.navigateBack({
               data: 1
             })
           }, 2000)
-        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        }else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
           console.log(1)
           wx.redirectTo({
             url: '../login/login',
@@ -223,18 +297,23 @@ Page({
       })
     }
 
+
   },
   go() {
-    img_1 = this.data.audits.identityCard1,
-      img_2 = this.data.audits.identityCard2
+     
     this.setData({
       name: this.data.audits.realName,
-      card_id: this.data.audits.identityNo,
-      img_1: this.data.audits.identityCard1Oss,
-      img_2: this.data.audits.identityCard2Oss,
+      phone: this.data.audits.identityNo,
+      img_1: this.data.audits.studentImg1,
+      img_2: this.data.audits.studentImg2,
       audit: 3,
+      school: this.data.audits.schoolName,
+      typ: this.data.audits.educationLevel,
+      start: this.data.audits.enrollmentYear,
+      end: this.data.audits.graduationYear,
       post1: false,
       post2: false,
+      id:1
     })
   },
   //用户认证信息

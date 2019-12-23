@@ -34,6 +34,7 @@
   height: 36rpx;
   line-height: 36rpx;
   z-index: 1;
+  width: 260rpx;
 }
 
 .tui-nomore-dot {

@@ -1,8 +1,8 @@
 <view class='a-nav bg-white' style='height:{{navH}}px'>
   <view class='a-nav-title'>
     <view class="nac_top">
-      <text class="zhng s" wx:if='{{!isbang}}'>未绑定家乡</text>
-      <text class="zhng" wx:else>{{user.bindCityName}}</text>
+      <text class="zhng s" wx:if='{{isbang == false}}'>未绑定家乡</text>
+      <text class="zhng" wx:else>{{user.bindAreaName}}</text>
       <text>感恩家乡，怀念家乡味道</text>
     </view>
 
@@ -66,7 +66,7 @@
       <view class="goods">
         <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
           <block  >
-            <swiper-item  class='swiper' wx:for='{{banner}}' id="{{item.id}}" bindtap="banner">
+            <swiper-item  class='swiper' wx:for='{{banner}}' id="{{item.id}}" bindtap="banner" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
               <image class="banner_img" src="{{item.advertiseImgOss}}"></image>
             </swiper-item>
           </block>

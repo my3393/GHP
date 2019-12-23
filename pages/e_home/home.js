@@ -63,7 +63,7 @@ Page({
         }else{
           wx.setTabBarItem({
             index: 1,
-            text: res.data.bindCityName,
+            text: res.data.bindAreaName,
           })
         }
 
@@ -89,7 +89,20 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    let that = this
+   
+     isRefresh = 0; //精选特产刷新
+     detail = [];
+     classifyId = 1;
+    wx.showLoading({
+      title: '刷新中',
+    })
+    currentPage = 1;
+    setTimeout(function () {
+      // wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      that.banner();
+    }, 200)
   },
 
   /**

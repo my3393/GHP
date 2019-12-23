@@ -2,5 +2,6 @@
   "navigationBarBackgroundColor": "#f12200",
  "usingComponents": {
   "skeleton": "/component/skeleton/skeleton"
-  }
+  },
+  "enablePullDownRefresh": true
 }

@@ -5,7 +5,7 @@
     <view class='infor'>
       <view class='inform'>真实姓名</view>
       <view class='inforin'>
-        <input type='text' value="{{names}}" placeholder='请输入姓名' bindinput='names'></input>
+        <input type='text' value="{{name}}" placeholder='请输入姓名' bindinput='name'></input>
       </view>
     </view>
     <view class='infor'>
@@ -17,13 +17,13 @@
     <view class='infor'>
       <view class='inform'>学校名称</view>
       <view class='inforin'>
-        <input type='number' value="{{school}}" placeholder='请输入联系人手机号' bindinput='school'></input>
+        <input type='number' value="{{school}}" placeholder='请输入学校名称' bindinput='school'></input>
       </view>
     </view>
     <view class='infor clearfix'>
       <view class='inform'>学历</view>
       <view class='inforin infor_r'>
-        <picker class="pick" range="{{type}}" range-key="classifyName" value="{{index}}" bindchange="type">
+        <picker class="pick" range="{{type}}" range-key="name" value="{{index}}" bindchange="type">
           <input disabled='true' type='text' value='{{typ}}' placeholder='请选择' bindtap='showlabel'></input>
         </picker>
       </view>
@@ -34,8 +34,8 @@
     <view class='infor clearfix'>
       <view class='inform'>入学年份</view>
       <view class='inforin infor_r'>
-        <picker class="pick" range="{{type}}" range-key="classifyName" value="{{index}}" bindchange="type">
-          <input disabled='true' type='text' value='{{typ}}' placeholder='请选择' bindtap='showlabel'></input>
+        <picker class="pick" mode='date' fields='month' start='2010-6' end='2030-9' bindchange="start">
+          <input disabled='true' type='text' value='{{start}}' placeholder='请选择' bindtap='showlabel'></input>
         </picker>
       </view>
       <view class='enter'>
@@ -45,8 +45,8 @@
     <view class='infor clearfix'>
       <view class='inform'>预计毕业年份</view>
       <view class='inforin infor_r'>
-        <picker class="pick" range="{{type}}" range-key="classifyName" value="{{index}}" bindchange="type">
-          <input disabled='true' type='text' value='{{typ}}' placeholder='请选择' bindtap='showlabel'></input>
+        <picker class="pick" mode='date' fields='month' start='2010-6' end='2030-9' bindchange="end">
+          <input disabled='true' type='text' value='{{end}}' placeholder='请选择' bindtap='showlabel'></input>
         </picker>
       </view>
       <view class='enter'>
@@ -99,17 +99,17 @@
       </view>
       <view>
         <text class="hui">我已阅读并同意</text>
-        <text bindtap="web">《善家购家乡特产交易平台商家入驻协议及须知》</text>
+        <text bindtap="web">《大学生认证协议及特权服务说明》</text>
       </view>
     </view>
-    <button wx:if='{{!loading}}' bind:tap="submit" loading="{{loading}}" form-type="submit" class="submit">提交认证</button>
+    <button wx:if='{{!loading}}' bind:tap="sub" loading="{{loading}}" form-type="submit" class="submit">提交认证</button>
   </view>
   <view wx:if='{{audit == 0 || audit == 1 || audit == 2}}'>
     <view class="list">
       <view>
         <view class="list_n">{{audits.realName}}</view>
         <view class="list_num">{{audits.identityNo}}</view>
-        <view>{{audits.schoolName}} {{audits.educationLevel}} {{audits.graduationYear}}</view>
+        <view>{{audits.schoolName}} {{audits.educationLevel}} {{audits.enrollmentYear}}   {{audits.graduationYear}} </view>
       </view>
       <view class="yan" wx:if='{{audit == 0}}'>
         审核中
@@ -122,7 +122,7 @@
         <text class="chs">{{audits.auditInfo}}</text>
       </view>
     </view>
-
+ 
     <button wx:if='{{audit == 2}}' bind:tap="go" loading="{{loading}}" class="submit submits">重新认证</button>
     <!-- <button wx:else loading="{{loading}}" form-type="submit" class="submit submits"></button> -->
   </view>

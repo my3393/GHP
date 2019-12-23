@@ -10,6 +10,7 @@ Page({
       { name: '我的反馈' }
     ],
     tar: 0,
+    img_num:0,
   },
 
   /**
@@ -60,11 +61,46 @@ Page({
   onReachBottom: function () {
 
   },
+  //切换
+  tag(e) {
+    let that = this;
+    
+      currentPage = 1,
+      detail = [];
+    that.setData({
+      tar: e.currentTarget.dataset.index,
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+    })
+    this.getDetail()
+  },
+  getDetail() {
+    let that = this;
+    let data = {
+      orderType: orderType,
+      currentPage: currentPage
+    }
 
-  }
+    app.res.req('app-web/userorder/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+      
+        detail.push(...res.data)
+        that.setData({
+          
+          detail: detail
+        })
+      
+        console.log(detail)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

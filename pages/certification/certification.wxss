@@ -18,6 +18,7 @@
 }
 .nav>view{
    width:calc((100% - 40rpx)/2);
+   
 }
 .zhao{
   width: 100%;

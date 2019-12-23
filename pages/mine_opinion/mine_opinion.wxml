@@ -1,10 +1,10 @@
 <!--pages/mine_opinion/mine_opinion.wxml-->
 <view class="top">
-    <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}">
+    <view wx:for='{{tag}}' bindtap="tag" wx:for-index='idx' data-index="{{idx}}" class="{{tar == idx ? 'top_a' : ''}}">
        {{item.name}}
     </view>
 </view> 
-<view wx:if='{{tar == 0}}'>
+<view style="margin-top:80rpx;" wx:if='{{tar == 0}}'>
   <view class='infor'>
     <view class='inform'>反馈类型</view>
     <view class='inforin infor_r'>
@@ -16,22 +16,28 @@
       <image src='../../images/enter.png'></image>
     </view>
   </view>
-
-    <view class="nav">
-      <textarea class="texta" value="{{sum}}" placeholder="请输入你要反馈的问题或意见" maxlength="200" bindinput="valueChange"></textarea>
-      <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
-          <view class="zhao_img">
-            <image src="../../images/zhao.png"></image>
-          </view>
-          <view>上传</view>
-        </view>
-        <view wx:else class="clearfix">
-          <view class="tu_img" bindtap="chooseImages" id="{{1}}">
-            <image src="{{zhaos2}}"></image>
-          </view>
-        </view>
+  <view class="nav">
+   <textarea class="texta" value="{{sums}}" placeholder="请输入你要反馈的问题和意见（200字以内）" maxlength="200" bindinput="valueChanges"></textarea>
+  <view class="clearfix">
+    <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
+      <image src="{{item}}"></image>
+      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
+        <image src="../../images/deteles.png" />
+      </view>  
     </view>
+    <view class="zhao"  bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
+      <view class="zhao_img">
+        <image src="../../images/zhao.png"></image>
+       
+      
+      </view>
+      <view>{{img_num}}/9</view>
+    </view>
+  </view>
 
-  <view class="submit" bindtap="submit">确定绑定</view>
 </view>
-<view wx:if='{{tar == 1}}'></view>
+   
+
+  <view class="submit" bindtap="submit">提交反馈</view>
+</view>
+<view style="margin-top:80rpx;" wx:if='{{tar == 1}}'></view>

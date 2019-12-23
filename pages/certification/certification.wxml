@@ -47,6 +47,11 @@
         </view>
         <view class="zhao_tit">身份证反面</view>
       </view>
+      <!-- <view class="nav">
+        <view>
+          <view class="tu_img"></view>
+        </view>
+      </view> -->
     </view>
     <button wx:if='{{!loading}}' bind:tap="submit" loading="{{loading}}" form-type="submit" class="submit">提交审核</button>
     <button wx:else loading="{{loading}}" form-type="submit" class="submit"></button>

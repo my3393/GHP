@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isdelete:false,
-    ismask: false,
+   
+    ismask: true,
     isExist:true,
     money:'',
   },
@@ -161,19 +161,12 @@ Page({
      })
    }
   },
-  cancel(){
-    wx.navigateBack({
-      data:1
-    })
-    this.setData({
-      isdelete: !this.data.isdelete,
-      ismask:!this.data.ismask
-    })
+  // 上个页面返回刷新
+  changeData: function () {
+   
+    this.infor();
+    //var options = { 'id': this.data.id }
+    //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
+
   },
-  confirm(){
-    this.setData({
-      isdelete: !this.data.isdelete,
-      ismask: !this.data.ismask
-    })
-  }
 })

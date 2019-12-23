@@ -106,6 +106,7 @@ Page({
           console.log(res.data)
           if (res.status == 1000) {
              that.getuser();
+            
           } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
             console.log(1)
             wx.redirectTo({

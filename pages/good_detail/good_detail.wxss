@@ -586,6 +586,7 @@ overflow: hidden;
   height: 500rpx;
   margin-top: 50rpx;
   overflow-y:scroll;
+  -webkit-overflow-scrolling: touch;
 }
 .chim{
   display: inline-block;

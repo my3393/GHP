@@ -628,6 +628,15 @@ Page({
       tar: 4
     })
   },
+  //取消弹出层
+  adres_all() {
+    this.setData({
+
+      address: true,
+      ismask: true,
+
+    })
+  },
   //省
   getprov: function () {
 

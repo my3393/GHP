@@ -110,6 +110,14 @@ Page({
      card_id:e.detail.value
    })
   },
+  sub(){
+    let that = this
+     if(thta.data.name == ''){
+       wx.showToast({
+         title: '请上传',
+       })
+     }
+  },
   submit() {
     let that = this;
     if(that.data.id){

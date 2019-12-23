@@ -13,10 +13,11 @@ page{
   border-top: 2rpx solid #f2f2f2;
   line-height: 100rpx;
   position: relative;
+  overflow: hidden;
 }
 .inform{
  float: left;
- margin-top: 3rpx;
+ margin-top: 6rpx;
   margin-right: 20rpx;
 }
 .inforin{
@@ -37,8 +38,8 @@ page{
 }
 .enter image{
   margin-left: 25rpx;
-  width: 20rpx;
-  height: 26rpx;
+  width: 16rpx;
+  height: 22rpx;
 }
 .enter image:nth-child(2){
   width: 30rpx;

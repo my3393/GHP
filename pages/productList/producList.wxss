@@ -22,7 +22,9 @@ page {
   left: 0;
   top: 0;
 }
-
+.tui-proimg-lists{
+  width: 100%!important;
+}
 .tui-header {
   display: flex;
   align-items: flex-start;

@@ -56,15 +56,3 @@
 
  <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
 
-<view class="popup" hidden="{{isdelete}}">
-        <view class="popup_h1">善款提现申请须知</view>
-        <view class="popup_content">1.本项目已筹款项由平台暂为保管，为保障项目善款切实的使用在申请者，若您需使用项目已筹款项，需项目申请人在平台下载善款申请模板，向其所在地的街道/村委/乡镇等地方政府部门开具贫困证明及盖章，填写审核人等相关信息提交平台，平台将在第一时间予以复核，审核通过后，款项自动打到申请人提供的银行账号中，请予以配合及理解。</view>
-        <view class="popup_content">
-        2.若上传的是非项目所在市出具的证明或虚拟伪造证明上传者，第一次予以警告，第二次将拉入善家公益黑名单；若申请人上传虚假伪造或非本市开具的证明，平台则有权将项目终止，所得善款用于资助其他项目。               
-        </view>
-        <view class="popup_content">3.申请证明确认需保证真实有效，提交申请后请将证明原件寄回平台。</view>
-        <view class="popup_btn">
-              <view bindtap="cancel">取消</view>
-              <view bindtap="confirm">确定</view>
-        </view>
-</view>

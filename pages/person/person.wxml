@@ -10,7 +10,7 @@
           </view>
           <view class="list-t">
               <view class="list-img" bindtap="chooseImage">
-                  <image src="{{post1}}" />
+                  <image src="{{post1}}" mode="widthFix" />
               </view>
               <view class="list-right">
                   <image src="../../images/right.png" />

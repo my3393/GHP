@@ -1,4 +1,7 @@
 // pages/order_refund_list/order_refund_list.js
+const app = getApp();
+let detail =[];
+let currentPage = 1;
 Page({
 
   /**
@@ -12,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     this.getDetail();
   },
 
   /**
@@ -66,17 +69,16 @@ Page({
   getDetail() {
     let that = this;
     let data = {
-      orderType: orderType,
-      currentPage: currentPage
+       currentPage 
     }
 
-    app.res.req('app-web/userorder/list', data, (res) => {
+    app.res.req('app-web/userorder/refundlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.hideLoading()
+        
         detail.push(...res.data)
         that.setData({
-          isshow: false,
+          
           detail: detail
         })
         wx.hideLoading()

@@ -89,13 +89,13 @@
           </view>
           <view>尊享标识</view>
         </view>
-        <view class="din-1">
+        <!-- <view class="din-1">
           <view class="din-img">
             <image src="../../images/member05.png" />
 
           </view>
           <view >赚10倍艺呗</view>
-        </view>
+        </view> -->
         <view class="din-1">
           <view class="din-img">
             <image src="../../images/member06.png" />
@@ -107,7 +107,7 @@
      <view class="shuom"> 
          <view>会员说明</view>
         <view>· 开通即表示您已阅读并同意《善家购会员服务协议》</view>
-        <view>· 会员服务一经开关不支持取消/退款，敬请谅解</view>
+        <view>· 会员服务一经开通不支持取消/退款，敬请谅解</view>
      </view>
       <view wx:if='{{user.phone == null}}'>
         <button class="submit" wx:if='{{current == 0}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</button>
