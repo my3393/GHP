@@ -418,7 +418,7 @@ Page({
             })
             if (that.data.user.memberType == 0){
               wx.redirectTo({
-                url: '../pay_success/pay_success?id=' + that.data.Price.payPrice,
+                url: '../pay_success/pay_success?id=' + that.data.Price.payPrice + '&isDeduction=' + res.data.isDeduction + '&deductionIntegral=' + res.data.deductionIntegral,
               })
             }else{
               wx.redirectTo({

@@ -9,7 +9,7 @@ Page({
    */
   data: {
     showIcon:true,
-    
+    ishistory:false,
   },
 
   /**
@@ -19,6 +19,7 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
+    this.getlist();
   },
 
   /**
@@ -32,7 +33,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'search',
+      success: function (res) {
+        that.setData({
+          history: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -73,10 +83,47 @@ Page({
    console.log(e.detail.value)
    if(e.detail.value != ''){
      wx.navigateTo({
-       url: '../productList/producList?searchKey=' + e.detail.value + 'k' + 1,
+       url: '../productList/producList?searchKey=' + e.detail.value + '&k=' + 1,
      })
+     let search = [];
+     if (wx.getStorageSync('search')){
+        search = wx.getStorageSync('search')
+     }
+     var index = search.findIndex(item => item === e.detail.value);
+     console.log(index)
+    
+     if (index > -1) {
+       // 存在
      
+     } else {
+       // 不存在
+       //state.catData.push(Object.assign({}, good, { num: 1 }));
+       search.push(e.detail.value)
+     }
+    
+    
+     wx.setStorage({
+       key: 'search',
+       data: search,
+     })
+
    }
+  },
+  //清除历史记录
+  clearst(e){
+    wx.removeStorage({
+      key: 'search',
+      success: function(res) {
+         this.setData({
+           history:[]
+         })
+      },
+    })
+  },
+  searchKey(e){
+    wx.navigateTo({
+      url: '../productList/producList?searchKey=' + e.currentTarget.id + '&k=' + 1,
+    })
   },
   navBack(){
     wx.navigateBack({
@@ -87,12 +134,50 @@ Page({
   value(e){
     keyword = e.detail.value
     if (keyword == ''){
-
+       this.setData({
+         ishistory:false,
+         detail:[],
+         store:[]
+       })
     }else{
       this.getdetail()
       this.getStore();
+      this.setData({
+        ishistory: true
+      })
     }
     
+  },
+  //热门推荐
+  getlist() {
+    let that = this;
+    let data = {
+    
+    }
+
+    app.res.req("app-web/home/hotsearch", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          list: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   //搜索店铺
   getStore() {

@@ -14,6 +14,7 @@ Page({
     adress: [], //选择的地址
     inpu: '',
     loading:true,
+    member_zk:'',
   },
 
   /**
@@ -94,6 +95,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  member(){
+    wx.navigateTo({
+      url: '../members/members',
+    })
   },
   //选择地址
   choose() {
@@ -239,7 +245,8 @@ Page({
           })
         }
         that.setData({
-          z_price: (that.data.prices - that.data.member_p + that.data.detail.expressFee).toFixed(2)
+          z_price: (that.data.prices - that.data.member_p + that.data.detail.expressFee).toFixed(2),
+          member_zk: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
         })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -350,8 +357,9 @@ Page({
               icon: 'none',
               duration: 1000
             })
+             
             wx.redirectTo({
-              url: '../pay_success/pay_success?id=' + that.data.z_price ,
+              url: '../pay_success/pay_success?id=' + that.data.z_price + '&isDeduction=' + res.data.isDeduction + '&deductionIntegral=' + res.data.deductionIntegral,
             })
           },
           fail(res) {

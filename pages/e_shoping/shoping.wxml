@@ -1,12 +1,25 @@
 <view wx:if="{{cartsdata.length == 0}}">
-       <view class="kong">
-            <view class="kong_img">
-              <image src="../../images/cart.png"></image>
-            </view>
-            <view class="non" bindtap="non">没有特产</view>
-       </view>
+  <view class="kong">
+    <view class="kong_img">
+      <image src="../../images/cart.png"></image>
+    </view>
+    <view class="non" bindtap="non">选购特产</view>
+  </view>
+  <view class="nav" style="margin-top:90%">
+    <view class="nav-list" wx:for="{{recommend}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
+      <view class="list-img">
+        <image src="{{item.productDefaultImgOss}}" />
+      </view>
+      <view class="list-j">{{item.productName}}</view>
+      <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>
 
- </view>
+      <view class="class-t-p ctp">
+        <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+      <view class="list-rig">
+        <image src="../../images/shop.png" /> </view>
+    </view>
+  </view>
+</view>
 <view wx:else>
   <view class="all-top">
     <view class='storehed'>
@@ -18,41 +31,42 @@
   </view>
   <view class="good">
     <view class='cartallview'>
-    <view class="cart-box" wx:for="{{cartsdata}}" wx:key="{{index}}" wx:for-index="idx">
-      <!-- wx:for 购物车信息列表 头部商家名称 -->
-      <view class='storehed'>
-        <icon color="#f12200" type="{{item.selected ? 'success':'circle'}}" bindtap="storeselected" data-index="{{idx}}" />
-        <view class="store-img">
-          <image src="../../images/store.png" />
+      <view class="cart-box" wx:for="{{cartsdata}}" wx:key="{{index}}" wx:for-index="idx">
+        <!-- wx:for 购物车信息列表 头部商家名称 -->
+        <view class='storehed'>
+          <icon color="#f12200" type="{{item.selected ? 'success':'circle'}}" bindtap="storeselected" data-index="{{idx}}" />
+          <view class="store-img">
+            <image src="../../images/store.png" />
+          </view>
+          <text bindtap="store" id="{{item.storeId}}">{{item.storeName}}</text>
+          <view class="store-img" bindtap="store" id="{{store.id}}">
+            <image src="../../images/right.png" />
+          </view>
         </view>
-        <text bindtap="store" id="{{item.storeId}}">{{item.storeName}}</text>
-        <view class="store-img" bindtap="store" id="{{store.id}}">
-          <image src="../../images/right.png" />
-        </view>
-      </view>
-      <!-- goodslist -->
-      <view>
-        <!-- 商品组键 -->
-        <view class='shopgoodlist' wx:for="{{item.products}}" wx:key="{{index}}" bindtap="good_detail" id="{{item.productId}}">
-          <!-- wx:if 是否选择显示不同图标 -->
-          <icon color="#f12200" class="cart-ic" type="{{item.selected ? 'success':'circle'}}" catchtap="goodsselected" data-index="{{index}}" data-select-index="{{idx}}" />
-          <!-- 点击商品图片可跳转到商品详情 -->
-          <image class="cart-thumb" src="{{item.productImgOss}}"></image>
-          <view class='goodsdata'>
-            <text class='goodsname dan'>{{item.productName}}</text>
-            <text class='specification'>{{item.provinceName}} {{item.cityName}}</text>
-            <view class="guig" >
-              <view class='gui-g' wx:if='{{item.specification != ""}}'>{{item.specification}}</view>
-            </view>
-            <text class='price'><text class="yuan">￥</text>{{item.salePrice}}</text>
-            <!-- 增加减少数量按钮 -->
-            <view class='goodsnum'>
-              <view class="suan" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
-                -
+        <!-- goodslist -->
+        <view>
+          <!-- 商品组键 -->
+          <view class='shopgoodlist' wx:for="{{item.products}}" wx:key="{{index}}" bindtap="good_detail" id="{{item.productId}}">
+            <!-- wx:if 是否选择显示不同图标 -->
+            <icon color="#f12200" class="cart-ic" type="{{item.selected ? 'success':'circle'}}" catchtap="goodsselected" data-index="{{index}}" data-select-index="{{idx}}" />
+            <!-- 点击商品图片可跳转到商品详情 -->
+            <image class="cart-thumb" src="{{item.productImgOss}}"></image>
+            <view class='goodsdata'>
+              <text class='goodsname dan'>{{item.productName}}</text>
+              <text class='specification'>{{item.provinceName}} {{item.cityName}}</text>
+              <view class="guig">
+                <view class='gui-g' wx:if='{{item.specification != ""}}'>{{item.specification}}</view>
               </view>
-              <view class="shu">{{item.buyCount}}</view>
-              <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" >
-                +
+              <text class='price'><text class="yuan">￥</text>{{item.salePrice}}</text>
+              <!-- 增加减少数量按钮 -->
+              <view class='goodsnum'>
+                <view class="suan" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
+                  -
+                </view>
+                <view class="shu">{{item.buyCount}}</view>
+                <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
+                  +
+                </view>
               </view>
             </view>
           </view>
@@ -60,40 +74,38 @@
       </view>
     </view>
   </view>
-  </view>
   <!-- 合计 提交订单 -->
   <view class='allselected' wx:if="{{detel}}">
     <view>
-     
-      <text >合计：</text>
+
+      <text>合计：</text>
       <text class='allprices'><text class="yuan">￥</text>{{allprices}}</text>
     </view>
-     <button size="mine" class='placeanorder option' wx:if="{{isdetel}}">
+    <button size="mine" class='placeanorder option' wx:if="{{isdetel}}">
       结算({{allnum}})
-      
-    
+
+
     </button>
-    <button size="mine" class='placeanorder' wx:elif='{{user.phone == null}}'  open-type="getPhoneNumber" 
-  bindgetphonenumber="getPhoneNumber">
+    <button size="mine" class='placeanorder' wx:elif='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
       结算({{allnum}})
-      
-    
+
+
     </button>
-     <button size="mine" class='placeanorder' wx:else  bindtap="pay">
+    <button size="mine" class='placeanorder' wx:else bindtap="pay">
       结算({{allnum}})
-      
-    
+
+
     </button>
   </view>
   <view class='allselected' wx:else>
     <view>
-     
-    
+
+
     </view>
     <view class='placeanorder {{isdetel ? "option" : ""}}' bindtap="delete">
       删除
-      
-    
+
+
     </view>
   </view>
 </view>

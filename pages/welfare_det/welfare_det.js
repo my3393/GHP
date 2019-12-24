@@ -4,6 +4,7 @@ let top1 = '';
 let top2 = '';
 let id;
 let ranklist = [];
+let currentPage = 1
 Page({
 
   /**
@@ -83,7 +84,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    ranklist = []
   },
 
   /**
@@ -203,33 +204,33 @@ Page({
     let that = this;
     let data = {
       projectId: id,
-
+      currentPage
     }
 
-    app.res.req("app-web/project/projectvote", data, (res) => {
+    app.res.req("app-web/project/votelist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-         if(res.data.length < 3){
-           that.setData({
-             ranklist: res.data,
+        //  if(res.data.length < 3){
+        //    that.setData({
+        //      ranklist: res.data,
              
-           })
-         }else{
-           if (that.data.currentPage == 1) {
-             that.setData({
-               top_1: res.data.data.splice(0, 1)[0],
-               top_2: res.data.data.splice(0, 1)[0],
-               top_3: res.data.data.splice(0, 1)[0],
+        //    })
+        //  }else{
+        //    if (that.data.currentPage == 1) {
+        //      that.setData({
+        //        top_1: res.data.data.splice(0, 1)[0],
+        //        top_2: res.data.data.splice(0, 1)[0],
+        //        top_3: res.data.data.splice(0, 1)[0],
 
-             })
-           }
-           reanklist.push(...res.data)
+        //      })
+        //    }
+        ranklist.push(...res.data)
            that.setData({
              ranklist: ranklist,
-             currentPage: res.data.currentPage,
-             isrank:false,
+            
+            
            })
-         }
+         
        
 
       } else if (res.status == 1004 || res.status == 1005) {
@@ -262,7 +263,7 @@ Page({
           console.log(num)
         }
         that.getList();
-        
+        that.getranklist();
         that.setData({
           detail: res.data,
         
@@ -408,8 +409,7 @@ Page({
       })
 
     } else if (top2 - 10 < e.scrollTop) {
-      console.log(top1)
-      console.log(top2)
+     
       that.setData({
         issrcoll: 3
       })

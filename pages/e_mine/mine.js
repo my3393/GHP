@@ -78,6 +78,42 @@ Page({
   onReachBottom: function () {
 
   },
+  downloadFile: function (e) {
+    console.log(e);
+    let type = e.currentTarget.dataset.type;
+    let url = e.currentTarget.dataset.url;
+    // switch (type) {
+    //   case "pdf":
+    //     url += 'pdf';
+    //     break;
+    //   case "word":
+    //     url += 'docx';
+    //     break;
+    //   case "excel":
+    //     url += 'xlsx';
+    //     break;
+    //   default:
+    //     url += 'pptx';
+    //     break;
+    // }
+    wx.downloadFile({
+      url: url,
+      success: function (res) {
+        console.log(res)
+        var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
+        wx.openDocument({
+          filePath: Path,
+          success: function (res) {
+            console.log('打开文档成功')
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    })
+  
+  },
   //banner跳转
   banner(e) {
     console.log(e)
@@ -106,11 +142,24 @@ Page({
       url: '../person/person',
     })
   },
+  //我的艺呗
+  integral(){
+     wx.navigateTo({
+       url: '../mine_yb/mine_yb',
+     })
+  },
   //大学生认证
   college(){
-    wx.navigateTo({
-      url: '../college/college',
-    })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 16,
+      })
+    } else{
+      wx.navigateTo({
+        url: '../college/college',
+      })
+    }
+   
   },
   //实名认证
   certification(){
@@ -120,15 +169,29 @@ Page({
   },
   //我的收藏
   collection(){
-    wx.navigateTo({
-      url: '../mine_collection/mine_collection',
-    })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 15,
+      })
+    } else{
+      wx.navigateTo({
+        url: '../mine_collection/mine_collection',
+      })
+    }
+    
   },
   //会员
   member(){
-    wx.navigateTo({
-      url: '../members/members',
-    })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 13,
+      })
+    } else{
+      wx.navigateTo({
+        url: '../members/members',
+      })
+    }
+   
   },
   //退款
   order_refund_list(){
@@ -138,15 +201,29 @@ Page({
   },
   //查看订单
   all(e){
-    wx.navigateTo({
-      url: '../order_all/order_all?id=' + e.currentTarget.id,
-    })
+    if (this.data.user.id == null || this.data.user.id == ''){
+      wx.navigateTo({
+        url: '../login/login?mine=' + 11,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../order_all/order_all?id=' + e.currentTarget.id,
+      })
+    }
+   
   },
   //资助申请
   mine_fund(){
-    wx.navigateTo({
-      url: '../mine_fund/mine_fund',
-    })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 14,
+      })
+    } else{
+      wx.navigateTo({
+        url: '../mine_fund/mine_fund',
+      })
+    }
+   
   },
   //联系客服
   phone(){
@@ -156,9 +233,16 @@ Page({
   },
   //我的钱包
   wallet(){
-     wx.navigateTo({
-       url: '../mine_wallet/mine_wallet',
-     })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 12,
+      })
+    } else{
+      wx.navigateTo({
+        url: '../mine_wallet/mine_wallet',
+      })
+    }
+    
   },
   //商家入驻
   store_refund(){
@@ -174,9 +258,16 @@ Page({
   },
   //收货地址
    address(){
-     wx.navigateTo({
-       url: '../address/address',
-     })
+     if (this.data.user.id == null || this.data.user.id == '') {
+       wx.navigateTo({
+         url: '../login/login?mine=' + 17,
+       })
+     } else{
+       wx.navigateTo({
+         url: '../address/address',
+       })
+     }
+    
    },
    //信息大码
   plusXing(str, frontLen, endLen) {

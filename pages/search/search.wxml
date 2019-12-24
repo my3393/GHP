@@ -14,54 +14,30 @@
      
     </view>
   </scroll-view> -->
-  <!-- <view >
+  <view class="history" style='margin-top:{{navH +10}}px' hidden="{{ishistory}}">
     <view class="host">
       <view class="nav-h1">历史记录</view>
-      <view class="detele">
+      <view class="detele" bindtap="clearst">
         <image src="../../images/detele.png" />
       </view>
       <view class="host-list">
-            <view class='list-n'>
-              正国枸杞王
-            </view>
-            <view class='list-n'>
-              正国
-            </view>
-            <view class='list-n'>
-              正国枸杞王
-            </view>
-
-            <view class='list-n'>
-              正国
-            </view>
-            <view class='list-n'>
-              正国枸杞王
-            </view>
+        <view class='list-n' wx:for='{{history}}' wx:key='item' id="{{item}}" bindtap="searchKey">
+           {{item}}
+        </view>
+        
       </view>
     </view>
     <view class="host">
       <view class="nav-h1">热门推荐</view>
-      
-      <view class="host-list">
-            <view class='list-n'>
-              正国枸杞王
-            </view>
-            <view class='list-n'>
-              正国
-            </view>
-            <view class='list-n'>
-              正国枸杞王
-            </view>
 
-            <view class='list-n'>
-              正国
-            </view>
-            <view class='list-n'>
-              正国枸杞王
-            </view>
+      <view class="host-list">
+        <view class='list-n' wx:for='{{list}}' wx:key='item'  id="{{item.searchValue}}" bindtap="searchKey">
+          {{item.searchValue}}
+        </view>
+        
       </view>
     </view>
-  </view> -->
+  </view>
   <view style='margin-top:{{navH}}px'>
     <view class="store" wx:for='{{store}}' wx:key='item' bindtap="store" id="{{item.id}}">
       <view class="store-img">

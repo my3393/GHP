@@ -6,7 +6,9 @@ Page({
     data: {
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         detail_id:'',
-        userid:''
+        userid:'',
+        mine:'',
+
     },
     onLoad(options) {
       console.log(options)
@@ -20,7 +22,17 @@ Page({
           that.setData({
             detail_id:options.id
           })
-       }
+       }else if(options.userid && options.mine){
+        that.setData({
+          mine: options.mine,
+          userid: options.userid
+        })
+      } else if (options.mine) {
+        that.setData({
+          mine: options.mine,
+         
+        })
+      }
       // 查看是否授权
       wx.getSetting({
         success(res) {
@@ -181,6 +193,42 @@ Page({
                                 } else if (that.data.detail_id != '') {
                                   wx.redirectTo({
                                     url: '../good_detail/good_detail?id=' + that.data.detail_id
+                                  })
+                                } else if (that.data.userid != '' && that.data.mine != '') {
+                                  wx.redirectTo({
+                                    url: '../store_refund/store_refund?userid=' + that.data.userid
+                                  })
+                                } else if (that.data.mine == 11) {
+                                  wx.redirectTo({
+                                    url: '../order_all/order_all?id=' + 0
+                                  })
+                                } else if (that.data.mine == 12) {
+                                  wx.redirectTo({
+                                    url: '../mine_wallet/mine_wallet'
+                                  })
+                                } else if (that.data.mine == 13) {
+                                  wx.redirectTo({
+                                    url: '../members/members'
+                                  })
+                                } else if (that.data.mine == 14) {
+                                  wx.redirectTo({
+                                    url: '../mine_fund/mine_fund' 
+                                  })
+                                } else if (that.data.mine == 15) {
+                                  wx.redirectTo({
+                                    url: '../mine_collection/mine_collection'
+                                  })
+                                } else if (that.data.mine == 16) {
+                                  wx.redirectTo({
+                                    url: '../college/college'
+                                  })
+                                } else if (that.data.mine == 17) {
+                                  wx.redirectTo({
+                                    url: '../address/address'
+                                  })
+                                }else if (that.data.mine != ''){
+                                  wx.redirectTo({
+                                    url: '../e_mine/mine'
                                   })
                                 } else {
                                   console.log(2)

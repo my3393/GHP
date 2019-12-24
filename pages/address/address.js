@@ -163,8 +163,13 @@ Page({
           title: '已删除',
           icon:'none'
         })
-        wx.clearStorage('address')
-        that.getDateil();
+        wx.removeStorage({
+          key: 'address',
+          success: function(res) {
+            that.getDateil()
+          },
+        })
+       
 
       } else {
         console.log(111)

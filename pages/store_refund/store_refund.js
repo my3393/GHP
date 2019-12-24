@@ -14,6 +14,7 @@ let zhao2 = '';
 let zhao3 = '';
 let images = [];
 let simages = [];
+let userid;
 Page({
 
   /**
@@ -50,8 +51,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.getAudit();
-     this.getType();
+    
+    if (options.userid) {
+      userid = options.userid
+      this.Bang();
+    }
   },
 
   /**
@@ -109,6 +115,39 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+  downloadFile: function (e) {
+    console.log(e);
+    wx.showModal({
+      title: '提示',
+      content: '点击下方qq浏览器可进行下载',
+      success(res) {
+        if (res.confirm) {
+          let type = e.currentTarget.dataset.type;
+          let url = e.currentTarget.dataset.url;
+          wx.downloadFile({
+            url: url,
+            success: function (res) {
+              console.log(res)
+              var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
+              wx.openDocument({
+                filePath: Path,
+                success: function (res) {
+                  console.log('打开文档成功')
+                }
+              })
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    
 
   },
   //删除个人照照片
@@ -173,6 +212,47 @@ Page({
      })
   },
   //入驻提交
+  sub(){
+    let that = this;
+    if (that.data.post1 == '../../images/store_logo.png') {
+      wx.showToast({
+        title: '请上传店铺logo',
+        icon: 'none'
+      })
+    } else if (that.data.name == '') {
+      wx.showToast({
+        title: '请输入店铺名称',
+        icon: 'none'
+      })
+    } else if (that.data.typ == '') {
+      wx.showToast({
+        title: '请选择主营类型',
+        icon: 'none'
+      })
+    } else if (that.data.addres == '') {
+      wx.showToast({
+        title: '请选择特产地址',
+        icon: 'none'
+      })
+    } else if (that.data.zhaos1 == '') {
+      wx.showToast({
+        title: '请上传特产溯源证明',
+        icon: 'none'
+      })
+    } else if (that.data.zhaos2 == '' && that.data.typeId != 14) {
+      wx.showToast({
+        title: '请上传食品经营许可证',
+        icon: 'none'
+      })
+    } else if (that.data.zhaos3 == '') {
+      wx.showToast({
+        title: '请上传店铺营业执照',
+        icon: 'none'
+      })
+    } else {
+      that.submit();
+    }
+  },
   submit(){
     let that = this;
     let data = {
@@ -271,7 +351,7 @@ Page({
             data: res.data,
           })
           setTimeout(function () {
-            that.submit();
+            that.sub();
           }, 1000)
 
         } else if (res.data.status === 103) {
@@ -343,12 +423,19 @@ Page({
           that.setData({
             load:false
           })
+          that.getType();
           wx.hideLoading()
 
         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-          wx.redirectTo({
-            url: '../login/login',
-          })
+          if (userid) {
+            wx.navigateTo({
+              url: '../login/login?mine=' + 1 + '&userid=' + userid
+            })
+          } else {
+            wx.navigateTo({
+              url: '../login/login?mine=' + 1
+            })
+          }       
         } else {
           wx.showToast({
             title: res.msg,
@@ -357,6 +444,46 @@ Page({
         }
       })
     },
+  //绑定
+  Bang() {
+    let that = this;
+    let data = {
+      id: userid
+    }
+
+    app.res.req("app-web/user/sharebinduser", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        if (userid) {
+          wx.navigateTo({
+            url: '../login/login?id=' + id + '&userid=' + userid
+          })
+        } else {
+          wx.navigateTo({
+            url: '../login/login?id=' + id
+          })
+        }
+      } else if (res.status == 1028) {
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
    //特产上传
   getprogress() {
     let that = this;

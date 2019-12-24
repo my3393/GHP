@@ -36,7 +36,7 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class="banner_num">{{current+1}} / {{detail.productImgOss.length + 1}}</view>
+  <view class="banner_num">{{current+1}} / {{good_img_num}}</view>
 </view>
 <!-- 顶部导航 -->
 <view class="naviga" style='top:{{navH}}px' hidden="{{naviga}}">
@@ -87,7 +87,7 @@
     <view class="w_price">
       <text class='huiyj'>会员价</text>
       <view wx:if='{{detail.isSpecificaton == 0}}' class="disp">
-        ￥{{detail.lowestPrice}}
+        ￥{{detail.lowestMemberPrice}}
       </view>
       <view wx:else class="disp">
         ￥{{detail.lowestMemberPrice}} - {{detail.topMemberPrice}}

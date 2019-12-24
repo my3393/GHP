@@ -195,9 +195,9 @@ Page({
        
         that.setData({
           store: res.data,
-          Img: res.data.storeLogoOss
+          Img: res.data.storeBackgroundImgOss
         })
-       that.getList();
+        that.getList();
         that.gettype();
         if (res.data.introduce != null) {
           rich = res.data.introduce.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')

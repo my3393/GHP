@@ -1,10 +1,10 @@
 <!--pages/sure_order/sure_order.wxml-->
-<view class="top" wx:if='{{user.memberType == 0}}'>
+<view class="top" wx:if='{{user.memberType == 0}}' bindtap="member">
     <view class="top_img">
         <image  src="../../images/hyjlb.png" />
     </view>
     <view class="top_n">
-        开通会员，预计本单最高可为您节省￥56.78
+        开通会员，预计本单最高可为您节省￥{{member_zk}}
     </view>
     <view class="top_r">
         >

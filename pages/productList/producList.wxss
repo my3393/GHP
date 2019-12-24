@@ -188,7 +188,8 @@ page {
 }
 
 .tui-bold {
-  font-weight: bold;
+  /* font-weight: bold; */
+  color: #f12200!important;
 }
 
 .tui-active {
@@ -615,4 +616,10 @@ page {
 .producd_class{
   color: #f12200;
   border: 1rpx solid #f12200;
+}
+.list-qu{
+  width: 306rpx;
+}
+.list-qu_h{
+  width: 440rpx;
 }

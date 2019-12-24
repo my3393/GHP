@@ -1,13 +1,13 @@
 <!-- pages/mine_yb/mine_yb.wxml -->
 <view class="top">
     <view class="title">我的艺呗</view>
-    <view class="shuom">使用说明？</view>
+    <!-- <view class="shuom">使用说明？</view> -->
     <view>
-        <view class="num">2345</view>
+        <view class="num">{{user.integral}}</view>
         <!-- <view class="znum">赚艺呗</view> -->
          <view class="znum">爱心投票</view>
     </view>
-    <view class="bootm">
+    <view class="bootm" bindtap="detail">
        收支明细
        <view class="bootm-img">
            <image  src="../../images/right.png" />

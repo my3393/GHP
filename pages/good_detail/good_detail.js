@@ -27,6 +27,7 @@ Page({
     num: 1,
     current: 0,
     goodId:0,
+    good_img_num:'0',
     is_num:false,//购物车数量显示
   },
 
@@ -304,22 +305,24 @@ Page({
        
 
 
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+      } 
+      // else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
 
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
-        if (userid) {
-          wx.navigateTo({
-            url: '../login/login?id=' + id + '&userid=' + userid
-          })
-        } else {
-          wx.navigateTo({
-            url: '../login/login?id=' + id
-          })
-        }
-      } else if (res.status == 1028) {
+      //   wx.showToast({
+      //     title: '请先登录',
+      //     icon: 'none'
+      //   })
+      //   if (userid) {
+      //     wx.navigateTo({
+      //       url: '../login/login?id=' + id + '&userid=' + userid
+      //     })
+      //   } else {
+      //     wx.navigateTo({
+      //       url: '../login/login?id=' + id
+      //     })
+      //   }
+      //} 
+      else if (res.status == 1028) {
 
       } else {
         wx.showToast({
@@ -707,7 +710,15 @@ Page({
     app.res.req("app-web/product/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-
+        if (res.data.productVideo == null){
+          that.setData({
+            good_img_num: res.data.productImgOss.length
+          })
+        }else{
+          that.setData({
+            good_img_num: res.data.productImgOss.length + 1
+          })
+        }
 
         that.setData({
           detail: res.data,
@@ -715,6 +726,7 @@ Page({
           price: res.data.lowestPrice,
           title_img: res.data.productDefaultImgOss
         })
+
         that.getStore();
         that.cart_num();
         this.getSku();

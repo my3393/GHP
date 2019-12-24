@@ -25,7 +25,7 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class="banner_num">{{current+1}} / {{detail.infoImgOss.length + 1}}</view>
+  <view class="banner_num">{{current+1}} / {{detail.infoImgOss.length}}</view>
 </view>
 <view class="nav">
   <view class="g-h1 dan">{{detail.projectTitle}}</view>
@@ -86,13 +86,13 @@
   </view>
 </view>
 <view class="title">
-  <view class="title_h1 top2">爱心投票（20）</view>
+  <view class="title_h1 top2">爱心投票</view>
   <view class="neir">
     目前
     <text class="yan">全国共有{{pai.totalProjectCount}}个</text> 申请被资助的项目，
     <text class="yan">当前项目位于总项目的第{{pai.currentRank}}位</text> ，快来位TA投票吧，项目票数越多，越容易受到平台关注，得到资助呦！
   </view>
-  <view hidden="{{isrank}}">
+  <!-- <view hidden="{{isrank}}">
     <view class="top">
       <view class="top_2">
         <view class="top_tx">
@@ -144,8 +144,8 @@
       </view>
       <view class="top_list_date">{{item.createDate}}</view>
     </view>
-  </view>
-  <view hidden="{{!isrank}}">
+  </view> -->
+  <view >
     <view class="top_list" wx:for='{{ranklist}}' wx:key='{{item.id}}'>
       <view class="top_list_img">
         <image src="{{item.headImgUrl}}" />

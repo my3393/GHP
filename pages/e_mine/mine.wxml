@@ -83,7 +83,7 @@
           <view>0</view>
           <view class="shouy-n">大爱榜单</view>
         </view>
-        <view class="shouy-z">
+        <view class="shouy-z" catchtap="integral">
           <view>{{user.integral}}</view>
           <view class="shouy-n">艺呗</view>
         </view>
@@ -230,6 +230,7 @@
     </view> -->
   </view>
 </view>
+<button class='skblue_bg' data-url="https://www.xingtu-group.cn/sjg_xieyi/8_Prove.pdf" data-type="pdf" catchtap='downloadFile'>下载</button>
 <view class="foot-boot">
   <view>善家购</view>
   <view class="foot-boot-m">大爱无疆，感恩家乡</view>

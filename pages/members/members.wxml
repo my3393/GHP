@@ -28,7 +28,7 @@
       <image src="../../images/tx.png"></image>
     </view>
      <view class="tx" wx:else>
-      <image src="{{user.headImgUrl}}" mode="widthFix"></image>
+      <image src="{{user.headImgUrl}}" ></image>
     </view>
     <view class="tx_n"  wx:if='{{user.userName == null}}'> {{phone}}</view>
     <view class="tx_n" wx:else> {{user.userName}}</view>
@@ -106,7 +106,8 @@
       </view>
      <view class="shuom"> 
          <view>会员说明</view>
-        <view>· 开通即表示您已阅读并同意《善家购会员服务协议》</view>
+         <view>· 首次邀请5位商家成功入驻善家购，即可免费开通黄金会员。</view>
+        <view>· 开通即表示您已阅读并同意<text class="chu">《善家购会员服务协议》</text></view>
         <view>· 会员服务一经开通不支持取消/退款，敬请谅解</view>
      </view>
       <view wx:if='{{user.phone == null}}'>

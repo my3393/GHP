@@ -48,6 +48,9 @@ Page({
       {name:'政府'},
     ],
     progre:0,
+    typ:'',
+    sum:'',
+    sums:'',
   },
 
   /**
@@ -150,7 +153,42 @@ Page({
    }
 
   },
-  
+  downloadFile: function (e) {
+    console.log(e);
+    let type = e.currentTarget.dataset.type;
+    let url = e.currentTarget.dataset.url;
+    // switch (type) {
+    //   case "pdf":
+    //     url += 'pdf';
+    //     break;
+    //   case "word":
+    //     url += 'docx';
+    //     break;
+    //   case "excel":
+    //     url += 'xlsx';
+    //     break;
+    //   default:
+    //     url += 'pptx';
+    //     break;
+    // }
+    wx.downloadFile({
+      url: url,
+      success: function (res) {
+        console.log(res)
+        var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
+        wx.openDocument({
+          filePath: Path,
+          success: function (res) {
+            console.log('打开文档成功')
+          }
+        })
+      },
+      fail: function (res) {
+        console.log(res)
+      }
+    })
+
+  },
   //
   quer(){
     this.setData({
@@ -408,8 +446,17 @@ Page({
             duration: 2000
           })
           setTimeout(function () {
+            var pages = getCurrentPages();//当前页面栈
+            if (pages.length > 1) {
+              var beforePage = pages[pages.length - 2];//获取上一个页面实例对象
+              var currPage = pages[pages.length - 1]; // 当前页面，若不对当前页面进行操作，可省去
+              // beforePage.setData({       //如果需要传参，可直接修改A页面的数据，若不需要，则可省去这一步
+              //   id: res.data.data
+              // })
+              beforePage.changeData();//触发父页面中的方法
+            }
             wx.navigateBack({
-              data: 1
+              delta: 1
             })
           }, 2000)
         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

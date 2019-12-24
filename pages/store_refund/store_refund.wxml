@@ -37,7 +37,7 @@
       <view class='infor' bindtap="diz">
         <view class='inform'>特产地址</view>
         <view class='inforin infor_r'>
-          <input disabled='true' type='text' value='{{addres}}' placeholder='请绑定家乡特产所在地址' bindtap='showlabel'></input>
+          <input disabled='true' type='text' value='{{addres}}' placeholder='请选择所在地址' bindtap='showlabel'></input>
         </view>
         <view class='enter'>
           <image src='../../images/enter.png'></image>
@@ -52,7 +52,7 @@
 
       <view class="nop">
         特产溯源证明
-        <view class="nop_r">模板下载</view>
+        <view class="nop_r" data-url="https://www.xingtu-group.cn/sjg_xieyi/7_Tracingtothesource.pdf" data-type="pdf" catchtap='downloadFile'>模板下载</view>
       </view>
 
       <view class="nav">
@@ -148,7 +148,7 @@
       </view>
 
       <button class="submit" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提交审核</button>
-      <button class="submit" bindtap="submit" wx:else>提交审核</button>
+      <button class="submit" bindtap="sub" wx:else>提交审核</button>
       <view style="height:120rpx;"></view>
     </view>
 
@@ -167,9 +167,9 @@
       <view> 恭喜您，成功入驻善家购</view>
       <view class="pc">
         <view>PC端管理后台</view>
-        <view>店铺地址：jnoireujhgijrepjgweiprjfwefewewrtgewrger</view>
-        <view>用户名：发热管仍</view>
-        <view>初始密码：ADF123456 （请及时修改密码）</view>
+        <view >店铺地址：{{audits.auditInfo}}</view>
+        <view>用户名：{{user.phone}}</view>
+        <view>初始密码：{{user.phone}}</view>
       </view>
       <view class="ru_enter">
         进入我的店铺

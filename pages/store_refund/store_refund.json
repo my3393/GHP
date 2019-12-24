@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "imgcut": "/component/imgcut/imgcut"
-  }
+  },
+  "navigationBarTitleText": "商家入驻"
 }

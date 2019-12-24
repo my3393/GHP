@@ -99,7 +99,7 @@
         </view>
     </view>
     <view wx:if='{{tar == 2}}'>
-        <view class='introduce'>
+        <view class='goods'>
             <rich-text  nodes="{{rich}}">
           
             </rich-text>

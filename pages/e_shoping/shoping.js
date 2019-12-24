@@ -1,6 +1,7 @@
 const app = getApp();
 let cartsdata = [];
 let ids = [];
+let isRefresh = 0; //精选特产刷新
 Page({
 
   /**
@@ -384,13 +385,13 @@ Page({
 
     num++;
     console.log(num)
-    //  cartsdata[idx].products[index].buyCount = num //点击后当前店铺下当前商品的数量
+      cartsdata[idx].products[index].buyCount = num //点击后当前店铺下当前商品的数量
 
-    // this.setData({
+    this.setData({
 
-    //   cartsdata: cartsdata //店铺下商品的数量
+      cartsdata: cartsdata //店铺下商品的数量
 
-    // })
+    })
     let data = {
       shopProductId: cartsdata[idx].products[index].id,
       buyCount: num
@@ -398,7 +399,7 @@ Page({
     app.res.req('app-web/shopcart/editbuycount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.getDateil();
+       // that.getDateil();
         //console.log(that.data.cartsdata)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
@@ -443,11 +444,11 @@ Page({
 
     cartsdata[idx].products[index].buyCount = num //点击后当前店铺下当前商品的数量
 
-    // this.setData({
+    this.setData({
 
-    //   cartsdata: cartsdata //店铺下商品的数量
+      cartsdata: cartsdata //店铺下商品的数量
 
-    // })
+    })
     let data = {
       shopProductId: cartsdata[idx].products[index].id,
       buyCount: num
@@ -455,7 +456,7 @@ Page({
     app.res.req('app-web/shopcart/editbuycount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.getDateil();
+      //   that.getDateil();
         //console.log(that.data.cartsdata)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
@@ -506,7 +507,7 @@ Page({
             console.log(res.data)
             if (res.status == 1000) {
               ids = [],
-                detail = []
+                cartsdata = []
               that.setData({
                 allnum: 0,
                 allprices: 0.00,
@@ -555,6 +556,7 @@ Page({
           cartsdata: res.data,
 
         })
+       // that.getRecommend();
         console.log(that.data.cartsdata)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
@@ -619,6 +621,40 @@ Page({
           // })
         }
       }
+    })
+  },
+  getRecommend() {
+    let that = this;
+    let data = {
+      isRefresh: isRefresh
+    }
+    app.res.req("app-web/home/recommend", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          recommend: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+
+
+  },
+  //查看商品详情
+  detail(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.dataset.id,
     })
   },
 })

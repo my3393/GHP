@@ -1,0 +1,5 @@
+/* pages/yb_detail/yb_detail.wxss */
+@import '../wallet_detail/wallet_detail';
+.li{
+  margin-top: 0;
+}

@@ -47,7 +47,7 @@
 </view>
 <view class="nop">
   资助申请证明
-  <view class="nop_r">下载证明模板</view>
+  <view class="nop_r" data-url="https://www.xingtu-group.cn/sjg_xieyi/9_Support.pdf" data-type="pdf" bindtap='downloadFile'>下载证明模板</view>
 </view>
 <view class="nav">
   <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">

@@ -1,19 +1,21 @@
-// pages/mine_yb/mine_yb.js
+// pages/yb_detail/yb_detail.js
 const app = getApp();
+let detail = [];
+let currentPage = 1;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     
+     this.getdetail();
   },
 
   /**
@@ -27,17 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let that = this;
-    //获取本地用户信息
-    wx.getStorage({
-      key: 'userinfo',
-      success: function (res) {
-  
-        that.setData({
-          user: res.data
-        })
-      },
-    })
+
   },
 
   /**
@@ -67,37 +59,34 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
-  detail(){
-     wx.navigateTo({
-       url: '../yb_detail/yb_detail',
-     })
-  },
-  //获取用户信息
-  getuser() {
+  getdetail() {
     let that = this;
     let data = {
-
+      currentPage
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req("app-web/user/integralrecord", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.setStorage({
-          key: 'token',
-          data: res.data.token,
-        })
-        wx.setStorage({
-          key: 'userinfo',
-          data: res.data,
+        detail.push(...res.data)
+        that.setData({
+          detail: detail
         })
 
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
       }
     })
   },

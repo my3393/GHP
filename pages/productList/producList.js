@@ -175,6 +175,7 @@ Page({
      region = '';//地区选择的名字
      searchKey = '';//筛选字
      product_id = '';
+    currentPage = 1;
   },
   //地区筛选
   btnDropChange: function (e) {
@@ -248,6 +249,9 @@ Page({
         // attrName += attrName ? ";" + item.name : item.name;
         provinceId = item.id
         currentPage = 1
+        this.setData({
+          detail:[]
+        })
         detail = []
         this.setData({
           region:item.name
@@ -371,8 +375,9 @@ Page({
       keyword = searchKey
       this.setData({
         searchKey: searchKey,
-
+        detail:[]
       })
+     
       detail = [];
       currentPage = 1
       this.getDetail();
@@ -485,8 +490,9 @@ Page({
             detail: detail,
             status: res.data.orderStatus
           })
+         
         }
-
+        console.log(that.data.detail)
 
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

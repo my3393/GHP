@@ -187,8 +187,8 @@ page {
    }
    .hong{
     position: absolute;
-    top: -14rpx;
-    right: -10rpx;
+    top: -10rpx;
+    right: -2rpx;
     width: 24rpx;
     height: 24rpx;
     border-radius: 50%;
