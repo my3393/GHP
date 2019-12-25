@@ -227,9 +227,21 @@ Page({
   },
   //联系客服
   phone(){
-    wx.makePhoneCall({
-      phoneNumber: '18818553353',
+    wx.showModal({
+      title: '24小时全国免费咨询服务热线',
+      content: '400-8292-878',
+      confirmText:'立即拨打',
+      success(res) {
+        if (res.confirm) {
+          wx.makePhoneCall({
+            phoneNumber: '400-8292-878',
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
     })
+   
   },
   //我的钱包
   wallet(){

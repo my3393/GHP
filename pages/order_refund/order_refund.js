@@ -129,7 +129,7 @@ Page({
       console.log(simages.length)
       if (simages.length < 3) {
         that.setData({
-          img_show: false
+          isshow: false
         })
       }
   },

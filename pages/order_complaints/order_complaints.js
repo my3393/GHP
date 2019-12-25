@@ -55,7 +55,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    images = [];
+    simages = [];
   },
 
   /**
@@ -77,6 +78,24 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  
+  //删除
+  detel(e) {
+    var that = this;
+    console.log(e)
+    simages.splice(e.currentTarget.dataset.index, 1)
+    images.splice(e.currentTarget.dataset.index, 1)
+    that.setData({
+      simgs: images,
+      img_num: that.data.img_num - 1
+    })
+    console.log(simages.length)
+    if (simages.length < 3) {
+      that.setData({
+        isshow: false
+      })
+    }
   },
   //申请原因
   bindcancel(e) {

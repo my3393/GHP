@@ -7,7 +7,7 @@
       </view>
 
       <view class='infor clearfix'>
-        <view class='inform'>店铺LOGO</view>
+        <view class='inform' >店铺LOGO</view>
         <view class='inforin infor_img' bindtap="chooseImage">
           <image src="{{post1}}"></image>
 
@@ -167,7 +167,7 @@
       <view> 恭喜您，成功入驻善家购</view>
       <view class="pc">
         <view>PC端管理后台</view>
-        <view >店铺地址：{{audits.auditInfo}}</view>
+        <view >店铺地址：<text bindtap="copy" data-text="{{audits.auditInfo}}">{{audits.auditInfo}}</text></view>
         <view>用户名：{{user.phone}}</view>
         <view>初始密码：{{user.phone}}</view>
       </view>

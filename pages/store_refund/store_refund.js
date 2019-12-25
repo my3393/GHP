@@ -117,11 +117,27 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //复制文本
+  copy(e){
+    console.log(e)
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.text,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+          }
+        })
+      }
+    })
+  },
   downloadFile: function (e) {
     console.log(e);
     wx.showModal({
       title: '提示',
-      content: '点击下方qq浏览器可进行下载',
+      content: '安卓点击下方qq浏览器可进行下载',
       success(res) {
         if (res.confirm) {
           let type = e.currentTarget.dataset.type;
@@ -429,7 +445,7 @@ Page({
         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
           if (userid) {
             wx.navigateTo({
-              url: '../login/login?mine=' + 1 + '&userid=' + userid
+              url: '../login/login?store_refund=' + 1 + '&userid=' + userid
             })
           } else {
             wx.navigateTo({

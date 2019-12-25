@@ -4,6 +4,9 @@
   margin-left: 12rpx;
   margin-top: 2rpx;
 }
+.inform{
+  margin-top: 5rpx;
+}
 .nav{
 
   padding: 30rpx 60rpx;

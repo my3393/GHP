@@ -344,6 +344,7 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
         clearInterval(setTime)
+        let data = res.data
         wx.requestPayment({
           timeStamp: res.data.sign.timeStamp,
           nonceStr: res.data.sign.nonceStr,
@@ -359,7 +360,7 @@ Page({
             })
              
             wx.redirectTo({
-              url: '../pay_success/pay_success?id=' + that.data.z_price + '&isDeduction=' + res.data.isDeduction + '&deductionIntegral=' + res.data.deductionIntegral,
+              url: '../pay_success/pay_success?id=' + that.data.z_price + '&isDeduction=' + data.isDeduction + '&deductionIntegral=' + data.deductionIntegral,
             })
           },
           fail(res) {

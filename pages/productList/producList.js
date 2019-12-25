@@ -536,4 +536,27 @@ Page({
       }
     })
   },
+  //查看全部
+  all(){
+    currentPage = 1;
+    provinceId = '';
+    cityId = '';
+    areaId = '';
+    townId = '';
+    storeId = '';
+    classifyId = '';
+    typeId = '';
+    sortType = 0;
+    keyword = '';
+    detail= [];
+    let dropdownList =  this.data.dropdownList
+    dropdownList[0].selected = false
+    this.setData({
+      tabIndex: 0,
+      region:'地区',
+      dropdownList,
+
+    })
+    this.getDetail();
+  }
 })

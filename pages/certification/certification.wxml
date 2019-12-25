@@ -53,7 +53,8 @@
         </view>
       </view> -->
     </view>
-    <button wx:if='{{!loading}}' bind:tap="submit" loading="{{loading}}" form-type="submit" class="submit">提交审核</button>
+    <button  wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
+    <button wx:elif='{{user.phone && loading == false}}'  bind:tap="sub" loading="{{loading}}" form-type="submit" class="submit">提交审核</button>
     <button wx:else loading="{{loading}}" form-type="submit" class="submit"></button>
   </view>
 

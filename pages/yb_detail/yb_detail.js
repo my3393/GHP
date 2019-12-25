@@ -43,7 +43,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+     detail = [];
   },
 
   /**
@@ -57,7 +57,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+      currentPage ++;
+      this.getdetail();
   },
   getdetail() {
     let that = this;

@@ -149,12 +149,20 @@ Page({
     app.res.req("app-web/store/collection", data, (res) => {
       console.log(res.data)
       if (res.status == 1016) {
+        wx.showToast({
+          title: '已关注',
+          icon:'none'
+        })
        that.getStore();
 
 
       }else if (res.status == 1017) {
+        wx.showToast({
+          title: '取消关注',
+          icon: 'none'
+        })
         that.getStore();
-
+        
 
       }else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({

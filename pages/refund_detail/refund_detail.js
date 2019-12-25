@@ -90,9 +90,15 @@ Page({
   },
   //修改申请
   xiugai(){
-    wx.navigateTo({
-      url: '../order_refund/order_refund?id=' + this.data.detail.id + '&status=' + status + '&z_status=' + this.data.detail.orderStatus,
-    })
+    if(this.data.detail.orderStatus == 17){
+      wx.navigateTo({
+        url: '../order_refund_s/order_refund_s?id=' + this.data.detail.id,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../order_refund/order_refund?id=' + this.data.detail.id + '&status=' + status + '&z_status=' + this.data.detail.orderStatus,
+      })
+    }
     
   },
   //退款进度

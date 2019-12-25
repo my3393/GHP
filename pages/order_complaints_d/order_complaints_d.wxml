@@ -31,7 +31,8 @@
                             
 </view>
 <view class="footer">
-  <view class="submit" bindtap="submit">撤销投诉</view>
+  <view wx:if='{{detail.complaintProgress === "平台已处理"}}'></view>
+  <view class="submit" bindtap="submit" wx:else>撤销投诉</view>
 </view>
 
 <!-- 撤销申请 -->

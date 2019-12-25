@@ -57,9 +57,9 @@
     <view>资助证明</view>
   </view>
   <view wx:else class="clearfix">
-    <view class="tu_img">
+    <view class="tu_img" bindtap="Preview" id='{{zhaos1}}' data-num="{{0}}">
       <image src="{{zhaos1}}"></image>
-      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{0}}" bindtap="detels">
+      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{0}}" catchtap="detels">
         <image src="../../images/deteles.png" />
       </view>
     </view>
@@ -72,9 +72,9 @@
 <view class="nop">相关照片</view>
 <view class="nav">
   <view class="clearfix">
-    <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
+    <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item' bindtap="Preview" id='{{item}}' data-num="{{1}}">
       <image src="{{item}}"></image>
-      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
+      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" catchtap="detels">
         <image src="../../images/deteles.png" />
       </view>  
     </view>

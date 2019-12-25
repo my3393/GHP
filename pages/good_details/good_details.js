@@ -319,6 +319,8 @@ Page({
             url: '../login/login?id=' + id
           })
         }
+      } else if (res.status == 1018) {
+
       } else if (res.status == 1028) {
 
       } else {
@@ -707,17 +709,31 @@ Page({
     app.res.req("app-web/product/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-
-
+        if (res.data.productVideo == null) {
+          that.setData({
+            good_img_num: res.data.productImgOss.length
+          })
+        } else {
+          that.setData({
+            good_img_num: res.data.productImgOss.length + 1
+          })
+        }
+        if (res.data.totalInventory == 0) {
+          that.setData({
+            isInventory: true
+          })
+        }
         that.setData({
           detail: res.data,
           spec: res.data.specificationItems,
           price: res.data.lowestPrice,
           title_img: res.data.productDefaultImgOss
+
         })
         that.getStore();
         that.cart_num();
         this.getSku();
+
         setTimeout(function () {
           that.recom();
         }, 1000)

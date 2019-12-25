@@ -221,6 +221,7 @@
 <view style="height:120rpx;"></view>
 <!-- 底部 -->
 <view class="foot top2">
+  <view class="foor_kon " wx:if='{{isInventory}}'>特产太抢手了，已售空，请耐心等待商家补货</view>
   <view class="foot_left">
     <view bindtap="Collection">
       <image wx:if='{{detail.isCollection == 0}}' src="../../images/xinxin_n.png" />
@@ -237,7 +238,12 @@
       <view>购物车</view>
     </view>
   </view>
-  <view class="foot_right">
+  <view wx:if='{{isInventory}}'  class="foot_right">
+       <button size="mini" class="joincart" style="opacity:0.4">加入购物车</button>
+   
+    <button size="mini" loading="{{loading}}" class="buynow" style="opacity:0.4" >立即购买</button>
+  </view>
+  <view wx:else class="foot_right">
     <button size="mini" class="joincart" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">加入购物车</button>
     <button size="mini" class="joincart" wx:else  bind:tap="showgg">加入购物车</button>
     <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button>

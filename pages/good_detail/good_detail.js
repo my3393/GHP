@@ -322,9 +322,11 @@ Page({
       //     })
       //   }
       //} 
-      else if (res.status == 1028) {
+      else if (res.status == 1018) {
 
-      } else {
+      } else if (res.status == 1028) {
+
+      }else {
         wx.showToast({
           title: res.msg,
           icon: 'none'
@@ -557,11 +559,21 @@ Page({
 
     app.res.req("app-web/product/collection", data, (res) => {
       console.log(res.data)
-      if (res.status == 1016 || res.status == 1017) {
+      if (res.status == 1016) {
+        wx.showToast({
+          title: '已收藏',
+          icon:'none'
+        })
         that.getDetail();
 
 
 
+      } else if (res.status == 1017){
+        wx.showToast({
+          title: '取消收藏',
+          icon: 'none'
+        })
+        that.getDetail();
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
           title: '请先登录',
@@ -719,12 +731,17 @@ Page({
             good_img_num: res.data.productImgOss.length + 1
           })
         }
-
+        if (res.data.totalInventory == 0){
+          that.setData({
+            isInventory :true
+          })
+        }
         that.setData({
           detail: res.data,
           spec: res.data.specificationItems,
           price: res.data.lowestPrice,
           title_img: res.data.productDefaultImgOss
+
         })
 
         that.getStore();

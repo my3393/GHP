@@ -123,7 +123,7 @@
       <view class="price_r">￥{{detail.freight}}</view>
     </view>
     <view class="z_right">
-      需付费:
+     <text wx:if='{{detail.orderStatus == 0}}'>需</text><text wx:else>实</text>付费:
       <view class="yan font">
         <text style="font-size:22rpx">￥</text> {{detail.payMoney}}
       </view>

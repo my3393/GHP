@@ -123,7 +123,27 @@ Page({
   onShareAppMessage: function () {
 
   },
-
+  //查看图片
+  Preview: function (e) {
+    var that = this;
+   
+    console.log(e)
+   if(e.currentTarget.dataset.num == 0){
+     var a = []
+     a.push(e.currentTarget.id)
+     wx.previewImage({
+       current: e.currentTarget.id,
+       urls: a
+     })
+   }else{
+     wx.previewImage({
+       current: e.currentTarget.id,
+       urls: that.data.images
+     })
+   }
+  
+   
+  },
   //删除个人照照片
   detels(e) {
     var that = this;

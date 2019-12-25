@@ -17,6 +17,7 @@ page {
   }
   .a-nav{
   z-index: 12!important;
+  
 }
   .top_dao{
         position: relative;
@@ -332,6 +333,16 @@ overflow: hidden;
     left: 0;
     padding-top: 10rpx;
     box-sizing: border-box;
+  }
+  .foor_kon{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background:rgba(241,34,0,0.2);
+    
+    top: -40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
   }
   .foot_left{
     float: left;

@@ -1,6 +1,6 @@
 <!-- pages/welfare_detail/welfare_detail.wxml -->
 <view class="top">
-  <image src="https://www.xingtu-group.cn/xcx_img/shanjiagou_logo.png" />
+  <image src="https://www.xingtu-group.cn/xcx_img/gy2.jpg" />
 </view>
 <view class="bot">
   <view class="progre">

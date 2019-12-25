@@ -194,7 +194,7 @@ Page({
                                   wx.redirectTo({
                                     url: '../good_detail/good_detail?id=' + that.data.detail_id
                                   })
-                                } else if (that.data.userid != '' && that.data.mine != '') {
+                                } else if (that.data.userid != '' && that.data.store_refund != '') {
                                   wx.redirectTo({
                                     url: '../store_refund/store_refund?userid=' + that.data.userid
                                   })

@@ -22,7 +22,7 @@ Page({
     ],
     tar:'0',
     photos:[
-      'https://www.xingtu-group.cn/xcx_img/sjgy_shouye.png'
+      'https://www.xingtu-group.cn/xcx_img/gy1.jpg'
     ],
     ...Canvas.data,
     num:'0'

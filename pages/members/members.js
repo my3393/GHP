@@ -99,6 +99,11 @@ Page({
   onReachBottom: function () {
 
   },
+  web(){
+     wx.navigateTo({
+       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/6_VIP.pdf',
+     })
+  },
   navBack(){
      wx.navigateBack({
        data:1

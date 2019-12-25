@@ -16,6 +16,9 @@ Page({
     number:'',
     name:'',
     id:'',
+    img_1:'',
+    img_2:'',
+    card_id:'',
   },
 
   /**
@@ -37,7 +40,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data,
+        })
+      },
+    })
   },
 
   /**
@@ -112,10 +124,28 @@ Page({
   },
   sub(){
     let that = this
-     if(thta.data.name == ''){
+    if (that.data.name == ''){
        wx.showToast({
-         title: '请上传',
+         title: '请输入你的真实姓名',
+         icon:'none'
        })
+    } else if (that.data.card_id == '') {
+       wx.showToast({
+         title: '请输入你的身份证号',
+         icon: 'none'
+       })
+    } else if (that.data.img_1 == '') {
+       wx.showToast({
+         title: '请上传身份证正面照',
+         icon: 'none'
+       })
+    } else if (that.data.img_2 == '') {
+       wx.showToast({
+         title: '请上传身份证反面照',
+         icon: 'none'
+       })
+     }else{
+       that.submit();
      }
   },
   submit() {
@@ -135,15 +165,16 @@ Page({
       app.res.req('app-web/user/resubmitauthentication', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
-          that.setData({
-            loading: !that.data.loading
-          })
+         
           wx.showToast({
             title: '重新提交成功，请等待平台审核',
             icon: 'none',
             duration: 2000
           })
           setTimeout(function () {
+            that.setData({
+              loading: !that.data.loading
+            })
             wx.navigateBack({
               data: 1
             })
@@ -175,15 +206,16 @@ Page({
       app.res.req('app-web/user/submitauthentication', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
-          that.setData({
-            loading: !that.data.loading
-          })
+          
           wx.showToast({
             title: '提交成功，请等待平台审核',
             icon: 'none',
             duration: 2000
           })
           setTimeout(function () {
+            that.setData({
+              loading: !that.data.loading
+            })
             wx.navigateBack({
               data: 1
             })
@@ -266,6 +298,56 @@ Page({
       name:name
     })
     console.log(result)
+  },
+  //绑定手机号
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.data.token,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data,
+          })
+          setTimeout(function () {
+            that.sub();
+          }, 1000)
+
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
   },
   //图片上传
   chooseImages(e) {

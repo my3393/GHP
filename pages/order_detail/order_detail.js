@@ -132,8 +132,9 @@ Page({
   //拨打电话
   phone(){
     let that = this;
+  
      wx.makePhoneCall({
-       phoneNumber: that.detail.servicePhone,
+       phoneNumber: that.data.detail.servicePhone,
      })
   },
   //取消原因

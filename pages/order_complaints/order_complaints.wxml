@@ -29,9 +29,9 @@
   </view>
   <textarea class="texta" placeholder="请输入订单投诉理由（必填）" maxlength="100" bindinput="valueChange"></textarea>
   <view>
-    <view class="tu_img" wx:for='{{simgs}}' wx:key='{{item.id}}'>
+    <view class="tu_img" wx:for='{{simgs}}' wx:for-index='idx' wx:key='{{item.id}}'>
       <image src="{{item}}" />
-      <view class="detele" bindtap="detele" id="{{item}}">
+      <view class="detele" bindtap="detel" data-index='{{idx}}'  id="{{item}}">
         <image src="../../images/deteles.png" />
       </view>
     </view>

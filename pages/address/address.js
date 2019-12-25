@@ -166,6 +166,7 @@ Page({
         wx.removeStorage({
           key: 'address',
           success: function(res) {
+            detail = []
             that.getDateil()
           },
         })
