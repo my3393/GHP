@@ -22,7 +22,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    this.getDefaultaddress();
+    
     id = options.id;
     this.setData({
       buyNum: options.num,
@@ -35,23 +35,32 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log('-监听页面初次渲染完成')
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+   
     let that = this;
-    wx.getStorage({
-      key: 'address',
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          adress: res.data
-        })
-      },
-    })
+    if (wx.getStorageSync('address')){
+      wx.getStorage({
+        key: 'address',
+        success: function (res) {
+          console.log(res.data)
+          that.setData({
+            adress: res.data
+          })
+          that.getDefaultaddress()
+        },
+      })
+    }else{
+      that.getDefaultaddress()
+       that.setData({
+         adress: []
+       })
+    }
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
@@ -166,6 +175,7 @@ Page({
           price: res.data.lowestPrice,
           title_img: res.data.productDefaultImgOss
         })
+       
         if (res.data.isSpecificaton == 1){
           that.getSku();
         }else{
@@ -196,6 +206,10 @@ Page({
     app.res.req('app-web/useraddress/defaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        that.setData({
+          defalutaddres: [],
+          defalutaddresId:'',
+        })
         if (res.data != null) {
           that.setData({
             defalutaddres: res.data,
@@ -269,26 +283,26 @@ Page({
   },
   pay() {
     let that = this;
-    if (that.data.defalutaddres != null && that.data.adress.length == 0) {
+    if (that.data.defalutaddres != '' && that.data.adress.length == 0) {
       that.setData({
         addressId: that.data.defalutaddres.id,
       })
       console.log(111)
 
-    } else if (that.data.defalutaddres != null && that.data.adress.length != 0) {
+    } else if (that.data.defalutaddres != '' && that.data.adress.length != 0) {
       that.setData({
         addressId: that.data.adress.id,
       })
       console.log(222)
 
-    } else if (that.data.defalutaddres == null && that.data.adress.length != 0) {
+    } else if (that.data.defalutaddres == '' && that.data.adress.length != 0) {
       that.setData({
         addressId: that.data.adress.id,
       })
       console.log(333)
 
 
-    } else if (that.data.defalutaddres == null && that.data.adress.length == 0) {
+    } else if (that.data.defalutaddres == '' && that.data.adress.length == 0) {
       wx.showToast({
         title: '请选择收货地址',
         icon: 'none'
@@ -439,5 +453,13 @@ Page({
         }
       }
     })
+  },
+  // 上个页面返回刷新
+  changeData: function () {
+    
+    this.getDetail();
+    //var options = { 'id': this.data.id }
+   
+
   },
 })

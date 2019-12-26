@@ -1,5 +1,5 @@
 <!-- pages/sure_order/sure_order.wxml -->
-<view class="top" wx:if='{{user.memberType == 0}}'>
+<view class="top" wx:if='{{user.memberType == 0}}' bindtap="member">
     <view class="top_img">
         <image src="../../images/hyjlb.png" />
     </view>

@@ -8,7 +8,7 @@ Page({
         detail_id:'',
         userid:'',
         mine:'',
-
+      store_refund:'',
     },
     onLoad(options) {
       console.log(options)
@@ -25,6 +25,11 @@ Page({
        }else if(options.userid && options.mine){
         that.setData({
           mine: options.mine,
+          userid: options.userid
+        })
+      } else if (options.userid && options.store_refund) {
+        that.setData({
+          store_refund: options.store_refund,
           userid: options.userid
         })
       } else if (options.mine) {
@@ -225,6 +230,14 @@ Page({
                                 } else if (that.data.mine == 17) {
                                   wx.redirectTo({
                                     url: '../address/address'
+                                  })
+                                } else if (that.data.mine == 19) {
+                                  wx.redirectTo({
+                                    url: '../store_refund/store_refund'
+                                  })
+                                } else if (that.data.mine == 18) {
+                                  wx.redirectTo({
+                                    url: '../certification/certification'
                                   })
                                 }else if (that.data.mine != ''){
                                   wx.redirectTo({

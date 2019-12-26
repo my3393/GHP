@@ -102,7 +102,9 @@
         <text bindtap="web">《大学生认证协议及特权服务说明》</text>
       </view>
     </view>
-    <button wx:if='{{!loading}}' bind:tap="sub" loading="{{loading}}" form-type="submit" class="submit">提交认证</button>
+    <button wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class="submit">提交认证</button>
+    <button  wx:elif='{{user.phone && loading == false}}'  bind:tap="sub" loading="{{loading}}" form-type="submit" class="submit">提交认证</button>
+    <button wx:else loading="{{loading}}" form-type="submit" class="submit"></button>
   </view>
   <view wx:if='{{audit == 0 || audit == 1 || audit == 2}}'>
     <view class="list">

@@ -1,8 +1,7 @@
 // pages/address/address.js
 const app = getApp();
 let sex;
-let currentPage = 1;
-let detail = [];
+
 Page({
 
   /**
@@ -50,7 +49,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    detail = [];
+  
   },
 
   /**
@@ -64,8 +63,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-     currentPage = currentPage +1;
-     this.getDateil();
+    
   },
 
   /**
@@ -113,9 +111,20 @@ Page({
           data: res.data,
         })
         if (sex) {
-          wx.navigateBack({
-            delta: 1,
-          })
+         
+            var pages = getCurrentPages();//当前页面栈
+            if (pages.length > 1) {
+              var beforePage = pages[pages.length - 2];//获取上一个页面实例对象
+              var currPage = pages[pages.length - 1]; // 当前页面，若不对当前页面进行操作，可省去
+              // beforePage.setData({       //如果需要传参，可直接修改A页面的数据，若不需要，则可省去这一步
+              //   id: res.data.data
+              // })
+              beforePage.changeData();//触发父页面中的方法
+            }
+            wx.navigateBack({
+              delta: 1
+            })
+         
         }
 
       } else {
@@ -166,7 +175,7 @@ Page({
         wx.removeStorage({
           key: 'address',
           success: function(res) {
-            detail = []
+           
             that.getDateil()
           },
         })
@@ -190,7 +199,7 @@ Page({
     app.res.req('app-web/useraddress/setdefaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        detail = [];
+      
         that.getDateil();
       } else {
         console.log(111)
@@ -206,7 +215,7 @@ Page({
   getDateil() {
     let that = this;
     let data = {
-      currentPage
+     
     }
     app.res.req('app-web/useraddress/list', data, (res) => {
       console.log(res.data)
@@ -219,9 +228,9 @@ Page({
           }
          
         }
-        detail.push(...res.data)
+     
         that.setData({
-          detail: detail,
+          detail: res.data,
 
         })
 
@@ -242,11 +251,8 @@ Page({
   },
   // 上个页面返回刷新
   changeData: function () {
-    currentPage = 1;
-    detail = [];
-    this.setData({
-      
-    })
+    
+    
     this.getDateil();
     //var options = { 'id': this.data.id }
     //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low

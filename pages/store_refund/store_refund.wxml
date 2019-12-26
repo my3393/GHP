@@ -27,7 +27,7 @@
         <view class='inform'>主营类型</view>
         <view class='inforin infor_r'>
           <picker class="pick" range="{{type}}" range-key="typeName" value="{{index}}" bindchange="type">
-            <input disabled='true' type='text' value='{{typ}}' placeholder='请选择主营商品类型' bindtap='showlabel'></input>
+            <input  disabled='true' type='text' value='{{typ}}' placeholder='请选择主营商品类型' bindtap='showlabel'></input>
           </picker>
         </view>
         <view class='enter'>
@@ -63,7 +63,7 @@
           <view>上传</view>
         </view>
         <view wx:else class="clearfix">
-          <view class="tu_img" bindtap="chooseImages" id="{{0}}">
+          <view class="tu_img" >
             <image src="{{zhaos1}}"></image>
             <view class="detele"   data-num="{{0}}" catchtap="detels">
               <image src="../../images/deteles.png" />
@@ -87,7 +87,7 @@
           <view>上传</view>
         </view>
         <view wx:else class="clearfix">
-          <view class="tu_img" bindtap="chooseImages" id="{{1}}">
+          <view class="tu_img" >
             <image src="{{zhaos2}}"></image>
             <view class="detele"  data-num="{{1}}" catchtap="detels">
               <image src="../../images/deteles.png" />
@@ -111,7 +111,7 @@
           <view>上传</view>
         </view>
         <view wx:else class="clearfix">
-          <view class="tu_img" bindtap="chooseImages" id="{{2}}">
+          <view class="tu_img" >
             <image src="{{zhaos3}}"></image>
             <view class="detele"  id="{{item}}" data-index='{{idx}}' data-num="{{2}}" catchtap="detels">
               <image src="../../images/deteles.png" />

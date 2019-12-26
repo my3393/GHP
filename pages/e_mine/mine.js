@@ -47,7 +47,9 @@ Page({
         that.setData({
           user: res.data
         })
+        console.log(that.data.user)
       },
+     
     })
   },
 
@@ -150,6 +152,7 @@ Page({
   },
   //大学生认证
   college(){
+     console.log(this.data.user.id == null)
     if (this.data.user.id == null || this.data.user.id == '') {
       wx.navigateTo({
         url: '../login/login?mine=' + 16,
@@ -163,9 +166,16 @@ Page({
   },
   //实名认证
   certification(){
-    wx.navigateTo({
-      url: '../certification/certification',
-    })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 18,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../certification/certification',
+      })
+    }
+   
   },
   //我的收藏
   collection(){
@@ -258,9 +268,16 @@ Page({
   },
   //商家入驻
   store_refund(){
-     wx.navigateTo({
-       url: '../store_refund/store_refund',
-     })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 19,
+      })
+    } else{
+      wx.navigateTo({
+        url: '../store_refund/store_refund',
+      })
+    }
+    
   },
   //登录
   login(){

@@ -303,6 +303,7 @@ Page({
       // wx.previewImage({
       //   urls: [r],
       // })
+      
       var test1 = setInterval(function () {
         that.getprogress();
       }, 1000)

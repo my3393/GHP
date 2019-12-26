@@ -86,7 +86,7 @@
   </view>
 </view>
 <view class="title">
-  <view class="title_h1 top2">爱心投票</view>
+  <view class="title_h1 top2">爱心投票({{love_num}})</view>
   <view class="neir">
     目前
     <text class="yan">全国共有{{pai.totalProjectCount}}个</text> 申请被资助的项目，

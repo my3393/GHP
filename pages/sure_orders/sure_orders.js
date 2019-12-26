@@ -41,15 +41,23 @@ Page({
    */
   onShow: function () {
     let that = this;
-    wx.getStorage({
-      key: 'address',
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          adress: res.data
-        })
-      },
-    })
+    if (wx.getStorageSync('address')) {
+      wx.getStorage({
+        key: 'address',
+        success: function (res) {
+          console.log(res.data)
+          that.setData({
+            adress: res.data
+          })
+          that.getDefaultaddress()
+        },
+      })
+    } else {
+      that.getDefaultaddress()
+      that.setData({
+        adress: []
+      })
+    }
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
@@ -95,6 +103,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  member() {
+    wx.navigateTo({
+      url: '../members/members',
+    })
   },
   //选择地址
   choose() {
@@ -448,6 +461,13 @@ Page({
       }
     })
   },
+  // 上个页面返回刷新
+  changeData: function () {
 
+    this.getDetail();
+    //var options = { 'id': this.data.id }
+
+
+  },
 
 })

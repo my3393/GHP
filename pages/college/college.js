@@ -355,6 +355,56 @@ Page({
       }
     })
   },
+  //绑定手机号
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.data.token,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data,
+          })
+          setTimeout(function () {
+            that.sub();
+          }, 1000)
+
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
+  },
   get() {
     let that = this;
     let result = that.plusXing(that.data.number, 1, 1)

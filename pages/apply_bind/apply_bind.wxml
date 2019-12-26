@@ -51,7 +51,7 @@
   温馨提示：为了您能及时使用善款，请确保提现账号为项目申请人本人账号且信息真实有效
 </view>
 
-<view class="submit" bindtap="submit">确定绑定</view>
+<view class="submit" bindtap="sub">确定绑定</view>
 
 
 <view class="adres" hidden="{{address}}">

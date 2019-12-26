@@ -45,6 +45,9 @@ Page({
     zhao2:true,
     zhao3:true,
     value:'',
+    addres:'',
+    typ:'',
+    xuan:'',
   },
 
   /**
@@ -250,6 +253,11 @@ Page({
         title: '请选择特产地址',
         icon: 'none'
       })
+    } else if (that.data.xuan == '') {
+      wx.showToast({
+        title: '请设置你店铺的公益宣言',
+        icon: 'none'
+      })
     } else if (that.data.zhaos1 == '') {
       wx.showToast({
         title: '请上传特产溯源证明',
@@ -274,7 +282,7 @@ Page({
     let data = {
       storeLogo: that.data.post1_name,
         storeName:that.data.name,
-       classifyId:that.data.typeId,
+       typeId:that.data.typeId,
         provinceId:province_id,
       cityId:city_id,
         areaId:area_id,
@@ -320,8 +328,8 @@ Page({
        name: this.data.audits.storeName,
        post1_name: this.data.audits.businessImg,
        post1: this.data.audits.storeLogoOss,
-       typ: this.data.audits.classifyName,
-       typeId: this.data.audits.classifyId,
+       typ: this.data.audits.typeName,
+       typeId: this.data.audits.typeId,
        prov: this.data.audits.provinceName,
        city: this.data.audits.cityName,
        area: this.data.audits.areaName,
@@ -442,7 +450,8 @@ Page({
           that.getType();
           wx.hideLoading()
 
-        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        }
+         else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
           if (userid) {
             wx.navigateTo({
               url: '../login/login?store_refund=' + 1 + '&userid=' + userid
@@ -452,7 +461,8 @@ Page({
               url: '../login/login?mine=' + 1
             })
           }       
-        } else {
+        }
+         else {
           wx.showToast({
             title: res.msg,
             icon: 'none'
@@ -475,22 +485,26 @@ Page({
         // })
 
 
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+      } 
+      // else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
 
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
-        if (userid) {
-          wx.navigateTo({
-            url: '../login/login?id=' + id + '&userid=' + userid
-          })
-        } else {
-          wx.navigateTo({
-            url: '../login/login?id=' + id
-          })
-        }
-      } else if (res.status == 1028) {
+      //   wx.showToast({
+      //     title: '请先登录',
+      //     icon: 'none'
+      //   })
+      //   if (userid) {
+      //     wx.navigateTo({
+      //       url: '../login/login?id=' + id + '&userid=' + userid
+      //     })
+      //   } else {
+      //     wx.navigateTo({
+      //       url: '../login/login?id=' + id
+      //     })
+      //   }
+      // } 
+      else if (res.status == 1028) {
+
+      } else if (res.status == 1030) {
 
       } else {
         wx.showToast({
@@ -565,10 +579,9 @@ Page({
       // wx.previewImage({
       //   urls: [r],
       // })
-      wx.showLoading({
-        title: '上传中',
-        mask:true
-      })
+      var test1 = setInterval(function () {
+        that.getprogress();
+      }, 1000)
       url = r
       that.setData({
         isshow: !that.data.isshow,
@@ -597,7 +610,7 @@ Page({
              icon: 'none'
            })
           
-          
+            clearTimeout(test1);
            that.setData({
              post1: datas.data.url,
              post1_name: datas.data.fileName,

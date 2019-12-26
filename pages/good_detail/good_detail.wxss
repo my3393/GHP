@@ -338,7 +338,7 @@ overflow: hidden;
     position: absolute;
     width: 100%;
     text-align: center;
-    background:rgba(241,34,0,0.2);
+    background:#FFDEDE;
     
     top: -40rpx;
     height: 40rpx;

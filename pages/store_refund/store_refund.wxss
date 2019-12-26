@@ -72,8 +72,21 @@ page{
   height: 140rpx;
   margin-bottom: 20rpx;
   float: left;
+  position: relative;
 }
 .tu_img image{
+  width: 100%;
+  height: 100%;
+}
+.detele{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+
+}
+.detele image{
   width: 100%;
   height: 100%;
 }

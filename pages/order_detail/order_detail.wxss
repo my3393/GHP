@@ -81,6 +81,8 @@ margin-right: 20rpx
 }
 .store_r{
   display: inline-block;
+  position: relative;
+  top: 2rpx;
 }
 .store_r image{
     width: 20rpx;

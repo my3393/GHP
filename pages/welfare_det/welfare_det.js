@@ -24,6 +24,8 @@ Page({
     istag:true,
     num:0,
     list:[],
+    love_num:0,
+    
   },
 
   /**
@@ -224,10 +226,14 @@ Page({
 
         //      })
         //    }
+        let num = 0
+        for(var i in res.data){
+          num = res.data[i].voteNum+ num
+        }
         ranklist.push(...res.data)
            that.setData({
              ranklist: ranklist,
-            
+             love_num:num
             
            })
          

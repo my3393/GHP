@@ -37,10 +37,11 @@ Page({
         showSkeleton: false
       })
     }, 1000)
-    let ids = [130,151]
-    var schoolStr = JSON.stringify(ids);
-    
-
+    if(options.bangId){
+      wx.setStorageSync('bandId', options.bangId)
+    }
+      
+   
   },
   
   /**
@@ -54,6 +55,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
@@ -93,15 +95,15 @@ Page({
    
      isRefresh = 0; //精选特产刷新
      detail = [];
-     classifyId = 1;
+     
     wx.showLoading({
       title: '刷新中',
     })
-    currentPage = 1;
+   
     setTimeout(function () {
       // wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
-      that.banner();
+      that.getbanner();
     }, 200)
   },
 
@@ -349,6 +351,7 @@ Page({
               banner:res.data,
 
             })
+            wx.hideLoading()
            that.getAdvert();
            
            that.getRecommend();

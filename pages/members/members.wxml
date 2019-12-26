@@ -124,9 +124,9 @@
         
       </view>
     </view>
-  
+  <view style="height:30rpx;"></view>
 </view>
-<view style="height:100rpx;"></view>
+
 <!-- 弹窗 -->
 <view class="popup" hidden="{{isdelete}}">
         <view class="popup_h1">恭喜你，会员开通成功</view>

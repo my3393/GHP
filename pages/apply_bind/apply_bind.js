@@ -31,6 +31,12 @@ Page({
     city: '',
     area: '',
     town: '',
+    typ:'',
+    addres:'',
+    minute:'',
+    phone:'',
+    name:'',
+    card:'',
     isprov: true,
     iscity: false,
     isqu: false,
@@ -103,6 +109,42 @@ Page({
     })
   },
   //提现提交
+  sub(){
+    let that = this;
+    if (that.data.typ == '') {
+      wx.showToast({
+        title: '请选择所属银行',
+        icon: 'none'
+      })
+    } else if (that.data.addres == '') {
+      wx.showToast({
+        title: '请选择开户所在地',
+        icon: 'none'
+      })
+    } else if (that.data.minute == '') {
+      wx.showToast({
+        title: '请填写详细地址',
+        icon: 'none'
+      })
+    } else if (that.data.phone == '') {
+      wx.showToast({
+        title: '请输入卡号',
+        icon: 'none'
+      })
+    } else if (that.data.name == '') {
+      wx.showToast({
+        title: '请输入持卡人姓名',
+        icon: 'none'
+      })
+    } else if (that.data.card == '') {
+      wx.showToast({
+        title: '请输入身份证号',
+        icon: 'none'
+      })
+    }else{
+      that.submit();
+    }
+  },
   submit(){
     let that =this;
     let data = {

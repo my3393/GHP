@@ -5,7 +5,7 @@
     <view>
         <view class="num">{{user.integral}}</view>
         <!-- <view class="znum">赚艺呗</view> -->
-         <view class="znum">爱心投票</view>
+         <view class="znum" bindtap="vote">爱心投票</view>
     </view>
     <view class="bootm" bindtap="detail">
        收支明细

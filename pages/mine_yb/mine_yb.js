@@ -72,7 +72,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+       
+  },
+  vote(){
+     wx.switchTab({
+       url: '../e_ welfare/e_ welfare',
+     })
   },
   detail(){
      wx.navigateTo({

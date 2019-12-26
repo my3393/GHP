@@ -46,7 +46,8 @@
         导入微信地址
     </view>
 </view> -->
-<view class="footer">
+<view wx:if='{{detail.length == 10}}'></view>
+<view class="footer" wx:else>
    <view class="add" bind:tap="add">
         <text >+ </text>
     新增地址

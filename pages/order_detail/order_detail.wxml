@@ -102,7 +102,7 @@
         <view class="tuik" catchtap="refund" data-status='{{item.orderStatus}}' id="{{item.id}}" wx:if='{{detail.orderStatus != 0 && detail.orderStatus != 4 && item.orderStatus == 0 || item.orderStatus == 1  }}'>退款</view>
         <view class="tuik zhong" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15 || item.orderStatus == 4 || item.orderStatus == 8 || item.orderStatus == 12 || item.orderStatus == 13 || item.orderStatus == 17}}'>退款中</view>
         <view class="tuik" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 6 || item.orderStatus == 10 || item.orderStatus == 14 || item.orderStatus == 18}}'>退款详情</view>
-         <view class="tuik zhong" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9 ||  item.orderStatus == 16}}'>退款成功</view>
+         <view class="tuik zhong" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9 ||  item.orderStatus == 16}}'>退款成功</view> 
       </view>
     </view>
     
