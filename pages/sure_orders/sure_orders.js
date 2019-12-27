@@ -233,6 +233,10 @@ Page({
     app.res.req('app-web/useraddress/defaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        that.setData({
+          defalutaddres: [],
+          defalutaddresId: '',
+        })
         if (res.data != null) {
           that.setData({
             defalutaddres: res.data,
@@ -305,26 +309,26 @@ Page({
   },
   pay() {
     let that = this;
-    if (that.data.defalutaddres != null && that.data.adress.length == 0) {
+    if (that.data.defalutaddres != '' && that.data.adress.length == 0) {
       that.setData({
         addressId: that.data.defalutaddres.id,
       })
       console.log(111)
 
-    } else if (that.data.defalutaddres != null && that.data.adress.length != 0) {
+    } else if (that.data.defalutaddres != '' && that.data.adress.length != 0) {
       that.setData({
         addressId: that.data.adress.id,
       })
       console.log(222)
 
-    } else if (that.data.defalutaddres == null && that.data.adress.length != 0) {
+    } else if (that.data.defalutaddres == '' && that.data.adress.length != 0) {
       that.setData({
         addressId: that.data.adress.id,
       })
       console.log(333)
 
 
-    } else if (that.data.defalutaddres == null && that.data.adress.length == 0) {
+    } else if (that.data.defalutaddres == '' && that.data.adress.length == 0) {
       wx.showToast({
         title: '请选择收货地址',
         icon: 'none'

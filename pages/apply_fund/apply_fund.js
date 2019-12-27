@@ -392,6 +392,11 @@ Page({
         title: '所需目标金额不能为空',
         icon: 'none'
       })
+    } else if (that.data.menoy > 100000 ) {
+      wx.showToast({
+        title: '所需目标金额最多10万',
+        icon: 'none'
+      })
     } else if (that.data.name == '') {
       wx.showToast({
         title: '请填写申请人姓名',

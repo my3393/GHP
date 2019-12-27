@@ -54,7 +54,7 @@
     <view class="shu_r">{{sum}}/100</view>
   </view>
   <textarea class="texta" placeholder="选填" maxlength="100" bindinput="valueChange"></textarea>
-  <view>
+  <view style="margin-top:20rpx;">
     <view class="tu_img" wx:for='{{simgs}}' wx:for-index='idx' wx:key='item'>
       <image src="{{item}}"></image>
       <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">

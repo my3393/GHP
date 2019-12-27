@@ -66,9 +66,9 @@
           <view class="nav-l-t">
               公益口号
           </view>
-          <view class="list-t">
+          <view class="list-t" bindtap="publicSlogan">
                <view style="display:inline-block;margin-right: 20rpx">
-                {{name}}
+                {{publicSlogan}}
               </view>
               <view class="list-right">
                   <image src="../../images/right.png" />

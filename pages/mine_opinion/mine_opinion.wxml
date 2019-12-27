@@ -18,10 +18,10 @@
   </view>
   <view class="nav">
    <textarea class="texta" value="{{sums}}" placeholder="请输入你要反馈的问题和意见（200字以内）" maxlength="200" bindinput="valueChanges"></textarea>
-  <view class="clearfix">
+  <view class="clearfix" style="margin-top:20rpx;">
     <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
       <image src="{{item}}"></image>
-      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
+      <view class="detele" id="{{item}}" data-index='{{idx}}'  bindtap="detels">
         <image src="../../images/deteles.png" />
       </view>  
     </view>
@@ -38,6 +38,6 @@
 </view>
    
 
-  <view class="submit" bindtap="submit">提交反馈</view>
+  <view class="submit" bindtap="sub">提交反馈</view>
 </view>
 <view style="margin-top:80rpx;" wx:if='{{tar == 1}}'></view>

@@ -117,6 +117,14 @@
         </view>
         <view>{{item.name}}</view>
     </view>
+     <view>
+       <button size="mine" class="butt" open-type="share">
+          <view style="height:46rpx">
+            <image src="../../images/fenx.png" />
+        </view>
+        <view>分享</view>
+       </button>
+    </view>
 </view>
  <!-- 关注弹窗 -->
   <!-- <view class="popup">

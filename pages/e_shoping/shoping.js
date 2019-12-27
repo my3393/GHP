@@ -104,8 +104,18 @@ Page({
   */
 
   onPullDownRefresh: function () {
+    let that = this;
      cartsdata = []
-     this.getDateil();
+    wx.showLoading({
+      title: '刷新中',
+    })
+
+    setTimeout(function () {
+      // wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      that.getDateil();
+    }, 200)
+    
   },
 
   /**
@@ -495,46 +505,50 @@ Page({
   delete(){
     let that = this;
     var Str = JSON.stringify(ids);
-    wx.showModal({
-      title: '提示',
-      content: '是否确认删除',
-      success(res) {
-        if (res.confirm) {
-          let data = {
-            shopProductIdJson: Str
-          }
-          app.res.req('app-web/shopcart/delete', data, (res) => {
-            console.log(res.data)
-            if (res.status == 1000) {
-              ids = [],
-                cartsdata = []
-              that.setData({
-                allnum: 0,
-                allprices: 0.00,
-              })
-              wx.showToast({
-                title: '已删除',
-                icon: 'none'
-              })
-              that.getDateil();
-            } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+    if(ids == ''){
 
-              wx.redirectTo({
-                url: '../login/login',
-              })
-            } else {
-              console.log(111)
-              wx.showToast({
-                title: res.msg,
-                icon: 'none'
-              })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '是否确认删除',
+        success(res) {
+          if (res.confirm) {
+            let data = {
+              shopProductIdJson: Str
             }
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
+            app.res.req('app-web/shopcart/delete', data, (res) => {
+              console.log(res.data)
+              if (res.status == 1000) {
+                ids = [],
+                  cartsdata = []
+                that.setData({
+                  allnum: 0,
+                  allprices: 0.00,
+                })
+                wx.showToast({
+                  title: '已删除',
+                  icon: 'none'
+                })
+                that.getDateil();
+              } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+
+                wx.redirectTo({
+                  url: '../login/login',
+                })
+              } else {
+                console.log(111)
+                wx.showToast({
+                  title: res.msg,
+                  icon: 'none'
+                })
+              }
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
         }
-      }
-    })
+      })
+    }
     
   },
   getDateil() {
@@ -556,6 +570,7 @@ Page({
           cartsdata: res.data,
 
         })
+        wx.hideLoading()
        // that.getRecommend();
         console.log(that.data.cartsdata)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

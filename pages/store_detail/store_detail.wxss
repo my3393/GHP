@@ -330,3 +330,13 @@ page{
     left: 0;
     z-index: 10; 
    }
+
+   .butt:after{
+     border: 0;
+   }
+   .butt{
+    background: #fff;
+    margin-top: -2rpx;
+    font-size: 22rpx;
+    
+   }

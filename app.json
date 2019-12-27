@@ -63,7 +63,8 @@
     "pages/agreement_store/agreement_store",
     "pages/order_refund_list/order_refund_list",
     "pages/person_xy/person_xy",
-    "pages/yb_detail/yb_detail"
+    "pages/yb_detail/yb_detail",
+    "pages/love_detail/love_detail"
   ],
   "tabBar": {
     "color": "#808080",

@@ -13,6 +13,9 @@
     <view wx:else class="clearfix">
         <view class="tu_img" >
       <image src="{{zhaos1}}"></image>
+        <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{0}}" catchtap="detels">
+        <image src="../../images/deteles.png" />
+      </view>
     </view>
     </view>
     <view>善款使用证明需下载善家购平台提供的善款提现证明模板，打印后前往地方市级政府开具，拍照上传至平台审核，审核通过后方可进行提现操作。</view>

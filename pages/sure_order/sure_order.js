@@ -15,6 +15,7 @@ Page({
     inpu: '',
     loading:true,
     member_zk:'',
+    deductionIntegral:'0'
   },
 
   /**

@@ -1,1 +1,2 @@
 /* pages/person_xy/person_xy.wxss */
+@import '../person_name/person_name'

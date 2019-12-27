@@ -1,0 +1,2 @@
+/* pages/love_detail/love_detail.wxss */
+@import '../wallet_detail/wallet_detail';

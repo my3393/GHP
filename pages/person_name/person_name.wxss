@@ -28,6 +28,9 @@ page{
     margin-left: 20rpx;
     margin-top: 29rpx;
 }
+.inpu input{
+  width: 450rpx
+}
 .submit{
     width: calc(100% - 40rpx);
     height: 80rpx;

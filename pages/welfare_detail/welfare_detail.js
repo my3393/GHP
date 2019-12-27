@@ -72,6 +72,18 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //查看图片
+  Preview: function (e) {
+    var that = this;
+    var urlsa = [];
+    console.log(e)
+    urlsa.push(e.currentTarget.id)
+    console.log(urlsa)
+    wx.previewImage({
+      current: e.currentTarget.id,
+      urls: that.data.list[e.currentTarget.dataset.num].publicityImgOss
+    })
+  },
   //查看更多
   gend:function(e){
     let that = this
@@ -101,7 +113,7 @@ Page({
           money: res.data,
 
         })
-     
+        that.draw('runCanvas', this.data.num, 1000);
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
         wx.redirectTo({

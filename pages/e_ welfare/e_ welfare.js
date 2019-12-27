@@ -145,6 +145,9 @@ Page({
     })
 
   },
+  changeData(){
+   
+  },
   //项目列表
   getList(){
     let that = this;

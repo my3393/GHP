@@ -4,6 +4,7 @@ let grade = 1;
 let id = '';
 let currentPage = 1;
 let list = [];
+
 Page({
 
   /**
@@ -19,6 +20,7 @@ Page({
     screenArray: [], //左侧导航栏内容
     screenId: "",  //后台查询需要的字段
     childrenArray: [], //右侧内容
+    typeId:'',
   },
 
   onLoad: function (options) {
@@ -26,6 +28,18 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        
+        that.setData({
+          user: res.data
+        })
+        that.getType();
+       
+      },
+    })
+   
    
   },
 
@@ -61,7 +75,7 @@ Page({
             isBang:false
           })
         }
-        that.getType();
+       
         if (res.data.loginId == null) {
             wx.navigateTo({
               url: '../login/login',
@@ -158,13 +172,16 @@ Page({
                Nostore:true,
              })
           }else{
-            id = res.data[0].id
+            
             that.setData({
               type: res.data,
-
+              typeId : res.data[0].id
             })
             that.getlist();
+
           }
+          that.getdymic();
+          wx.hideLoading()
        }else if(res.status == 1004 || res.status == 1005){
            wx.redirectTo({
              url: '../login/login',
@@ -183,13 +200,13 @@ Page({
     let data = {
       currentPage: currentPage,
         provinceId: that.data.user.bindProvinceId,
-      cityId: that.data.user.bindCityId,
+        cityId: that.data.user.bindCityId,
         areaId:'',
-      townId:'',
-        classifyId:id,
-      typeId:'',
+        townId:'',
+       
+        typeId:that.data.typeId,
         sortType:0,
-      keyword:''
+        keyword:''
     }
     app.res.req('app-web/product/list', data, (res) => {
       console.log(res.data)
@@ -244,10 +261,37 @@ Page({
       }
     })
   },
+ //文字轮播
+  getdymic() {
+    let that = this;
+    let data = {
+
+    }
+    app.res.req('app-web/donation/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        
+        that.setData({
+          dymic: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
    //商品切换
    tag: function (e) {
     var that = this;
-    id =  e.currentTarget.dataset.id;
+    id =  e.currentTarget.id;
     var nowTime = new Date();
     if (nowTime - this.data.tapTime < 500) {
       console.log('阻断')
@@ -255,15 +299,16 @@ Page({
     }
     console.log(e.currentTarget);
     list = [];
-    that.getlist();
+   
     this.setData({
-      tapTime: nowTime
+      tapTime: nowTime,
+      typeId:e.currentTarget.id
     });
 
     that.setData({
       tar: e.currentTarget.dataset.num,
     })
-
+     that.getlist();
 
   },
   //绑定家乡

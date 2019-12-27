@@ -168,11 +168,14 @@ Page({
 
     wx.chooseImage({
       count: 1,
-      sizeType: ['original', 'compressed'], //可选择原图或压缩后的图片
+      sizeType: ['compressed'], //可选择原图或压缩后的图片
       sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
       success: res => {
         // console.log(res.tempFilePaths[0]);
         var tempFilePaths = res.tempFilePaths;
+        var test1 = setInterval(function () {
+          that.getprogress();
+        }, 1000)
         wx.showLoading();
         const uploadTask = wx.uploadFile({
           url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
@@ -204,26 +207,58 @@ Page({
                 isshow: !that.data.isshow
               })
             }
-
+            clearTimeout(test1);
             wx.hideLoading();
             // do something
             wx.showToast({
               title: '上传成功',
               icon: 'none'
             })
+          }, fail(res) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传失败,请检查网络',
+              icon: 'none'
+            })
+            clearTimeout(test1);
           }
         })
-        uploadTask.onProgressUpdate((res) => {
-          console.log('上传进度', res.progress)
-          console.log('已经上传的数据长度', res.totalBytesSent)
-          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-        })
-        that.setData({
-          postersies: res.tempFilePaths[0]
-        })
+       
       }
     })
 
 
+  },
+  getprogress() {
+    let that = this;
+    let data = {
+    }
+
+    app.res.req('app-web/oss/progress', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // that.setData({
+        //   progress: res.data
+        // })
+
+        if (res.data == 100) {
+          wx.hideLoading();
+        } else {
+          wx.showLoading({
+            title: res.data + '%',
+            mask: true,
+          });
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
 })

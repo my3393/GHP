@@ -39,6 +39,7 @@ Page({
     }, 1000)
     if(options.bangId){
       wx.setStorageSync('bandId', options.bangId)
+      
     }
       
    
@@ -129,7 +130,7 @@ Page({
   search_product(e){
     console.log(e)
     wx.navigateTo({
-      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name + '&id=' + e.currentTarget.id,
+      url: '../productList/producList?searchKey=' + e.currentTarget.dataset.name + '&homeId=' + 1 ,
     })
   },
   search_all(){

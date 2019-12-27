@@ -28,10 +28,10 @@
     <view class="shu_r">{{sum}}/100</view>
   </view>
   <textarea class="texta" placeholder="请输入订单投诉理由（必填）" maxlength="100" bindinput="valueChange"></textarea>
-  <view>
+  <view style="margin-top:20rpx;">
     <view class="tu_img" wx:for='{{simgs}}' wx:for-index='idx' wx:key='{{item.id}}'>
       <image src="{{item}}" />
-      <view class="detele" bindtap="detel" data-index='{{idx}}'  id="{{item}}">
+      <view class="detele" bindtap="detel" data-index="{{idx}}"> 
         <image src="../../images/deteles.png" />
       </view>
     </view>

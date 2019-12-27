@@ -29,7 +29,7 @@ Page({
       {name:'店铺',img:'../../images/store.png',imgs:'../../images/store_active.png'},
       {name:'特产分类',img:'../../images/switch.png',imgs:'../../images/tes_active.png'},
       {name:'特色介绍',img:'../../images/tsjs.png',imgs:'../../images/tsjs_active.png'},
-      {name:'分享',img:'../../images/fenx.png',imgs:'../../images/fenx.png'},
+      // {name:'分享',img:'../../images/fenx.png',imgs:'../../images/fenx.png'},
     ],
     tar:'',
    Img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574139227810&di=19a2595df93625bf1bfcc027b4bcd79c&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a22859b248a5a801211d25d63b72.jpg%401280w_1l_2o_100sh.jpg",
@@ -49,7 +49,7 @@ Page({
       title: '加载中',
     })
     this.getStore();
-    this.getCommed();
+   
     this.setData({
       navH: app.globalData.navHeight
     })
@@ -66,7 +66,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          user: res.data
+        })
+      },
+    })
+    if(wx.getStorageSync('bangId')){
+      that.Bang();
+    }
   },
 
   /**
@@ -102,7 +114,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this;
+  
+    return {
+      title: '您的好友' + that.data.user.userName + '向您推荐了一个非常棒的特产店铺，点击立即进入' ,
+      path: '/pages/store_detail/store_detail?storeid=' + id + '&userid=' + that.data.user.id,
 
+    }
   },
   //分类选择
 
@@ -145,40 +163,86 @@ Page({
     let data = {
       storeId: id
     }
+    if (that.data.store.isCollection == 0){
+      app.res.req("app-web/store/collection", data, (res) => {
+        console.log(res.data)
+        if (res.status == 1016) {
+          wx.showToast({
+            title: '已关注',
+            icon: 'none'
+          })
+          that.getStore();
 
-    app.res.req("app-web/store/collection", data, (res) => {
-      console.log(res.data)
-      if (res.status == 1016) {
-        wx.showToast({
-          title: '已关注',
-          icon:'none'
-        })
-       that.getStore();
+
+        } else if (res.status == 1017) {
+          wx.showToast({
+            title: '取消关注',
+            icon: 'none'
+          })
+          that.getStore();
 
 
-      }else if (res.status == 1017) {
-        wx.showToast({
-          title: '取消关注',
-          icon: 'none'
-        })
-        that.getStore();
-        
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.showToast({
+            title: '请先登录',
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '取消关注将无法在我的收藏中快捷进入店铺',
+        success(res) {
+          if (res.confirm) {
+            app.res.req("app-web/store/collection", data, (res) => {
+              console.log(res.data)
+              if (res.status == 1016) {
+                wx.showToast({
+                  title: '已关注',
+                  icon: 'none'
+                })
+                that.getStore();
 
-      }else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
-        wx.navigateTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
-    })
+
+              } else if (res.status == 1017) {
+                wx.showToast({
+                  title: '取消关注',
+                  icon: 'none'
+                })
+                that.getStore();
+
+
+              } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+                wx.showToast({
+                  title: '请先登录',
+                  icon: 'none'
+                })
+                wx.navigateTo({
+                  url: '../login/login',
+                })
+              } else {
+                wx.showToast({
+                  title: res.msg,
+                  icon: 'none'
+                })
+              }
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+    
   },
   //返回上一页
   navBack(){
@@ -205,6 +269,7 @@ Page({
           store: res.data,
           Img: res.data.storeBackgroundImgOss
         })
+        that.getCommed();
         that.getList();
         that.gettype();
         if (res.data.introduce != null) {
@@ -214,12 +279,9 @@ Page({
           })
         }
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
+       
         wx.navigateTo({
-          url: '../login/login',
+          url: '../login/login?storeid=' + id + '&userid=' + that.data.user.id,
         })
       } else {
         wx.showToast({
@@ -483,5 +545,36 @@ Page({
       })
     }
    
+  },
+  //绑定
+  Bang() {
+    let that = this;
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
+
+    app.res.req("app-web/user/sharebinduser", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+        console.log('----绑定成功---')
+        wx.removeStorageSync('bandId')
+      } else if (res.status == 1028) {
+
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bandId')
+        console.log('----已经绑定----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bandId')
+        console.log('----已经绑定----')
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
 })

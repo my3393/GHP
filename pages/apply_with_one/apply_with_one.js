@@ -38,7 +38,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that =this
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data
+        })
+        console.log(that.data.user)
+      },
 
+    })
   },
 
   /**
@@ -79,6 +89,22 @@ Page({
       ismask: true,
     })
   },
+  //删除个人照照片
+  detels(e) {
+    var that = this;
+    console.log(e)
+    console.log(that.data.imgs)
+
+
+   
+      that.setData({
+        zhao1: true,
+        zhaos1: '',
+      })
+      zhao1 = ''
+    
+
+  },
   //重新提交信息
   again() {
     let that = this;
@@ -114,22 +140,37 @@ Page({
   },
   sub(){
     let that =this;
-    if(that.data.zhaos1 == ''){
+    if (that.data.user.isRealName == 0) {
+      wx.showModal({
+        title: '提示',
+        content: '你还没有实名认证，只有实名认证通过后，才可以提现',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../certification/certification',
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+      
+    } else if(that.data.zhaos1 == ''){
       wx.showToast({
         title: '请上传善款使用证明',
         icon:'none'
       })
-    } else if (that.data.zhaos1 == '') {
+    } else if (that.data.name == '') {
       wx.showToast({
         title: '请填写证明人姓名',
         icon: 'none'
       })
-    } else if (that.data.zhaos1 == '') {
+    } else if (that.data.zhiwie == '') {
       wx.showToast({
         title: '请填写证明人职位',
         icon: 'none'
       })
-    } else if (that.data.zhaos1 == '') {
+    } else if (that.data.phone == '') {
       wx.showToast({
         title: '请输入证明人电话',
         icon: 'none'
@@ -259,12 +300,7 @@ Page({
           }
         })
         uploadTask.onProgressUpdate((res) => {
-          let rm = res.progress
-          console.lof(rm)
-          wx.showToast({
-            title: res,
-            icon: 'none'
-          })
+       
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)
           console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)

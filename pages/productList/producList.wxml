@@ -112,7 +112,7 @@
         </view>
         <view class="tui-drawer-content tui-flex-attr">
           <view class="tui-attr-item {{item.selected?'producd_class':''}}" wx:for="{{className}}" wx:key="{{index}}" data-name="{{item.classifyName}}" data-index="{{index}}" data-id='{{item.id}}' bindtap="product">
-            <view class="tui-attr-ellipsis">{{item.classifyName}}</view>
+            <view class="tui-attr-ellipsis">{{item.btnSure}}</view>
           </view>
 
 

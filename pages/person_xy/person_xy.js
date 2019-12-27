@@ -103,6 +103,7 @@ Page({
             title: '修改成功',
             icon: 'none'
           })
+          this.getuser();
           setTimeout(function () {
             var pages = getCurrentPages();//当前页面栈
             if (pages.length > 1) {
@@ -114,9 +115,9 @@ Page({
               beforePage.changeData();//触发父页面中的方法
             }
             wx.navigateBack({
-              delta: 2
+              delta: 1
             })
-          })
+          },1000)
         } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
           wx.redirectTo({
             url: '../login/login',
@@ -129,5 +130,26 @@ Page({
         }
       })
     }
-  }
+  },
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('app-web/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+
+      }
+    })
+  },
 })

@@ -9,7 +9,7 @@
         <view class='canvasBox'>
           <view class='bigCircle'></view>
           <view class='littleCircle'></view>
-          <canvas canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
+          <canvas canvas-id="runCanvas"  id="runCanvas" class='canvas'></canvas>
         </view>
       </view>
       <view class="pro-rig">
@@ -53,7 +53,7 @@
 <view class="nav">
   <view class="title">
     <view class="title_h1">公益善款资助公示</view>
-    <view wx:for='{{list}}' wx:key='item'>
+    <view wx:for='{{list}}' wx:key='item' wx:for-index='idx'>
       <view class="title_h2">{{item.publicityTitle}}</view>
       <view class="mone">
         资助金额：
@@ -62,7 +62,7 @@
       <view class="title_t">{{item.publicityContent}}
       </view>
       <view class='title_img'>
-        <image wx:for='{{item.publicityImgOss}}' src="{{item}}" />
+        <image wx:for='{{item.publicityImgOss}}' src="{{item}}" bindtap="Preview" wx:key="item" src="{{item}}" id="{{item}}" data-num='{{idx}}' />
       </view>
       <view class="title_date">{{item.createDate}}</view>
       <view class="tit_bot"></view>

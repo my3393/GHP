@@ -31,7 +31,8 @@ Page({
     isqu: false,
     isjie: false,
     college:1,
-    bang_diz:'已绑定'
+    bang_diz:'已绑定',
+    publicSlogan:'请填写你的公益宣言'
   },
 
   /**
@@ -94,6 +95,11 @@ Page({
             bang_diz: '未绑定'
           })
         }
+        if (res.data.publicSlogan) {
+          that.setData({
+            publicSlogan: res.data.publicSlogan
+          })
+        }
       },
     })
   },
@@ -139,6 +145,11 @@ Page({
          url: '../college/college',
        })
      }
+  },
+  publicSlogan(){
+    wx.navigateTo({
+      url: '../person_xy/person_xy',
+    })
   },
    //性别选择
    sexChange(e){
@@ -373,7 +384,7 @@ Page({
    
     //var options = { 'id': this.data.id }
     //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
-    this.getuser();
+    //this.getuser();
   },
   //获取用户信息
   getuser() {

@@ -54,13 +54,14 @@ Page({
 
     pageIndex: 1,
     loadding: false,
-    pullUpOn: true
+    pullUpOn: true,
+    detail:[]
   },
   onLoad: function (options) {
     console.log(options)
     //首页分类
-    if(options.id){
-      classifyId = options.id
+    if(options.homeId){ 
+      keyword = options.searchKey
     }
     //从搜索页
     if(options.k){
@@ -377,7 +378,7 @@ Page({
         searchKey: searchKey,
         detail:[]
       })
-     
+      
       detail = [];
       currentPage = 1
       this.getDetail();
@@ -469,7 +470,7 @@ Page({
       cityId: cityId,
       areaId: areaId,
       townId: townId,
-      classifyId: classifyId,
+     
       typeId: typeId,
       sortType: sortType,
       keyword: keyword
@@ -513,7 +514,7 @@ Page({
     let data = {
 
     }
-    app.res.req("app-web/home/classify", data, (res) => {
+    app.res.req("app-web/home/grade/type", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for(var i in res.data){

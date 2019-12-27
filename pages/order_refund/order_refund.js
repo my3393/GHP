@@ -19,7 +19,7 @@ Page({
       { name: '商家缺货' },
       { name: '其他原因' },
     ],
-    cargos: [
+    cargos: [ 
       { name: '未收到货' },
       { name: '已收到货' },
     ],

@@ -49,7 +49,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data,
+        })
+      },
+    })
   },
 
   /**
@@ -170,12 +179,12 @@ Page({
         title: '请选择预计毕业年份',
         icon: 'none'
       })
-    } else if (img_1 == '') {
+    } else if (that.data.img_1 == '') {
       wx.showToast({
         title: '请上传学生证或学生卡正面照',
         icon: 'none'
       })
-    } else if (img_2 == '') {
+    } else if (that.data.img_2 == '') {
       wx.showToast({
         title: '请上传学生证或学生卡反面照',
         icon: 'none'

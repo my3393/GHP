@@ -1,8 +1,8 @@
 <view class='a-nav bg-white' style='height:{{navH}}px'>
   <view class='a-nav-title'>
     <view class="nac_top">
-      <text class="zhng s" wx:if='{{isbang == false}}'>未绑定家乡</text>
-      <text class="zhng" wx:else>{{user.bindAreaName}}</text>
+      <!-- <text class="zhng s" wx:if='{{isbang == false}}'>未绑定家乡</text>
+      <text class="zhng" wx:else>{{user.bindAreaName}}</text> -->
       <text>感恩家乡，怀念家乡味道</text>
     </view>
 
@@ -17,7 +17,16 @@
       </view>
       <text style=" vertical-align: middle;">家乡善款￥28,000.00 |</text>
     </view>
-    <view class="top-r">用户188****3352为家乡成功捐款￥1.58</view>
+    <view class="top-r">
+      <view class="tui-rolling-news">
+       
+        <swiper vertical="{{true}}" autoplay="{{true}}" circular="{{true}}" interval="3000" class="tui-swiper">
+          <swiper-item wx:for="{{dymic}}" wx:key="{{index}}" class="tui-swiper-item">
+            <view class="tui-news-item" bindtap='detail'>{{item.payUserName}}</view>
+          </swiper-item>
+        </swiper>
+      </view>
+    </view>
   </view>
   <view wx:if='{{Nostore}}'>
     <view class="kong">
@@ -26,7 +35,7 @@
       </view>
       <view>你的家乡还没有绑定相关特产上架</view>
       <view>你可邀请商家入驻</view>
-      <button open-type="share" class="bangd "  >
+      <button open-type="share" class="bangd ">
         邀请商家入驻
       </button>
       <view bind:tap="bang" style="margin-top:30rpx; color:#333;">更换绑定</view>
@@ -37,8 +46,8 @@
     <scroll-view class='left-navbar' scroll-y="true">
       <!-- <view wx:for="{{screenArray}}" class="{{ currentTab == index ? 'active' : '' }}" wx:key="unique" bindtap="{{ currentTab != index ? 'navbarTap':'' }}" id="{{index}}" data-screenId="{{item.screenId}}">{{item.screenName}}
       </view> -->
-      <view wx:for="{{type}}" wx:key="{{item.id}}" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
-        {{item.classifyName}}
+      <view wx:for="{{type}}" wx:key="{{item.id}}" wx:for-index="index" id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
+        {{item.typeName}}
       </view>
     </scroll-view>
     <!-- <view class="goods">
@@ -65,8 +74,8 @@
         </view> -->
       <view class="goods">
         <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-          <block  >
-            <swiper-item  class='swiper' wx:for='{{banner}}' id="{{item.id}}" bindtap="banner" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+          <block>
+            <swiper-item class='swiper' wx:for='{{banner}}' id="{{item.id}}" bindtap="banner" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
               <image class="banner_img" src="{{item.advertiseImgOss}}"></image>
             </swiper-item>
           </block>
@@ -105,4 +114,3 @@
     </view>
   </view>
 </view>
-

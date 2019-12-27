@@ -69,7 +69,7 @@
     <view>项目还未被资助</view>
   </view>
   <view wx:else>
-    <view class="title" wx:for='{{list}}'>
+    <view class="title" wx:for='{{list}}' wx:for-index='idx'>
 
       <view class="title_h2">{{item.publicityTitle}}</view>
       <view class="mone">
@@ -79,7 +79,7 @@
       <view class="title_t">{{item.publicityContent}}
       </view>
       <view class='title_img' >
-        <image wx:for='{{item.publicityImgOss}}' wx:key="item" src="{{item}}" />
+        <image wx:for='{{item.publicityImgOss}}' bindtap="Preview" wx:key="item" src="{{item}}" id="{{item}}" data-index="{{index}}" data-num='{{idx}}' />
       </view>
       <view class="title_date">{{list.createDate}}</view>
     </view>

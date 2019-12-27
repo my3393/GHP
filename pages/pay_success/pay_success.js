@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    deductionIntegral:0,
+    isDeduction:0,
   },
 
   /**
@@ -13,6 +14,12 @@ Page({
    */
   onLoad: function (options) {
      console.log(options)
+    if (options.isDeduction == 1) {
+      this.setData({
+        deductionIntegral: options.deductionIntegral,
+        isDeduction: options.isDeduction
+      })
+    }
      this.setData({
        menoy:options.id
      })

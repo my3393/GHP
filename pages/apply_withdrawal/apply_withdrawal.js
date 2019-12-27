@@ -127,6 +127,11 @@ Page({
        title: '请输入提现金额',
        icon:'none'
      })
+   } else if (that.data.money == 0) {
+     wx.showToast({
+       title: '提现金额需大于0',
+       icon: 'none'
+     })
    }else if(that.data.money > that.data.z_num){
      wx.showToast({
        title: '当前输入金额大于可提现金额',

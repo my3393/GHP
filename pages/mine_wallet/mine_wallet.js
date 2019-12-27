@@ -60,7 +60,11 @@ Page({
   onUnload: function () {
 
   },
-
+  wallet_detail(){
+     wx.navigateTo({
+       url: '../wallet_detail/wallet_detail',
+     })
+  },
   getinfor() {
     let that = this;
     let data = {

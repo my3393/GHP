@@ -15,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   this.getbanner();
+  
     this.setData({
       navH: app.globalData.navHeight
     })
@@ -34,6 +34,7 @@ Page({
    */
   onShow: function () {
     let that = this;
+    this.getbanner();
     //获取本地用户信息
     wx.getStorage({
       key: 'userinfo',
@@ -79,6 +80,18 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+  //分销收益
+  wallet_detail(){
+     wx.navigateTo({
+       url: '../wallet_detail/wallet_detail',
+     })
+  },
+  //大爱榜单
+  love_help(){
+    wx.navigateTo({
+      url: '../love_help/love_help',
+    })
   },
   downloadFile: function (e) {
     console.log(e);

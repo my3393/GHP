@@ -74,12 +74,12 @@
         </view>
         <view class="kait-n"  > 开通会员</view>
       </view>
-      <view class="shouyi">
+      <view class="shouyi" catchtap="wallet_detail">
         <view class="shouy-z">
           <view>{{user.transactionFinishAmount}}</view>
           <view class="shouy-n">分销收益</view>
         </view>
-        <view class="shouy-z">
+        <view class="shouy-z" catchtap="love_help">
           <view>0</view>
           <view class="shouy-n">大爱榜单</view>
         </view>

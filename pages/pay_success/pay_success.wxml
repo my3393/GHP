@@ -5,6 +5,7 @@
      </view>
      <view class="xiao">支付成功</view>
      <view class="menoy">￥{{menoy}}</view>
+     <!-- <view class="yb" wx:if='{{isDeduction == 1}}'>(艺呗抵扣 {{deductionIntegral}})</view> -->
      <view class="chak" bindtap="chak">查看订单</view>
      <view class="home" bindtap="home">返回首页</view>
 </view>

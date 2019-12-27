@@ -1,25 +1,25 @@
 // pages/wallet_detail/wallet_detail.js
 const app = getApp();
-let detail=[];
-let currentPage=1;
+let detail = [];
+let currentPage = 1;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
-    tar:0,
+
+    tar: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-     
-       this.getHas();
-     
+
+
+    this.getHas();
+
   },
 
   /**
@@ -40,8 +40,8 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-     detail = [];
-     currentPage = 1;
+    detail = [];
+    currentPage = 1;
   },
 
   /**
@@ -70,14 +70,14 @@ Page({
       currentPage
     }
 
-    app.res.req("app-web/user/settlementlist", data, (res) => {
+    app.res.req("app-web/user/donationlist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       detail.push(...res.data)
-       that.setData({
-         detail:detail
-       })
-      
+        detail.push(...res.data)
+        that.setData({
+          detail: detail
+        })
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({

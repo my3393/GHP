@@ -17,7 +17,7 @@
     <view class='infor'>
       <view class='inform'>学校名称</view>
       <view class='inforin'>
-        <input type='number' value="{{school}}" placeholder='请输入学校名称' bindinput='school'></input>
+        <input type='text' value="{{school}}" placeholder='请输入学校名称' bindinput='school'></input>
       </view>
     </view>
     <view class='infor clearfix'>

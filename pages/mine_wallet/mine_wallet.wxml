@@ -4,7 +4,8 @@
     <view>
         <view class="num">{{detail.remainTotalAmount}}</view>
         
-         <view class="znum tix" wx:if="{{user.memberType == 0 }}"  bindtap="member">开通会员</view>
+         <view class="znum" wx:if="{{user.memberType == 0 &&  detail.remainTotalAmount == 0}}"  bindtap="member">开通会员</view>
+          <view class="znum tix" wx:elif='{{user.memberType != 0 &&  detail.remainTotalAmount == 0}}' bindtap="drawal">提现</view>
          <view class="znum" wx:else bindtap="drawal">提现</view>
     </view>
     <view class="bootm yan" wx:if='{{user.memberType == 0}}' bindtap="member">
@@ -13,7 +14,7 @@
            <image  src="../../images/right.png" />
        </view>
     </view>
-     <view class="bootm" wx:else>
+     <view class="bootm" wx:else bindtap="wallet_detail">
        金额明细
        <view class="bootm-img">
            <image  src="../../images/right.png" />

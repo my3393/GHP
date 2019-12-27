@@ -9,6 +9,7 @@ Page({
         userid:'',
         mine:'',
       store_refund:'',
+      storeId:''
     },
     onLoad(options) {
       console.log(options)
@@ -30,6 +31,11 @@ Page({
       } else if (options.userid && options.store_refund) {
         that.setData({
           store_refund: options.store_refund,
+          userid: options.userid
+        })
+      } else if (options.userid && options.storeid) {
+        that.setData({
+          storeId: options.storeid,
           userid: options.userid
         })
       } else if (options.mine) {
@@ -179,6 +185,11 @@ Page({
                                   key: 'userinfo',
                                   data: res.data.data,
                                 })
+                                wx.setStorage({
+                                  key: 'bangId',
+                                  data: that.data.userid,
+                                })
+                                
                                 if (res.data.data.phone == null || res.data.data.phone == '') {
                                   console.log('未绑定手机号')
                                   wx.redirectTo({
@@ -202,6 +213,11 @@ Page({
                                 } else if (that.data.userid != '' && that.data.store_refund != '') {
                                   wx.redirectTo({
                                     url: '../store_refund/store_refund?userid=' + that.data.userid
+                                  })
+                                } else if (that.data.userid != '' && that.data.storeId != '') {
+                                  console.log('店铺')
+                                  wx.redirectTo({
+                                    url: '../store_detail/store_detail?id=' + that.data.storeId
                                   })
                                 } else if (that.data.mine == 11) {
                                   wx.redirectTo({
@@ -245,6 +261,8 @@ Page({
                                   })
                                 } else {
                                   console.log(2)
+                                  console.log(that.data.storeId)
+                                  console.log(that.data.userid)
                                   wx.switchTab({
                                     url: '../e_home/home'
                                   })
@@ -275,7 +293,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: "http://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
+      url: "https://sjg.api.xingtu-group.cn/app-web/login/defaultlogin",
       data: {
 
       },
@@ -314,5 +332,32 @@ Page({
     })
 
   },
+  //绑定
+  Bang() {
+    let that = this;
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
 
+    app.res.req("app-web/user/sharebinduser", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+        console.log('----绑定成功---')
+        wx.removeStorageSync('bandId')
+      }else if (res.status == 1028) {
+
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bandId')
+        console.log('----已经绑定----')
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })

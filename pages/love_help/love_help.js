@@ -1,18 +1,19 @@
 // pages/love_help/love_help.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+     ismask:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.Detail();
   },
 
   /**
@@ -62,5 +63,40 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  love_detail(){
+    wx.navigateTo({
+      url: '../love_detail/love_detail',
+    })
+  },
+  home(){
+    wx.switchTab({
+      url: '../e_home/home',
+    })
+  },
+  Detail() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('app-web/user/donationinfo', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          detail: res.data
+        })
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
 })
