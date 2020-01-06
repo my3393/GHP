@@ -6,16 +6,19 @@ Page({
    * 页面的初始数据
    */
   data: {
+   
+
     isshow: true,
     statusBarHeight: 0,
     titleBarHeight: 0,
+    love:'0'
   },
-
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+     
     this.setData({
       navH: app.globalData.navHeight
     })
@@ -80,6 +83,12 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+  //共享联盟
+  union(){
+    wx.navigateTo({
+      url: '../union/union',
+    })
   },
   //分销收益
   wallet_detail(){
@@ -279,6 +288,21 @@ Page({
     }
     
   },
+  imgsrcs: function (e) {
+    var that = this;
+    console.log(e)
+    wx.showToast({
+      title: '长按保存图片，扫码关注公众号',
+      icon: 'none',
+      duration: 3000
+    })
+    //图片预览
+    wx.previewImage({
+      current: 'https://www.xingtu-group.cn/xcx_img/gzh.jpg', // 当前显示图片的http链接   
+      urls: ['https://www.xingtu-group.cn/xcx_img/gzh.jpg'],// 需要预览的图片http链接列表
+
+    })
+  },
   //商家入驻
   store_refund(){
     if (this.data.user.id == null || this.data.user.id == '') {
@@ -340,15 +364,38 @@ Page({
           banner: res.data,
 
         })
-        setTimeout(function () {
-          that.getuser();
-        }, 200)
+        that.Detail();
+       
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
         })
       } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  Detail() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('app-web/user/donationinfo', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          love: res.data.totalMoney
+        })
+        
+        setTimeout(function () {
+          that.getuser();
+        }, 200)
+      }  else {
         wx.showToast({
           title: res.msg,
           icon: 'none'

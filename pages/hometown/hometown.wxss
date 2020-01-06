@@ -52,3 +52,7 @@
     border-radius: 40rpx;
     margin-left: 30rpx;
 }
+.t_active{
+  background: #F12200;
+  color: #fff;
+}

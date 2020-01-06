@@ -22,6 +22,7 @@ Page({
     id = options.id
    this.getDetail();
    this.getdiz();
+   
    // const base64 = new Base64();
    //console.log(data)
   },
@@ -79,6 +80,7 @@ Page({
     let data = {
       id
     }
+    
 
     app.res.req('app-web/userorder/logisticsinfo', data, (res) => {
       console.log(res.data)

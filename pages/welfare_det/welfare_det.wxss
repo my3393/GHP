@@ -442,3 +442,7 @@ overflow: hidden;
   border-radius: 30rpx;
   background: linear-gradient(to right, #f12200, #ff4e17);
 }
+.butt{
+  background: #fff;
+  margin: 0;
+}

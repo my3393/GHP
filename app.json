@@ -64,7 +64,9 @@
     "pages/order_refund_list/order_refund_list",
     "pages/person_xy/person_xy",
     "pages/yb_detail/yb_detail",
-    "pages/love_detail/love_detail"
+    "pages/love_detail/love_detail",
+    "pages/swim/swim",
+    "pages/union/union"
   ],
   "tabBar": {
     "color": "#808080",

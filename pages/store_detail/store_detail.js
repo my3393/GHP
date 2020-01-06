@@ -7,6 +7,7 @@ let keyword = '';
 let productType = 0;
 let list = [];
 let rich;
+let userid;
 Page({
 
   /**
@@ -44,7 +45,15 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    id = options.id
+    
+    if (options.storeid){
+      id = options.storeid
+    }else{
+      id = options.id
+    }
+    if (options.userid) {
+      userid = options.userid
+    }
     wx.showLoading({
       title: '加载中',
     })
@@ -171,6 +180,7 @@ Page({
             title: '已关注',
             icon: 'none'
           })
+          list = []
           that.getStore();
 
 
@@ -179,6 +189,7 @@ Page({
             title: '取消关注',
             icon: 'none'
           })
+          list = []
           that.getStore();
 
 
@@ -210,6 +221,7 @@ Page({
                   title: '已关注',
                   icon: 'none'
                 })
+                list = []
                 that.getStore();
 
 
@@ -218,6 +230,7 @@ Page({
                   title: '取消关注',
                   icon: 'none'
                 })
+                list = []
                 that.getStore();
 
 
@@ -260,11 +273,11 @@ Page({
       keyword: keyword,
       productType: productType,
     }
-
+   
     app.res.req("app-web/store/detail", data, (res) => {
-      console.log(res.data)
+      console.log(res.data +'店铺详情' )
       if (res.status == 1000) {
-       
+        console.log('店铺详情')
         that.setData({
           store: res.data,
           Img: res.data.storeBackgroundImgOss
@@ -272,6 +285,7 @@ Page({
         that.getCommed();
         that.getList();
         that.gettype();
+        wx.hideLoading()
         if (res.data.introduce != null) {
           rich = res.data.introduce.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
           that.setData({
@@ -280,8 +294,8 @@ Page({
         }
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
        
-        wx.navigateTo({
-          url: '../login/login?storeid=' + id + '&userid=' + that.data.user.id,
+        wx.redirectTo({
+          url: '../login/login?storeid=' + id + '&userid=' + userid,
         })
       } else {
         wx.showToast({
@@ -399,7 +413,7 @@ Page({
           load:false,
         })
         wx.hideLoading()
-
+        console.log('店铺推荐')
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
           title: '请先登录',
@@ -569,12 +583,7 @@ Page({
       } else if (res.status == 1031) {
         wx.removeStorageSync('bandId')
         console.log('----已经绑定----')
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
+      } 
     })
   },
 })

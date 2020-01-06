@@ -33,6 +33,8 @@ Page({
 
   onLoad: function (options) {
     console.log(options)
+   
+
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
@@ -127,6 +129,37 @@ Page({
       })
     }
    
+  },
+  //顶部导航
+  top_navigation(e){
+    
+    let index = e.currentTarget.id
+    if(index == 1){
+      console.log(index)
+      wx.navigateTo({
+        url: '../search/search',
+      })
+    }else if(index == 2){
+      wx.switchTab({
+        url: '../e_home/home',
+      })
+    } else if (index == 3) {
+      wx.switchTab({
+        url: '../e_specialty/e_specialty',
+      })
+    } else if (index == 4) {
+      wx.switchTab({
+        url: '../e_mine/mine',
+      })
+    } else if (index == 5) {
+     wx.navigateTo({
+       url: '../mine_collection/mine_collection',
+     })
+    } else if (index == 6) {
+      wx.navigateTo({
+        url: '../mine_opinion/mine_opinion',
+      })
+    }
   },
   //分享
   fenx(){
@@ -342,8 +375,8 @@ Page({
       cityId:'',
         areaId:'',
       townId:'',
-      classifyId: that.data.detail.classifyId,
-      typeId:'',
+      classifyId: '',
+      typeId: that.data.detail.typeId,
         sortType:0,
       keyword:'',
       
@@ -861,21 +894,21 @@ Page({
     })
 
   },
-  onPageScroll: function (e) {
+  // onPageScroll: function (e) {
+  //    console.log(e.scrollTop)
+  //   let that = this
+  //   if (e.scrollTop > 300) {
 
-    let that = this
-    if (e.scrollTop > 300) {
+  //     that.setData({
+  //       is_top: false,
+  //     })
+  //   } else {
 
-      that.setData({
-        istop: false,
-      })
-    } else {
-
-      that.setData({
-        istop: true
-      })
-    }
-  },
+  //     that.setData({
+  //       is_top: true
+  //     })
+  //   }
+ // },
   /**
    * 生命周期函数--监听页面卸载
    */

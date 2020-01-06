@@ -139,7 +139,7 @@ Page({
   },
   //选购特产
   non(){
-    wx.navigateTo({
+    wx.switchTab({
       url: '../e_home/home',
     })
   },
@@ -571,7 +571,7 @@ Page({
 
         })
         wx.hideLoading()
-       // that.getRecommend();
+        that.getRecommend();
         console.log(that.data.cartsdata)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)

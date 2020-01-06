@@ -1,0 +1,17 @@
+/* pages/union/union.wxss */
+.top{
+  width: 100%;
+  background: #fff;
+  height: 60rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  line-height: 60rpx;
+  z-index: 9;
+}
+.top_a{
+  color: #f12200;
+  border-bottom: 2rpx solid #f12200;
+}

@@ -19,7 +19,7 @@ page{
     border-bottom: 2rpx solid #f12200;
   }
   .li{
-      margin-top: 60rpx;
+      margin-top: 20rpx;
   }
   .list{
       margin-top: 2rpx;

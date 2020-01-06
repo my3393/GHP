@@ -165,12 +165,14 @@
   </view>
   <view style='height:100rpx'></view>
   <view class="footer">
-    <view bindtap="fenx">
-      <view class="fenx">
+    <view >
+      <button size="min" open-type="share" class="butt">
+        <view class="fenx">
         <image src="../../images/fenx.png" />
 
       </view>
-      <view>分享</view>
+      <view style="margin-top:-20rpx">分享</view>
+      </button>
     </view>
     <view class="submit" bindtap="vote">
       帮TA投票

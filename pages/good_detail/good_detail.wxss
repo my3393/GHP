@@ -339,7 +339,7 @@ overflow: hidden;
     width: 100%;
     text-align: center;
     background:#FFDEDE;
-    
+    opacity: 0.96;
     top: -40rpx;
     height: 40rpx;
     line-height: 40rpx;

@@ -9,7 +9,7 @@
     <view class="list_date">
       <view>{{item.createDate}}</view>
       <view class="list_r" wx:if='{{item.recordStatus == 0}}'>待结算</view>
-       <view class="list_r" wx:if='{{item.recordStatus == 1}}'>已提现</view>
+       <view class="list_r" wx:if='{{item.recordStatus == 1 == item.recordType == 2}}'>已提现</view>
         <view class="list_r" wx:if='{{item.recordStatus == 2}}'>提现审核中</view>
          <view class="list_r" wx:if='{{item.recordStatus == 3}}'>提现驳回</view>
 

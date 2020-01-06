@@ -27,6 +27,7 @@ Page({
     ],
     progre: 0,
     typ: '',
+    sums:'',
     img_num:0,
   },
 
@@ -79,6 +80,12 @@ Page({
   onReachBottom: function () {
 
   },
+  //反馈问题
+  valueChanges(e){
+    this.setData({
+       sums:e.detail.value
+    })
+  },
   //删除个人照照片
   detels(e) {
     var that = this;
@@ -94,13 +101,19 @@ Page({
         img_num: that.data.img_num - 1
       })
       console.log(simages.length)
-      if (simages.length < 9) {
+      if (simages.length < 3) {
         that.setData({
           img_show: false
         })
       }
     
 
+  },
+  type(e){
+    console.log(e)
+    this.setData({
+      typ:this.data.type[e.detail.value].name
+    })
   },
   //查看图片
   Preview: function (e) {
@@ -121,41 +134,44 @@ Page({
          title: '请选择反馈类型',
          icon:'none'
        })
-    } else if (that.data.typ == '') {
+    } else if (that.data.sums == '') {
       wx.showToast({
-        title: '请选择反馈类型',
+        title: '请说明你要反馈的问题和意见',
         icon: 'none'
       })
-    } else if (that.data.typ == '') {
+    } else if (that.data.images == '') {
       wx.showToast({
-        title: '请选择反馈类型',
+        title: '请上传图片',
         icon: 'none'
       })
     }else{
       that.submit()
     }
   },
-  getprogress() {
+  submit() {
+
     let that = this;
+    var Str = JSON.stringify(simages);
     let data = {
-      
+    
+        feedbackType:that.data.typ,
+      feedbackContent:that.data.sums,
+      feedbackImgJson: Str
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('app-web/feedback/submit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        that.setData({
-          progress: res.data
-        })
-
-        if (res.data == 100) {
-          wx.hideLoading();
-        } else {
-          wx.showLoading({
-            title: res.data + '%',
-            mask: true,
-          });
-        }
+          wx.showToast({
+            title: '提交成功',
+            icon:'none'
+          })
+          setTimeout(function(){
+            wx.navigateBack({
+              dalet:1
+            })
+          },1000)
+       
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
@@ -248,7 +264,7 @@ Page({
                 images: images,
                 img_num: images.length
               })
-              if (simages.length == 9) {
+              if (simages.length == 3) {
                 that.setData({
                   img_show: !that.data.img_show
                 })
@@ -303,21 +319,20 @@ Page({
   getDetail() {
     let that = this;
     let data = {
-      orderType: orderType,
-      currentPage: currentPage
+      currentPage
     }
 
-    app.res.req('app-web/userorder/list', data, (res) => {
+    app.res.req('app-web/feedback/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
       
-        detail.push(...res.data)
+       // detail.push(...res.data)
         that.setData({
           
-          detail: detail
+          detail: res.data
         })
       
-        console.log(detail)
+       
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',

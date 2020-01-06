@@ -1,0 +1,22 @@
+<!--pages/swim/swim.wxml-->
+<view>
+  <view class="goods-list clearfix" wx:for='{{detail}}' wx:key='id' bindtap="good_detail" id="{{item.id}}" data-status="{{item.isShelf}}">
+    <view class="goods-img">
+      <image src="{{item.productDefaultImgOss}}"></image>
+      <view class="yishi" wx:if='{{item.isShelf == 0}}'>已失效</view>
+    </view>
+    <view class="goods-n">
+      <view class="goods-j">{{item.productName}}</view>
+      <view class="goods-q dan">{{item.productTitle}}</view>
+      <view class="goods-q">{{item.provinceName}} {{item.cityName}} {{item.areaName}} {{item.townName}}</view>
+      <view class="goods-t">
+        <view class="goods-p">
+          <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}
+        </view>
+        <view class="goods-g">
+          <image src="../../images/shop.png" />
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

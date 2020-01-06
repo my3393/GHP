@@ -1,15 +1,15 @@
 <!--pages/mine_opinion/mine_opinion.wxml-->
 <view class="top">
-    <view wx:for='{{tag}}' bindtap="tag" wx:for-index='idx' data-index="{{idx}}" class="{{tar == idx ? 'top_a' : ''}}">
-       {{item.name}}
-    </view>
-</view> 
+  <view wx:for='{{tag}}' bindtap="tag" wx:for-index='idx' data-index="{{idx}}" class="{{tar == idx ? 'top_a' : ''}}">
+    {{item.name}}
+  </view>
+</view>
 <view style="margin-top:80rpx;" wx:if='{{tar == 0}}'>
   <view class='infor'>
     <view class='inform'>反馈类型</view>
     <view class='inforin infor_r'>
       <picker class="pick" range="{{type}}" range-key="name" value="{{index}}" bindchange="type">
-            <input disabled='true' type='text' value='{{typ}}' placeholder='请选择反馈类型' bindtap='showlabel'></input>
+        <input disabled='true' type='text' value='{{typ}}' placeholder='请选择反馈类型' bindtap='showlabel'></input>
       </picker>
     </view>
     <view class='enter'>
@@ -17,27 +17,46 @@
     </view>
   </view>
   <view class="nav">
-   <textarea class="texta" value="{{sums}}" placeholder="请输入你要反馈的问题和意见（200字以内）" maxlength="200" bindinput="valueChanges"></textarea>
-  <view class="clearfix" style="margin-top:20rpx;">
-    <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
-      <image src="{{item}}"></image>
-      <view class="detele" id="{{item}}" data-index='{{idx}}'  bindtap="detels">
-        <image src="../../images/deteles.png" />
-      </view>  
-    </view>
-    <view class="zhao"  bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
-      <view class="zhao_img">
-        <image src="../../images/zhao.png"></image>
-       
-      
+    <textarea class="texta" value="{{sums}}" placeholder="请输入你要反馈的问题和意见（200字以内）" maxlength="200" bindinput="valueChanges"></textarea>
+    <view class="clearfix" style="margin-top:20rpx;">
+      <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
+        <image src="{{item}}"></image>
+        <view class="detele" id="{{item}}" data-index='{{idx}}' bindtap="detels">
+          <image src="../../images/deteles.png" />
+        </view>
       </view>
-      <view>{{img_num}}/9</view>
+      <view class="zhao" bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
+        <view class="zhao_img">
+          <image src="../../images/zhao.png"></image>
+
+
+        </view>
+        <view>{{img_num}}/3</view>
+      </view>
     </view>
+
   </view>
 
-</view>
-   
 
   <view class="submit" bindtap="sub">提交反馈</view>
 </view>
-<view style="margin-top:80rpx;" wx:if='{{tar == 1}}'></view>
+<view style="margin-top:80rpx;" wx:if='{{tar == 1}}'>
+    <view class="nav" wx:for='{{detail}}' wx:key='item' >
+       <view class="nav_tit">
+         意见反馈：{{item.feedbackContent}}
+       </view>
+       <view class="nav_img">
+          <view wx:for='{{item.feedbackImgOss}}' wx:key='item' >
+            <image src="{{item}}"></image>
+          </view>
+          
+       </view>
+       <view class="shij">
+         <view>模块归属：{{item.feedbackType}}</view>
+         <view >{{item.createDate}}</view>
+       </view>
+       <view class="pint" wx:if='{{item.status != 0}}'>
+         <text> 平台回复：</text> {{item.replyContent}}
+       </view>
+    </view>
+</view>

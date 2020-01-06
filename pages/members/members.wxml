@@ -68,9 +68,9 @@
             <image src="../../images/member02.png" />
 
           </view>
-           <view wx:if='{{current == 0}}' >购物{{detail[2].memberShareRatio * 100}}%分红</view>
-          <view wx:if='{{current == 1}}'>购物{{detail[1].memberShareRatio * 100}}%分红</view>
-          <view wx:if='{{current == 2}}'>购物{{detail[0].memberShareRatio * 100}}%分红</view>
+           <view wx:if='{{current == 0}}' >订单{{detail[2].memberShareRatio * 100}}%分红</view>
+          <view wx:if='{{current == 1}}'>订单{{detail[1].memberShareRatio * 100}}%分红</view>
+          <view wx:if='{{current == 2}}'>订单{{detail[0].memberShareRatio * 100}}%分红</view>
         </view>
         <view class="din-1">
           <view class="din-img">
@@ -78,9 +78,9 @@
 
           </view>
          
-          <view wx:if='{{current == 0}}'>订单{{detail[2].memberDiscount * 100}}%折扣</view>
-          <view wx:if='{{current == 1}}'>订单{{detail[1].memberDiscount * 100}}%折扣</view>
-          <view wx:if='{{current == 2}}'>订单{{detail[0].memberDiscount * 100}}%折扣</view>
+          <view wx:if='{{current == 0}}'>购物{{detail[2].memberDiscount * 100}}%折扣</view>
+          <view wx:if='{{current == 1}}'>购物{{detail[1].memberDiscount * 100}}%折扣</view>
+          <view wx:if='{{current == 2}}'>购物{{detail[0].memberDiscount * 100}}%折扣</view>
         </view>
         <view class="din-1">
           <view class="din-img">

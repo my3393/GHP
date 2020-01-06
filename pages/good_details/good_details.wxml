@@ -40,37 +40,37 @@
 </view>
 <!-- 顶部导航 -->
 <view class="naviga" style='top:{{navH}}px' hidden="{{naviga}}">
-  <view class="naviga_list">
-    <view class="naviga_img">
+  <view class="naviga_list" bindtap="top_navigation" id="{{1}}">
+    <view class="naviga_img" >
       <image src="../../images/searchs.png" />
     </view>
     搜索特产
   </view>
-   <view class="naviga_list">
+  <view class="naviga_list" bindtap="top_navigation" id="{{2}}">
     <view class="naviga_img">
       <image src="../../images/specialty.png" />
     </view>
     善家购
   </view>
-  <view class="naviga_list">
+  <view class="naviga_list" bindtap="top_navigation" id="{{3}}">
     <view class="naviga_img">
       <image src="../../images/specialty.png" />
     </view>
     家乡特产
   </view>
-  <view class="naviga_list">
+  <view class="naviga_list" bindtap="top_navigation" id="{{4}}">
     <view class="naviga_img">
       <image src="../../images/mine.png" />
     </view>
     个人中心
   </view>
-   <view class="naviga_list">
+   <view class="naviga_list" bindtap="top_navigation" id="{{5}}">
     <view class="naviga_img">
-      <image src="../../images/mine.png" />
+      <image src="../../images/yjfk.png" />
     </view>
     我的收藏
   </view>
-  <view class="naviga_list">
+  <view class="naviga_list" bindtap="top_navigation" id="{{6}}">
     <view class="naviga_img">
       <image src="../../images/yjfk.png" />
     </view>

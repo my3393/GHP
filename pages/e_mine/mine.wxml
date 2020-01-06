@@ -80,7 +80,7 @@
           <view class="shouy-n">分销收益</view>
         </view>
         <view class="shouy-z" catchtap="love_help">
-          <view>0</view>
+          <view>{{love}}</view>
           <view class="shouy-n">大爱榜单</view>
         </view>
         <view class="shouy-z" catchtap="integral">
@@ -147,6 +147,12 @@
         <image src="../../images/d-fk.png" />
       </view>
       <view>我的钱包</view>
+    </view>
+     <view class="din-1" bindtap="union">
+      <view class="din-img">
+        <image src="../../images/hy.png" />
+      </view>
+      <view>共享联盟</view>
     </view>
     <view class="din-1" bindtap="member">
       <view class="din-img">
@@ -216,7 +222,7 @@
       </view>
       <view>分享善家</view>
     </view> -->
-    <view class="din-1">
+    <view class="din-1" bindtap="imgsrcs">
       <view class="din-img">
         <image src="../../images/gzgzh.png" />
       </view>
@@ -230,8 +236,9 @@
     </view> -->
   </view>
 </view>
-<button class='skblue_bg' data-url="https://www.xingtu-group.cn/sjg_xieyi/8_Prove.pdf" data-type="pdf" catchtap='downloadFile'>下载</button>
+<!-- <button class='skblue_bg' data-url="https://www.xingtu-group.cn/sjg_xieyi/8_Prove.pdf" data-type="pdf" catchtap='downloadFile'>下载</button> -->
 <view class="foot-boot">
   <view>善家购</view>
   <view class="foot-boot-m">大爱无疆，感恩家乡</view>
 </view>
+

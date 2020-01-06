@@ -4,7 +4,7 @@ const app = getApp();
 let currentPage = 1;
 let status = 0;
 let list = [];
-let provinceId = '';
+
 let cityId = '';
 let areaId = '';
 let townId ='';
@@ -25,7 +25,8 @@ Page({
       'https://www.xingtu-group.cn/xcx_img/gy1.jpg'
     ],
     ...Canvas.data,
-    num:'0'
+    num:'0',
+    provinceId:''
   },
 
   /**
@@ -77,6 +78,12 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+  //寻找老乡
+  xun(){
+    wx.navigateTo({
+      url: '../hometown/hometown',
+    })
   },
   //申请资助
   appl(){
@@ -145,8 +152,9 @@ Page({
     })
 
   },
-  changeData(){
-   
+  changeDatas(){
+    list = [];
+    this.getList()
   },
   //项目列表
   getList(){
@@ -154,7 +162,7 @@ Page({
     let data = {
       status:status,
       currentPage: currentPage,
-      provinceId:provinceId,
+      provinceId:that.data.provinceId,
       cityId: cityId,
       areaId: areaId,
       townId: townId,
@@ -163,6 +171,7 @@ Page({
     app.res.req('app-web/project/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        console.log(list)
          for(var i in res.data){
            let num = (res.data[i].raiseAmount / res.data[i].targetAmount ) * 100
            res.data[i].num = num.toFixed(2)

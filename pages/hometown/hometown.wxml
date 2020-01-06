@@ -2,35 +2,18 @@
 <view class="nav">
    <view >选择省份</view>
    <view >
-        <view class="tag">
+        <!-- <view class="tag">
            全部
+       </view> -->
+       <view class="tag {{tar == index ?'t_active':''}}" wx:for='{{province}}' wx:for-index='index' wx:key='item' id="{{item.id}}" bindtap="tag" data-index="{{index}}">
+           {{item.name}}
        </view>
-       <view class="tag">
-           广东
-       </view>
-       <view class="tag">
-           广东
-       </view>
-       <view class="tag">
-           广东
-       </view>
-       <view class="tag">
-           广东
-       </view>
-       <view class="tag">
-           广东
-       </view>
-       <view class="tag">
-           广东
-       </view>
-       <view class="tag">
-           广东
-       </view>
+       
    </view>
    <view ></view>
 </view>
 
 <view class="page-footer">
-       <view class='chong'>重置</view>
-       <view class="que" bindtap="open_list">筛选老乡</view>
+       <view class='chong'>全国</view>
+       <view class="que" bindtap="open">筛选老乡</view>
    </view>

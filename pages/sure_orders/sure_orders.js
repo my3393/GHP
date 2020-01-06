@@ -156,6 +156,7 @@ Page({
       }
     })
   },
+  
   //商品详情
   getDetail() {
     console.log(ids)

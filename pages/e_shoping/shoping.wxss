@@ -1,6 +1,11 @@
 page{
   background: #f9f9f9;
 }
+.kong{
+  
+  position: absolute;
+  top: 28%;
+}
 .all-top{
   position: fixed;
   top: 0;
@@ -12,6 +17,11 @@ page{
   justify-content: space-between;
   background: #ffffff;
   z-index: 99;
+}
+.weini{
+  font-size: 36rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
 }
 .bi{
   line-height: 70rpx;

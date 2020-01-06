@@ -57,10 +57,10 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "pages/store_detail/store_detail",
-					"pathName": "pages/store_detail/store_detail",
-					"query": "id=3&userid=52",
+					"id": 0,
+					"name": "pages/welfare_det/welfare_det",
+					"pathName": "pages/welfare_det/welfare_det",
+					"query": "id=26&userid=52",
 					"scene": null
 				}
 			]

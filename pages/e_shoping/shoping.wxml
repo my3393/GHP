@@ -5,7 +5,9 @@
     </view>
     <view class="non" bindtap="non">选购特产</view>
   </view>
-  <view class="nav" style="margin-top:90%">
+
+  <view class="nav" style="margin-top:85%">
+    <view class="weini">为你推荐</view>
     <view class="nav-list" wx:for="{{recommend}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
       <view class="list-img">
         <image src="{{item.productDefaultImgOss}}" />

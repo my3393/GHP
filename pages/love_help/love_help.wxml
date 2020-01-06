@@ -1,5 +1,5 @@
 <view class="top">
-    <view class="title">爱心助力金额</view>
+    <view class="title">当前，你已为家乡助力</view>
    
     <view class="clearfix">
         <view class="num">{{detail.totalMoney}}</view>
@@ -8,7 +8,7 @@
         
     </view>
      <view class="bootm" bindtap="love_detail">
-       爱心助力明细
+       助力明细
        <view class="bootm-img">
            <image  src="../../images/right.png" />
        </view>
@@ -16,7 +16,8 @@
 </view>
 
  <view class="muq">
-   目前<text class="yan">全国共有{{detail.totalCount}}名</text>老乡已为家乡爱心助力，您当前在老乡中<text class="yan">排行第{{detail.rank}}位</text>，购物消费可贡献更多爱心助力金哦 ，排名更靠前，连续排名前3的家乡游子，有机会获得家乡“爱心助力大使”荣誉称号！                                        
+    <view style="font-size:30rpx;margin-bottom:12rpx">温馨提示</view>
+   1. 目前<text class="yan">全国共有{{detail.totalCount}}名</text>老乡已为家乡爱心助力，您当前在老乡中<text class="yan">排行第{{detail.rank}}位</text>，购物消费可贡献更多爱心助力金哦 ，排名更靠前，连续排名前3的家乡游子，有机会获得家乡“爱心助力大使”荣誉称号！                 <view>2.您在平台的每次购买特产的行为，平台都将为您向家乡捐赠一定比例的大爱助力金 ，消费越多，排名越靠前，连续排名前3的家乡游子，还有机会获得家乡的“爱心助力大使”荣誉称号！</view>                      
  </view>
 
 <view class="foot-boot">

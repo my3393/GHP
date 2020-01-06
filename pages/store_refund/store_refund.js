@@ -227,7 +227,7 @@ Page({
   //查看协议
   web(){
      wx.navigateTo({
-       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.pdf',
+       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.html',
      })
   },
   //入驻提交

@@ -11,18 +11,18 @@
 
 <view hidden="{{!isBang}}" style='margin-top:{{navH}}px'>
   <view class="top">
-    <view class="top-left">
+    <!-- <view class="top-left">
       <view class="top-img">
         <image src="../../images/trumpe.png" />
       </view>
       <text style=" vertical-align: middle;">家乡善款￥28,000.00 |</text>
-    </view>
+    </view> -->
     <view class="top-r">
       <view class="tui-rolling-news">
        
         <swiper vertical="{{true}}" autoplay="{{true}}" circular="{{true}}" interval="3000" class="tui-swiper">
           <swiper-item wx:for="{{dymic}}" wx:key="{{index}}" class="tui-swiper-item">
-            <view class="tui-news-item" bindtap='detail'>{{item.payUserName}}</view>
+            <view class="tui-news-item">用户{{item.payUserName}} 为家乡成功捐款￥{{item.amount}}</view>
           </swiper-item>
         </swiper>
       </view>

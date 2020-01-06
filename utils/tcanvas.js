@@ -8,9 +8,9 @@ export default{
     run(c, w, h) {
       let that = this;
       var num = (2 * Math.PI / 100 * c) - 0.5 * Math.PI;
-      that.data.ctx2.arc(w, h, w - 6, -0.5 * Math.PI, num); //每个间隔绘制的弧度
+      that.data.ctx2.arc(w, h, w - 8, -0.5 * Math.PI, num); //每个间隔绘制的弧度
       that.data.ctx2.setStrokeStyle("#F12200");
-      that.data.ctx2.setLineWidth("7");
+      that.data.ctx2.setLineWidth("6");
       that.data.ctx2.setLineCap("butt");
       that.data.ctx2.stroke();
       that.data.ctx2.beginPath();

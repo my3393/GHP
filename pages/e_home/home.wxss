@@ -295,3 +295,19 @@ box-sizing: border-box;
   width: 100%;
   height: 100%;
 }
+.official{
+  position: fixed;
+ bottom: 20rpx;
+ margin-left: 20rpx;
+  width: calc(100% - 40rpx);
+ 
+}
+.official_det{
+  position: absolute;
+  top: 16rpx;
+  right: 20rpx;
+}
+.official_det image{
+  width: 26rpx;
+  height: 26rpx;
+}

@@ -1,25 +1,21 @@
-// pages/wallet_detail/wallet_detail.js
+// pages/swim/swim.js
 const app = getApp();
 let detail = [];
-let currentPage = 1;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
-    tar: 0,
+    detail:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
-    this.getHas();
-
+      this.getdetail();
   },
 
   /**
@@ -40,23 +36,23 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    detail = [];
-    currentPage = 1;
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    etail = [];
-    currentPage = 1;
+     detail = []
+     currentPage = 1;
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    currentPage = currentPage + 1
+    this.getdetail();
   },
 
   /**
@@ -65,27 +61,32 @@ Page({
   onReachBottom: function () {
 
   },
-  getHas() {
+
+  getdetail() {
     let that = this;
     let data = {
-      currentPage
+
+      currentPage: 1,
+      provinceId: '',
+      cityId: '',
+      areaId: '',
+      townId: '',
+      typeId: 14,
+      sortType: 0,
+      keyword: ''
     }
 
-    app.res.req("app-web/user/donationlist", data, (res) => {
+    app.res.req("app-web/product/list", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        detail.push(...res.data)
+
+         detail.push(...res.data)
         that.setData({
-          detail: detail
+          detail: detail,
+
         })
-
-
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../login/login',
         })
       } else {

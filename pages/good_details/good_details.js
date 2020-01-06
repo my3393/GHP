@@ -127,6 +127,37 @@ Page({
     }
 
   },
+  //顶部导航
+  top_navigation(e) {
+
+    let index = e.currentTarget.id
+    if (index == 1) {
+      console.log(index)
+      wx.navigateTo({
+        url: '../search/search',
+      })
+    } else if (index == 2) {
+      wx.switchTab({
+        url: '../e_home/home',
+      })
+    } else if (index == 3) {
+      wx.switchTab({
+        url: '../e_specialty/e_specialty',
+      })
+    } else if (index == 4) {
+      wx.switchTab({
+        url: '../e_mine/mine',
+      })
+    } else if (index == 5) {
+      wx.navigateTo({
+        url: '../mine_collection/mine_collection',
+      })
+    } else if (index == 6) {
+      wx.navigateTo({
+        url: '../mine_opinion/mine_opinion',
+      })
+    }
+  },
   //分享
   fenx() {
     let that = this

@@ -113,7 +113,7 @@ Page({
           money: res.data,
 
         })
-        that.draw('runCanvas', this.data.num, 1000);
+       // that.draw('runCanvas', this.data.num, 1000);
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
         wx.redirectTo({

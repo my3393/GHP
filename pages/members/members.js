@@ -101,7 +101,7 @@ Page({
   },
   web(){
      wx.navigateTo({
-       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/6_VIP.pdf',
+       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/6_VIP.html',
      })
   },
   navBack(){
@@ -113,6 +113,7 @@ Page({
   getPhoneNumber: function (e) {
     var that = this;
     console.log(e)
+  
     wx.request({
       url: app.data.urlmall + "app-web/login/xcxbindphone",
       data: {

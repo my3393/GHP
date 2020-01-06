@@ -9,7 +9,8 @@ Page({
         userid:'',
         mine:'',
       store_refund:'',
-      storeId:''
+      storeId:'',
+      det:'',
     },
     onLoad(options) {
       console.log(options)
@@ -34,8 +35,14 @@ Page({
           userid: options.userid
         })
       } else if (options.userid && options.storeid) {
+        console.log('店铺id' + options.storeid)
         that.setData({
           storeId: options.storeid,
+          userid: options.userid
+        })
+      } else if (options.det) {
+        that.setData({
+          det: options.det,
           userid: options.userid
         })
       } else if (options.mine) {
@@ -216,8 +223,14 @@ Page({
                                   })
                                 } else if (that.data.userid != '' && that.data.storeId != '') {
                                   console.log('店铺')
+                                  console.log(that.data.storeId)
                                   wx.redirectTo({
                                     url: '../store_detail/store_detail?id=' + that.data.storeId
+                                  })
+                                } else if (that.data.userid != '' && that.data.det != '') {
+                                 
+                                  wx.redirectTo({
+                                    url: '../welfare_det/welfare_det?id=' + that.data.det +  '&userid=' + that.data.userid,
                                   })
                                 } else if (that.data.mine == 11) {
                                   wx.redirectTo({

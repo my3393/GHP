@@ -77,7 +77,7 @@ Page({
   //协议
   web(){
      wx.navigateTo({
-       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/4_service.pdf' ,
+       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/4_Student.html' ,
      })
   },
   //删除个人照照片

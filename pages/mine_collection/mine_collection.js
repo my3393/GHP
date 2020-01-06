@@ -78,6 +78,7 @@ Page({
       if (that.data.tar == 0) {
         that.getdetail()
       } else {
+        store = [];
         that.getstore();
       }
     }, 200)
@@ -155,6 +156,7 @@ Page({
     app.res.req('app-web/store/collectionlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        wx.hideLoading()
         store.push(...res.data)
         that.setData({
           store: store

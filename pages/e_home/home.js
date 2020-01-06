@@ -2,7 +2,8 @@
 const app = getApp();
 let isRefresh = 0; //精选特产刷新
 let detail = [];
-let classifyId =1;
+let typeId = '13';
+let user;
 Page({
 
   /**
@@ -15,8 +16,7 @@ Page({
     tar: '',
     detail:[],
     istop:true,
-     res:'nide'
-
+     isofficial: false,
   },
 
   /**
@@ -41,7 +41,26 @@ Page({
       wx.setStorageSync('bandId', options.bangId)
       
     }
-      
+    wx.getNetworkType({
+      success: function (res) {
+        console.log(res)
+        if (res.networkType == "2g" || res.networkType == "3g") {
+        
+          wx.showToast({
+            title: '当前网路环境较差',
+            icon: 'none',
+            duration: 2000
+          })
+        }else if(res.networkType == 'none'){
+          wx.showToast({
+            title: '无网路，请检查是否开启网路',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+
+      },
+    })
    
   },
   
@@ -49,17 +68,28 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this
+    //3秒后隐藏关注组件
+    that.setData({
+      isofficial: false,
+    })
+    setTimeout(function () {
+      
+      that.setData({
+        isofficial: true,
+      })
+    }, 5000)
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
+       
         console.log(res.data.bindProvinceId)
         if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
           
@@ -68,6 +98,7 @@ Page({
             index: 1,
             text: res.data.bindAreaName,
           })
+          user = res.data
         }
 
       },
@@ -78,7 +109,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+   
   },
 
   /**
@@ -119,7 +150,24 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this;
+    console.log(that.data.detail.name)
+    return {
+      title: that.data.detail.productName,
+      path: '/pages/e_home/home?userid=' + user.id,
 
+    }
+  },
+  binderror(e) {
+    console.log(e.detail)
+  },
+  bindload(e) {
+    console.log(e.detail)
+  },
+  official_det() {
+    this.setData({
+      isofficial: true,
+    })
   },
   //搜索
   search(){
@@ -169,13 +217,13 @@ Page({
   getDetail(){
     let that =this;
     let data = {
-      classifyId:'',
-      currentPage:1,
+      
+        currentPage:1,
         provinceId:'',
-      cityId:'',
+        cityId:'',
         areaId:'',
-      townId:'',
-      typeId:classifyId,
+       townId:'',
+       typeId: typeId,
         sortType:0,
       keyword:''
     }
@@ -249,7 +297,7 @@ Page({
             className:res.data,
 
            })
-        that.getDetail();
+        
         that.getType();
       }else if(res.status == 1004 || res.status == 1005){
           wx.redirectTo({
@@ -307,13 +355,13 @@ Page({
     app.res.req('app-web/home/grade/type', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
-
-          
+           
+           typeId = res.data[0].id
             that.setData({
               type:res.data
-
+         
             })
-
+         that.getDetail();
        }else if(res.status == 1004 || res.status == 1005){
            wx.redirectTo({
              url: '../login/login',
@@ -396,7 +444,7 @@ Page({
   tag: function (e) {
     var that = this;
     let conut = '';
-    classifyId = e.currentTarget.dataset.id;
+    typeId = e.currentTarget.dataset.id;
     var nowTime = new Date();
     if (nowTime - this.data.tapTime < 500) {
       console.log('阻断')

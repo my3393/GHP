@@ -28,11 +28,11 @@
 
 
   <view class="badge">
-    <view >
+    <view class="skeleton-rect">
       <view class="badge-img"> <image src="../../images/badge.png"></image></view>
       <view class="badge-n">助力家乡</view>
     </view>
-    <view >
+    <view class="skeleton-rect">
       <view class="badge-img"> <image src="../../images/badge.png"></image></view>
       <view class="badge-n">家乡公益</view>
     </view>
@@ -119,5 +119,12 @@
   <view class="b-logo">
     <view >善家购</view>
     <view >大爱无疆，感谢家乡</view>
+  </view>
+</view>
+
+<view class="official" hidden="{{isofficial}}">
+  <official-account bindload='bindload' binderror='binderror'></official-account>
+  <view class="official_det" bindtap="official_det">
+    <image src="../../images/xxxx.png"></image>
   </view>
 </view>

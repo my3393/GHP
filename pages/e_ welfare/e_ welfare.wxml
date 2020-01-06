@@ -43,7 +43,7 @@
 </view>
 <view class="project">
     <view class="h2">公益项目</view>
-    <view class="pro-r">
+    <view class="pro-r" bindtap="xun">
         <view class="pro-n">寻找老乡</view>
         <view class="pro-r-img">
             <image src="../../images/right.png" />

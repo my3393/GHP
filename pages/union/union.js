@@ -1,24 +1,27 @@
-// pages/wallet_detail/wallet_detail.js
+// pages/union/union.js
 const app = getApp();
-let detail = [];
+
 let currentPage = 1;
+let detail = [];
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    tag: [
+      { name: '共享成员' },
+      { name: '共享商家' }
+    ],
     tar: 0,
+    ismask:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
-    this.getHas();
 
   },
 
@@ -40,16 +43,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    detail = [];
-    currentPage = 1;
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    etail = [];
-    currentPage = 1;
+
   },
 
   /**
@@ -65,35 +66,22 @@ Page({
   onReachBottom: function () {
 
   },
-  getHas() {
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+  //切换
+  tag(e) {
     let that = this;
-    let data = {
-      currentPage
-    }
+    currentPage = 1,
+      detail = [];
+    that.setData({
+      tar: e.currentTarget.dataset.index,
 
-    app.res.req("app-web/user/donationlist", data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-        detail.push(...res.data)
-        that.setData({
-          detail: detail
-        })
-
-
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
-        wx.navigateTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
-      }
     })
+   
   },
 })

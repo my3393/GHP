@@ -1,7 +1,6 @@
-<!--pages/mine_collection/mine_collection.wxml-->
-<view hidden="{{load}}">
-   <view class="top">
-  <view wx:for='{{tag}}' wx:for-index='idx' class="{{tar == idx ? 'top_a' : ''}}" bindtap="tag" data-index="{{idx}}">
+<!--pages/union/union.wxml-->
+<view class="top">
+  <view wx:for='{{tag}}' bindtap="tag" wx:for-index='idx' data-index="{{idx}}" class="{{tar == idx ? 'top_a' : ''}}">
     {{item.name}}
   </view>
 </view>
@@ -57,7 +56,7 @@
     </view>
   </view>
   <view wx:else>
-    <view class="list-nav clearfix" wx:for='{{store}}' wx:key='item' bindtap="store_detail" id="{{item.id}}" >
+    <view class="list-nav clearfix" wx:for='{{store}}' wx:key='item' bindtap="store_detail" id="{{item.id}}">
       <view class="store-img">
         <image src="{{item.storeLogoOss}}" />
       </view>
@@ -86,5 +85,7 @@
       </view>
     </view>
   </view>
+
 </view>
-</view>
+
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>

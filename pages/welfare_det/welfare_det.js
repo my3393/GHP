@@ -4,7 +4,8 @@ let top1 = '';
 let top2 = '';
 let id;
 let ranklist = [];
-let currentPage = 1
+let currentPage = 1;
+let userid;
 Page({
 
   /**
@@ -33,6 +34,9 @@ Page({
    */
   onLoad: function (options) {
     id = options.id
+    if (options.userid) {
+      userid = options.userid
+    }
     this.setData({
       navH: app.globalData.navHeight
     })
@@ -73,6 +77,9 @@ Page({
         })
       },
     })
+    if (wx.getStorageSync('bangId')) {
+      that.Bang();
+    }
   },
 
   /**
@@ -107,7 +114,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this;
 
+    return {
+      title: that.data.detail.projectTitle,
+      path: '/pages/welfare_det/welfare_det?det=' + id + '&userid=' + that.data.user.id,
+
+    }
   },
   //查看图片
   Preview: function (e) {
@@ -193,17 +206,24 @@ Page({
     app.res.req("app-web/project/projectvote", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        
+        wx.showToast({
+          title: '投票成功',
+          icon:'none'
+        })
         
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
         })
       }else if(res.status == 1027){
-         that.setData({
-           buzu:!that.data.buzu,
-           ismask:!that.data.ismask
-         })
+        //  that.setData({
+        //    buzu:!that.data.buzu,
+        //    ismask:!that.data.ismask
+        //  })
+        wx.showToast({
+          title: '艺呗不足',
+          icon: 'none'
+        })
           
       } else {
         wx.showToast({
@@ -287,9 +307,10 @@ Page({
         
         })
         console.log(res.data.infoImgOss)
-      } else if (res.status == 1004 || res.status == 1005) {
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+
         wx.redirectTo({
-          url: '../login/login',
+          url: '../login/login?det=' + id + '&userid=' + userid,
         })
       } else {
         wx.showToast({
@@ -374,10 +395,18 @@ Page({
     })
   },
   //返回上一页
-  navBack(){
-    wx.navigateBack({
-      data:1
-    })
+  navBack(e){
+    console.log(e)
+    if(userid){
+      wx.switchTab({
+        url: '../e_home/home',
+      })
+    }else{
+      wx.navigateBack({
+        data: 1
+      })
+    }
+    
   },
   move() {
 
@@ -515,5 +544,31 @@ Page({
         return textRowArr
       }
     }
+  },
+  //绑定
+  Bang() {
+    let that = this;
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
+
+    app.res.req("app-web/user/sharebinduser", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+        console.log('----绑定成功---')
+        wx.removeStorageSync('bandId')
+      } else if (res.status == 1028) {
+
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bandId')
+        console.log('----已经绑定----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bandId')
+        console.log('----已经绑定----')
+      }
+    })
   },
 })
