@@ -1,4 +1,9 @@
 {
   "navigationBarTextStyle": "black",
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "tui-icon": "../../../component/icon/icon",
+    "tui-badge": "../../../component/badge/badge",
+    "tui-top-dropdown": "../../../component/top-dropdown/top-dropdown"
+  }
 }

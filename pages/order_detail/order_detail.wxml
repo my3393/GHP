@@ -163,7 +163,7 @@
 <view class="footer" wx:if='{{detail.orderStatus == 1}}'>
     <view class="footer_r">
 
-        <!-- <view class="tuik" >提醒发货</view> -->
+        <view class="tuik" bindtap="remind">提醒发货</view>
                 
     </view>
 </view>

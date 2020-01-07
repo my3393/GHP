@@ -5,14 +5,19 @@
 <view>
   <view class='a-nav {{is_top ? "" : "bg-white"}} ' style='height:{{navH}}px'>
     <view class='a-nav-title'>
-      <view class="top_dao {{isvideo?'':'top_daos'}}">
+      <!-- <view class="top_dao {{isvideo?'':'top_daos'}}">
         <view>
           <image src='../../images/left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
         </view>
         <view>
           <image src='../../images/h_daoh.png' mode='aspectFit' class='daoh' bindtap='nav'></image>
         </view>
-      </view>
+      </view> -->
+      <view class="tui-header-icon" style="margin-top:{{top}}px">
+      <tui-icon name="arrowleft" color="{{opcity>=1?'#000':'#fff'}}" bindtap="navBack" tui-icon-class="tui-icon-back" class="tui-icon" style="background:rgba(0, 0, 0, {{iconOpcity}});"></tui-icon>
+      <tui-icon name="more-fill" color="{{opcity>=1?'#000':'#fff'}}" size="20" tui-icon-class="tui-icon-more" class="tui-icon tui-icon-ml" style="background:rgba(0, 0, 0, {{iconOpcity}});" catchtap="openMenu"></tui-icon>
+      <!-- <tui-badge type="red" tui-badge-class="tui-badge" size="small">5</tui-badge> -->
+    </view>
       <view class="top_center" hidden="{{is_top}}">
         <text class="{{issrcoll == 1 ? 'center_a' :''}}" bindtap="scrollto">商品</text>
         <text class="{{issrcoll == 2 ? 'center_a' :''}}" bindtap="scrollto1">评价</text>
@@ -379,4 +384,28 @@
   </view>
 </view>
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
+
+
+<!--顶部下拉菜单-->
+  <tui-top-dropdown tui-top-dropdown="tui-top-dropdown" bgcolor="rgba(76, 76, 76, 0.95);" show="{{menuShow}}" height="0" bind:close="closeMenu">
+    <view class="tui-menu-box tui-padding">
+      <view class="tui-menu-header" style="padding-top:{{top}}px;">
+        功能直达
+      </view>
+      <view class="tui-menu-itembox">
+        <block wx:for="{{topMenu}}" wx:key="{{index}}">
+          <view class="tui-menu-item" hover-class="tui-opcity" hover-stay-time="150" bindtap="common" data-index="{{index}}">
+            <view class="tui-badge-box">
+              <image src="{{item.icon}}" class="item_icon"></image>
+              <tui-badge type="red" tui-badge-class="tui-menu-badge" size="small" wx:if="{{item.badge}}">{{item.badge}}</tui-badge>
+            </view>
+            <view class="tui-menu-text">{{item.text}}</view>
+          </view>
+        </block>
+      </view>
+      <tui-icon name="up" color="#fff" size="26" class="tui-icon-up" catchtap="closeMenu"></tui-icon>
+    </view>
+
+  </tui-top-dropdown>
+  <!---顶部下拉菜单-->
 

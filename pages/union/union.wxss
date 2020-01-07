@@ -1,17 +1,84 @@
 /* pages/union/union.wxss */
-.top{
-  width: 100%;
+@import '../mine_collection/mine_collection.wxss';
+
+.about{
+  width: calc(100% - 100rpx);
+   padding: 20rpx 0;
+  box-sizing: border-box;
   background: #fff;
-  height: 60rpx;
   position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: space-around;
-  line-height: 60rpx;
-  z-index: 9;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+ 
+  color: #666;
+  z-index: 10;
+  border-radius: 26rpx;
 }
-.top_a{
+.about_h1{
+  margin: 20rpx 0;
+  width: 100%;
+  text-align: center;
+  color: #333;
+  
+}
+.about>view{
+  letter-spacing: 2rpx;
+  line-height: 50rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.about_foot{
+  padding: 0;
+  box-sizing: none ;
+  margin-top: 32rpx;
+  border-top: 1rpx solid #e6e6e6;
+  height: 80rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 100rpx !important;
   color: #f12200;
-  border-bottom: 2rpx solid #f12200;
+}
+.xuang{
+  font-size: 28rpx;
+
+}
+.g_detail{
+  margin-top: 2rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.g_detail_img{
+  width: 72rpx;
+  height: 72rpx;
+  border-radius:50%;
+  overflow: hidden;
+  float: left;
+  margin-right: 20rpx;
+}
+.g_detail_name{
+  margin-top: 16rpx;
+  display: inline-block;
+}
+.g_detail_time{
+  float: right;
+  margin-top: 16rpx;
+  color: #999;
+}
+.g_store_name{
+  display: inline-block;
+   margin-top: 4rpx;
+   font-size: 28rpx;
+}
+.g_store_price{
+  float: right;
+  margin-top: 4rpx;
+  font-size: 28rpx;
+  color: red;
+}
+.g_store_time{
+  color: #999;
+  font-size: 24rpx;
+  margin-top: 8rpx;
 }

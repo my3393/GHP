@@ -1,5 +1,6 @@
 //app.js
 var http = require('utils/http.js')  
+
 App({
   data: {
     urlmall: "https://sjg.api.xingtu-group.cn/"

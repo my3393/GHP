@@ -10,8 +10,9 @@
       <view class="kong_img">
         <image src="../../images/cellection.png"></image>
       </view>
-      <view>没有相关收藏</view>
-      <view class="xuang" bindtap="home">选购特产</view>
+      <view>暂无共享成员,您还未获得共享收益</view>
+      <view style="margin-top:20rpx">关于共享联盟 ></view>
+      <button class="xuang" size="min" open-type="share">分享善家</button>
       <view class="foot-boot">
         <view>善家购</view>
         <view class="foot-boot-m">大爱无疆，感恩家乡</view>
@@ -19,25 +20,12 @@
     </view>
   </view>
   <view wx:else>
-    <view class="goods-list clearfix" wx:for='{{detail}}' wx:key='id' bindtap="good_detail" id="{{item.id}}" data-status="{{item.isShelf}}">
-      <view class="goods-img">
-        <image src="{{item.productDefaultImgOss}}"></image>
-        <view class="yishi" wx:if='{{item.isShelf == 0}}'>已失效</view>
+      <view class="g_detail clearfix" wx:for='{{detail}}' wx:key='item'>
+         <image src="{{item.headImgUrl}}" class="g_detail_img"></image>
+         <view class="g_detail_name">{{item.userName}}</view>
+         <view class="g_detail_time">{{item.bindUserDate}}</view>
       </view>
-      <view class="goods-n">
-        <view class="goods-j">{{item.productName}}</view>
-        <view class="goods-q dan">{{item.productTitle}}</view>
-        <view class="goods-q">{{item.provinceName}} {{item.cityName}} {{item.areaName}} {{item.townName}}</view>
-        <view class="goods-t">
-          <view class="goods-p">
-            <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}
-          </view>
-          <view class="goods-g">
-            <image src="../../images/shop.png" />
-          </view>
-        </view>
-      </view>
-    </view>
+   
   </view>
 </view>
 
@@ -47,8 +35,9 @@
       <view class="kong_img">
         <image src="../../images/cellection.png"></image>
       </view>
-      <view>没有相关收藏</view>
-      <view class="xuang" bindtap="home">选购特产</view>
+      <view>暂无共享成员,您还未获得共享收益</view>
+      <view style="margin-top:20rpx">关于共享联盟 ></view>
+      <button class="xuang" size="min" open-type="share">分享善家</button>
       <view class="foot-boot">
         <view>善家购</view>
         <view class="foot-boot-m">大爱无疆，感恩家乡</view>
@@ -56,36 +45,23 @@
     </view>
   </view>
   <view wx:else>
-    <view class="list-nav clearfix" wx:for='{{store}}' wx:key='item' bindtap="store_detail" id="{{item.id}}">
-      <view class="store-img">
-        <image src="{{item.storeLogoOss}}" />
+     <view class="g_detail clearfix">
+         <image src="{{item.storeLogoOss}}" class="g_detail_img"></image>
+         <view class="g_store_name">{{item.storeName}} ></view>
+          <view class="g_store_price">￥ {{item.revenue}}</view>
+         <view class="g_store_time">{{item.createDate}}</view>
+        
       </view>
-      <view class="list-name">
-        <view>{{item.storeName}}</view>
-        <view class="list-q">{{item.provinceName}} {{item.cityName}} {{item.areaName}} </view>
-      </view>
-      <view class="list-g">进店</view>
-      <view class="classify" style="padding:0;margin-top: 20rpx; ">
-        <view class="class-two" wx:for='{{item.products}}' wx:key='item' catchtap="good_detail" id="{{item.id}}">
-          <view class="class-t-img">
-            <image src="{{item.productDefaultImgOss}}" />
-          </view>
-          <view class="class-t-n">
-            {{item.productName}}
-          </view>
-          <view class="class-t-p">
-            <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
-        </view>
-
-        <view class="class-two" style="vertical-align: top;">
-          <view class="class-t-img">
-            <image src="../../images/chakan.png" />
-          </view>
-        </view>
-      </view>
-    </view>
   </view>
 
 </view>
 
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
+<view class="about" hidden="{{about}}">
+   <view class="about_h1">关于共享联盟</view>
+   <view>1.共享联盟</view>
+   <view>共享成员只面向会员（未过期）用户，绑定用户后，用户购买特产成交后，分享会员可获得相应的订单收益，分享成交的订单越多，获得的共享收益越多哦，共享收益可随时提现。</view>
+   <view>2.共享商家</view>
+   <view>共享商家面向平台会员用户及非会员用户，凡分享用户成功邀请用户注册登录并成为商家，商家在平台完成订单交易后，该邀请用户均可获得商家交易订单中的利益分红，成功邀请的商家越多，订单成交越多，获得的共享收益越多哦，共享收益线下结算</view>
+   <view class="about_foot" bindtap="about">知道了</view>
+</view>

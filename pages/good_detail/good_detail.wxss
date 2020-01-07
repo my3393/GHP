@@ -786,3 +786,132 @@ background: #fff;
   transform: translate(-50%);
   border-radius: 20rpx;
 }
+
+.tui-header-icon {
+  position: fixed;
+  left: 10px;
+  top: 0;
+  display: flex;
+  align-items: flex-start;
+  height: 32px;
+  transform: translateZ(0);
+  z-index: 99999;
+}
+
+.tui-badge {
+  background: #e41f19 !important;
+  position: absolute;
+  right: -4px;
+}
+
+.tui-icon-ml {
+  margin-left: 20rpx;
+}
+
+.tui-icon {
+  height: 32px !important;
+  width: 32px !important;
+  border-radius: 16px;
+}
+
+.tui-icon-back {
+  height: 32px !important;
+  width: 32px !important;
+  display: block !important;
+}
+
+.tui-icon-more {
+  height: 20px !important;
+  width: 20px !important;
+  padding: 6px !important;
+  display: block !important;
+}
+
+/*顶部菜单*/
+
+.tui-menu-box {
+  box-sizing: border-box;
+}
+
+.tui-menu-header {
+  font-size: 34rpx;
+  color: #fff;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.tui-top-dropdown {
+  z-index: 9999 !important;
+}
+
+.tui-menu-itembox {
+  color: #fff;
+  padding: 40rpx 10rpx 0 10rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 26rpx;
+}
+
+.tui-menu-item {
+  width: 22%;
+  height: 160rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  margin-right: 4%;
+  margin-bottom: 4%;
+}
+
+.tui-menu-item:nth-of-type(4n) {
+  margin-right: 0;
+}
+
+.tui-badge-box {
+  position: relative;
+}
+
+.tui-menu-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+.tui-msg-badge {
+  top: -10px;
+} 
+
+.tui-icon-up {
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tui-menu-text {
+  padding-top: 12rpx;
+}
+
+.tui-opcity .tui-menu-text, .tui-opcity .tui-badge-box {
+  opacity: 0.5;
+  transition: opacity 0.2s ease-in-out;
+}
+.tui-padding {
+  padding: 0 30rpx;
+  margin-top: 100rpx;
+  box-sizing: border-box;
+}
+.tui-badge {
+  background: #e41f19 !important;
+  position: absolute;
+  right: -4px;
+}
+.item_icon{
+  width: 44rpx;
+  height: 44rpx;
+}
+/*顶部菜单*/

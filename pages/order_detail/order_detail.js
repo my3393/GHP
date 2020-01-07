@@ -123,6 +123,27 @@ Page({
     })
     
   },
+  //提醒发货
+  remind(){
+  
+    var timestamp1 = Date.parse(new Date());//拿到现在时间
+    
+    if (wx.getStorageSync('data_expiration') > timestamp1 && wx.getStorageSync('data_expiration') ){
+        wx.showToast({
+          title: '24小时之内只能提醒一次哦',
+          icon:'none'
+        })
+    }else{
+      var timestamp = Date.parse(new Date());
+      var expiration = timestamp + 1 * 24 * 3600 *1000; //缓存一天
+      wx.setStorageSync("data_expiration", expiration);
+      wx.showToast({
+        title: '提醒卖家发货成功',
+        icon: 'none'
+      })
+    }
+    
+  },
   //查看物流
   wul(e) {
     wx.navigateTo({
