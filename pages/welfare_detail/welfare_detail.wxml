@@ -6,11 +6,12 @@
   <view class="progre">
     <view class="pro-t">
       <view class="pro-left">
-        <view class='canvasBox'>
+        <!-- <view class='canvasBox'>
           <view class='bigCircle'></view>
           <view class='littleCircle'></view>
           <canvas canvas-id="runCanvas"  id="runCanvas" class='canvas'></canvas>
-        </view>
+        </view> -->
+         <van-circle layer-color='#f3f3f3' value="{{nums}}" color="{{gradientColor}}" stroke-width="6" text='{{num + "%"}}'  />
       </view>
       <view class="pro-rig">
         <view>

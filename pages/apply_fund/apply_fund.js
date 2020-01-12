@@ -39,6 +39,7 @@ Page({
     img_num:0,
     img_show:false,
     isdelete:false,
+    ispdf:true,
     num:0,
     nums:0,
     type:[
@@ -80,7 +81,7 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-        
+
         that.setData({
           user: res.data
         })
@@ -126,7 +127,7 @@ Page({
   //查看图片
   Preview: function (e) {
     var that = this;
-   
+
     console.log(e)
    if(e.currentTarget.dataset.num == 0){
      var a = []
@@ -141,15 +142,15 @@ Page({
        urls: that.data.images
      })
    }
-  
-   
+
+
   },
   //删除个人照照片
   detels(e) {
     var that = this;
     console.log(e)
     console.log(that.data.imgs)
-    
+
 
    if(e.currentTarget.dataset.num == 1){
      simages.splice(e.currentTarget.dataset.index, 1)
@@ -174,9 +175,58 @@ Page({
 
   },
   downloadFile: function (e) {
+    let _this = this
+    wx.getSystemInfo({
+      success: function(res) {
+        console.log(res)
+        if (res.platform == "ios"){
+          _this.setData({
+            ismask: !_this.data.ismask,
+            ispdf: !_this.data.ispdf
+          })
+          // wx.showModal({
+          //   title: '提示',
+          //   content: '点击确认复制链接去浏览器打开',
+          //   success(res) {
+          //     if (res.confirm) {
+          //       wx.setClipboardData({
+          //         data: 'https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/file/download9',
+          //         success: function (res) {
+          //           // wx.showToast({
+          //           //   title: '复制成功',
+          //           //   icon:'none'
+          //           // });
+          //         }
+          //       })
+          //     } else if (res.cancel) {
+          //       console.log('用户点击取消')
+          //     }
+          //   }
+          // })
+        }else{
+          let type = e.currentTarget.dataset.type;
+          let url = e.currentTarget.dataset.url;
+          wx.downloadFile({
+            url: url,
+            success: function (res) {
+              console.log(res)
+              var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
+              wx.openDocument({
+                filePath: Path,
+                success: function (res) {
+                  console.log('打开文档成功')
+                }
+              })
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
+        }
+      },
+    })
     console.log(e);
-    let type = e.currentTarget.dataset.type;
-    let url = e.currentTarget.dataset.url;
+
     // switch (type) {
     //   case "pdf":
     //     url += 'pdf';
@@ -191,23 +241,31 @@ Page({
     //     url += 'pptx';
     //     break;
     // }
-    wx.downloadFile({
-      url: url,
+
+
+  },
+  //取消
+  cancel(){
+    this.setData({
+      ismask:!this.data.ismask,
+      ispdf:!this.data.ispdf
+    })
+  },
+  confirm() {
+    this.setData({
+      ismask: !this.data.ismask,
+      ispdf: !this.data.ispdf
+    })
+    wx.setClipboardData({
+      data: 'https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/file/download9',
       success: function (res) {
-        console.log(res)
-        var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
-        wx.openDocument({
-          filePath: Path,
-          success: function (res) {
-            console.log('打开文档成功')
-          }
-        })
-      },
-      fail: function (res) {
-        console.log(res)
+        wx.showToast({
+          title: '复制成功',
+          icon:'none',
+          duration:2500,
+        });
       }
     })
-
   },
   //
   quer(){
@@ -268,7 +326,7 @@ Page({
       num: e.detail.value.length,
       sum: e.detail.value,
     })
-    
+
   },
   valueChanges(e) {
     console.log(e.detail.value.length)
@@ -276,14 +334,14 @@ Page({
       nums: e.detail.value.length,
       sums: e.detail.value
     })
-    
+
   },
   //绑定手机号
   getPhoneNumber: function (e) {
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -335,7 +393,7 @@ Page({
       id
 
     }
-    app.res.req('app-web/userproject/applydetail', data, (res) => {
+    app.res.req('/userproject/applydetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
          that.setData({
@@ -343,7 +401,7 @@ Page({
            menoy: res.data.targetAmount,
            name: res.data.applyName,
            phone: res.data.applyUserPhone,
-           typ: res.data.applyBody,      
+           typ: res.data.applyBody,
            sum: res.data.projectExplain,
            sums: res.data.introduce,
            num: res.data.projectExplain.length,
@@ -353,7 +411,7 @@ Page({
            town: res.data.townName,
            addres: res.data.provinceName + '-' + res.data.cityName + '-' + res.data.areaName + '-' + res.data.townName,
            zhaos1: res.data.qualificationImgOss,
-           
+
            img_num: res.data.infoImgOss.length,
            zhao1:false,
            images: res.data.infoImgOss,
@@ -462,7 +520,7 @@ Page({
         introduce: that.data.sums,
       }
 
-      app.res.req('app-web/userproject/againsubmit', data, (res) => {
+      app.res.req('/userproject/againsubmit', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({
@@ -512,7 +570,7 @@ Page({
         introduce: that.data.sums,
       }
 
-      app.res.req('app-web/project/subapply', data, (res) => {
+      app.res.req('/project/subapply', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({
@@ -552,7 +610,7 @@ Page({
      let data = {
      }
 
-     app.res.req('app-web/home/classify', data, (res) => {
+     app.res.req('/home/classify', data, (res) => {
        console.log(res.data)
        if (res.status == 1000) {
          that.setData({
@@ -576,13 +634,13 @@ Page({
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
           progress: res.data
         })
-        
+
         if(res.data == 100){
           wx.hideLoading();
         }else{
@@ -606,7 +664,7 @@ Page({
    //图片上传
    chooseImages(e) {
     var that = this;
-    
+
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], //可选择原图或压缩后的图片
@@ -618,9 +676,9 @@ Page({
        var test1 =   setInterval(function(){
            that.getprogress();
         },1000)
-        
+
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -659,7 +717,7 @@ Page({
             }
 
             clearTimeout(test1);
-            
+
             // do something
             wx.showToast({
               title: '上传成功',
@@ -756,7 +814,7 @@ Page({
       grade: 1,
       id: ''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -799,7 +857,7 @@ Page({
     }
     // 获取所有市
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '2',
         id: province_id,
@@ -858,7 +916,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '3',
         id: city_id,
@@ -913,7 +971,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '4',
         id: area_id,

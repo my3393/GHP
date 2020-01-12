@@ -1,18 +1,23 @@
 <view class="video_mask" hidden="{{isvideo}}">
-   <view><video id="good_video" class="video" autoplay="{{isplay}}" src="{{detail.productVideo}}"></video></view>
+   <view><video class="video" autoplay="{{isplay}}" src="{{detail.productVideo}}" enable-play-gesture="{{true}}"></video></view>
    <view class="back_video" bindtap="play">退出播放</view>
 </view>
 <view>
   <view class='a-nav {{is_top ? "" : "bg-white"}} ' style='height:{{navH}}px'>
     <view class='a-nav-title'>
-      <view class="top_dao">
+      <!-- <view class="top_dao {{isvideo?'':'top_daos'}}">
         <view>
           <image src='../../images/left.png' mode='aspectFit' class='b_back' bindtap='navBack'></image>
         </view>
         <view>
           <image src='../../images/h_daoh.png' mode='aspectFit' class='daoh' bindtap='nav'></image>
         </view>
-      </view>
+      </view> -->
+      <view class="tui-header-icon" style="margin-top:{{top}}px">
+      <tui-icon name="arrowleft" color="{{opcity>=1?'#000':'#fff'}}" bindtap="navBack" tui-icon-class="tui-icon-back" class="tui-icon" style="background:rgba(0, 0, 0, {{iconOpcity}});"></tui-icon>
+      <tui-icon name="more-fill" color="{{opcity>=1?'#000':'#fff'}}" size="20" tui-icon-class="tui-icon-more" class="tui-icon tui-icon-ml" style="background:rgba(0, 0, 0, {{iconOpcity}});" catchtap="openMenu"></tui-icon>
+      <!-- <tui-badge type="red" tui-badge-class="tui-badge" size="small">5</tui-badge> -->
+    </view>
       <view class="top_center" hidden="{{is_top}}">
         <text class="{{issrcoll == 1 ? 'center_a' :''}}" bindtap="scrollto">商品</text>
         <text class="{{issrcoll == 2 ? 'center_a' :''}}" bindtap="scrollto1">评价</text>
@@ -25,9 +30,9 @@
 <view class="banner_top">
   <swiper bindchange="swiperChange" class="banner" circular="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
     <block>
-      <swiper-item class='plays'>
+      <swiper-item class='plays' wx:if='{{detail.productVideo != null}}'>
         <image src="{{detail.productDefaultImgOss}}"></image>
-        <view class="play">
+        <view class="play" bindtap="play">
           <image src="../../images/play.png"></image>
         </view>
       </swiper-item>
@@ -36,7 +41,7 @@
       </swiper-item>
     </block>
   </swiper>
-  <view class="banner_num">{{current+1}} / {{detail.productImgOss.length + 1}}</view>
+  <view class="banner_num">{{current+1}} / {{good_img_num}}</view>
 </view>
 <!-- 顶部导航 -->
 <view class="naviga" style='top:{{navH}}px' hidden="{{naviga}}">
@@ -99,7 +104,7 @@
     <view class="w_price">
       <text class='huiyj'>会员价</text>
       <view wx:if='{{detail.isSpecificaton == 0}}' class="disp">
-        ￥{{detail.lowestPrice}}
+        ￥{{detail.lowestMemberPrice}}
       </view>
       <view wx:else class="disp">
         ￥{{detail.lowestMemberPrice}} - {{detail.topMemberPrice}}
@@ -189,7 +194,7 @@
   <scroll-view class="classify" scroll-x="{{true}}" style="padding:0;margin-top: 20rpx; ">
     <view class="class-two" wx:for="{{store_recommended}}" wx:key='{{item.id}}' id="{{item.id}}" bindtap="good_detail">
       <view class="class-t-img">
-        <image src="{{item.productDefaultImgOss}}" />
+        <image src="{{item.productDefaultImgOss}}" /> 
       </view>
       <view class="class-t-n">{{item.productName}}</view>
       <view class="class-t-p">
@@ -233,6 +238,7 @@
 <view style="height:120rpx;"></view>
 <!-- 底部 -->
 <view class="foot top2">
+  <view class="foor_kon " wx:if='{{isInventory}}'>特产太抢手啦，请耐心等待商家补货</view>
   <view class="foot_left">
     <view bindtap="Collection">
       <image wx:if='{{detail.isCollection == 0}}' src="../../images/xinxin_n.png" />
@@ -249,7 +255,12 @@
       <view>购物车</view>
     </view>
   </view>
-  <view class="foot_right">
+  <view wx:if='{{isInventory}}'  class="foot_right">
+       <button size="mini" class="joincart" style="opacity:0.4">加入购物车</button>
+   
+    <button size="mini" loading="{{loading}}" class="buynow" style="opacity:0.4" >已售罄</button>
+  </view>
+  <view wx:else class="foot_right">
     <button size="mini" class="joincart" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">加入购物车</button>
     <button size="mini" class="joincart" wx:else  bind:tap="showgg">加入购物车</button>
     <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button>
@@ -257,7 +268,9 @@
   </view>
 </view>
 
-
+<view class="zstop" hidden="{{istop}}" bind:tap="top">
+    <image src="../../images/ztop.png" />
+  </view>
 <!-- 规格选择 -->
 <view hidden='{{ishidegg}}' class='mark'>
   <!-- <view class="gug_all" bindtap="gug_all"></view> -->
@@ -371,4 +384,28 @@
   </view>
 </view>
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
+
+
+<!--顶部下拉菜单-->
+  <tui-top-dropdown tui-top-dropdown="tui-top-dropdown" bgcolor="rgba(76, 76, 76, 0.95);" show="{{menuShow}}" height="0" bind:close="closeMenu">
+    <view class="tui-menu-box tui-padding">
+      <view class="tui-menu-header" style="padding-top:{{top}}px;">
+        功能直达
+      </view>
+      <view class="tui-menu-itembox">
+        <block wx:for="{{topMenu}}" wx:key="{{index}}">
+          <view class="tui-menu-item" hover-class="tui-opcity" hover-stay-time="150" bindtap="common" data-index="{{index}}">
+            <view class="tui-badge-box">
+              <image src="{{item.icon}}" class="item_icon"></image>
+              <tui-badge type="red" tui-badge-class="tui-menu-badge" size="small" wx:if="{{item.badge}}">{{item.badge}}</tui-badge>
+            </view>
+            <view class="tui-menu-text">{{item.text}}</view>
+          </view>
+        </block>
+      </view>
+      <tui-icon name="up" color="#fff" size="26" class="tui-icon-up" catchtap="closeMenu"></tui-icon>
+    </view>
+
+  </tui-top-dropdown>
+  <!---顶部下拉菜单-->
 

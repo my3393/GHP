@@ -6,14 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     
+
   },
 
   /**
@@ -32,7 +32,7 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-  
+
         that.setData({
           user: res.data
         })
@@ -72,7 +72,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-       
+
   },
   vote(){
      wx.switchTab({
@@ -91,7 +91,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req('/user/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({

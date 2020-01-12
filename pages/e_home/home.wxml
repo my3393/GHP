@@ -1,10 +1,10 @@
 <!--pages/home/home.wxml-->
-<skeleton selector="skeleton"
-          loading="spin"
-          bgcolor="#FFF"
-          wx:if="{{showSkeleton}}"></skeleton>
- <view class="skeleton">
-  <view class="top-back clearfix" >
+<skeleton selector="skeleton" loading="spin" bgcolor="#FFF" wx:if="{{showSkeleton}}"></skeleton>
+<view class="skeleton">
+  <view class="fixs" style='line-height:{{navH + 10}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}' >
+     善家购
+  </view>
+  <view class="top-back clearfix" style=" background:{{gradientColor}};margin-top:{{navH}}px; ">
     <!-- <view class="h-titlie">
       <view class="h-t-img"><image src="../../images/home.png"></image></view>
       <view class="h-name">善家购</view>
@@ -13,112 +13,134 @@
       <view class="sear-img">
         <image src="../../images/search.png"></image>
       </view>
-      <view class="sea"><input class="search" placeholder="商品，店铺" disabled="true" bindtap="search"></input></view>
+      <view class="sea">
+        <input class="search" placeholder="商品，店铺" disabled="true" bindtap="search"></input>
+      </view>
     </view>
     <view>
-    <swiper  class="banner"  indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-      <block>
-        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{banner}}' wx:key="item"                         data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
-          <image class="banner_img skeleton-rect" src="{{ item.bannerImgOss}}" lazy-load="true"></image>
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
+      <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9" bindchange="testSwiper">
+        <block>
+          <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{banner}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+            <image class="banner_img skeleton-rect" src="{{item.bannerImgOss}}" lazy-load="true"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
   </view>
 
 
   <view class="badge">
     <view class="skeleton-rect">
-      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+      <view class="badge-img">
+        <image src="../../images/badge.png"></image>
+      </view>
       <view class="badge-n">助力家乡</view>
     </view>
     <view class="skeleton-rect">
-      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+      <view class="badge-img">
+        <image src="../../images/badge.png"></image>
+      </view>
       <view class="badge-n">家乡公益</view>
     </view>
-    <view >
-      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="skeleton-rect">
+      <view class="badge-img">
+        <image src="../../images/badge.png"></image>
+      </view>
       <view class="badge-n">服务保障</view>
     </view>
-    <view >
-      <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="skeleton-rect">
+      <view class="badge-img">
+        <image src="../../images/badge.png"></image>
+      </view>
       <view class="badge-n">担保交易</view>
     </view>
   </view>
 
   <view class="classify">
     <view class="class-one" wx:for="{{className}}" wx:key="item" data-name="{{item.classifyName}}" id='{{item.id}}' bindtap="search_product">
-      <view class="class-img "><image class="skeleton-radius" src="{{item.classifyImgOss}}"></image></view>
+      <view class="class-img ">
+        <image class="skeleton-radius" src="{{item.classifyImgOss}}"></image>
+      </view>
       <view class="class-n">{{item.classifyName}}</view>
     </view>
-     <view class="class-one"  data-id='{{item.id}}' bindtap="search_all">
-      <view class="class-img "><image class="skeleton-radius" src="../../images/home_gengd.png"></image></view>
-      <view class="class-n">查看更多</view>
+    <view class="class-one" data-id='{{item.id}}' bindtap="search_all">
+      <view class="class-img ">
+        <image class="skeleton-radius" src="../../images/home_gengd.png"></image>
+      </view> 
+      <view class="class-n skeleton-rect">查看更多</view>
     </view>
   </view>
-  <view >
-   <swiper  class="advert" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
+  <view>
+    <swiper class="advert" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
       <block>
-        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper'  wx:for='{{advert}}' wx:key="item"                        data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
-          <image  src="{{item.advertiseImgOss}}" lazy-load="true"></image>
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{advert}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+          <image class="skeleton-radius" src="{{item.advertiseImgOss}}" lazy-load="true"></image>
         </swiper-item>
       </block>
     </swiper>
-   
+
   </view>
   <view class="recommended">
-    <view class="rescom">
-      <text class="rescom-w">精选特产</text>
-      <text >感受他乡风情，享受地方特产</text>
+    <view class="rescom skeleton-rect">
+      <text class="rescom-w skeleton-rect">精选特产</text>
+      <text>感受他乡风情，享受地方特产</text>
     </view>
-    <view class="huan" bind:tap="huan">换一换</view>
+    <view class="huan skeleton-rect" bind:tap="huan">换一换</view>
     <view class="classify" style="padding:0;margin-top: 20rpx; ">
-        <view class="class-two" wx:for="{{recommend}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
-          <view class="class-t-img skeleton-rect"><image src="{{item.productDefaultImgOss}}" /></view>
-          <view class="class-t-n">
-            {{item.productName}}
-          </view>
-          <view class="class-t-p"><text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+      <view class="class-two" wx:for="{{recommend}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
+        <view class="class-t-img skeleton-rect">
+          <image class="skeleton-rect" src="{{item.productDefaultImgOss}}" />
         </view>
+        <view class="class-t-n skeleton-rect">
+          {{item.productName}}
+        </view>
+        <view class="class-t-p skeleton-rect">
+          <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+      </view>
 
     </view>
   </view>
 
-  <view >
-      <view class="rescom res-two" >
-        <text class="rescom-w">热门特产</text>
-        <text >精选特产，为您推荐</text>
+  <view>
+    <view class="rescom res-two">
+      <text class="rescom-w">热门特产</text>
+      <text>精选特产，为您推荐</text>
     </view>
   </view>
 
   <scroll-view scroll-x="true" class="tag">
-      <view  wx:for="{{type}}" wx:key="item" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
-          {{item.typeName}}
-      </view>
+    <view wx:for="{{type}}" wx:key="item" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"active":""}}'>
+      {{item.typeName}}
+    </view>
   </scroll-view>
 
   <view class="nav">
     <view class="nav-list" wx:for="{{detail}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
-      <view class="list-img"> <image src="{{item.productDefaultImgOss}}" /></view>
+      <view class="list-img">
+        <image src="{{item.productDefaultImgOss}}" />
+      </view>
       <view class="list-j">{{item.productName}}</view>
       <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>
 
-        <view class="class-t-p ctp"><text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
-        <view class="list-rig"><image src="../../images/shop.png"/> </view>
+      <view class="class-t-p ctp">
+        <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+      <view class="list-rig">
+        <image src="../../images/shop.png" /> </view>
     </view>
   </view>
 
   <view class="gend" bindtap="search_all">
     查看更多特产
-    <view class="gend-img"><image src="../../images/right.png" /> </view>
+    <view class="gend-img">
+      <image src="../../images/right.png" /> </view>
   </view>
 
   <view class="zstop" hidden="{{istop}}" bind:tap="top">
     <image src="../../images/ztop.png" />
   </view>
   <view class="b-logo">
-    <view >善家购</view>
-    <view >大爱无疆，感谢家乡</view>
+    <view>善家购</view>
+    <view>大爱无疆，感谢家乡</view>
   </view>
 </view>
 

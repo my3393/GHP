@@ -13,7 +13,7 @@ Page({
   getPhoneNumber: function (e) {
     var that = this;
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,

@@ -23,7 +23,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    
+
     id = options.id;
     this.setData({
       buyNum: options.num,
@@ -43,7 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+
     let that = this;
     if (wx.getStorageSync('address')){
       wx.getStorage({
@@ -125,7 +125,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/sku", data, (res) => {
+    app.res.req("/product/sku", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {
@@ -165,10 +165,10 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/detail", data, (res) => {
+    app.res.req("/product/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       
+
 
         that.setData({
           detail: res.data,
@@ -176,7 +176,7 @@ Page({
           price: res.data.lowestPrice,
           title_img: res.data.productDefaultImgOss
         })
-       
+
         if (res.data.isSpecificaton == 1){
           that.getSku();
         }else{
@@ -185,7 +185,7 @@ Page({
           })
           that.checked();
         }
-        
+
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
@@ -204,7 +204,7 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/useraddress/defaultaddress', data, (res) => {
+    app.res.req('/useraddress/defaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -239,7 +239,7 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/member/discount', data, (res) => {
+    app.res.req('/member/discount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (that.data.user.memberType == 1) {
@@ -327,14 +327,14 @@ Page({
       terminal: '小程序'
 
     }
-    app.res.req('app-web/order/productsubmit', data, (res) => {
+    app.res.req('/order/productsubmit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       
+
          wx.showLoading({
            mask:true
          })
-       
+
         setTimeout(function(){
           wx.hideLoading()
           that.pays();
@@ -355,7 +355,7 @@ Page({
     let data = {
 
     }
-    app.res.req("app-web/pay/xcxpay", data, (res) => {
+    app.res.req("/pay/xcxpay", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         clearInterval(setTime)
@@ -367,13 +367,13 @@ Page({
           signType: 'MD5',
           paySign: res.data.sign.paySign,
           success(res) {
-            
+
             wx.showToast({
               title: '支付成功',
               icon: 'none',
               duration: 1000
             })
-             
+
             wx.redirectTo({
               url: '../pay_success/pay_success?id=' + that.data.z_price + '&isDeduction=' + data.isDeduction + '&deductionIntegral=' + data.deductionIntegral,
             })
@@ -410,7 +410,7 @@ Page({
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -457,10 +457,10 @@ Page({
   },
   // 上个页面返回刷新
   changeData: function () {
-    
+
     this.getDetail();
     //var options = { 'id': this.data.id }
-   
+
 
   },
 })

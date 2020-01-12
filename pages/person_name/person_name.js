@@ -95,7 +95,7 @@ Page({
         userName: that.data.name
       }
 
-      app.res.req('app-web/user/editusername', data, (res) => {
+      app.res.req('/user/editusername', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
            that.getuser();
@@ -136,7 +136,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req('/user/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({

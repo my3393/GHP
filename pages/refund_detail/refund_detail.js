@@ -23,7 +23,7 @@ Page({
        title: '加载中',
      })
      id = options.id,
-     storeId = options.storeId 
+     storeId = options.storeId
      status = options.status
      this.getDetail();
     this.chexiao_nums()
@@ -99,7 +99,7 @@ Page({
         url: '../order_refund/order_refund?id=' + this.data.detail.id + '&status=' + status + '&z_status=' + this.data.detail.orderStatus,
       })
     }
-    
+
   },
   //退款进度
   jind(){
@@ -118,12 +118,12 @@ Page({
         url: '../order_complaints_d/order_complaints_d?id=' + id,
       })
     }
-    
+
   },
   //撤销申请
   chexiao(){
      this.chexiao_num();
-     
+
   },
   chexiaos(){
     let that = this;
@@ -131,10 +131,10 @@ Page({
       id: id
     }
 
-    app.res.req('app-web/userorder/revocation', data, (res) => {
+    app.res.req('/userorder/revocation', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        
+
         // that.setData({
         //   detail: res.data,
         //   status: res.data.orderStatus
@@ -166,10 +166,10 @@ Page({
       id: id
     }
 
-    app.res.req('app-web/userorder/revocationcount', data, (res) => {
+    app.res.req('/userorder/revocationcount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-          
+
          if(res.data == 2){
           wx.showToast({
             title: '当前撤销机会已用完，不能撤销',
@@ -191,7 +191,7 @@ Page({
              ischexiao: !that.data.ischexiao
            })
          }
-        
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
@@ -211,14 +211,14 @@ Page({
       id: id
     }
 
-    app.res.req('app-web/userorder/revocationcount', data, (res) => {
+    app.res.req('/userorder/revocationcount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
         that.setData({
           chexiao_nums: res.data
         })
-        
+
 
 
       } else {
@@ -240,7 +240,7 @@ Page({
   },
   cx_cancel() {
     let that = this;
-    
+
     this.setData({
       ismask: !that.data.ismask,
       ischexiao: !that.data.ischexiao
@@ -252,7 +252,7 @@ Page({
       id: id
     }
 
-    app.res.req('app-web/userorder/suborderdetail', data, (res) => {
+    app.res.req('/userorder/suborderdetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.getstore();
@@ -281,13 +281,13 @@ Page({
       storeId
     }
 
-    app.res.req('app-web/store/refundaddress', data, (res) => {
+    app.res.req('/store/refundaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
         that.setData({
           store: res.data,
-          
+
         })
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

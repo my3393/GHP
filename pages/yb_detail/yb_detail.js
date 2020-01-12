@@ -66,7 +66,7 @@ Page({
       currentPage
     }
 
-    app.res.req("app-web/user/integralrecord", data, (res) => {
+    app.res.req("/user/integralrecord", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         detail.push(...res.data)

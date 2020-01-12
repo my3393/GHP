@@ -15,7 +15,7 @@ Page({
     onLoad(options) {
       console.log(options)
       let that = this;
-      if(options.id && options.userid){
+      if (options.id && options.userid) {
         that.setData({
           detail_id: options.id,
           userid: options.userid
@@ -49,6 +49,11 @@ Page({
         that.setData({
           mine: options.mine,
          
+        })
+      }else if(options.userid){
+        that.setData({
+         
+          userid: options.userid
         })
       }
       // 查看是否授权
@@ -160,11 +165,10 @@ Page({
                                 data: res.code,
                             })
                       if (res.code) {
-                        console.log(res.iv)
-                        console.log(res.code)
+                        
                         setTimeout(function () {
                           wx.request({
-                            url: "https://sjg.api.xingtu-group.cn/app-web/login/xcxlogin",
+                            url: "https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/login/xcxlogin",
                             data: {
                               code: res.code,                          
                               encryptedData: encryptedData,
@@ -207,6 +211,12 @@ Page({
                                     //   url: '../good_detail/good_detail?id=' + that.data.detail_id
                                     // })
                                   
+                                }else if(wx.getStorageSync('url')){
+                                  console.log('-----url-----')
+                                  wx.redirectTo({
+                                    url: wx.getStorageSync('url'),
+                                  })
+                                  wx.removeStorageSync('url')
                                 } else if (that.data.detail_id != '' && that.data.userid != ''){
                                   console.log(11)
                                    wx.redirectTo({

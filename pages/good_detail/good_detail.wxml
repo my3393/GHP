@@ -217,6 +217,9 @@
    <view class="detail_img" wx:for='{{detail.detailImgOss}}' >
       <image src="{{item}}" mode="widthFix" />
    </view>
+   <view class="detail_img">
+     <image src="https://www.xingtu-group.cn/xcx_img/good_detail.png" mode="widthFix"></image>
+   </view>
 </view>
 <view class="shop_details">
    <view class="detail_h1">商品推荐</view>
@@ -237,7 +240,7 @@
 </view>
 <view style="height:120rpx;"></view>
 <!-- 底部 -->
-<view class="foot top2">
+<view class="foot top2" style="padding-bottom:{{bottom}}rpx;height:{{height}}rpx">
   <view class="foor_kon " wx:if='{{isInventory}}'>特产太抢手啦，请耐心等待商家补货</view>
   <view class="foot_left">
     <view bindtap="Collection">

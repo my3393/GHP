@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -58,8 +58,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/welfare_det/welfare_det",
-					"pathName": "pages/welfare_det/welfare_det",
+					"name": "pages/members/members",
+					"pathName": "pages/members/members",
 					"query": "id=26&userid=52",
 					"scene": null
 				}

@@ -105,7 +105,7 @@ Page({
     console.log(e)
     this.setData({
       typ: this.data.type[e.detail.value].name,
-     
+
     })
   },
   //提现提交
@@ -156,7 +156,7 @@ Page({
       cardholder:that.data.name,
       identityNo:that.data.card,
     }
-    app.res.req('app-web/userproject/submitbankinfo', data, (res) => {
+    app.res.req('/userproject/submitbankinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({
@@ -274,7 +274,7 @@ Page({
       grade: 1,
       id: ''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -317,7 +317,7 @@ Page({
     }
     // 获取所有市
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '2',
         id: province_id,
@@ -376,7 +376,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '3',
         id: city_id,
@@ -431,7 +431,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '4',
         id: area_id,
@@ -485,5 +485,5 @@ Page({
       town: e.currentTarget.dataset.name
     })
   },
-  
+
 })

@@ -24,7 +24,7 @@ Page({
     iscity: false,
     isqu: false,
     isjie: false,
-    iscitys: false, 
+    iscitys: false,
     isqus: false,
     isjies: false,
     ismask:true,
@@ -102,11 +102,11 @@ Page({
           areaId:area_id,
             townId:town_id,
         }
-        app.res.req('app-web/user/bindregion', data, (res) => {
+        app.res.req('/user/bindregion', data, (res) => {
           console.log(res.data)
           if (res.status == 1000) {
              that.getuser();
-            
+
           } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
             console.log(1)
             wx.redirectTo({
@@ -129,7 +129,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req('/user/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({
@@ -159,7 +159,7 @@ Page({
       ismask: true,
     })
   },
- 
+
   diz(){
     this.getprov();
      this.setData({
@@ -218,19 +218,19 @@ Page({
   },
   //省
   getprov: function () {
-    
+
     province = []
     let that = this;
     let data = {
       grade: 1,
       id:''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       
+
           province.push(...res.data)
-       
+
         that.setData({
           province: province
         })
@@ -246,7 +246,7 @@ Page({
         })
       }
     })
-    
+
   },
   // 省跳市
   getprovs: function (e) {
@@ -261,7 +261,7 @@ Page({
       tas3: 999,
       tas4: 999,
       tar: 9,
-      
+
     })
 
     var nowTime = new Date();
@@ -271,11 +271,11 @@ Page({
     }
     // 获取所有市
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '2',
         id: province_id,
-        
+
       },
       method: 'POST',
       header: {
@@ -286,9 +286,9 @@ Page({
       success: function (res) {
         console.log(res.data.data)
         if (res.data.status == 1000) {
-         
+
             city.push(...res.data.data)
-         
+
           that.setData({
             citys: city,
             city: '',
@@ -332,11 +332,11 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '3',
         id: city_id,
-        
+
       },
       method: 'POST',
       header: {
@@ -347,9 +347,9 @@ Page({
       success: function (res) {
         console.log(res.data.data)
         if (res.data.status == 1000) {
-        
+
             area.push(...res.data.data)
-        
+
           that.setData({
             areas: area,
             area: '',
@@ -390,11 +390,11 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '4',
         id: area_id,
-        
+
       },
       method: 'POST',
       header: {
@@ -405,9 +405,9 @@ Page({
       success: function (res) {
         console.log(res.data.data)
         if (res.data.status == 1000) {
-         
+
             town.push(...res.data.data)
-         
+
           let a = { name: '-' }
           town.push(a)
           that.setData({

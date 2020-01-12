@@ -12,7 +12,7 @@ Page({
     tag: [
       { name: '商品收藏', id: '1' },
       { name: '店铺收藏', id: '2' },
-    
+
 
     ],
     tar: 0,
@@ -94,7 +94,7 @@ Page({
       }else{
         this.getstore();
       }
-      
+
   },
   home(){
      wx.switchTab({
@@ -102,14 +102,14 @@ Page({
      })
   },
   good_detail(e){
-    
+
      if(e.currentTarget.dataset.status == 0){
        wx.showToast({
          title: '该商品已下架',
          icon:'none'
        })
      }else{
-      
+
        wx.navigateTo({
          url: '../good_detail/good_detail?id=' + e.currentTarget.id,
        })
@@ -126,7 +126,7 @@ Page({
       currentPage: currentPage
     }
 
-    app.res.req('app-web/product/collectionlist', data, (res) => {
+    app.res.req('/product/collectionlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         detail.push(...res.data)
@@ -153,7 +153,7 @@ Page({
       currentPage: currentPage
     }
 
-    app.res.req('app-web/store/collectionlist', data, (res) => {
+    app.res.req('/store/collectionlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.hideLoading()
@@ -177,7 +177,7 @@ Page({
   tag(e){
     console.log(e)
     let that = this;
-    
+
     store = [];
     currentPage = 1
     that.setData({

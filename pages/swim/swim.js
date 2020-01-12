@@ -76,7 +76,7 @@ Page({
       keyword: ''
     }
 
-    app.res.req("app-web/product/list", data, (res) => {
+    app.res.req("/product/list", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 

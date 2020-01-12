@@ -13,6 +13,7 @@ Page({
     isdelete: false,
     ismask: false,
     zhao1: true,
+    ispdf:true,
   },
 
   /**
@@ -89,6 +90,63 @@ Page({
       ismask: true,
     })
   },
+  downloadFile: function (e) {
+    let _this = this
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        if (res.platform == "ios") {
+          _this.setData({
+            ismask: !_this.data.ismask,
+            ispdf: !_this.data.ispdf
+          })
+        } else {
+          let type = e.currentTarget.dataset.type;
+          let url = e.currentTarget.dataset.url;
+          wx.downloadFile({
+            url: url,
+            success: function (res) {
+              console.log(res)
+              var Path = res.tempFilePath              //返回的文件临时地址，用于后面打开本地预览所用
+              wx.openDocument({
+                filePath: Path,
+                success: function (res) {
+                  console.log('打开文档成功')
+                }
+              })
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
+        }
+      },
+    })
+    console.log(e);
+  },
+  //取消
+  cancel() {
+    this.setData({
+      ismask: !this.data.ismask,
+      ispdf: !this.data.ispdf
+    })
+  },
+  confirm() {
+    this.setData({
+      ismask: !this.data.ismask,
+      ispdf: !this.data.ispdf
+    })
+    wx.setClipboardData({
+      data: 'https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/file/download8',
+      success: function (res) {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'none',
+          duration: 2500,
+        });
+      }
+    })
+  },
   //删除个人照照片
   detels(e) {
     var that = this;
@@ -96,13 +154,13 @@ Page({
     console.log(that.data.imgs)
 
 
-   
+
       that.setData({
         zhao1: true,
         zhaos1: '',
       })
       zhao1 = ''
-    
+
 
   },
   //重新提交信息
@@ -112,21 +170,21 @@ Page({
       projectId: id
     }
 
-    app.res.req("app-web/userproject/donationapplyinfo", data, (res) => {
+    app.res.req("/userproject/donationapplyinfo", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         sqId = res.data.id;
         id = res.data.projectId;
         zhao1 =  res.data.certificateImg,
         that.setData({
-          
-          
+
+
              zhao1:false,
              zhaos1: res.data.certificateImgOss,
              name: res.data.proveUserName,
              zhiwie: res.data.proveUserPosition,
              phone: res.data.phone
-         
+
         })
 
 
@@ -154,7 +212,7 @@ Page({
           }
         }
       })
-      
+
     } else if(that.data.zhaos1 == ''){
       wx.showToast({
         title: '请上传善款使用证明',
@@ -193,7 +251,7 @@ Page({
         id:sqId
       }
 
-      app.res.req('app-web/userproject/resubmitdonationapply', data, (res) => {
+      app.res.req('/userproject/resubmitdonationapply', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({
@@ -226,7 +284,7 @@ Page({
         phone: that.data.phone,
       }
 
-      app.res.req('app-web/userproject/donationapply', data, (res) => {
+      app.res.req('/userproject/donationapply', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({
@@ -251,7 +309,7 @@ Page({
         }
       })
     }
-    
+
   },
   //图片上传
   chooseImages(e) {
@@ -266,7 +324,7 @@ Page({
         var tempFilePaths = res.tempFilePaths;
         wx.showLoading();
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -300,7 +358,7 @@ Page({
           }
         })
         uploadTask.onProgressUpdate((res) => {
-       
+
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)
           console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)

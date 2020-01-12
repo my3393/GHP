@@ -81,7 +81,7 @@ swiper-item image{
     }
     .tx{
       float: left;
-
+ 
       margin-right: 20rpx;
     }
     .tx image{
@@ -95,6 +95,8 @@ swiper-item image{
       font-size: 30rpx;
       display: inline-block;
       margin-top: 16rpx;
+      max-width: 130rpx;
+      margin-right: 20rpx;
     }
     .biaos{
       display: inline-block;
@@ -106,6 +108,16 @@ swiper-item image{
       color: #fff;
       font-size: 20rpx;
     }
+    .gongy{
+    font-size: 26rpx;
+    color: #fff;
+    display: inline-block;
+}
+.gongy image{
+  width: 100rpx;
+  height: 32rpx;
+  margin-right: 20rpx;
+}
 /*  */
 .qy{
   width: 100%;

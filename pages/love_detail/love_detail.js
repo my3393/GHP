@@ -48,7 +48,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    etail = [];
+    detail = [];
     currentPage = 1;
   },
 
@@ -71,7 +71,7 @@ Page({
       currentPage
     }
 
-    app.res.req("app-web/user/donationlist", data, (res) => {
+    app.res.req("/user/donationlist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         detail.push(...res.data)

@@ -87,10 +87,10 @@ Page({
    */
   onReachBottom: function () {
     let that = this;
-     
+
         currentPage = currentPage +1
         that.getDetail();
-    
+
   },
 
   /**
@@ -111,7 +111,7 @@ Page({
             id: e.currentTarget.id
           }
 
-          app.res.req('app-web/userorder/delete', data, (res) => {
+          app.res.req('/userorder/delete', data, (res) => {
             console.log(res.data)
             if (res.status == 1000) {
               detail = []
@@ -127,7 +127,7 @@ Page({
               })
             }
           })
-        
+
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
@@ -170,7 +170,7 @@ Page({
             id: e.currentTarget.id
           }
 
-          app.res.req('app-web/userorder/confirmreceipt', data, (res) => {
+          app.res.req('/userorder/confirmreceipt', data, (res) => {
             console.log(res.data)
             if (res.status == 1000) {
               detail = []
@@ -191,7 +191,7 @@ Page({
         }
       }
     })
-   
+
   },
   getDetail() {
     let that = this;
@@ -200,7 +200,7 @@ Page({
       currentPage: currentPage
     }
 
-    app.res.req('app-web/userorder/list', data, (res) => {
+    app.res.req('/userorder/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.hideLoading()
@@ -231,7 +231,7 @@ Page({
     detail = [];
     that.setData({
       tar:e.currentTarget.dataset.index,
-      
+
     })
     this.getDetail()
   },
@@ -241,10 +241,10 @@ Page({
       id: e.currentTarget.id
     }
 
-    app.res.req('app-web/pay/gopay', data, (res) => {
+    app.res.req('/pay/gopay', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        app.res.req("app-web/pay/xcxpay", data, (res) => {
+        app.res.req("/pay/xcxpay", data, (res) => {
           console.log(res.data)
           if (res.status == 1000) {
             wx.requestPayment({

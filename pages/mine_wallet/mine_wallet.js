@@ -71,14 +71,14 @@ Page({
 
     }
 
-    app.res.req('app-web/user/walletinfo', data, (res) => {
+    app.res.req('/user/walletinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data != null) {
           that.setData({
             detail:res.data
           })
-         
+
         }
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({

@@ -152,7 +152,7 @@ page {
      padding: 4rpx 10rpx;
      margin-right: 14rpx;
      box-sizing: border-box;
-     background:linear-gradient(to right, #f12200, #ff4e17);
+     background:linear-gradient(to right, #f12200, #ff4e17); 
      border-radius: 8rpx;
      color: #fff;
 

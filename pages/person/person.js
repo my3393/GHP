@@ -62,7 +62,7 @@ Page({
           that.setData({
             name: res.data.userName
           })
-        } 
+        }
         if (res.data.headImgUrl != null) {
           that.setData({
             post1: res.data.headImgUrl
@@ -78,19 +78,26 @@ Page({
               sexs: '女'
             })
           }
-          
-        } 
+
+        }
         if (res.data.birthday != null) {
           that.setData({
             day: res.data.birthday
           })
-        } 
+        }
         if (res.data.isCollegeStudent == 1) {
           that.setData({
             college: 0
           })
-        } 
-        if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null){
+        }
+        if (res.data.homeProvinceId == '' || res.data.homeProvinceId == null){
+
+        }else{
+          that.setData({
+            home: res.data.homeProvinceName + '-' + res.data.homeCityName + '-' + res.data.homeAreaName + '-' + res.data.homeTownName,
+          })
+        }
+        if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
           that.setData({
             bang_diz: '未绑定'
           })
@@ -153,7 +160,7 @@ Page({
   },
    //性别选择
    sexChange(e){
-   
+
     let that = this;
     that.setData({
       sexs: that.data.sex[e.detail.value].name,
@@ -163,7 +170,7 @@ Page({
        sex: that.data.sex[e.detail.value].id
      }
      console.log(this.data.day)
-     app.res.req('app-web/user/editsex', data, (res) => {
+     app.res.req('/user/editsex', data, (res) => {
        console.log(res.data)
        if (res.status == 1000) {
 
@@ -194,7 +201,7 @@ Page({
       birthday:e.detail.value
     }
     console.log(this.data.day)
-    app.res.req('app-web/user/editbirthday', data, (res) => {
+    app.res.req('/user/editbirthday', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -220,8 +227,8 @@ Page({
     let data = {
       fileName: that.data.post1_name
     }
-    
-    app.res.req('app-web/user/editheadimgurl', data, (res) => {
+
+    app.res.req('/user/editheadimgurl', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -268,7 +275,7 @@ Page({
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -314,17 +321,17 @@ Page({
       // wx.previewImage({
       //   urls: [r],
       // })
-      
+
       var test1 = setInterval(function () {
         that.getprogress();
       }, 1000)
-      
+
       that.setData({
         isshow: !that.data.isshow,
         ishidden: !that.data.ishidden
       })
       wx.uploadFile({
-        url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+        url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
         filePath: r,
         name: 'file',
         header: {
@@ -381,7 +388,7 @@ Page({
   },
   // //刷新报名
   changeData: function () {
-   
+
     //var options = { 'id': this.data.id }
     //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
     //this.getuser();
@@ -393,7 +400,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req('/user/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({
@@ -408,16 +415,18 @@ Page({
       }
     })
   },
-  diz() {
+  diz(e) {
+
     this.getprov();
     this.setData({
       address: false,
       ismask: false,
+      type:e.currentTarget.id
     })
   },
   x_prov() {
     let that = this;
-    
+
     that.setData({
       isprov: true,
       iscity: false,
@@ -482,7 +491,7 @@ Page({
       grade: 1,
       id: ''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -528,7 +537,7 @@ Page({
     }
     // 获取所有市
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '2',
         id: province_id,
@@ -589,7 +598,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '3',
         id: city_id,
@@ -647,7 +656,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '4',
         id: area_id,
@@ -699,18 +708,57 @@ Page({
       addres: that.data.prov + '-' + that.data.city + '-' + that.data.area + '-' + e.currentTarget.dataset.name,
       address: true,
       town: e.currentTarget.dataset.name,
-      
+
     })
-    that.bang();
+    if(that.data.type == 0){
+      that.bangs();
+      that.setData({
+        home: that.data.prov + '-' + that.data.city + '-' + that.data.area + '-' + e.currentTarget.dataset.name,
+      })
+    }else{
+      that.bang()
+    }
+
   },
   bang(){
+    let that = this;
     let data = {
       provinceId: province_id,
       cityId: city_id,
       areaId: area_id,
       townId: town_id,
     }
-    app.res.req('app-web/user/bindregion', data, (res) => {
+    app.res.req('/user/bindregion', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.showToast({
+          title: '绑定成功',
+        })
+        that.getuser();
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //所在地
+  bangs() {
+    let that = this
+    let data = {
+      provinceId: province_id,
+      cityId: city_id,
+      areaId: area_id,
+      townId: town_id,
+    }
+    app.res.req('/useraddress/updatehomeregion', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({

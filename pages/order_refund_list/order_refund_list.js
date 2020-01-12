@@ -69,16 +69,16 @@ Page({
   getDetail() {
     let that = this;
     let data = {
-       currentPage 
+       currentPage
     }
 
-    app.res.req('app-web/userorder/refundlist', data, (res) => {
+    app.res.req('/userorder/refundlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        
+
         detail.push(...res.data)
         that.setData({
-          
+
           detail: detail
         })
         wx.hideLoading()

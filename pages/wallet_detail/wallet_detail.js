@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+
     tar:0,
   },
 
@@ -16,10 +16,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-     
+
+
        this.getHas();
-     
+
   },
 
   /**
@@ -40,7 +40,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-     
+
   },
 
   /**
@@ -70,14 +70,14 @@ Page({
       currentPage
     }
 
-    app.res.req("app-web/user/settlementlist", data, (res) => {
+    app.res.req("/user/settlementlist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
        detail.push(...res.data)
        that.setData({
          detail:detail
        })
-      
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({

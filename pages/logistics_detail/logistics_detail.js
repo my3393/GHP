@@ -22,7 +22,7 @@ Page({
     id = options.id
    this.getDetail();
    this.getdiz();
-   
+
    // const base64 = new Base64();
    //console.log(data)
   },
@@ -80,15 +80,15 @@ Page({
     let data = {
       id
     }
-    
 
-    app.res.req('app-web/userorder/logisticsinfo', data, (res) => {
+
+    app.res.req('/userorder/logisticsinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.hideLoading()
-       
+
         that.setData({
-          
+
           isshow: false,
           detail:res.data[0],
           details:res.data[0].details[0],
@@ -114,15 +114,15 @@ Page({
       id: id
     }
 
-    app.res.req('app-web/userorder/detail', data, (res) => {
+    app.res.req('/userorder/detail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
-          diz: res.data,       
+          diz: res.data,
         })
 
 
-        
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({

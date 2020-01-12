@@ -52,7 +52,7 @@
 
       <view class="nop">
         特产溯源证明
-        <view class="nop_r" data-url="https://www.xingtu-group.cn/sjg_xieyi/7_Tracingtothesource.pdf" data-type="pdf" catchtap='downloadFile'>模板下载</view>
+        <view class="nop_r" data-url="http://sjg.api.xingtu-group.cn/app-web/file/download7" data-type="pdf" catchtap='downloadFile'>模板下载</view>
       </view>
 
       <view class="nav">
@@ -171,9 +171,9 @@
         <view>用户名：{{user.phone}}</view>
         <view>初始密码：{{user.phone}}</view>
       </view>
-      <view class="ru_enter">
+      <!-- <view class="ru_enter">
         进入我的店铺
-      </view>
+      </view> -->
     </view>
     <view class="audit" wx:if='{{audit == 2}}'>
       <view class="kong_img">
@@ -277,3 +277,15 @@
 </view>
 
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
+
+<!--  -->
+<view class="popups" hidden="{{ispdf}}">
+    <image src="../../images/pdf.png" class="pdf"></image>
+    <view class="popup_contents">1.点击下方“复制”按钮拷贝下载链接</view>
+    <view class="popup_contents">2.选择在浏览器打开</view>
+    <view class="popup_contents">3.分享/发送微信，完成下载</view>
+    <view class="popup_btn">
+    <view bindtap="cancel">取消</view>
+    <view bindtap="confirm">复制</view>
+  </view>
+</view>

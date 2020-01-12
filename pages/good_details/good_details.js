@@ -27,6 +27,41 @@ Page({
     current: 0,
     goodId: 0,
     is_num: false,//购物车数量显示
+    scrollH: 0, //滚动总高度
+    opcity: 0,
+    iconOpcity: 0.5,
+    topMenu: [{
+      icon: "../../images/tui_1.png",
+      text: "搜索特产",
+      size: 26,
+      badge: 3
+    }, {
+      icon: "../../images/tui_2.png",
+      text: "善家购",
+      size: 23,
+      badge: 0
+    }, {
+      icon: "../../images/tui_3.png",
+      text: "家乡特产",
+      size: 26,
+      badge: 0
+    }, {
+      icon: "../../images/tui_4.png",
+      text: "个人中心",
+      size: 23,
+      badge: 2
+    }, {
+      icon: "../../images/tui_5.png",
+      text: "我的收藏",
+      size: 26,
+      badge: 0
+    }, {
+      icon: "../../images/tui_6.png",
+      text: "意见反馈",
+      size: 23,
+      badge: 0
+    }],
+    menuShow: false,
   },
 
   onLoad: function (options) {
@@ -51,6 +86,20 @@ Page({
       userid = options.userid
       this.Bang();
     }
+    let obj = wx.getMenuButtonBoundingClientRect();
+    this.setData({
+      width: obj.left,
+      height: obj.top + obj.height + 8,
+      top: obj.top + (obj.height - 32) / 2
+    }, () => {
+      wx.getSystemInfo({
+        success: (res) => {
+          this.setData({
+            scrollH: res.windowWidth
+          })
+        }
+      })
+    });
   },
   /**
    * 生命周期函数--监听页面显示
@@ -174,7 +223,7 @@ Page({
       productId: id
     }
 
-    app.res.req('app-web/shopcart/addproduct', data, (res) => {
+    app.res.req('/shopcart/addproduct', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({
@@ -313,7 +362,7 @@ Page({
 
     }
 
-    app.res.req("app-web/shopcart/shopcartnumber", data, (res) => {
+    app.res.req("/shopcart/shopcartnumber", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data == 0) {
@@ -377,7 +426,7 @@ Page({
 
     }
 
-    app.res.req("app-web/product/list", data, (res) => {
+    app.res.req("/product/list", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -408,7 +457,7 @@ Page({
       id: userid
     }
 
-    app.res.req("app-web/user/sharebinduser", data, (res) => {
+    app.res.req("/user/sharebinduser", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({
@@ -448,7 +497,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/sku", data, (res) => {
+    app.res.req("/product/sku", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {
@@ -585,7 +634,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/collection", data, (res) => {
+    app.res.req("/product/collection", data, (res) => {
       console.log(res.data)
       if (res.status == 1016 || res.status == 1017) {
         that.getDetail();
@@ -613,7 +662,7 @@ Page({
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -671,7 +720,7 @@ Page({
       storeId: that.data.detail.storeId
     }
 
-    app.res.req("app-web/store/detail", data, (res) => {
+    app.res.req("/store/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -707,7 +756,7 @@ Page({
       storeId: that.data.detail.storeId
     }
 
-    app.res.req("app-web/store/recommendproduct", data, (res) => {
+    app.res.req("/store/recommendproduct", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -737,7 +786,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/detail", data, (res) => {
+    app.res.req("/product/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data.productVideo == null) {
@@ -840,7 +889,15 @@ Page({
     })
   },
   onPageScroll: function (e) {
-
+    let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
+    let opcity = scroll / this.data.scrollH;
+    if (this.data.opcity >= 1 && opcity >= 1) {
+      return;
+    }
+    this.setData({
+      opcity: opcity,
+      iconOpcity: 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity)
+    })
     let that = this
     if (e.scrollTop > 200) {
 
@@ -890,5 +947,44 @@ Page({
     // detail_id;
     ds = false;
   },
-
+  openMenu: function () {
+    this.setData({
+      menuShow: true
+    })
+  },
+  closeMenu: function () {
+    this.setData({
+      menuShow: false
+    })
+  },
+  common: function (e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.index
+    if (index == 0) {
+      console.log(index)
+      wx.navigateTo({
+        url: '../search/search',
+      })
+    } else if (index == 1) {
+      wx.switchTab({
+        url: '../e_home/home',
+      })
+    } else if (index == 2) {
+      wx.switchTab({
+        url: '../e_specialty/e_specialty',
+      })
+    } else if (index == 3) {
+      wx.switchTab({
+        url: '../e_mine/mine',
+      })
+    } else if (index == 4) {
+      wx.navigateTo({
+        url: '../mine_collection/mine_collection',
+      })
+    } else if (index == 5) {
+      wx.navigateTo({
+        url: '../mine_opinion/mine_opinion',
+      })
+    }
+  },
 })

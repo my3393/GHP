@@ -14,6 +14,6 @@
 </view>
 
 <view class="page-footer">
-       <view class='chong'>全国</view>
+       <view class='chong' bindtap="open" id="{{1}}">全国</view>
        <view class="que" bindtap="open">筛选老乡</view>
    </view>

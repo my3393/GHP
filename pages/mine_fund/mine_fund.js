@@ -111,11 +111,11 @@ Page({
         url: '../apply_with_one/apply_with_one?id=' + e.currentTarget.id,
       })
     }
-    
+
   },
   tix_c(e) {
     wx.navigateTo({
-      url: '../apply_with_one/apply_with_one?id=' + e.currentTarget.id + '&tru=' + 1, 
+      url: '../apply_with_one/apply_with_one?id=' + e.currentTarget.id + '&tru=' + 1,
     })
   },
   //详情
@@ -126,7 +126,7 @@ Page({
       currentPage
     }
 
-    app.res.req('app-web/userproject/list', data, (res) => {
+    app.res.req('/userproject/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {

@@ -26,7 +26,7 @@ Page({
       { name: '本科生' },
       { name: '硕士生' },
       { name: '博士生' },
-      
+
     ],
     typ:'',
   },
@@ -137,8 +137,8 @@ Page({
       name: e.detail.value
     })
   },
- 
- 
+
+
   sub(){
     let that = this;
     var phonetel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
@@ -200,7 +200,7 @@ Page({
   },
   submit() {
     let that = this;
-   
+
     if (that.data.id) {
       let that = this;
 
@@ -216,7 +216,7 @@ Page({
         studentImg2: img_2,
 
       }
-      app.res.req('app-web/authentication/editcollege', data, (res) => {
+      app.res.req('/authentication/editcollege', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           that.setData({
@@ -261,7 +261,7 @@ Page({
         studentImg1: img_1,
         studentImg2: img_2,
       }
-      app.res.req('app-web/authentication/submitcollege', data, (res) => {
+      app.res.req('/authentication/submitcollege', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           that.setData({
@@ -309,7 +309,7 @@ Page({
 
   },
   go() {
-     
+
     this.setData({
       name: this.data.audits.realName,
       phone: this.data.audits.identityNo,
@@ -336,7 +336,7 @@ Page({
 
     }
 
-    app.res.req('app-web/authentication/collegeinfo', data, (res) => {
+    app.res.req('/authentication/collegeinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data != null) {
@@ -369,7 +369,7 @@ Page({
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -439,7 +439,7 @@ Page({
           that.getprogress();
         }, 1000)
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -503,7 +503,7 @@ Page({
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({

@@ -62,6 +62,22 @@
               </view>
           </view>
       </view>
+      <view class="nav_list_l">
+          <view class="nav-l-t">
+              所在地
+          </view>
+          <view class="list-t">
+              <view class="list-n" bindtap="diz" id="{{0}}">
+                 
+                      <input style="width:520rpx;" type="text" disabled="{{true}}" value='{{home}}' placeholder="请选择所在地" />  
+                 
+                
+              </view>
+              <view class="list-right" bindtap="diz" id="{{0}}">
+                  <image src="../../images/right.png" />
+              </view>
+          </view>
+      </view>
        <view class="nav_list_l">
           <view class="nav-l-t">
               公益口号
@@ -99,13 +115,13 @@
               绑定家乡
           </view>
           <view class="list-t">
-              <view class="list-n" bindtap="diz">
+              <view class="list-n" bindtap="diz" id="{{1}}">
                  
                       <input type="text" disabled="{{true}}" value='{{bang_diz}}' placeholder="请选择" />  
                  
                 
               </view>
-              <view class="list-right">
+              <view class="list-right" bindtap="diz" id="{{1}}">
                   <image src="../../images/right.png" />
               </view>
           </view>

@@ -56,12 +56,21 @@ page{
 
 }
 
+.fixs{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 12;
+}
 .banner{
   width: calc(100% - 40rpx);
   margin-left: 20rpx;
   height: 260rpx;
   position: relative;
   top:30rpx;
+  border-radius: 8rpx;
 }
 .banner image{
   width: 100%;

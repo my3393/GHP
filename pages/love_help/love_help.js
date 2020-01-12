@@ -80,7 +80,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/donationinfo', data, (res) => {
+    app.res.req('/user/donationinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({

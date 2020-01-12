@@ -23,7 +23,7 @@ Page({
       { name: '特产列表' },
       { name: '特产分类' },
       { name: '其他' },
-      
+
     ],
     progre: 0,
     typ: '',
@@ -93,7 +93,7 @@ Page({
     console.log(that.data.imgs)
 
 
-    
+
       simages.splice(e.currentTarget.dataset.index, 1)
       images.splice(e.currentTarget.dataset.index, 1)
       that.setData({
@@ -106,7 +106,7 @@ Page({
           img_show: false
         })
       }
-    
+
 
   },
   type(e){
@@ -120,12 +120,12 @@ Page({
     var that = this;
 
     console.log(e)
-   
+
       wx.previewImage({
         current: e.currentTarget.id,
         urls: that.data.images
       })
-    
+
   },
   sub(){
     let that = this;
@@ -153,13 +153,13 @@ Page({
     let that = this;
     var Str = JSON.stringify(simages);
     let data = {
-    
+
         feedbackType:that.data.typ,
       feedbackContent:that.data.sums,
       feedbackImgJson: Str
     }
 
-    app.res.req('app-web/feedback/submit', data, (res) => {
+    app.res.req('/feedback/submit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
           wx.showToast({
@@ -171,7 +171,7 @@ Page({
               dalet:1
             })
           },1000)
-       
+
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
@@ -189,7 +189,7 @@ Page({
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -233,7 +233,7 @@ Page({
         }, 1000)
 
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -307,7 +307,7 @@ Page({
   //切换
   tag(e) {
     let that = this;
-    
+
       currentPage = 1,
       detail = [];
     that.setData({
@@ -322,17 +322,17 @@ Page({
       currentPage
     }
 
-    app.res.req('app-web/feedback/list', data, (res) => {
+    app.res.req('/feedback/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-      
+
        // detail.push(...res.data)
         that.setData({
-          
+
           detail: res.data
         })
-      
-       
+
+
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',

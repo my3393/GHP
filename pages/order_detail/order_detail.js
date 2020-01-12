@@ -90,7 +90,7 @@ Page({
   },
   //确认签收
   quer(){
-    
+
     let that = this;
     wx.showModal({
       title: '提示',
@@ -101,7 +101,7 @@ Page({
             id: that.data.detail.id,
           }
 
-          app.res.req('app-web/userorder/confirmreceipt', data, (res) => {
+          app.res.req('/userorder/confirmreceipt', data, (res) => {
             console.log(res.data)
             if (res.status == 1000) {
               that.getDetail()
@@ -121,13 +121,13 @@ Page({
         }
       }
     })
-    
+
   },
   //提醒发货
   remind(){
-  
+
     var timestamp1 = Date.parse(new Date());//拿到现在时间
-    
+
     if (wx.getStorageSync('data_expiration') > timestamp1 && wx.getStorageSync('data_expiration') ){
         wx.showToast({
           title: '24小时之内只能提醒一次哦',
@@ -142,7 +142,7 @@ Page({
         icon: 'none'
       })
     }
-    
+
   },
   //查看物流
   wul(e) {
@@ -153,7 +153,7 @@ Page({
   //拨打电话
   phone(){
     let that = this;
-  
+
      wx.makePhoneCall({
        phoneNumber: that.data.detail.servicePhone,
      })
@@ -169,7 +169,7 @@ Page({
       id: that.data.detail.id,
       cancelReason: this.data.cancel[e.detail.value].name
     }
-    app.res.req('app-web/userorder/cancel', data, (res) => {
+    app.res.req('/userorder/cancel', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -212,9 +212,9 @@ Page({
     })
     let data = {
       id: that.data.detail.id,
-      
+
     }
-    app.res.req('app-web/userorder/delete', data, (res) => {
+    app.res.req('/userorder/delete', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -234,7 +234,7 @@ Page({
   //退款
   refund(e){
     wx.navigateTo({
-      url: '../order_refund/order_refund?id=' + e.currentTarget.id + '&status=' + this.data.detail.orderStatus + '&z_status=' + e.currentTarget.dataset.status, 
+      url: '../order_refund/order_refund?id=' + e.currentTarget.id + '&status=' + this.data.detail.orderStatus + '&z_status=' + e.currentTarget.dataset.status,
     })
   },
   //付款
@@ -244,10 +244,10 @@ Page({
       id: that.data.detail.id
     }
 
-    app.res.req('app-web/pay/gopay', data, (res) => {
+    app.res.req('/pay/gopay', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        app.res.req("app-web/pay/xcxpay", data, (res) => {
+        app.res.req("/pay/xcxpay", data, (res) => {
           console.log(res.data)
           if (res.status == 1000) {
             wx.requestPayment({
@@ -396,26 +396,26 @@ Page({
      id:id
     }
 
-    app.res.req('app-web/userorder/detail', data, (res) => {
+    app.res.req('/userorder/detail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data.logisticsInfo){
           let logistics = JSON.parse(res.data.logisticsInfo)
            console.log(that.data.logistics)
           that.setData({
-           
+
             logistics: logistics.result.list[0]
           })
           console.log(that.data.logistics)
         }
-        
-        
+
+
         that.setData({
           detail: res.data,
           member_p: (res.data.productTotalFee + res.data.freight - res.data.payMoney).toFixed(2)
         })
-       
-       
+
+
         that.PaymentTime();
         that.PaymentTimes();
 

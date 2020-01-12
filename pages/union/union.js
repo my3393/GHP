@@ -49,9 +49,9 @@ Page({
       key: 'userinfo',
       success: function (res) {
 
-       
+
           user = res.data
-       
+
       },
     })
   },
@@ -112,7 +112,7 @@ Page({
    */
   onShareAppMessage: function () {
     var that = this;
-    
+
     return {
       title: '你的好友' + user.userName + '向您推荐了一个非常棒小程序，点击立即进入',
       imageUrl:'https://www.xingtu-group.cn/xcx_img/tu.png',
@@ -126,7 +126,7 @@ Page({
       currentPage: currentPage
     }
 
-    app.res.req('app-web/user/binduserlist', data, (res) => {
+    app.res.req('/user/binduserlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         detail.push(...res.data)
@@ -153,7 +153,7 @@ Page({
       currentPage: currentPage
     }
 
-    app.res.req('app-web/user/bindstorelist', data, (res) => {
+    app.res.req('/user/bindstorelist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.hideLoading()

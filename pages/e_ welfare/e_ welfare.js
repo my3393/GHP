@@ -26,7 +26,12 @@ Page({
     ],
     ...Canvas.data,
     num:'0',
-    provinceId:''
+    nums:'0',
+    provinceId:'',
+    gradientColor: {
+      '0%': '#f12200',
+      '100%': '#ff4e17'
+    }
   },
 
   /**
@@ -35,7 +40,7 @@ Page({
   onLoad: function (options) {
     this.getDateil();
     this.getList();
-    
+
   },
 
   /**
@@ -120,20 +125,21 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/project/sjgamount', data, (res) => {
+    app.res.req('/project/sjgamount', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
          if (res.data.withdrawalTotalAmount != 0){
            let num =( (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount)*100)
            that.setData({
+             nums:num.toFixed(0),
              num: num.toFixed(2)
            })
            console.log(num)
          }
-         
+
             that.setData({
               money:res.data,
-              
+
             })
          that.draw('runCanvas', this.data.num, 1000);
            console.log(that.data.num)
@@ -166,9 +172,9 @@ Page({
       cityId: cityId,
       areaId: areaId,
       townId: townId,
-    
+
     }
-    app.res.req('app-web/project/list', data, (res) => {
+    app.res.req('/project/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         console.log(list)

@@ -1,4 +1,4 @@
-let sUrl = "https://sjg.api.xingtu-group.cn/";
+let sUrl = "https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb";
 function getData(url, data, nb) {
   wx.request({
     url: sUrl + url,

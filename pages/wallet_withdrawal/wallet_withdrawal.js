@@ -17,7 +17,7 @@ Page({
     this.setData({
       num:options.num
     })
-  }, 
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -75,10 +75,10 @@ Page({
       return false
     }
     let data = {
-     
+
     }
 
-    app.res.req("app-web/user/settlementlist", data, (res) => {
+    app.res.req("/user/settlementlist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         detail.push(...res.data)

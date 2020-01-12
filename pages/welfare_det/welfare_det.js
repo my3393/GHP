@@ -26,7 +26,7 @@ Page({
     num:0,
     list:[],
     love_num:0,
-    
+
   },
 
   /**
@@ -58,13 +58,13 @@ Page({
     //选择id
     var that = this;
     query.select('.top1').boundingClientRect(function (rect) {
-      
+
 
       top1 = rect.top
 
     }).exec();
     query.select('.top2').boundingClientRect(function (rect) {
-      
+
 
       top2 = rect.top
 
@@ -149,7 +149,7 @@ Page({
   },
   //确定
   que2(){
-    
+
     this.setData({
       ismask: !this.data.ismask,
       buzu: !this.data.buzu
@@ -173,11 +173,11 @@ Page({
   getvalue() {
     let that = this;
     let data = {
-     
+
 
     }
 
-    app.res.req("/app-web/member/voteyb", data, (res) => {
+    app.res.req("/member/voteyb", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
          that.setData({
@@ -203,14 +203,14 @@ Page({
 
     }
 
-    app.res.req("app-web/project/projectvote", data, (res) => {
+    app.res.req("/project/projectvote", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({
           title: '投票成功',
           icon:'none'
         })
-        
+
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
@@ -224,7 +224,7 @@ Page({
           title: '艺呗不足',
           icon: 'none'
         })
-          
+
       } else {
         wx.showToast({
           title: res.msg,
@@ -241,13 +241,13 @@ Page({
       currentPage
     }
 
-    app.res.req("app-web/project/votelist", data, (res) => {
+    app.res.req("/project/votelist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         //  if(res.data.length < 3){
         //    that.setData({
         //      ranklist: res.data,
-             
+
         //    })
         //  }else{
         //    if (that.data.currentPage == 1) {
@@ -266,10 +266,10 @@ Page({
            that.setData({
              ranklist: ranklist,
              love_num:num
-            
+
            })
-         
-       
+
+
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -290,7 +290,7 @@ Page({
       id: id
     }
 
-    app.res.req("app-web/project/detail", data, (res) => {
+    app.res.req("/project/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data.raiseAmount != 0) {
@@ -304,7 +304,7 @@ Page({
         that.getranklist();
         that.setData({
           detail: res.data,
-        
+
         })
         console.log(res.data.infoImgOss)
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
@@ -321,7 +321,7 @@ Page({
     })
   },
   //项目公式
-  
+
   getList() {
     let that = this;
     let data = {
@@ -329,13 +329,13 @@ Page({
       currentPage:1
     }
 
-    app.res.req("app-web/project/publicitylist", data, (res) => {
+    app.res.req("/project/publicitylist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.getPai();
         that.setData({
           list: res.data,
-         
+
         })
 
       } else if (res.status == 1004 || res.status == 1005) {
@@ -355,10 +355,10 @@ Page({
     let that = this;
     let data = {
       projectId: id,
-      
+
     }
 
-    app.res.req("app-web/project/projectrank", data, (res) => {
+    app.res.req("/project/projectrank", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -406,7 +406,7 @@ Page({
         data: 1
       })
     }
-    
+
   },
   move() {
 
@@ -456,7 +456,7 @@ Page({
       })
 
     } else if (top2 - 10 < e.scrollTop) {
-     
+
       that.setData({
         issrcoll: 3
       })
@@ -552,7 +552,7 @@ Page({
       id: wx.getStorageSync('bangId')
     }
 
-    app.res.req("app-web/user/sharebinduser", data, (res) => {
+    app.res.req("/user/sharebinduser", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // wx.showToast({

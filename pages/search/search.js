@@ -91,17 +91,17 @@ Page({
      }
      var index = search.findIndex(item => item === e.detail.value);
      console.log(index)
-    
+
      if (index > -1) {
        // 存在
-     
+
      } else {
        // 不存在
        //state.catData.push(Object.assign({}, good, { num: 1 }));
        search.push(e.detail.value)
      }
-    
-    
+
+
      wx.setStorage({
        key: 'search',
        data: search,
@@ -146,16 +146,16 @@ Page({
         ishistory: true
       })
     }
-    
+
   },
   //热门推荐
   getlist() {
     let that = this;
     let data = {
-    
+
     }
 
-    app.res.req("app-web/home/hotsearch", data, (res) => {
+    app.res.req("/home/hotsearch", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -182,18 +182,18 @@ Page({
   //搜索店铺
   getStore() {
     let that = this;
-    let data = { 
+    let data = {
       currentPage: currentPage,
       keyword: keyword,
     }
 
-    app.res.req("app-web/store/list", data, (res) => {
+    app.res.req("/store/list", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
           store: res.data
         })
-        
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -238,7 +238,7 @@ Page({
       sortType:0
     }
 
-    app.res.req("app-web/product/list", data, (res) => {
+    app.res.req("/product/list", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({

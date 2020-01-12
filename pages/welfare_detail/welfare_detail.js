@@ -11,7 +11,12 @@ Page({
    */
   data: {
     ...Canvas.data,
-    shao: '30',
+   num:'0',
+   nums:'0',
+    gradientColor: {
+      '0%': '#f12200',
+      '100%': '#ff4e17'
+    },
     isduo:true
   },
 
@@ -19,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.draw('runCanvas', this.data.shao, 1000);
+   // this.draw('runCanvas', this.data.shao, 1000);
 
     this.getDateil();
   },
@@ -50,7 +55,7 @@ Page({
    */
   onUnload: function () {
     list = [];
-  }, 
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -97,14 +102,15 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/project/sjgamount', data, (res) => {
+    app.res.req('/project/sjgamount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.getList();
         if (res.data.withdrawalTotalAmount != 0) {
           let num = (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount)
           that.setData({
-            num: num.toFixed(2)
+            num: num.toFixed(2),
+            nums: num.toFixed(0),
           })
           console.log(num)
         }
@@ -113,7 +119,7 @@ Page({
           money: res.data,
 
         })
-       // that.draw('runCanvas', this.data.num, 1000);
+        that.draw('runCanvas', this.data.num, 1000);
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
         wx.redirectTo({
@@ -136,7 +142,7 @@ Page({
       projectId:id,
       currentPage: currentPage
     }
-    app.res.req('app-web/project/publicitylist', data, (res) => {
+    app.res.req('/project/publicitylist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {

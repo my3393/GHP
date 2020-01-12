@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.getDefaultaddress();
-   
+
     let idn = options.ids
 
     ids = idn.split(',')
@@ -123,7 +123,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/sku", data, (res) => {
+    app.res.req("/product/sku", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {
@@ -156,7 +156,7 @@ Page({
       }
     })
   },
-  
+
   //商品详情
   getDetail() {
     console.log(ids)
@@ -164,13 +164,13 @@ Page({
 
     var Str = JSON.stringify(ids);
     let data ={
-      shopProductIdJson: Str,  
+      shopProductIdJson: Str,
     }
     // wx.request({
     //   url: "http://192.168.123.171:8080/app-web/shopcart/placeorder",
     //   data: {
-        
-    //     shopProductIdJson : Str, 
+
+    //     shopProductIdJson : Str,
     //   },
     //   method: 'POST',
     //   header: {
@@ -204,7 +204,7 @@ Page({
     //     }
     //   }
     // })
-    app.res.req("app-web/shopcart/placeorder", data, (res) => {
+    app.res.req("/shopcart/placeorder", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -231,7 +231,7 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/useraddress/defaultaddress', data, (res) => {
+    app.res.req('/useraddress/defaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -266,7 +266,7 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/member/discount', data, (res) => {
+    app.res.req('/member/discount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (user.memberType == 1) {
@@ -338,13 +338,13 @@ Page({
     }
     var Str = JSON.stringify(ids);
     var input = JSON.stringify(that.data.inpu)
-    
+
     let data = {
       shopProductIdJson : Str,
-      
-       
+
+
        leaveMessageJson:input,
-     
+
        terminal: 'xx',
        addressIdStr: that.data.addressId,
     }
@@ -368,7 +368,7 @@ Page({
     //   success: function (res) {
     //     console.log(res.data.data)
     //     if (res.data.status === 100) {
-          
+
     //     } else if (res.data.status === 103) {
     //       wx.redirectTo({
     //         url: '/pages/login/login',
@@ -383,7 +383,7 @@ Page({
     //   }
     // })
 
-    app.res.req('app-web/order/shopcartsubmit', data, (res) => {
+    app.res.req('/order/shopcartsubmit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if(res.data.index == 1007){
@@ -399,8 +399,8 @@ Page({
             wx.hideLoading()
             that.pays();
           }, 2000)
-        } 
-       
+        }
+
       } else {
 
         wx.showToast({
@@ -417,7 +417,7 @@ Page({
     let data = {
 
     }
-    app.res.req("app-web/pay/xcxpay", data, (res) => {
+    app.res.req("/pay/xcxpay", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         clearInterval(setTime)

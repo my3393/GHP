@@ -63,7 +63,7 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-        
+
         that.setData({
           user: res.data
         })
@@ -115,7 +115,7 @@ Page({
       wx.stopPullDownRefresh() //停止下拉刷新
       that.getDateil();
     }, 200)
-    
+
   },
 
   /**
@@ -151,7 +151,7 @@ Page({
   },
   //进入店铺
   store(e){
-    
+
     wx.navigateTo({
       url: '../store_detail/store_detail?id=' + e.currentTarget.id,
     })
@@ -406,7 +406,7 @@ Page({
       shopProductId: cartsdata[idx].products[index].id,
       buyCount: num
     }
-    app.res.req('app-web/shopcart/editbuycount', data, (res) => {
+    app.res.req('/shopcart/editbuycount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
        // that.getDateil();
@@ -463,7 +463,7 @@ Page({
       shopProductId: cartsdata[idx].products[index].id,
       buyCount: num
     }
-    app.res.req('app-web/shopcart/editbuycount', data, (res) => {
+    app.res.req('/shopcart/editbuycount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
       //   that.getDateil();
@@ -488,7 +488,23 @@ Page({
     let that = this;
     if(ids.length == 0){
 
-    }else{
+    } else if (that.data.user.homeProvinceId == null || that.data.user.homeProvinceId == '') {
+      wx.showModal({
+        title: '提示',
+        content: '下单需要绑定你的所在地',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          } else if (res.cancel) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          }
+        }
+      })
+    } else{
       wx.navigateTo({
         url: '../sure_orders/sure_orders?ids=' + ids,
       })
@@ -497,7 +513,7 @@ Page({
         shopProductIds: ids
       }
 
-     
+
     }
 
   },
@@ -516,7 +532,7 @@ Page({
             let data = {
               shopProductIdJson: Str
             }
-            app.res.req('app-web/shopcart/delete', data, (res) => {
+            app.res.req('/shopcart/delete', data, (res) => {
               console.log(res.data)
               if (res.status == 1000) {
                 ids = [],
@@ -549,14 +565,14 @@ Page({
         }
       })
     }
-    
+
   },
   getDateil() {
     let that = this;
     let data = {
-       
+
     }
-    app.res.req('app-web/shopcart/list', data, (res) => {
+    app.res.req('/shopcart/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {
@@ -593,7 +609,7 @@ Page({
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -643,7 +659,7 @@ Page({
     let data = {
       isRefresh: isRefresh
     }
-    app.res.req("app-web/home/recommend", data, (res) => {
+    app.res.req("/home/recommend", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({

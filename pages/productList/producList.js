@@ -60,7 +60,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     //首页分类
-    if(options.homeId){ 
+    if(options.homeId){
       keyword = options.searchKey
     }
     //从搜索页
@@ -68,7 +68,7 @@ Page({
       keyword=options.searchKey
     }
 
-   
+
     //从店铺进入
     if (options.storeId) {
       //分类
@@ -180,10 +180,10 @@ Page({
   },
   //地区筛选
   btnDropChange: function (e) {
-    
+
     let index = e.currentTarget.dataset.index;
     //let arr = JSON.parse(JSON.stringify(this.data.province));
- 
+
       let arr = this.data.province
       this.setData({
         attrData: arr,
@@ -195,15 +195,15 @@ Page({
           scrollTop: 0
         })
       })
-    
+
   },
   //地区选择
   btnSelected: function (e) {
     let index = e.currentTarget.dataset.index;
     let selected = `attrData[${index}].selected`;
     let attrData = this.data.attrData
-   
-   
+
+
     for(var i in this.data.attrData){
       if(i == index){
         attrData[i].selected = !this.data.attrData[i].selected
@@ -215,7 +215,7 @@ Page({
     this.setData({
       // [selected]: !this.data.attrData[index].selected
       attrData:attrData,
-     
+
     })
     console.log(attrData)
   },
@@ -241,12 +241,12 @@ Page({
   btnSure: function () {
     let index = this.data.attrIndex;
     let arr = this.data.attrData;
-   
+
     let attrName = "";
     //这里只是为了展示选中效果,并非实际场景
     for (let item of arr) {
       if (item.selected) {
-        
+
         // attrName += attrName ? ";" + item.name : item.name;
         provinceId = item.id
         currentPage = 1
@@ -259,7 +259,7 @@ Page({
         })
         this.getDetail();
       }
-     
+
     }
     // let isActive = `attrArr[${index}].isActive`;
     // let selectedName = `attrArr[${index}].selectedName`;
@@ -340,7 +340,7 @@ Page({
   //类型选择
   product(e){
     let index = e.currentTarget.dataset.index;
-   
+
     let attrData = this.data.className
 
 
@@ -356,7 +356,7 @@ Page({
     this.setData({
       // [selected]: !this.data.attrData[index].selected
       className: attrData,
-      
+
     })
   },
   product_reset(){
@@ -364,7 +364,7 @@ Page({
     let attrData = this.data.className
 
 
-    for (var i in attrData) {  
+    for (var i in attrData) {
         attrData[i].selected = false
     }
     this.setData({
@@ -378,7 +378,7 @@ Page({
         searchKey: searchKey,
         detail:[]
       })
-      
+
       detail = [];
       currentPage = 1
       this.getDetail();
@@ -430,19 +430,19 @@ Page({
   //省
   getprov: function () {
 
-   
+
     let that = this;
     let data = {
       grade: 1,
       id: ''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
          for(var i in res.data){
            res.data[i].selected = false
          }
-       
+
 
         that.setData({
           province: res.data
@@ -470,13 +470,13 @@ Page({
       cityId: cityId,
       areaId: areaId,
       townId: townId,
-     
+
       typeId: typeId,
       sortType: sortType,
       keyword: keyword
     }
 
-    app.res.req('app-web/product/list', data, (res) => {
+    app.res.req('/product/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data == '') {
@@ -491,7 +491,7 @@ Page({
             detail: detail,
             status: res.data.orderStatus
           })
-         
+
         }
         console.log(that.data.detail)
 
@@ -514,7 +514,7 @@ Page({
     let data = {
 
     }
-    app.res.req("app-web/home/grade/type", data, (res) => {
+    app.res.req("/home/grade/type", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for(var i in res.data){
@@ -524,7 +524,7 @@ Page({
           className: res.data,
 
         })
-      
+
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
           url: '../login/login',
@@ -556,8 +556,40 @@ Page({
       tabIndex: 0,
       region:'地区',
       dropdownList,
-
+      searchKey:'',
     })
     this.getDetail();
-  }
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var that = this;
+    //console.log(that.data.detail.name)
+    return {
+      title: '您的好友给您发送了一张商家入驻邀请函，点击【立即查看】',
+      imageUrl: 'https://www.xingtu-group.cn/xcx_img/store_refund.png',
+      path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
+
+    }
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    let that = this;
+   
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          user: res.data
+        })
+
+
+      },
+    })
+
+  },
 })

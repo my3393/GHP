@@ -36,7 +36,7 @@ Page({
    Img:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1574139227810&di=19a2595df93625bf1bfcc027b4bcd79c&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a22859b248a5a801211d25d63b72.jpg%401280w_1l_2o_100sh.jpg",
   },
   fenx(){
-        
+
      let that =this;
    this.setData({ istag: !that.data.istag });
    },
@@ -45,7 +45,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    
+
     if (options.storeid){
       id = options.storeid
     }else{
@@ -58,7 +58,7 @@ Page({
       title: '加载中',
     })
     this.getStore();
-   
+
     this.setData({
       navH: app.globalData.navHeight
     })
@@ -108,7 +108,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+
   },
 
   /**
@@ -124,7 +124,7 @@ Page({
    */
   onShareAppMessage: function () {
     var that = this;
-  
+
     return {
       title: '您的好友' + that.data.user.userName + '向您推荐了一个非常棒的特产店铺，点击立即进入' ,
       path: '/pages/store_detail/store_detail?storeid=' + id + '&userid=' + that.data.user.id,
@@ -159,7 +159,7 @@ Page({
       value:''
     })
   },
-  
+
   //商品详情
   good_detail(e){
     wx.navigateTo({
@@ -173,7 +173,7 @@ Page({
       storeId: id
     }
     if (that.data.store.isCollection == 0){
-      app.res.req("app-web/store/collection", data, (res) => {
+      app.res.req("/store/collection", data, (res) => {
         console.log(res.data)
         if (res.status == 1016) {
           wx.showToast({
@@ -214,7 +214,7 @@ Page({
         content: '取消关注将无法在我的收藏中快捷进入店铺',
         success(res) {
           if (res.confirm) {
-            app.res.req("app-web/store/collection", data, (res) => {
+            app.res.req("/store/collection", data, (res) => {
               console.log(res.data)
               if (res.status == 1016) {
                 wx.showToast({
@@ -255,7 +255,7 @@ Page({
         }
       })
     }
-    
+
   },
   //返回上一页
   navBack(){
@@ -273,8 +273,8 @@ Page({
       keyword: keyword,
       productType: productType,
     }
-   
-    app.res.req("app-web/store/detail", data, (res) => {
+
+    app.res.req("/store/detail", data, (res) => {
       console.log(res.data +'店铺详情' )
       if (res.status == 1000) {
         console.log('店铺详情')
@@ -293,7 +293,7 @@ Page({
           })
         }
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-       
+
         wx.redirectTo({
           url: '../login/login?storeid=' + id + '&userid=' + userid,
         })
@@ -310,16 +310,16 @@ Page({
     let that = this;
     let data = {
       storeId: id,
-     
+
     }
 
-    app.res.req("app-web/store/producttype", data, (res) => {
+    app.res.req("/store/producttype", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
           type: res.data
         })
-        
+
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -356,13 +356,13 @@ Page({
         tas: e.currentTarget.id
       })
     }
-    
+
     currentPage = 1;
     list = [];
     this.getList();
   },
   //商品列表
- 
+
   getList() {
     let that = this;
     let data = {
@@ -373,7 +373,7 @@ Page({
       productType: productType
     }
 
-    app.res.req("app-web/store/productlist", data, (res) => {
+    app.res.req("/store/productlist", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         list.push(...res.data)
@@ -405,7 +405,7 @@ Page({
       storeId:id
     }
 
-    app.res.req("app-web/store/recommendproduct", data, (res) => {
+    app.res.req("/store/recommendproduct", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -510,7 +510,7 @@ Page({
         canvasId: 'posterCanvas',
         fileType: 'png',
         success: (canvasImgRes) => {
-         
+
           this.setData({
             imgSrc: canvasImgRes.tempFilePath
           });
@@ -542,7 +542,7 @@ Page({
         tar:e.currentTarget.dataset.index
      })
     }
-    
+
   },
   onPageScroll: function (e) {
     console.log(e.scrollTop)
@@ -558,7 +558,7 @@ Page({
         ress:''
       })
     }
-   
+
   },
   //绑定
   Bang() {
@@ -567,7 +567,7 @@ Page({
       id: wx.getStorageSync('bangId')
     }
 
-    app.res.req("app-web/user/sharebinduser", data, (res) => {
+    app.res.req("/user/sharebinduser", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // wx.showToast({
@@ -583,7 +583,7 @@ Page({
       } else if (res.status == 1031) {
         wx.removeStorageSync('bandId')
         console.log('----已经绑定----')
-      } 
+      }
     })
   },
 })

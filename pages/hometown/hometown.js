@@ -44,14 +44,19 @@ Page({
   onUnload: function () {
 
   },
-  open(){
-    if(this.data.id == ''){
-      wx.showToast({
-        title: '请选择省份',
-        icon:'none'
+  open(e){
+    if (e.currentTarget.id == 1) {
+      this.setData({
+        id:''
       })
     }else{
-     
+      if (this.data.id == '') {
+        wx.showToast({
+          title: '请选择省份',
+          icon: 'none'
+        })
+      } else {
+
         var pages = getCurrentPages();//当前页面栈
         if (pages.length > 1) {
           var beforePage = pages[pages.length - 2];//获取上一个页面实例对象
@@ -59,14 +64,16 @@ Page({
           beforePage.setData({       //如果需要传参，可直接修改A页面的数据，若不需要，则可省去这一步
             provinceId: this.data.id
           })
-         
+
           beforePage.changeDatas();//触发父页面中的方法
         }
         wx.navigateBack({
           delta: 1
         })
-     
+
+      }
     }
+    
   },
   tag(e){
     this.setData({
@@ -83,7 +90,7 @@ Page({
       grade: 1,
       id: ''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -103,7 +110,7 @@ Page({
     })
 
   },
- 
 
- 
+
+
 })

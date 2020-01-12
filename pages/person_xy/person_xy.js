@@ -95,7 +95,7 @@ Page({
         publicSlogan: that.data.name
       }
 
-      app.res.req('app-web/user/editpublicslogan', data, (res) => {
+      app.res.req('/user/editpublicslogan', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
 
@@ -137,7 +137,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req('/user/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({

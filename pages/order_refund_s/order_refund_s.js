@@ -27,7 +27,7 @@ Page({
     isshow: false,
     progress:'00',
   },
-  
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -88,9 +88,9 @@ Page({
   },
   bindrefund(e) {
     this.setData({
-      Courier: this.data.Couriers[e.detail.value].name,  
+      Courier: this.data.Couriers[e.detail.value].name,
     })
-   
+
   },
   name(e){
     this.setData({
@@ -116,7 +116,7 @@ Page({
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -158,7 +158,7 @@ Page({
           that.getprogress();
         }, 1000)
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -243,7 +243,7 @@ Page({
          refundExpressName: that.data.Courier,
            refundUserPhone:that.data.phone
        }
-       app.res.req('app-web/userorder/subimitrefundInfo', data, (res) => {
+       app.res.req('/userorder/subimitrefundInfo', data, (res) => {
          console.log(res.data)
          if (res.status == 1000) {
            wx.showToast({

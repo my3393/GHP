@@ -19,7 +19,7 @@ Page({
       { name: '商家缺货' },
       { name: '其他原因' },
     ],
-    cargos: [ 
+    cargos: [
       { name: '未收到货' },
       { name: '已收到货' },
     ],
@@ -188,7 +188,7 @@ Page({
         refundExplain: value,
         refundImgJson: schoolStr
       }
-      app.res.req('app-web/userorder/applyrefund', data, (res) => {
+      app.res.req('/userorder/applyrefund', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({
@@ -220,7 +220,7 @@ Page({
         refundExplain: value,
         refundImgJson: schoolStr
       }
-      app.res.req('app-web/userorder/applyrefund', data, (res) => {
+      app.res.req('/userorder/applyrefund', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({
@@ -262,7 +262,7 @@ Page({
      else{
        that.submits();
      }
- 
+
     // wx.request({
     //   url: "http://192.168.123.171:8080/app-web/userorder/applyrefund",
     //   data: {
@@ -281,7 +281,7 @@ Page({
     //   success: function (res) {
     //     console.log(res.data.data)
     //     if (res.data.status === 100) {
-         
+
 
 
     //     } else if (res.data.status === 103) {
@@ -301,14 +301,14 @@ Page({
     //     }
     //   }
     // })
-    
-  }, 
+
+  },
   getprogress() {
     let that = this;
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // that.setData({
@@ -350,7 +350,7 @@ Page({
           that.getprogress();
         }, 1000)
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -414,7 +414,7 @@ Page({
       id: id
     }
 
-    app.res.req('app-web/userorder/suborderdetail', data, (res) => {
+    app.res.req('/userorder/suborderdetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 

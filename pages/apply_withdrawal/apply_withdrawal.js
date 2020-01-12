@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
+
     ismask: true,
     isExist:true,
     money:'',
@@ -16,7 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      
+
       this.setData({
         z_num:options.money,
          id:options.id
@@ -89,7 +89,7 @@ Page({
     let data = {
       projectId: that.data.id
     }
-    app.res.req('app-web/userproject/bindbankinfo', data, (res) => {
+    app.res.req('/userproject/bindbankinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data.bankCard != null){
@@ -142,7 +142,7 @@ Page({
        projectId: that.data.id,
        amount: that.data.money
      }
-     app.res.req('app-web/userproject/donationwithdrawal', data, (res) => {
+     app.res.req('/userproject/donationwithdrawal', data, (res) => {
        console.log(res.data)
        if (res.status == 1000) {
          wx.showToast({
@@ -168,7 +168,7 @@ Page({
   },
   // 上个页面返回刷新
   changeData: function () {
-   
+
     this.infor();
     //var options = { 'id': this.data.id }
     //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low

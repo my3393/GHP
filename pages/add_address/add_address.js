@@ -32,7 +32,7 @@ Page({
       phone:'',
       minute:'',
       town:'',
-     
+
       checked:true,
   },
 
@@ -101,7 +101,7 @@ Page({
     let data = {
       id
     }
-    app.res.req('app-web/useraddress/addressdetail', data, (res) => {
+    app.res.req('/useraddress/addressdetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         address = res.data
@@ -149,13 +149,13 @@ Page({
         checked:!this.data.checked
     })
     if(this.data.checked == true){
-     
+
        sum=1
-     
+
     }else{
-      
+
         sum= 0
-      
+
     }
   },
   names(e){
@@ -184,7 +184,7 @@ Page({
   },
   sub(){
     var that = this;
-   
+
     var phonetel = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (that.data.names == '') {
       wx.showToast({
@@ -242,7 +242,7 @@ Page({
           detailAddress: that.data.minute,
           isDefault: sum
         }
-        app.res.req('app-web/useraddress/edit', data, (res) => {
+        app.res.req('/useraddress/edit', data, (res) => {
           console.log(res.data)
           if (res.status == 1000) {
             wx.showToast({
@@ -274,7 +274,7 @@ Page({
         })
       }else{
         let data = {
-          
+
           consigneeName: that.data.names,
           consigneePhone: that.data.phone,
           provinceId: province_id,
@@ -284,7 +284,7 @@ Page({
           detailAddress: that.data.minute,
           isDefault: sum
         }
-        app.res.req('app-web/useraddress/add', data, (res) => {
+        app.res.req('/useraddress/add', data, (res) => {
           console.log(res.data)
           if (res.status == 1000) {
             wx.showToast({
@@ -315,8 +315,8 @@ Page({
           }
         })
       }
-      
-     
+
+
     }
   },
   x_prov() {
@@ -362,10 +362,10 @@ Page({
   //取消弹出层
   adres_all(){
     this.setData({
-       
+
       address: true,
       ismask: true,
-    
+
     })
   },
   //省
@@ -377,7 +377,7 @@ Page({
       grade: 1,
       id: ''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -423,7 +423,7 @@ Page({
     }
     // 获取所有市
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '2',
         id: province_id,
@@ -484,7 +484,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '3',
         id: city_id,
@@ -542,7 +542,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '4',
         id: area_id,

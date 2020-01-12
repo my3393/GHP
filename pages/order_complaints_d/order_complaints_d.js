@@ -83,7 +83,7 @@ Page({
       complaintType:1
     }
 
-    app.res.req('app-web/userorder/complaint', data, (res) => {
+    app.res.req('/userorder/complaint', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({
@@ -104,7 +104,7 @@ Page({
         })
       }
     })
-  
+
   },
   getDetail() {
     let that = this;
@@ -112,13 +112,13 @@ Page({
       id: id
     }
 
-    app.res.req('app-web/userorder/suborderdetail', data, (res) => {
+    app.res.req('/userorder/suborderdetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       
+
         that.setData({
           detail: res.data,
-          
+
         })
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

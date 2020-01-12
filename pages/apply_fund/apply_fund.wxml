@@ -47,7 +47,7 @@
 </view>
 <view class="nop">
   资助申请证明
-  <view class="nop_r" data-url="https://www.xingtu-group.cn/sjg_xieyi/9_Support.pdf" data-type="pdf" bindtap='downloadFile'>下载证明模板</view>
+  <view class="nop_r" data-url="https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/file/download9" data-type="pdf" bindtap='downloadFile'>下载证明模板</view>
 </view>
 <view class="nav">
   <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
@@ -194,5 +194,17 @@
   </view>
   <view class="que_btn" bindtap="quer">
     确定
+  </view>
+</view>
+
+<!--  -->
+<view class="popups" hidden="{{ispdf}}">
+    <image src="../../images/pdf.png" class="pdf"></image>
+    <view class="popup_contents">1.点击下方“复制”按钮拷贝下载链接</view>
+    <view class="popup_contents">2.选择在浏览器打开</view>
+    <view class="popup_contents">3.分享/发送微信，完成下载</view>
+    <view class="popup_btn">
+    <view bindtap="cancel">取消</view>
+    <view bindtap="confirm">复制</view>
   </view>
 </view>

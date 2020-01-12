@@ -3,5 +3,6 @@
  "usingComponents": {
   "skeleton": "/component/skeleton/skeleton"
   },
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom"
 }

@@ -14,7 +14,7 @@ Page({
 
     tar:'',
     isBang:true,
-    
+
     currentTab: 0,  //对应样式变化
     scrollTop: 0,  //用作跳转后右侧视图回到顶部
     screenArray: [], //左侧导航栏内容
@@ -31,16 +31,16 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-        
+
         that.setData({
           user: res.data
         })
         that.getType();
-       
+
       },
     })
-   
-   
+
+
   },
 
 
@@ -69,13 +69,13 @@ Page({
         that.setData({
           user: res.data
         })
-        
+
         if (res.data.bindProvinceId == null || res.data.bindProvinceId == ''){
           that.setData({
             isBang:false
           })
         }
-       
+
         if (res.data.loginId == null) {
             wx.navigateTo({
               url: '../login/login',
@@ -83,7 +83,7 @@ Page({
         }
       },
     })
-   
+
   },
 
   /**
@@ -134,7 +134,7 @@ Page({
       title:'您的好友给您发送了一张商家入驻邀请函，点击【立即查看】' ,
       imageUrl: 'https://www.xingtu-group.cn/xcx_img/store_refund.png',
       path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
-     
+
     }
   },
   //banner跳转
@@ -164,7 +164,7 @@ Page({
     let data = {
       provinceId: that.data.user.bindProvinceId
     }
-    app.res.req('app-web/home/classifyprovince', data, (res) => {
+    app.res.req('/home/classifyprovince', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
           if(res.data == ''){
@@ -172,7 +172,7 @@ Page({
                Nostore:true,
              })
           }else{
-            
+
             that.setData({
               type: res.data,
               typeId : res.data[0].id
@@ -203,12 +203,12 @@ Page({
         cityId: that.data.user.bindCityId,
         areaId:'',
         townId:'',
-       
+
         typeId:that.data.typeId,
         sortType:0,
         keyword:''
     }
-    app.res.req('app-web/product/list', data, (res) => {
+    app.res.req('/product/list', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
          list.push(...res.data)
@@ -233,9 +233,9 @@ Page({
   getbanner() {
     let that = this;
     let data = {
-     
+
     }
-    app.res.req('app-web/home/hometownadvertise', data, (res) => {
+    app.res.req('/home/hometownadvertise', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {
@@ -267,10 +267,10 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/donation/list', data, (res) => {
+    app.res.req('/donation/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        
+
         that.setData({
           dymic: res.data,
 
@@ -299,7 +299,7 @@ Page({
     }
     console.log(e.currentTarget);
     list = [];
-   
+
     this.setData({
       tapTime: nowTime,
       typeId:e.currentTarget.id
@@ -324,7 +324,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req('/user/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({

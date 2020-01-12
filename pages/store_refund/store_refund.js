@@ -21,14 +21,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    load:true,//
-    num:0,
-    isshow:true,
-    isg:true,
-    audit:3,
-    post1:'../../images/store_logo.png',
-    name:'',
+    load: true, //
+    num: 0,
+    isshow: true,
+    isg: true,
+    audit: 3,
+    post1: '../../images/store_logo.png',
+    name: '',
     ismask: true,
+    ispdf:true,
     address: true,
     prov: '',
     city: '',
@@ -37,26 +38,26 @@ Page({
     zhaos1: '',
     zhaos2: '',
     zhaos3: '',
-    isprov:true,
+    isprov: true,
     iscity: false,
     isqu: false,
     isjie: false,
-    zhao1:true,
-    zhao2:true,
-    zhao3:true,
-    value:'',
-    addres:'',
-    typ:'',
-    xuan:'',
+    zhao1: true,
+    zhao2: true,
+    zhao3: true,
+    value: '',
+    addres: '',
+    typ: '',
+    xuan: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
     this.getAudit();
-    
+
     if (options.userid) {
       userid = options.userid
       this.Bang();
@@ -66,19 +67,19 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     let that = this;
     //获取本地用户信息
     wx.getStorage({
       key: 'userinfo',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           user: res.data
         })
@@ -89,45 +90,45 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
   //复制文本
-  copy(e){
+  copy(e) {
     console.log(e)
     wx.setClipboardData({
       data: e.currentTarget.dataset.text,
-      success: function (res) {
+      success: function(res) {
         wx.getClipboardData({
-          success: function (res) {
+          success: function(res) {
             wx.showToast({
               title: '复制成功'
             })
@@ -137,12 +138,16 @@ Page({
     })
   },
   downloadFile: function (e) {
-    console.log(e);
-    wx.showModal({
-      title: '提示',
-      content: '安卓点击下方qq浏览器可进行下载',
-      success(res) {
-        if (res.confirm) {
+    let _this = this
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        if (res.platform == "ios") {
+          _this.setData({
+            ismask: !_this.data.ismask,
+            ispdf: !_this.data.ispdf
+          })
+        } else {
           let type = e.currentTarget.dataset.type;
           let url = e.currentTarget.dataset.url;
           wx.downloadFile({
@@ -161,13 +166,33 @@ Page({
               console.log(res)
             }
           })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
         }
+      },
+    })
+    console.log(e);
+  },
+  //取消
+  cancel() {
+    this.setData({
+      ismask: !this.data.ismask,
+      ispdf: !this.data.ispdf
+    })
+  },
+  confirm() {
+    this.setData({
+      ismask: !this.data.ismask,
+      ispdf: !this.data.ispdf
+    })
+    wx.setClipboardData({
+      data: 'https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/file/download7',
+      success: function (res) {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'none',
+          duration: 2500,
+        });
       }
     })
-    
-
   },
   //删除个人照照片
   detels(e) {
@@ -176,25 +201,25 @@ Page({
     console.log(that.data.imgs)
 
 
-   if (e.currentTarget.dataset.num == 0) {
+    if (e.currentTarget.dataset.num == 0) {
       that.setData({
         zhao1: true,
         zhaos1: '',
       })
       zhao1 = ''
-   } else if (e.currentTarget.dataset.num == 1){
-     that.setData({
-       zhao2: true,
-       zhaos2: '',
-     })
-     zhao2 = ''
-   } else if (e.currentTarget.dataset.num == 2) {
-     that.setData({
-       zhao3: true,
-       zhaos3: '',
-     })
-     zhao3 = ''
-   }
+    } else if (e.currentTarget.dataset.num == 1) {
+      that.setData({
+        zhao2: true,
+        zhaos2: '',
+      })
+      zhao2 = ''
+    } else if (e.currentTarget.dataset.num == 2) {
+      that.setData({
+        zhao3: true,
+        zhaos3: '',
+      })
+      zhao3 = ''
+    }
 
   },
   //取消
@@ -205,33 +230,33 @@ Page({
     })
   },
   //店铺名称
-  names(e){
-     this.setData({
-       name:e.detail.value
-     })
+  names(e) {
+    this.setData({
+      name: e.detail.value
+    })
   },
   //宣言
-  xuan(e){
+  xuan(e) {
     this.setData({
-      xuan:e.detail.value
+      xuan: e.detail.value
     })
   },
   //类型
-  type(e){
-     console.log(e)
-     this.setData({
-       typ: this.data.type[e.detail.value].typeName,
-       typeId: this.data.type[e.detail.value].id,
-     })
+  type(e) {
+    console.log(e)
+    this.setData({
+      typ: this.data.type[e.detail.value].typeName,
+      typeId: this.data.type[e.detail.value].id,
+    })
   },
   //查看协议
-  web(){
-     wx.navigateTo({
-       url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.html',
-     })
+  web() {
+    wx.navigateTo({
+      url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.html',
+    })
   },
   //入驻提交
-  sub(){
+  sub() {
     let that = this;
     if (that.data.post1 == '../../images/store_logo.png') {
       wx.showToast({
@@ -277,32 +302,32 @@ Page({
       that.submit();
     }
   },
-  submit(){
+  submit() {
     let that = this;
     let data = {
       storeLogo: that.data.post1_name,
-        storeName:that.data.name,
-       typeId:that.data.typeId,
-        provinceId:province_id,
-      cityId:city_id,
-        areaId:area_id,
-      townId:town_id,
-        publicSlogan:that.data.xuan,
-      saleImg:zhao1,
-        foodImg:zhao2,
-       businessImg:zhao3,
-        introduce:that.data.value,
+      storeName: that.data.name,
+      typeId: that.data.typeId,
+      provinceId: province_id,
+      cityId: city_id,
+      areaId: area_id,
+      townId: town_id,
+      publicSlogan: that.data.xuan,
+      saleImg: zhao1,
+      foodImg: zhao2,
+      businessImg: zhao3,
+      introduce: that.data.value,
     }
 
-    app.res.req('app-web/store/submitapply', data, (res) => {
+    app.res.req('/store/submitapply', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // that.setData({
         //   audits: res.data,
         //   audit: 2
         // })
-         that.getAudit();
-       
+        that.getAudit();
+
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
@@ -316,7 +341,7 @@ Page({
     })
   },
   //重新提交
-  again(){
+  again() {
     province_id = this.data.audits.provinceId;
     city_id = this.data.audits.cityId;
     area_id = this.data.audits.areaId;
@@ -324,34 +349,34 @@ Page({
     zhao1 = this.data.audits.saleImg;
     zhao2 = this.data.audits.foodImg;
     zhao3 = this.data.audits.storeLogo;
-     this.setData({
-       name: this.data.audits.storeName,
-       post1_name: this.data.audits.businessImg,
-       post1: this.data.audits.storeLogoOss,
-       typ: this.data.audits.typeName,
-       typeId: this.data.audits.typeId,
-       prov: this.data.audits.provinceName,
-       city: this.data.audits.cityName,
-       area: this.data.audits.areaName,
-       town: this.data.audits.townName,
-       zhaos1: this.data.audits.saleImgOss,
-       zhaos2: this.data.audits.foodImgOss,
-       zhaos3: this.data.audits.businessImgOss,
-       xuan: this.data.audits.publicSlogan,
-       value: this.data.audits.introduce,
-       addres: this.data.audits.provinceName + '-' + this.data.audits.cityName + '-' + this.data.audits.areaName + '-' + this.data.audits.townName,
-       zhao1: false,
-       zhao2: false,
-       zhao3: false,
-       isprov:true,
-       audit:3,
-     })
+    this.setData({
+      name: this.data.audits.storeName,
+      post1_name: this.data.audits.businessImg,
+      post1: this.data.audits.storeLogoOss,
+      typ: this.data.audits.typeName,
+      typeId: this.data.audits.typeId,
+      prov: this.data.audits.provinceName,
+      city: this.data.audits.cityName,
+      area: this.data.audits.areaName,
+      town: this.data.audits.townName,
+      zhaos1: this.data.audits.saleImgOss,
+      zhaos2: this.data.audits.foodImgOss,
+      zhaos3: this.data.audits.businessImgOss,
+      xuan: this.data.audits.publicSlogan,
+      value: this.data.audits.introduce,
+      addres: this.data.audits.provinceName + '-' + this.data.audits.cityName + '-' + this.data.audits.areaName + '-' + this.data.audits.townName,
+      zhao1: false,
+      zhao2: false,
+      zhao3: false,
+      isprov: true,
+      audit: 3,
+    })
   },
-  getPhoneNumber: function (e) {
+  getPhoneNumber: function(e) {
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -363,7 +388,7 @@ Page({
         token: wx.getStorageSync('token')
       },
       dataType: 'json',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.status === 1000) {
           wx.setStorage({
@@ -374,7 +399,7 @@ Page({
             key: 'userinfo',
             data: res.data,
           })
-          setTimeout(function () {
+          setTimeout(function() {
             that.sub();
           }, 1000)
 
@@ -396,80 +421,77 @@ Page({
       }
     })
   },
-   getType(){
-     let that = this;
-    
-     let data = {
-       grade: 1
-     }
+  getType() {
+    let that = this;
 
-     app.res.req('app-web/home/grade/type', data, (res) => {
-       console.log(res.data)
-       if (res.status == 1000) {
-         that.setData({
-           type: res.data
-         })
+    let data = {
+      grade: 1
+    }
 
-       } else if (res.status == 1004 || res.status == 1005) {
-         wx.redirectTo({
-           url: '../login/login',
-         })
-       } else {
-         wx.showToast({
-           title: res.msg,
-           icon: 'none'
-         })
-       }
-     })
-   },
-    getAudit() {
-      let that = this;
-      wx.showLoading({
-        title: '加载中',
-      })
-      let data = {
+    app.res.req('/home/grade/type', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          type: res.data
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
       }
+    })
+  },
+  getAudit() {
+    let that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    let data = {}
 
-      app.res.req('app-web/store/applyinfo', data, (res) => {
-        console.log(res.data)
-        if (res.status == 1000) {
-          if(res.data == null){
-            that.setData({
-              
-              audit:3
-            })
-          }else{
-            that.setData({
-              audits: res.data,
-              audit: res.data.auditStatus
-            })
-          }
+    app.res.req('/store/applyinfo', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data == null) {
           that.setData({
-            load:false
-          })
-          that.getType();
-          wx.hideLoading()
 
-        }
-         else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-          if (userid) {
-            wx.navigateTo({
-              url: '../login/login?store_refund=' + 1 + '&userid=' + userid
-            })
-          } else {
-            wx.navigateTo({
-              url: '../login/login?mine=' + 1
-            })
-          }       
-        }
-         else {
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
+            audit: 3
+          })
+        } else {
+          that.setData({
+            audits: res.data,
+            audit: res.data.auditStatus
           })
         }
-      })
-    },
+        that.setData({
+          load: false
+        })
+        that.getType();
+        wx.hideLoading()
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        if (userid) {
+          wx.navigateTo({
+            url: '../login/login?store_refund=' + 1 + '&userid=' + userid
+          })
+        } else {
+          wx.navigateTo({
+            url: '../login/login?mine=' + 1
+          })
+        }
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //绑定
   Bang() {
     let that = this;
@@ -477,7 +499,7 @@ Page({
       id: userid
     }
 
-    app.res.req("app-web/user/sharebinduser", data, (res) => {
+    app.res.req("/user/sharebinduser", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // wx.showToast({
@@ -485,7 +507,7 @@ Page({
         // })
 
 
-      } 
+      }
       // else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
 
       //   wx.showToast({
@@ -501,7 +523,7 @@ Page({
       //       url: '../login/login?id=' + id
       //     })
       //   }
-      // } 
+      // }
       else if (res.status == 1028) {
 
       } else if (res.status == 1030) {
@@ -514,13 +536,12 @@ Page({
       }
     })
   },
-   //特产上传
+  //特产上传
   getprogress() {
     let that = this;
-    let data = {
-    }
+    let data = {}
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -550,7 +571,7 @@ Page({
   //LOGO
   chooseImage(e) {
     var that = this;
-   // id = e.currentTarget.id,
+    // id = e.currentTarget.id,
     wx.chooseImage({
       count: 1,
       success: (res) => {
@@ -579,7 +600,7 @@ Page({
       // wx.previewImage({
       //   urls: [r],
       // })
-      var test1 = setInterval(function () {
+      var test1 = setInterval(function() {
         that.getprogress();
       }, 1000)
       url = r
@@ -588,7 +609,7 @@ Page({
         ishidden: !that.data.ishidden
       })
       wx.uploadFile({
-        url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+        url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
         filePath: url,
         name: 'file',
         header: {
@@ -603,25 +624,25 @@ Page({
         success(res) {
           let datas = JSON.parse(res.data)
           console.log(datas)
-          if (datas.status == 1000){
-           wx.hideLoading();
-           wx.showToast({
-             title: '上传成功',
-             icon: 'none'
-           })
-          
+          if (datas.status == 1000) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传成功',
+              icon: 'none'
+            })
+
             clearTimeout(test1);
-           that.setData({
-             post1: datas.data.url,
-             post1_name: datas.data.fileName,
-             
-           })
-         }else{
-           wx.showToast({
-             title: res.msg,
-             icon: 'none'
-           })
-         }
+            that.setData({
+              post1: datas.data.url,
+              post1_name: datas.data.fileName,
+
+            })
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
 
         }
 
@@ -646,11 +667,11 @@ Page({
       success: res => {
         // console.log(res.tempFilePaths[0]);
         var tempFilePaths = res.tempFilePaths;
-        var test1 = setInterval(function () {
+        var test1 = setInterval(function() {
           that.getprogress();
         }, 1000)
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -679,7 +700,7 @@ Page({
                 zhao2: false
               })
               zhao2 = datas.data.fileName
-            }else{
+            } else {
               that.setData({
                 zhaos3: datas.data.url,
                 zhao3: false
@@ -693,7 +714,8 @@ Page({
               title: '上传成功',
               icon: 'none'
             })
-          },fail(res) {
+          },
+          fail(res) {
             wx.hideLoading();
             wx.showToast({
               title: '上传失败,请检查网络',
@@ -703,14 +725,14 @@ Page({
           }
         })
         uploadTask.onProgressUpdate((res) => {
-          
+
           that.setData({
-            chang:res.progress
+            chang: res.progress
           })
           wx.showToast({
             title: that.data.chang,
             icon: 'none',
-            duration:3000,
+            duration: 3000,
           })
           console.log('上传进度', res.progress)
           console.log('已经上传的数据长度', res.totalBytesSent)
@@ -725,10 +747,10 @@ Page({
 
   },
   //勾选
-  gx(){
+  gx() {
     let that = this;
     that.setData({
-      isg:!that.data.isg
+      isg: !that.data.isg
     })
   },
   valueChange(e) {
@@ -794,7 +816,7 @@ Page({
     })
   },
   //省
-  getprov: function () {
+  getprov: function() {
 
     province = []
     let that = this;
@@ -802,7 +824,7 @@ Page({
       grade: 1,
       id: ''
     }
-    app.res.req('app-web/region/list', data, (res) => {
+    app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
@@ -826,7 +848,7 @@ Page({
 
   },
   // 省跳市
-  getprovs: function (e) {
+  getprovs: function(e) {
     var that = this;
     console.log(e)
     city = [];
@@ -848,7 +870,7 @@ Page({
     }
     // 获取所有市
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '2',
         id: province_id,
@@ -860,7 +882,7 @@ Page({
         token: wx.getStorageSync('token'),
       },
       dataType: 'json',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.data)
         if (res.data.status == 1000) {
 
@@ -888,10 +910,12 @@ Page({
 
       }
     })
-    this.setData({ tapTime: nowTime });
+    this.setData({
+      tapTime: nowTime
+    });
   },
   // 市跳区
-  getcity: function (e) {
+  getcity: function(e) {
     var that = this;
     area = []
     city_id = e.currentTarget.id;;
@@ -909,7 +933,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '3',
         id: city_id,
@@ -921,7 +945,7 @@ Page({
         token: wx.getStorageSync('token'),
       },
       dataType: 'json',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.data)
         if (res.data.status == 1000) {
 
@@ -946,10 +970,12 @@ Page({
 
       }
     })
-    this.setData({ tapTime: nowTime });
+    this.setData({
+      tapTime: nowTime
+    });
   },
   // 区跳街道
-  getarea: function (e) {
+  getarea: function(e) {
     var that = this;
     town = []
 
@@ -967,7 +993,7 @@ Page({
     }
     // 获取所有区
     wx.request({
-      url: app.data.urlmall + "app-web/region/list",
+      url: app.data.urlmall + "/region/list",
       data: {
         grade: '4',
         id: area_id,
@@ -979,13 +1005,15 @@ Page({
         token: wx.getStorageSync('token'),
       },
       dataType: 'json',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data.data)
         if (res.data.status == 1000) {
 
           town.push(...res.data.data)
 
-          let a = { name: '-' }
+          let a = {
+            name: '-'
+          }
           town.push(a)
           that.setData({
             towns: town,
@@ -1004,10 +1032,12 @@ Page({
 
       }
     })
-    this.setData({ tapTime: nowTime });
+    this.setData({
+      tapTime: nowTime
+    });
   },
   //街道
-  gettown: function (e) {
+  gettown: function(e) {
     var that = this;
     town = []
     console.log(e)

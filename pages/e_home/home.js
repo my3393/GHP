@@ -17,6 +17,13 @@ Page({
     detail:[],
     istop:true,
      isofficial: false,
+    //深色
+    bottomColor: '#ff6600',
+    //浅色
+    gradientColor: '#ffcc99',
+    scrollH: 0, //滚动总高度
+    opcity: 0,
+    iconOpcity: 0.5,
   },
 
   /**
@@ -24,7 +31,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    
+
     if (wx.getStorageSync('token')) {
       that.getbanner();
       console.log('token存在')
@@ -39,13 +46,13 @@ Page({
     }, 1000)
     if(options.bangId){
       wx.setStorageSync('bandId', options.bangId)
-      
+
     }
     wx.getNetworkType({
       success: function (res) {
         console.log(res)
         if (res.networkType == "2g" || res.networkType == "3g") {
-        
+
           wx.showToast({
             title: '当前网路环境较差',
             icon: 'none',
@@ -61,14 +68,28 @@ Page({
 
       },
     })
-   
+    let obj = wx.getMenuButtonBoundingClientRect();
+    this.setData({
+      width: obj.left,
+      height: obj.top + obj.height + 8,
+      top: obj.top + (obj.height - 32) / 2
+    }, () => {
+      wx.getSystemInfo({
+        success: (res) => {
+          this.setData({
+            scrollH: res.windowWidth
+          })
+        }
+      })
+    });
+
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
@@ -76,12 +97,15 @@ Page({
    */
   onShow: function () {
     let that = this
+    this.setData({
+      navH: app.globalData.navHeight
+    })
     //3秒后隐藏关注组件
     that.setData({
       isofficial: false,
     })
     setTimeout(function () {
-      
+
       that.setData({
         isofficial: true,
       })
@@ -89,10 +113,10 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-       
+
         console.log(res.data.bindProvinceId)
         if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
-          
+
         }else{
           wx.setTabBarItem({
             index: 1,
@@ -109,7 +133,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-   
+
   },
 
   /**
@@ -124,14 +148,16 @@ Page({
    */
   onPullDownRefresh: function () {
     let that = this
-   
+
      isRefresh = 0; //精选特产刷新
      detail = [];
-     
+     that.setData({
+       tar:0
+     })
     wx.showLoading({
       title: '刷新中',
     })
-   
+
     setTimeout(function () {
       // wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
@@ -157,6 +183,21 @@ Page({
       path: '/pages/e_home/home?userid=' + user.id,
 
     }
+  },
+  testSwiper: function (e) {
+    var that = this;
+    var index = e.detail.current;
+    var currentbottomColor =
+      that.data.banner[index].colorNo;
+    var currentgradientColor =
+      that.data.banner[index].colorNo;
+    that.setData({
+      bottomColor:
+      '#' +  currentbottomColor,
+      gradientColor:
+        '#' +   currentgradientColor
+    })
+
   },
   binderror(e) {
     console.log(e.detail)
@@ -217,18 +258,13 @@ Page({
   getDetail(){
     let that =this;
     let data = {
-      
-        currentPage:1,
-        provinceId:'',
-        cityId:'',
-        areaId:'',
-       townId:'',
+
+
        typeId: typeId,
-        sortType:0,
-      keyword:''
+
     }
 
-    app.res.req("app-web/product/list", data, (res) => {
+    app.res.req("/home/choiceness/product", data, (res) => {
       console.log(res.data)
       if(res.status == 1000){
 
@@ -237,8 +273,8 @@ Page({
              detail:res.data,
 
            })
-         
-         
+
+
       }else if(res.status == 1004 || res.status == 1005){
           wx.redirectTo({
             url: '../login/login',
@@ -257,7 +293,7 @@ Page({
     let data = {
 
     }
-    app.res.req("app-web/home/advertise", data, (res) => {
+    app.res.req("/home/advertise", data, (res) => {
       console.log(res.data)
       if(res.status == 1000){
         for (var i in res.data) {
@@ -290,14 +326,14 @@ Page({
     let data = {
 
     }
-    app.res.req("app-web/home/classify", data, (res) => {
+    app.res.req("/home/classify", data, (res) => {
       console.log(res.data)
       if(res.status == 1000){
            that.setData({
             className:res.data,
 
            })
-        
+
         that.getType();
       }else if(res.status == 1004 || res.status == 1005){
           wx.redirectTo({
@@ -323,7 +359,7 @@ Page({
     let data = {
       isRefresh:isRefresh
     }
-    app.res.req("app-web/home/recommend", data, (res) => {
+    app.res.req("/home/recommend", data, (res) => {
       console.log(res.data)
       if(res.status == 1000){
            that.setData({
@@ -351,15 +387,15 @@ Page({
     let data = {
       grade:1
     }
-    
-    app.res.req('app-web/home/grade/type', data, (res) => {
+
+    app.res.req('/home/grade/type', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
-           
+
            typeId = res.data[0].id
             that.setData({
               type:res.data
-         
+
             })
          that.getDetail();
        }else if(res.status == 1004 || res.status == 1005){
@@ -380,7 +416,7 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/home/banner', data, (res) => {
+    app.res.req('/home/banner', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
           if(res.data.index == 1007){
@@ -393,16 +429,16 @@ Page({
               if(res.data[i].xcxUrl != ''){
                 res.data[i].xcx = JSON.parse(res.data[i].xcxUrl)
               }
-             
+
             }
-           
+
             that.setData({
               banner:res.data,
 
             })
             wx.hideLoading()
            that.getAdvert();
-           
+
            that.getRecommend();
            that.getClass();
        }else if(res.status == 1004 || res.status == 1005){
@@ -424,7 +460,7 @@ Page({
   gettoken() {
     let that =this;
     let data = {}
-    app.res.req("app-web/login/defaultlogin", data, (res) => {
+    app.res.req("/login/defaultlogin", data, (res) => {
       wx.setStorage({
         key: 'token',
         data: res.data.token,
@@ -479,7 +515,16 @@ Page({
 
   },
   onPageScroll: function (e) {
-
+    let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
+    let opcity = scroll / this.data.scrollH;
+    if (this.data.opcity >= 1 && opcity >= 1) {
+      return;
+    }
+    this.setData({
+      opcity: opcity,
+      iconOpcity: 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity)
+    })
+    console.log(this.data.opcity)
     let that = this
     if (e.scrollTop > 300) {
 

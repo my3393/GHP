@@ -1,5 +1,6 @@
 // pages/members/members.js
 const app = getApp();
+let userid;
 Page({
 
   /**
@@ -29,6 +30,10 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
+    if(options.userid){
+      userid = options.id
+      wx.setStorageSync('bangId', userid)
+    }
   },
 
   /**
@@ -66,8 +71,12 @@ Page({
         }
         that.setData({
           user: res.data,
-         
+
         })
+        if (wx.getStorageSync('bangId')) {
+
+          that.Bang();
+        }
       },
     })
   },
@@ -99,23 +108,60 @@ Page({
   onReachBottom: function () {
 
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var that = this;
+    return {
+      title: '你的好友' + user.userName + '向您推荐了一个非常棒小程序，点击立即进入',
+      imageUrl: 'https://www.xingtu-group.cn/xcx_img/tu.png',
+      path: '/pages/member/member?userid=' + that.data.user.id,
+
+    }
+  },
   web(){
      wx.navigateTo({
        url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/6_VIP.html',
      })
   },
   navBack(){
-     wx.navigateBack({
-       data:1
-     })
+    if(userid){
+      wx.switchTab({
+        url: '../e_home/home',
+      })
+    }else{
+      wx.navigateBack({
+        data: 1
+      })
+    }
+  },
+  //立即分销
+  confirm_delete(){
+    this.setData({
+      isdelete: !this.data.isdelete,
+      ismask:!this.data.ismask
+    })
+    wx.switchTab({
+      url: '../e_home/home',
+    })
+  },
+  cancel_delete(){
+    this.setData({
+      isdelete: !this.data.isdelete,
+      ismask: !this.data.ismask
+    })
+    wx.switchTab({
+      url: '../e_home/home',
+    })
   },
   //绑定手机号
   getPhoneNumber: function (e) {
     var that = this;
     console.log(e)
-  
+
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -168,10 +214,10 @@ Page({
        memberType: e.currentTarget.id
      }
      if(that.data.user.memberType == 0){
-       app.res.req('app-web/order/membersubmit', data, (res) => {
+       app.res.req('/order/membersubmit', data, (res) => {
          console.log(res.data)
          if (res.status == 1000) {
-           app.res.req("app-web/pay/xcxpay", data, (res) => {
+           app.res.req("/pay/xcxpay", data, (res) => {
              console.log(res.data)
              if (res.status == 1000) {
 
@@ -234,16 +280,16 @@ Page({
          icon:'none'
        })
      }
-    
+
    },
   //会员详情
   Detail(){
     let that = this;
     let data = {
-    
+
     }
 
-    app.res.req('app-web/member/info', data, (res) => {
+    app.res.req('/member/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -252,13 +298,45 @@ Page({
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
-          url: '../login/login',
+          url: '../login/login?userid=' + userid,
         })
+        wx.setStorageSync('url', '../members/members')
       } else {
         wx.showToast({
           title: res.msg,
           icon: 'none'
         })
+      }
+    })
+  },
+  //绑定
+  Bang() {
+    let that = this;
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
+
+    app.res.req("/user/sharebinduser", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+        console.log('----绑定成功---')
+        wx.removeStorageSync('bandId')
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login?userid=' + that.data.user.id,
+        })
+        wx.setStorageSync('url', '../member/member')
+      } else if (res.status == 1028) {
+
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bandId')
+        console.log('----已经绑定----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bandId')
+        console.log('----已经绑定----')
       }
     })
   },

@@ -49,7 +49,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
@@ -63,7 +63,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
   },
 
   /**
@@ -103,7 +103,7 @@ Page({
     let data = {
       id: e.currentTarget.id
     }
-    app.res.req('app-web/useraddress/addressdetail', data, (res) => {
+    app.res.req('/useraddress/addressdetail', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({
@@ -111,7 +111,7 @@ Page({
           data: res.data,
         })
         if (sex) {
-         
+
             var pages = getCurrentPages();//当前页面栈
             if (pages.length > 1) {
               var beforePage = pages[pages.length - 2];//获取上一个页面实例对象
@@ -124,7 +124,7 @@ Page({
             wx.navigateBack({
               delta: 1
             })
-         
+
         }
 
       } else {
@@ -151,7 +151,7 @@ Page({
     this.setData({
       ismask: !this.data.ismask,
       isdelete: !this.data.isdelete,
-      
+
     })
 
   },
@@ -160,12 +160,12 @@ Page({
     this.setData({
       ismask: !this.data.ismask,
       isdelete: !this.data.isdelete,
-      
+
     })
     let data = {
       id:that.data.id
     }
-    app.res.req('app-web/useraddress/delete', data, (res) => {
+    app.res.req('/useraddress/delete', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({
@@ -175,11 +175,11 @@ Page({
         wx.removeStorage({
           key: 'address',
           success: function(res) {
-           
+
             that.getDateil()
           },
         })
-       
+
 
       } else {
         console.log(111)
@@ -196,10 +196,10 @@ Page({
     let data = {
       id:e.currentTarget.dataset.id
     }
-    app.res.req('app-web/useraddress/setdefaultaddress', data, (res) => {
+    app.res.req('/useraddress/setdefaultaddress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-      
+
         that.getDateil();
       } else {
         console.log(111)
@@ -215,9 +215,9 @@ Page({
   getDateil() {
     let that = this;
     let data = {
-     
+
     }
-    app.res.req('app-web/useraddress/list', data, (res) => {
+    app.res.req('/useraddress/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {
@@ -226,9 +226,9 @@ Page({
           } else {
             res.data[i].checked = false
           }
-         
+
         }
-     
+
         that.setData({
           detail: res.data,
 
@@ -251,11 +251,11 @@ Page({
   },
   // 上个页面返回刷新
   changeData: function () {
-    
-    
+
+
     this.getDateil();
     //var options = { 'id': this.data.id }
     //this.onLoad(options);//最好是只写需要刷新的区域的代码，onload也可，效率低，有点low
-  
+
   },
 })

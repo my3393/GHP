@@ -1,4 +1,8 @@
 {
  
-  "navigationBarTitleText": "善家公益"
+  "navigationBarTitleText": "善家公益",
+  "usingComponents": {
+    "van-circle": "../../../component/circle/index"
+    
+  }
 }

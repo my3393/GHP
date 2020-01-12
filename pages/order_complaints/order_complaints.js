@@ -79,7 +79,7 @@ Page({
   onShareAppMessage: function () {
 
   },
-  
+
   //删除
   detel(e) {
     var that = this;
@@ -129,7 +129,7 @@ Page({
       wx.showToast({
         title: '请上传投诉照片',
         icon: "none"
-      }) 
+      })
     }else{
       var schoolStr = JSON.stringify(simages);
       let data = {
@@ -139,7 +139,7 @@ Page({
         complaintImgJson: schoolStr
       }
 
-      app.res.req('app-web/userorder/complaint', data, (res) => {
+      app.res.req('/userorder/complaint', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({
@@ -178,7 +178,7 @@ Page({
         }, 1000)
         wx.showLoading();
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -223,7 +223,7 @@ Page({
             clearTimeout(test1);
           }
         })
-       
+
       }
     })
 
@@ -234,7 +234,7 @@ Page({
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // that.setData({

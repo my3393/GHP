@@ -70,7 +70,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-   
+
   },
 
   /**
@@ -99,7 +99,7 @@ Page({
         img_1:'',
         post1:true,
       })
-      
+
     } else if (e.currentTarget.dataset.num == 1) {
       img_2 = '';
       that.setData({
@@ -162,10 +162,10 @@ Page({
         identityCard1: img_1,
         identityCard2: img_2,
       }
-      app.res.req('app-web/user/resubmitauthentication', data, (res) => {
+      app.res.req('/user/resubmitauthentication', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
-         
+
           wx.showToast({
             title: '重新提交成功，请等待平台审核',
             icon: 'none',
@@ -193,7 +193,7 @@ Page({
         }
       })
     }else{
-      
+
       that.setData({
         loading: !that.data.loading
       })
@@ -203,10 +203,10 @@ Page({
         identityCard1: img_1,
         identityCard2: img_2,
       }
-      app.res.req('app-web/user/submitauthentication', data, (res) => {
+      app.res.req('/user/submitauthentication', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
-          
+
           wx.showToast({
             title: '提交成功，请等待平台审核',
             icon: 'none',
@@ -250,17 +250,17 @@ Page({
     })
   },
   //用户认证信息
-  
+
   getaudit(){
     let that = this;
     wx.showLoading({
       title: '加载中',
     })
     let data = {
-      
+
     }
 
-    app.res.req('app-web/user/authenticationinfo', data, (res) => {
+    app.res.req('/user/authenticationinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
           if(res.data != null){
@@ -304,7 +304,7 @@ Page({
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -364,7 +364,7 @@ Page({
           that.getprogress();
         }, 1000)
         const uploadTask = wx.uploadFile({
-          url: app.data.urlmall + 'app-web/oss/xcxupload', // 仅为示例，非真实的接口地址
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
@@ -393,7 +393,7 @@ Page({
                 post2: false
               })
               img_2 = datas.data.fileName
-            } 
+            }
             wx.hideLoading();
             // do something
             clearTimeout(test1);
@@ -436,7 +436,7 @@ Page({
     let data = {
     }
 
-    app.res.req('app-web/oss/progress', data, (res) => {
+    app.res.req('/oss/progress', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({

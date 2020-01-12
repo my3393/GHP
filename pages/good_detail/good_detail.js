@@ -9,17 +9,17 @@ var selectAttrid = []; //选择的属性id
 var a = [];
 var ds = false;
 let user;
-let sex = 0;//判断是不是从立即购买打开的规格
+let sex = 0; //判断是不是从立即购买打开的规格
 let userid;
 Page({
   data: {
     isvideo: true,
     isplay: false,
     istop: true,
-    isSecurity: true,//保障
+    isSecurity: true, //保障
     ismask: true,
-    isgug: true,//规格
-    naviga: true,//顶部导航栏
+    isgug: true, //规格
+    naviga: true, //顶部导航栏
     istag: true,
     is_top: true,
     issrcoll: '1',
@@ -28,7 +28,7 @@ Page({
     current: 0,
     goodId: 0,
     good_img_num: '0',
-    is_num: false,//购物车数量显示
+    is_num: false, //购物车数量显示
     scrollH: 0, //滚动总高度
     opcity: 0,
     iconOpcity: 0.5,
@@ -39,38 +39,39 @@ Page({
       badge: 3
     }, {
       icon: "../../images/tui_2.png",
-        text: "善家购",
+      text: "善家购",
       size: 23,
       badge: 0
     }, {
       icon: "../../images/tui_3.png",
-        text: "家乡特产",
+      text: "家乡特产",
       size: 26,
       badge: 0
     }, {
       icon: "../../images/tui_4.png",
-        text: "个人中心",
+      text: "个人中心",
       size: 23,
       badge: 2
     }, {
       icon: "../../images/tui_5.png",
-        text: "我的收藏",
+      text: "我的收藏",
       size: 26,
       badge: 0
     }, {
       icon: "../../images/tui_6.png",
-        text: "意见反馈",
+      text: "意见反馈",
       size: 23,
       badge: 0
     }],
     menuShow: false,
+    height:90,
   },
 
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
     wx.getStorage({
       key: 'userinfo',
-      success: function (res) {
+      success: function(res) {
         user = res.data
         //  /  console.log(bcode)
       },
@@ -88,7 +89,7 @@ Page({
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,
-      height: obj.top + obj.height + 8,
+      // height: obj.top + obj.height + 8,
       top: obj.top + (obj.height - 32) / 2
     }, () => {
       wx.getSystemInfo({
@@ -103,7 +104,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     //获取id距离窗口高度
     var query = wx.createSelectorQuery();
     //选择id
@@ -114,18 +115,28 @@ Page({
     //   top1 = rect.top
 
     // }).exec();
-    query.select('.top2').boundingClientRect(function (rect) {
+    query.select('.top2').boundingClientRect(function(rect) {
 
 
       top2 = rect.top
 
     }).exec();
-    //获取本地用户信息
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        if (res.model == "iPhone X" || res.model == "iPhone XR" || res.model == "iPhone XS Max") {
+           that.setData({
+             bottom:20,
+             height:130
+           })
+        }
+      },
+    })
 
     //获取本地用户信息
     wx.getStorage({
       key: 'userinfo',
-      success: function (res) {
+      success: function(res) {
 
         that.setData({
           user: res.data
@@ -134,9 +145,9 @@ Page({
     })
   },
   /**
-  * 用户点击右上角分享
-  */
-  onShareAppMessage: function () {
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
     var that = this;
     console.log(that.data.detail.name)
     return {
@@ -221,7 +232,7 @@ Page({
       productId: id
     }
 
-    app.res.req('app-web/shopcart/addproduct', data, (res) => {
+    app.res.req('/shopcart/addproduct', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.showToast({
@@ -257,7 +268,7 @@ Page({
     }
 
   },
-  swiperChange: function (e) {
+  swiperChange: function(e) {
     var that = this;
     if (e.detail.source == 'touch') {
       that.setData({
@@ -272,7 +283,7 @@ Page({
     })
   },
   //加
-  add: function (e) {
+  add: function(e) {
     var that = this;
 
     that.setData({
@@ -283,7 +294,7 @@ Page({
 
   },
   //减
-  reduction: function (e) {
+  reduction: function(e) {
     var that = this;
     if (that.data.num == 1) {
       wx.showToast({
@@ -298,7 +309,7 @@ Page({
     }
   },
   //规格选择
-  pack: function (e) {
+  pack: function(e) {
     var that = this;
     ds = false;
     console.log(e);
@@ -360,7 +371,7 @@ Page({
 
     }
 
-    app.res.req("app-web/shopcart/shopcartnumber", data, (res) => {
+    app.res.req("/shopcart/shopcartnumber", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data == 0) {
@@ -398,7 +409,7 @@ Page({
       //       url: '../login/login?id=' + id
       //     })
       //   }
-      //} 
+      //}
       else if (res.status == 1018) {
 
       } else if (res.status == 1028) {
@@ -414,19 +425,13 @@ Page({
   recom() {
     let that = this;
     let data = {
-      currentPage: 1,
-      provinceId: '',
-      cityId: '',
-      areaId: '',
-      townId: '',
-      classifyId: '',
+
       typeId: that.data.detail.typeId,
-      sortType: 0,
-      keyword: '',
+
 
     }
 
-    app.res.req("app-web/product/list", data, (res) => {
+    app.res.req("/home/choiceness/product", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -457,7 +462,7 @@ Page({
       id: userid
     }
 
-    app.res.req("app-web/user/sharebinduser", data, (res) => {
+    app.res.req("/user/sharebinduser", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // wx.showToast({
@@ -497,7 +502,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/sku", data, (res) => {
+    app.res.req("/product/sku", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         for (var i in res.data) {
@@ -533,26 +538,42 @@ Page({
     let that = this;
 
     console.log(user.id)
-    if (user.id == null) {
+    if (user.id == null || user.id == '') {
 
       console.log(selectIndexArray.length)
       wx.navigateTo({
         url: '../login/login?id=' + id,
       })
+    } else if (user.homeProvinceId == null || user.homeProvinceId == ''){
+      wx.showModal({
+        title: '提示',
+        content: '下单需要绑定你的所在地',
+        success(res) {
+          if (res.confirm) {
+             wx.navigateTo({
+               url: '../person/person',
+             })
+          } else if (res.cancel) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          }
+        }
+      })
     } else if (that.data.detail.isSpecificaton == 0) {
       wx.navigateTo({
-        url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num
-          + '&selectIndexArray=' + selectIndexArray
-          + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+        url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +
+          '&selectIndexArray=' + selectIndexArray +
+          '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
       })
 
     } else {
       if (selectIndexArray.length === that.data.spec.length) {
         if (ds == true) {
           wx.navigateTo({
-            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num
-              + '&selectIndexArray=' + selectIndexArray
-              + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +
+              '&selectIndexArray=' + selectIndexArray +
+              '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
           })
         } else {
           wx.showToast({
@@ -592,9 +613,9 @@ Page({
         })
         if (sex == 1) {
           wx.navigateTo({
-            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num
-              + '&selectIndexArray=' + selectIndexArray
-              + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +
+              '&selectIndexArray=' + selectIndexArray +
+              '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
           })
         } else {
           that.cart();
@@ -634,7 +655,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/collection", data, (res) => {
+    app.res.req("/product/collection", data, (res) => {
       console.log(res.data)
       if (res.status == 1016) {
         wx.showToast({
@@ -668,11 +689,11 @@ Page({
     })
   },
   //绑定手机号
-  getPhoneNumber: function (e) {
+  getPhoneNumber: function(e) {
     var that = this;
     console.log(e)
     wx.request({
-      url: app.data.urlmall + "app-web/login/xcxbindphone",
+      url: app.data.urlmall + "/login/xcxbindphone",
       data: {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
@@ -684,7 +705,7 @@ Page({
         token: wx.getStorageSync('token')
       },
       dataType: 'json',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.status === 1000) {
           wx.setStorage({
@@ -695,7 +716,7 @@ Page({
             key: 'userinfo',
             data: res.data,
           })
-          setTimeout(function () {
+          setTimeout(function() {
             that.showgg();
           }, 1000)
 
@@ -730,7 +751,7 @@ Page({
       storeId: that.data.detail.storeId
     }
 
-    app.res.req("app-web/store/detail", data, (res) => {
+    app.res.req("/store/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -766,7 +787,7 @@ Page({
       storeId: that.data.detail.storeId
     }
 
-    app.res.req("app-web/store/recommendproduct", data, (res) => {
+    app.res.req("/store/recommendproduct", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -796,7 +817,7 @@ Page({
       productId: id
     }
 
-    app.res.req("app-web/product/detail", data, (res) => {
+    app.res.req("/product/detail", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         if (res.data.productVideo == null) {
@@ -824,7 +845,7 @@ Page({
         that.getStore();
         that.cart_num();
         this.getSku();
-        setTimeout(function () {
+        setTimeout(function() {
           that.recom();
         }, 1000)
       } else if (res.status == 1004 || res.status == 1005) {
@@ -898,7 +919,7 @@ Page({
       duration: 300
     })
   },
-  onPageScroll: function (e) {
+  onPageScroll: function(e) {
     let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
     let opcity = scroll / this.data.scrollH;
     if (this.data.opcity >= 1 && opcity >= 1) {
@@ -964,7 +985,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
     this.setData({
       selectName: "", //已选的属性名字
       selectAttrid: [], //选择的属性id
@@ -980,17 +1001,17 @@ Page({
     // detail_id;
     ds = false;
   },
-  openMenu: function () {
+  openMenu: function() {
     this.setData({
       menuShow: true
     })
   },
-  closeMenu: function () {
+  closeMenu: function() {
     this.setData({
       menuShow: false
     })
   },
-  common: function (e) {
+  common: function(e) {
     console.log(e)
     let index = e.currentTarget.dataset.index
     if (index == 0) {

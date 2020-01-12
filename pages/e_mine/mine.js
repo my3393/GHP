@@ -6,30 +6,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-   
+
 
     isshow: true,
     statusBarHeight: 0,
     titleBarHeight: 0,
-    love:'0'
+    love:'0',
+
   },
- 
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     
+
     this.setData({
       navH: app.globalData.navHeight
     })
-    
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-     
+
   },
 
   /**
@@ -53,7 +54,7 @@ Page({
         })
         console.log(that.data.user)
       },
-     
+
     })
   },
 
@@ -84,6 +85,7 @@ Page({
   onReachBottom: function () {
 
   },
+
   //共享联盟
   union(){
     wx.navigateTo({
@@ -98,9 +100,28 @@ Page({
   },
   //大爱榜单
   love_help(){
-    wx.navigateTo({
-      url: '../love_help/love_help',
-    })
+    if (this.data.user.homeProvinceId == null || this.data.user.homeProvinceId == '') {
+      wx.showModal({
+        title: '提示',
+        content: '大爱榜单需要绑定你的家乡哦',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          } else if (res.cancel) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          }
+        }
+      })
+    }else{
+      wx.navigateTo({
+        url: '../love_help/love_help',
+      })
+    }
+
   },
   downloadFile: function (e) {
     console.log(e);
@@ -136,7 +157,7 @@ Page({
         console.log(res)
       }
     })
-  
+
   },
   //banner跳转
   banner(e) {
@@ -184,7 +205,7 @@ Page({
         url: '../college/college',
       })
     }
-   
+
   },
   //实名认证
   certification(){
@@ -197,7 +218,7 @@ Page({
         url: '../certification/certification',
       })
     }
-   
+
   },
   //我的收藏
   collection(){
@@ -210,7 +231,7 @@ Page({
         url: '../mine_collection/mine_collection',
       })
     }
-    
+
   },
   //会员
   member(){
@@ -223,7 +244,7 @@ Page({
         url: '../members/members',
       })
     }
-   
+
   },
   //退款
   order_refund_list(){
@@ -242,7 +263,7 @@ Page({
         url: '../order_all/order_all?id=' + e.currentTarget.id,
       })
     }
-   
+
   },
   //资助申请
   mine_fund(){
@@ -255,7 +276,7 @@ Page({
         url: '../mine_fund/mine_fund',
       })
     }
-   
+
   },
   //联系客服
   phone(){
@@ -273,7 +294,7 @@ Page({
         }
       }
     })
-   
+
   },
   //我的钱包
   wallet(){
@@ -286,7 +307,7 @@ Page({
         url: '../mine_wallet/mine_wallet',
       })
     }
-    
+
   },
   imgsrcs: function (e) {
     var that = this;
@@ -298,7 +319,7 @@ Page({
     })
     //图片预览
     wx.previewImage({
-      current: 'https://www.xingtu-group.cn/xcx_img/gzh.jpg', // 当前显示图片的http链接   
+      current: 'https://www.xingtu-group.cn/xcx_img/gzh.jpg', // 当前显示图片的http链接
       urls: ['https://www.xingtu-group.cn/xcx_img/gzh.jpg'],// 需要预览的图片http链接列表
 
     })
@@ -314,7 +335,7 @@ Page({
         url: '../store_refund/store_refund',
       })
     }
-    
+
   },
   //登录
   login(){
@@ -333,7 +354,7 @@ Page({
          url: '../address/address',
        })
      }
-    
+
    },
    //信息大码
   plusXing(str, frontLen, endLen) {
@@ -350,8 +371,8 @@ Page({
     let data = {
 
     }
-    app.res.req('app-web/home/personalcenteradvertise', data, (res) => {
-     
+    app.res.req('/home/personalcenteradvertise', data, (res) => {
+
       if (res.status == 1000) {
         for (var i in res.data) {
           if (res.data[i].xcxUrl != '') {
@@ -365,7 +386,7 @@ Page({
 
         })
         that.Detail();
-       
+
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -385,16 +406,19 @@ Page({
 
     }
 
-    app.res.req('app-web/user/donationinfo', data, (res) => {
+    app.res.req('/user/donationinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
           love: res.data.totalMoney
         })
-        
+
         setTimeout(function () {
           that.getuser();
         }, 200)
+
+      }else if(res.status == 1002){
+
       }  else {
         wx.showToast({
           title: res.msg,
@@ -410,7 +434,7 @@ Page({
 
     }
 
-    app.res.req('app-web/user/info', data, (res) => {
+    app.res.req('/user/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         wx.setStorage({
@@ -421,7 +445,7 @@ Page({
           key: 'userinfo',
           data: res.data,
         })
-       
+
       }
     })
   },
