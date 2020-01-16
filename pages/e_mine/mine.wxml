@@ -45,6 +45,7 @@
         <view>
           <view class="per-n" wx:if='{{user.userName == null}}'>{{phone}}</view>
           <view class="per-n" wx:else>{{user.userName}}</view>
+          <image wx:if='{{user.memberType != 0}}' src="{{code}}" class="ewm" catchtap="ewm"></image>
           <!-- <view class="hui" wx:if='{{user.memberType == 1}}'>
             <image src="../../images/aix (3).png" />
           </view>

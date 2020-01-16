@@ -5,7 +5,7 @@ let id ='';
 let list = [];
 let currentPage = 1
 Page({
-  ...Canvas.options,
+ // ...Canvas.options,
   /**
    * 页面的初始数据
    */
@@ -107,7 +107,8 @@ Page({
       if (res.status == 1000) {
         that.getList();
         if (res.data.withdrawalTotalAmount != 0) {
-          let num = (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount)
+          let num = (res.data.withdrawalTotalAmount) / (res.data.shareTotalAmount) * 100
+          console.log(num)
           that.setData({
             num: num.toFixed(2),
             nums: num.toFixed(0),
@@ -119,7 +120,7 @@ Page({
           money: res.data,
 
         })
-        that.draw('runCanvas', this.data.num, 1000);
+       
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)
         wx.redirectTo({

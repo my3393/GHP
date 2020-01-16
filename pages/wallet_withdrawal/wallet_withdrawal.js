@@ -60,32 +60,31 @@ Page({
   onReachBottom: function () {
 
   },
-  all(e){
-    this.setData({
-      value:this.data.num
-    })
-  },
-  getHas() {
+  sub(){
     let that = this;
-    if(that.data.value == '' || that.data.value == 0){
+    if (that.data.value == '' || that.data.value == 0) {
       wx.showToast({
         title: '提现金额不能为0',
-        icon:'none'
+        icon: 'none'
       })
       return false
     }
     let data = {
-
+      amount:that.data.value
     }
 
-    app.res.req("/user/settlementlist", data, (res) => {
+    app.res.req("/user/withdrawal", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        detail.push(...res.data)
-        that.setData({
-          detail: detail
-        })
-
+       wx.showToast({
+         title: '提现成功',
+         duration:3000
+       })
+        setTimeout(function(){
+          wx.navigateBack({
+            delta: 2,
+          })
+        },3000)
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -103,4 +102,12 @@ Page({
       }
     })
   },
+  
+  all(e){
+    this.setData({
+      value:this.data.num
+    })
+  },
+  
+    
 })

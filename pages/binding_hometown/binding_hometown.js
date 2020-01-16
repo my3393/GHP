@@ -29,7 +29,7 @@ Page({
     isjies: false,
     ismask:true,
     name:'',
-    img:'https://graph.baidu.com/resource/116877509f357d436cd2101575547725.jpg'
+    img:'https://www.xingtu-group.cn/xcx_img/Specialty.jpg'
   },
 
   /**
@@ -141,7 +141,7 @@ Page({
           data: res.data,
         })
         wx.switchTab({
-          url: '../e_specialty/e_specialty',
+          url: '../e_home/home',
         })
       }
     })

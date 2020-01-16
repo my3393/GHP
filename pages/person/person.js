@@ -734,6 +734,9 @@ Page({
         wx.showToast({
           title: '绑定成功',
         })
+        that.setData({
+          bang_diz: '已绑定',
+        })
         that.getuser();
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         console.log(1)

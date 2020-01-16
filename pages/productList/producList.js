@@ -16,6 +16,7 @@ let searchKey = '';//筛选字
 let product_id = '';
 Page({
   data: {
+    load:true,
     istop: true,
     searchKey: "", //搜索关键词
     width: 200, //header宽度
@@ -59,6 +60,9 @@ Page({
   },
   onLoad: function (options) {
     console.log(options)
+    wx.showLoading({
+      title: '加载中',
+    })
     //首页分类
     if(options.homeId){
       keyword = options.searchKey
@@ -210,6 +214,7 @@ Page({
       }else{
         attrData[i].selected = false
       }
+      provinceId = this.data.attrData[i].id
     }
     region = this.data.attrData[index].name
     this.setData({
@@ -239,35 +244,38 @@ Page({
   },
   //地区确定选择
   btnSure: function () {
+    let _this = this
     let index = this.data.attrIndex;
     let arr = this.data.attrData;
 
     let attrName = "";
     //这里只是为了展示选中效果,并非实际场景
-    for (let item of arr) {
-      if (item.selected) {
+    if(provinceId == ''){
+      detail = []
+      _this.getDetail();
+    }else{
+      for (let item of arr) {
+        if (item.selected) {
 
-        // attrName += attrName ? ";" + item.name : item.name;
-        provinceId = item.id
-        currentPage = 1
-        this.setData({
-          detail:[]
-        })
-        detail = []
-        this.setData({
-          region:item.name
-        })
-        this.getDetail();
+
+
+          currentPage = 1
+          this.setData({
+            detail: []
+          })
+          detail = []
+          this.setData({
+            region: item.name
+          })
+          this.getDetail();
+        }
+
       }
-
     }
-    // let isActive = `attrArr[${index}].isActive`;
-    // let selectedName = `attrArr[${index}].selectedName`;
+    
+   
      this.btnCloseDrop();
-    // this.setData({
-    //   [isActive]: active,
-    //   [selectedName]: attrName
-    // })
+    
   },
   showDropdownList: function () {
     this.setData({
@@ -341,34 +349,34 @@ Page({
   product(e){
     let index = e.currentTarget.dataset.index;
 
-    let attrData = this.data.className
+    let attrData = this.data.typeName
 
 
     for (var i in attrData) {
       if (i == index) {
-        attrData[i].selected = !this.data.className[i].selected
+        attrData[i].selected = !this.data.typeName[i].selected
       } else {
         attrData[i].selected = false
       }
     }
-    searchKey = attrData[index].classifyName,
+    searchKey = attrData[index].typeName,
       product_id = attrData[index].id
     this.setData({
       // [selected]: !this.data.attrData[index].selected
-      className: attrData,
+      typeName: attrData,
 
     })
   },
   product_reset(){
       searchKey = '';
-    let attrData = this.data.className
+    let attrData = this.data.typeName
 
 
     for (var i in attrData) {
         attrData[i].selected = false
     }
     this.setData({
-      className: attrData,
+      typeName: attrData,
     })
   },
   closeDrawer: function () {
@@ -482,7 +490,7 @@ Page({
         if (res.data == '') {
           this.setData({
             loadding: false,
-
+          
             pullUpOn: false
           })
         } else {
@@ -493,6 +501,10 @@ Page({
           })
 
         }
+        that.setData({
+          load:false
+        })
+        wx.hideLoading()
         console.log(that.data.detail)
 
 
@@ -512,7 +524,7 @@ Page({
   getClass() {
     let that = this;
     let data = {
-
+      grade: 1
     }
     app.res.req("/home/grade/type", data, (res) => {
       console.log(res.data)
@@ -521,7 +533,7 @@ Page({
           res.data[i].selected = false
         }
         that.setData({
-          className: res.data,
+          typeName: res.data,
 
         })
 
@@ -557,6 +569,8 @@ Page({
       region:'地区',
       dropdownList,
       searchKey:'',
+      loadding: true,
+      pullUpOn: true
     })
     this.getDetail();
   },
@@ -566,12 +580,19 @@ Page({
   onShareAppMessage: function () {
     var that = this;
     //console.log(that.data.detail.name)
-    return {
-      title: '您的好友给您发送了一张商家入驻邀请函，点击【立即查看】',
-      imageUrl: 'https://www.xingtu-group.cn/xcx_img/store_refund.png',
-      path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
+    if(that.data.user.id == ''){
+      wx.showToast({
+        title: '请先登录',
+      })
+    }else{
+      return {
+        title: '您的好友给您发送了一张商家入驻邀请函，点击【立即查看】',
+        imageUrl: 'https://www.xingtu-group.cn/xcx_img/store_refund.png',
+        path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
 
+      }
     }
+    
   },
   /**
    * 生命周期函数--监听页面显示

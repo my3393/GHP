@@ -1,0 +1,27 @@
+<!--pages/yb_sm/yb_sm.wxml-->
+
+<view class="top">“艺呗”通用于娱乐世界平台旗下:</view>
+
+<view class="nav clearfix">
+  <image src="../../images/ylsj.png" class="img"></image>
+  <view>娱乐世界</view>
+  <view class="tit">
+    在娱乐世界平台，使用艺呗可帮您喜爱的明星idol上热门推荐置顶，让你的明星idol展示更耀眼，更受大家的关注和喜爱。                      
+  </view>
+  <view class="btn" bindtap="ylsj">前往体验</view>
+</view>
+<view class="nav clearfix">
+  <image src="../../images/sjg.png" class="img"></image>
+  <view>善家购</view>
+  <view class="tit">
+    在善家购全国特产交易平台，购买商品或开通分销会员，赠送相应艺呗，使用艺呗可帮善家公益中的项目投票，让值得被大家捐赠的项目展示在更多人面前，献自己的一份爱，帮助需要帮助的人。                                             
+  </view>
+  <view class="btn" bindtap="sjg">前往体验</view>
+</view>
+<view class="nav clearfix">
+  <image src="../../images/yslm.png" class="img"></image>
+  <view>艺赛联盟</view>
+  <view class="tit">在艺赛联盟平台，使用艺呗可帮您喜爱的选手上热门、推荐置顶，获得更多关注。                                              
+  </view>
+  <view class="btn" bindtap="yslm">前往体验</view>
+</view>

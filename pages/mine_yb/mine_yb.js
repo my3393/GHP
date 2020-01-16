@@ -74,6 +74,11 @@ Page({
   onShareAppMessage: function () {
 
   },
+  sm(){
+     wx.navigateTo({
+       url: '../yb_sm/yb_sm',
+     })
+  },
   vote(){
      wx.switchTab({
        url: '../e_ welfare/e_ welfare',

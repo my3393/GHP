@@ -19,7 +19,7 @@
 
 .page-footer {
     position: absolute;
-    bottom: 100rpx;
+    bottom: 50rpx;
     left: 0;
     width: 100%;
 }

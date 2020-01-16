@@ -1,0 +1,42 @@
+/* pages/yb_sm/yb_sm.wxss */
+page{
+  background: #f9f9f9;
+}
+.top{
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+  font-size: 34rpx;
+}
+.nav{
+  margin-top: 30rpx;
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 8rpx;
+}
+.img{
+  width: 50rpx;
+  height: 50rpx;
+  float: left;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.tit{
+  margin:15rpx 0;
+  padding-top: 20rpx;
+  color: #ccc;  
+  font-size: 26rpx;
+  border-top: 1rpx solid #f3f3f3;
+}
+.btn{
+  float: right;
+  width: 150rpx;
+  height: 54rpx;
+  border: 1rpx solid #f12200;
+  text-align: center;
+  line-height: 54rpx;
+  color: #f12200;
+  border-radius: 30rpx;
+}

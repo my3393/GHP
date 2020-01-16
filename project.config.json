@@ -58,8 +58,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/members/members",
-					"pathName": "pages/members/members",
+					"name": "pages/e_home/home",
+					"pathName": "pages/e_home/home",
 					"query": "id=26&userid=52",
 					"scene": null
 				}

@@ -40,7 +40,6 @@
     "pages/person_name/person_name",
     "pages/store_search/store_search",
     "pages/binding_hometown/binding_hometown",
-   
     "pages/sure_orders/sure_orders",
     "pages/apply_fund/apply_fund",
     "pages/mine_fund/mine_fund",
@@ -66,7 +65,8 @@
     "pages/yb_detail/yb_detail",
     "pages/love_detail/love_detail",
     "pages/swim/swim",
-    "pages/union/union"
+    "pages/union/union",
+    "pages/yb_sm/yb_sm"
   ],
   "tabBar": {
     "color": "#808080",
@@ -111,5 +111,9 @@
     "navigationBarTitleText": "善家购",
     "navigationBarTextStyle": "white"
   },
+  "navigateToMiniProgramAppIdList": [
+    "wxf556b39ee9c934b4",
+    "wx4cef4fe6585f5bfd"
+  ],
   "sitemapLocation": "sitemap.json"
 }

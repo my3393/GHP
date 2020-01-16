@@ -111,10 +111,11 @@ Page({
   },
   //清除历史记录
   clearst(e){
+    let that=this;
     wx.removeStorage({
       key: 'search',
       success: function(res) {
-         this.setData({
+         that.setData({
            history:[]
          })
       },

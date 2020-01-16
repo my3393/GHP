@@ -58,7 +58,7 @@ Page({
   */
 
   onShow: function () {
-    this.getDateil();
+    
     let that = this;
     wx.getStorage({
       key: 'userinfo',
@@ -67,6 +67,7 @@ Page({
         that.setData({
           user: res.data
         })
+        that.getDateil();
       }
     })
   },

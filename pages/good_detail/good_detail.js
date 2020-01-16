@@ -69,6 +69,7 @@ Page({
 
   onLoad: function(options) {
     console.log(options)
+    let that =this
     wx.getStorage({
       key: 'userinfo',
       success: function(res) {
@@ -84,7 +85,7 @@ Page({
 
     if (options.userid) {
       userid = options.userid
-      this.Bang();
+      that.Bang();
     }
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
@@ -100,6 +101,10 @@ Page({
         }
       })
     });
+    //绑定
+    if(wx.getStorageSync('bangId')){
+      that.Bang();
+    }
   },
   /**
    * 生命周期函数--监听页面显示
@@ -453,7 +458,7 @@ Page({
           icon: 'none'
         })
       }
-    })
+    }) 
   },
   //绑定
   Bang() {
@@ -468,7 +473,7 @@ Page({
         // wx.showToast({
         //   title: '绑定成功',
         // })
-
+        wx.removeStorageSync('bangId')
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
 
@@ -486,7 +491,14 @@ Page({
           })
         }
       } else if (res.status == 1028) {
-
+        wx.removeStorageSync('bangId')
+        console.log('----2018----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangId')
+        console.log('----1030----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangId')
+        console.log('----已经绑定----')
       } else {
         wx.showToast({
           title: res.msg,
@@ -956,6 +968,17 @@ Page({
 
       that.setData({
         issrcoll: 3
+      })
+    }
+    if (e.scrollTop > 300) {
+
+      that.setData({
+        istop: false,
+      })
+    } else {
+
+      that.setData({
+        istop: true
       })
     }
   },

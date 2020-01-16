@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" hidden="{{load}}">
   <!--header-->
   <view class="tui-header-box">
     <view class="tui-header" style="width:{{width}}px;height:{{height}}px">
@@ -62,7 +62,8 @@
         <image src="../../images/cart.png"></image>
       </view>
       <view class="non">暂未查询到你想要的特产</view>
-      <view  bindtap="all" class="all">查看全部</view>
+      <button size="min"  open-type="share" class="all">邀请商家</button>
+      <view class="quan" bindtap="all">查看全部</view>
     </view>
   </view>
   <view wx:else class="tui-product-list" style="margin-top:72rpx" >
@@ -111,8 +112,8 @@
           </view> -->
         </view>
         <view class="tui-drawer-content tui-flex-attr">
-          <view class="tui-attr-item {{item.selected?'producd_class':''}}" wx:for="{{className}}" wx:key="{{index}}" data-name="{{item.classifyName}}" data-index="{{index}}" data-id='{{item.id}}' bindtap="product">
-            <view class="tui-attr-ellipsis">{{item.btnSure}}</view>
+          <view class="tui-attr-item {{item.selected?'producd_class':''}}" wx:for="{{typeName}}" wx:key="{{index}}" data-name="{{item.classifyName}}" data-index="{{index}}" data-id='{{item.id}}' bindtap="product">
+            <view class="tui-attr-ellipsis">{{item.typeName}}</view>
           </view>
 
 

@@ -31,7 +31,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-
+   
     if (wx.getStorageSync('token')) {
       that.getbanner();
       console.log('token存在')
@@ -44,9 +44,16 @@ Page({
         showSkeleton: false
       })
     }, 1000)
-    if(options.bangId){
-      wx.setStorageSync('bandId', options.bangId)
-
+    if(options.userid){
+      wx.setStorageSync('bangId', options.userid)
+      that.Bang();
+      
+    }
+    
+    if (decodeURIComponent(options.q).split('/')[4]){
+      console.log(decodeURIComponent(options.q).split('/')[4] + '第二个')
+      wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])
+      that.Bang();
     }
     wx.getNetworkType({
       success: function (res) {
@@ -100,6 +107,10 @@ Page({
     this.setData({
       navH: app.globalData.navHeight
     })
+    if (wx.getStorageSync('bangId')) {
+      that.Bang();
+      
+    }
     //3秒后隐藏关注组件
     that.setData({
       isofficial: false,
@@ -113,17 +124,54 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
+        user = res.data
+       // console.log(res.data.bindProvinceId)
+       if(res.data.id){
+         if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
+           wx.showModal({
+             cancelText: '先逛逛',
+             confirmText: '去绑定',
+             confirmColor: '#f12200',
+             cancelColor: '#cccccc',
+             title: '你还未绑定家乡',
+             content: '每成交一笔订单，平台将替你为你家乡献出一份爱心',
+             success(res) {
+               if (res.confirm) {
+                 wx.navigateTo({
+                   url: '../person/person',
+                 })
+               } else if (res.cancel) {
 
-        console.log(res.data.bindProvinceId)
-        if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
+               }
+             }
+           })
+         } else {
+           wx.setTabBarItem({
+             index: 1,
+             text: res.data.bindAreaName,
+           })
 
-        }else{
-          wx.setTabBarItem({
-            index: 1,
-            text: res.data.bindAreaName,
-          })
-          user = res.data
-        }
+           if (res.data.memberType == 0 && res.data.bindUserNum != 0) {
+             wx.showModal({
+               cancelText: '先逛逛',
+               confirmText: '去开通',
+               confirmColor: '#f12200',
+               cancelColor: '#cccccc',
+               title: '会员',
+               content: '您当前已锁定' + res.data.bindUserNum + '名用户，开通会员即可获得锁定用户订单交易金额的10%分红收益',
+               success(res) {
+                 if (res.confirm) {
+                   wx.navigateTo({
+                     url: '../members/members',
+                   })
+                 } else if (res.cancel) {
+
+                 }
+               }
+             })
+           }
+         }
+       }
 
       },
     })
@@ -179,7 +227,7 @@ Page({
     var that = this;
     console.log(that.data.detail.name)
     return {
-      title: that.data.detail.productName,
+      
       path: '/pages/e_home/home?userid=' + user.id,
 
     }
@@ -472,7 +520,7 @@ Page({
       setTimeout(function () {
         that.getbanner();
 
-      }, 100)
+      }, 500)
     })
 
   },
@@ -537,5 +585,32 @@ Page({
         istop: true
       })
     }
-  }
+  },
+  //绑定
+  Bang() {
+    let that = this;
+    
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
+
+    app.res.req("/user/sharebinduser", data, (res) => {
+      console.log(res)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+      
+        wx.removeStorageSync('bangId')
+      } else if (res.status == 1028) {
+        console.log('----1028----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangId')
+        console.log('----1030----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangId')
+        console.log('----1031----')
+      }
+    })
+  },
 })

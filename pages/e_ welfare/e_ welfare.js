@@ -9,7 +9,7 @@ let cityId = '';
 let areaId = '';
 let townId ='';
 Page({
-  ...Canvas.options,
+  //...Canvas.options,
   /**
    * 页面的初始数据
    */
@@ -141,7 +141,7 @@ Page({
               money:res.data,
 
             })
-         that.draw('runCanvas', this.data.num, 1000);
+       //  that.draw('runCanvas', this.data.num, 1000);
            console.log(that.data.num)
        }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
          console.log(1)

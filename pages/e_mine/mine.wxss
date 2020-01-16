@@ -19,6 +19,12 @@ page{
         background-size: cover;
         background-image: url(../../images/mine_top.png);
 }
+.ewm{
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  right: 30rpx;
+}
 .top{
    
     height: 320rpx;

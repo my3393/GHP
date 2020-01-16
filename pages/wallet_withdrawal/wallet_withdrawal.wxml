@@ -15,9 +15,9 @@
               <input  type="number" value="{{value}}" />
            </view>
       </view>
-      <view class="dete">
+      <!-- <view class="dete">
           <image src="../../images/x.png" />
-      </view>
+      </view> -->
       <view class="ke">当前可提现金额¥{{num}} <text class="yan" bindtap="all">  全部提现</text> </view>
       <!-- <view class="fuw">
          <view >
@@ -34,7 +34,7 @@
 
 <!-- <view class="tis">温馨提示：发起提现时，微信财付通平台将收取一定比例的提现手续费，到账金额请以实际到账金额为准。</view> -->
 
-<view class="submit">
+<view class="submit" bindtap="sub">
 确认提现
 </view>
 

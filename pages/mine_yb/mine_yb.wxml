@@ -1,7 +1,7 @@
 <!-- pages/mine_yb/mine_yb.wxml -->
 <view class="top">
     <view class="title">我的艺呗</view>
-    <!-- <view class="shuom">使用说明？</view> -->
+    <view class="shuom" bindtap="sm">使用说明？</view>
     <view>
         <view class="num">{{user.integral}}</view>
         <!-- <view class="znum">赚艺呗</view> -->

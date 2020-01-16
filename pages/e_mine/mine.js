@@ -88,9 +88,15 @@ Page({
 
   //共享联盟
   union(){
-    wx.navigateTo({
-      url: '../union/union',
-    })
+    if (this.data.user.id == null || this.data.user.id == '') {
+      wx.navigateTo({
+        url: '../login/login?mine=' + 20,
+      })
+    } else {
+      wx.navigateTo({
+        url: '../union/union',
+      })
+    }
   },
   //分销收益
   wallet_detail(){
@@ -100,7 +106,7 @@ Page({
   },
   //大爱榜单
   love_help(){
-    if (this.data.user.homeProvinceId == null || this.data.user.homeProvinceId == '') {
+    if (this.data.user.bindProvinceId == null || this.data.user.bindProvinceId == '') {
       wx.showModal({
         title: '提示',
         content: '大爱榜单需要绑定你的家乡哦',
@@ -319,8 +325,8 @@ Page({
     })
     //图片预览
     wx.previewImage({
-      current: 'https://www.xingtu-group.cn/xcx_img/gzh.jpg', // 当前显示图片的http链接
-      urls: ['https://www.xingtu-group.cn/xcx_img/gzh.jpg'],// 需要预览的图片http链接列表
+      current: 'https://www.xingtu-group.cn/xcx_img/gzh1.jpg', // 当前显示图片的http链接
+      urls: ['https://www.xingtu-group.cn/xcx_img/gzh1.jpg'],// 需要预览的图片http链接列表
 
     })
   },
@@ -386,7 +392,7 @@ Page({
 
         })
         that.Detail();
-
+        that.getcode()
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -409,15 +415,20 @@ Page({
     app.res.req('/user/donationinfo', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+
         that.setData({
           love: res.data.totalMoney
         })
-
         setTimeout(function () {
           that.getuser();
         }, 200)
+        
 
       }else if(res.status == 1002){
+        setTimeout(function () {
+          that.getuser();
+        }, 200)
+      } else if (res.status == 1024) {
 
       }  else {
         wx.showToast({
@@ -425,6 +436,65 @@ Page({
           icon: 'none'
         })
       }
+    })
+  },
+  //二维码
+  getcode() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/qrcode/xcx', data, (res) => {
+     
+      if (res.status == 1000) {
+        var array = wx.base64ToArrayBuffer(res.data)
+        const fsm = wx.getFileSystemManager();
+        const FILE_BASE_NAME = 'mine_base64';
+        const filePath = wx.env.USER_DATA_PATH + '/' + FILE_BASE_NAME + '.png';
+        fsm.writeFile({
+          filePath,
+          data: array,
+          encoding: 'binary',
+          success() {
+            console.log(filePath)
+            that.setData({
+              errormsg: '',
+              code: filePath //结果图片
+            })
+          },
+          fail() {
+
+          },
+        });
+      
+         
+      
+      } else if (res.status == 1002) {
+        
+      } else if (res.status == 1018) {
+
+      }  else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  ewm: function (e) {
+    var that = this;
+    console.log(e)
+    wx.showToast({
+      title: '长按保存图片',
+      icon: 'none',
+      duration: 3000
+    })
+    //图片预览
+    wx.previewImage({
+      current: that.data.code, // 当前显示图片的http链接
+      urls: [that.data.code],// 需要预览的图片http链接列表
+
     })
   },
    //获取用户信息

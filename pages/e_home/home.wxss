@@ -37,7 +37,8 @@ page{
   width: 34rpx;
   height: 34rpx;
   margin-left: 20rpx;
-  display: inline-block;
+  float: left;
+
 
 }
 .sear-img image{
@@ -48,10 +49,11 @@ page{
 .sea{
   display: inline-block;
   vertical-align: middle;
-  margin-left: 6rpx;
+  margin-left: 10rpx;
+  width: 85%;
 }
 .search{
-  width: 80%;
+ 
   height: 70rpx;
 
 }

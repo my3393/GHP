@@ -83,7 +83,7 @@
               公益口号
           </view>
           <view class="list-t" bindtap="publicSlogan">
-               <view style="display:inline-block;margin-right: 20rpx">
+               <view style="display:inline-block;margin-right: 20rpx;width:500rpx;" class="dan">
                 {{publicSlogan}}
               </view>
               <view class="list-right">

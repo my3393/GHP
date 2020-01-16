@@ -30,6 +30,12 @@ Page({
       goodId: options.goodId
     })
     this.getDetail();
+    wx.requestSubscribeMessage({
+      tmplIds: ['gwqSviJ4QfPLJhmk5tQflU4-Fy1qH_-qIWzeyGYdhFk'],
+      success(res) {
+        console.log(res)
+       }
+    })
   },
 
   /**

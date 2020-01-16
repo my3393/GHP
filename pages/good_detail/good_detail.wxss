@@ -19,6 +19,9 @@ page {
   z-index: 12!important;
   
 }
+.ztop{
+  bottom: 100rpx!important;
+}
   .top_dao{
         position: relative;
         position: absolute;

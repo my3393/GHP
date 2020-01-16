@@ -19,12 +19,17 @@ Page({
     Img:'../../images/member_b.png',
     ismask:true,
     isdelete:true,
+    load:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+
+    })
     this.Detail();
     this.stretch(330)
     this.setData({
@@ -292,8 +297,10 @@ Page({
     app.res.req('/member/info', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        wx.hideLoading()
         that.setData({
-          detail: res.data
+          detail: res.data,
+          load:false
         })
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

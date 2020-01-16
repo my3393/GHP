@@ -9,12 +9,12 @@
       <view class="h-t-img"><image src="../../images/home.png"></image></view>
       <view class="h-name">善家购</view>
     </view> -->
-    <view class="top-sear">
+    <view class="top-sear skeleton-radius">
       <view class="sear-img">
         <image src="../../images/search.png"></image>
       </view>
       <view class="sea">
-        <input class="search" placeholder="商品，店铺" disabled="true" bindtap="search"></input>
+        <input class="search " placeholder="商品，店铺" disabled="true" bindtap="search"></input>
       </view>
     </view>
     <view>
@@ -71,10 +71,10 @@
     </view>
   </view>
   <view>
-    <swiper class="advert" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
+    <swiper class="advert skeleton-radius" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
       <block>
         <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{advert}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
-          <image class="skeleton-radius" src="{{item.advertiseImgOss}}" lazy-load="true"></image>
+          <image  src="{{item.advertiseImgOss}}" lazy-load="true"></image>
         </swiper-item>
       </block>
     </swiper>
@@ -83,7 +83,7 @@
   <view class="recommended">
     <view class="rescom skeleton-rect">
       <text class="rescom-w skeleton-rect">精选特产</text>
-      <text>感受他乡风情，享受地方特产</text>
+      <text class="skeleton-rect">感受他乡风情，享受地方特产</text>
     </view>
     <view class="huan skeleton-rect" bind:tap="huan">换一换</view>
     <view class="classify" style="padding:0;margin-top: 20rpx; ">

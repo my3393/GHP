@@ -14,7 +14,7 @@ Page({
 
     tar:'',
     isBang:true,
-
+    animation: false,
     currentTab: 0,  //对应样式变化
     scrollTop: 0,  //用作跳转后右侧视图回到顶部
     screenArray: [], //左侧导航栏内容
@@ -39,7 +39,11 @@ Page({
 
       },
     })
-
+    setTimeout(() => {
+      this.setData({
+        animation: true
+      })
+    }, 600)
 
   },
 
@@ -77,7 +81,7 @@ Page({
         }
 
         if (res.data.loginId == null) {
-            wx.navigateTo({
+            wx.redirectTo({
               url: '../login/login',
             })
         }
@@ -97,7 +101,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+     currentPage = 1;
+     list = [];
   },
 
   /**
@@ -108,11 +113,12 @@ Page({
     wx.showLoading({
       title: '刷新中',
     })
+    list = [];
     currentPage = 1;
     setTimeout(function () {
       // wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
-      that.banner();
+      that.getbanner();
       that.getType();
     }, 200)
   },

@@ -196,10 +196,12 @@ Page({
                                   key: 'userinfo',
                                   data: res.data.data,
                                 })
-                                wx.setStorage({
-                                  key: 'bangId',
-                                  data: that.data.userid,
-                                })
+                                if(that.data.userid){
+                                  wx.setStorage({
+                                    key: 'bangId',
+                                    data: that.data.userid,
+                                  })
+                                }
                                 
                                 if (res.data.data.phone == null || res.data.data.phone == '') {
                                   console.log('未绑定手机号')
@@ -278,6 +280,10 @@ Page({
                                   wx.redirectTo({
                                     url: '../certification/certification'
                                   })
+                                } else if (that.data.mine == 20) {
+                                  wx.redirectTo({
+                                    url: '../union/union'
+                                  })
                                 }else if (that.data.mine != ''){
                                   wx.redirectTo({
                                     url: '../e_mine/mine'
@@ -316,7 +322,7 @@ Page({
     var that = this;
 
     wx.request({
-      url: "https://sjg.api.xingtu-group.cn/app-web/login/defaultlogin",
+      url: "https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/login/defaultlogin",
       data: {
 
       },
@@ -334,7 +340,7 @@ Page({
           })
           wx.setStorage({
             key: 'userinfo',
-            data: res.data.data.user,
+            data: res.data.data,
           })
           wx.switchTab({
             url: '../e_home/home'

@@ -387,7 +387,7 @@
   </view>
 </view>
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
-
+ 
 
 <!--顶部下拉菜单-->
   <tui-top-dropdown tui-top-dropdown="tui-top-dropdown" bgcolor="rgba(76, 76, 76, 0.95);" show="{{menuShow}}" height="0" bind:close="closeMenu">
