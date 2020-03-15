@@ -44,6 +44,11 @@ page{
   display: inline-block;
 }
 .spec_back{
+  width: 79%;
+  margin-left: 20%;
+  overflow: hidden;
+}
+.spec_back image{
   width: 100%;
   height: 100%;
 }
@@ -65,7 +70,7 @@ page{
 .left-navbar{
   position:absolute;
   left:0;
-  width:25%;
+  width:20%;
   height:85%;
   background-color:#F9F9F9;
   font-size:15px;
@@ -79,7 +84,7 @@ page{
 #right{
   position:absolute;
   right:0;
-  width:75%;
+  width:80%;
   height:84%;
 
   padding: 0 20rpx;
@@ -170,9 +175,25 @@ page{
   width: 100%;
   height: 100%;
 }
+.yaoqing{
+   position: absolute;
+  bottom: -16rpx;
+  left: 60%;
+  transform: translate(-50%,-50%);
+}
+.more{
+  margin: 40rpx 0;
+  text-align: center;
+}
+.gengh{
+  color: #fff;
+  margin-top: 20rpx;
+  text-align: center;
+}
 .bangd{
   width: 200rpx;
   height: 60rpx;
+ 
   text-align: center;
   line-height: 60rpx;
   color: #fff;
@@ -246,4 +267,34 @@ page{
   100% {
     transform: translateX(-100%);
   }
+}
+.tongx{
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  font-size: 22rpx;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 20%;
+  padding: 10rpx 14rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+/* 视频 */
+.maskvideo{
+    width: 100%;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%,-50%)  !important;
+    z-index: 9999 !important;
+}
+.yds{
+   width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 12;
 }

@@ -120,7 +120,7 @@
         <image src="{{item.productDefaultImgOss}}" />
       </view>
       <view class="list-j">{{item.productName}}</view>
-      <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>
+      <view class="list-qu"> {{item.cityName}} {{item.areaName}} {{item.townName}}</view>
 
       <view class="class-t-p ctp">
         <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>

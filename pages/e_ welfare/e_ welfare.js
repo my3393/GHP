@@ -4,7 +4,7 @@ const app = getApp();
 let currentPage = 1;
 let status = 0;
 let list = [];
-
+let userid ='';
 let cityId = '';
 let areaId = '';
 let townId ='';
@@ -24,6 +24,9 @@ Page({
     photos:[
       'https://www.xingtu-group.cn/xcx_img/gy1.jpg'
     ],
+    photoses:[
+      'http://xt-ylsj.oss-cn-shenzhen.aliyuncs.com/sjg/2019121316331078500014.jpg'
+    ],
     ...Canvas.data,
     num:'0',
     nums:'0',
@@ -39,8 +42,12 @@ Page({
    */
   onLoad: function (options) {
     this.getDateil();
+    if (options.userid) {
+      userid = options.id
+      wx.setStorageSync('bangId', userid)
+    }
     this.getList();
-
+   
   },
 
   /**
@@ -54,7 +61,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
 
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -83,6 +100,18 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var that = this;
+    
+    return {
+      title: '我是' + that.data.user.userName+'大爱无疆，助力家乡，邀你为爱前行。',
+      path: '/pages/e_specialty/e_specialty?userid=' + that.data.user.id,
+
+    }
   },
   //寻找老乡
   xun(){
@@ -146,8 +175,9 @@ Page({
        }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
          console.log(1)
            wx.redirectTo({
-             url: '../login/login',
+             url: '../login/login?userid=' + userid,
            })
+         wx.setStorageSync('url', '../e_ welfare/e_ welfare')
        } else {
          console.log(111)
          wx.showToast({

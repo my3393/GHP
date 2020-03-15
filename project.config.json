@@ -58,8 +58,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/e_home/home",
-					"pathName": "pages/e_home/home",
+					"name": "pages/store_refund/store_refund",
+					"pathName": "pages/e_specialty/e_specialty",
 					"query": "id=26&userid=52",
 					"scene": null
 				}

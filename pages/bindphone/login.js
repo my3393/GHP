@@ -8,7 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    mine: '',
+  },
+  onLoad(options){
+    console.log(options)
+      if(options.mine){
+        that.setData({mine:options.mine})
+      }
   },
   getPhoneNumber: function (e) {
     var that = this;
@@ -36,9 +43,29 @@ Page({
             key: 'userinfo',
             data: res.data.data.user,
           })
-          wx.switchTab({
-            url: '../e_home/home',
-          })
+          setTimeout(function(){
+            if (that.data.mine) {
+              wx.switchTab({
+                url: '../e_mine/mine',
+              })
+            } else {
+              wx.switchTab({
+                url: '../e_home/home',
+              })
+            }
+          },600)
+
+        } else if (res.data.status === 1002) {
+          if(that.data.mine){
+            wx.switchTab({
+              url: '../e_mine/mine',
+            })
+          }else{
+            wx.switchTab({
+              url: '../e_home/home',
+            })
+          }
+        
 
         } else if (res.data.status === 103) {
           wx.showToast({

@@ -1,0 +1,35 @@
+<!--pages/feedback/feedback.wxml-->
+<view >
+  <view class='infor'>
+     <view class="fee_img">
+         <image src="{{detail.productDefaultImgOss}}"></image>
+     </view>
+     <view style="line-height:50rpx; margin-top:20rpx" >
+        <view class="dan">{{detail.productName}}</view>
+     <view class="fee_rig dan">{{detail.productTitle}}</view>
+     </view>
+  </view>
+  <view class="nav">
+    <textarea class="texta" value="{{sums}}" placeholder="请输入你要反馈的问题和意见（200字以内）" maxlength="200" bindinput="valueChanges"></textarea>
+    <view class="clearfix" style="margin-top:20rpx;">
+      <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
+        <image src="{{item}}"></image>
+        <view class="detele" id="{{item}}" data-index='{{idx}}' bindtap="detels">
+          <image src="../../images/deteles.png" />
+        </view>
+      </view>
+      <view class="zhao" bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
+        <view class="zhao_img">
+          <image src="../../images/zhao.png"></image>
+
+
+        </view>
+        <view>{{img_num}}/3</view>
+      </view>
+    </view>
+
+  </view>
+
+
+  <view class="submit" bindtap="sub">提交反馈</view>
+</view>

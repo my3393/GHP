@@ -156,10 +156,17 @@ Page({
     var that = this;
     console.log(that.data.detail.name)
     return {
-      title: that.data.detail.productName,
+      title: '我是' + that.data.user.userName + ',这是' + that.data.detail.cityName + that.data.detail.areaName + that.data.detail.productName + '特产，邀你品尝',
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
-
+  
     }
+  },
+  //反馈
+  feedback(e){
+    console.log(e.currentTarget)
+    wx.navigateTo({
+      url: '../feedback/feedback?id=' + e.currentTarget.id,
+    })
   },
   //播放视频
   play() {

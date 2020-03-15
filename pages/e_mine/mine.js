@@ -12,7 +12,8 @@ Page({
     statusBarHeight: 0,
     titleBarHeight: 0,
     love:'0',
-
+    isZhi:true,
+    mp4:true,
   },
 
   /**
@@ -43,12 +44,19 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-        if (res.data.phone != null) {
+       
+        if (res.data.phone != null || res.data.phone != '') {
           var phone = that.plusXing(res.data.phone, 3, 4)
           that.setData({
             phone: phone
           })
         }
+        // if (res.data.phone == null || res.data.phone == ''){
+         
+        //   wx.redirectTo({
+        //     url: '../bindphone/login?mine=' + 1
+        //   })
+        // }
         that.setData({
           user: res.data
         })
@@ -85,7 +93,43 @@ Page({
   onReachBottom: function () {
 
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var that = this;
 
+    return {
+      title: '我是' + that.data.user.userName + that.data.user.bindCityName + that.data.user.bindAreaName + '推广家乡特产，我为家乡代言，诚邀你的评鉴。',
+      path: '/pages/e_specialty/e_specialty?userid=' + that.data.user.id,
+
+    }
+  },
+   //商品反馈
+  feedback(){
+    wx.navigateTo({
+      url: '../feedbacklist/feedbacklist',
+    })
+  },
+  //合伙人操作指南
+  zhin(){
+    wx.navigateTo({
+      url: '../mp4/mp4',
+    })
+  },
+  zhiru(){
+    this.setData({
+      isZhi: !this.data.isZhi
+    })
+    wx.navigateTo({
+      url: '../zhin/zhin?code=' + this.data.code,
+    })
+  },
+  xiaochu(){
+    this.setData({
+      isZhi: !this.data.isZhi
+    })
+  },
   //共享联盟
   union(){
     if (this.data.user.id == null || this.data.user.id == '') {
@@ -474,6 +518,8 @@ Page({
         
       } else if (res.status == 1018) {
 
+      } else if (res.status == 1024) {
+
       }  else {
         wx.showToast({
           title: res.msg,
@@ -485,17 +531,20 @@ Page({
   ewm: function (e) {
     var that = this;
     console.log(e)
-    wx.showToast({
-      title: '长按保存图片',
-      icon: 'none',
-      duration: 3000
+    wx.navigateTo({
+      url: '../zhin/zhin?code=' + this.data.code,
     })
-    //图片预览
-    wx.previewImage({
-      current: that.data.code, // 当前显示图片的http链接
-      urls: [that.data.code],// 需要预览的图片http链接列表
+    // wx.showToast({
+    //   title: '长按保存图片',
+    //   icon: 'none',
+    //   duration: 3000
+    // })
+    // //图片预览
+    // wx.previewImage({
+    //   current: that.data.code, // 当前显示图片的http链接
+    //   urls: [that.data.code],// 需要预览的图片http链接列表
 
-    })
+    // })
   },
    //获取用户信息
   getuser() {

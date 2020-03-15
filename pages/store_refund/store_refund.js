@@ -60,6 +60,7 @@ Page({
 
     if (options.userid) {
       userid = options.userid
+      wx.setStorageSync('bangId', userid)
       this.Bang();
     }
   },
@@ -119,7 +120,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
+    var that = this;
 
+    return {
+      title: '我是' + that.data.user.userName + +that.data.user.bindCityName + that.data.user.bindAreaName + '人平台海量老乡，欢迎特产入驻。' ,
+      path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
+
+    }
   },
   //复制文本
   copy(e) {
@@ -283,22 +290,24 @@ Page({
         title: '请设置你店铺的公益宣言',
         icon: 'none'
       })
-    } else if (that.data.zhaos1 == '') {
-      wx.showToast({
-        title: '请上传特产溯源证明',
-        icon: 'none'
-      })
-    } else if (that.data.zhaos2 == '' && that.data.typeId != 14) {
-      wx.showToast({
-        title: '请上传食品经营许可证',
-        icon: 'none'
-      })
-    } else if (that.data.zhaos3 == '') {
-      wx.showToast({
-        title: '请上传店铺营业执照',
-        icon: 'none'
-      })
-    } else {
+    } 
+    // else if (that.data.zhaos1 == '') {
+    //   wx.showToast({
+    //     title: '请上传特产溯源证明',
+    //     icon: 'none'
+    //   })
+    // } else if (that.data.zhaos2 == '' && that.data.typeId != 14) {
+    //   wx.showToast({
+    //     title: '请上传食品经营许可证',
+    //     icon: 'none'
+    //   })
+    // } else if (that.data.zhaos3 == '') {
+    //   wx.showToast({
+    //     title: '请上传店铺营业执照',
+    //     icon: 'none'
+    //   })
+    // }
+     else {
       that.submit();
     }
   },
@@ -476,11 +485,11 @@ Page({
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         if (userid) {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../login/login?store_refund=' + 1 + '&userid=' + userid
           })
         } else {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../login/login?mine=' + 1
           })
         }

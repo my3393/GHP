@@ -20,10 +20,17 @@ page{
         background-image: url(../../images/mine_top.png);
 }
 .ewm{
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   position: absolute;
   right: 30rpx;
+}
+.hhr{
+  position: absolute;
+  top: 110rpx;
+  right: 30rpx;
+  color: #fff;
+  font-size: 26rpx;
 }
 .top{
    
@@ -280,4 +287,49 @@ page{
 .banner image{
     width: 100%;
     height: 100%;
+}
+/* 指南 */
+.sai-yds{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 12;
+}
+
+.sai-yd{
+	position:absolute;
+  width: calc(100% - 180rpx);
+  margin-left: 90rpx;
+	top: 15%;
+  
+  background: #fff;
+ 
+  padding-bottom: 40rpx;
+  box-sizing: border-box;
+  border-radius: 12rpx;
+}
+.zhi_img{
+  padding: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+  height: 650rpx;
+}
+.zhi_img image{
+  width: 100%;
+  height: 100%;
+}
+
+.zhi_but{
+  width: calc(100% - 40rpx);
+  height: 80rpx;
+  color: #fff;
+  border-radius: 45rpx;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 50rpx;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  margin-left: 20rpx;
 }

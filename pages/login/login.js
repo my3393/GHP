@@ -11,6 +11,7 @@ Page({
       store_refund:'',
       storeId:'',
       det:'',
+      
     },
     onLoad(options) {
       console.log(options)
@@ -283,6 +284,10 @@ Page({
                                 } else if (that.data.mine == 20) {
                                   wx.redirectTo({
                                     url: '../union/union'
+                                  })
+                                } else if (that.data.mine == 100) {
+                                  wx.switchTab({
+                                    url: '../e_specialty/e_specialty',
                                   })
                                 }else if (that.data.mine != ''){
                                   wx.redirectTo({

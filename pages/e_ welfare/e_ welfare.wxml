@@ -1,13 +1,20 @@
 <view class="top">
-    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
+    <swiper wx:if='{{user.xcxIsShow == 1}}' class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
         <block wx:for='{{photos}}' wx:key="{{item.id}}">
             <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
                 <image class="banner_img" src="{{item}}" mode="widthFix"></image>
             </swiper-item>
         </block>
     </swiper>
+    <swiper wx:else class="banner"  duration="1000" >
+        <block wx:for='{{photoses}}' wx:key="{{item.id}}">
+            <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
+                <image class="banner_img" src="{{item}}" mode="widthFix"></image>
+            </swiper-item>
+        </block>
+    </swiper>
 </view>
-<view class="progre">
+<view class="progre" wx:if='{{user.xcxIsShow == 1}}'>
     <view class="pro-t">
         <view class="pro-left">
             <!-- <view class='canvasBox'>
@@ -40,9 +47,9 @@
             </view>
         </view>
     </view>
-    <view class="jiao" bindtap="ljgeng">了解更多</view>
+    <view wx:if='{{user.xcxIsShow == 1}}' class="jiao" bindtap="ljgeng">了解更多</view>
 </view>
-<view class="project">
+<view class="project" wx:if='{{user.xcxIsShow == 1}}'>
     <view class="h2">公益项目</view>
     <view class="pro-r" bindtap="xun">
         <view class="pro-n">寻找老乡</view>

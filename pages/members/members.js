@@ -9,9 +9,8 @@ Page({
   data: {
 
     imgUrls: [
-      'https://www.xingtu-group.cn/xcx_img/member1.png',
-      'https://www.xingtu-group.cn/xcx_img/member2.png',
-      'https://www.xingtu-group.cn/xcx_img/member3.png'
+      '../../images/members1.png',
+      '../../images/members2.png',
     ],
     current: 0,
     animationData: {},
@@ -124,6 +123,16 @@ Page({
       path: '/pages/member/member?userid=' + that.data.user.id,
 
     }
+  },
+  //思维
+  member_sw(e){
+    var a = []
+    console.log(e.currentTarget)
+    a.push(e.currentTarget.id)
+    wx.previewImage({
+      current: e.currentTarget.id,
+      urls: a
+    })
   },
   web(){
      wx.navigateTo({

@@ -47,7 +47,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
 
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -94,10 +104,16 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
-   */
+  * 用户点击右上角分享
+  */
   onShareAppMessage: function () {
+    var that = this;
 
+    return {
+      title: '我是' + that.data.user.bindCityName + that.data.user.bindAreaName + '买卖' + that.data.user.bindAreaName + '特产，助力家乡发展，家乡特供平台。',
+      path: '/pages/e_home/home?userid=' + that.data.user.id,
+
+    }
   },
   //删除订单
   cance(e){

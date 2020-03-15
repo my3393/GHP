@@ -1,11 +1,11 @@
-// pages/navig/navig.js
+// pages/mp4/mp4.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showIcon: true,
+  
   },
 
   /**
