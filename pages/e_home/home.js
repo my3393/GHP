@@ -2,8 +2,9 @@
 const app = getApp();
 let isRefresh = 0; //精选特产刷新
 let detail = [];
-let typeId = '13';
+let typeId = '';
 let user;
+
 Page({
 
   /**
@@ -24,8 +25,18 @@ Page({
     scrollH: 0, //滚动总高度
     opcity: 0,
     iconOpcity: 0.5,
+    currentPage:1
   },
-
+  tass(e){
+    console.log(e)
+    let roomId = 5;
+    let customParams = { path: 'pages/index/index', pid: 1 } // 开发者在直播间页面路径上携带自定义参数（如示例中的path和pid参数），后续可以在分享卡片链接和跳转至商详页时获取，详见【获取自定义参数】、【直播间到商详页面携带参数】章节
+   
+    this.setData({
+      roomId,
+      customParams: encodeURIComponent(JSON.stringify(customParams))
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -45,13 +56,14 @@ Page({
       })
     }, 1000)
     if(options.userid){
+      console.log(options.userid)
       wx.setStorageSync('bangId', options.userid)
       that.Bang();
       
     }
     
     if (decodeURIComponent(options.q).split('/')[4]){
-      console.log(decodeURIComponent(options.q).split('/')[4] + '第二个')
+      
       wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])
       that.Bang();
     }
@@ -126,6 +138,7 @@ Page({
       success: function (res) {
         user = res.data
        // console.log(res.data.bindProvinceId)
+      
        if(res.data.id){
          if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
            wx.showModal({
@@ -134,7 +147,7 @@ Page({
              confirmColor: '#f12200',
              cancelColor: '#cccccc',
              title: '你还未绑定家乡',
-             content: '每成交一笔订单，平台将替你为你家乡献出一份爱心',
+             content: '绑定自己家乡，帮助家乡宣传。',
              success(res) {
                if (res.confirm) {
                  wx.navigateTo({
@@ -217,7 +230,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    this.setData({
+      currentPage:this.data.currentPage + 1
 
+    })
+    this.getDetails();
   },
 
   /**
@@ -227,7 +244,7 @@ Page({
     var that = this;
     console.log(that.data.detail.name)
     return {
-      
+      title: '我是' + user.bindCityName + user.bindAreaName + '人，买卖家乡特产，复苏家乡经济，您的家乡需要您...',
       path: '/pages/e_home/home?userid=' + user.id,
 
     }
@@ -315,12 +332,19 @@ Page({
     app.res.req("/home/choiceness/product", data, (res) => {
       console.log(res.data)
       if(res.status == 1000){
+           if(res.data == ''){
+             wx.showToast({
+               title: '已经没有了哦',
+               icon:'none'
+             })
+           }else{
+             detail.push(...res.data)
+             that.setData({
+               detail: detail,
 
-          // detail.push(...res.data)
-           that.setData({
-             detail:res.data,
-
-           })
+             })
+           }
+          
 
 
       }else if(res.status == 1004 || res.status == 1005){
@@ -334,6 +358,52 @@ Page({
          })
       }
    })
+  },
+  //全部商品列表
+  getDetails() {
+    let that = this;
+    let data = {
+      currentPage:that.data.currentPage,
+        storeId:'',
+      provinceId:'',
+        cityId:'',
+      areaId:'',
+        townId:'',
+      typeId:typeId,
+        sortType:0,
+      keyword:'',
+
+    }
+
+    app.res.req("/product/list", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data == '') {
+          wx.showToast({
+            title: '已经没有了哦',
+            icon: 'none'
+          })
+        } else {
+          detail.push(...res.data)
+          that.setData({
+            detail: detail,
+
+          })
+        }
+
+
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   //广告
   getAdvert(){
@@ -439,13 +509,15 @@ Page({
     app.res.req('/home/grade/type', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
-
-           typeId = res.data[0].id
+         let typ = [
+           {id:'',typeName:'全部'}
+         ]
+          typ.push(...res.data)
             that.setData({
-              type:res.data
+              type:typ
 
             })
-         that.getDetail();
+         that.getDetails();
        }else if(res.status == 1004 || res.status == 1005){
            wx.redirectTo({
              url: '../login/login',
@@ -489,6 +561,7 @@ Page({
 
            that.getRecommend();
            that.getClass();
+           that.gongz();
        }else if(res.status == 1004 || res.status == 1005){
          console.log(1)
            wx.redirectTo({
@@ -545,14 +618,27 @@ Page({
       isSearch: false,
       index: e.currentTarget.dataset.num,
       tar: e.currentTarget.dataset.num,
-
+      currentPage:1
       // player:[],
       // ranklist:[],
       // dynamic:[],
     })
      detail = [];
-    that.getDetail();
+    that.getDetails();
 
+  },
+  //是否关注公众号
+  gongz(){
+    let that = this;
+    let data = {}
+    app.res.req("/follow/wx", data, (res) => {
+     console.log(res.data)
+     if(res.data == 1){
+       that.setData({
+         isofficial: true,
+       })
+     } 
+    })
   },
   //置顶
   top(){

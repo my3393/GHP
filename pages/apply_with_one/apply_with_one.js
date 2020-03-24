@@ -65,6 +65,18 @@ Page({
   onUnload: function () {
 
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    var that = this;
+
+    return {
+      title: '我是' + that.data.user.userName + that.data.user.bindCityName + that.data.user.bindAreaName + '推广家乡特产，我为家乡代言，诚邀你的评鉴。',
+      path: '/pages/e_home/e_home?userid=' + that.data.user.id,
+
+    }
+  },
   //姓名
   name(e) {
     this.setData({

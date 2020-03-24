@@ -111,10 +111,11 @@
       </view>
     </view>
     <view class="kait" wx:if='{{user.memberType == 0}}' bindtap="member">立即开通 ></view>
-    <view class="kaith">分享成交预计可收入￥{{detail.shareMemberIncome}}</view>
+    <view class="kaith" bindtap="member"><image class="hehuor" src="../../images/mine_3.png"></image> 分享成交预计可收入￥{{detail.shareMemberIncome}}</view>
   </view>
   <view class="dan sp_j">{{detail.productName}}</view>
   <view class="sp_jj">{{detail.productTitle}}</view>
+   <view class="sp_jj">销量： <text style="color:#000"> {{detail.totalSaleNum}}</text> </view>
   <view class="can">
     <text class="candi">产地</text> {{detail.provinceName}} {{detail.cityName}} {{detail.areaName}} {{detail.townName}}
   </view>
@@ -252,11 +253,16 @@
       <image src="../../images/store.png" />
       <view>店铺</view>
     </view>
+    <view bindtap="feedback" id="{{detail.id}}">
+      <image src="../../images/feedback.png" />
+      <view>反馈</view>
+    </view>
     <view bindtap="shop" class="shop">
       <image src="../../images/shop.png" />
       <view class="hong" hidden="{{is_num}}">{{cart_num}}</view>
       <view>购物车</view>
     </view>
+     
   </view>
   <view wx:if='{{isInventory}}'  class="foot_right">
        <button size="mini" class="joincart" style="opacity:0.4">加入购物车</button>
@@ -266,8 +272,8 @@
   <view wx:else class="foot_right">
     <button size="mini" class="joincart" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">加入购物车</button>
     <button size="mini" class="joincart" wx:else  bind:tap="showgg">加入购物车</button>
-    <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button>
-    <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:else >立即购买</button>
+    <!-- <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" wx:if='{{loading}}'></button> -->
+    <button size="mini" loading="{{loading}}" class="buynow" bind:tap="buy" >立即购买</button>
   </view>
 </view>
 

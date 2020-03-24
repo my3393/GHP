@@ -80,6 +80,7 @@ Page({
     if (wx.getStorageSync('bangId')) {
       that.Bang();
     }
+    
   },
 
   /**

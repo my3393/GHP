@@ -12,6 +12,8 @@
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
 		"uglifyFileName": true,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -23,7 +25,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.2",
+	"libVersion": "2.9.5",
 	"appid": "wxd01b5807647c44d9",
 	"projectname": "xian",
 	"debugOptions": {
@@ -58,8 +60,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/e_home/home",
-					"pathName": "pages/e_home/home",
+					"name": "pages/store_refund/store_refund",
+					"pathName": "pages/e_specialty/e_specialty",
 					"query": "id=26&userid=52",
 					"scene": null
 				}

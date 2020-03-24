@@ -25,7 +25,7 @@
 <view wx:else>
   <view class="all-top">
     <view class='storehed'>
-      <icon color="#f12200" type="{{allselected ? 'success':'circle'}}" data-index="{{idx}}" bindtap="tapallallprices" />
+      <icon style="margin-left:0" color="#f12200" type="{{allselected ? 'success':'circle'}}" data-index="{{idx}}" bindtap="tapallallprices" />
       <text>全选</text>
     </view>
     <view class="bi" wx:if='{{detel}}' bindtap="editor">编辑</view>

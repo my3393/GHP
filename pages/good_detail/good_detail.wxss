@@ -9,6 +9,12 @@ page {
     font-size: 28rpx;
 
   }
+  .hehuor{
+    width: 100rpx;
+    height: 30rpx;
+    float: left;
+    margin-right: 12rpx;
+  }
   .bg-white{
     background: #fff;
   }
@@ -362,7 +368,7 @@ overflow: hidden;
   }
   .foot_right{
     float: right;
-    width: 56%;
+    width: 55%;
 
   }
 

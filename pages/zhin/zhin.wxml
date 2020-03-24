@@ -1,0 +1,5 @@
+<!--pages/zhin/zhin.wxml-->
+<view class="img">
+  <image src="https://www.xingtu-group.cn/xcx_img/xuanc.jpg"></image>
+  <image class="ewm" src="{{code}}"> </image>
+</view>

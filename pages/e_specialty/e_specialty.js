@@ -4,14 +4,14 @@ let grade = 1;
 let id = '';
 let currentPage = 1;
 let list = [];
-
+let userid = '';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    
     tar:'',
     isBang:true,
     animation: false,
@@ -21,13 +21,26 @@ Page({
     screenId: "",  //后台查询需要的字段
     childrenArray: [], //右侧内容
     typeId:'',
+    ren:0,
+    isgoods:true,
+    isMore:true,
+    ismp:true,
+    isvideo:true,
   },
 
   onLoad: function (options) {
     var that = this;
     this.setData({
-      navH: app.globalData.navHeight
+      navH: app.globalData.navHeight,
+      height: wx.getSystemInfoSync().windowHeight,
     })
+    console.log(that.data.height)
+    if (options.userid) {
+      userid = options.id
+      console.log('这是' + userid)
+      wx.setStorageSync('bangId', userid)
+    }
+    
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
@@ -78,11 +91,29 @@ Page({
           that.setData({
             isBang:false
           })
+          wx.setTabBarItem({
+            index: 1,
+            text: '家乡特产',
+          })
+        }else{
+          that.getren()
+          wx.setTabBarItem({
+            index: 1,
+            text: res.data.bindAreaName,
+          })
         }
-
+        if (res.data.bindAreaId == '511623'){
+          that.setData({
+            ismp:false
+          })
+        }else{
+          that.setData({
+            ismp: true
+          })
+        }
         if (res.data.loginId == null) {
             wx.redirectTo({
-              url: '../login/login',
+              url: '../login/login?mine=' + 100
             })
         }
       },
@@ -127,7 +158,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+  
   },
 
   /**
@@ -137,11 +168,72 @@ Page({
     var that = this;
     //console.log(that.data.detail.name)
     return {
-      title:'您的好友给您发送了一张商家入驻邀请函，点击【立即查看】' ,
-      imageUrl: 'https://www.xingtu-group.cn/xcx_img/store_refund.png',
-      path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
+      title: '我是' + that.data.user.bindCityName + that.data.user.bindAreaName + '人，买卖' + that.data.user.bindAreaName + '特产，助力家乡发展，家乡特供平台。',
+     // imageUrl: 'https://www.xingtu-group.cn/xcx_img/store_refund.png',
+      path: '/pages/e_specialty/e_specialty?userid=' + that.data.user.id,
 
     }
+  },
+  // 视频
+  hidevideo: function (e) {
+    var that = this;
+    that.setData({
+      isvideo: !that.data.isvideo
+    })
+  },
+  seevideo: function (e) {
+    var that = this;
+    that.setData({
+      isvideo: !that.data.isvideo,
+     
+    })
+  },
+  //加载更多
+  getMore(){
+     let that = this;
+     currentPage = currentPage +1;
+    let data = {
+      currentPage: currentPage,
+      provinceId: that.data.user.bindProvinceId,
+      cityId: that.data.user.bindCityId,
+      areaId: '',
+      townId: '',
+
+      typeId: that.data.typeId,
+      sortType: 0,
+      keyword: ''
+    }
+    app.res.req('/product/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data == '') {
+          that.setData({
+            isMore: false
+          })
+          wx.showToast({
+            title: '已加载全部',
+            icon:'none'
+          })
+        } else {
+          list.push(...res.data)
+          that.setData({
+            list: list,
+            
+          })
+        }
+
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   //banner跳转
   banner(e) {
@@ -168,29 +260,27 @@ Page({
     let that = this;
     console.log(that.data.user)
     let data = {
-      provinceId: that.data.user.bindProvinceId
+      grade:1
     }
-    app.res.req('/home/classifyprovince', data, (res) => {
+    app.res.req('/home/grade/type', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
-          if(res.data == ''){
-             that.setData({
-               Nostore:true,
-             })
-          }else{
+          
 
             that.setData({
               type: res.data,
-              typeId : res.data[0].id
+              
             })
             that.getlist();
 
-          }
+          
+         
           that.getdymic();
           wx.hideLoading()
        }else if(res.status == 1004 || res.status == 1005){
+         console.log('1000')
            wx.redirectTo({
-             url: '../login/login',
+             url: '../login/login?mine=' + 100,
            })
        } else {
          wx.showToast({
@@ -217,11 +307,24 @@ Page({
     app.res.req('/product/list', data, (res) => {
       console.log(res.data)
        if(res.status == 1000){
-         list.push(...res.data)
-            that.setData({
-              list:list,
-
-            })
+         console.log(res.data.length)
+         if(res.data.length < 10){
+           that.setData({
+             isMore: false
+           })
+         }
+         if(res.data == ''){
+             that.setData({
+               isgoods:true
+             })
+         }else{
+           list.push(...res.data)
+           that.setData({
+             list: list,
+             isgoods:false
+           })
+         }
+        
 
        }else if(res.status == 1004 || res.status == 1005){
            wx.redirectTo({
@@ -257,8 +360,32 @@ Page({
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
-          url: '../login/login',
+          url: '../login/login?mine=' + 100,
         })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //人数
+   rand(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  },
+  getren() {
+    let that = this;
+    let data = {
+      cityId: that.data.user.bindCityId
+    }
+    app.res.req('/user/bindhomeusercount', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        var randnum = that.rand(6000, 8000);
+         that.setData({
+           ren:res.data+randnum
+         })
       } else {
         wx.showToast({
           title: res.msg,
@@ -298,6 +425,7 @@ Page({
    tag: function (e) {
     var that = this;
     id =  e.currentTarget.id;
+    currentPage = 1;
     var nowTime = new Date();
     if (nowTime - this.data.tapTime < 500) {
       console.log('阻断')
@@ -308,12 +436,10 @@ Page({
 
     this.setData({
       tapTime: nowTime,
-      typeId:e.currentTarget.id
-    });
-
-    that.setData({
+      typeId:e.currentTarget.id,
       tar: e.currentTarget.dataset.num,
-    })
+      isMore:true,
+    });
      that.getlist();
 
   },

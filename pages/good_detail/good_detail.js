@@ -36,7 +36,7 @@ Page({
       icon: "../../images/tui_1.png",
       text: "搜索特产",
       size: 26,
-      badge: 3
+      badge: 0
     }, {
       icon: "../../images/tui_2.png",
       text: "善家购",
@@ -51,7 +51,7 @@ Page({
       icon: "../../images/tui_4.png",
       text: "个人中心",
       size: 23,
-      badge: 2
+      badge: 0
     }, {
       icon: "../../images/tui_5.png",
       text: "我的收藏",
@@ -156,10 +156,17 @@ Page({
     var that = this;
     console.log(that.data.detail.name)
     return {
-      title: that.data.detail.productName,
+      title: '我是' + that.data.user.userName + ',这是' + that.data.detail.cityName + that.data.detail.areaName + that.data.detail.productName + '特产，邀你品尝',
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
-
+  
     }
+  },
+  //反馈
+  feedback(e){
+    console.log(e.currentTarget)
+    wx.navigateTo({
+      url: '../feedback/feedback?id=' + e.currentTarget.id,
+    })
   },
   //播放视频
   play() {
@@ -550,29 +557,31 @@ Page({
     let that = this;
 
     console.log(user.id)
-    if (user.id == null || user.id == '') {
+    if (that.data.user.id == null || that.data.user.id == '') {
 
       console.log(selectIndexArray.length)
       wx.navigateTo({
         url: '../login/login?id=' + id,
       })
-    } else if (user.homeProvinceId == null || user.homeProvinceId == ''){
-      wx.showModal({
-        title: '提示',
-        content: '下单需要绑定你的所在地',
-        success(res) {
-          if (res.confirm) {
-             wx.navigateTo({
-               url: '../person/person',
-             })
-          } else if (res.cancel) {
-            wx.navigateTo({
-              url: '../person/person',
-            })
-          }
-        }
-      })
-    } else if (that.data.detail.isSpecificaton == 0) {
+    }
+    //  else if (that.data.user.homeProvinceId == null || that.data.user.homeProvinceId == ''){
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '下单需要绑定你的所在地',
+    //     success(res) {
+    //       if (res.confirm) {
+    //          wx.navigateTo({
+    //            url: '../person/person',
+    //          })
+    //       } else if (res.cancel) {
+    //         wx.navigateTo({
+    //           url: '../person/person',
+    //         })
+    //       }
+    //     }
+    //   })
+    // }
+     else if (that.data.detail.isSpecificaton == 0) {
       wx.navigateTo({
         url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +
           '&selectIndexArray=' + selectIndexArray +
@@ -886,7 +895,7 @@ Page({
       })
     } else {
       wx.navigateBack({
-        data: 1
+        delta: 1
       })
     }
   },

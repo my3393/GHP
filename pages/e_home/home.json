@@ -1,8 +1,10 @@
 {
   "navigationBarBackgroundColor": "#f12200",
  "usingComponents": {
-  "skeleton": "/component/skeleton/skeleton"
+  "skeleton": "/component/skeleton/skeleton",
+  "subscribe": "plugin-private://wx2b03c6e691cd7370/components/subscribe/subscribe"
   },
+  
   "enablePullDownRefresh": true,
   "navigationStyle": "custom"
 }

@@ -4,7 +4,7 @@
     <view class='a-nav bg-white clearfix' style='height:{{navH}}px'>
       <view class='a-nav-title'>
         <view class="inpu">
-          会员中心
+          合伙人
         </view>
         <!-- <view class="top_dao">
           <view>
@@ -34,7 +34,7 @@
       <view class="tx_n" wx:if='{{user.userName == null}}'> {{phone}}</view>
       <view class="tx_n dan" wx:else> {{user.userName}}</view>
       <view class="gongy">
-        <image src="../../images/mine_1.png"></image>
+        <!-- <image src="../../images/mine_1.png"></image> -->
         <image wx:if='{{user.isCollegeStudent == 1}}' src="../../images/mine_2.png"></image>
         <image wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
         <image wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
@@ -112,27 +112,68 @@
           <view>敬请期待</view>
         </view>
       </view>
+      <image src="https://www.xingtu-group.cn/xcx_img/263.jpeg" id="https://www.xingtu-group.cn/xcx_img/263.jpeg" style="width:97%;height:720rpx;" bindtap="member_sw"></image>
       <view class="shuom">
-        <view>会员说明</view>
-        <view>· 首次邀请500位商家成功入驻善家购，即可免费开通黄金会员。</view>
-        <view>· 开通即表示您已阅读并同意
-          <text style="color:#000" bindtap="web">《善家购会员服务协议》</text>
+       
+        <view wx:if='{{current == 1}}'>
+             <view>《善家购》股东简介
+尊敬的《善家购》家人们，感恩您对自己家乡的支持! 感恩您参与善家购的推广运营，共同为家乡的经济发展贡献自己的一份力量，贡献大爱! 为了回馈各地合伙人以及普通百姓参与宣传家乡做出的贡献，《善家购》联合商家给出 一部分利润作为整个宣传推广过程中的利益共享。具体如下；</view>
+             <view>1  成为股东:
+合伙人旗下会员用户升级合伙人数量达到 100 人。 系统自动将合伙人身份升级成为股东身份。</view>
+             <view>2  股东福利: 股东身份直接锁定的用户(任意身份都一样)，收益保持原合伙人收益。 股东名下的合伙人身份享有下级分红 10%的收益，股东同步享有 2%。 股东名下的合伙人身份享有下级分红 30%的收益，股东同步享有 5%。</view>
+             <view>3  宣传工具:
+所有身份，都有分享二维码、分享连接、分享海报，三种分享工具。</view>
+             <view>4  宣传方式:
+二维码、连接都可以各种朋友圈，社交群随意宣发。</view>
+             <view>5  分享差异: 转发分享系统提示是宣传自己家乡，更加容易引起好友关注浏览、轻松锁定关系。 </view>
+             <view>6  海报张贴: 寻找政府或者商协会等资源直接涉及餐厅，酒店，美发，商超，物业等都可以张贴。 </view>
+             <view>7  宣传动力: 海报内容主导正能善念，大爱贡献精神，每一句都紧贴每个人家乡，被关注度超高! </view>
+             <view>8  购买动力: 产地溯源精确到乡镇更加信任，从小生活习惯更加喜欢，助力家乡发展家乡情怀更浓。</view>
+             <view>希望所有《善家购》家人认真核算你的人脉帮助多少地方经济复苏!转换收益有多大! 大爱无疆、助力家乡，买卖家乡特产，助力家乡发展，一次转发分享，利益终身捆绑!</view>
+             
         </view>
-        <view>· 会员服务一经开通不支持取消/退款，敬请谅解</view>
+        <view wx:if='{{current == 0}}'>
+              <view>《善家购》合伙人简介
+尊敬的《善家购》家人们，感恩您对自己家乡的支持! 感恩您参与善家购的推广运营，共同为家乡的经济发展贡献自己的一份力量，贡献大爱! 为了回馈各地合伙人以及普通百姓参与宣传家乡做出的贡献，《善家购》联合商家给出 一部分利润作为整个宣传推广过程中的利益共享。具体如下；</view>
+              <view>1、成为会员
+关注并绑定善家购家乡既是会员:首次进入平台赠送 100 艺呗， 会员在分享宣传家乡每吸纳一个人系统将赠送 100 艺呗作为奖励 </view>
+              <view>2、会员福利: 会员分享获得的艺呗可以在购物过程中抵扣消费金额的 10% </view>
+              <view>3、成为合伙人</view>
+              <view>3.1 会员通过分享好友锁定用户达到 100 人，系统自动升级成为合伙人! </view>
+              <view>3.2会员用户也可以在个人中心花费 99 元购买成为平台的合伙人身份! </view>
+              <view>4、合伙人简述 被合伙人锁定的会员在未升级之前所吸纳的用户(这里我们称之为用户 B) 以及被(B)用户在分享宣传转发过程吸纳的用户(这里我们称之为用户 C) 以及被(C)用户在分享宣传转发过程吸纳的用户(这里我们称之为用户 D) </view>
+              <view>5、合伙人福利:
+被合伙人锁定的 B\C\D 用户购买任意地方特产，</view>
+              <view>5.1合伙人享有 10%的分红。</view>
+              <view> 5.2被合伙人锁定的 B\C\D 用户购买合伙人的交易，合伙人享有 30%的分红。</view>
+              <view>5.3所有 B 用户之后的用户交易收益终止于他们通过分享升级或者购买成为合伙人。</view>
+              <view>6、宣传工具:所有身份，都有分享二维码、分享连接、分享海报，三种分享工具。</view>
+              <view>7  宣传方式:二维码、连接都可以各种朋友圈，社交群随意宣发。</view>
+              <view>8  分享差异: 转发分享系统提示是宣传自己家乡，更加容易引起好友关注浏览、轻松锁定关系。</view>
+              <view>9  海报张贴: 寻找政府或者商协会等资源直接涉及餐厅，酒店，美发，商超，物业等都可以张贴。 </view>
+              <view>10  宣传动力: 海报内容主导正能善念，大爱贡献精神，每一句都紧贴每个人家乡，被关注度超高! </view>
+              <view>希望所有《善家购》家人认真核算你的人脉帮助多少地方经济复苏!转换收益有多大! 大爱无疆、助力家乡，买卖家乡特产，助力家乡发展，一次转发分享，利益终身捆绑!11  购买动力: 产地溯源精确到乡镇更加信任，从小生活习惯更加喜欢，助力家乡发展家乡情怀更浓。</view>
+           
+          
+        </view>
+        <view>· 开通即表示您已阅读并同意
+          <text style="color:#000" bindtap="web">《善家购服务协议》</text>
+        </view>
+        <view>· 服务一经开通不支持取消/退款，敬请谅解</view>
       </view>
       <view wx:if='{{user.phone == null}}'>
         <button class="submit" wx:if='{{current == 0}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</button>
         <button class="submit" wx:if='{{current == 1}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</button>
         <button class="submit" wx:if='{{current == 2}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{3}}">立即开通￥{{detail[0].memberPrice}}</button>
       </view>
-      <view wx:elif='{{user.memberType == 0}}'>
-        <button class="submit" wx:if='{{current == 0}}' bindtap="pay" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</button>
-        <button class="submit" wx:if='{{current == 1}}' bindtap="pay" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</button>
+      <view wx:else class="pos">
+        <button class="submit" wx:if='{{current == 0 && user.memberType != 1}}' bindtap="pay" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</button>
+        <button class="submit" wx:if='{{current == 1 && user.memberType != 2}}' bindtap="pay" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</button>
         <button class="submit" wx:if='{{current == 2}}' bindtap="pay" id="{{3}}">立即开通￥{{detail[0].memberPrice}}</button>
       </view>
-      <view wx:else>
+      <!-- <view wx:else>
 
-      </view>
+      </view> -->
     </view>
 
   </view>

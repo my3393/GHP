@@ -1,0 +1,27 @@
+/* pages/feedback_detail/feedback_detail.wxss */
+@import '../mine_opinion/mine_opinion';
+.infor{
+  padding-bottom: 20rpx;
+}
+.nav{
+  margin-top: 4rpx;
+}
+.fee_img{
+  width: 80rpx;
+  height: 80rpx;
+  float: left;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+.fee_img image{
+  width: 100%;
+  height: 100%;
+}
+.fee_rig{
+  color: #999;
+  font-size: 24rpx;
+}
+.submit{
+  position: fixed;
+  bottom: 20rpx;
+}

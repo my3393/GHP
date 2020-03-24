@@ -1,4 +1,7 @@
 <!--pages/home/home.wxml-->
+
+<navigator bindtap="tass" class="zhibo" url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{5}}&custom_params={{customParams}}">直播</navigator>
+
 <skeleton selector="skeleton" loading="spin" bgcolor="#FFF" wx:if="{{showSkeleton}}"></skeleton>
 <view class="skeleton">
   <view class="fixs" style='line-height:{{navH + 10}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}' >
@@ -120,7 +123,7 @@
         <image src="{{item.productDefaultImgOss}}" />
       </view>
       <view class="list-j">{{item.productName}}</view>
-      <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>
+      <view class="list-qu"> {{item.cityName}} {{item.areaName}} {{item.townName}}</view>
 
       <view class="class-t-p ctp">
         <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>

@@ -4,6 +4,12 @@ page{
   color: PingFang-SC-Regular;
  
 }
+.zhibo{
+  background: blueviolet;
+  position: fixed;
+  top: 500rpx;
+  left: 0;
+}
 
 .top-back{
   width: 100%;

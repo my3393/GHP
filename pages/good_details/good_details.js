@@ -142,10 +142,17 @@ Page({
     var that = this;
     console.log(that.data.detail.name)
     return {
-      title: that.data.detail.productName,
+      title: '我是' + that.data.user.userName + ',这是' + that.data.user.bindCityName + that.data.user.bindAreaName + '特产' + that.data.detail.productName,
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
 
     }
+  },
+  //反馈
+  feedback(e) {
+    console.log(e.currentTarget)
+    wx.navigateTo({
+      url: '../feedback/feedback?id=' + e.currentTarget.id,
+    })
   },
   //播放视频
   play() {
@@ -533,7 +540,7 @@ Page({
     let that = this;
 
     console.log(user.id)
-    if (user.id == null) {
+    if (that.data.user.id == null) {
 
       console.log(selectIndexArray.length)
       wx.navigateTo({

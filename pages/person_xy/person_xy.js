@@ -27,7 +27,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data,
+        })
+      },
+    })
   },
 
   /**

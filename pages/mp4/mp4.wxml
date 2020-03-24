@@ -1,0 +1,2 @@
+<!--pages/mp4/mp4.wxml-->
+<video src="https://www.xingtu-group.cn/xcx_img/video1.mp4" class="mp" autoplay="true"></video>

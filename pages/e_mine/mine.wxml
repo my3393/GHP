@@ -26,7 +26,7 @@
         </view>
          <view class="shouy-z">
           <view>0</view>
-          <view class="shouy-n">大爱榜单</view>
+          <view class="shouy-n">爱心助力</view>
         </view>
         <view class="shouy-z">
           <view>0</view>
@@ -46,6 +46,7 @@
           <view class="per-n" wx:if='{{user.userName == null}}'>{{phone}}</view>
           <view class="per-n" wx:else>{{user.userName}}</view>
           <image wx:if='{{user.memberType != 0}}' src="{{code}}" class="ewm" catchtap="ewm"></image>
+          <view class="hhr" catchtap="zhin">分享操作指南</view>
           <!-- <view class="hui" wx:if='{{user.memberType == 1}}'>
             <image src="../../images/aix (3).png" />
           </view>
@@ -58,7 +59,7 @@
         </view>
         <view>
           <view class="gongy">
-             <image  src="../../images/mine_1.png"></image>
+             <!-- <image  src="../../images/mine_1.png"></image> -->
              <image wx:if='{{user.isCollegeStudent == 1}}' src="../../images/mine_2.png"></image>
              <image wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
              <image wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
@@ -82,7 +83,7 @@
         </view>
         <view class="shouy-z" catchtap="love_help">
           <view>{{love}}</view>
-          <view class="shouy-n">大爱榜单</view>
+          <view class="shouy-n">爱心助力</view>
         </view>
         <view class="shouy-z" catchtap="integral">
           <view>{{user.integral}}</view>
@@ -179,6 +180,12 @@
       </view>
       <view>大学生创业</view>
     </view>
+    <view class="din-1" style="margin-top: 20rpx;"  bindtap="feedback">
+      <view class="din-img">
+        <image src="../../images/feedback.png" />
+      </view>
+      <view>商品反馈</view>
+    </view>
   </view>
   
 </view>
@@ -241,5 +248,16 @@
 <view class="foot-boot">
   <view>善家购</view>
   <view class="foot-boot-m">大爱无疆，感恩家乡</view>
+</view>
+
+
+<!-- 指南 -->
+<view class="sai-yds" hidden='{{isZhi}}' bindtap="xiaochu">
+  <view class="sai-yd">
+    <view class='zhi_img'>
+      <image src="../../images/zhin.jpg"></image>
+    </view>
+    <view class="zhi_but" catchtap="zhiru">确定截图</view>
+  </view>
 </view>
 

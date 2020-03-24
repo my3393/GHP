@@ -27,7 +27,7 @@
     "pages/search_store/search_store",
     "pages/search_name/search_name",
     "pages/search/search",
-    "pages/navig/navig",
+    
     "pages/mine_yb/mine_yb",
     "pages/person/person",
     "pages/e_mine/mine",
@@ -38,7 +38,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/person_name/person_name",
-    "pages/store_search/store_search",
+   
     "pages/binding_hometown/binding_hometown",
     "pages/sure_orders/sure_orders",
     "pages/apply_fund/apply_fund",
@@ -66,7 +66,22 @@
     "pages/love_detail/love_detail",
     "pages/swim/swim",
     "pages/union/union",
-    "pages/yb_sm/yb_sm"
+    "pages/yb_sm/yb_sm",
+    "pages/zhin/zhin",
+    "pages/feedback/feedback",
+    "pages/mp4/mp4",
+    "pages/feedbacklist/feedbacklist",
+    "pages/feedback_detail/feedback_detail"
+  ],
+  "subpackages": [
+    {
+      "root": "packageA",
+      "name": "pack1",
+      "pages": [
+       
+      ]
+    }
+   
   ],
   "tabBar": {
     "color": "#808080",
@@ -104,6 +119,12 @@
         "text": "我的"
       }
     ]
+  },
+  "plugins": {
+    "live-player-plugin": {
+      "version": "1.0.3",
+      "provider": "wx2b03c6e691cd7370" 
+    }
   },
   "window": {
     "backgroundTextStyle": "light",
