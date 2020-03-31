@@ -150,7 +150,7 @@ Page({
     })
   },
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享buy
    */
   onShareAppMessage: function() {
     var that = this;
@@ -160,6 +160,12 @@ Page({
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
   
     }
+  },
+  //Shouy
+  shouye(){
+    wx.switchTab({
+      url: '../e_home/home',
+    })
   },
   //反馈
   feedback(e){
@@ -564,23 +570,23 @@ Page({
         url: '../login/login?id=' + id,
       })
     }
-    //  else if (that.data.user.homeProvinceId == null || that.data.user.homeProvinceId == ''){
-    //   wx.showModal({
-    //     title: '提示',
-    //     content: '下单需要绑定你的所在地',
-    //     success(res) {
-    //       if (res.confirm) {
-    //          wx.navigateTo({
-    //            url: '../person/person',
-    //          })
-    //       } else if (res.cancel) {
-    //         wx.navigateTo({
-    //           url: '../person/person',
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
+     else if (that.data.user.homeProvinceId == null || that.data.user.homeProvinceId == ''){
+      wx.showModal({
+        title: '提示',
+        content: '下单需要绑定你的所在地',
+        success(res) {
+          if (res.confirm) {
+             wx.navigateTo({
+               url: '../person/person',
+             })
+          } else if (res.cancel) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          }
+        }
+      })
+    }
      else if (that.data.detail.isSpecificaton == 0) {
       wx.navigateTo({
         url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +

@@ -45,9 +45,9 @@
     </view>
   </view>
   <view wx:else>
-     <view class="g_detail clearfix">
+     <view class="g_detail clearfix" wx:for='{{store}}' wx:key='item'>
          <image src="{{item.storeLogoOss}}" class="g_detail_img"></image>
-         <view class="g_store_name">{{item.storeName}} ></view>
+         <view class="g_store_name">{{item.storeName}} </view>
           <view class="g_store_price">￥ {{item.revenue}}</view>
          <view class="g_store_time">{{item.createDate}}</view>
         

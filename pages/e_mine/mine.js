@@ -44,7 +44,7 @@ Page({
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
-       
+        console.log(res)
         if (res.data.phone == null ) {
          
         } else if ( res.data.phone == '') {
@@ -533,6 +533,12 @@ Page({
       }
     })
   },
+  //去绑定手机号
+  shouj(){
+     wx.navigateTo({
+       url: '../bindphone/login',
+     })
+  },
   ewm: function (e) {
     var that = this;
     console.log(e)
@@ -573,17 +579,56 @@ Page({
       }
     })
   },
-  // onPageScroll: function (e) {
-  //   console.log(e.scrollTop)
-  //   let that = this
-  //   if (e.scrollTop > 40) {
-  //     that.setData({
-  //       isshow: false,
-  //     })
-  //   } else {
-  //     that.setData({
-  //       isshow: true
-  //     })
-  //   }
-  // },
+  ylsj() {
+    //娱乐世界
+    wx.navigateToMiniProgram({
+      appId: 'wxf556b39ee9c934b4',
+      path: 'pages/my_idol/my_idol',
+      extraData: {
+
+      },
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+      }
+    })
+
+  },
+  yslm() {
+    //艺赛联盟
+    wx.navigateToMiniProgram({
+      appId: 'wx4cef4fe6585f5bfd',
+      path: 'pages/e_home/e_home',
+      extraData: {
+
+      },
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+      }
+    })
+
+  },
+  wypt() {
+    //艺赛联盟
+    wx.navigateToMiniProgram({
+      appId: 'wx4cef4fe6585f5bfd',
+      path: 'pages/e_home/e_home',
+      extraData: {
+
+      },
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+      }
+    })
+
+  },
+  //文艺商学
+  wysx(){
+    wx.showToast({
+      title: '暂未开放',
+      icon:'none'
+    })
+  }
 })

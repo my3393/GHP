@@ -40,7 +40,10 @@ Page({
       console.log('这是' + userid)
       wx.setStorageSync('bangId', userid)
     }
-    
+    //绑定
+    if (wx.getStorageSync('bangId')) {
+      that.Bang();
+    }
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {

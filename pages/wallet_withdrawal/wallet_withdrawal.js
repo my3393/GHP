@@ -7,6 +7,7 @@ Page({
    */
   data: {
     num:'0',
+    value:''
   },
 
   /**
@@ -81,11 +82,24 @@ Page({
 
     }
   },
+  val(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
   sub(){
+    console.log(this.data.value)
     let that = this;
     if (that.data.value == '' || that.data.value == 0) {
       wx.showToast({
         title: '提现金额不能为0',
+        icon: 'none'
+      })
+      return false
+    }
+    if(that.data.value > that.data.num){
+      wx.showToast({
+        title:'当前输入金额大于可提现金额',
         icon: 'none'
       })
       return false
@@ -101,9 +115,10 @@ Page({
          title: '提现成功',
          duration:3000
        })
+       that.getuser();
         setTimeout(function(){
           wx.navigateBack({
-            delta: 2,
+            delta: 1,
           })
         },3000)
 
@@ -129,6 +144,27 @@ Page({
       value:this.data.num
     })
   },
-  
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+
+      }
+    })
+  },
     
 })

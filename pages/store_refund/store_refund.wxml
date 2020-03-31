@@ -73,7 +73,7 @@
         <view>2020年5月1号前免费入驻，之后商户入驻需要交付品质保证金2980元。</view>
         <view>图片上传说明：</view>
         
-        <view>1.请下载善家购平台店铺特产销售证明模板</view>
+        <view>1.请下载善家平台店铺特产销售证明模板</view>
         <view>2.前往当地街道/政府/村委等政府机构开具特产销售证明</view>
         <view>3.销售证明需保证字迹清晰，可辨别，凡作假行为一经查实将被列入平台黑名单，一年内不可再次申请入驻</view>
       </view>
@@ -145,7 +145,7 @@
         </view>
         <view>
           <text class="hui">我已阅读并同意</text>
-          <text bindtap="web">《善家购家乡特产交易平台商家入驻协议及须知》</text>
+          <text bindtap="web">《善家家乡特产交易平台商家入驻协议及须知》</text>
         </view>
       </view>
 
@@ -166,7 +166,7 @@
       <view class="kong_img">
         <image src="../../images/store_true.png"></image>
       </view>
-      <view> 恭喜您，成功入驻善家购</view>
+      <view> 恭喜您，成功入驻善家</view>
       <view class="pc">
         <view>PC端管理后台</view>
         <view >店铺地址：<text bindtap="copy" data-text="{{audits.auditInfo}}">{{audits.auditInfo}}</text></view>
@@ -191,7 +191,7 @@
         重新提交
       </view>
       <view class="bott">
-        <view>善家购</view>
+        <view>善家</view>
         <view>大爱无疆，感恩家乡</view>
       </view>
     </view>

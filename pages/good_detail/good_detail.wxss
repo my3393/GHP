@@ -2,6 +2,16 @@ page {
     background: #f9f9f9;
     font-size: 24rpx;
   }
+  .shouye{
+    position: fixed;
+    right: 30rpx;
+    bottom: 160rpx;
+    background: #e65009;
+    padding: 10rpx;
+    color: #fff;
+    border-radius: 30rpx;
+    box-sizing: border-box;
+  }
   .top_center{
     background: #fff;
     width: 100%;

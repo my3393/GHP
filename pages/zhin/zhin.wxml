@@ -1,5 +1,12 @@
 <!--pages/zhin/zhin.wxml-->
-<view class="img">
+<!-- <view class="img">
   <image src="https://www.xingtu-group.cn/xcx_img/xuanc.jpg"></image>
   <image class="ewm" src="{{code}}"> </image>
-</view>
+</view> -->
+
+
+  <view>
+    <painter customStyle='position: absolute; left: -9999rpx;' palette="{{template}}" bind:imgOK="onImgOK" widthPixels="1000" />
+    <image src="{{image}}" style="width: 654rpx; height: 1000rpx; margin-left:40rpx;margin-top: 40rpx" />
+    <button type="primary" hidden="{{load}}" style='position:relative;margin-top:50rpx' bind:tap='saveImage'>保存图片到相册</button>
+  </view>

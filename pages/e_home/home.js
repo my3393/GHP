@@ -42,7 +42,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-   
+    
     if (wx.getStorageSync('token')) {
       that.getbanner();
       console.log('token存在')
@@ -61,7 +61,10 @@ Page({
       that.Bang();
       
     }
-    
+    //绑定
+    if (wx.getStorageSync('bangId')) {
+      that.Bang();
+    }
     if (decodeURIComponent(options.q).split('/')[4]){
       
       wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])

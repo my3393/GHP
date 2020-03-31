@@ -418,3 +418,7 @@
   </tui-top-dropdown>
   <!---顶部下拉菜单-->
 
+<!-- 首页 -->
+<view class="shouye" bindtap="shouye">
+首页
+</view>

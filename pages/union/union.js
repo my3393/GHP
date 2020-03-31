@@ -32,6 +32,7 @@ Page({
       title: '加载中',
     })
     this.getdetail();
+    this.getstore();
   },
 
   /**

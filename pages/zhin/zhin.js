@@ -1,11 +1,13 @@
 // pages/zhin/zhin.js
+import Card from '../../palette/cards';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    template:'',
+    load:true,
   },
 
   /**
@@ -16,13 +18,17 @@ Page({
    this.setData({
      code:options.code
    })
+   wx.showLoading({
+     title: '图片加载中',
+   })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    let that = this;
+    
   },
 
   /**
@@ -39,6 +45,20 @@ Page({
         })
       },
     })
+    let res = [
+      this.data.code,
+      'https://sjg.xcx.api.xingtu-group.cn/xcx/xuanc.jpg'
+    ]
+    this.setData({
+      template: new Card().palette(res)
+    });
+    setTimeout(function () {
+      wx.hideLoading()
+      that.setData({
+        load: false
+      })
+     
+    }, 2500)
   },
 
   /**
@@ -80,5 +100,18 @@ Page({
       path: '/pages/e_home/home?userid=' + that.data.user.id,
 
     }
-  }
+  },
+  onImgOK(e) {
+    this.imagePath = e.detail.path;
+    this.setData({
+      image: this.imagePath
+    })
+    console.log(e);
+  },
+
+  saveImage() {
+    wx.saveImageToPhotosAlbum({
+      filePath: this.imagePath,
+    });
+  },
 })

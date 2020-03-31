@@ -12,7 +12,7 @@
             ￥
         </view>
         <view class='inpu'>
-              <input  type="number" value="{{value}}" />
+              <input  type="number" value="{{value}}" bindinput="val" />
            </view>
       </view>
       <!-- <view class="dete">
@@ -39,6 +39,6 @@
 </view>
 
 <view class="foot-boot">
-    <view >善家购</view>
+    <view >善家</view>
     <view class="foot-boot-m">大爱无疆，感恩家乡</view>
 </view>

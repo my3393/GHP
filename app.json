@@ -79,10 +79,12 @@
       "name": "pack1",
       "pages": [
        
+       
       ]
     }
    
   ],
+  
   "tabBar": {
     "color": "#808080",
     "selectedColor": "#f12200",
@@ -92,7 +94,7 @@
         "selectedIconPath": "images/home-active.png",
         "iconPath": "images/home.png",
         "pagePath": "pages/e_home/home",
-        "text": "善家购"
+        "text": "善家"
       },
       {
         "selectedIconPath": "images/specialty-active.png",
@@ -129,12 +131,13 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f12200",
-    "navigationBarTitleText": "善家购",
+    "navigationBarTitleText": "善家",
     "navigationBarTextStyle": "white"
   },
   "navigateToMiniProgramAppIdList": [
     "wxf556b39ee9c934b4",
-    "wx4cef4fe6585f5bfd"
+    "wx4cef4fe6585f5bfd",
+    "wx07d6c635b023161e"
   ],
   "sitemapLocation": "sitemap.json"
 }
