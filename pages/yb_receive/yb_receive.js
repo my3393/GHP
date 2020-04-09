@@ -14,9 +14,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    this.setData({
-      detail:options.data
-    })
+     this.getdetail();
   },
 
   /**
@@ -66,5 +64,94 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  tuih(e) {
+    let that = this
+    let data = {
+      id: e.currentTarget.id
+    }
+    app.res.req('/integral/refusedintegral', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+       that.getdetail();
+        that.getuser();
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  shoux(e) {
+    let that = this
+    let data = {
+      id: e.currentTarget.id
+    }
+    app.res.req('/integral/receiveintegral', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getdetail();
+        that.getuser();
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  getdetail() {
+    let that = this
+    let data = {
+      
+    }
+    app.res.req('/integral/receiverecord', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          detail: res.data
+        })
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+
+      }
+    })
+  },
 })

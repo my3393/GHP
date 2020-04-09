@@ -1,11 +1,14 @@
 // pages/yb_zeng/yb_zeng.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-   phone:''
+   phone:'',
+   valu:'',
+    modal:false,
   },
 
   /**
@@ -29,7 +32,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data,
+          integral: res.data.integral
+        })
+        
+      },
+    })
   },
 
   /**
@@ -66,24 +80,61 @@ Page({
   onShareAppMessage: function () {
 
   },
+  input(e){
+    console.log(e.detail.value)
+     this.setData({
+       valu:e.detail.value
+     })
+  },
+  all(){
+     this.setData({
+       value: this.data.integral
+     })
+  },
   getphone(){
     let that = this
     let data = {
-      phone: this.data.phone
+      phone: that.data.phone
     }
     app.res.req('/integral/searchphone', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.navigateTo({
-          url: '../yb_zeng/yb_zeng?data=' + that.data.phone,
-        })
+         that.setData({
+            detail:res.data
+         })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
         })
-      } else if (res.status == 1003) {
-        that.setData({
-          modal: true,
+      }  else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  hide(){
+      wx.redirectTo({
+        url: '../mine_yb/mine_yb',
+      })
+  },
+  sub() {
+    let that = this
+    let data = {
+      receiveUserPhone:that.data.phone,
+      integral: that.data.valu
+    }
+    app.res.req('/integral/sendintegral', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+         that.setData({
+           modal:true
+         })
+        that.getuser();
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
         })
       } else {
         wx.showToast({
@@ -92,5 +143,27 @@ Page({
         })
       }
     })
-  }
+  },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+
+      }
+    })
+  },
 })

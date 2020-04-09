@@ -109,6 +109,7 @@ Page({
       })
       return false
     }
+
     if (that.data.value <1) {
       wx.showToast({
         title: '提现金额需大于等于1元',
@@ -121,6 +122,7 @@ Page({
         amount: that.data.value,
         storeId: that.data.id
       }
+
 
       app.res.req("/user/bindstorewithdrawal", data, (res) => {
         console.log(res.data)

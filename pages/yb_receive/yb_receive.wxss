@@ -31,6 +31,33 @@ page{
   display: inline-block;
   margin-right: 20rpx
 }
+.shoux{
+  float: right;
+  margin-top: 30rpx;
+   background: #f12200;
+   color: #fff;
+    width: 150rpx;
+  height: 60rpx;
+  border-radius: 36rpx;
+  text-align: center;
+  line-height: 60rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  opacity: 0.4;
+}
+.tuih{
+   width: 150rpx;
+  height: 60rpx;
+  border-radius: 36rpx;
+  text-align: center;
+  line-height: 60rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  opacity: 0.4;
+   border: 1rpx solid #CCCCCC;
+  float: right;
+  margin-top: 30rpx;
+}
 .rig :nth-child(2){
    background: #f12200;
    color: #fff

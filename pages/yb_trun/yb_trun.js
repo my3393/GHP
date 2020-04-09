@@ -133,7 +133,7 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
         wx.navigateTo({
-          url: '../yb_zeng/yb_zeng?data=' + that.data.phone,
+          url: '../yb_zeng/yb_zeng?phone=' + res.data.phone,
         })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({

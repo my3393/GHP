@@ -11,6 +11,7 @@ Page({
     imgUrls: [
       'https://www.xingtu-group.cn/xcx_img/member1.png',
       'https://www.xingtu-group.cn/xcx_img/member2.png',
+
     ],
     current: 0,
     animationData: {},

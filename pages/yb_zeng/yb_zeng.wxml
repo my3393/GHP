@@ -2,21 +2,21 @@
 <view class="nav clearfix">
    <view class="lef">转增给</view>
    <view class="head">
-      <image src="../../images/head.png"></image>
-      <view class="minz">王大锤</view>
+      <image src="{{detail.headImgUrl}}"></image>
+      <view class="minz">{{detail.userName}}</view>
    </view>
   <view style="margin-top:40rpx">
      <view class="xia">转增艺呗数</view>
     <view class="xia_i">
-       <input placeholder="0" class="inp"></input>
+       <input placeholder="0" class="inp" bindinput="input" value="{{valu}}"></input>
        <view>
-         可转增艺呗 : 56
-         <view class="quan">全部转增</view>
+         可转增艺呗 : {{integral}}
+         <view class="quan" bindtap="all">全部转增</view>
        </view>
     </view>
   </view>
 </view>
-<button class="but">赠予他</button>
+<button class="but" bindtap="sub">赠予他</button>
 
 <view class="sm">
    <view>转赠说明</view>
@@ -24,3 +24,12 @@
    <view>2.一旦发出去赠送不予撤回，三日内对方未收下，将自动退回。</view>
    <view>3.艺呗为本平台的虚拟币，所有解释权贵平台所有。</view>
 </view>
+
+ <tui-modal show="{{modal}}"  custom="{{true}}">
+    <view class="tui-modal-custom">
+     <view class="tui-modal-custom-text tit">转增成功</view>
+       <view class="tui-modal-custom-text tite">待用户查收，3天未接受自动退回本账号</view>
+     
+      <tui-button type="danger" shape="circle" tui-button-class="tui-btn-mtop" bindtap="hide">确定</tui-button>
+    </view>
+  </tui-modal>

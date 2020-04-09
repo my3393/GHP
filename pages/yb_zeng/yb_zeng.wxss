@@ -18,12 +18,27 @@ page{
 .head{
    
 }
+.sm{
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
 .head>image{
   width: 70rpx;
   height: 70rpx;
   float: left;
   margin-top: 20rpx;
   margin-right: 20rpx;
+}
+.tit{
+  text-align: center;
+  margin-bottom: 30rpx;
+  font-size: 32rpx;
+}
+.tite{
+  color: #999999;
+  line-height: 64rpx;
 }
 .minz{
  

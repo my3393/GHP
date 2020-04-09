@@ -1,12 +1,18 @@
 <!--pages/yb_receive/yb_receive.wxml-->
 <view>
-  <view class="nav ">
-    <view>2020-4-7 20.32.41</view>
+  <view class="nav " wx:for='{{detail}}'>
+    <view>{{item.createDate}}</view>
     <view class="list clearfix">
-      苗儿服务机构发美欧人机木芙蓉IE几个民偶尔
-      <view class="rig">
-        <view>返回</view>
-        <view>收下</view>
+      {{item.integralInfo}}
+      <view class="rig" wx:if="{{item.type == 0 && item.sendUserId != item.userId}}">
+        <view bindtap="tuih" id="{{item.id}}">退回</view>
+        <view bindtap="shoux" id="{{item.id}}">收下</view>
+      </view>
+      <view class="shoux" wx:elif='{{item.type == 1}}'>
+          已收下
+      </view>
+       <view class="tuih" wx:elif='{{item.type == 2}}'>
+          已退回
       </view>
     </view>
 

@@ -534,7 +534,6 @@ Page({
     })
   },
   //去绑定手机号
-  //绑定手机号
   getPhoneNumber: function (e) {
     var that = this;
     console.log(e)
@@ -575,6 +574,12 @@ Page({
         }
       }
     })
+  },
+  shouj(){
+     wx.navigateTo({
+       url: '../bindphone/login',
+     })
+
   },
   ewm: function (e) {
     var that = this;

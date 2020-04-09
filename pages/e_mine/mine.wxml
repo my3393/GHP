@@ -74,7 +74,7 @@
         <view class="kait">
           <image src="../../images/aix2.png" />
         </view>
-        <view class="kait-n"> 开通会员</view>
+        <view class="kait-n" > 开通会员</view>
       </view>
       <view class="shouyi" catchtap="wallet_detail">
         <view class="shouy-z">
@@ -144,8 +144,12 @@
 <view class="nav nav-t">
   <view class="m-h1">我的善家</view>
   <view wx:if='{{user.id == "" || user.id == null}}'></view>
-  <view class="shoujih" wx:elif='{{user.phone == "" || user.phone == null}}' ><button class="bangdin"  open-type="getPhoneNumber" 
-  bindgetphonenumber="getPhoneNumber"> 绑定手机</button></view>
+
+  <view class="shoujih" wx:elif='{{user.phone == "" || user.phone == null}}'>
+    <button class="bangdin" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"> 绑定手机</button>
+  </view>
+
+
   <view wx:else></view>
   <view class="dind">
     <view class="din-1" bindtap="wallet">
@@ -214,6 +218,7 @@
         <image src="../../images/zhaq.png" />
       </view>
       <view>实名认证</view>
+
     </view>
     <view class="din-1" style="margin-top: 20rpx;" bindtap="college">
       <view class="din-img">
@@ -221,48 +226,40 @@
       </view>
       <view>大学生创业</view>
     </view>
-    <!-- <view class="din-1" bindtap="option">
-      <view class="din-img">
-        <image src="../../images/yjfk.png" />
-      </view>
-      <view>意见反馈</view>
-    </view> -->
-  </view>
-  <view class="dind">
-    <view class="din-1" bindtap="imgsrcs">
-      <view class="din-img">
-        <image src="../../images/gzgzh.png" />
-      </view>
-      <view>关注公众号</view>
-    </view>
-    <view class="din-1" bindtap="ylsj">
-      <view class="din-img">
-        <image src="../../images/gzgzh.png" />
-      </view>
-      <view>娱乐世界</view>
-    </view>
-    <!-- <view class="din-1" bindtap="imgsrcs">
-      <view class="din-img">
-        <image src="../../images/gzgzh.png" />
-      </view>
-      <view>购你售</view>
-    </view> -->
-    <view class="din-1" bindtap="yslm">
-      <view class="din-img">
-        <image src="../../images/gzgzh.png" />
-      </view>
-      <view>艺赛联盟</view>
-    </view>
-    <view class="din-1" bindtap="wysx">
-      <view class="din-img">
-        <image src="../../images/gzgzh.png" />
-      </view>
-      <view>品牌联营</view>
-    </view>
-  </view>
-  <view class="dind">
+   
+   </view>
 
-    <!-- <view class="din-1" bindtap="wypt">
+<view class="dind">
+  <view class="din-1" bindtap="imgsrcs">
+    <view class="din-img">
+      <image src="../../images/gzgzh.png" />
+    </view>
+    <view>关注公众号</view>
+
+  </view>
+  <view class="din-1" bindtap="ylsj">
+    <view class="din-img">
+      <image src="../../images/gzgzh.png" />
+    </view>
+    <view>娱乐世界</view>
+  </view>
+
+  <view class="din-1" bindtap="yslm">
+    <view class="din-img">
+      <image src="../../images/gzgzh.png" />
+    </view>
+    <view>艺赛联盟</view>
+  </view>
+  <view class="din-1" bindtap="wysx">
+    <view class="din-img">
+      <image src="../../images/gzgzh.png" />
+    </view>
+    <view>品牌联营</view>
+  </view>
+</view>
+<view class="dind">
+
+  <!-- <view class="din-1" bindtap="wypt">
       <view class="din-img">
         <image src="../../images/gzgzh.png" />
       </view>
@@ -270,15 +267,15 @@
     </view> -->
 
 
-    <view class="din-1" bindtap="wysx">
-      <view class="din-img">
-        <image src="../../images/gzgzh.png" />
-      </view>
-      <view>文艺商学</view>
+  <view class="din-1" bindtap="wysx">
+    <view class="din-img">
+      <image src="../../images/gzgzh.png" />
     </view>
+    <view>文艺商学</view>
   </view>
 </view>
-<!-- <button class='skblue_bg' data-url="https://www.xingtu-group.cn/sjg_xieyi/8_Prove.pdf" data-type="pdf" catchtap='downloadFile'>下载</button> -->
+</view>
+
 <view class="foot-boot">
   <view>善家</view>
   <view class="foot-boot-m">大爱无疆，感恩家乡</view>

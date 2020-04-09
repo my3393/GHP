@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/e_home/home",
     "pages/mine_yb/mine_yb",
     "pages/yb_receive/yb_receive",
     "pages/yb_zeng/yb_zeng",
-    "pages/e_home/home",
+    
     
     "pages/community/community",
     "pages/members/members",
@@ -82,9 +83,12 @@
     {
       "root": "packageA",
       "name": "pack1",
+
       "pages": []
+
     }
   ],
+  
   "tabBar": {
     "color": "#808080",
     "selectedColor": "#f12200",
@@ -137,7 +141,8 @@
   "navigateToMiniProgramAppIdList": [
     "wxf556b39ee9c934b4",
     "wx4cef4fe6585f5bfd",
-    "wx07d6c635b023161e"
+    "wx07d6c635b023161e",
+    "wx1f1ea04b716771be"
   ],
   "sitemapLocation": "sitemap.json"
 }

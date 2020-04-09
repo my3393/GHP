@@ -33,7 +33,7 @@ Page({
       },
       dataType: 'json',
       success: function (res) {
-        console.log(res.data.data)
+        console.log(res.data)
         if (res.data.status === 1000) {
           wx.setStorage({
             key: 'token',
