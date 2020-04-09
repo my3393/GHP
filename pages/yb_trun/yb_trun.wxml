@@ -1,0 +1,28 @@
+<!--pages/yb_trun/yb_trun.wxml-->
+<view class="nav">
+   <view>查找赠送用户</view>
+   <view class="int">
+     <image src="../../images/search.png" class="int_img"></image>
+     <input placeholder="请输入要转增的人手机号"  bindinput="bindcha"></input>
+   </view>
+   
+</view>
+<button class="but" bindtap="cha">查找</button>
+<view class="sm">
+   <view>转赠说明</view>
+   <view> 1.赠予用户需是本平台已存在用户，通过搜索对方绑定手机号查找赠予对方。</view>
+   <view>2.一旦发出去赠送不予撤回，三日内对方未收下，将自动退回。</view>
+   <view>3.艺呗为本平台的虚拟币，所有解释权归平台所有。</view>
+</view>
+<sj />
+
+ <tui-modal show="{{modal}}"  custom="{{true}}">
+    <view class="tui-modal-custom">
+     <view class="tui-modal-custom-text tit">未查找到该用户</view>
+       <view class="tui-modal-custom-text tite">1.请确认输入手机号是否正确</view>
+      <view class="tui-modal-custom-text tite">2.请确认被转赠用户绑定手机号</view>
+      <tui-button type="danger" shape="circle" tui-button-class="tui-btn-mtop" bindtap="hide">我知道了</tui-button>
+    </view>
+  </tui-modal>
+
+    <tui-modal show="{{modal2}}" bind:click="handleClick2" bind:cancel="hide2" content="转赠艺呗需要绑定手机号" color="#333" size="32" shape="circle"></tui-modal>

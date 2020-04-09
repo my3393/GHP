@@ -1,22 +1,37 @@
 <!-- pages/mine_yb/mine_yb.wxml -->
-<view class="top">
-    <view class="title">我的艺呗</view>
-    <view class="shuom" bindtap="sm">使用说明？</view>
-    <view>
-        <view class="num">{{user.integral}}</view>
-        <!-- <view class="znum">赚艺呗</view> -->
-         <view class="znum" bindtap="vote">爱心投票</view>
-    </view>
+<view class="top clearfix">
+
+  <view class="shuom" bindtap="sm">使用说明？</view>
+  <view style="height:50rpx"></view>
+  <view class="title">
+   <view >我的艺呗</view>
+    <view class="num">{{user.integral}}</view>
+    <!-- <view class="znum">赚艺呗</view> -->
+   
+  </view>
+   <view class="tc">
+      <view class="znum" bindtap="vote">爱心投票</view>
+       <view class="znum" bindtap="trun">艺呗转增</view>
+   </view>
+  <view class="minx">
     <view class="bootm" bindtap="detail">
-       收支明细
-       <view class="bootm-img">
-           <image  src="../../images/right.png" />
-       </view>
+      收支明细
+      <view class="bootm-img">
+        <image src="../../images/right.png" />
+      </view>
     </view>
+    <view class="bootm" bindtap="receive">
+      转增记录
+      <view class="bootm-img">
+        <image src="../../images/right.png" />
+      </view>
+    </view>
+  </view>
 </view>
 
 <view class="list">
-    <view >艺呗获取渠道</view>
-    <view >1、分享绑定新用户可获得相应的艺呗值（仅限于非会员用户参与）</view>   
-    <view >2.更多赚取艺呗的方式敬请期待</view>
+  <view>艺呗获取渠道</view>
+  <view>1、分享绑定新用户可获得相应的艺呗值（仅限于非会员用户参与）</view>
+  <view>2.更多赚取艺呗的方式敬请期待</view>
 </view>
+<sj  />

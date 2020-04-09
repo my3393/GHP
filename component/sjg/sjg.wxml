@@ -1,0 +1,5 @@
+<!--component/sjg/sjg.wxml-->
+<view class="bott">
+  <view>{{sj}}</view>
+  <view>{{daai}}</view>
+</view>

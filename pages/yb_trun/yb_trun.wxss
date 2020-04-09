@@ -1,0 +1,56 @@
+/* pages/yb_trun/yb_trun.wxss */
+page{
+  background: #f2f2f2;
+}
+.nav{
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.int{
+  width: 100%;
+  height: 60rpx;
+  border:  4rpx solid #f9f9f9;
+  border-radius: 30rpx;
+  margin-top: 20rpx;
+}
+.int_img{
+  width: 26rpx;
+  height: 26rpx;
+  float: left;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+input{
+  margin-left: 20rpx;
+  height: 100%;
+  display: inline-block;
+}
+button:after{
+  padding: 0,
+}
+.but{
+  width: calc(100% - 60rpx);
+  margin-left: 30rpx;
+  height: 80rpx;
+  color: #fff;
+   border-radius: 40rpx;
+    background:linear-gradient(to right, #f12200, #ff4e17); 
+    margin-top: 40rpx;
+    line-height: 80rpx;
+}
+.sm{
+  margin-top: 40rpx;
+  font-size: 28rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.tit{
+  text-align: center;
+  margin-bottom: 30rpx;
+  font-size: 32rpx;
+}
+.tite{
+  color: #999999;
+  line-height: 64rpx;
+}

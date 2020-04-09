@@ -61,6 +61,7 @@ Page({
       size: 23,
       badge: 0
     }],
+    height: 90,
     menuShow: false,
   },
 
@@ -89,7 +90,7 @@ Page({
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,
-      height: obj.top + obj.height + 8,
+      // height: obj.top + obj.height + 8,
       top: obj.top + (obj.height - 32) / 2
     }, () => {
       wx.getSystemInfo({
@@ -123,7 +124,17 @@ Page({
 
     }).exec();
     //获取本地用户信息
-
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        if (res.model == "iPhone X" || res.model == "iPhone XR" || res.model == "iPhone XS Max") {
+          that.setData({
+            bottom: 20,
+            height: 130
+          })
+        }
+      },
+    })
     //获取本地用户信息
     wx.getStorage({
       key: 'userinfo',
@@ -134,6 +145,7 @@ Page({
         })
       },
     })
+
   },
   /**
   * 用户点击右上角分享
@@ -146,6 +158,12 @@ Page({
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
 
     }
+  },
+  //Shouy
+  shouye() {
+    wx.switchTab({
+      url: '../e_home/home',
+    })
   },
   //反馈
   feedback(e) {
@@ -540,26 +558,44 @@ Page({
     let that = this;
 
     console.log(user.id)
-    if (that.data.user.id == null) {
+    if (that.data.user.id == null || that.data.user.id == '') {
 
       console.log(selectIndexArray.length)
       wx.navigateTo({
         url: '../login/login?id=' + id,
       })
-    } else if (that.data.detail.isSpecificaton == 0) {
+    }
+    else if (that.data.user.homeProvinceId == null || that.data.user.homeProvinceId == '') {
+      wx.showModal({
+        title: '提示',
+        content: '下单需要绑定你的所在地',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          } else if (res.cancel) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          }
+        }
+      })
+    }
+    else if (that.data.detail.isSpecificaton == 0) {
       wx.navigateTo({
-        url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num
-          + '&selectIndexArray=' + selectIndexArray
-          + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+        url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +
+          '&selectIndexArray=' + selectIndexArray +
+          '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
       })
 
     } else {
       if (selectIndexArray.length === that.data.spec.length) {
         if (ds == true) {
           wx.navigateTo({
-            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num
-              + '&selectIndexArray=' + selectIndexArray
-              + '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
+            url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +
+              '&selectIndexArray=' + selectIndexArray +
+              '&goodId=' + that.data.goodId + '&storeid=' + that.data.detail.storeId,
           })
         } else {
           wx.showToast({
@@ -686,11 +722,11 @@ Page({
         if (res.data.status === 1000) {
           wx.setStorage({
             key: 'token',
-            data: res.data.token,
+            data: res.data.data.token,
           })
           wx.setStorage({
             key: 'userinfo',
-            data: res.data,
+            data: res.data.data,
           })
           setTimeout(function () {
             that.showgg();

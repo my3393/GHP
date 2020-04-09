@@ -30,12 +30,12 @@ Page({
       goodId: options.goodId
     })
     this.getDetail();
-    wx.requestSubscribeMessage({
-      tmplIds: ['gwqSviJ4QfPLJhmk5tQflU4-Fy1qH_-qIWzeyGYdhFk'],
-      success(res) {
-        console.log(res)
-       }
-    })
+    // wx.requestSubscribeMessage({
+    //   tmplIds: ['gwqSviJ4QfPLJhmk5tQflU4-Fy1qH_-qIWzeyGYdhFk'],
+    //   success(res) {
+    //     console.log(res)
+    //    }
+    // })
   },
 
   /**
@@ -439,11 +439,11 @@ Page({
         if (res.data.status === 1000) {
           wx.setStorage({
             key: 'token',
-            data: res.datatoken,
+            data: res.data.token,
           })
           wx.setStorage({
             key: 'userinfo',
-            data: res.data,
+            data: res.data.data,
           })
           setTimeout(function () {
             that.pay();

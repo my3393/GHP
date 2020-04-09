@@ -1,0 +1,41 @@
+/* pages/yb_receive/yb_receive.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 26rpx;
+}
+.nav{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  text-align: center;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+.list{
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  margin-top: 10rpx;
+  text-align: left;
+  line-height: 50rpx;
+}
+.rig{
+  float: right;
+  margin-top: 30rpx;
+}
+.rig>view{
+  width: 150rpx;
+  height: 60rpx;
+  border-radius: 36rpx;
+  text-align: center;
+  line-height: 60rpx;
+  display: inline-block;
+  margin-right: 20rpx
+}
+.rig :nth-child(2){
+   background: #f12200;
+   color: #fff
+}
+.rig :nth-child(1){
+   border: 1rpx solid #CCCCCC;
+   margin-right: 40rpx;
+}

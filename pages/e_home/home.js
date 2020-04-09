@@ -13,6 +13,7 @@ Page({
   data: {
     lazy:true,
     showSkeleton: true,
+    modal:false,
     idx: '',
     tar: '',
     detail:[],
@@ -42,7 +43,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-   
+    
     if (wx.getStorageSync('token')) {
       that.getbanner();
       console.log('token存在')
@@ -61,7 +62,10 @@ Page({
       that.Bang();
       
     }
-    
+    //绑定
+    if (wx.getStorageSync('bangId')) {
+      that.Bang();
+    }
     if (decodeURIComponent(options.q).split('/')[4]){
       
       wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])
@@ -223,7 +227,7 @@ Page({
       // wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
       that.getbanner();
-    }, 200)
+    }, 1500)
   },
 
   /**
@@ -499,6 +503,39 @@ Page({
 
 
   },
+  show3() {
+    this.setData({
+      modal: !this.data.modal
+    })
+  },
+  //会员商品
+  getmemberproduct() {
+    let that = this;
+    let data = {
+      isRefresh: isRefresh
+    }
+    app.res.req("/home/memberproduct", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          memberproduct: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+
+
+  },
   //热门特产
   getType(){
     let that = this;
@@ -558,8 +595,9 @@ Page({
             })
             wx.hideLoading()
            that.getAdvert();
-
+           
            that.getRecommend();
+         that.getmemberproduct();
            that.getClass();
            that.gongz();
        }else if(res.status == 1004 || res.status == 1005){

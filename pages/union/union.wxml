@@ -20,9 +20,9 @@
     </view>
   </view>
   <view wx:else>
-      <view class="g_detail clearfix" wx:for='{{detail}}' wx:key='item'>
+      <view class="g_detail clearfix" wx:for='{{detail}}' wx:key='item' >
          <image src="{{item.headImgUrl}}" class="g_detail_img"></image>
-         <view class="g_detail_name">{{item.userName}}</view>
+         <view class="g_detail_name">{{item.userName}}></view>
          <view class="g_detail_time">{{item.bindUserDate}}</view>
       </view>
    
@@ -39,15 +39,15 @@
       <view style="margin-top:20rpx">关于共享联盟 ></view>
       <button class="xuang" size="min" open-type="share">分享善家</button>
       <view class="foot-boot">
-        <view>善家购</view>
+        <view>善家</view>
         <view class="foot-boot-m">大爱无疆，感恩家乡</view>
       </view>
     </view>
   </view>
   <view wx:else>
-     <view class="g_detail clearfix">
+     <view class="g_detail clearfix" wx:for='{{store}}' wx:key='item' bindtap="tx" id="{{item.revenue}}" data-index="{{item.id}}">
          <image src="{{item.storeLogoOss}}" class="g_detail_img"></image>
-         <view class="g_store_name">{{item.storeName}} ></view>
+         <view class="g_store_name">{{item.storeName}} </view>
           <view class="g_store_price">￥ {{item.revenue}}</view>
          <view class="g_store_time">{{item.createDate}}</view>
         

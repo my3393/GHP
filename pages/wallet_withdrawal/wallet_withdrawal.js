@@ -7,6 +7,7 @@ Page({
    */
   data: {
     num:'0',
+    value:''
   },
 
   /**
@@ -17,6 +18,11 @@ Page({
     this.setData({
       num:options.num
     })
+    if(options.id){
+      this.setData({
+        id: options.id
+      })
+    }
   },
 
   /**
@@ -81,7 +87,13 @@ Page({
 
     }
   },
+  val(e){
+    this.setData({
+      value:e.detail.value
+    })
+  },
   sub(){
+    console.log(this.data.value)
     let that = this;
     if (that.data.value == '' || that.data.value == 0) {
       wx.showToast({
@@ -90,38 +102,91 @@ Page({
       })
       return false
     }
-    let data = {
-      amount:that.data.value
+    if(that.data.value > that.data.num){
+      wx.showToast({
+        title:'当前输入金额大于可提现金额',
+        icon: 'none'
+      })
+      return false
     }
-
-    app.res.req("/user/withdrawal", data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-       wx.showToast({
-         title: '提现成功',
-         duration:3000
-       })
-        setTimeout(function(){
-          wx.navigateBack({
-            delta: 2,
-          })
-        },3000)
-
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.showToast({
-          title: '请先登录',
-          icon: 'none'
-        })
-        wx.navigateTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+    if (that.data.value <1) {
+      wx.showToast({
+        title: '提现金额需大于等于1元',
+        icon: 'none'
+      })
+      return false
+    }
+    if(that.data.id){
+      let data = {
+        amount: that.data.value,
+        storeId: that.data.id
       }
-    })
+
+      app.res.req("/user/bindstorewithdrawal", data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '提现成功',
+            duration: 3000
+          })
+          that.getuser();
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 2,
+            })
+          }, 3000)
+
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.showToast({
+            title: '请先登录',
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }else{
+     
+      let data = {
+        amount: that.data.value
+      }
+
+      app.res.req("/user/withdrawal", data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          wx.showToast({
+            title: '提现成功',
+            duration: 3000
+          })
+          that.getuser();
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1,
+            })
+          }, 3000)
+
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.showToast({
+            title: '请先登录',
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
   },
   
   all(e){
@@ -129,6 +194,27 @@ Page({
       value:this.data.num
     })
   },
-  
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/user/info', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+
+      }
+    })
+  },
     
 })

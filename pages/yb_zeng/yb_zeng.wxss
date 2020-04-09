@@ -1,0 +1,61 @@
+/* pages/yb_zeng/yb_zeng.wxss */
+page{
+  background: #f9f9f9
+}
+.nav{
+  padding:30rpx 20rpx;
+  box-sizing: border-box;
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.lef{
+  float: left;
+  margin-top: 30rpx;
+  margin-right: 90rpx;
+}
+.head{
+   
+}
+.head>image{
+  width: 70rpx;
+  height: 70rpx;
+  float: left;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+.minz{
+ 
+ line-height: 112rpx;
+}
+.xia_i{
+  display: inline-block;
+  font-size: 26rpx;
+  color: #999999;
+}
+.inp{
+  display: inline-block;
+  border-bottom: 1rpx solid #CCCCCC;
+  font-size: 40rpx;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+}
+.xia{
+  margin-right: 30rpx;
+  float: left;
+}
+.quan{
+  color: red;
+  float: right;
+}
+.but{
+  width: calc(100% - 60rpx);
+  margin-left: 30rpx;
+  height: 80rpx;
+  color: #fff;
+   border-radius: 40rpx;
+    background:linear-gradient(to right, #f12200, #ff4e17); 
+    margin-top: 40rpx;
+    line-height: 80rpx;
+}

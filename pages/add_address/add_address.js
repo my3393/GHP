@@ -158,6 +158,7 @@ Page({
 
     }
   },
+  //收件人
   names(e){
     this.setData({
       names:e.detail.value

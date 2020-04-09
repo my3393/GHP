@@ -26,10 +26,10 @@ page{
     box-sizing: border-box;
     background: #fff;
     margin-top: 20rpx;
-    width: calc(100% - 40rpx);
-    margin-left: 20rpx;
+    /* width: calc(100% - 40rpx);
+    margin-left: 20rpx; */
     border-radius: 12rpx;
-    margin-top: 20rpx;
+   
 }
 .list_name{
     font-size: 28rpx;

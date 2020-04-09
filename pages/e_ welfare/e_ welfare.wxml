@@ -88,6 +88,6 @@
     </view>
 </view>
 
-<view class="appl" bindtap="appl">
+<view  class="appl" bindtap="appl" wx:if='{{user.xcxIsShow == 1}}'>
   <image src="../../images/apply_refund.png"> </image>
 </view>

@@ -2,14 +2,14 @@
   <view class="header"></view>
 </view> -->
 <view class="top_img" style="background-image: url(https://www.xingtu-group.cn/xcx_img/mine_top.png)">
-  <view class="tops" hidden="{{isshow}}">
+  <!-- <view class="tops" hidden="{{isshow}}">
     <view class="tops-t">
       <view class="tops-img">
         <image src="../../images/tx.png" />
       </view>
       <view class="tops-n">正国</view>
     </view>
-  </view>
+  </view> -->
   <view class="top" hidden="{{!isshow}}">
     <view class="top-tx" wx:if='{{user.id == null}}' bindtap="login">
       <view class="tx">
@@ -24,7 +24,7 @@
           <view>0</view>
           <view class="shouy-n">分销收益</view>
         </view>
-         <view class="shouy-z">
+        <view class="shouy-z">
           <view>0</view>
           <view class="shouy-n">爱心助力</view>
         </view>
@@ -34,7 +34,7 @@
         </view>
       </view>
     </view>
-    <view class="top-tx" wx:else >
+    <view class="top-tx" wx:else>
       <view class="tx" wx:if='{{user.headImgUrl == null}}' bindtap="person">
         <image src="../../images/tx.png" mode="widthFix" />
       </view>
@@ -59,13 +59,13 @@
         </view>
         <view>
           <view class="gongy">
-             <!-- <image  src="../../images/mine_1.png"></image> -->
-             <image wx:if='{{user.isCollegeStudent == 1}}' src="../../images/mine_2.png"></image>
-             <image wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
-             <image wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
-             <image wx:if='{{user.memberType == 3}}' src="../../images/mine_5.png"></image>
+            <!-- <image  src="../../images/mine_1.png"></image> -->
+            <image wx:if='{{user.isCollegeStudent ==1}}' src="../../images/mine_2.png"></image>
+            <image wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
+            <image wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
+            <image wx:if='{{user.memberType == 3}}' src="../../images/mine_5.png"></image>
           </view>
-          
+
         </view>
         <view class="jies" wx:if='{{user.publicSlogan}}'>{{user.publicSlogan}}</view>
         <!-- <view class="jies" wx:else>请设置你的公益宣言</view> -->
@@ -74,20 +74,20 @@
         <view class="kait">
           <image src="../../images/aix2.png" />
         </view>
-        <view class="kait-n"  > 开通会员</view>
+        <view class="kait-n"> 开通会员</view>
       </view>
       <view class="shouyi" catchtap="wallet_detail">
         <view class="shouy-z">
           <view>{{user.transactionFinishAmount}}</view>
-          <view class="shouy-n">分销收益</view>
+          <view class="shouy-n">分销收益></view>
         </view>
         <view class="shouy-z" catchtap="love_help">
           <view>{{love}}</view>
-          <view class="shouy-n">爱心助力</view>
+          <view class="shouy-n">爱心助力></view>
         </view>
         <view class="shouy-z" catchtap="integral">
           <view>{{user.integral}}</view>
-          <view class="shouy-n">艺呗</view>
+          <view class="shouy-n">艺呗></view>
         </view>
       </view>
     </view>
@@ -118,12 +118,12 @@
     </view>
     <view class="din-1" catchtap="all" id="{{3}}">
       <view class="din-img">
-        <image src="../../images/d-sh.png"  />
+        <image src="../../images/d-sh.png" />
         <!-- <view class="hong">9</view> -->
       </view>
       <view>待收货</view>
     </view>
-    <view class="din-1"  catchtap="all" id="{{4}}" >
+    <view class="din-1" catchtap="all" id="{{4}}">
       <view class="din-img">
         <image src="../../images/d-succ.png" />
         <!-- <view class="hong">9</view> -->
@@ -134,7 +134,7 @@
 </view>
 <view>
   <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
-    <block >
+    <block>
       <swiper-item wx:for='{{banner}}' id="{{item.id}}" bindtap="banner" class='swiper' data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
         <image class="banner_img" src="{{item.advertiseImgOss}}"></image>
       </swiper-item>
@@ -143,6 +143,10 @@
 </view>
 <view class="nav nav-t">
   <view class="m-h1">我的善家</view>
+  <view wx:if='{{user.id == "" || user.id == null}}'></view>
+  <view class="shoujih" wx:elif='{{user.phone == "" || user.phone == null}}' ><button class="bangdin"  open-type="getPhoneNumber" 
+  bindgetphonenumber="getPhoneNumber"> 绑定手机</button></view>
+  <view wx:else></view>
   <view class="dind">
     <view class="din-1" bindtap="wallet">
       <view class="din-img">
@@ -150,7 +154,7 @@
       </view>
       <view>我的钱包</view>
     </view>
-     <view class="din-1" bindtap="union">
+    <view class="din-1" bindtap="union">
       <view class="din-img">
         <image src="../../images/hy.png" />
       </view>
@@ -174,20 +178,21 @@
       </view>
       <view>我的收藏</view>
     </view>
-    <view class="din-1" style="margin-top: 20rpx;"  bindtap="college">
-      <view class="din-img">
-        <image src="../../images/mine_cy.png" />
-      </view>
-      <view>大学生创业</view>
-    </view>
-    <view class="din-1" style="margin-top: 20rpx;"  bindtap="feedback">
+
+    <view class="din-1" style="margin-top: 20rpx;" bindtap="feedback">
       <view class="din-img">
         <image src="../../images/feedback.png" />
       </view>
       <view>商品反馈</view>
     </view>
+    <view class="din-1" bindtap="address">
+      <view class="din-img">
+        <image src="../../images/shdz.png" />
+      </view>
+      <view>收货地址</view>
+    </view>
   </view>
-  
+
 </view>
 <view class="nav nav-t">
   <view class="m-h1">我的服务</view>
@@ -204,60 +209,88 @@
       </view>
       <view>官方客服</view>
     </view>
-    <view class="din-1" bindtap="address">
-      <view class="din-img">
-        <image src="../../images/shdz.png" />
-      </view>
-      <view>收货地址</view>
-    </view>
-    <view class="din-1" bindtap="option">
-      <view class="din-img">
-        <image src="../../images/yjfk.png" />
-      </view>
-      <view>意见反馈</view>
-    </view>
-  </view>
-  <view class="dind" >
     <view class="din-1" bindtap="certification">
       <view class="din-img">
         <image src="../../images/zhaq.png" />
       </view>
       <view>实名认证</view>
     </view>
-    <!-- <view class="din-1">
+    <view class="din-1" style="margin-top: 20rpx;" bindtap="college">
       <view class="din-img">
-        <image src="../../images/fxsj.png" />
+        <image src="../../images/mine_cy.png" />
       </view>
-      <view>分享善家</view>
+      <view>大学生创业</view>
+    </view>
+    <!-- <view class="din-1" bindtap="option">
+      <view class="din-img">
+        <image src="../../images/yjfk.png" />
+      </view>
+      <view>意见反馈</view>
     </view> -->
+  </view>
+  <view class="dind">
     <view class="din-1" bindtap="imgsrcs">
       <view class="din-img">
         <image src="../../images/gzgzh.png" />
       </view>
       <view>关注公众号</view>
     </view>
-    <!-- <view class="din-1">
+    <view class="din-1" bindtap="ylsj">
       <view class="din-img">
-        <image src="../../images/shez.png" />
+        <image src="../../images/gzgzh.png" />
       </view>
-      <view>设置</view>
+      <view>娱乐世界</view>
+    </view>
+    <!-- <view class="din-1" bindtap="imgsrcs">
+      <view class="din-img">
+        <image src="../../images/gzgzh.png" />
+      </view>
+      <view>购你售</view>
     </view> -->
+    <view class="din-1" bindtap="yslm">
+      <view class="din-img">
+        <image src="../../images/gzgzh.png" />
+      </view>
+      <view>艺赛联盟</view>
+    </view>
+    <view class="din-1" bindtap="wysx">
+      <view class="din-img">
+        <image src="../../images/gzgzh.png" />
+      </view>
+      <view>品牌联营</view>
+    </view>
+  </view>
+  <view class="dind">
+
+    <!-- <view class="din-1" bindtap="wypt">
+      <view class="din-img">
+        <image src="../../images/gzgzh.png" />
+      </view>
+      <view>文娱配套</view>
+    </view> -->
+
+
+    <view class="din-1" bindtap="wysx">
+      <view class="din-img">
+        <image src="../../images/gzgzh.png" />
+      </view>
+      <view>文艺商学</view>
+    </view>
   </view>
 </view>
 <!-- <button class='skblue_bg' data-url="https://www.xingtu-group.cn/sjg_xieyi/8_Prove.pdf" data-type="pdf" catchtap='downloadFile'>下载</button> -->
 <view class="foot-boot">
-  <view>善家购</view>
+  <view>善家</view>
   <view class="foot-boot-m">大爱无疆，感恩家乡</view>
 </view>
 
 
 <!-- 指南 -->
-<view class="sai-yds" hidden='{{isZhi}}' bindtap="xiaochu">
+<!-- <view class="sai-yds" hidden='{{isZhi}}' bindtap="xiaochu">
   <view class="sai-yd">
     <view class='zhi_img'>
       <image src="../../images/zhin.jpg"></image>
     </view>
     <view class="zhi_but" catchtap="zhiru">确定截图</view>
   </view>
-</view>
-
+</view> -->

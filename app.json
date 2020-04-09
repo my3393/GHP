@@ -1,6 +1,11 @@
 {
   "pages": [
+    "pages/mine_yb/mine_yb",
+    "pages/yb_receive/yb_receive",
+    "pages/yb_zeng/yb_zeng",
     "pages/e_home/home",
+    
+    "pages/community/community",
     "pages/members/members",
     "pages/mine_collection/mine_collection",
     "pages/certification/certification",
@@ -27,8 +32,6 @@
     "pages/search_store/search_store",
     "pages/search_name/search_name",
     "pages/search/search",
-    
-    "pages/mine_yb/mine_yb",
     "pages/person/person",
     "pages/e_mine/mine",
     "pages/e_shoping/shoping",
@@ -38,7 +41,6 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/person_name/person_name",
-   
     "pages/binding_hometown/binding_hometown",
     "pages/sure_orders/sure_orders",
     "pages/apply_fund/apply_fund",
@@ -71,17 +73,17 @@
     "pages/feedback/feedback",
     "pages/mp4/mp4",
     "pages/feedbacklist/feedbacklist",
-    "pages/feedback_detail/feedback_detail"
+    "pages/feedback_detail/feedback_detail",
+    "pages/yb_trun/yb_trun",
+    "component/sjg/sjg"
+    
   ],
   "subpackages": [
     {
       "root": "packageA",
       "name": "pack1",
-      "pages": [
-       
-      ]
+      "pages": []
     }
-   
   ],
   "tabBar": {
     "color": "#808080",
@@ -92,7 +94,7 @@
         "selectedIconPath": "images/home-active.png",
         "iconPath": "images/home.png",
         "pagePath": "pages/e_home/home",
-        "text": "善家购"
+        "text": "善家"
       },
       {
         "selectedIconPath": "images/specialty-active.png",
@@ -122,19 +124,20 @@
   },
   "plugins": {
     "live-player-plugin": {
-      "version": "1.0.3",
-      "provider": "wx2b03c6e691cd7370" 
+      "version": "1.0.5",
+      "provider": "wx2b03c6e691cd7370"
     }
   },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f12200",
-    "navigationBarTitleText": "善家购",
+    "navigationBarTitleText": "善家",
     "navigationBarTextStyle": "white"
   },
   "navigateToMiniProgramAppIdList": [
     "wxf556b39ee9c934b4",
-    "wx4cef4fe6585f5bfd"
+    "wx4cef4fe6585f5bfd",
+    "wx07d6c635b023161e"
   ],
   "sitemapLocation": "sitemap.json"
 }

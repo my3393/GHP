@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "我的艺呗"
+  "navigationBarTitleText": "我的艺呗",
+  "usingComponents": {
+    "sj": "../../../component/sjg/sjg"
+  }
 }

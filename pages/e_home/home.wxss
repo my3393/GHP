@@ -10,7 +10,26 @@ page{
   top: 500rpx;
   left: 0;
 }
-
+.out{
+  width: 100vw;
+  height: 50vw;
+   padding: 20rpx;
+  box-sizing: border-box;
+  overflow:hidden;
+ 
+}
+.flex{
+  box-sizing: border-box;
+  height: 50vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.flex view{
+  width: 19vw;
+  height: 25vw;
+ 
+}
 .top-back{
   width: 100%;
   height: 320rpx;
@@ -118,14 +137,15 @@ white-space: nowrap;
 .class-one{
   text-align: center;
   /* width: calc((100% - 60rpx)/3); */
-  margin-right: 40rpx;
+  /* margin-right: 40rpx; */
   display: inline-block;
 }
 .class-img{
-  width: 100rpx;
-  height: 100rpx;
+  width: 100rpx !important;
+  height: 100rpx!important;
   border-radius: 50%;
   overflow: hidden;
+  display: inline-block;
 }
 .class-img image{
   width: 100%;

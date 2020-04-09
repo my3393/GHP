@@ -1,11 +1,11 @@
 <!--pages/home/home.wxml-->
 
-<navigator bindtap="tass" class="zhibo" url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{5}}&custom_params={{customParams}}">直播</navigator>
+<!-- <navigator bindtap="tass" class="zhibo" url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{5}}&custom_params={{customParams}}">直播</navigator> -->
 
 <skeleton selector="skeleton" loading="spin" bgcolor="#FFF" wx:if="{{showSkeleton}}"></skeleton>
 <view class="skeleton">
-  <view class="fixs" style='line-height:{{navH + 10}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}' >
-     善家购
+  <view class="fixs" style='line-height:{{navH + 10}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}'>
+    善家
   </view>
   <view class="top-back clearfix" style=" background:{{gradientColor}};margin-top:{{navH}}px; ">
     <!-- <view class="h-titlie">
@@ -58,31 +58,67 @@
       <view class="badge-n">担保交易</view>
     </view>
   </view>
-
-  <view class="classify">
-    <view class="class-one" wx:for="{{className}}" wx:key="item" data-name="{{item.classifyName}}" id='{{item.id}}' bindtap="search_product">
-      <view class="class-img ">
-        <image class="skeleton-radius" src="{{item.classifyImgOss}}"></image>
+  <scroll-view class="out" scroll-x="true" scroll-with-animation="{{true}}">
+    <view class="flex" hover-class="none" hover-stop-propagation="false">
+      <view class="class-one" wx:for="{{className}}" wx:key="item" data-name="{{item.classifyName}}" id='{{item.id}}' bindtap="search_product">
+        <view class="class-img ">
+          <image class="skeleton-radius" src="{{item.classifyImgOss}}"></image>
+        </view>
+        <view class="class-n">{{item.classifyName}}</view>
       </view>
-      <view class="class-n">{{item.classifyName}}</view>
+      <view class="class-one" data-id='{{item.id}}' bindtap="search_all">
+        <view class="class-img ">
+          <image class="skeleton-radius" src="../../images/home_gengd.png"></image>
+        </view>
+        <view class="class-n skeleton-rect">查看更多</view>
+      </view>
     </view>
-    <view class="class-one" data-id='{{item.id}}' bindtap="search_all">
-      <view class="class-img ">
-        <image class="skeleton-radius" src="../../images/home_gengd.png"></image>
-      </view> 
-      <view class="class-n skeleton-rect">查看更多</view>
-    </view>
-  </view>
+  </scroll-view>
   <view>
     <swiper class="advert skeleton-radius" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
       <block>
         <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{advert}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
-          <image  src="{{item.advertiseImgOss}}" lazy-load="true"></image>
+          <image src="{{item.advertiseImgOss}}" lazy-load="true"></image>
         </swiper-item>
       </block>
     </swiper>
 
   </view>
+  <tui-modal show="{{modal}}" bind:cancel="hide8" custom="{{true}}">
+    <view class="tui-modal-custom">
+      <view>至尊简介：</view>
+      <view>如何成为至尊会员</view>
+      <view>1、分享锁定100个用户成为至尊会员</view>
+      <view>2、直接去个人中心购买至尊会员身份</view>
+      <view>3、直接在至尊会员商城购买产品获得</view>
+      <view>至尊会员福利简介</view>
+      <view>1、《善家》购物直接九折,2、分享他人购买特产分红10%,3、分享他人成为至尊分红30%,4、善家任意交易赠送等值艺呗,5、艺呗可在抵扣商城消费抵扣</view>
+      <view style="height:20rpx;"></view>
+      <!-- <view class="tui-modal-custom-text">我是自定内容</view> -->
+      <tui-button type="danger" shape="circle" tui-button-class="tui-btn-mtop" bind:click="show3">确定</tui-button>
+    </view>
+  </tui-modal>
+  <view class="recommended">
+    <view class="rescom skeleton-rect">
+      <text class="rescom-w skeleton-rect">至尊会员商城</text>
+
+    </view>
+    <view class="huan skeleton-rect" bindtap="show3">说明</view>
+    <view class="classify" style="padding:0;margin-top: 20rpx; ">
+      <view class="class-two" wx:for="{{memberproduct}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
+        <view class="class-t-img skeleton-rect">
+          <image class="skeleton-rect" src="{{item.productDefaultImgOss}}" />
+        </view>
+        <view class="class-t-n skeleton-rect">
+          {{item.productName}}
+        </view>
+        <view class="class-t-p skeleton-rect">
+          <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+      </view>
+
+    </view>
+  </view>
+  <view style="height:20rpx"></view>
   <view class="recommended">
     <view class="rescom skeleton-rect">
       <text class="rescom-w skeleton-rect">精选特产</text>

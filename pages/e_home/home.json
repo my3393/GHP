@@ -1,8 +1,11 @@
 {
   "navigationBarBackgroundColor": "#f12200",
  "usingComponents": {
+    "tui-modal": "../../component/modal/modal",
+    "tui-button": "../../../component/button/button",
   "skeleton": "/component/skeleton/skeleton",
   "subscribe": "plugin-private://wx2b03c6e691cd7370/components/subscribe/subscribe"
+ 
   },
   
   "enablePullDownRefresh": true,

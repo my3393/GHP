@@ -161,7 +161,7 @@
          <text class="yuan">￥</text>{{z_price}}
      </view>
  </view>
- <button class="pay" size="mini" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" 
+ <button class="pay" size="mini" wx:if='{{user.phone == null || user.phone == ""}}' open-type="getPhoneNumber" 
   bindgetphonenumber="getPhoneNumber">
     微信支付
  </button>

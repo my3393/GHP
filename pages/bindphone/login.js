@@ -41,7 +41,7 @@ Page({
           })
           wx.setStorage({
             key: 'userinfo',
-            data: res.data.data.user,
+            data: res.data.data,
           })
           setTimeout(function(){
             if (that.data.mine) {

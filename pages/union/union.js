@@ -32,6 +32,7 @@ Page({
       title: '加载中',
     })
     this.getdetail();
+    this.getstore();
   },
 
   /**
@@ -119,6 +120,11 @@ Page({
       path: '/pages/e_home/home?userid=' + user.id,
 
     }
+  },
+  tx(e){
+    wx.navigateTo({
+      url: '../wallet_withdrawal/wallet_withdrawal?num=' + e.currentTarget.id +'&id=' + e.currentTarget.dataset.index ,
+    })
   },
   getdetail() {
     let that = this;

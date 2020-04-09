@@ -1,4 +1,5 @@
 // pages/yb_sm/yb_sm.js
+const app = getApp();
 Page({
 
   /**

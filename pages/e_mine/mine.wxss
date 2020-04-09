@@ -2,6 +2,10 @@
 page{
     background: #f9f9f9;
 }
+.shoujih{
+  color: #f12200;
+  float: right;
+}
 .header {
   display: flex;
   align-items: center;
@@ -12,6 +16,16 @@ page{
   z-index: 99999;
   border-bottom: 1rpx solid #f6f6f6;
 }
+button::after{
+border:none;
+}
+.bangdin{
+  padding: 0;
+  background: #fff;
+  line-height: 40rpx;
+  color: red;
+  font-size: 26rpx;
+}
 .top_img{
         width: 100%;
         height: 320rpx;
@@ -20,14 +34,15 @@ page{
         background-image: url(../../images/mine_top.png);
 }
 .ewm{
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
   position: absolute;
   right: 30rpx;
+  top: 44rpx;
 }
 .hhr{
   position: absolute;
-  top: 110rpx;
+  top: 120rpx;
   right: 30rpx;
   color: #fff;
   font-size: 26rpx;
@@ -149,7 +164,7 @@ page{
 .members{
     background: #F9A41D;
     width: 150rpx;
-    height: 52rpx;
+    height: 44rpx;
     float: right;
     border-top-left-radius: 40rpx;
     border-bottom-left-radius: 40rpx;

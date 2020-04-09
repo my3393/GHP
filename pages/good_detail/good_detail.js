@@ -11,6 +11,7 @@ var ds = false;
 let user;
 let sex = 0; //判断是不是从立即购买打开的规格
 let userid;
+let tuij;
 Page({
   data: {
     isvideo: true,
@@ -39,7 +40,7 @@ Page({
       badge: 0
     }, {
       icon: "../../images/tui_2.png",
-      text: "善家购",
+      text: "善家",
       size: 23,
       badge: 0
     }, {
@@ -126,6 +127,12 @@ Page({
       top2 = rect.top
 
     }).exec();
+    query.select('.detail_h1').boundingClientRect(function (rect) {
+
+      tuij = rect.top
+      console.log(rect.top)
+
+    }).exec();
     wx.getSystemInfo({
       success: function (res) {
         console.log(res)
@@ -150,7 +157,7 @@ Page({
     })
   },
   /**
-   * 用户点击右上角分享
+   * 用户点击右上角分享buy
    */
   onShareAppMessage: function() {
     var that = this;
@@ -160,6 +167,12 @@ Page({
       path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
   
     }
+  },
+  //Shouy
+  shouye(){
+    wx.switchTab({
+      url: '../e_home/home',
+    })
   },
   //反馈
   feedback(e){
@@ -564,23 +577,23 @@ Page({
         url: '../login/login?id=' + id,
       })
     }
-    //  else if (that.data.user.homeProvinceId == null || that.data.user.homeProvinceId == ''){
-    //   wx.showModal({
-    //     title: '提示',
-    //     content: '下单需要绑定你的所在地',
-    //     success(res) {
-    //       if (res.confirm) {
-    //          wx.navigateTo({
-    //            url: '../person/person',
-    //          })
-    //       } else if (res.cancel) {
-    //         wx.navigateTo({
-    //           url: '../person/person',
-    //         })
-    //       }
-    //     }
-    //   })
-    // }
+     else if (that.data.user.homeProvinceId == null || that.data.user.homeProvinceId == ''){
+      wx.showModal({
+        title: '提示',
+        content: '下单需要绑定你的所在地',
+        success(res) {
+          if (res.confirm) {
+             wx.navigateTo({
+               url: '../person/person',
+             })
+          } else if (res.cancel) {
+            wx.navigateTo({
+              url: '../person/person',
+            })
+          }
+        }
+      })
+    }
      else if (that.data.detail.isSpecificaton == 0) {
       wx.navigateTo({
         url: '../sure_order/sure_order?id=' + id + '&num=' + that.data.num +
@@ -731,15 +744,15 @@ Page({
         if (res.data.status === 1000) {
           wx.setStorage({
             key: 'token',
-            data: res.data.token,
+            data: res.data.data.token,
           })
           wx.setStorage({
             key: 'userinfo',
-            data: res.data,
+            data: res.data.data,
           })
           setTimeout(function() {
             that.showgg();
-          }, 1000)
+          }, 1500)
 
         } else if (res.data.status === 103) {
           wx.showToast({
@@ -871,11 +884,11 @@ Page({
         }, 1000)
       } else if (res.status == 1004 || res.status == 1005) {
         if (userid) {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../login/login?id=' + id + '&userid=' + userid
           })
         } else {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../login/login?id=' + id
           })
         }
@@ -902,7 +915,8 @@ Page({
   //顶部导航栏
   nav() {
     this.setData({
-      naviga: !this.data.naviga
+      naviga: !this.data.naviga,
+      
     })
   },
   // 查看评价
@@ -922,34 +936,26 @@ Page({
   },
 
   // 滚轮显示
-  scrollto() {
-    wx.pageScrollTo({
-      scrollTop: 201,
-      duration: 300
-    })
-  },
-  scrollto1() {
-    wx.pageScrollTo({
-      scrollTop: top1 - 60,
-      duration: 300
-    })
-  },
-  scrollto2() {
-    wx.pageScrollTo({
-      selector: '.top2',
-      duration: 300
-    })
-  },
+  // scrollto() {
+  //   wx.pageScrollTo({
+  //     scrollTop: 201,
+  //     duration: 300
+  //   })
+  // },
+  // scrollto1() {
+  //   wx.pageScrollTo({
+  //     scrollTop: top1 - 60,
+  //     duration: 300
+  //   })
+  // },
+  // scrollto2() {
+  //   wx.pageScrollTo({
+  //     selector: '.top2',
+  //     duration: 300
+  //   })
+  // },
   onPageScroll: function(e) {
-    let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
-    let opcity = scroll / this.data.scrollH;
-    if (this.data.opcity >= 1 && opcity >= 1) {
-      return;
-    }
-    this.setData({
-      opcity: opcity,
-      iconOpcity: 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity)
-    })
+    
     let that = this
     if (e.scrollTop > 200) {
 
@@ -962,23 +968,33 @@ Page({
         is_top: true
       })
     }
-    if (e.scrollTop < 400) {
+    if (e.scrollTop < 500) {
 
       that.setData({
         issrcoll: 1
       })
-    } else if (400 < e.scrollTop && e.scrollTop < 700) {
+    } else if (500 < e.scrollTop && e.scrollTop < tuij) {
 
       that.setData({
         issrcoll: 2
       })
 
-    } else if (700 < e.scrollTop) {
+    } else if (tuij < e.scrollTop) {
 
       that.setData({
         issrcoll: 3
       })
     }
+    let scroll = e.scrollTop <= 0 ? 0 : e.scrollTop;
+    let opcity = scroll / this.data.scrollH;
+    if (this.data.opcity >= 1 && opcity >= 1) {
+      return;
+    }
+    this.setData({
+      opcity: opcity,
+      iconOpcity: 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity)
+    })
+   
     if (e.scrollTop > 300) {
 
       that.setData({

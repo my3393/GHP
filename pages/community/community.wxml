@@ -1,0 +1,16 @@
+<!--pages/community/community.wxml-->
+<view class='main-wraper'>
+    <navBar background='#fff' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick">
+        <view class='location' slot="left">
+            <view class='con'>上海东莞得</view>
+            <view class='icon' />
+        </view>
+        <view class='lxy-nav-bar-search' slot="center">
+            <view class='lxy-nav-bar-search__icon' />
+            <view class='lxy-nav-bar-search__input'>
+                <input autoFocus="true" bindconfirm="confirmSearch" bindinput="search" class="srch-ipt" confirmType="search" placeholder="搜索内容" placeholderClass="ipt-placeholder" type="text" value=""></input>
+            </view>
+        </view>
+    </navBar>
+    
+</view>

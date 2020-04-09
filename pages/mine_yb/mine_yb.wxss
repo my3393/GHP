@@ -13,7 +13,8 @@ page{
     border-radius: 12rpx;
 }
 .title{
-    display: inline-block;
+   width: 100%;
+   text-align: center
 }
 .shuom{
     float: right;
@@ -24,7 +25,12 @@ page{
     margin-top: 45rpx;
     color: #333;
     font-size: 40rpx;
-    display: inline-block;
+    
+}
+.tc{
+  margin:  40rpx 0;
+  display: flex;
+  justify-content: space-around;
 }
 .znum{
     margin-top: 30rpx;
@@ -38,12 +44,26 @@ page{
     border-radius: 40rpx;
     background:linear-gradient(to right, #f12200, #ff4e17); 
 }
-.bootm{
-    border-top:1rpx solid #f9f9f9 ;
-    margin-top: 30rpx;
-    padding-top: 20rpx;
-    box-sizing: border-box;
+.minx{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+  padding-bottom: 0;
+  box-sizing: border-box;
+  border-top: 1rpx solid #f9f9f9;
 }
+.minx :nth-child(1){
+   border-right:  1rpx solid #f9f9f9;
+   padding-right: 20rpx;
+   box-sizing: border-box;
+}
+.minx>view{
+  width: 50%;
+
+}  
+
 .bootm-img{
     width: 20rpx;
     height: 20rpx;

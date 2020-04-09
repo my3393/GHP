@@ -6,8 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
-  },
+     sjg:{
+       sj:'你的'
+     }
+  }, 
 
   /**
    * 生命周期函数--监听页面加载
@@ -73,6 +75,16 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  receive(){
+    wx.navigateTo({
+      url: '../yb_receive/yb_receive',
+    })
+  },
+  trun(){
+     wx.navigateTo({
+       url: '../yb_trun/yb_trun',
+     })
   },
   sm(){
      wx.navigateTo({
