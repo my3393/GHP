@@ -1,0 +1,21 @@
+<!--packageA/pages/receive/receive.wxml-->
+<scroll-view scroll-x="true" class="tag">
+    <view wx:for="{{type}}" wx:key="item" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"actives":""}}'>
+      {{item.typeName}}
+    </view>
+  </scroll-view>
+
+  <view>
+     <view class="nav clearfix">
+       <image src="../../../images/sjg.png"></image>
+       <view class="nav_rig">
+         <view class="nav_name dan">网大麻烦热欧克摩尔给人看美国后没够俄日及椎</view>
+         <view class="nav_jn dan">技能：诺维家你覅如</view>
+       </view>
+     </view>
+  </view>
+
+
+<view class="ruz">
+  <image src="../../../images/receive_ruz.png"></image>
+</view>

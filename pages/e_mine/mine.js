@@ -7,13 +7,27 @@ Page({
    */
   data: {
 
-
+    modal5:false,
     isshow: true,
     statusBarHeight: 0,
     titleBarHeight: 0,
     love:'0',
     isZhi:true,
     mp4:true,
+    button5: [{
+      text: "再看看",
+      type: 'gray'
+    }, {
+      text: "去开通",
+      type:'red'
+    }],
+    button4: [{
+      text: "取消",
+      type: 'gray'
+    }, {
+      text: "去绑定",
+      type: 'red'
+    }],
   },
 
   /**
@@ -89,7 +103,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    let that = this;
+    wx.showLoading({
+      title: '刷新中',
+    })
+    that.getuser();
+    setTimeout(function () {
+      // wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      
+    }, 1000)
   },
 
   /**
@@ -109,6 +132,25 @@ Page({
       path: '/pages/e_specialty/e_specialty?userid=' + that.data.user.id,
 
     }
+  },
+  hide5() {
+    this.setData({
+      modal5: false
+    })
+  },
+  zhizu(){
+    this.setData({
+      modal5: true
+    })
+  },
+  handleClick5(e) {
+    let index = e.detail.index;
+    if(index == 1){
+       wx.navigateTo({
+         url: '../members/members',
+       })
+    }
+    this.hide5()
   },
    //商品反馈
   feedback(){
@@ -608,6 +650,7 @@ Page({
 
     app.res.req('/user/info', data, (res) => {
       console.log(res.data)
+      wx.hideLoading()
       if (res.status == 1000) {
         wx.setStorage({
           key: 'token',
@@ -617,7 +660,7 @@ Page({
           key: 'userinfo',
           data: res.data,
         })
-
+        
       }
     })
   },

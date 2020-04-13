@@ -1,4 +1,5 @@
 {
+   "navigationBarTitleText": "艺呗转赠",
   "usingComponents": {
     "sj": "../../../component/sjg/sjg",
     "tui-modal": "../../component/modal/modal",

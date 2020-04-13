@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "大爱榜单"
+  "navigationBarTitleText": "大爱榜单",
+  "usingComponents": {
+    "sj": "../../../component/sjg/sjg"
+   
+  }
 }

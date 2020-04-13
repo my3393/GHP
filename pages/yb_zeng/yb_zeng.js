@@ -88,7 +88,7 @@ Page({
   },
   all(){
      this.setData({
-       value: this.data.integral
+       valu: this.data.integral
      })
   },
   getphone(){
@@ -121,28 +121,41 @@ Page({
   },
   sub() {
     let that = this
-    let data = {
-      receiveUserPhone:that.data.phone,
-      integral: that.data.valu
-    }
-    app.res.req('/integral/sendintegral', data, (res) => {
-      console.log(res.data)
-      if (res.status == 1000) {
-         that.setData({
-           modal:true
-         })
-        that.getuser();
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
+    if(that.data.valu == '' || that.data.valu == 0){
+      wx.showToast({
+        title: '输入艺呗值不能为空',
+        icon:'none'
+      })
+    } else if (that.data.valu > that.data.integral) {
+      wx.showToast({
+        title: '输入金额大于当前可转赠金额',
+        icon: 'none'
+      })
+    }else{
+      let data = {
+        receiveUserPhone: that.data.phone,
+        integral: that.data.valu
       }
-    })
+      app.res.req('/integral/sendintegral', data, (res) => {
+        console.log(res.data)
+        if (res.status == 1000) {
+          that.setData({
+            modal: true
+          })
+          that.getuser();
+        } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+          wx.redirectTo({
+            url: '../login/login',
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            icon: 'none'
+          })
+        }
+      })
+    }
+    
   },
   //获取用户信息
   getuser() {

@@ -311,3 +311,24 @@ white-space: nowrap;
   margin-top: 18rpx;
   margin-left: 5rpx;
 }
+.tui-modal-foot{
+  display: flex;
+  justify-content: space-around;
+}
+.tui-modal-foot>view{
+  width: 190rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  text-align: center;
+  line-height: 70rpx;
+}
+.tui-modal-foot :nth-child(1){
+  border: 1rpx solid #f12200;
+  color: #f12200;
+  background: #fff;
+}
+.tui-modal-foot :nth-child(2){
+ 
+  color: #fff;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+}

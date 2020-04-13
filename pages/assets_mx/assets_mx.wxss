@@ -1,0 +1,2 @@
+/* pages/assets_mx/assets_mx.wxss */
+@import '../wallet_detail/wallet_detail';

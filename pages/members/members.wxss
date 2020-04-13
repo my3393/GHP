@@ -188,3 +188,56 @@ swiper-item image{
   height: 120rpx;
  
 }
+.jihuo{
+ 
+  position: relative;
+  top: 0rpx;
+  right: -230rpx;
+   background:linear-gradient(to right, #f12200, #ff4e17);
+  width: 130rpx;
+  height: 46rpx;
+  text-align: center;
+  line-height: 46rpx;
+  color: #fff;
+ display: inline-block;
+ border-radius: 30rpx
+}
+.shouyi{
+    margin: 30rpx;
+    width: calc(100% - 40rpx);
+    margin-left: 10rpx;
+    height: 120rpx;
+   
+   
+    border-radius: 12rpx;
+}
+.shouy-z{
+    display: inline-block;
+    width: 33%;
+   
+    margin-top: 20rpx;
+    text-align: center;
+}
+.sho_img image{
+  width: 45rpx;
+  height: 48rpx;  
+}
+.tit{
+  text-align: center;
+  margin-bottom: 30rpx;
+  font-size: 32rpx;
+}
+.tite{
+  color: #999999;
+  line-height: 64rpx;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+.tui-modal-foot>button{
+  width: 190rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  text-align: center;
+  line-height: 70rpx;
+  font-size: 30rpx;
+}

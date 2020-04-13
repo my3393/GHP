@@ -1,0 +1,21 @@
+/* pages/assets_expel/assets_expel.wxss */
+@import '../yb_zeng/yb_zeng';
+.inpt{
+  display: inline-block;
+  border-bottom: 1rpx solid #CCCCCC;
+  font-size: 32rpx;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+  margin-left: 36rpx;
+  width: 480rpx;
+   color: #000;
+}
+.inpts{
+  display: inline-block;
+  border-bottom: 1rpx solid #CCCCCC;
+  font-size: 32rpx;
+  margin-top: 20rpx;
+  margin-bottom: 10rpx;
+  width: 480rpx;
+  color: #000;
+}

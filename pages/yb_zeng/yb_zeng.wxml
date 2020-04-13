@@ -6,12 +6,12 @@
       <view class="minz">{{detail.userName}}</view>
    </view>
   <view style="margin-top:40rpx">
-     <view class="xia">转增艺呗数</view>
+     <view class="xia">转赠艺呗数</view>
     <view class="xia_i">
-       <input placeholder="0" class="inp" bindinput="input" value="{{valu}}"></input>
+       <input placeholder="0" type="number" class="inp" bindinput="input" value="{{valu}}"></input>
        <view>
-         可转增艺呗 : {{integral}}
-         <view class="quan" bindtap="all">全部转增</view>
+         可转赠艺呗 : {{integral}}
+         <view class="quan" bindtap="all">全部转赠</view>
        </view>
     </view>
   </view>
@@ -27,7 +27,7 @@
 
  <tui-modal show="{{modal}}"  custom="{{true}}">
     <view class="tui-modal-custom">
-     <view class="tui-modal-custom-text tit">转增成功</view>
+     <view class="tui-modal-custom-text tit">转赠成功</view>
        <view class="tui-modal-custom-text tite">待用户查收，3天未接受自动退回本账号</view>
      
       <tui-button type="danger" shape="circle" tui-button-class="tui-btn-mtop" bindtap="hide">确定</tui-button>

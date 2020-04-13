@@ -10,9 +10,10 @@ Page({
 
     imgUrls: [
       'https://www.xingtu-group.cn/xcx_img/member1.png',
-      'https://www.xingtu-group.cn/xcx_img/member2.png',
+      
 
     ],
+    modal4:false,
     current: 0,
     animationData: {},
     animationData2: {},
@@ -20,6 +21,8 @@ Page({
     ismask:true,
     isdelete:true,
     load:true,
+    modal:false,
+    modal2: false,
   },
 
   /**
@@ -31,6 +34,7 @@ Page({
 
     })
     this.Detail();
+    
     this.stretch(330)
     this.setData({
       navH: app.globalData.navHeight
@@ -53,6 +57,7 @@ Page({
    */
   onShow: function () {
     let that = this;
+    this.getnum();
     //获取本地用户信息
     wx.getStorage({
       key: 'userinfo',
@@ -78,6 +83,11 @@ Page({
           user: res.data,
 
         })
+        if (res.data.bindProvinceId == null || res.data.bindProvinceId == '' || res.data.homeProvinceId == null || res.data.homeProvinceId == ''){
+               that.setData({
+                 modal4:true,
+               })
+        }
         if (wx.getStorageSync('bangId')) {
 
           that.Bang();
@@ -124,6 +134,78 @@ Page({
       path: '/pages/member/member?userid=' + that.data.user.id,
 
     }
+  },
+  jihuo(){
+    this.setData({
+      modal:true,
+    })
+  },
+  //资产
+  zic(){
+     wx.navigateTo({
+       url: '../mine_assets/mine_assets',
+     })
+  },
+  //转赠
+  zhuanz(){
+    wx.navigateTo({
+      url: '../assets_expel/assets_expel',
+    })
+  },
+  //明细
+  minx(){
+   wx.navigateTo({
+     url: '../assets_mx/assets_mx',
+   })
+  },
+  hide4() {
+    this.setData({
+      modal4: false
+    })
+
+  },
+  hide() {
+    this.setData({
+      modal: false
+    })
+
+  },
+  handclick(){
+    if (this.data.num == 0) {
+      this.setData({
+        modal2: true
+      })
+    } else {
+      this.active()
+    }
+    this.hide()
+  },
+  hide2() {
+    this.setData({
+      modal2: false
+    })
+
+  },
+  handclick2(e) {
+    this.setData({
+      memberType: 1
+    })
+    this.pay()
+    
+    this.hide2()
+  },
+  handleClick4(e) {
+    let index = e.detail.index;
+    if (index == 1) {
+      wx.navigateTo({
+        url: '../person/person',
+      })
+    } else {
+      wx.navigateBack({
+        delat: 1
+      })
+    }
+    this.hide4()
   },
   //思维
   member_sw(e){
@@ -223,10 +305,16 @@ Page({
   },
   //购买会员
    pay(e){
-     console.log(e.currentTarget.id)
-     let that = this;
+     let that = this
+     if(e){
+       this.setData({
+         memberType: e.currentTarget.id
+       })
+     }
+     
+    
      let data = {
-       memberType: e.currentTarget.id
+       memberType: that.data.memberType
      }
      if(that.data.user.memberType == 0){
        app.res.req('/order/membersubmit', data, (res) => {
@@ -297,6 +385,48 @@ Page({
      }
 
    },
+   //张数
+   getnum() {
+    let that = this;
+    let data = {
+      memberType:1
+    }
+
+      app.res.req('/membercard/findcardnum', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+         that.setData({
+           num:res.data
+         })
+         
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //激活会员卡
+  active() {
+    let that = this;
+    let data = {
+      memberType: 1
+    }
+
+    app.res.req('/membercard/activatecard', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+       
+         that.getuser();
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //会员详情
   Detail(){
     let that = this;
@@ -398,5 +528,32 @@ Page({
       xing += '*';
     }
     return str.substring(0, frontLen) + xing + str.substring(str.length - endLen);
+  },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/user/info', data, (res) => {
+      console.log(res.data)
+      wx.hideLoading()
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+        that.setData({
+          user: res.data,
+
+        })
+
+      }
+    })
   },
 })

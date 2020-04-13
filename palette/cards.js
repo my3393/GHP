@@ -27,17 +27,15 @@ export default class LastMayday {
             }
           },
           {
-            "type": "qrcode",
-            "content": res[0],
+            "type": "image",
+            "url": res[0],
             "css": {
-              "color": "#000000",
-              "background": "#ffffff",
+              
               "width": "120px",
               "height": "120px",
               "top": "800px",
               "left": "267px",
-              "rotate": "0",
-              "borderRadius": ""
+             
             }
           }
         ]

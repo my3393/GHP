@@ -1,0 +1,13 @@
+<!--pages/assets_mx/assets_mx.wxml-->
+<view class="li">
+  <view class="list" wx:for='{{detail}}' wx:key='{{index}}' >
+    <view>
+      <view class='list_tit dan'>{{item.recordInfo}}</view>
+      <view class="list_r yan" wx:if='{{item.recordType == 1}}'>{{item.cardNum}}张</view>
+      <view class="list_r " wx:if='{{item.recordType == 2}}'>{{item.cardNum}}张</view>
+    </view>
+    <view class="list_date">
+      <view>{{item.createDate}}</view>
+    </view>
+  </view>
+</view>

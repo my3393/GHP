@@ -132,16 +132,19 @@ Page({
     app.res.req('/integral/searchphone', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        wx.navigateTo({
-          url: '../yb_zeng/yb_zeng?phone=' + res.data.phone,
-        })
+        if(res.data == null || res.data == ''){
+          that.setData({
+            modal: true,
+          })
+        }else{
+          wx.navigateTo({
+            url: '../yb_zeng/yb_zeng?phone=' + res.data.phone,
+          })
+        }
+        
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
-        })
-      }else if(res.status == 1003){
-        that.setData({
-          modal:true,
         })
       } else {
         wx.showToast({

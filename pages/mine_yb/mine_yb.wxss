@@ -14,7 +14,7 @@ page{
 }
 .title{
    width: 100%;
-   text-align: center
+   text-align: left;
 }
 .shuom{
     float: right;
@@ -25,7 +25,7 @@ page{
     margin-top: 45rpx;
     color: #333;
     font-size: 40rpx;
-    
+    display: inline-block;
 }
 .tc{
   margin:  40rpx 0;
@@ -33,7 +33,7 @@ page{
   justify-content: space-around;
 }
 .znum{
-    margin-top: 30rpx;
+    margin-top: 40rpx;
     width: 170rpx;
     height: 70rpx;
     font-size: 22rpx;
@@ -63,7 +63,9 @@ page{
   width: 50%;
 
 }  
-
+.bootm{
+  margin-top: 50rpx;
+}
 .bootm-img{
     width: 20rpx;
     height: 20rpx;

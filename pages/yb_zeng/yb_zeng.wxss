@@ -15,14 +15,13 @@ page{
   margin-top: 30rpx;
   margin-right: 90rpx;
 }
-.head{
-   
-}
+
 .sm{
   margin-top: 40rpx;
   font-size: 28rpx;
   padding: 20rpx;
   box-sizing: border-box;
+  line-height: 50rpx;
 }
 .head>image{
   width: 70rpx;

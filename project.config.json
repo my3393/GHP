@@ -60,9 +60,9 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/store_refund/store_refund",
-					"pathName": "pages/e_specialty/e_specialty",
-					"query": "id=26&userid=52",
+					"name": "packageA/pages/receive/receive",
+					"pathName": "packageA/pages/receive_home/receive_home",
+					"query": "",
 					"scene": null
 				}
 			]

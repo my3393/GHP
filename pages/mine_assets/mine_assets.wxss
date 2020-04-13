@@ -1,0 +1,123 @@
+/* pages/mine_assets/mine_assets.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.top{
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-size: 34rpx;
+  font-weight: 600
+}
+.top_img{
+  
+  width: 100%;
+  margin-top: 14rpx;
+  height: 170rpx;
+  
+}
+.top>view{
+  line-height: 45rpx;
+}
+.top>view>view:nth-child(1){
+  font-weight: 700;
+  font-size: 32rpx;
+  margin-bottom: 12rpx;
+}
+.zz{
+  margin-top: 50rpx;
+}
+.heng{
+  width: 8rpx;
+  height: 32rpx;
+  margin-top: 2rpx;
+  background: #f12200;
+  position: relative;
+  top: 5rpx;
+  display: inline-block;
+  margin:0 20rpx;
+  box-sizing: border-box;
+}
+.zhan{
+  margin-top: 20rpx;
+}
+.zhan>view{
+  width: calc((100% - 60rpx)/2);
+  margin-left: 20rpx;
+  background: #fff;
+  padding: 30rpx 20rpx;
+  box-sizing: border-box;
+ border-radius: 20rpx;
+ display: inline-block;
+}
+.h1{
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+.xs{
+  font-size: 24rpx;
+  color: #ccc;
+
+}
+.state{
+  margin-left: 20rpx;
+  margin-right: 40rpx;
+  margin-top: 40rpx;
+  display: inline-block;
+}
+.active{
+  font-size: 30rpx;
+  font-weight: 600
+}
+.state_nav{
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+}
+.state_sm{
+  display: inline-block;
+}
+.state_type{
+  float: right;
+}
+.state_num{
+  margin-right: 100rpx;
+}
+.state_time{
+  margin-top: 20rpx;
+  color: #999;
+  display: inline-block;
+}
+.release{
+  float: right;
+  padding: 8rpx 20rpx;
+  box-sizing: border-box;
+  border-radius: 24rpx;
+  background: #f12200;
+  color: #fff;
+  margin-top: 12rpx;
+  vertical-align: middle;
+}
+.instructions{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  margin-top: 20rpx;
+}
+.linqu{
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  width: 130rpx;
+  height: 46rpx;
+  text-align: center;
+  line-height: 46rpx;
+  color: #fff;
+ display: inline-block;
+ border-radius: 30rpx
+}
+.lq{
+  opacity: 0.5
+}

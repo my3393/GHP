@@ -11,7 +11,7 @@
   </view>
    <view class="tc">
       <view class="znum" bindtap="vote">爱心投票</view>
-       <view class="znum" bindtap="trun">艺呗转增</view>
+       <view class="znum" bindtap="trun">艺呗转赠</view>
    </view>
   <view class="minx">
     <view class="bootm" bindtap="detail">
@@ -21,17 +21,19 @@
       </view>
     </view>
     <view class="bootm" bindtap="receive">
-      转增记录
+      转赠记录
       <view class="bootm-img">
         <image src="../../images/right.png" />
       </view>
     </view>
   </view>
 </view>
-
+<tui-modal show="{{modal5}}" bind:click="handleClick5" bind:cancel="hide5" content="收到一条艺呗转赠" color="#333" size="32" shape="circle" button='{{button5}}'></tui-modal>
 <view class="list">
   <view>艺呗获取渠道</view>
-  <view>1、分享绑定新用户可获得相应的艺呗值（仅限于非会员用户参与）</view>
-  <view>2.更多赚取艺呗的方式敬请期待</view>
+  <view>1.购买特产成交赠送固定比例的艺呗数量；</view>
+  <view>2.开通会员赠送10倍数量的艺呗；</view>
+  <view>3.分享绑定新用户可获得相应的艺呗；</view>
+  <view>4.更多赚取艺呗的方式敬请期待；</view>
 </view>
 <sj  />

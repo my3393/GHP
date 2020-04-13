@@ -8,14 +8,22 @@ Page({
   data: {
      sjg:{
        sj:'你的'
-     }
+     },
+    modal5:false,
+    button5: [{
+      text: "晚点再去",
+      type: 'gray'
+    }, {
+      text: "前往查看",
+      type:'red'
+    }],
   }, 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getdetail();
   },
 
   /**
@@ -100,6 +108,45 @@ Page({
      wx.navigateTo({
        url: '../yb_detail/yb_detail',
      })
+  },
+  hide5(){
+     this.setData({
+       modal5:false
+     })
+  },
+  handleClick5(e) {
+    let index = e.detail.index;
+    if(index == 1){
+      wx.navigateTo({
+        url: '../yb_receive/yb_receive',
+      })
+    }
+    this.hide5()
+  },
+  getdetail() {
+    let that = this
+    let data = {
+
+    }
+    app.res.req('/integral/receiverecord', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data[0].type == 0 && res.data[0].userId != res.data[0].sendUserId){
+                that.setData({
+                  modal5:true,
+                })
+         }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   //获取用户信息
   getuser() {

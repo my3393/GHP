@@ -19,6 +19,15 @@ page{
 button::after{
 border:none;
 }
+.d-img{
+  width: 100%;
+  height: 180rpx;
+  display: inline-block;
+}
+.d-img image{
+  width: 100%;
+  height: 100%
+}
 .bangdin{
   padding: 0;
   background: #fff;

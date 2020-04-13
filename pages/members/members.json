@@ -1,4 +1,9 @@
 {
   "navigationBarTextStyle": "white",
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "sj": "../../../component/sjg/sjg",
+    "tui-modal": "../../component/modal/modal",
+    "tui-button": "../../../component/button/button"
+  }
 }
