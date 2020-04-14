@@ -357,3 +357,14 @@ border:none;
   background:linear-gradient(to right, #f12200, #ff4e17);
   margin-left: 20rpx;
 }
+.tit{
+  text-align: center;
+  margin-bottom: 30rpx;
+  font-size: 32rpx;
+}
+.tite{
+  color: #999999;
+  line-height: 64rpx;
+  text-align: center;
+  margin-bottom: 40rpx;
+}

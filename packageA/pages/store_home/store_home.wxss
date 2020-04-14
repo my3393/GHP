@@ -1,0 +1,171 @@
+/* packageA/pages/store_home/store_home.wxss */
+@import "../receive_home/receive_home";
+.qis{
+  font-size: 22rpx;
+}
+.qis text{
+  margin-right: 20rpx;
+}
+.search image{
+  float: left;
+  width: 26rpx;
+  height: 26rpx;
+  margin: 15rpx 12rpx;
+}
+.search{
+  width: calc(100% - 40rpx);
+  height: 60rpx;
+  border-radius:30rpx;
+  border: 1rpx solid #EAEAEA;
+  margin-left: 20rpx;
+}
+.search input{
+  border: 0;
+  margin-top: 10rpx;
+}
+.banner{
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    height: 140rpx;
+    margin-top: 20rpx;
+}
+.banner image{
+    width: 100%;
+    height: 100%;
+}
+/* 左侧 */
+.tab-view {
+  /* height: 100%; */
+  width: 160rpx;
+  height: 600rpx;
+  z-index: 10;
+  float: left;
+}
+
+.tab-bar-item {
+  width: 160rpx;
+  height: 80rpx;
+  background: #f6f6f6;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #444;
+  font-weight: 400;
+}
+
+.active {
+  position: relative;
+  color: #000;
+  font-size: 30rpx;
+  font-weight: 600;
+  background: #fcfcfc;
+}
+
+.active::before {
+  content: "";
+  position: absolute;
+  border-left: 8rpx solid #E41F19;
+  height: 30rpx;
+  left: 0;
+}
+/* 左侧导航布局 end*/
+
+.right-box {
+  margin-left: 160rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+}
+
+.page-view {
+  width: 100%;
+  overflow: hidden;
+}
+
+
+
+.slide-image {
+  width: 100%;
+  height: 220rpx;
+}
+
+.class-box {
+  padding-top: 30rpx;
+}
+
+.class-item {
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 12rpx;
+}
+
+.class-name {
+  font-size: 22rpx;
+}
+
+.g-box {
+  text-align: center;
+  padding-top: 40rpx;
+}
+.g-image{
+  width: 156rpx;
+  height: 156rpx;
+  float: left;
+  margin-right: 12rpx;
+}
+.g-title{
+  text-align: left;
+}
+/* 底部 */
+
+.foote{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  height: 100rpx;
+  padding: 10rpx 20rpx;
+  
+  box-sizing: border-box;
+}
+.foote_left{
+  text-align: center;
+  font-size: 24rpx;
+  color: #333333;
+  float: left;
+}
+.foote_left image{
+  width: 46rpx;
+  height: 46rpx;
+}
+.foote_right{
+  float: right
+}
+.price{
+  color: red;
+}
+.hj{
+  position: relative;
+  top: -18rpx;
+}
+.foote_right>view{
+  display: inline-block;
+  margin-left: 30rpx;
+}
+ .placeanorder{
+  margin: 0!important;
+width: 180rpx!important;
+border-radius: 100rpx;
+background:linear-gradient(to right, #f12200, #ff4e17);
+text-align: center;
+height: 70rpx;
+font-size: 28rpx;
+line-height: 70rpx;
+color: #ffffff;
+margin-top: 10rpx !important;
+}

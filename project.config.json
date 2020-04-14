@@ -61,7 +61,7 @@
 				{
 					"id": 0,
 					"name": "packageA/pages/receive/receive",
-					"pathName": "packageA/pages/receive_home/receive_home",
+					"pathName": "packageA/pages/store_home/store_home",
 					"query": "",
 					"scene": null
 				}

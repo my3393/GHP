@@ -23,6 +23,13 @@ Page({
     load:true,
     modal:false,
     modal2: false,
+    button4: [{
+      text: "取消",
+      type: 'gray'
+    }, {
+      text: "去绑定",
+        type:'danger'
+    }],
   },
 
   /**
@@ -81,7 +88,8 @@ Page({
         }
         that.setData({
           user: res.data,
-
+          startDate: res.data.startDate.substring(0,10),
+          endDate: res.data.endDate.substring(0, 10)
         })
         if (res.data.bindProvinceId == null || res.data.bindProvinceId == '' || res.data.homeProvinceId == null || res.data.homeProvinceId == ''){
                that.setData({
@@ -171,6 +179,7 @@ Page({
 
   },
   handclick(){
+    this.hide()
     if (this.data.num == 0) {
       this.setData({
         modal2: true
@@ -178,7 +187,7 @@ Page({
     } else {
       this.active()
     }
-    this.hide()
+    
   },
   hide2() {
     this.setData({
@@ -417,7 +426,7 @@ Page({
     app.res.req('/membercard/activatecard', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       
+         that.getnum();
          that.getuser();
       } else {
         wx.showToast({

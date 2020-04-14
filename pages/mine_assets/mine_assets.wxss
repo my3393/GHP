@@ -9,6 +9,9 @@ page{
   font-size: 34rpx;
   font-weight: 600
 }
+.top>view{
+  display: inline-block;
+}
 .top_img{
   
   width: 100%;
@@ -65,9 +68,10 @@ page{
   margin-right: 40rpx;
   margin-top: 40rpx;
   display: inline-block;
+  font-size: 32rpx;
 }
 .active{
-  font-size: 30rpx;
+  font-size: 36rpx;
   font-weight: 600
 }
 .state_nav{
@@ -88,7 +92,7 @@ page{
 .state_time{
   margin-top: 20rpx;
   color: #999;
-  display: inline-block;
+  
 }
 .release{
   float: right;
@@ -120,4 +124,35 @@ page{
 }
 .lq{
   opacity: 0.5
+}
+.zcmx{
+  width: 46rpx;
+  height: 40rpx;
+  float: left;
+  margin-top: 16rpx;
+  margin-right: 16rpx;
+}
+.jihuo{
+  float: right;
+  color: #f12200;
+  font-size: 30rpx;
+}
+.tit{
+  text-align: center;
+  margin-bottom: 30rpx;
+  font-size: 32rpx;
+}
+.tite{
+  color: #999999;
+  line-height: 64rpx;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+.tui-modal-foot>button{
+  width: 190rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  text-align: center;
+  line-height: 70rpx;
+  font-size: 30rpx;
 }

@@ -1,10 +1,13 @@
 <!--pages/mine_assets/mine_assets.wxml-->
 <view class="top">
-  <view >可用激活卷 <text style="color:#ccc">（{{num}}张）</text></view>
-   <image class="top_img" src="https://www.xingtu-group.cn/xcx_img/volume.png"></image>
-  
-    
-  
+  <view>可用激活卷
+    <text style="color:#ccc">（{{num}}张）</text>
+  </view>
+  <view class="jihuo" wx:if='{{user.memberType == 0}}' bindtap="jihuo">激活会员</view>
+  <image class="top_img" src="https://www.xingtu-group.cn/xcx_img/volume.png"></image>
+
+
+
 </view>
 
 <view class="zz">
@@ -14,10 +17,12 @@
 
 <view class="zhan">
   <view bindtap="zhuanz">
+    <image class="zcmx" src="../../images/zhuanz.png"></image>
     <view class="h1">资产转赠</view>
     <view class="xs">将会员激活卷赠与他人</view>
   </view>
   <view bindtap="minx">
+    <image class="zcmx" src="../../images/zcmx.png"></image>
     <view class="h1">资产明细</view>
     <view class="xs">查看资产领取情况</view>
   </view>
@@ -25,46 +30,70 @@
 
 <view class="state {{tar == index?'active':''}}" bindtap="tag" data-index="{{index}}" wx:for='{{tag}}'>{{item.name}}</view>
 
-<view wx:if='{{tar == 0}}' style="margin-top:20rpx;">
-   <view class="state_nav" wx:for='{{card}}'>
-      <view class="state_sm">
-        转赠给{{item.receiveUserPhone}}
-      </view>
-      <view class="state_type">
-         <text class="state_num">{{item.cardNum}}张</text>
-         <text wx:if='{{item.status == 0}}'>未领取</text>
-         <text wx:if='{{item.status == 1}}' style="color:#ccc">已领取</text>
-      </view>
-      <view class="state_time">{{item.createDate}}</view>
-     
-   </view>
+<view wx:if='{{tar == 1}}' style="margin-top:20rpx;">
+  <view class="state_nav" wx:for='{{card}}'>
+    <view class="state_sm">
+      转赠给{{item.receiveUserPhone}}
+    </view>
+    <view class="state_type">
+      <text class="state_num">{{item.cardNum}}张</text>
+      <text wx:if='{{item.status == 0}}'>未领取</text>
+      <text wx:if='{{item.status == 1}}' style="color:#ccc">已领取</text>
+    </view>
+    <view class="state_time">{{item.createDate}}</view>
+
+  </view>
 </view>
-<view wx:if='{{tar == 1}}'>
-   <view class="state_nav" wx:for='{{cards}}'>
-      <view class="state_sm">
-       收到 {{item.sendUserName}}的转赠
-      </view>
-      <view class="state_type">
-         <text class="state_num">{{item.cardNum}}张</text>
-         <text class="linqu" wx:if='{{item.status == 0}}' bindtap="lingqu" id="{{item.id}}">领取</text>
-         <text class="linqu lq" wx:if='{{item.status == 1}}'>已领取</text>
-      </view>
-      <view class="state_time">{{item.createDate}}</view>
-      
-   </view>
+<view wx:if='{{tar == 0}}'>
+  <view class="state_nav" wx:for='{{cards}}'>
+    <view class="state_sm">
+      收到 {{item.sendUserName}}的转赠
+    </view>
+    <view class="state_type">
+      <text class="state_num">{{item.cardNum}}张</text>
+      <text class="linqu" wx:if='{{item.status == 0}}' bindtap="lingqu" id="{{item.id}}">领取</text>
+      <text class="linqu lq" wx:if='{{item.status == 1}}'>已领取</text>
+    </view>
+    <view class="state_time">{{item.createDate}}</view>
+
+  </view>
 
 </view>
 <view wx:if='{{tar == 2}}' style="margin-top:20rpx;">
-    <view class="instructions">
-        <view class="h1">会员激活卷有什么用</view>
-        <view class="xs">获得至尊会员激活卷可激活使用本卷，激活成功后自动成为至尊会员，享受至尊会员特权。</view>
-    </view>
-    <view class="instructions">
-        <view class="h1">资产转增</view>
-        <view class="xs">个人名下的善家至尊会员激活卷属于个人资产，支持转增，具体转增操作可前往“资产转增”查看</view>
-    </view>
-    <view class="instructions">
+  <view class="instructions">
+    <view class="h1">会员激活卷有什么用</view>
+    <view class="xs">获得至尊会员激活卷可激活使用本卷，激活成功后自动成为至尊会员，享受至尊会员特权。</view>
+  </view>
+  <view class="instructions">
+    <view class="h1">资产转增</view>
+    <view class="xs">个人名下的善家至尊会员激活卷属于个人资产，支持转增，具体转增操作可前往“资产转增”查看</view>
+  </view>
+  <!-- <view class="instructions">
         <view class="h1">资产冻结与释放</view>
         <view class="xs">资产转增在对方领取前，转增资产处于冻结状态。当资产冻结超过一年，你可申请释放，释放的资产自动汇入可用资产中</view>
-    </view>
+    </view> -->
 </view>
+
+<tui-modal show="{{modal}}" custom="{{true}}">
+  <view class="tui-modal-custom">
+    <view class="tui-modal-custom-text tit">确定激活?</view>
+    <view class="tui-modal-custom-text tite">激活将使用1张至尊会员激活卷</view>
+
+    <view class="tui-modal-foot">
+      <view bindtap="hide">再想想</view>
+      <view bindtap="handclick">去激活</view>
+    </view>
+  </view>
+</tui-modal>
+<tui-modal show="{{modal2}}" custom="{{true}}">
+  <view class="tui-modal-custom">
+    <view class="tui-modal-custom-text tit">激活失败</view>
+    <view class="tui-modal-custom-text tite">当前无至尊会员激活券</view>
+
+    <view class="tui-modal-foot">
+      <view bindtap="hide2">关闭</view>
+
+      <view  bindtap="handclick2">前往购买</view>
+    </view>
+  </view>
+</tui-modal>

@@ -1,93 +1,108 @@
 <view class="top">
-    <swiper wx:if='{{user.xcxIsShow == 1}}' class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
-        <block wx:for='{{photos}}' wx:key="{{item.id}}">
-            <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
-                <image class="banner_img" src="{{item}}" mode="widthFix"></image>
-            </swiper-item>
-        </block>
-    </swiper>
-    <swiper wx:else class="banner"  duration="1000" >
-        <block wx:for='{{photoses}}' wx:key="{{item.id}}">
-            <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
-                <image class="banner_img" src="{{item}}" mode="widthFix"></image>
-            </swiper-item>
-        </block>
-    </swiper>
+  <swiper wx:if='{{user.xcxIsShow == 1}}' class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
+    <block wx:for='{{photos}}' wx:key="{{item.id}}">
+      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
+        <image class="banner_img" src="{{item}}" mode="widthFix"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <swiper wx:else class="banner" duration="1000">
+    <block wx:for='{{photoses}}' wx:key="{{item.id}}">
+      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper'>
+        <image class="banner_img" src="{{item}}" mode="widthFix"></image>
+      </swiper-item>
+    </block>
+  </swiper>
 </view>
 <view class="progre" wx:if='{{user.xcxIsShow == 1}}'>
-    <view class="pro-t">
-        <view class="pro-left">
-            <!-- <view class='canvasBox'>
+  <view class="pro-t">
+    <view class="pro-left">
+      <!-- <view class='canvasBox'>
                 <view class='bigCircle'></view>
                 <view class='littleCircle'></view>
                 <canvas canvas-id="runCanvas" id="runCanvas" class='canvas'></canvas>
             </view> -->
-            <van-circle layer-color='#f3f3f3' value="{{nums}}" color="{{gradientColor}}" stroke-width="6" text='{{num + "%"}}'  />
-        </view>
-        <view class="pro-rig">
-            <view>
-                <view class="money">
-                    <image src="../../images/money.png" />
-                </view>
-                <text style="vertical-align: middle;color: #666666;">累计金额</text>
-                <view class="money-m">
-                    <text class="money-s">￥</text>
-                    {{money.shareTotalAmount}}
-                </view>
-            </view>
-            <view>
-                <view class="money">
-                    <image src="../../images/zhuc.png" />
-                </view>
-                <text style="vertical-align: middle;color: #666666;">支出金额</text>
-                <view class="money-m">
-                    <text class="money-s">￥</text>
-                    {{money.withdrawalTotalAmount}}
-                </view>
-            </view>
-        </view>
+      <van-circle layer-color='#f3f3f3' value="{{nums}}" color="{{gradientColor}}" stroke-width="6" text='{{num + "%"}}' />
     </view>
-    <view wx:if='{{user.xcxIsShow == 1}}' class="jiao" bindtap="ljgeng">了解更多</view>
+    <view class="pro-rig">
+      <view>
+        <view class="money">
+          <image src="../../images/money.png" />
+        </view>
+        <text style="vertical-align: middle;color: #666666;">累计金额</text>
+        <view class="money-m">
+          <text class="money-s">￥</text> {{money.shareTotalAmount}}
+        </view>
+      </view>
+      <view>
+        <view class="money">
+          <image src="../../images/zhuc.png" />
+        </view>
+        <text style="vertical-align: middle;color: #666666;">支出金额</text>
+        <view class="money-m">
+          <text class="money-s">￥</text> {{money.withdrawalTotalAmount}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{user.xcxIsShow == 1}}' class="jiao" bindtap="ljgeng">了解更多</view>
 </view>
 <view class="project" wx:if='{{user.xcxIsShow == 1}}'>
-    <view class="h2">公益项目</view>
-    <view class="pro-r" bindtap="xun">
-        <view class="pro-n">寻找老乡</view>
-        <view class="pro-r-img">
-            <image src="../../images/right.png" />
-        </view>
+  <view class="h2">公益项目</view>
+  <view class="pro-r" bindtap="xun">
+    <view class="pro-n">寻找老乡</view>
+    <view class="pro-r-img">
+      <image src="../../images/right.png" />
     </view>
-    <view>
-        <view wx:for="{{tag}}" wx:for-index="idx" data-idx='{{idx}}' class="tag  {{tar == idx ? 'active' : ''}} " bind:tap="tag">
-            {{item.name}}
-        </view>
+  </view>
+  <view>
+    <view wx:for="{{tag}}" wx:for-index="idx" data-idx='{{idx}}' class="tag  {{tar == idx ? 'active' : ''}} " bind:tap="tag">
+      {{item.name}}
     </view>
-    <view class="nav" wx:for='{{list}}' wx:key='{{item.id}}' id="{{item.id}}" bind:tap="detail">
-        <view class="g-banner">
-            <image src="{{item.defaultImgOss}}"  />
-        </view>
-        <view class="g-h1 dan">{{item.projectTitle}}</view>
-        <view class="g-h2">{{item.projectExplain}}</view>
-        <view class="jindu">
-            <progress class="progress" stroke-width="5" active percent="{{item.num}}" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
-        </view>
-        <view class="g-bott">
-            <view class="g-bo">
-                <view class='g-bott-j'>{{item.targetAmount}}</view>
-                <view class='g-boot-y'>目标金额/元</view>
-            </view>
-            <view class="g-bo">
-                <view class='g-bott-j'>{{item.raiseAmount}}</view>
-                <view class='g-boot-y'>已筹款/元</view>
-            </view>
-            <view class="g-bo">
-                <view class='g-bott-j'>{{item.voteNum}}</view>
-                <view class='g-boot-y'>项目票数</view>
-            </view>
-        </view>
+  </view>
+  <view class="nav" wx:for='{{list}}' wx:key='{{item.id}}' id="{{item.id}}" bind:tap="detail">
+    <view class="g-banner">
+      <image src="{{item.defaultImgOss}}" />
     </view>
+    <view class="g-h1 dan">{{item.projectTitle}}</view>
+    <view class="g-h2">{{item.projectExplain}}</view>
+    <view class="jindu">
+      <progress class="progress" stroke-width="5" active percent="{{item.num}}" font-size='12' activeColor='#F22702' show-info='true' border-radius='4'></progress>
+    </view>
+    <view class="g-bott">
+      <view class="g-bo">
+        <view class='g-bott-j'>{{item.targetAmount}}</view>
+        <view class='g-boot-y'>目标金额/元</view>
+      </view>
+      <view class="g-bo">
+        <view class='g-bott-j'>{{item.raiseAmount}}</view>
+        <view class='g-boot-y'>已筹款/元</view>
+      </view>
+      <view class="g-bo">
+        <view class='g-bott-j'>{{item.voteNum}}</view>
+        <view class='g-boot-y'>项目票数</view>
+      </view>
+    </view>
+  </view>
 </view>
 
-<view  class="appl" bindtap="appl" wx:if='{{user.xcxIsShow == 1}}'>
+<view class="appl" bindtap="appl" wx:if='{{user.xcxIsShow == 1}}'>
   <image src="../../images/apply_refund.png"> </image>
+</view>
+
+
+<view wx:if='{{user.xcxIsShow != 1}}'>
+  <view class="nav-list" wx:for="{{recommend}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
+    <view class="list-img">
+      <image src="{{item.productDefaultImgOss}}" />
+    </view>
+    <view class="list-j">{{item.productName}}</view>
+    <view class="list-qu">{{item.provinceName}} {{item.cityName}}</view>
+
+    <view class="class-t-p ctp">
+      <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+    <view class="list-rig">
+      <image src="../../images/shop.png" /> </view>
+  </view>
+
 </view>

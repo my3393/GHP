@@ -48,12 +48,14 @@
       </view>
       <view class="biaos" wx:if='{{user.memberType == 0}}'>未开通</view>
       <view class="jihuo" bindtap="jihuo" wx:if='{{user.memberType == 0}}'>激活会员</view>
+      <view wx:if='{{user.memberType != 0}}' style="font-size:20rpx">{{startDate}}至{{endDate}}有效</view>
     </view>
 
 
   </view>
+  <!-- current='{{current}}' -->
   <view class='test'>
-    <swiper display-multiple-items='1' circular previous-margin='10px' next-margin='10px' bindchange='change' current='{{current}}'>
+    <swiper display-multiple-items='1' circular previous-margin='10px' next-margin='10px' bindchange='change' >
       <block wx:for="{{imgUrls}}" wx:key='{{index}}'>
         <swiper-item>
           <view class="box" data-index='{{index}}' animation="{{index == current?animationData:animationData2}}">
@@ -217,7 +219,7 @@
 
 </view>
 
-<tui-modal show="{{modal4}}" bind:click="handleClick4" bind:cancel="hide4" content="开通会员需要绑定家乡和所在地" color="#333" size="32" shape="circle" button='{{button4}}'></tui-modal>
+<tui-modal show="{{modal4}}" bind:click="handleClick4" bind:cancel="hide4" content="开通会员需要绑定家乡和所在地" color="#333" size="32" shape="circle" maskClosable="{{false}}" button='{{button4}}'></tui-modal>
 
  <tui-modal show="{{modal}}"  custom="{{true}}">
     <view class="tui-modal-custom">

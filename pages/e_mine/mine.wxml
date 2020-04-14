@@ -19,7 +19,7 @@
         </view>
         <view class="shouy-z">
           <view>0</view>
-          <view class="shouy-n">爱心助力</view>
+          <view class="shouy-n">我的资产</view>
         </view>
         <view class="shouy-z">
           <view>0</view>
@@ -67,16 +67,16 @@
         <view class="kait">
           <image src="../../images/aix2.png" />
         </view>
-        <view class="kait-n"> 开通会员</view>
+        <view class="kait-n">开通会员</view>
       </view>
-      <view class="shouyi" catchtap="wallet_detail">
-        <view class="shouy-z">
+      <view class="shouyi" >
+        <view class="shouy-z" catchtap="wallet_detail">
           <view>{{user.transactionFinishAmount}}</view>
           <view class="shouy-n">分销收益></view>
         </view>
-        <view class="shouy-z" catchtap="love_help">
-          <view>{{love}}</view>
-          <view class="shouy-n">爱心助力></view>
+        <view class="shouy-z" catchtap="zic">
+          <view>{{num}}</view>
+          <view class="shouy-n">我的资产></view>
         </view>
         <view class="shouy-z" catchtap="integral">
           <view>{{user.integral}}</view>
@@ -271,6 +271,13 @@
       <view>关注公众号</view>
 
     </view>
+    <view class="din-1" bindtap="love_help">
+      <view class="din-img">
+        <image src="../../images/gzgzh.png" />
+      </view>
+      <view>爱心助力</view>
+
+    </view>
   </view>
 
 </view>
@@ -291,4 +298,19 @@
   </view>
 </view> -->
 
-<tui-modal show="{{modal5}}" bind:click="handleClick5" bind:cancel="hide5" content="全国加油77折起" color="#333" size="32" shape="circle" button='{{button5}}'></tui-modal>
+<tui-modal show="{{modal5}}" bind:click="handleClick5" bind:cancel="hide5" content="全国加油77折起" color="#333" size="32" shape="circle" button='{{button5}}'>
+
+
+</tui-modal>
+
+<tui-modal show="{{modal}}"  custom="{{true}}">
+    <view class="tui-modal-custom">
+     <view class="tui-modal-custom-text tit">收到至尊兑换券</view>
+       <view class="tui-modal-custom-text tite">你有{{nums}}个至尊兑换券未领取</view>
+     
+      <view class="tui-modal-foot">
+         <view bindtap="hide">再想想</view>
+         <view bindtap="handclick">前往领取</view>
+      </view>
+    </view>
+  </tui-modal>

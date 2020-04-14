@@ -10,11 +10,13 @@ Page({
    */
   data: {
      tag:[
+       { name: '待领取资产' },
        { name: '资产状态' },
-       {name:'待领取资产'},
        {name:'资产说明'}
      ],
-     tar:1,
+     tar:0,
+    modal: false,
+    modal2: false,
   },
 
   /**
@@ -36,7 +38,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
 
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -68,10 +80,10 @@ Page({
   onReachBottom: function () {
       let that  = this;
       currentPage = currentPage + 1
-      if(that.data.tar == 0){
+      if(that.data.tar == 1){
         
         that.getzhuan();
-      }else if(that.data.tar == 1){
+      }else if(that.data.tar == 0){
         that.getdai();
       }
   },
@@ -81,6 +93,42 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  jihuo() {
+    this.setData({
+      modal: true,
+    })
+  },
+  hide() {
+    this.setData({
+      modal: false
+    })
+
+  },
+  handclick() {
+    this.hide()
+    if (this.data.num == 0) {
+      this.setData({
+        modal2: true
+      })
+    } else {
+      this.active()
+    }
+    
+  },
+  hide2() {
+    this.setData({
+      modal2: false
+    })
+
+  },
+  handclick2(e) {
+    this.setData({
+      memberType: 1
+    })
+    
+
+    this.hide2()
   },
   //转赠
   zhuanz() {
@@ -99,10 +147,10 @@ Page({
     console.log(e)
     var index = e.currentTarget.dataset.index
     currentPage = 1
-    if(index == 0){
+    if(index == 1){
       card = []
       that.getzhuan()
-    }else if(index == 1){
+    }else if(index == 0){
       cards = []
       that.getdai();
     }
@@ -124,6 +172,26 @@ Page({
           num: res.data
         })
 
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //激活会员卡
+  active() {
+    let that = this;
+    let data = {
+      memberType: 1
+    }
+
+    app.res.req('/membercard/activatecard', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.getnum();
+        that.getuser();
       } else {
         wx.showToast({
           title: res.msg,
@@ -162,7 +230,6 @@ Page({
       memberType: 1,
       currentPage: currentPage
     }
-
     app.res.req('/membercard/sendcardrecord', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
@@ -218,5 +285,31 @@ Page({
       }
     })
   },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
 
+    }
+
+    app.res.req('/user/info', data, (res) => {
+      console.log(res.data)
+      wx.hideLoading()
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+        that.setData({
+          user: res.data,
+
+        })
+
+      }
+    })
+  },
 })

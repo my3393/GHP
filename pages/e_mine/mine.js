@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    modal:false,
     modal5:false,
     isshow: true,
     statusBarHeight: 0,
@@ -53,25 +53,24 @@ Page({
    */
   onShow: function () {
     let that = this;
-    this.getbanner();
     //获取本地用户信息
     wx.getStorage({
       key: 'userinfo',
       success: function (res) {
         console.log(res)
-        if (res.data.phone == null ) {
-         
-        } else if ( res.data.phone == '') {
-          
-        }else{
+        if (res.data.phone == null) {
+
+        } else if (res.data.phone == '') {
+
+        } else {
           var phone = that.plusXing(res.data.phone, 3, 4)
           that.setData({
             phone: phone
           })
         }
-        
+
         // if (res.data.phone == null || res.data.phone == ''){
-         
+
         //   wx.redirectTo({
         //     url: '../bindphone/login?mine=' + 1
         //   })
@@ -83,6 +82,10 @@ Page({
       },
 
     })
+    that.getbanner();
+    that.getnum();
+    that.getnums();
+    
   },
 
   /**
@@ -132,6 +135,26 @@ Page({
       path: '/pages/e_specialty/e_specialty?userid=' + that.data.user.id,
 
     }
+  },
+  hide() {
+    this.setData({
+      modal: false
+    })
+
+  },
+  handclick(e) {
+    
+      wx.navigateTo({
+        url: '../mine_assets/mine_assets',
+      })
+  
+    this.hide()
+  },
+  //我的资产
+  zic(){
+    wx.navigateTo({
+      url: '../mine_assets/mine_assets',
+    })
   },
   hide5() {
     this.setData({
@@ -641,6 +664,55 @@ Page({
 
     // })
   },
+  //张数
+  getnum() {
+    let that = this;
+    let data = {
+      memberType: 1
+    }
+
+    app.res.req('/membercard/findcardnum', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          num: res.data
+        })
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //领取提示
+  getnums() {
+    let that = this;
+    let data = {
+      memberType: 1
+    }
+
+    app.res.req('/membercard/unclaimedcardnum', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if(res.data != 0){
+          that.setData({
+            modal: true
+          })
+        }
+        that.setData({
+          nums: res.data
+        })
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
    //获取用户信息
   getuser() {
     let that = this;
@@ -660,7 +732,9 @@ Page({
           key: 'userinfo',
           data: res.data,
         })
-        
+        that.setData({
+          user:res.data
+        })
       }
     })
   },

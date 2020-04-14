@@ -116,7 +116,8 @@ swiper-item image{
 .gongy image{
   width: 100rpx;
   height: 32rpx;
-  margin-right: 20rpx;
+  margin-right: 90rpx;
+  margin-left: 10rpx;
 }
 /*  */
 .qy{

@@ -2,7 +2,6 @@
   "pages": [
     "pages/e_home/home",
     "pages/assets_expel/assets_expel",
-    
     "pages/mine_assets/mine_assets",
     "pages/community/community",
     "pages/mine_yb/mine_yb",
@@ -86,7 +85,8 @@
       "name": "pack1",
       "pages": [
         "pages/receive/receive",
-        "pages/receive_home/receive_home"
+        "pages/receive_home/receive_home",
+        "pages/store_home/store_home"
       ]
     }
   ],
@@ -129,7 +129,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
   "plugins": {

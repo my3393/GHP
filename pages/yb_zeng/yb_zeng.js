@@ -128,7 +128,7 @@ Page({
       })
     } else if (that.data.valu > that.data.integral) {
       wx.showToast({
-        title: '输入金额大于当前可转赠金额',
+        title: '输入艺呗大于当前可转赠艺呗',
         icon: 'none'
       })
     }else{

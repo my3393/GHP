@@ -1,0 +1,89 @@
+<!--packageA/pages/store_home/store_home.wxml-->
+<view class="top_b"></view>
+<view class="hone clearfix">
+  <image src="../../../images/sjg.png"></image>
+  <view class="h1">
+    深圳市花覅额海公司
+  </view>
+  <view class="hone_rig">
+    <view>
+      <image src="../../../images/xinxin_n.png"></image>
+      <view>收藏</view>
+    </view>
+    <view>
+      <image src="../../../images/fenx.png"></image>
+      <view>分享</view>
+    </view>
+  </view>
+  <view class="qis">
+    <text>起送￥20</text>
+    <text>配送费￥0</text>
+  </view>
+  <view class="qis">1.3km</view>
+  <view class="jies dan">深圳市海诚装饰设计工程有限公司成立于2011年海诚装饰（HaiCheng Decoration）简称海诚装饰。</view>
+  <view class="">
+    <text>极速退款</text>
+  </view>
+</view>
+
+<view class="search">
+  <image src="../../../images/search.png"></image>
+  <input placeholder="商品名称"></input>
+</view>
+<view>
+  <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
+    <block>
+      <swiper-item wx:for='{{banner}}' id="{{item.id}}" bindtap="banner" class='swiper' data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+        <image class="banner_img" src="{{item.advertiseImgOss}}"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<!-- 商品分类 -->
+<scroll-view scroll-y scroll-with-animation class="tab-view" scroll-top="{{scrollTop}}" style="height:{{menuHeight}}px">
+  <view wx:for="{{tabbar}}" wx:key="{{index}}" class="tab-bar-item {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" catchtap="swichNav">
+    <text>{{item}}</text>
+  </view>
+</scroll-view>
+<!-- 右侧 -->
+<view class="right-box">
+  <!--内容部分 start 自定义可删除-->
+  <block wx:for="{{tabbar}}" wx:key="{{index}}">
+    <view class="page-view" >
+      
+      <view class="class-box">
+        <view class="class-item">
+          <view class="class-name">{{item}}</view>
+          <view class="clearfix">
+            <view class="g-box" catchtap="productList" data-key="高价回收">
+              <image src="../../../images/ylsj.png" class="g-image" />
+              <view class="g-title">高价回收</view>
+            </view>
+           
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+  </block>
+  <!--内容部分 end 自定义可删除-->
+</view>
+
+<!-- footer -->
+<view class="foote">
+  <view class="foote_left">
+     <image src="../../../images/shop.png"></image>
+     <view>购物车</view>
+  </view>
+  <view class="foote_right">
+    <view class="hj">合计：<text class="price"><text style="font-size:14rpx">￥</text >28.8</text> </view>
+    <view>
+       <button size="mine" class='placeanorder' bindtap="pay">
+      结算({{allnum}})
+
+
+    </button>
+    </view>
+  </view>
+</view>

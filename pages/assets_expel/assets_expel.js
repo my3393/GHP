@@ -29,7 +29,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
 
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -97,9 +107,20 @@ Page({
         title: '请输入正确手机号',
         icon:'none'
       })
+    } else if (that.data.phone == that.data.user.phone) {
+      wx.showToast({
+        title: '不能转赠给自己',
+        icon: 'none'
+      })
+      
     } else if (that.data.num == '' || that.data.num == 0){
       wx.showToast({
         title: '请输入转赠张数',
+        icon: 'none'
+      })
+    } else if (that.data.num > that.data.nums) {
+      wx.showToast({
+        title: '转赠张数大于当前可转赠数',
         icon: 'none'
       })
     }else{

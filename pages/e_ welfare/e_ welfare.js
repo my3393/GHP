@@ -47,6 +47,7 @@ Page({
       wx.setStorageSync('bangId', userid)
     }
     this.getList();
+    this.getRecommend();
    
   },
 
@@ -188,6 +189,7 @@ Page({
     })
 
   },
+  
   changeDatas(){
     list = [];
     this.getList()
@@ -231,5 +233,39 @@ Page({
         })
       }
     })
-  }
+  },
+  getRecommend() {
+    let that = this;
+    let data = {
+      isRefresh: 0
+    }
+    app.res.req("/home/recommend", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          recommend: res.data,
+
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+
+
+  },
+  //查看商品详情
+  detail(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '../good_detail/good_detail?id=' + e.currentTarget.dataset.id,
+    })
+  },
 })
