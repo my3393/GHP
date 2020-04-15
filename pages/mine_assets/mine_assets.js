@@ -203,6 +203,14 @@ Page({
   //领取
   lingqu(e) {
     let that = this;
+    var nowTime = new Date();
+    if (nowTime - this.data.tapTime < 800) {
+      console.log('阻断')
+      return;
+    }
+
+   
+
     let data = {
       receiveId: e.currentTarget.id
     }
@@ -214,7 +222,11 @@ Page({
         currentPage = 1;
         cards = []
         that.getdai();
-
+        wx.showToast({
+          title: '领取成功',
+          icon:'none',
+          mask:true
+        })
       } else {
         wx.showToast({
           title: res.msg,
@@ -222,6 +234,9 @@ Page({
         })
       }
     })
+    this.setData({
+      tapTime: nowTime
+    });
   },
   //状态
   getzhuan(e) {

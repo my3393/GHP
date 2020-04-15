@@ -53,6 +53,7 @@ Page({
     }
     if (options.userid) {
       userid = options.userid
+      wx.setStorageSync('bangId', options.userid)
     }
     wx.showLoading({
       title: '加载中',

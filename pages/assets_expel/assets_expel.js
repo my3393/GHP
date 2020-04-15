@@ -96,13 +96,25 @@ Page({
   },
   //
   sub(e) {
+    var nowTime = new Date();
+    if (nowTime - this.data.tapTime < 1000) {
+      console.log('阻断')
+      wx.showToast({
+        title: '你的操作太快了',
+        icon:'none'
+      })
+      return;
+    }
+
+    
     let that = this;
+    var tel = /^[1]([3-9])[0-9]{9}$/
     if (that.data.nums == 0) {
       wx.showToast({
         title: '可转赠的张数为零',
         icon: 'none'
       })
-    }else if(that.data.number == '' || that.data.number.length != 11){
+    }else if(that.data.number == '' || that.data.number.length != 11 || !tel.test(that.data.number) ){
       wx.showToast({
         title: '请输入正确手机号',
         icon:'none'
@@ -147,7 +159,9 @@ Page({
         }
       })
     }
-    
+    this.setData({
+      tapTime: nowTime
+    });
   },
   //张数
   getnum() {

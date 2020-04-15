@@ -38,6 +38,8 @@ Page({
       customParams: encodeURIComponent(JSON.stringify(customParams))
     })
   },
+  
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -645,8 +647,6 @@ Page({
       console.log('阻断')
       return;
     }
-    console.log(e.currentTarget);
-
 
     this.setData({
       tapTime: nowTime
@@ -696,7 +696,7 @@ Page({
       opcity: opcity,
       iconOpcity: 0.5 * (1 - opcity < 0 ? 0 : 1 - opcity)
     })
-    console.log(this.data.opcity)
+    //console.log(this.data.opcity)
     let that = this
     if (e.scrollTop > 300) {
 

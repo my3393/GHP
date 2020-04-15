@@ -3,7 +3,7 @@
    <view>查找赠送用户</view>
    <view class="int">
      <image src="../../images/search.png" class="int_img"></image>
-     <input placeholder="请输入要转增的人手机号"  bindinput="bindcha"></input>
+     <input placeholder="请输入要转赠的人手机号"  bindinput="bindcha"></input>
    </view>
    
 </view>

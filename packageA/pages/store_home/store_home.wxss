@@ -1,5 +1,8 @@
 /* packageA/pages/store_home/store_home.wxss */
 @import "../receive_home/receive_home";
+page{
+  font-size: 28rpx;
+}
 .qis{
   font-size: 22rpx;
 }
@@ -108,7 +111,7 @@
 }
 
 .g-box {
-  text-align: center;
+  position: relative;
   padding-top: 40rpx;
 }
 .g-image{
@@ -120,6 +123,39 @@
 .g-title{
   text-align: left;
 }
+
+
+/*  */
+
+ .goodsnum {
+position: absolute;
+right: 30rpx;
+bottom: 10rpx;
+
+}
+.suan{
+  display: inline-block;
+  width: 40rpx;
+  height: 40rpx;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  line-height: 36rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 6rpx;
+} 
+.reduction{
+  background: #fff;
+  border: 1rpx solid #f12200;
+  color: #f12200;
+}
+.shu{
+  display: inline-block;
+  min-width: 40rpx;
+  text-align: center;
+  margin: 0 10rpx;
+}
+
 /* 底部 */
 
 .foote{
@@ -153,9 +189,9 @@
   position: relative;
   top: -18rpx;
 }
-.foote_right>view{
+.foote_left>view{
   display: inline-block;
-  margin-left: 30rpx;
+  margin-right: 30rpx;
 }
  .placeanorder{
   margin: 0!important;
@@ -168,4 +204,78 @@ font-size: 28rpx;
 line-height: 70rpx;
 color: #ffffff;
 margin-top: 10rpx !important;
+}
+.shou{
+  margin-top: 12rpx;
+  margin-bottom: 40rpx;
+  color: #ccc;
+  font-size: 24rpx;
+}
+.show1{
+  width: 500rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.show1 image{
+  width: 440rpx;
+  height: 440rpx;
+  margin: 20rpx 10rpx;
+}
+.show1_sell{
+  margin-left:10rpx;
+  color: #ccc;
+  margin-bottom: 12rpx;
+}
+.show1_xian{
+  background: #FF8D39;
+  color: #fff;
+}
+.show1_cart{
+  float: right;
+  width: 160rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  color: #fff;
+  border-radius: 35rpx;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  font-size: 24rpx;
+}
+/* 弹窗2 */
+.show2{
+ overflow: hidden;
+}
+.show2_top{
+  background:rgba(241,34,0,0.1);
+  color: #f12200;
+  height: 40rpx;
+  text-align: center;
+  
+}
+.show2_detel{
+  float: right;
+
+}
+
+.show2_detel image{
+  width: 26rpx;
+  height: 26rpx;
+  margin-right: 10rpx;
+  position: relative;
+  top: 5rpx;
+}
+.show2_midd{
+  margin: 40rpx 20rpx;
+ 
+}
+.show2_good image{
+  width: 156rpx;
+  height: 156rpx;
+  float: left;
+  margin-right: 20rpx;
+}
+.show2_good{
+  margin:0 20rpx; 
+   position: relative;
+   margin-bottom: 20rpx;
 }

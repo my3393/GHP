@@ -52,13 +52,10 @@ Page({
     this.setData({
       template: new Card().palette(res)
     });
-    setTimeout(function () {
-      wx.hideLoading()
-      that.setData({
-        load: false
-      })
+   
      
-    }, 2500)
+     
+   
   },
 
   /**
@@ -107,6 +104,10 @@ Page({
       image: this.imagePath
     })
     console.log(e);
+    wx.hideLoading()
+    this.setData({
+      load: false
+    })
   },
 
   saveImage() {

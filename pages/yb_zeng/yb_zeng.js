@@ -121,6 +121,7 @@ Page({
   },
   sub() {
     let that = this
+   
     if(that.data.valu == '' || that.data.valu == 0){
       wx.showToast({
         title: '输入艺呗值不能为空',

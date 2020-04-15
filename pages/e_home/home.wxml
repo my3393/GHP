@@ -2,13 +2,15 @@
 
 <!-- <navigator bindtap="tass" class="zhibo" url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{5}}&custom_params={{customParams}}">直播</navigator> -->
 
+
 <skeleton selector="skeleton" loading="spin" bgcolor="#FFF" wx:if="{{showSkeleton}}"></skeleton>
 <view class="skeleton">
 
   <view class="fixs" style='line-height:{{navH + 10}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}'>
-
+    善家
 
   </view>
+ 
   <view class="top-back clearfix" style=" background:{{gradientColor}};margin-top:{{navH}}px; ">
     <!-- <view class="h-titlie">
       <view class="h-t-img"><image src="../../images/home.png"></image></view>
@@ -19,7 +21,7 @@
         <image src="../../images/search.png"></image>
       </view>
       <view class="sea">
-        <input class="search " placeholder="商品，店铺" disabled="true" bindtap="search"></input>
+        <input class="search " placeholder="商品，店铺" disabled="true" bindtap="aaa"></input>
       </view>
     </view>
     <view>
@@ -180,7 +182,7 @@
     <image src="../../images/ztop.png" />
   </view>
   <view class="b-logo">
-    <view>善家购</view>
+    <view>善家</view>
     <view>大爱无疆，感谢家乡</view>
   </view>
 </view>

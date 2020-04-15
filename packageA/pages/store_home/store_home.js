@@ -6,11 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabbar: ["推荐分类", "进口超市", "国际名牌", "奢侈品", "海囤全球", "男装", "女装", "男鞋", "女鞋", "钟表珠宝", "手机数码", "电脑办公", "家用电器", "玩具乐器", "运动户外", "宠物生活", "特产馆"],
+    tabbar: ["推荐分类复健科为日", "进口超市", "国际名牌", "奢侈品", "海囤全球", "男装", "女装", "男鞋", "女鞋", "钟表珠宝", "手机数码", "电脑办公", "家用电器", "玩具乐器", "运动户外", "宠物生活", "特产馆"],
     menuHeight: "", //菜单高度
     currentTab: 0, //预设当前项的值
     scrollTop: 0, //tab标题的滚动条位置
-    allnum:'0'
+    allnum:'0',
+    show1:false,
+    show2:false,
+    height:600
   },
 
   /**
@@ -26,7 +29,7 @@ Page({
   onReady: function () {
 
   },
-
+  
   /**
    * 生命周期函数--监听页面显示
    */
@@ -67,6 +70,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  showPopup() {
+    this.setData({ show: true });
+  },
+
+  onClose() {
+    this.setData({ show: false });
+  },
+  showPopup2() {
+    this.setData({ show2: true });
+  },
+
+  onClose2() {
+    this.setData({ show2: false });
   },
   //轮播
   getbanner() {

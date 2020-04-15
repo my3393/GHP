@@ -49,17 +49,33 @@
 <view class="right-box">
   <!--内容部分 start 自定义可删除-->
   <block wx:for="{{tabbar}}" wx:key="{{index}}">
-    <view class="page-view" >
-      
+    <view class="page-view">
+
       <view class="class-box">
         <view class="class-item">
           <view class="class-name">{{item}}</view>
           <view class="clearfix">
             <view class="g-box" catchtap="productList" data-key="高价回收">
               <image src="../../../images/ylsj.png" class="g-image" />
-              <view class="g-title">高价回收</view>
+              <view class="g-title dan">高价回收</view>
+              <view class="shou">售23</view>
+              <view>
+                <view>
+                  <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
+                  <text style="color:#ccc">￥29.9</text>
+                </view>
+                <view class='goodsnum'>
+                  <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
+                    -
+                  </view>
+                  <view class="shu">{{item.buyCount}}</view>
+                  <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
+                    +
+                  </view>
+                </view>
+              </view>
             </view>
-           
+
           </view>
         </view>
 
@@ -73,17 +89,146 @@
 <!-- footer -->
 <view class="foote">
   <view class="foote_left">
-     <image src="../../../images/shop.png"></image>
-     <view>购物车</view>
+    <view>
+      <image src="../../../images/shop.png"></image>
+      <view>购物车</view>
+    </view>
+    <view class="hj">合计：
+      <text class="price"><text style="font-size:14rpx">￥</text >28.8</text> </view>
   </view>
   <view class="foote_right">
-    <view class="hj">合计：<text class="price"><text style="font-size:14rpx">￥</text >28.8</text> </view>
+
     <view>
-       <button size="mine" class='placeanorder' bindtap="pay">
-      结算({{allnum}})
+      <button size="mine" class='placeanorder' bindtap="aaa">
+        结算({{allnum}})
 
 
-    </button>
+      </button>
     </view>
   </view>
 </view>
+
+
+
+<!-- 弹出层 -->
+
+
+
+<van-popup show="{{ show1 }}" bind:close="onClose" closeable>
+  <view class="show1 clearfix">
+    <view class="show1_tit">蒙牛特仑苏纯牛奶蒙牛特仑苏纯牛奶</view>
+    <image src="../../../images/ylsj.png"></image>
+    <view class="show1_sell">售23
+      <text class="show1_xian">限一人份</text>
+    </view>
+    <view style="font-size:40rpx">
+      <text class="price"><text style="font-size:24rpx">￥</text >28.8</text>
+      <view class="show1_cart">加入购物车</view>
+    </view>
+  </view>
+</van-popup>
+<!-- 购物车弹窗 -->
+<van-popup show="{{ show2 }}" bind:close="onClose2" position='bottom' custom-style="height: 60%" round>
+  <view class="show2_top">还差5.6元配送</view>
+  <scroll-view scroll-y='true' style="height:{{height}}rpx">
+    <view class="show2 clearfix">
+
+      <view class="show2_midd">
+        <text>共3件商品</text>
+        <view class="show2_detel">
+          <image src="../../../images/detele.png"></image>
+          清空购物车
+        </view>
+      </view>
+      <view class="show2_good dan">
+        <image src="../../../images/sjg.png"></image>
+        <view>苹果20个进口的五金</view>
+        <view style="margin-top:90rpx">
+          <view>
+            <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
+            <text style="color:#ccc">￥29.9</text>
+          </view>
+          <view class='goodsnum'>
+            <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
+              -
+            </view>
+            <view class="shu">{{item.buyCount}}</view>
+            <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
+              +
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="show2_good dan">
+        <image src="../../../images/sjg.png"></image>
+        <view>苹果20个进口的五金</view>
+        <view style="margin-top:90rpx">
+          <view>
+            <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
+            <text style="color:#ccc">￥29.9</text>
+          </view>
+          <view class='goodsnum'>
+            <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
+              -
+            </view>
+            <view class="shu">{{item.buyCount}}</view>
+            <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
+              +
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="show2_good dan">
+        <image src="../../../images/sjg.png"></image>
+        <view>苹果20个进口的五金</view>
+        <view style="margin-top:90rpx">
+          <view>
+            <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
+            <text style="color:#ccc">￥29.9</text>
+          </view>
+          <view class='goodsnum'>
+            <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
+              -
+            </view>
+            <view class="shu">{{item.buyCount}}</view>
+            <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
+              +
+            </view>
+          </view>
+        </view>
+      </view>
+      <view>
+        <view class="show2_midd">
+          <text>共3件商品</text>
+          <view class="show2_detel">
+
+            删除
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>
+  <view class="foote">
+    <view class="foote_left">
+      <view>
+        <image src="../../../images/shop.png"></image>
+        <view>购物车</view>
+      </view>
+      <view class="hj">合计：
+        <text class="price"><text style="font-size:14rpx">￥</text >28.8</text> </view>
+    </view>
+    <view class="foote_right">
+
+      <view>
+        <button size="mine" class='placeanorder' bindtap="pay">
+          结算({{allnum}})
+
+
+        </button>
+      </view>
+    </view>
+  </view>
+</van-popup>
+
+<!-- 规格弹窗 -->
