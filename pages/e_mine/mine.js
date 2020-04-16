@@ -678,11 +678,6 @@ Page({
           num: res.data
         })
 
-      } else {
-        wx.showToast({
-          title: res.msg,
-          icon: 'none'
-        })
       }
     })
   },
@@ -695,8 +690,8 @@ Page({
 
     app.res.req('/membercard/unclaimedcardnum', data, (res) => {
       console.log(res.data)
-      if (res.status == 1000) {
-        if(res.data != 0){
+      if (res.status == 1000 ) {
+        if(res.data != 0 && !res.dara.index){
           that.setData({
             modal: true
           })
@@ -705,6 +700,8 @@ Page({
           nums: res.data
         })
 
+      }else if(res.status == 1024){
+        
       } else {
         wx.showToast({
           title: res.msg,

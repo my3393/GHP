@@ -1,0 +1,63 @@
+/* packageA/pages/post/post.wxss */
+page{
+  font-size: 28rpx;
+  background: #f9f9f9;
+}
+.top{
+  display: flex;
+  padding: 20rpx;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+.top_left image{
+  width: 26rpx;
+  height: 26rpx;
+}
+.top_right{
+   background:linear-gradient(to right, #f12200, #ff4e17);
+   width: 190rpx;
+   height: 46rpx;
+   text-align: center;
+   line-height: 46rpx;
+   color: #fff;
+   border-radius: 30rpx;
+}
+.nav{
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  border-radius: 10rpx;
+  color: #ccc;
+}
+.nav_name{
+  color: #000;
+  display: inline-block;
+}
+.nav_m{
+  float: right;
+  color: #ccc;
+}
+.nav_m text{
+  margin-right: 20rpx;
+}
+.nav>view{
+  line-height: 42rpx;
+}
+.nav_btn{
+  width: 160rpx;
+  height: 56rpx;
+  background: #f9f9f9;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  line-height: 56rpx;
+  text-align: center;
+}
+.nav_btn image{
+  width: 32rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+}

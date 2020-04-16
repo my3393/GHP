@@ -1,0 +1,13 @@
+/* packageA/pages/company_ruz/commpany_ruz.wxss */
+@import '../../../pages/store_refund/store_refund';
+.chun_left{
+  float: left;
+  color: #000;
+  width: 150rpx;
+}
+.zhao{
+  margin-left: 30rpx;
+}
+.you{
+  margin-left: 180rpx;
+}

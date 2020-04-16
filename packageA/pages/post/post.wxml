@@ -1,0 +1,24 @@
+<!--packageA/pages/post/post.wxml-->
+<view class="top">
+  <view class="top_left">
+    <image src="../../../images/store_active.png"></image>
+    附近驿站
+  </view>
+  <view class="top_right">
+    申请成为驿站
+  </view>
+</view>
+<view class="nav">
+  <view class="nav_name">疯女人爱哦（西乡店）</view>
+  <view class="nav_m">
+   <text style="color:red">距你最近</text>
+   300m</view>
+   <view>宝安中心尚都花园6栋A105号</view>
+   <view>营业时间：10:00-22:00</view>
+   <view style="margint">
+     <view class="nav_btn">
+       <image src="../../../images/shdz.png"></image> 
+       查看地址 
+     </view>
+   </view>
+</view>

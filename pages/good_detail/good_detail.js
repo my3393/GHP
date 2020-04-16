@@ -12,6 +12,7 @@ let user;
 let sex = 0; //判断是不是从立即购买打开的规格
 let userid;
 let tuij;
+let storeid;
 Page({
   data: {
     isvideo: true,
@@ -86,7 +87,13 @@ Page({
 
     if (options.userid) {
       userid = options.userid
+      wx.setStorageSync('bangId', userid)
       that.Bang();
+    }
+    if (options.storeid) {
+      storeid = options.storeid
+      wx.setStorageSync('storeid', storeid)
+      that.Bang_store();
     }
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
@@ -105,6 +112,9 @@ Page({
     //绑定
     if(wx.getStorageSync('bangId')){
       that.Bang();
+    }
+    if (wx.getStorageSync('storeid')) {
+      that.Bang_store();
     }
   },
   /**
@@ -494,6 +504,53 @@ Page({
         //   title: '绑定成功',
         // })
         wx.removeStorageSync('bangId')
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        if (userid) {
+          wx.navigateTo({
+            url: '../login/login?id=' + id + '&userid=' + userid
+          })
+        } else {
+          wx.navigateTo({
+            url: '../login/login?id=' + id
+          })
+        }
+      } else if (res.status == 1028) {
+        wx.removeStorageSync('bangId')
+        console.log('----2018----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangId')
+        console.log('----1030----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangId')
+        console.log('----已经绑定----')
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //绑定
+  Bang_store() {
+    let that = this;
+    let data = {
+      storeId: storeid
+    }
+
+    app.res.req("/user/sharebindstore", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+        wx.removeStorageSync('storeid')
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
 

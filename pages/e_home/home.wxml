@@ -122,6 +122,26 @@
 
     </view>
   </view>
+  <view class="recommended" wx:if='{{store_recommended.length != 0}}'>
+    <view class="rescom skeleton-rect">
+      <text class="rescom-w skeleton-rect">{{store_name.storeName}}</text>
+
+    </view>
+    <!-- <view class="huan skeleton-rect" bindtap="show3">说明</view> -->
+    <view class="classify" style="padding:0;margin-top: 20rpx; ">
+      <view class="class-two" wx:for="{{store_recommended}}" wx:key="item" data-id='{{item.id}}' bindtap="detail">
+        <view class="class-t-img skeleton-rect">
+          <image class="skeleton-rect" src="{{item.productDefaultImgOss}}" />
+        </view>
+        <view class="class-t-n skeleton-rect">
+          {{item.productName}}
+        </view>
+        <view class="class-t-p skeleton-rect">
+          <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+      </view>
+
+    </view>
+  </view>
   <view style="height:20rpx"></view>
   <view class="recommended">
     <view class="rescom skeleton-rect">

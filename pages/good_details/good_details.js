@@ -87,6 +87,9 @@ Page({
       userid = options.userid
       this.Bang();
     }
+    if (wx.getStorageSync('storeid')) {
+      that.Bang_store();
+    }
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,

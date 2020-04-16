@@ -60,8 +60,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/receive/receive",
-					"pathName": "packageA/pages/store_home/store_home",
+					"name": "packageA/pages/post/post",
+					"pathName": "packageA/pages/post/post",
 					"query": "",
 					"scene": null
 				}

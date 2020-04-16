@@ -26,7 +26,8 @@ Page({
     scrollH: 0, //滚动总高度
     opcity: 0,
     iconOpcity: 0.5,
-    currentPage:1
+    currentPage:1,
+    store_recommended:[]
   },
   tass(e){
     console.log(e)
@@ -73,26 +74,8 @@ Page({
       wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])
       that.Bang();
     }
-    wx.getNetworkType({
-      success: function (res) {
-        console.log(res)
-        if (res.networkType == "2g" || res.networkType == "3g") {
+    //绑定店铺
 
-          wx.showToast({
-            title: '当前网路环境较差',
-            icon: 'none',
-            duration: 2000
-          })
-        }else if(res.networkType == 'none'){
-          wx.showToast({
-            title: '无网路，请检查是否开启网路',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-
-      },
-    })
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
       width: obj.left,
@@ -147,23 +130,23 @@ Page({
       
        if(res.data.id){
          if (res.data.bindProvinceId == '' || res.data.bindProvinceId == null) {
-           wx.showModal({
-             cancelText: '先逛逛',
-             confirmText: '去绑定',
-             confirmColor: '#f12200',
-             cancelColor: '#cccccc',
-             title: '你还未绑定家乡',
-             content: '绑定自己家乡，帮助家乡宣传。',
-             success(res) {
-               if (res.confirm) {
-                 wx.navigateTo({
-                   url: '../person/person',
-                 })
-               } else if (res.cancel) {
+          //  wx.showModal({
+          //    cancelText: '先逛逛',
+          //    confirmText: '去绑定',
+          //    confirmColor: '#f12200',
+          //    cancelColor: '#cccccc',
+          //    title: '你还未绑定家乡',
+          //    content: '绑定自己家乡，帮助家乡宣传。',
+          //    success(res) {
+          //      if (res.confirm) {
+          //        wx.navigateTo({
+          //          url: '../person/person',
+          //        })
+          //      } else if (res.cancel) {
 
-               }
-             }
-           })
+          //      }
+          //    }
+          //  })
          } else {
            wx.setTabBarItem({
              index: 1,
@@ -190,8 +173,33 @@ Page({
              })
            }
          }
-       }
+         if (res.data.phone == '' || res.data.phone == null) {
+           wx.showModal({
+             cancelText: '先逛逛',
+             confirmText: '去绑定',
+             confirmColor: '#f12200',
+             cancelColor: '#cccccc',
+             //  title: '你还未绑定家乡',
+             content: '你还没绑定手机号。',
+             success(res) {
+               if (res.confirm) {
+                 wx.navigateTo({
+                   url: '../login/login',
+                 })
+               } else if (res.cancel) {
 
+               }
+             }
+           })
+         }
+       }
+        if (res.data.bindStoreId){
+          that.setData({
+            storeId: res.data.bindStoreId
+          })
+            that.getCommed()
+            that.getstore_name()
+        }
       },
     })
   },
@@ -224,12 +232,11 @@ Page({
     wx.showLoading({
       title: '刷新中',
     })
-
-    setTimeout(function () {
-      // wx.hideNavigationBarLoading() //完成停止加载
+    setTimeout(() => {
       wx.stopPullDownRefresh() //停止下拉刷新
-      that.getbanner();
-    }, 1500)
+      this.getbanner();
+    },1500)
+    
   },
 
   /**
@@ -676,6 +683,68 @@ Page({
          isofficial: true,
        })
      } 
+    })
+  },
+  //店铺推荐
+  getCommed() {
+    let that = this;
+    let data = {
+      storeId: that.data.storeId
+    }
+
+    app.res.req("/store/recommendproduct", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          store_recommended: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //店铺名称
+  getstore_name() {
+    let that = this;
+    let data = {
+      storeId: that.data.storeId
+    }
+
+    app.res.req("/store/detail", data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          store_name: res.data
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
   },
   //置顶

@@ -86,7 +86,9 @@
       "pages": [
         "pages/receive/receive",
         "pages/receive_home/receive_home",
-        "pages/store_home/store_home"
+        "pages/store_home/store_home",
+        "pages/company_ruz/commpany_ruz",
+        "pages/post/post"
       ]
     }
   ],

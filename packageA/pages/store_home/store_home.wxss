@@ -127,10 +127,10 @@ page{
 
 /*  */
 
- .goodsnum {
-position: absolute;
-right: 30rpx;
-bottom: 10rpx;
+.goodsnum {
+ position: absolute;
+ right: 30rpx;
+ bottom: 0rpx;
 
 }
 .suan{
