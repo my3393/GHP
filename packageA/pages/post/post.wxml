@@ -15,10 +15,15 @@
    300m</view>
    <view>宝安中心尚都花园6栋A105号</view>
    <view>营业时间：10:00-22:00</view>
-   <view style="margint">
+   <view style="margin-top:30rpx;">
      <view class="nav_btn">
        <image src="../../../images/shdz.png"></image> 
        查看地址 
      </view>
+     <view class="nav_btn">
+       <image src="../../../images/phone.png"></image> 
+        联系电话
+     </view>
    </view>
+    
 </view>

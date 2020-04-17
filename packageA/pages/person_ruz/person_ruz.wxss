@@ -1,0 +1,2 @@
+/* packageA/pages/person_ruz/person_ruz.wxss */
+@import '../../../pages/store_refund/store_refund';
