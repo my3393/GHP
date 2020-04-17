@@ -1,0 +1,100 @@
+/* packageA/pages/today/seckill/seckill.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.top_img{
+  width: 100%;
+  height: 300rpx;
+}
+.top_img image{
+  width: 100%;
+  height: 100%;
+}
+.time{
+  width: 100%;
+  height: 140rpx;
+  background: #f12200;
+  padding: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+}
+.time>view{
+  width: 160rpx;
+  height: 100rpx;
+  background: #E20505;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  padding-top: 14rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+.active{
+  background: #fff !important;
+  color: #f12200 !important;
+}
+.actives{
+  background: #FFA191 !important;
+}
+.nav{
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  width: clac(100% - 40rpx);
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 12rpx;
+
+}
+.nav_top{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #F3F3F3;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+}
+.nav_top image{
+  width: 30rpx;
+  height: 30rpx;
+  float: left;
+  margin-top: 4rpx;
+  margin-right: 6rpx;
+}
+.nav_top_r{
+  color: #ccc;
+}
+.nav_top :nth-child(2) text{
+  margin-left: 20rpx;
+}
+.nav_good{
+  margin-top: 20rpx;
+}
+.nav_good image{
+  float: left;
+  width: 156rpx;
+  height: 156rpx;
+  margin-right: 20rpx;
+}
+.ilmit{
+  border: 1rpx solid #FF8D39;
+  display: inline-block;
+  color: #FF8D39;
+  font-size: 22rpx;
+  margin-top: 12rpx;
+  padding: 2rpx 4rpx;
+  
+  box-sizing: border-box;
+}
+.pro{
+  margin-top: 10rpx;
+}
+.pro{
+  color: #FF3300;
+}
+.progress{
+  width: 240rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+}

@@ -273,8 +273,8 @@ border:none;
 .din-1{
     text-align: center;
     width: 25%;
-     display: inline-block;
-
+     display: inline-block; 
+     margin-bottom: 20rpx;
 }
 .din-img{
     width: 48rpx;

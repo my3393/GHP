@@ -1,0 +1,48 @@
+/* packageA/pages/stay_ruz/stay_ruz.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.top_img{
+  width: 100%;
+  height: 300rpx;
+}
+.certification{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #F3F3F3;
+  background: #fff;
+}
+.certification >view{
+  width: 150rpx;
+  height: 54rpx;
+  border: 2rpx solid #f12200;
+  border-radius: 30rpx;
+  text-align: center;
+  line-height: 54rpx;
+  float: right;
+  color: #f12200;
+  margin-top: 22rpx;  
+}
+.nav{
+  padding: 20rpx;
+  background: #fff;
+  box-sizing: border-box;
+  margin-top: 30rpx;
+}
+.nav_list{
+  padding:20rpx 0rpx;
+  box-sizing: border-box
+}
+.nav_list image{
+  float: left;
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+}
+.nav_list :nth-child(3){
+  color: #999999
+}

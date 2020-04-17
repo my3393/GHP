@@ -1,2 +1,12 @@
 /* packageA/pages/person_ruz/person_ruz.wxss */
 @import '../../../pages/store_refund/store_refund';
+.infor_r input{
+  text-align: left
+}
+
+.t{
+  margin-top: -5rpx;
+}
+.lste{
+  margin-left: 50rpx;
+}

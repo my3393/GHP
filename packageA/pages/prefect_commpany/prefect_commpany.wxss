@@ -1,1 +1,69 @@
 /* packageA/pages/prefect_commpany/prefect_commpany.wxss */
+@import '../../../pages/store_refund/store_refund';
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+  
+}
+.nav{
+  padding: 20rpx;
+  background: #fff;
+  box-sizing: border-box;
+  color: #000;
+}
+.nav>image{
+  width: 120rpx;
+  height: 120rpx;
+  float: left;
+  margin-right: 20rpx;
+}
+
+.nav_btn{
+ float: right;
+  width: 120rpx;
+  height: 56rpx;
+  background: #f9f9f9;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+  line-height: 56rpx;
+  text-align: center;
+}
+.nav_btn image{
+  width: 32rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+}
+.nav_fw{
+  margin-top: 20rpx;
+  color: #ccc;
+}
+.yw{
+  margin-top: 20rpx;
+  width: 100%;
+  height: 130rpx;
+}
+.infor_r input{
+  text-align: left
+}
+
+.t{
+  margin-top: -5rpx;
+}
+.mor{
+  width: 100%;
+  height: 100rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  line-height: 100rpx;
+  background: #fff;
+  margin-top: 20rpx;
+}
+.switch{
+  float:right;
+}
+
+.wx-switch-input{width:84rpx !important;height:40rpx !important;}
+.wx-switch-input::before{width:82rpx !important;height: 40rpx !important;}
+.wx-switch-input::after{ width: 36rpx !important;height: 36rpx !important;}

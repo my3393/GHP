@@ -12,8 +12,7 @@ let town_id = '';
 let zhao1 = '';
 let zhao2 = '';
 let zhao3 = '';
-let images = [];
-let simages = [];
+
 let userid;
 Page({
 

@@ -21,7 +21,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    load: true, //
+    load: false, //
     num: 0,
     isshow: true,
     isg: true,

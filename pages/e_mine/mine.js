@@ -68,7 +68,27 @@ Page({
             phone: phone
           })
         }
+        if(res.data.id){
+          if (res.data.phone == '' || res.data.phone == null) {
+            wx.showModal({
+              cancelText: '先逛逛',
+              confirmText: '去绑定',
+              confirmColor: '#f12200',
+              cancelColor: '#cccccc',
+              //  title: '你还未绑定家乡',
+              content: '你还没绑定手机号。',
+              success(res) {
+                if (res.confirm) {
+                  wx.redirectTo({
+                    url: '../login/login',
+                  })
+                } else if (res.cancel) {
 
+                }
+              }
+            })
+          }
+        }
         // if (res.data.phone == null || res.data.phone == ''){
 
         //   wx.redirectTo({

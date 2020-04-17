@@ -1,4 +1,3 @@
-<!--packageA/pages/person_ruz/person_ruz.wxml-->
 
 <!--pages/store_refund/store_refund.wxml-->
 <view hidden="{{load}}">
@@ -20,14 +19,14 @@
       </view>
       <view class='infor'>
         <view class='inform'>姓名</view>
-        <view class='inforin'>
+        <view class='inforin lste'>
         
-          <input type='text' placeholder='设置您的店铺名称' value="{{name}}" bindinput='names'></input>
+          <input type='text' placeholder='请输入你的名字' value="{{name}}" bindinput='names'></input>
         </view>
       </view>
        <view class='infor'>
         <view class='inform'>性别</view>
-        <view class='inforin infor_r'>
+        <view class='inforin infor_r t lste'>
           <picker class="pick" range="{{sex}}" range-key="name" value="{{index}}" bindchange="sex">
             <input  disabled='true' type='text' value='{{typ}}' placeholder='请选择' bindtap='showlabel'></input>
           </picker>
@@ -38,7 +37,7 @@
       </view>
       <view class='infor'>
         <view class='inform'>类型</view>
-        <view class='inforin infor_r'>
+        <view class='inforin infor_r t lste'>
           <picker class="pick" range="{{type}}" range-key="typeName" value="{{index}}" bindchange="type">
             <input  disabled='true' type='text' value='{{typ}}' placeholder='请选择' bindtap='showlabel'></input>
           </picker>
@@ -47,9 +46,16 @@
           <image src='../../../images/enter.png'></image>
         </view>
       </view>
+      <view class='infor'>
+        <view class='inform'>联系方式</view>
+        <view class='inforin '>
+        
+          <input type='text' placeholder='请输入联系方式' value="{{phone}}" bindinput='phone'></input>
+        </view>
+      </view>
       <view class='infor' bindtap="diz">
         <view class='inform'>特产地址</view>
-        <view class='inforin infor_r'>
+        <view class='inforin infor_r '>
           <input disabled='true' type='text' value='{{addres}}' placeholder='请选择所在地址' bindtap='showlabel'></input>
         </view>
         <view class='enter'>
@@ -57,17 +63,23 @@
         </view>
       </view>
       <view class='infor'>
-        <view class='inform'>公益宣言</view>
-        <view class='inforin'>
-          <input type='text' placeholder='设置您店铺的公益宣言' bindinput='xuan' value="{{xuan}}"></input>
+        
+        <view class='inforin' style="margin-left:114rpx;">
+          <input type='text' placeholder='详细地址' bindinput='xuan' value="{{xuan}}"></input>
         </view>
       </view>
-
-      <view class="nop">
-        特产溯源证明
-        <view class="nop_r" data-url="http://sjg.api.xingtu-group.cn/app-web/file/download7" data-type="pdf" catchtap='downloadFile'>模板下载</view>
+       <view class="nop">
+        专业技能
+        <view class="nop_rs">
+          {{num}}/200</view>
       </view>
 
+      <view class="nav">
+        <textarea class="texta" value="{{value}}" placeholder="请简单描述下你擅长的技能" maxlength="200" bindinput="valueChange"></textarea>
+      </view>
+      <view class="nop">
+        技能证书
+       </view>
       <view class="nav">
         <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
           <view class="zhao_img">
@@ -83,69 +95,14 @@
             </view>
           </view>
         </view>
-        <view>2020年5月1号前免费入驻，之后商户入驻需要交付品质保证金2980元。</view>
+        
         <view>图片上传说明：</view>
         
-        <view>1.请下载善家平台店铺特产销售证明模板</view>
-        <view>2.前往当地街道/政府/村委等政府机构开具特产销售证明</view>
-        <view>3.销售证明需保证字迹清晰，可辨别，凡作假行为一经查实将被列入平台黑名单，一年内不可再次申请入驻</view>
-      </view>
-      <view class="nop" wx:if='{{typeId != 14}}'>
-        食品经营许可证
-
-      </view>
-      <view class="nav" wx:if='{{typeId != 14}}'>
-        <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
-          <view class="zhao_img">
-            <image src="../../../images/zhao.png"></image>
-          </view>
-          <view>上传</view>
-        </view>
-        <view wx:else class="clearfix">
-          <view class="tu_img" >
-            <image src="{{zhaos2}}"></image>
-            <view class="detele"  data-num="{{1}}" catchtap="detels">
-              <image src="../../../images/deteles.png" />
-            </view>
-          </view>
-        </view>
-        <view>图片上传说明：</view>
-        <view>1.出于监管的要求，需要上传审核店铺的食品经营许可证。</view>
-        <view>2.上传时请保证照片的清晰度，可辨别。</view>
-
+        <view>1.选填，若有证书更能体现个人能力</view>
+        <view>2.证件需清晰可辨认，不能上传复印件</view>
+       
       </view>
       
-      <view class="nop">
-        店铺营业执照
-      </view>
-      <view class="nav">
-        <view class="zhao" wx:if='{{zhao3}}' bindtap="chooseImages" id="{{2}}">
-          <view class="zhao_img">
-            <image src="../../../images/zhao.png"></image>
-          </view>
-          <view>上传</view>
-        </view>
-        <view wx:else class="clearfix">
-          <view class="tu_img" >
-            <image src="{{zhaos3}}"></image>
-            <view class="detele"  id="{{item}}" data-index='{{idx}}' data-num="{{2}}" catchtap="detels">
-              <image src="../../../images/deteles.png" />
-            </view>
-          </view>
-        </view>
-        <view>图片上传说明：</view>
-        <view>1.请确保身份证边框完整，字体清晰，证件号码清晰可见；</view>
-        <view>2.营业执照清晰可辨别，未过期。</view>
-      </view>
-      <view class="nop">
-        特产介绍
-        <view class="nop_rs">
-          {{num}}/500</view>
-      </view>
-
-      <view class="nav">
-        <textarea class="texta" value="{{value}}" placeholder="选填" maxlength="500" bindinput="valueChange"></textarea>
-      </view>
       <view class="agree">
         <view bindtap="gx">
           <view class="g" hidden="{{isg}}">
@@ -158,7 +115,7 @@
         </view>
         <view>
           <text class="hui">我已阅读并同意</text>
-          <text bindtap="web">《善家家乡特产交易平台商家入驻协议及须知》</text>
+          <text bindtap="web">《个人服务入驻协议》</text>
         </view>
       </view>
 

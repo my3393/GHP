@@ -1,0 +1,43 @@
+<!--packageA/pages/stay_ruz/stay_ruz.wxml-->
+<view >
+  <image class="top_img" src="https://www.xingtu-group.cn/xcx_img/z_receive.png"></image>
+</view>
+
+<view>
+  <view class="certification" bindtap="real">
+    实名认证
+    <view>前去认证</view>
+  </view>
+   <view class="certification" bindtap="person_ruz">
+    个人服务认证
+    <view>前去认证</view>
+  </view>
+   <view class="certification" bindtap="commany_ruz">
+    企业服务认证
+    <view>前去认证</view>
+  </view>
+</view>
+
+<view class="nav clearfix">
+    <view class="nav_list" >
+       <image src="../../../images/stay1.png"></image>
+       <view>身份认证</view>
+       <view>实名认证，信息真实可靠，双方都安心~</view>
+    </view>
+    <view class="nav_list">
+       <image src="../../../images/stay2.png"></image>
+       <view>免费宣传</view>
+       <view>附近社区用户，都有可能是你的客源~</view>
+    </view>
+    <view class="nav_list">
+       <image src="../../../images/stay3.png"></image>
+       <view>副业外快</view>
+       <view>轻松找到副业，外快来得也很快~</view>
+    </view>
+    <view class="nav_list">
+       <image src="../../../images/stay4.png"></image>
+       <view>主动权在手</view>
+       <view>线上帮你招揽，接不接都由你~</view>
+    </view>
+
+</view>
