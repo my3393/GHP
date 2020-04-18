@@ -60,10 +60,10 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/today/seckill/seckill",
-					"pathName": "packageA/pages/today/seckill/seckill",
+					"name": "packageA/pages/post/apply_post/apply_post",
+					"pathName": "packageA/pages/post/apply_post/apply_post",
 					"query": "",
-					"scene": 1001
+					"scene": null
 				}
 			]
 		}

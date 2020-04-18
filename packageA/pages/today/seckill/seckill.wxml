@@ -38,9 +38,13 @@
     <view class="ilmit">限一人份</view>
     <view>
       <view class="pro">
-       <progress class="progress" activeColor='#f12200' backgroundColor='#ff4e17' percent='70' border-radius='10'></progress>
+       <progress class="progress" activeColor='#f12200' backgroundColor='#ff4e17' percent='70' border-radius='10'  stroke-width='7'></progress>
        <text>余2件</text>
       </view>
+      <view class="snap">
+       去抢购
+      </view>
     </view>
+    <view class="price"><text style="font-size:12rpx">￥</text>9.9 <text class="cha">199</text></view>
   </view>
 </view>

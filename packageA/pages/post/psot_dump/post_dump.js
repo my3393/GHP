@@ -1,18 +1,13 @@
-// packageA/pages/post/post.js
+// packageA/pages/post/psot_dump/post_dump.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    i:2
+
   },
-  
-   a: () =>{
-    this.setData({
-      i:3
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

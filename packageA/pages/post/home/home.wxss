@@ -1,3 +1,6 @@
+/* packageA/pages/post/home/home.wxss */
+
+/* packageA/pages/post/home/home.wxss */
 /* packageA/pages/post/post.wxss */
 page{
   font-size: 28rpx;

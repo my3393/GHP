@@ -1,0 +1,17 @@
+/* component/graph/graph.wxss */
+.plugin_img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+}
+.plugin_img image{
+  width: 300rpx;
+  height: 300rpx;
+
+}
+.plugin_img view{
+  color: #ccc;
+  margin-top: 40rpx;
+}

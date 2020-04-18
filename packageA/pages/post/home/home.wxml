@@ -1,7 +1,7 @@
 <!--packageA/pages/post/post.wxml-->
 <view class="top">
   <view class="top_left">
-    <image src="../../../images/store_active.png"></image>
+    <image src="/images/store_active.png"></image>
     附近驿站
   </view>
   <view class="top_right">
@@ -17,11 +17,11 @@
    <view>营业时间：10:00-22:00</view>
    <view style="margin-top:30rpx;">
      <view class="nav_btn">
-       <image src="../../../images/shdz.png"></image> 
+       <image src="/images/shdz.png"></image> 
        查看地址 
      </view>
      <view class="nav_btn">
-       <image src="../../../images/phone.png"></image> 
+       <image src="/images/phone.png"></image> 
         联系电话
      </view>
    </view>

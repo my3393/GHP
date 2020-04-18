@@ -1,3 +1,7 @@
 {
+  "usingComponents": {
+    "sj": "../../../component/sjg/sjg"
+    
+  },
   "navigationBarTitleText": "申请提现"
 }

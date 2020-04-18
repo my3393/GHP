@@ -11,3 +11,5 @@
 <view class="submit {{isact?'act':''}}" bindtap="submit" >
     保存
 </view>
+
+<sj />

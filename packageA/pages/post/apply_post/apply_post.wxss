@@ -1,0 +1,88 @@
+/* packageA/pages/post/apply_post/apply_post.wxss */
+.nav{
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+.h1{
+  font-size: 30rpx;
+  margin: 30rpx 0;
+  font-weight: 600
+}
+.nav_top{
+  display: inline-block;
+}
+.nav_top image{
+  width: 30rpx;
+  height: 30rpx;
+  float: left;
+  margin-top: 8rpx;
+  margin-right: 4rpx;  
+}
+.cha{
+  display: inline-block;
+  color: red;
+  margin-left: 30rpx;
+}
+.suo{
+  margin-top: 40rpx;
+ 
+}
+.suo>view{
+  line-height: 50rpx;
+}
+.scope{
+  margin-top: 20rpx;
+}
+.scope view{
+   width: 130rpx;
+   height: 56rpx;
+   text-align: center;
+   line-height: 56rpx;
+   background: #f5f5f5;
+   border-radius: 30rpx;
+   display: inline-block;
+   margin-right: 40rpx;
+   color: #666666;
+}
+.scop{
+
+  background:rgba(241,34,0,0.1);
+  border: 1rpx solid #f12200;
+  color: #f12200 !important; 
+  
+}
+.time{
+  margin-top: 30rpx;
+  height: 100rpx;
+  width: calc(100% - 80rpx);
+  margin-left: 40rpx;
+  border-top: 1rpx solid #EAEAEA;
+  border-bottom: 1rpx solid #EAEAEA;
+  display: flex;
+  line-height: 100rpx;
+  justify-content: space-around;
+}
+.cost{
+  margin-top: 50rpx;
+
+}
+.cost view{
+  float: right;
+  color: red;
+}
+.sub{
+   margin: 60rpx 0;
+   background:linear-gradient(to right, #f12200, #ff4e17);
+   text-align: center;
+   width: calc(100% - 40rpx);
+   height: 80rpx;
+   margin-left: 20rpx;
+   border-radius: 40rpx;
+   color: #fff;
+   line-height: 80rpx;
+}
+.bott{
+  text-align: center;
+  color: #ccc
+}

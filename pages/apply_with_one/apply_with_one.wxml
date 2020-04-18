@@ -46,7 +46,7 @@
 <view class="submit" bindtap="sub">提交申请</view>
 
 
-<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>    
 
 <!-- 弹窗 -->
 <view class="popup" hidden="{{isdelete}}">

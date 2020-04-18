@@ -77,8 +77,17 @@ page{
 .state_nav{
   background: #fff;
   padding: 20rpx;
+   padding-bottom: 40rpx;
   box-sizing: border-box;
   margin-top: 20rpx;
+  position:relative;
+ 
+}
+.two{
+  position: absolute;
+  bottom: 20rpx;
+  right: 20rpx;
+  font-size: 22rpx;
 }
 .state_sm{
   display: inline-block;

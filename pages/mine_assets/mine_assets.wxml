@@ -41,7 +41,7 @@
       <text wx:if='{{item.status == 1}}' style="color:#ccc">已领取</text>
     </view>
     <view class="state_time">{{item.createDate}}</view>
-
+   
   </view>
 </view>
 <view wx:if='{{tar == 0}}'>
@@ -54,8 +54,9 @@
       <text class="linqu" wx:if='{{item.status == 0}}' bindtap="lingqu" id="{{item.id}}">领取</text>
       <text class="linqu lq" wx:if='{{item.status == 1}}'>已领取</text>
     </view>
+    
     <view class="state_time">{{item.createDate}}</view>
-
+     <view class="two linqu" bindtap="phone" id="{{item.sendUserPhone}}">再次申领</view>
   </view>
 
 </view>
@@ -66,7 +67,7 @@
   </view>
   <view class="instructions">
     <view class="h1">资产转增</view>
-    <view class="xs">个人名下的善家至尊会员激活卷属于个人资产，支持转增，具体转增操作可前往“资产转增”查看</view>
+    <view class="xs">个人名下的善家购至尊会员激活卷属于个人资产，支持转增，具体转增操作可前往“资产转增”查看</view>
   </view>
   <!-- <view class="instructions">
         <view class="h1">资产冻结与释放</view>

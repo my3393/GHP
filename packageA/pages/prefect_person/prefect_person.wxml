@@ -1,0 +1,97 @@
+<!--packageA/pages/prefect_commpany/prefect_commpany.wxml-->
+<view class="nav clearfix">
+  <image src="../../../images/sjg.png"></image>
+  <view style="display:inline-block">深圳市你得问</view>
+  <view class="nav_btn">
+    <image src="../../../images/home.png"></image>
+    主页
+  </view>
+  <view class="nav_fw">房屋中间</view>
+  <view style="margin-top:60rpx;">
+    <view>业务介绍</view>
+    <textarea class="yw" placeholder="公司业务介绍不能少哦"></textarea>
+  </view>
+
+</view>
+<view class="nop">
+  基本信息
+</view>
+<view class='infor clearfix'>
+  <view class='inform'>头像</view>
+  <view class='inforin infor_img' bindtap="chooseImage">
+    <image src="{{post1}}"></image>
+
+  </view>
+  <view class='enter'>
+    <image src='../../../images/enter.png'></image>
+  </view>
+</view>
+<view class='infor'>
+  <view class='inform'>电话</view>
+  <view class='inforin lste'>
+
+    <input type='text' placeholder='请输入你的名字' value="{{name}}" bindinput='names'></input>
+  </view>
+</view>
+
+<view class='infor' bindtap="diz">
+  <view class='inform'>地址</view>
+  <view class='inforin infor_r '>
+    <input disabled='true' type='text' value='{{addres}}' placeholder='请选择所在地址' bindtap='showlabel'></input>
+  </view>
+  <view class='enter'>
+    <image src='../../../images/enter.png'></image>
+  </view>
+</view>
+<view class='infor'>
+
+  <view class='inforin' style="margin-left:126rpx;">
+    <input type='text' placeholder='详细地址' bindinput='xuan' value="{{xuan}}"></input>
+  </view>
+</view>
+
+ <view class="nop">
+        图片（用图片展示下你自己的技能）
+       </view>
+      <view class="nav">
+        <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
+          <view class="zhao_img">
+            <image src="../../../images/zhao.png"></image>
+          </view>
+          <view>上传</view>
+        </view>
+        <view wx:else class="clearfix">
+          <view class="tu_img" >
+            <image src="{{zhaos1}}"></image>
+            <view class="detele"   data-num="{{0}}" catchtap="detels">
+              <image src="../../../images/deteles.png" />
+            </view>
+          </view>
+        </view>
+      
+       
+      </view>
+
+<view class="nav" style="margin-top:20rpx;">
+  <view>技能</view>
+  <view class="clearfix" style="margin-top:20rpx;">
+    <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
+      <image src="{{item}}"></image>
+      <view class="detele" id="{{item}}" data-index='{{idx}}' bindtap="detels">
+        <image src="../../images/deteles.png" />
+      </view>
+    </view>
+    <view class="zhao" bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
+      <view class="zhao_img">
+        <image src="../../../images/zhao.png"></image>
+      </view>
+      <view>上传</view>
+    </view>
+  </view>
+</view>
+<view class="mor" >
+    默认地址
+    <view class="switch">
+      <switch color="#f12200" checked="{{checked}}" bindchange="check" />
+    </view>
+</view>

@@ -1,0 +1,18 @@
+<!--packageA/pages/post/community/community.wxml-->
+<view class="nav">
+   <view class="h1">善家社区驿站是什么?</view>
+   <view class="h2">1.社区驿站说明</view>
+   <view> 社区驿站主要为星途集团旗下平台提供快递暂放与送上门服务. </view>
+   <view class="h2">2.加入有什么好处？</view>
+   <view>可作为副业发展，每完成一个订单服务可获得一定奖励。</view>
+   <view class="h2">3.驿站服务范围</view>
+   <view> 根据实际情况，驿站可选择负责小范围（楼栋）或大范围（小区），且一个范围内仅有一家驿站。</view>
+   <view class="h2">4.申请条件</view>
+   <view> 拥有一个地处一楼的店面；有一定的时间自由，保障驿站业务的正常进行。</view>
+</view>
+
+
+<view class="foote">
+   <view bindtap="apply">门店已进驻，将其申请为驿站</view>
+   <view>门店未进驻，直接申请为驿站</view>
+</view>

@@ -34,10 +34,7 @@
   <view><text class="hei">分销收益：</text>{{detail.transactionFinishAmount}}<text>元</text></view>
 </view>
 
-<view class="foot-boot">
-    <view >善家</view>
-    <view class="foot-boot-m">大爱无疆，感恩家乡</view>
-</view>
+<sj />
 
  <view class="popup" hidden="{{iscertfica}}">
         <view class="popup_h1">请先进行实名认证</view>

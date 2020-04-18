@@ -1,0 +1,47 @@
+<!--packageA/pages/post/apply_post/apply_post.wxml-->
+<view class="nav">
+   <view class="h1">
+     711便利店（新乐店）
+   </view>
+   <view class="nav_top">
+     <image src="/images/phone.png"></image>
+     400-45782124
+   </view>
+   <view class="cha">查看门店照片</view>
+
+   <view class="suo">
+      <view>所在地址</view>
+      <view>深圳市宝安区宝安中心尚都花园6栋A105号</view>
+   </view>
+   <view class="suo">
+      <view>服务范围</view>
+   </view>
+   <view class="scope">
+       <view class="scop">本小区</view>
+       <view>本栋楼</view>
+   </view>
+   <view class="suo">
+     <view>营业时间</view>
+   </view>
+   <view class="time">
+       <view>
+         <picker mode="time" start='00:00' end='23:59' value='{{start}}' bindchange='start'>
+           {{start}}
+         </picker>
+       </view>
+       <view>~</view>
+       <view> 
+         <picker mode="time" start='00:00' end='23:59' value='{{end}}' bindchange='end'>
+           {{end}}
+         </picker>
+      </view>
+   </view>
+
+   <view class="cost">
+    加盟费用
+    <view>￥20</view>
+   </view>
+   <view class="sub">申请成为驿站</view>
+   <view class="bott">申请即表示已阅读并同意《善家社区驿站申请协议》</view>
+</view>
+

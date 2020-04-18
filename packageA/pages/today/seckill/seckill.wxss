@@ -42,7 +42,7 @@ page{
   padding: 20rpx;
   box-sizing: border-box;
   background: #fff;
-  width: clac(100% - 40rpx);
+  width: calc(100% - 40rpx);
   margin-left: 20rpx;
   margin-top: 20rpx;
   border-radius: 12rpx;
@@ -89,12 +89,37 @@ page{
 }
 .pro{
   margin-top: 10rpx;
+  display: inline-block;
 }
 .pro{
   color: #FF3300;
+  font-size: 22rpx;
 }
 .progress{
   width: 240rpx;
   display: inline-block;
   margin-right: 20rpx;
+}
+.snap{
+  float: right;
+  width: 140rpx;
+  height: 54rpx;
+   background:linear-gradient(to right, #f12200, #ff4e17);
+   text-align: center;
+   line-height: 56rpx;
+   color: #fff;
+   font-size: 24rpx;
+   border-radius: 30rpx;
+}
+.price{
+  color: #f12200;
+  font-weight: 600;
+}
+
+.cha{
+  text-decoration:line-through;
+  font-size: 28rpx;
+  color: #666666;
+  font-weight: 500
+
 }

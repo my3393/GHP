@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "订单中心",
-  "enablePullDownRefresh": true
-  
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "sj": "../../../component/sjg/sjg"  
+  }
 }

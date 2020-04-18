@@ -4,7 +4,7 @@
   <view class='a-nav-title'>
 
     <view class="a-nav-t " hidden="{{!is_top}}">
-      善家公益
+      善家购公益
     </view>
     <view class="top_center" hidden="{{is_top}}">
       <text class="{{issrcoll == 1 ? 'center_a' :''}}" bindtap="scrollto">项目</text>

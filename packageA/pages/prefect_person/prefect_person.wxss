@@ -1,0 +1,2 @@
+/* packageA/pages/prefect_person/prefect_person.wxss */
+@import '../prefect_commpany/prefect_commpany'

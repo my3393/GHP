@@ -94,6 +94,23 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //拨打电话
+  phone(e){
+    wx.showModal({
+      title: '提示',
+      content: '确定拨打该用户电话吗？',
+      success(res) {
+        if (res.confirm) {
+          wx.makePhoneCall({
+            phoneNumber: e.currentTarget.id //仅为示例，并非真实的电话号码
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+   
+  },
   jihuo() {
     this.setData({
       modal: true,

@@ -77,7 +77,8 @@
     "pages/feedback_detail/feedback_detail",
     "pages/yb_trun/yb_trun",
     "component/sjg/sjg",
-    "pages/assets_mx/assets_mx"
+    "pages/assets_mx/assets_mx",
+    "component/graph/graph"
   ],
   "subpackages": [
     {
@@ -88,11 +89,15 @@
         "pages/receive_home/receive_home",
         "pages/store_home/store_home",
         "pages/company_ruz/commpany_ruz",
-        "pages/post/post",
         "pages/prefect_commpany/prefect_commpany",
         "pages/person_ruz/person_ruz",
         "pages/stay_ruz/stay_ruz",
-        "pages/today/seckill/seckill"
+        "pages/today/seckill/seckill",
+        "pages/prefect_person/prefect_person",
+        "pages/post/home/home",
+        "pages/post/community/community",
+        "pages/post/apply_post/apply_post",
+        "pages/post/psot_dump/post_dump"
       ]
     }
   ],
