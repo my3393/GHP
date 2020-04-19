@@ -215,7 +215,7 @@ Page({
                           // })
 
                         } else if (wx.getStorageSync('url')) {
-                          console.log('-----url-----')
+                          console.log('-----url----')
                           wx.redirectTo({
                             url: wx.getStorageSync('url'),
                           })

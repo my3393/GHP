@@ -1,4 +1,4 @@
-// packageA/pages/person_ruz/person_ruz.js
+// pages/store_refund/store_refund.js
 var url;
 const app = getApp();
 let province = [];
@@ -12,8 +12,7 @@ let town_id = '';
 let zhao1 = '';
 let zhao2 = '';
 let zhao3 = '';
-let images = [];
-let simages = [];
+
 let userid;
 Page({
 
@@ -26,36 +25,39 @@ Page({
     isshow: true,
     isg: true,
     audit: 3,
-    post1: '../../../images/store_logo.png',
+    post1: '/images/store_logo.png',
     name: '',
-    ismask: true,
-    ispdf: true,
+    ismask: true,  
     address: true,
     prov: '',
     city: '',
     area: '',
     town: '',
     zhaos1: '',
-    zhaos2: '',
-    zhaos3: '',
     isprov: true,
     iscity: false,
     isqu: false,
     isjie: false,
-    zhao1: true,
-    zhao2: true,
-    zhao3: true,
+    zhao1: true, 
     value: '',
     addres: '',
     typ: '',
     xuan: '',
+    sexs:[
+      { name: '男', id: "1" },
+      {name:'女',id:"2"},
+    ],
+    phone:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    //this.getAudit();
 
+    
   },
 
   /**
@@ -69,7 +71,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -104,7 +115,569 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this;
 
+    return {
+      title: '我是' + that.data.user.userName + +that.data.user.bindCityName + that.data.user.bindAreaName + '人平台海量老乡，欢迎特产入驻。',
+      path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
+
+    }
+  },
+  //复制文本
+  copy(e) {
+    console.log(e)
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.text,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+          }
+        })
+      }
+    })
+  },
+  
+  //取消
+  cancel() {
+    this.setData({
+      ismask: !this.data.ismask,
+      ispdf: !this.data.ispdf
+    })
+  },
+  confirm() {
+    this.setData({
+      ismask: !this.data.ismask,
+      ispdf: !this.data.ispdf
+    })
+    wx.setClipboardData({
+      data: 'https://sjg.xcx.api.xingtu-group.cn/api-sjgxcxweb/file/download7',
+      success: function (res) {
+        wx.showToast({
+          title: '复制成功',
+          icon: 'none',
+          duration: 2500,
+        });
+      }
+    })
+  },
+  //删除个人照照片
+  detels(e) {
+    var that = this;
+    console.log(e)
+    console.log(that.data.imgs)
+
+
+    if (e.currentTarget.dataset.num == 0) {
+      that.setData({
+        zhao1: true,
+        zhaos1: '',
+      })
+      zhao1 = ''
+    } else if (e.currentTarget.dataset.num == 1) {
+      that.setData({
+        zhao2: true,
+        zhaos2: '',
+      })
+      zhao2 = ''
+    } else if (e.currentTarget.dataset.num == 2) {
+      that.setData({
+        zhao3: true,
+        zhaos3: '',
+      })
+      zhao3 = ''
+    }
+
+  },
+  //取消
+  detel() {
+    this.setData({
+      address: true,
+      ismask: true,
+    })
+  },
+  //姓名
+  names(e) {
+    this.setData({
+      name: e.detail.value
+    })
+  },
+  //电话
+  phone(e) {
+    this.setData({
+      phone: e.detail.value
+    })
+  },
+  //性别
+  sex(e) {
+    this.setData({
+      gender: this.data.sexs[e.detail.value].id
+    })
+  },
+  //类型
+  type(e) {
+    console.log(e)
+    this.setData({
+      typ: this.data.type[e.detail.value].typeName,
+      typeId: this.data.type[e.detail.value].id,
+    })
+  },
+  //查看协议
+  web() {
+    wx.navigateTo({
+      url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.html',
+    })
+  },
+  //入驻提交
+  sub() {
+    let that = this;
+    if (that.data.post1 == '/images/store_logo.png') {
+      wx.showToast({
+        title: '请上传头像',
+        icon: 'none'
+      })
+    } else if (that.data.name == '') {
+      wx.showToast({
+        title: '请输入名字',
+        icon: 'none'
+      })
+    } else if (that.data.gender == '') {
+      wx.showToast({
+        title: '请选择性别',
+        icon: 'none'
+      })
+    } else if (that.data.addres == '') {
+      wx.showToast({
+        title: '请选择特产地址',
+        icon: 'none'
+      })
+    } else if (that.data.xuan == '') {
+      wx.showToast({
+        title: '请描述下你的技能',
+        icon: 'none'
+      })
+    }
+   
+    else {
+      that.submit();
+    }
+  },
+  submit() {
+    let that = this;
+    let data = {
+      storeLogo: that.data.post1_name,
+      storeName: that.data.name,
+      typeId: that.data.typeId,
+      provinceId: province_id,
+      cityId: city_id,
+      areaId: area_id,
+      townId: town_id,
+      publicSlogan: that.data.xuan,
+      saleImg: zhao1,
+      foodImg: zhao2,
+      businessImg: zhao3,
+      introduce: that.data.value,
+    }
+
+    app.res.req('/store/submitapply', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        // that.setData({
+        //   audits: res.data,
+        //   audit: 2
+        // })
+        that.getAudit();
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //重新提交
+  again() {
+    province_id = this.data.audits.provinceId;
+    city_id = this.data.audits.cityId;
+    area_id = this.data.audits.areaId;
+    town_id = this.data.audits.townId;
+    zhao1 = this.data.audits.saleImg;
+    zhao2 = this.data.audits.foodImg;
+    zhao3 = this.data.audits.storeLogo;
+    this.setData({
+      name: this.data.audits.storeName,
+      post1_name: this.data.audits.businessImg,
+      post1: this.data.audits.storeLogoOss,
+      typ: this.data.audits.typeName,
+      typeId: this.data.audits.typeId,
+      prov: this.data.audits.provinceName,
+      city: this.data.audits.cityName,
+      area: this.data.audits.areaName,
+      town: this.data.audits.townName,
+      zhaos1: this.data.audits.saleImgOss,
+      zhaos2: this.data.audits.foodImgOss,
+      zhaos3: this.data.audits.businessImgOss,
+      xuan: this.data.audits.publicSlogan,
+      value: this.data.audits.introduce,
+      addres: this.data.audits.provinceName + '-' + this.data.audits.cityName + '-' + this.data.audits.areaName + '-' + this.data.audits.townName,
+      zhao1: false,
+      zhao2: false,
+      zhao3: false,
+      isprov: true,
+      audit: 3,
+    })
+  },
+  getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
+    wx.request({
+      url: app.data.urlmall + "/login/xcxbindphone",
+      data: {
+        encryptedData: e.detail.encryptedData,
+        iv: e.detail.iv,
+        sessionKey: wx.getStorageSync('sessionkey')
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        token: wx.getStorageSync('token')
+      },
+      dataType: 'json',
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.status === 1000) {
+          wx.setStorage({
+            key: 'token',
+            data: res.data.token,
+          })
+          wx.setStorage({
+            key: 'userinfo',
+            data: res.data,
+          })
+          setTimeout(function () {
+            that.sub();
+          }, 1000)
+
+        } else if (res.data.status === 103) {
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+
+        } else {
+          // wx.showToast({
+          //   title: res.data.msg,
+          //   icon: 'none'
+          // })
+        }
+      }
+    })
+  },
+  getType() {
+    let that = this;
+
+    let data = {
+      grade: 1
+    }
+
+    app.res.req('/home/grade/type', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          type: res.data
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  getAudit() {
+    let that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
+    let data = {}
+
+    app.res.req('/store/applyinfo', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data == null) {
+          that.setData({
+
+            audit: 3
+          })
+        } else {
+          that.setData({
+            audits: res.data,
+            audit: res.data.auditStatus
+          })
+        }
+        that.setData({
+          load: false
+        })
+        that.getType();
+        wx.hideLoading()
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        if (userid) {
+          wx.redirectTo({
+            url: '../login/login?store_refund=' + 1 + '&userid=' + userid
+          })
+        } else {
+          wx.redirectTo({
+            url: '../login/login?mine=' + 1
+          })
+        }
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  
+  //特产上传
+  getprogress() {
+    let that = this;
+    let data = {}
+
+    app.res.req('/oss/progress', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          progress: res.data
+        })
+
+        if (res.data == 100) {
+          wx.hideLoading();
+        } else {
+          wx.showLoading({
+            title: res.data + '%',
+            mask: true,
+          });
+        }
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //LOGO
+  chooseImage(e) {
+    var that = this;
+    // id = e.currentTarget.id,
+    wx.chooseImage({
+      count: 1,
+      success: (res) => {
+        this.setData({
+          src: res.tempFilePaths[0],
+          isshow: !that.data.isshow,
+        })
+      },
+    })
+
+  },
+  //裁剪
+  chooseimg() {
+    wx.chooseImage({
+      count: 1,
+      success: (res) => {
+        this.setData({
+          src: res.tempFilePaths[0]
+        })
+      },
+    })
+  },
+  cut() {
+    var that = this;
+    this.selectComponent('#imgcut').cut().then(r => {
+      // wx.previewImage({
+      //   urls: [r],
+      // })
+      var test1 = setInterval(function () {
+        that.getprogress();
+      }, 1000)
+      url = r
+      that.setData({
+        isshow: !that.data.isshow,
+        ishidden: !that.data.ishidden
+      })
+      wx.uploadFile({
+        url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
+        filePath: url,
+        name: 'file',
+        header: {
+          "Content-Type": "multipart/form-data",
+          'accept': 'application/json',
+          'token': wx.getStorageSync('token')
+        },
+        formData: {
+          'token': wx.getStorageSync('token')
+        },
+        dataType: 'json',
+        success(res) {
+          let datas = JSON.parse(res.data)
+          console.log(datas)
+          if (datas.status == 1000) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传成功',
+              icon: 'none'
+            })
+
+            clearTimeout(test1);
+            that.setData({
+              post1: datas.data.url,
+              post1_name: datas.data.fileName,
+
+            })
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
+
+        }
+
+      })
+
+    }).catch(e => {
+      wx.showModal({
+        title: '',
+        content: e.errMsg,
+        showCancel: false
+      })
+    })
+  },
+  //图片上传
+  chooseImages(e) {
+    var that = this;
+
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      success: res => {
+        // console.log(res.tempFilePaths[0]);
+        var tempFilePaths = res.tempFilePaths;
+        var test1 = setInterval(function () {
+          that.getprogress();
+        }, 1000)
+        const uploadTask = wx.uploadFile({
+          url: app.data.urlmall + '/oss/xcxupload', // 仅为示例，非真实的接口地址
+          filePath: tempFilePaths[0],
+          name: 'file',
+          header: {
+            "Content-Type": "multipart/form-data",
+            'accept': 'application/json',
+            'token': wx.getStorageSync("token")
+          },
+          formData: {
+            // 'token': wx.getStorageSync("etoken")
+          },
+          // UploadTask.onProgressUpdate(function callback)
+          dataType: 'json',
+          success(res) {
+
+            let datas = JSON.parse(res.data)
+            console.log(datas)
+            if (e.currentTarget.id == 0) {
+              that.setData({
+                zhaos1: datas.data.url,
+                zhao1: false
+              })
+              zhao1 = datas.data.fileName
+            } else if (e.currentTarget.id == 1) {
+              that.setData({
+                zhaos2: datas.data.url,
+                zhao2: false
+              })
+              zhao2 = datas.data.fileName
+            } else {
+              that.setData({
+                zhaos3: datas.data.url,
+                zhao3: false
+              })
+              zhao3 = datas.data.fileName
+            }
+            clearTimeout(test1);
+            wx.hideLoading();
+            // do something
+            wx.showToast({
+              title: '上传成功',
+              icon: 'none'
+            })
+          },
+          fail(res) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '上传失败,请检查网络',
+              icon: 'none'
+            })
+            clearTimeout(test1);
+          }
+        })
+        uploadTask.onProgressUpdate((res) => {
+
+          that.setData({
+            chang: res.progress
+          })
+          wx.showToast({
+            title: that.data.chang,
+            icon: 'none',
+            duration: 3000,
+          })
+          console.log('上传进度', res.progress)
+          console.log('已经上传的数据长度', res.totalBytesSent)
+          console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+        })
+        that.setData({
+          postersies: res.tempFilePaths[0]
+        })
+      }
+    })
+
+
+  },
+  //勾选
+  gx() {
+    let that = this;
+    that.setData({
+      isg: !that.data.isg
+    })
+   
+  },
+  valueChange(e) {
+    console.log(e.detail.value.length)
+    this.setData({
+      num: e.detail.value.length
+    })
   },
   diz() {
     this.getprov();

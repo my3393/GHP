@@ -21,7 +21,7 @@
         <image src="../../images/search.png"></image>
       </view>
       <view class="sea">
-        <input class="search " placeholder="商品，店铺" disabled="true" bindtap="aaa"></input>
+        <input class="search " placeholder="商品，店铺" disabled="true" bindtap="search"></input>
       </view>
     </view>
     <view>

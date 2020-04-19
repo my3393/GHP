@@ -97,7 +97,8 @@
         "pages/post/home/home",
         "pages/post/community/community",
         "pages/post/apply_post/apply_post",
-        "pages/post/psot_dump/post_dump"
+        "pages/post/psot_dump/post_dump",
+        "pages/post/apply_post2/apply_post2"
       ]
     }
   ],

@@ -1,1 +1,26 @@
 /* packageA/pages/post/psot_dump/post_dump.wxss */
+page{
+  font-size: 28rpx;
+}
+.apply{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+   background:linear-gradient(to right, #f12200, #ff4e17);
+   text-align: center;
+   width: 220rpx;
+   height: 60rpx;
+   
+   border-radius: 40rpx;
+   color: #fff;
+   line-height: 60rpx;
+   font-size: 26rpx;
+}
+.kia{
+   position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: #666666;
+}

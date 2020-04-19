@@ -60,9 +60,16 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/post/apply_post/apply_post",
-					"pathName": "packageA/pages/post/apply_post/apply_post",
+					"name": "packageA/pages/person_ruz/person_ruz",
+					"pathName": "packageA/pages/person_ruz/person_ruz",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "pages/good_detail/good_detail",
+					"pathName": "pages/good_detail/good_detail",
+					"query": "storeid=10&userid=52&id=354",
 					"scene": null
 				}
 			]

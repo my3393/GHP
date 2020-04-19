@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "graph": "../../../component/graph/graph"
+   
+  }
 }

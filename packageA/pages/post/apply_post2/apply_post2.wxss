@@ -1,0 +1,2 @@
+/* packageA/pages/post/apply_post2/apply_post2.wxss */
+@import '/pages/store_refund/store_refund';

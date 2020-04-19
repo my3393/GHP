@@ -27,9 +27,9 @@
               <view>{{store.storeName}}</view>
           </view>
           <view>
-              <view class="biao_img">
+              <!-- <view class="biao_img">
                   <image src="../../images/aix.png" />
-              </view>
+              </view> -->
               <view class="focus">{{store.collectionNum}}人关注</view>
           </view>
           <view style="width:560rpx">{{store.publicSlogan}}</view>

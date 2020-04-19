@@ -88,12 +88,12 @@ Page({
     if (options.userid) {
       userid = options.userid
       wx.setStorageSync('bangId', userid)
-      that.Bang();
+     
     }
     if (options.storeid) {
       storeid = options.storeid
       wx.setStorageSync('storeid', storeid)
-      that.Bang_store();
+    
     }
     let obj = wx.getMenuButtonBoundingClientRect();
     this.setData({
@@ -110,12 +110,7 @@ Page({
       })
     });
     //绑定
-    if(wx.getStorageSync('bangId')){
-      that.Bang();
-    }
-    if (wx.getStorageSync('storeid')) {
-      that.Bang_store();
-    }
+   
   },
   /**
    * 生命周期函数--监听页面显示
@@ -126,7 +121,12 @@ Page({
     //选择id
     var that = this;
     // query.select('.top1').boundingClientRect(function (rect) {
-
+    if (wx.getStorageSync('bangId')) {
+      that.Bang();
+    }
+    if (wx.getStorageSync('storeid')) {
+      that.Bang_store();
+    }
 
     //   top1 = rect.top
 
@@ -174,7 +174,7 @@ Page({
     console.log(that.data.detail.name)
     return {
       title: '我是' + that.data.user.userName + ',这是' + that.data.detail.cityName + that.data.detail.areaName + that.data.detail.productName + '特产，邀你品尝',
-      path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id,
+      path: '/pages/good_detail/good_detail?id=' + id + '&userid=' + user.id + '&storeid=' + that.data.detail.storeId,
   
     }
   },
@@ -944,10 +944,19 @@ Page({
           wx.redirectTo({
             url: '../login/login?id=' + id + '&userid=' + userid
           })
+          if(that.data.detail){
+            var url = '../good_detail/good_detail?id=' + id + '&userid=' + userid + '&storeid=' + that.data.detail.storeId
+            wx.setStorageSync('url', url)
+          }else{
+            var url = '../good_detail/good_detail?id=' + id + '&userid=' + userid 
+            wx.setStorageSync('url', url)
+          }
+         
         } else {
           wx.redirectTo({
             url: '../login/login?id=' + id
           })
+       
         }
       } else {
         wx.showToast({

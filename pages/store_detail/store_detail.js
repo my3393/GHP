@@ -8,6 +8,7 @@ let productType = 0;
 let list = [];
 let rich;
 let userid;
+let storeid;
 Page({
 
   /**
@@ -45,8 +46,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-
+     var that = this
     if (options.storeid){
+        
       id = options.storeid
     }else{
       id = options.id
@@ -54,19 +56,14 @@ Page({
     if (options.userid) {
       userid = options.userid
       wx.setStorageSync('bangId', userid)
-      that.Bang();
+      
     }
     if (options.storeid) {
       storeid = options.storeid
       wx.setStorageSync('storeid', storeid)
-      that.Bang_store();
+      
     }
-    if (wx.getStorageSync('bangId')) {
-      that.Bang();
-    }
-    if (wx.getStorageSync('storeid')) {
-      that.Bang_store();
-    }
+    
     wx.showLoading({
       title: '加载中',
     })
@@ -98,8 +95,11 @@ Page({
         })
       },
     })
-    if(wx.getStorageSync('bangId')){
+    if (wx.getStorageSync('bangId')) {
       that.Bang();
+    }
+    if (wx.getStorageSync('storeid')) {
+      that.Bang_store();
     }
   },
 
@@ -309,7 +309,11 @@ Page({
 
         wx.redirectTo({
           url: '../login/login?storeid=' + id + '&userid=' + userid,
+          
         })
+        
+        var url= '../store_detail/store_detail?storeid=' + id + '&userid=' + userid
+        wx.setStorageSync('url',url)
       } else {
         wx.showToast({
           title: res.msg,
@@ -482,55 +486,7 @@ Page({
       ismask:true
     })
   },
-  canvasPoster(code) { //canvas绘制图片，code是动态小程序码，可看我上一篇文章
-    wx.showLoading({
-      icon: 'loading',
-      title: '海报制作中',
-    })
-    let that = this;
-    let ctx = wx.createCanvasContext('posterCanvas', this);
-    ctx.setFillStyle('white');
-    ctx.fillRect(0, 0, 400, 450,40);
-    ctx.arc(360, 40, 40, Math.PI*2, Math.PI * 1.5)
-    ctx.clip();
-    ctx.setFontSize(12);
-    ctx.setFillStyle('#666666');
-    ctx.fillText('用户名', 50, 30);
-    ctx.setFillStyle('#333333');
-    ctx.fillText('给您推荐了一个热门的店铺', 50, 50);
-    ctx.drawImage('../../images/tui.jpg', 15, 70, 220, 200);
-    //动态生成的小程序码（ps：网络图片一定要先下载到本地）
-    ctx.drawImage(code, 20, 280, 60, 60);
-    ctx.setFontSize(10);
-    ctx.setTextAlign('center');
-    ctx.setFillStyle('#333333');
-    ctx.fillText('长按图片识别，立即进店', 140, 300);
-    ctx.setFillStyle('#999');
-    ctx.fillText('分享自 善家购特产商城', 140, 325);
-    ctx.setFillStyle('#000000');
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(30, 35, 15, 0, 2 * Math.PI);
-    ctx.clip();
-    ctx.drawImage('../../images/head.png', 15, 20, 30, 30); //头像我是用的本地图片
-    ctx.restore();
-    ctx.setFontSize(30);
-    wx.hideLoading()
-    ctx.draw(false, () => {
-      wx.canvasToTempFilePath({ //将canvas生成图片
-        width: 280,
-        height: 450,
-        canvasId: 'posterCanvas',
-        fileType: 'png',
-        success: (canvasImgRes) => {
-
-          this.setData({
-            imgSrc: canvasImgRes.tempFilePath
-          });
-        }
-      }, this);
-    })
-  },
+ 
   canvasWorkBreak(maxWidth, fontSize, text) {
     const maxLength = maxWidth / fontSize
     const textLength = text.length

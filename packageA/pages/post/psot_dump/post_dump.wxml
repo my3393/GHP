@@ -1,2 +1,8 @@
 <!--packageA/pages/post/psot_dump/post_dump.wxml-->
-<text>packageA/pages/post/psot_dump/post_dump.wxml</text>
+<graph>
+ 
+</graph>
+ <view class="apply" bindtap="apply">直接申请为驿站</view>
+ <view class="kia">前往开店</view>
+
+
