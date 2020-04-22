@@ -1,0 +1,11 @@
+<!--packageA/pages/release/mine/mine.wxml-->
+ <view>
+     <view class="nav clearfix" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
+       <image src="{{item.headImgUrl}}"></image>
+       <view class="nav_rig">
+         <view class="nav_name dan">{{item.userName}}</view>
+         <view class="nav_jn dan">详情：{{item.content}}</view>
+         <view class="typ">{{item.typeName}}</view>
+       </view>
+     </view>
+  </view>

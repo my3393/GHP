@@ -1,19 +1,22 @@
-// packageA/pages/stay_ruz/stay_ruz.js
+// packageA/pages/release/mine/mine.js
 const app = getApp();
+const app = getApp();
+let currentPage = 1
+let detail = [];
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   this.getAudit();
+    this.getDetail();
   },
 
   /**
@@ -41,7 +44,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+     currentPage = 1
+     detail = [];
   },
 
   /**
@@ -64,50 +68,31 @@ Page({
   onShareAppMessage: function () {
 
   },
-  commany_ruz(){
-    wx.navigateTo({
-      url: '../company_ruz/commpany_ruz',
-    })
-  },
-  person_ruz(){
-    wx.navigateTo({
-      url: '../person_ruz/person_ruz',
-    })
-  },
-  getAudit() {
+  getDetail() {
     let that = this;
-    wx.showLoading({
-      title: '加载中',
-    })
     let data = {
-      enterpriseType:1
-    }
+      currentPage: currentPage, 
+    } 
 
-    app.res.req('/sqapply/enterpriseinfo', data, (res) => {
+    app.res.req('/sqdynamic/mydynamiclist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        if (res.data == null) {
-          that.setData({
-
-            audit: 3
-          })
-        } else {
-          that.setData({
-           
-            audit: res.data.auditStatus
-          })
-        }
+        detail.push(...res.data.data)
         that.setData({
-          load: false
-        })
-        
-        wx.hideLoading()
+          detail: detail,
 
+        })
+        wx.hideLoading()
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
         })
-      } 
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
   },
 })

@@ -1,6 +1,6 @@
 //app.js
-var http = require('utils/http.js')  ;
-
+var http = require('utils/http.js') ;
+let livePlayer = requirePlugin('live-player-plugin')
 
 App({
   data: {
@@ -89,6 +89,21 @@ App({
    res: {
     req: http.req  //这里配置我们需要的方法
   },
-  
+  onShow(options) {
+    // 分享卡片入口场景才调用getShareParams接口获取以下参数
+    if (options.scene == 1007 || options.scene == 1008 || options.scene == 1044) {
+      livePlayer.getShareParams()
+        .then(res => {
+          console.log('get room id', res.room_id) // 房间号
+          console.log('get openid', res.openid) // 用户openid
+          console.log('get share openid', res.share_openid) // 分享者openid，分享卡片进入场景才有
+          console.log('get custom params', res.custom_params) // 开发者在跳转进入直播间页面时，页面路径上携带的自定义参数，这里传回给开发者
+          console.log('绑定',res.custom_params.pid)
+          wx.setStorageSync('bangId',res.custom_params.pid)
+        }).catch(err => {
+          console.log('get share params', err)
+        })
+    }
+  }
 
 })

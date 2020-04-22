@@ -11,3 +11,17 @@
 .you{
   margin-left: 180rpx;
 }
+.m_left{
+  margin-left: 178rpx;
+}
+.pay{
+   background:linear-gradient(to right, #f12200, #ff4e17);
+   text-align: center;
+   width:140rpx;
+   height: 60rpx;
+   display: inline-block;
+   margin-top: 40rpx;
+   border-radius: 40rpx;
+   color: #fff;
+   line-height: 60rpx;
+}

@@ -755,49 +755,69 @@ Page({
       }
     })
   },
-  ylsj() {
+  ylsj(e) {
     //娱乐世界
-    wx.navigateToMiniProgram({
-      appId: 'wxf556b39ee9c934b4',
-      path: 'pages/my_idol/my_idol',
-      extraData: {
-
-      },
-      envVersion: 'release',
-      success(res) {
-        // 打开成功
-      }
+    wx.showToast({
+      title: '艺呗抵扣' + e.currentTarget.id + '%',
+      icon:'none'
     })
+    setTimeout(()=>{
+      wx.navigateToMiniProgram({
+        appId: 'wxf556b39ee9c934b4',
+        path: 'pages/my_idol/my_idol',
+        extraData: {
+
+        },
+        envVersion: 'release',
+        success(res) {
+          // 打开成功
+        }
+      })
+    },1500)
+   
 
   },
-  yslm() {
+  yslm(e) {
     //艺赛联盟
-    wx.navigateToMiniProgram({
-      appId: 'wx4cef4fe6585f5bfd',
-      path: 'pages/e_home/e_home',
-      extraData: {
-
-      },
-      envVersion: 'release',
-      success(res) {
-        // 打开成功
-      }
+    wx.showToast({
+      title: '艺呗抵扣' + e.currentTarget.id + '%',
+      icon: 'none'
     })
+    setTimeout(()=>{
+      wx.navigateToMiniProgram({
+        appId: 'wx4cef4fe6585f5bfd',
+        path: 'pages/e_home/e_home',
+        extraData: {
+
+        },
+        envVersion: 'release',
+        success(res) {
+          // 打开成功
+        }
+      })
+    },1500)
+    
 
   },
-  wypt() {
-    //艺赛联盟
-    wx.navigateToMiniProgram({
-      appId: 'wx4cef4fe6585f5bfd',
-      path: 'pages/e_home/e_home',
-      extraData: {
-
-      },
-      envVersion: 'release',
-      success(res) {
-        // 打开成功
-      }
+  wypt(e) {
+    wx.showToast({
+      title: '艺呗抵扣' + e.currentTarget.id + '%',
+      icon: 'none'
     })
+    //艺赛联盟
+   setTimeout(()=>{
+     wx.navigateToMiniProgram({
+       appId: 'wx4cef4fe6585f5bfd',
+       path: 'pages/e_home/e_home',
+       extraData: {
+
+       },
+       envVersion: 'release',
+       success(res) {
+         // 打开成功
+       }
+     })
+   },1500)
 
   },
   //文艺商学

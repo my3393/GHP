@@ -1,5 +1,5 @@
 <!--packageA/pages/company_ruz/commpany_ruz.wxml-->
-<view hidden="{{!load}}">
+<view hidden="{{load}}">
   <view hidden="{{!isshow}}">
     <view wx:if="{{audit == 3}}">
       <view class="nop">
@@ -10,7 +10,7 @@
       <view class='infor'>
         <view class='inform'>公司名称</view>
         <view class='inforin'>
-          <input type='text' placeholder='请输入与营业执照上一致' value="{{name}}" bindinput='names'></input>
+          <input type='text' placeholder='请输入与营业执照上一致' value="{{name}}" bindinput='name'></input>
         </view>
       </view>
       <view class='infor' bindtap="diz">
@@ -34,21 +34,21 @@
 
       </view>
       <view class='infor'>
-        <view class='inform'>主营类型</view>
+        <view class='inform'>公司类型</view>
         <view class='inforin infor_r'>
           <picker class="pick" range="{{type}}" range-key="typeName" value="{{index}}" bindchange="type">
-            <input disabled='true' type='text' value='{{typ}}' placeholder='请选择主营商品类型' bindtap='showlabel'></input>
+            <input disabled='true' type='text' value='{{typ}}' placeholder='请选择' ></input>
           </picker>
         </view>
         <view class='enter'>
-          <image src='../../../images/enter.png'></image>
+          <image src='/images/enter.png'></image>
         </view>
       </view>
       <view class="nav">
         <view class="chun_left">前台照片</view>
         <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
           <view class="zhao_img">
-            <image src="../../../images/zhao.png"></image>
+            <image src="/images/zhao.png"></image>
           </view>
           <view>上传</view>
         </view>
@@ -56,49 +56,68 @@
           <view class="tu_img">
             <image src="{{zhaos1}}"></image>
             <view class="detele" data-num="{{0}}" catchtap="detels">
-              <image src="../../../images/deteles.png" />
+              <image src="/images/deteles.png" />
             </view>
           </view>
         </view>
-        <view>查看示例</view>
+        <view class="m_left">照片需包含公司名称</view>
       </view>
 
       <view class="nav">
         <view class="chun_left">公司LOGO</view>
-        <view class="zhao" wx:if='{{zhao3}}' bindtap="chooseImages" id="{{2}}">
-          <view class="zhao_img">
-            <image src="../../../images/zhao.png"></image>
-          </view>
-          <view>上传</view>
-        </view>
-        <view wx:else class="clearfix">
-          <view class="tu_img">
-            <image src="{{zhaos3}}"></image>
-            <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{2}}" catchtap="detels">
-              <image src="../../../images/deteles.png" />
-            </view>
-          </view>
-        </view>
-        <view>开店后可自行进行修改</view>
-
-      </view>
-      <view class="nav">
-        <view class="chun_left">经营许可证</view>
         <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
           <view class="zhao_img">
-            <image src="../../../images/zhao.png"></image>
+            <image src="/images/zhao.png"></image>
           </view>
           <view>上传</view>
         </view>
         <view wx:else class="clearfix">
           <view class="tu_img">
             <image src="{{zhaos2}}"></image>
-            <view class="detele" data-num="{{1}}" catchtap="detels">
-              <image src="../../../images/deteles.png" />
+            <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" catchtap="detels">
+              <image src="/images/deteles.png" />
             </view>
           </view>
         </view>
-        <view>证件需清晰可辨认，不得使用复印件</view>
+        <view class="m_left">开店后可自行进行修改</view>
+
+      </view>
+      <view class="nav">
+        <view class="chun_left">营业执照</view>
+        <view class="zhao" wx:if='{{zhao3}}' bindtap="chooseImages" id="{{2}}">
+          <view class="zhao_img">
+            <image src="/images/zhao.png"></image>
+          </view>
+          <view>上传</view>
+        </view>
+        <view wx:else class="clearfix">
+          <view class="tu_img">
+            <image src="{{zhaos3}}"></image>
+            <view class="detele" data-num="{{2}}" catchtap="detels">
+              <image src="/images/deteles.png" />
+            </view>
+          </view>
+        </view>
+        <view class="m_left">证件需清晰可辨认，不得使用复印件</view>
+
+      </view>
+       <view class="nav">
+        <view class="chun_left">经营许可证</view>
+        <view class="zhao" wx:if='{{zhao6}}' bindtap="chooseImages" id="{{5}}">
+          <view class="zhao_img">
+            <image src="/images/zhao.png"></image>
+          </view>
+          <view>上传</view>
+        </view>
+        <view wx:else class="clearfix">
+          <view class="tu_img">
+            <image src="{{zhaos6}}"></image>
+            <view class="detele" data-num="{{5}}" catchtap="detels">
+              <image src="/images/deteles.png" />
+            </view>
+          </view>
+        </view>
+        <view class="m_left">证件需清晰可辨认，不得使用复印件</view>
 
       </view>
       <view class="nop">
@@ -107,49 +126,49 @@
       </view>
       <view class="nav">
         <view class="chun_left">法人手持身份证照</view>
-        <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
+        <view class="zhao" wx:if='{{zhao4}}' bindtap="chooseImages" id="{{3}}">
           <view class="zhao_img">
-            <image src="../../../images/zhao.png"></image>
+            <image src="/images/zhao.png"></image>
           </view>
           <view>上传</view>
         </view>
         <view wx:else class="clearfix">
           <view class="tu_img">
-            <image src="{{zhaos2}}"></image>
-            <view class="detele" data-num="{{1}}" catchtap="detels">
-              <image src="../../../images/deteles.png" />
+            <image src="{{zhaos4}}"></image>
+            <view class="detele" data-num="{{3}}" catchtap="detels">
+              <image src="/images/deteles.png" />
             </view>
           </view>
         </view>
-        <view> 保证人像居中，露出脸部及手臂；可清晰查看身份证信息 </view>
+        <view class="m_left"> 保证人像居中，露出脸部及手臂；可清晰查看身份证信息 </view>
 
       </view>
       <view class="nav">
         <view class="chun_left">身份证背面照</view>
-        <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
+        <view class="zhao" wx:if='{{zhao5}}' bindtap="chooseImages" id="{{4}}">
           <view class="zhao_img">
-            <image src="../../../images/zhao.png"></image>
+            <image src="/images/zhao.png"></image>
           </view>
           <view>上传</view>
         </view>
         <view wx:else class="clearfix">
           <view class="tu_img">
-            <image src="{{zhaos2}}"></image>
-            <view class="detele" data-num="{{1}}" catchtap="detels">
-              <image src="../../../images/deteles.png" />
+            <image src="{{zhaos5}}"></image>
+            <view class="detele" data-num="{{4}}" catchtap="detels">
+              <image src="/images/deteles.png" />
             </view>
           </view>
         </view>
-        <view>身份证需在有效期内，证件需清晰可辨认</view>
+        <view class="m_left">身份证需在有效期内，证件需清晰可辨认</view>
 
       </view>
-       <view class='infor'>
+      <view class='infor'>
         <view class='inform'>法人姓名</view>
         <view class='inforin'>
-          <input type='text' placeholder='请填写法人姓名' value="{{name}}" bindinput='names'></input>
+          <input type='text' placeholder='请填写法人姓名' value="{{names}}" bindinput='names'></input>
         </view>
       </view>
-       <view class='infor'>
+      <view class='infor'>
         <view class='inform'>法人电话</view>
         <view class='inforin'>
           <input type='number' placeholder='请填写法人电话' value="{{phone}}" bindinput='number'></input>
@@ -161,7 +180,7 @@
 
           </view>
           <view class="gx" hidden="{{!isg}}">
-            <image src="../../../images/gx.png"></image>
+            <image src="/images/gx.png"></image>
           </view>
 
         </view>
@@ -182,22 +201,17 @@
       <view class="kong_img">
         <image src="../../../images/store_z.png"></image>
       </view>
-      <view> 商家入驻审核中</view>
+      <view> 企业入驻审核中</view>
       <view>平台将在1~3个工作日反馈审核结果</view>
     </view>
     <view class="audit" wx:if="{{audit == 1}}">
       <view class="kong_img">
         <image src="../../../images/store_true.png"></image>
       </view>
-      <view> 恭喜您，成功入驻善家</view>
-      <view class="pc">
-        <view>PC端管理后台</view>
-        <view>店铺地址：
-          <text bindtap="copy" data-text="{{audits.auditInfo}}">{{audits.auditInfo}}</text>
-        </view>
-        <view>用户名：{{user.phone}}</view>
-        <view>初始密码：{{user.phone}}</view>
-      </view>
+      <view>  入驻申请已通过 </view>
+      <view wx:if='{{audits.isPay == 0}}'>认证费用￥{{audits.payMoney}}请尽快支付</view>
+      <view wx:if='{{audits.isPay == 0}}' class="pay" bindtap="pay">去支付</view>
+      <view class="pay" wx:if='{{audits.isPay == 1 || audits.isPay == 2}}' bindtap="go">去完善</view>
       <!-- <view class="ru_enter">
         进入我的店铺
       </view> -->
@@ -206,7 +220,7 @@
       <view class="kong_img">
         <image src="../../../images/store_no.png"></image>
       </view>
-      <view> 商家入驻审核未通过</view>
+      <view> 企业入驻审核未通过</view>
       <view class="pc">
         <view style="color:#333">未通过原因</view>
         <view>{{audits.auditInfo}}</view>

@@ -1,0 +1,37 @@
+/* packageA/pages/release/mine/mine.wxss */
+.nav{
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+}
+.nav>image{
+  width: 220rpx;
+  height: 220rpx;
+  float: left;
+  margin-right: 20rpx;
+}
+.nav_rig{
+  
+}
+.nav_name{
+  width: 400rpx;
+  font-weight: 600
+}
+.nav_jn{
+  width: 400rpx;
+  margin-top: 12rpx;
+}
+.typ{
+  width:140rpx;
+height:50rpx;
+background:rgba(255,141,57,1);
+border-radius:18px;
+color: #fff;
+margin-top: 20rpx;
+overflow: hidden;
+text-align: center;
+line-height: 50rpx;
+}

@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -60,8 +60,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/person_ruz/person_ruz",
-					"pathName": "packageA/pages/person_ruz/person_ruz",
+					"name": "packageA/pages/prefect_person/prefect_person",
+					"pathName": "packageA/pages/prefect_person/prefect_person",
 					"query": "",
 					"scene": null
 				},

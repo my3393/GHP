@@ -122,12 +122,12 @@ page{
   margin-top: 20rpx;
 }
 .linqu{
-  background:linear-gradient(to right, #f12200, #ff4e17);
+
   width: 130rpx;
   height: 46rpx;
   text-align: center;
   line-height: 46rpx;
-  color: #fff;
+  color: #f12200;
  display: inline-block;
  border-radius: 30rpx
 }

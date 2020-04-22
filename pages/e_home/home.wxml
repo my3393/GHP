@@ -1,6 +1,6 @@
 <!--pages/home/home.wxml-->
 
-<!-- <navigator bindtap="tass" class="zhibo" url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{5}}&custom_params={{customParams}}">直播</navigator> -->
+<!-- <navigator bindtap="tass" class="zhibo" url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id={{7}}&custom_params={{customParams}}">直播</navigator> -->
 
 
 <skeleton selector="skeleton" loading="spin" bgcolor="#FFF" wx:if="{{showSkeleton}}"></skeleton>

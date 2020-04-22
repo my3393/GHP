@@ -10,3 +10,17 @@
 .lste{
   margin-left: 50rpx;
 }
+.pay{
+   background:linear-gradient(to right, #f12200, #ff4e17);
+   text-align: center;
+   width:140rpx;
+   height: 60rpx;
+   display: inline-block;
+   margin-top: 40rpx;
+   border-radius: 40rpx;
+   color: #fff;
+   line-height: 60rpx;
+}
+.zhao{
+  margin-left: 20rpx;
+}

@@ -137,31 +137,31 @@
 <view class="nav nav-t">
   <view class="m-h1">至尊服务</view>
   <view class="dind">
-    <view class="din-1" bindtap="ylsj">
+    <view class="din-1" bindtap="ylsj" id="{{20}}">
       <view class="din-img">
         <image src="../../images/superme_1.png" />
       </view>
       <view>年会庆典</view>
     </view>
-     <view class="din-1" bindtap="yslm">
+     <view class="din-1" bindtap="yslm" id="{{50}}">
       <view class="din-img">
         <image src="../../images/superme_2.png" />
       </view>
       <view>艺赛联盟</view>
     </view>
-     <view class="din-1" bindtap="ylsj">
+     <view class="din-1" bindtap="wysx" >
        <view class="din-img">
         <image src="../../images/superme_3.png" />
       </view>
       <view>明星教学</view>
     </view>
-     <view class="din-1" bindtap="ylsj">
+     <view class="din-1" bindtap="ylsj" id='{{20}}'>
       <view class="din-img">
         <image src="../../images/superme_4.png" />
       </view>
       <view>祝福视频</view>
     </view>
-     <view class="din-1" bindtap="wypt">
+     <view class="din-1" bindtap="wypt" id='{{50}}'>
        <view class="din-img">
         <image src="../../images/superme_5.png" />
       </view>

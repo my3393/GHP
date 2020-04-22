@@ -71,7 +71,7 @@ page{
   position:absolute;
   left:0;
   width:20%;
-  height:85%;
+  height:65%;
   background-color:#F9F9F9;
   font-size:15px;
 }

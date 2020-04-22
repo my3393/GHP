@@ -1,59 +1,10 @@
-<!--packageA/pages/prefect_commpany/prefect_commpany.wxml-->
-<view class="nav clearfix">
-  <image src="{{post1}}"></image>
-  <view style="display:inline-block">{{audits.companyName}}</view>
-  <view class="nav_btn" bindtap="home">
-    <image src="/images/home.png"></image>
-    主页
-  </view>
-  <view class="nav_fw">{{audits.typeName}}</view>
-  <view style="margin-top:60rpx;">
-    <view>业务介绍</view>
-    <textarea class="yw" placeholder="公司业务介绍不能少哦" value="{{yw}}" bindinput="yw"></textarea>
-  </view>
-
-</view>
-<view class="nop">
-  基本信息
-</view>
-<view class='infor'>
-  <view class='inform'>公司电话</view>
-  <view class='inforin lste'>
-
-    <input type='text' placeholder='请输入' value="{{companyPhone}}" bindinput='number'></input>
-  </view>
-</view>
-<view class='infor clearfix'>
-  <view class='inform'>公司LOGO</view>
-  <view class='inforin infor_img' bindtap="chooseImage">
-    <image src="{{post1}}"></image>
-
-  </view>
-  <view class='enter'>
-    <image src='/images/enter.png'></image>
-  </view>
-</view>
-<view class='infor' bindtap="diz">
-  <view class='inform'>公司地址</view>
-  <view class='inforin infor_r '>
-    <input disabled='true' type='text' value='{{addres}}' placeholder='请选择所在地址' bindtap='showlabel'></input>
-  </view>
-  <view class='enter'>
-    <image src='/images/enter.png'></image>
-  </view>
-</view>
-<view class='infor'>
-
-  <view class='inforin' style="margin-left:126rpx;">
-    <input type='text' placeholder='详细地址' bindinput='xuan' value="{{xuan}}"></input>
-  </view>
-</view>
+<!--pages/realease/release.wxml-->
 <view class="nav">
-  公司简介
-  <textarea class="yw" placeholder="请简单介绍下贵公司" value="{{intor}}" bindinput="intor" maxlength="50"></textarea>
+  服务描述
+  <textarea class="yw" placeholder="请简单介绍下舒服描述" value="{{intor}}" bindinput="intor" maxlength="50"></textarea>
 </view>
 <view class="nav" style="margin-top:20rpx;">
-  <view>公司形象</view>
+  <view>图片介绍</view>
   <view class="clearfix" style="margin-top:20rpx;">
     <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
       <image src="{{item}}"></image>
@@ -69,13 +20,50 @@
     </view>
   </view>
 </view>
-
-<view class="mor" >
-    隐藏主页
-    <view class="switch">
-      <switch color="#f12200" checked="{{isHide}}" bindchange="check" />
-    </view>
+<view class='infor' bindtap="diz">
+  <view class='inform'>地址</view>
+  <view class='inforin infor_r '>
+    <input disabled='true' type='text' value='{{addres}}' placeholder='请选择所在地址' bindtap='showlabel'></input>
+  </view>
+  <view class='enter'>
+    <image src='/images/enter.png'></image>
+  </view>
 </view>
+<view class='infor'>
+
+  <view class='inforin' style="margin-left:116rpx;">
+    <input type='text' placeholder='详细地址' bindinput='xuan' value="{{xuan}}"></input>
+  </view>
+</view>
+
+<view class='infor'>
+  <view class='inform'>联系方式</view>
+  <view class='inforin lste'>
+
+    <input type='text' placeholder='请输入' value="{{companyPhone}}" bindinput='number'></input>
+  </view>
+</view>
+<view class='infor'>
+  <view class='inform'>类型</view>
+  <view class='inforin infor_r'>
+    <picker class="pick" range="{{type}}" range-key="typeName" value="{{index}}" bindchange="type">
+      <input disabled='true' type='text' value='{{typ}}' placeholder='请选择'></input>
+    </picker>
+  </view>
+  <view class='enter'>
+    <image src='/images/enter.png'></image>
+  </view>
+</view>
+
+<button class="submit" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提交审核</button>
+      <button class="submit" bindtap="sub" wx:else>提交审核</button>
+
+      <button class="submit" bindtap="mine"  style="margin-top:30rpx;">我的</button>
+      <view style="height:120rpx;"></view>
+    
+
+
+
 
 
 

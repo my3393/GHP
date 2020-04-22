@@ -31,7 +31,7 @@ Page({
   },
   tass(e){
     console.log(e)
-    let roomId = 5;
+    let roomId = 7;
     let customParams = { path: 'pages/index/index', pid: 1 } // 开发者在直播间页面路径上携带自定义参数（如示例中的path和pid参数），后续可以在分享卡片链接和跳转至商详页时获取，详见【获取自定义参数】、【直播间到商详页面携带参数】章节
    
     this.setData({

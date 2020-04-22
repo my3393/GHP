@@ -5,6 +5,9 @@ page{
   font-size: 28rpx;
   
 }
+.zhao{
+  margin-left: 20rpx;
+}
 .nav{
   padding: 20rpx;
   background: #fff;

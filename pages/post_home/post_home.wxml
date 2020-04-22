@@ -1,0 +1,81 @@
+<!--packageA/pages/receive/receive.wxml-->
+<view class='main-wraper'>
+  <navBar background='#fff' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick" >
+    <view class='location' slot="left" bindtap="xuan">
+      <!-- <image src="/images/"></image> -->
+      <view class='con dan'>{{address}}</view>
+      <view class='icon' />
+    </view>
+    <view class='lxy-nav-bar-search' slot="center">
+      <view class='lxy-nav-bar-search__icon' />
+      <view class='lxy-nav-bar-search__input'>
+        <input autoFocus="true" bindconfirm="confirmSearch" bindinput="search" class="srch-ipt" confirmType="search" placeholder="搜索内容" placeholderClass="ipt-placeholder" type="text" value=""></input>
+      </view>
+    </view>
+  </navBar>
+  <view class="tar">
+    <view wx:for='{{tar}}' data-index="{{index}}" class="{{index == tas?'active':'' }}">{{item.name}}</view>
+
+  </view>
+  <view>
+    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9" bindchange="testSwiper">
+      <block>
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{banner}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+          <image class="banner_img skeleton-rect" src="{{item.bannerImgOss}}" lazy-load="true"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  
+ 
+
+  
+
+</view>
+<scroll-view scroll-x="true" class="tag">
+    <view wx:for="{{type}}" wx:key="item" wx:for-index="index" id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"actives":""}}'>
+      {{item.typeName}}
+    </view>
+  </scroll-view>
+
+  <view>
+     <view class="nav clearfix" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
+       <image src="{{item.headImgUrl}}"></image>
+       <view class="nav_rig">
+         <view class="nav_name dan">{{item.userName}}</view>
+         <view class="nav_jn dan">详情：{{item.content}}</view>
+         <view class="typ">{{item.typeName}}</view>
+       </view>
+     </view>
+  </view>
+
+
+<view class="ruz" bindtap="ruz">
+  <image src="/images/receive_ruz.png"></image>
+  <view>发布</view>
+</view>
+
+
+ <tui-modal show="{{modal}}"  custom="{{true}}">
+    <view class="tui-modal-custom">
+    
+       <view class="tui-modal-custom-text tite">善家购需要获取你当前位置</view>
+     
+      <view class="tui-modal-foot">
+         <view bindtap="hide">取消</view>
+         <view>
+            <button open-type='openSetting' bindopensetting="openSetting">确定</button>
+         </view>
+          
+      </view>
+    </view>
+  </tui-modal>
+
+
+
+
+
+
+
+
+

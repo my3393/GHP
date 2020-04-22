@@ -26,6 +26,7 @@ Page({
     isMore:true,
     ismp:true,
     isvideo:true,
+    live:156,
   },
 
   onLoad: function (options) {
@@ -111,7 +112,8 @@ Page({
           })
         }else{
           that.setData({
-            ismp: true
+            ismp: true,
+            live:76
           })
         }
         if (res.data.loginId == null) {
@@ -176,6 +178,11 @@ Page({
       path: '/pages/e_specialty/e_specialty?userid=' + that.data.user.id,
 
     }
+  },
+  live(){
+    wx.navigateTo({
+      url: '../live/live',
+    })
   },
   // 视频
   hidevideo: function (e) {

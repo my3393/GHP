@@ -1,32 +1,32 @@
 <!--packageA/pages/receive_home/receive_home.wxml-->
 <view class="top_b"></view>
 <view class="hone clearfix">
-   <image src="../../../images/sjg.png"></image>
+   <image src="{{detail.companyLogoOss}}"></image>
    <view class="h1">
-      深圳市花覅额海公司
+     {{detail.companyName}}
    </view>
    <view class="hone_rig">
       <view>
-         <image src="../../../images/xinxin_n.png"></image>
+         <image src="/images/xinxin_n.png"></image>
          <view>收藏</view>
       </view>
       <view>
-         <image src="../../../images/fenx.png"></image>
+         <image src="/images/fenx.png"></image>
          <view>分享</view>
       </view>
    </view>
    <view class="mi">距你800m</view>
-   <view class="jies">深圳市海诚装饰设计工程有限公司成立于2011年海诚装饰（HaiCheng Decoration）简称海诚装饰。</view>
+   <view class="jies">{{detail.companyDescribe}}</view>
 </view>
 
-<view class="yw">
+<view class="yw" wx:if='{{detail.companyBusiness}}'>
   <view class="h1">业务介绍</view>
-  <view> 深圳市海诚装饰是以商装、工装为主，工业厂房装修 、建材等相关产业的专业性装饰设计公司。</view>
+  <view> {{detail.companyBusiness}}</view>
 </view>
 
 <!-- 资质证书 -->
 
-<view class="zhen">
+<view class="zhen" bindtap="Preview" data-num="{{2}}" id="{{licenseImgsOSS[0]}}">
  资质证书
  <image src="../../../images/right.png"></image>
 </view>
@@ -34,23 +34,21 @@
 <view class="yw">
  <view class="h1">公司形象</view>
 
- <scroll-view scroll-x="true" class="gs_img">
-   <image src="../../../images/sjg.png"></image>
-   <image src="../../../images/sjg.png"></image> 
-   <image src="../../../images/sjg.png"></image>
-   <image src="../../../images/sjg.png"></image>
+ <scroll-view scroll-x="true" class="gs_img" bindtap="Preview" data-num="{{1}}" id="{{item}}">
+   <image src="{{item}}" wx:for='{{detail.companyImgsOss}}'></image>
+  
  </scroll-view>
 </view>
 
 <view class="yw">
-  <view class="h1">公司地址</view>
-  <view> 深圳市海诚装饰是以商装、工装为主，工业厂房装修 、建材等相关产业的专业性装饰设计公司。</view>
+  <view class="h1" bindtap="get">公司地址</view>
+  <view> {{detail.provinceName}}-{{detail.cityName}}-{{detail.areaName}}-{{detail.townName}}-{{detail.detailAddress}}</view>
 </view>
 
 
-  <map class="map"
-    latitude="{{latitude}}"
+  <map class="map" id="myMap" 
     longitude="{{longitude}}"
+    latitude="{{latitude}}"
      scale="14" 
      controls="{{controls}}" 
      bindcontroltap="controltap" 
@@ -62,6 +60,6 @@
 
 <view style="height:200rpx"></view>
 
-<view class="foot">
+<view class="foot" bindtap="phone">
   <view >电话联系</view>
 </view>

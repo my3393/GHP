@@ -99,6 +99,10 @@
 </view>
 
 <!-- 在线同乡 -->
+<view class="tongx" style="bottom:{{live}}rpx" bindtap="live" >
+  <view>直播</view>
+ 
+</view>
 <view class="tongx" style="bottom:76rpx" bindtap="seevideo" hidden="{{ismp}}">
   <view>邻水商务局</view>
   <view>授权视频</view>

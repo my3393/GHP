@@ -73,6 +73,7 @@ page{
   margin-bottom: 20rpx;
   float: left;
   position: relative;
+  margin-left: 30rpx;
 }
 .tu_img image{
   width: 100%;

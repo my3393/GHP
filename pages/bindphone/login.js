@@ -43,17 +43,26 @@ Page({
             key: 'userinfo',
             data: res.data.data,
           })
-          setTimeout(function(){
-            if (that.data.mine) {
-              wx.switchTab({
-                url: '../e_mine/mine',
-              })
-            } else {
-              wx.switchTab({
-                url: '../e_home/home',
-              })
-            }
-          },600)
+          if (wx.getStorageSync('url')) {
+            console.log('-----url----')
+            wx.redirectTo({
+              url: wx.getStorageSync('url'),
+            })
+            wx.removeStorageSync('url')
+          }else{
+            setTimeout(function () {
+              if (that.data.mine) {
+                wx.switchTab({
+                  url: '../e_mine/mine',
+                })
+              } else {
+                wx.switchTab({
+                  url: '../e_home/home',
+                })
+              }
+            }, 600)
+          }
+         
 
         } else if (res.data.status === 1002) {
           if(that.data.mine){

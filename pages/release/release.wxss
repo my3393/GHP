@@ -1,0 +1,21 @@
+/* pages/realease/release.wxss */
+@import '/pages/store_refund/store_refund';
+.yw{
+  margin-top: 20rpx;
+  width: 100%;
+  height: 130rpx;
+  color: #000;
+}
+.zhao{
+  margin-left: 30rpx;
+}
+.you{
+  margin-left: 180rpx;
+}
+.m_left{
+  margin-left: 178rpx;
+}
+.infor_r input{
+  text-align: left;
+  margin-left: 42rpx;
+}

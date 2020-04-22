@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/e_specialty/e_specialty",
     "pages/e_home/home",
     "pages/assets_expel/assets_expel",
     "pages/mine_assets/mine_assets",
@@ -37,7 +38,7 @@
     "pages/e_mine/mine",
     "pages/e_shoping/shoping",
     "pages/e_ welfare/e_ welfare",
-    "pages/e_specialty/e_specialty",
+   
     "pages/canvas/canvas",
     "pages/index/index",
     "pages/logs/logs",
@@ -78,7 +79,10 @@
     "pages/yb_trun/yb_trun",
     "component/sjg/sjg",
     "pages/assets_mx/assets_mx",
-    "component/graph/graph"
+    "component/graph/graph",
+    "pages/post_home/post_home",
+    "pages/release/release",
+    "pages/live/live"
   ],
   "subpackages": [
     {
@@ -98,7 +102,8 @@
         "pages/post/community/community",
         "pages/post/apply_post/apply_post",
         "pages/post/psot_dump/post_dump",
-        "pages/post/apply_post2/apply_post2"
+        "pages/post/apply_post2/apply_post2",
+        "pages/release/mine/mine"
       ]
     }
   ],
@@ -108,22 +113,22 @@
     "borderStyle": "white",
     "list": [
       {
+        "selectedIconPath": "images/welfare-active.png",
+        "iconPath": "images/welfare.png",
+        "pagePath": "pages/post_home/post_home",
+        "text": "善家社区"
+      },
+      {
         "selectedIconPath": "images/home-active.png",
         "iconPath": "images/home.png",
         "pagePath": "pages/e_home/home",
-        "text": "善家"
+        "text": "善家购"
       },
       {
         "selectedIconPath": "images/specialty-active.png",
         "iconPath": "images/specialty.png",
         "pagePath": "pages/e_specialty/e_specialty",
         "text": "家乡特产"
-      },
-      {
-        "selectedIconPath": "images/welfare-active.png",
-        "iconPath": "images/welfare.png",
-        "pagePath": "pages/e_ welfare/e_ welfare",
-        "text": "善家公益"
       },
       {
         "selectedIconPath": "images/shop-active.png",
