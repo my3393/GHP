@@ -99,7 +99,7 @@
 </view>
 
 <!-- 在线同乡 -->
-<view class="tongx" style="bottom:{{live}}rpx" bindtap="live" >
+<view class="tongx" style="bottom:{{live}}rpx;font-size:34rpx;" bindtap="live"  >
   <view>直播</view>
  
 </view>

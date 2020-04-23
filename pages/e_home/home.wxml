@@ -213,3 +213,7 @@
     <image src="../../images/xxxx.png"></image>
   </view>
 </view>
+
+<view class="live" bindtap="live">
+ 直播
+</view>

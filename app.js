@@ -100,6 +100,7 @@ App({
           console.log('get custom params', res.custom_params) // 开发者在跳转进入直播间页面时，页面路径上携带的自定义参数，这里传回给开发者
           console.log('绑定',res.custom_params.pid)
           wx.setStorageSync('bangId',res.custom_params.pid)
+          console.log(wx.getStorageSync('bangId'),'绑定的')
         }).catch(err => {
           console.log('get share params', err)
         })

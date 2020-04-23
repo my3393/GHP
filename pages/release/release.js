@@ -104,6 +104,11 @@ Page({
   onShareAppMessage: function() {
 
   },
+  mine(){
+    wx.navigateTo({
+      url: '/packageA/pages/release/mine/mine' ,
+    })
+  },
   //类型
   type(e) {
     console.log(e)
@@ -215,7 +220,10 @@ Page({
     app.res.req('/sqorder/submitdynamic', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-         
+         wx.showLoading({
+           title: '',
+           icon:'none'
+         })
          that.pay();
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
@@ -250,7 +258,15 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
 
-         
+         wx.showToast({
+           title: '提交成功请等待审核',
+           icon:'none'
+         })
+         setTimeout(()=>{
+             wx.switchTab({
+               url: '../post_home/post_home',
+             })
+         },1500)
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
@@ -347,65 +363,51 @@ Page({
       console.log('阻断')
       return;
     }
-    let data = {
-      applyType: 3
+    let data ={
+
     }
-    app.res.req('/sqorder/applysubmit', data, (res) => {
+    app.res.req("/sqpay/xcxpay", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
 
-        wx.showLoading({
-          mask: true
+        wx.hideLoading()
+        wx.requestPayment({
+          timeStamp: res.data.sign.timeStamp,
+          nonceStr: res.data.sign.nonceStr,
+          package: res.data.sign.package,
+          signType: 'MD5',
+          paySign: res.data.sign.paySign,
+          success(res) {
+
+            wx.showToast({
+              title: '支付成功',
+              icon: 'none',
+              duration: 1000
+            })
+
+            setTimeout(() => {
+              wx.switchTab({
+                url: '../post_home/post_home',
+              })
+            }, 1500)
+
+          },
+          fail(res) {
+            wx.showToast({
+              title: '支付失败',
+              icon: 'none'
+            })
+
+          }
         })
-        setTimeout(() => {
-          wx.hideLoading()
-          app.res.req("/sqpay/xcxpay", data, (res) => {
-            console.log(res.data)
-            if (res.status == 1000) {
 
+        //   interval = null;
 
-              wx.requestPayment({
-                timeStamp: res.data.sign.timeStamp,
-                nonceStr: res.data.sign.nonceStr,
-                package: res.data.sign.package,
-                signType: 'MD5',
-                paySign: res.data.sign.paySign,
-                success(res) {
-
-                  wx.showToast({
-                    title: '支付成功',
-                    icon: 'none',
-                    duration: 1000
-                  })
-                  that.getAudit()
-
-                },
-                fail(res) {
-                  wx.showToast({
-                    title: '支付失败',
-                    icon: 'none'
-                  })
-
-                }
-              })
-
-              //   interval = null;
-
-            } else if (res.status == 1004 || res.status == 1005) {
-              wx.redirectTo({
-                url: '../login/login',
-              })
-            } else {
-              wx.showToast({
-                title: res.msg,
-                icon: 'none'
-              })
-            }
-          })
-        }, 2000)
-
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
       } else {
-
         wx.showToast({
           title: res.msg,
           icon: 'none'

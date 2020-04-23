@@ -262,6 +262,11 @@ Page({
 
     }
   },
+  live() {
+    wx.navigateTo({
+      url: '../live/live',
+    })
+  },
   testSwiper: function (e) {
     var that = this;
     var index = e.detail.current;

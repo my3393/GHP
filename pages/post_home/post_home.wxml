@@ -1,20 +1,21 @@
 <!--packageA/pages/receive/receive.wxml-->
 <view class='main-wraper'>
-  <navBar background='#fff' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick" >
+  <navBar background='#fff' title='善家社区' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick" >
     <view class='location' slot="left" bindtap="xuan">
       <!-- <image src="/images/"></image> -->
       <view class='con dan'>{{address}}</view>
       <view class='icon' />
     </view>
-    <view class='lxy-nav-bar-search' slot="center">
+    
+    <!-- <view class='lxy-nav-bar-search' slot="center">
       <view class='lxy-nav-bar-search__icon' />
       <view class='lxy-nav-bar-search__input'>
-        <input autoFocus="true" bindconfirm="confirmSearch" bindinput="search" class="srch-ipt" confirmType="search" placeholder="搜索内容" placeholderClass="ipt-placeholder" type="text" value=""></input>
+        <input bindconfirm="confirmSearch" bindinput="search" class="srch-ipt" confirmType="search" placeholder="搜索内容" placeholderClass="ipt-placeholder" type="text" value=""></input>
       </view>
-    </view>
+    </view> -->
   </navBar>
   <view class="tar">
-    <view wx:for='{{tar}}' data-index="{{index}}" class="{{index == tas?'active':'' }}">{{item.name}}</view>
+    <view wx:for='{{tars}}' data-index="{{index}}" class="{{index == tas?'active':'' }}" bindtap="tars">{{item.name}}</view>
 
   </view>
   <view>
@@ -43,8 +44,9 @@
        <image src="{{item.headImgUrl}}"></image>
        <view class="nav_rig">
          <view class="nav_name dan">{{item.userName}}</view>
-         <view class="nav_jn dan">详情：{{item.content}}</view>
+         <view class="nav_jn ">详情：{{item.content}}</view>
          <view class="typ">{{item.typeName}}</view>
+         <view class="distance">{{item.distance}}</view>
        </view>
      </view>
   </view>

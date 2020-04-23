@@ -4,6 +4,19 @@ page{
   color: PingFang-SC-Regular;
  
 }
+.live{
+ background:linear-gradient(to right, #f12200, #ff4e17);
+ width: 80rpx;
+ height: 80rpx;
+ border-radius: 50%;
+ text-align: center;
+ line-height: 80rpx;
+ box-shadow: 2px 2px 8px #f12200;
+ color: #fff;
+ position: fixed;
+ bottom: 20rpx;
+ right: 20rpx;
+}
 .zhibo{
   background: blueviolet;
   position: fixed;

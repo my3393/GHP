@@ -1,8 +1,8 @@
 // packageA/pages/release/mine/mine.js
 const app = getApp();
-const app = getApp();
+
 let currentPage = 1
-let detail = [];
+let detail = []
 Page({
 
   /**

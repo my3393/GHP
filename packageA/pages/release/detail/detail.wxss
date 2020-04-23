@@ -1,0 +1,51 @@
+/* packageA/pages/post/detail/detail.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.nav{
+  margin-top: 20rpx;
+  background: #fff;
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.head_img{
+  width: 200rpx;
+  height: 200rpx;
+  float: left;
+  margin-right: 20rpx;
+
+}
+.head_type{
+  color: #999;
+  margin-top: 20rpx;
+}
+.img{
+  display: inline-block;
+  margin-right: 20rpx;
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 20rpx;
+}
+
+.foot{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  height: 100rpx;
+}
+.foot view{
+  width: calc(100% - 40rpx);
+  height: 80rpx;
+  background: #f12200;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  color: #fff;
+  border-radius: 40rpx;
+}

@@ -7,5 +7,13 @@
          <view class="nav_jn dan">详情：{{item.content}}</view>
          <view class="typ">{{item.typeName}}</view>
        </view>
+       <view class="audit" wx:if='{{item.auditStatus == 2}}'>
+          <view>驳回信息：套路</view>
+          <view>审核不通过</view>
+       </view>
+        <view class="audit" wx:if='{{item.auditStatus == 1}}'>
+          <view></view>
+          <view>审核通过</view>
+       </view>
      </view>
   </view>

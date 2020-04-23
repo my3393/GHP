@@ -494,7 +494,7 @@ Page({
   Bang() {
     let that = this;
     let data = {
-      id: userid
+      id: wx.getStorageSync('bangId')
     }
 
     app.res.req("/user/sharebinduser", data, (res) => {

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/e_specialty/e_specialty",
     "pages/e_home/home",
+    "pages/e_specialty/e_specialty",
+   
     "pages/assets_expel/assets_expel",
     "pages/mine_assets/mine_assets",
     "pages/community/community",
@@ -38,7 +39,6 @@
     "pages/e_mine/mine",
     "pages/e_shoping/shoping",
     "pages/e_ welfare/e_ welfare",
-   
     "pages/canvas/canvas",
     "pages/index/index",
     "pages/logs/logs",
@@ -103,7 +103,8 @@
         "pages/post/apply_post/apply_post",
         "pages/post/psot_dump/post_dump",
         "pages/post/apply_post2/apply_post2",
-        "pages/release/mine/mine"
+        "pages/release/mine/mine",
+        "pages/release/detail/detail"
       ]
     }
   ],

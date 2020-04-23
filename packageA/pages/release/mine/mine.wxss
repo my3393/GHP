@@ -1,4 +1,8 @@
 /* packageA/pages/release/mine/mine.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
 .nav{
   background: #fff;
   padding: 20rpx;
@@ -8,8 +12,8 @@
   margin-left: 20rpx;
 }
 .nav>image{
-  width: 220rpx;
-  height: 220rpx;
+  width: 120rpx;
+  height: 120rpx;
   float: left;
   margin-right: 20rpx;
 }
@@ -34,4 +38,11 @@ margin-top: 20rpx;
 overflow: hidden;
 text-align: center;
 line-height: 50rpx;
+font-size: 26rpx;
+}
+.audit{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  color: red;
 }

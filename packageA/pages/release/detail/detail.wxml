@@ -1,0 +1,19 @@
+<!--packageA/pages/post/detail/detail.wxml-->
+
+<view class="nav clearfix">
+  <image src="{{detail.headImgUrl}}" class="head_img"></image>
+  <view >{{detail.userName}}</view>
+  <view class="head_type">{{detail.typeName}}</view>
+</view>
+
+<view class="nav">
+  <view>{{detail.content}}</view>
+  <image class="img" wx:for='{{detail.contentImgsOss}}' src="{{item}}"></image>
+</view>
+<view class="nav">
+ 地址：{{detail.provinceName}}-{{detail.cityName}}-{{detail.areaName}}-{{detail.townName}}-{{detail.detailAddress}}
+</view>
+<view style="height:100rpx;"></view>
+<view class="foot" bindtap="phone" id="{{detail.phone}}">
+  <view >电话联系</view>
+</view>

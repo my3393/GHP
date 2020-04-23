@@ -23,13 +23,22 @@ Page({
     address:'定位中...',
     latitude:'',
     longitude:'',
+    tars: [
+      { name: '善家联盟' },
+      { name: '善家服务' },
+      { name: '善家驿站' },
+    ],
+    tas: 1,
   },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    wx.showLoading({
+      title: '加载中',
+      icon:'none'
+    })
     var _this = this;
     _this.getbanner();
     // wx.getLocation({
@@ -83,8 +92,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
-  },
+    
+  }, 
 
   /**
    * 页面上拉触底事件的处理函数
@@ -98,6 +107,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  tars(e){
+    var index = e.currentTarget.dataset.index
+     if(index == 0 || index == 2){
+       wx.showToast({
+         title: '暂未开放',
+         icon:'none'
+       })
+     }
   },
   hide() {
     this.setData({
@@ -127,6 +145,7 @@ Page({
 
   },
   xuan(){
+    let _this = this
     wx.authorize({
       scope: 'scope.userLocation',
       success: (res) => {
@@ -135,12 +154,15 @@ Page({
           longitude: 113.88308,
           success: (location) => {
             console.log(location);
-            this.setData({
+            _this.setData({
               location: `lat：${location.latitude}；long：${location.longitude}`,
               address:  location.name,
               latitude: location.latitude,
               longitude: location.longitude
             })
+            detail = []
+            currentPage = 1
+            _this.getDetail()
           }
         })
       },
@@ -173,7 +195,7 @@ Page({
   },
   detail(e){
    wx.navigateTo({
-     url: '/packageA/pages/receive_home/receive_home?id=' + e.currentTarget.id,
+     url: '/packageA/pages/release/detail/detail?id=' + e.currentTarget.id,
    })
   },
   tag(e){
@@ -205,6 +227,13 @@ Page({
     app.res.req('/sqdynamic/dynamiclonglatlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        for(var i in res.data.data){
+          if (res.data.data[i].distance < 1000)
+            res.data.data[i].distance = res.data.data[i].distance  + "m"
+          else if (res.data.data[i].distance > 1000)
+            res.data.data[i].distance = (Math.round(res.data.data[i].distance / 100) / 10).toFixed(1) + "km"
+            
+        }
         detail.push(...res.data.data)
         that.setData({
           detail: detail,

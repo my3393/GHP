@@ -5,6 +5,7 @@
 page{
   font-size: 26rpx;
 }
+
 .top{
  
   padding: 0 20rpx;
