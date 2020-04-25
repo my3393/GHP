@@ -8,7 +8,7 @@
 
 <view class="nav">
   <view>{{detail.content}}</view>
-  <image class="img" wx:for='{{detail.contentImgsOss}}' src="{{item}}"></image>
+  <image class="img" wx:for='{{detail.contentImgsOss}}' src="{{item}}" id="{{item}}" bindtap="Preview"></image>
 </view>
 <view class="nav">
  地址：{{detail.provinceName}}-{{detail.cityName}}-{{detail.areaName}}-{{detail.townName}}-{{detail.detailAddress}}

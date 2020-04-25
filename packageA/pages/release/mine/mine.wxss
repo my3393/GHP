@@ -21,7 +21,7 @@ page{
   
 }
 .nav_name{
-  width: 400rpx;
+  width: 520rpx;
   font-weight: 600
 }
 .nav_jn{
@@ -29,20 +29,23 @@ page{
   margin-top: 12rpx;
 }
 .typ{
-  width:140rpx;
-height:50rpx;
+  width:120rpx;
+height:40rpx;
 background:rgba(255,141,57,1);
 border-radius:18px;
 color: #fff;
 margin-top: 20rpx;
 overflow: hidden;
 text-align: center;
-line-height: 50rpx;
-font-size: 26rpx;
+line-height: 40rpx;
+font-size: 24rpx;
 }
 .audit{
   margin-top: 20rpx;
   display: flex;
   justify-content: space-between;
   color: red;
+}
+.audit :nth-child(1){
+  width: 500rpx;
 }

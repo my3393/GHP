@@ -1,7 +1,7 @@
 <!--pages/realease/release.wxml-->
 <view class="nav">
   服务描述
-  <textarea class="yw" placeholder="请简单介绍下舒服描述" value="{{intor}}" bindinput="intor" maxlength="50"></textarea>
+  <textarea class="yw" placeholder="请简单介绍下招聘信息" value="{{intor}}" bindinput="intor" maxlength="50"></textarea>
 </view>
 <view class="nav" style="margin-top:20rpx;">
   <view>图片介绍</view>
@@ -58,8 +58,8 @@
 <button class="submit" wx:if='{{user.phone == null}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">提交审核</button>
       <button class="submit" bindtap="sub" wx:else>提交审核</button>
 
-      <!-- <button class="submit" bindtap="mine"  style="margin-top:30rpx;">我的</button>
-      <view style="height:120rpx;"></view> -->
+      <button class="submit" bindtap="mine"  style="margin-top:30rpx;">我的</button>
+      <view style="height:120rpx;"></view>
     
 
 

@@ -1,0 +1,2 @@
+/* packageA/pages/union/enter2/enter2.wxss */
+@import '../enter/enter';

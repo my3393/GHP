@@ -66,8 +66,8 @@ display: -webkit-box;
 
 }
 .ruz{
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
   position: fixed;
   bottom: 40rpx;
@@ -75,10 +75,11 @@ display: -webkit-box;
   background:linear-gradient(to right, #f12200, #ff4e17);
   text-align: center;
   color: #fff;
+  font-size:26rpx; 
 }
 .ruz>image{
-  width: 50rpx;
-  height: 50rpx;
+  width: 45rpx;
+  height: 45rpx;
   margin-top: 10rpx;
 }
 

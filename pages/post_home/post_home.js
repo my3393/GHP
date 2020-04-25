@@ -12,6 +12,7 @@ let cityId = '';
 let areaId = '';
 let townId ='';
 let keyword = '';
+let type =[]
 Page({
 
   /**
@@ -99,7 +100,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+     currentPage = currentPage +1
+     this.getDetail();
   },
 
   /**
@@ -107,6 +109,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  //banner跳转
+  banner(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.xcxurl == '') {
+
+    } else if (e.currentTarget.dataset.xcx.id == '') {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page,
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page + e.currentTarget.dataset.xcx.id,
+      })
+    }
   },
   tars(e){
     var index = e.currentTarget.dataset.index
@@ -227,18 +244,25 @@ Page({
     app.res.req('/sqdynamic/dynamiclonglatlist', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        for(var i in res.data.data){
-          if (res.data.data[i].distance < 1000)
-            res.data.data[i].distance = res.data.data[i].distance  + "m"
-          else if (res.data.data[i].distance > 1000)
-            res.data.data[i].distance = (Math.round(res.data.data[i].distance / 100) / 10).toFixed(1) + "km"
-            
+        if(res.data.data == '' && currentPage != 1){
+          wx.showToast({
+            title: '已经加载完了',
+            icon:'none'
+          })
+        }else{
+          for (var i in res.data.data) {
+            if (res.data.data[i].distance < 1000)
+              res.data.data[i].distance = res.data.data[i].distance + "m"
+            else if (res.data.data[i].distance > 1000)
+              res.data.data[i].distance = (Math.round(res.data.data[i].distance / 100) / 10).toFixed(1) + "km"
+
+          }
+          detail.push(...res.data.data)
+          that.setData({
+            detail: detail,
+
+          })
         }
-        detail.push(...res.data.data)
-        that.setData({
-          detail: detail,
-        
-        })
         wx.hideLoading()
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
@@ -261,11 +285,15 @@ Page({
     app.res.req('/sqdynamic/dynacmictype', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        
+         let type = [
+           {typeName:'全部',id:'0'}
+         ]
+         type.push(...res.data)
         that.setData({
-          type: res.data,
-          typeId:res.data[0].id
+          type: type,
+          typeId:type[0].id
         })
+        console.log(that.data.type)
         that.getDetail()
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
@@ -283,7 +311,7 @@ Page({
   getbanner() {
     let that = this;
     let data = {
-      type:3
+      type:2
     }
     app.res.req('/sqhome/banner', data, (res) => {
       console.log(res.data)

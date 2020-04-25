@@ -298,7 +298,7 @@ white-space: nowrap;
   width: 70rpx;
   height: 70rpx;
   position: fixed;
-  bottom: 80rpx;
+  bottom: 112rpx;
   right: 30rpx;
   box-shadow: 2rpx 2rpx 2rpx #666;
   border-radius: 50%;

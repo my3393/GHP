@@ -25,7 +25,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.5",
+	"libVersion": "2.10.3",
 	"appid": "wxd01b5807647c44d9",
 	"projectname": "xian",
 	"debugOptions": {
@@ -60,8 +60,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/prefect_person/prefect_person",
-					"pathName": "packageA/pages/prefect_person/prefect_person",
+					"name": "packageA/pages/today/order/order",
+					"pathName": "packageA/pages/today/order/order",
 					"query": "",
 					"scene": null
 				},

@@ -2,7 +2,6 @@
   "pages": [
     "pages/e_home/home",
     "pages/e_specialty/e_specialty",
-   
     "pages/assets_expel/assets_expel",
     "pages/mine_assets/mine_assets",
     "pages/community/community",
@@ -104,7 +103,13 @@
         "pages/post/psot_dump/post_dump",
         "pages/post/apply_post2/apply_post2",
         "pages/release/mine/mine",
-        "pages/release/detail/detail"
+        "pages/release/detail/detail",
+        "pages/union/home/home",
+        "pages/union/shop_open/shop_open",
+        "pages/union/enter/enter",
+        "pages/union/problem/problem",
+        "pages/union/enter2/enter2",
+        "pages/today/order/order"
       ]
     }
   ],
@@ -114,8 +119,8 @@
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "images/welfare-active.png",
-        "iconPath": "images/welfare.png",
+        "selectedIconPath": "images/community_active.png",
+        "iconPath": "images/community.png",
         "pagePath": "pages/post_home/post_home",
         "text": "善家社区"
       },

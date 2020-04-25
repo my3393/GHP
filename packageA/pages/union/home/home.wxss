@@ -1,0 +1,38 @@
+/* packageA/pages/union/home/home.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.nav{
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1rpx solid #f9f9f9;
+
+}
+.nav image{
+  width: 70rpx;
+  height: 70rpx;
+  float: left;
+  margin-right: 20rpx;
+
+}
+.nav_center{
+  display: inline-block;
+}
+.nav_center :nth-child(2){
+ color: #EAEAEA;
+ margin-top: 4rpx;
+ width: 470rpx;
+}
+.nav_right{
+  float: right;
+  width: 130rpx;
+  height: 46rpx;
+  border: 1rpx solid #f12200;
+  border-radius: 30rpx;
+  color: #f12200;
+  line-height: 46rpx;
+  text-align: center;
+  margin-top: 10rpx;
+}

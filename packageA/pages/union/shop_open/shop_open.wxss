@@ -1,0 +1,67 @@
+/* packageA/pages/union/shop_open/shop_open.wxss */
+.top_img{
+  width: 100%;
+  height: 300rpx;
+}
+.nav{
+  padding: 20rpx;
+  box-sizing: border-box;
+
+}
+.h1{
+  margin: 40rpx 0;
+  font-weight: 600;
+  display: inline-block;
+  font-size: 36rpx;
+}
+.liu{
+  width: 100%;
+  height: 92rpx;
+}
+.qit{
+  padding: 4rpx 10rpx;
+  background: #F3F3F3;
+  box-sizing: border-box;
+  float: right;
+  margin-top: 44rpx;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+}
+.navs{
+   padding:10rpx 30rpx;
+   box-sizing: border-box;
+   color: #999999; 
+}
+.navs :nth-child(1){
+  color: #666666;
+  font-weight: 600
+}
+.foots{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  width: 100%;
+ 
+}
+.shangf{
+  color: #000 !important;
+  margin-right: 10rpx;
+}
+.foots :nth-child(1){
+   width: calc(100% - 40rpx);
+  height: 80rpx;
+  background: #f12200;
+  text-align: center;
+  line-height: 80rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  color: #fff;
+  border-radius: 40rpx;
+}
+.foots :nth-child(2){
+  text-align: center;
+  color: #f12200;
+  height: 80rpx;
+  line-height: 80rpx;
+}

@@ -1,0 +1,34 @@
+<!--packageA/pages/union/shop_open/shop_open.wxml-->
+<image class="top_img" src="https://www.xingtu-group.cn/xcx_img/union_1.png"></image>
+
+<view class="nav">
+    <view class="h1">开店流程</view>
+    <image class="liu" src="https://www.xingtu-group.cn/xcx_img/union_2.png"></image>
+    <view class="h1">
+      开店直通车
+    </view> 
+    <view class="qit">其他常见问题</view>
+</view>
+
+<view class="navs">
+   <view>品类范围</view>
+   <view>生鲜果蔬 生鲜超市 鲜花种植 美食</view>
+</view>
+<view class="navs">
+   <view>商户入驻要求</view>
+   <view>支持有线下实体店铺的商户入驻 </view>
+   <view>支持无资质类的自由商贩入驻</view>
+</view>
+<view class="navs">
+   <view>入驻资料</view>
+   <view> 门店牌匾照、店内照、店铺logo、营业执照、行业许可证、经营者身份证信息。</view>
+</view>
+<view class="navs">
+   <view>收益说明</view>
+   <view>平台收取成交订单的百分之三十作为平台运营推广费用。</view>
+</view>
+<view style="height:180rpx;"></view>
+<view class="foots">
+   <view>个体商户入驻（推荐）</view>
+   <view> 以自由卖家入驻 </view>
+</view>

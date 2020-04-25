@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "发布广告",
-  "usingComponents": {}
+  "usingComponents": {
+   "dump":"/component/graph/graph"
+  }
 }

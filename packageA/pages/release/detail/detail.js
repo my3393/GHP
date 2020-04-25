@@ -90,24 +90,12 @@ Page({
     var that = this;
 
     console.log(e)
-    if (e.currentTarget.dataset.num == 0) {
-      var a = []
-      a.push(e.currentTarget.id)
+   
       wx.previewImage({
         current: e.currentTarget.id,
-        urls: a
+        urls: that.data.detail.contentImgsOss
       })
-    } if (e.currentTarget.dataset.num == 2) {
-      wx.previewImage({
-        current: e.currentTarget.id,
-        urls: that.data.detail.licenseImgsOSS
-      })
-    } else {
-      wx.previewImage({
-        current: e.currentTarget.id,
-        urls: that.data.detail.companyImgsOss
-      })
-    }
+  
   },
   get() {
     wx.authorize({

@@ -1,0 +1,28 @@
+<!--packageA/pages/union/home/home.wxml-->
+
+<view style="margin-top:20rpx;">
+   <view class="nav">
+     <image src="/packageA/images/union_1.png"></image>
+     <view class="nav_center">
+        <view >我要开店</view>
+        <view>果蔬、商超、餐饮等商家欢迎进驻</view>
+     </view>
+     <view class="nav_right">前往申请</view>
+   </view>
+   <view class="nav">
+     <image src="/packageA/images/union_2.png"></image>
+     <view class="nav_center">
+        <view >申请成为社区驿站</view>
+        <view>提供快递暂放、送上门服务</view>
+     </view>
+     <view class="nav_right">前往申请</view>
+   </view>
+   <view class="nav">
+     <image src="/packageA/images/union_3.png" style="margin-top:10rpx"></image>
+     <view class="nav_center">
+        <view >服务入驻申请</view>
+        <view> 家政、中介等服务性企业进驻社区，不用担心客源</view>
+     </view>
+     <view class="nav_right" style="margin-top:38rpx">前往申请</view>
+   </view>
+</view>

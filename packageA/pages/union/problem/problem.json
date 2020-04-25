@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tui-collapse": "/component/tui-collapse/tui-collapse",
+    "tui-list-cell": "/component/list-cell/list-cell"
+  }
+}

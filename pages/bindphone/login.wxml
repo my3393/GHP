@@ -4,13 +4,12 @@
   </view>
 
 <view class='titles'>申请获得以下权限</view>
-<view class='stipss'>·获得您的公开信息(昵称、头像等)</view>
+<view class='stipss'>·平台需要获取你手机号才能给你更好的服务</view>
 <!-- 需要使用 button 来授权登录 -->
 <button
   wx:if="{{canIUse}}"
    open-type="getPhoneNumber" 
   bindgetphonenumber="getPhoneNumber"
- 
 >
   绑定手机号
 </button>

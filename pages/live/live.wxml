@@ -1,30 +1,37 @@
 <!--pages/live/live.wxml-->
-<view class="nav" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
-  <view class="top">
-    <view class="dan">{{item.name}}</view>
-    <view class="mine">
-      <view>主播：{{item.anchorName}}</view>
-      <view>直播时间：{{item.s_date}} {{item.s_time}}~{{item.e_time}}</view>
+<view wx:if='{{detail.length != 0}}'>
+  <view class="nav" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
+    <view class="top">
+      <view class="dan">{{item.name}}</view>
+      <view class="mine">
+        <view>主播：{{item.anchorName}}</view>
+        <view>直播时间：{{item.s_date}} {{item.s_time}}~{{item.e_time}}</view>
+      </view>
+      
     </view>
-    
+    <view class="img">
+      <view class="live_s" wx:if='{{item.liveStatus == 102}}' style="#FF8D39">
+        <image src="/images/live_1.png"></image>
+          还未开始
+      </view>
+        <view class="live_s" wx:if='{{item.liveStatus == 101}}' style="color:#f12200">
+        <image src="/images/live_3.png"></image>
+          直播中
+      </view>
+      <view class="live_s" wx:if='{{item.liveStatus == 103}}' style="color:#999">
+        <image src="/images/live_2.png"></image>
+          已结束
+      </view>
+        <view class="live_s" wx:if='{{item.liveStatus == 107}}' style="color:#999">
+        <image src="/images/live_2.png"></image>
+          已过期
+      </view>
+      <image class="share" src="{{item.shareImg}}"></image>
+      </view>
   </view>
-  <view class="img">
-     <view class="live_s" wx:if='{{item.liveStatus == 102}}' style="#FF8D39">
-       <image src="/images/live_1.png"></image>
-        还未开始
-     </view>
-      <view class="live_s" wx:if='{{item.liveStatus == 101}}' style="color:#f12200">
-       <image src="/images/live_3.png"></image>
-        直播中
-     </view>
-     <view class="live_s" wx:if='{{item.liveStatus == 103}}' style="color:#999">
-       <image src="/images/live_2.png"></image>
-        已结束
-     </view>
-      <view class="live_s" wx:if='{{item.liveStatus == 107}}' style="color:#999">
-       <image src="/images/live_2.png"></image>
-        已过期
-     </view>
-     <image class="share" src="{{item.shareImg}}"></image>
-    </view>
+</view>
+
+<view wx:else>
+ <dump introduce='暂无直播'  />
+ 
 </view>

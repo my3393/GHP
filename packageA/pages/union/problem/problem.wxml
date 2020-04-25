@@ -1,0 +1,10 @@
+<!--packageA/pages/union/problem/problem.wxml-->
+ <block wx:for="{{dataList}}" wx:key="{{index}}">
+      <tui-collapse index="{{index}}" current="{{item.current}}" disabled="{{item.disabled}}" bind:click="change">
+        <tui-list-cell hover="{{!item.disabled}}" slot="title">{{item.name}}</tui-list-cell>
+        <view wx:for='{{item.intro}}' class="tui-content clearfix" slot="content" >
+           <view >{{item}}</view>
+           <view class="right"><image  src="/images/right.png"></image></view>
+        </view>
+      </tui-collapse>
+    </block>

@@ -149,7 +149,7 @@ Page({
           //  })
          } else {
            wx.setTabBarItem({
-             index: 1,
+             index: 2,
              text: res.data.bindAreaName,
            })
 

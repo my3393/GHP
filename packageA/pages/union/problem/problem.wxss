@@ -1,0 +1,20 @@
+/* packageA/pages/union/problem/problem.wxss */
+.right image{
+ 
+  width: 28rpx;
+  height: 28rpx;
+
+}
+.right{
+  float: right;
+}
+.tui-content{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  background: #f9f9f9;
+}
+.tui-content>view:nth-child(1){
+  display: inline-block;
+}
