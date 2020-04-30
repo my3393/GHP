@@ -32,7 +32,7 @@
 
 <view wx:if='{{tar == 1}}' style="margin-top:20rpx;">
   <view class="state_nav" wx:for='{{card}}'>
-    <view class="state_sm">
+    <view class="state_sm" >
       转赠给{{item.receiveUserPhone}}
     </view>
     <view class="state_type">
@@ -56,7 +56,7 @@
     </view>
     
     <view class="state_time">{{item.createDate}}</view>
-     <view class="two linqu" bindtap="phone" id="{{item.sendUserPhone}}">再次申领</view>
+     <view class="two" bindtap="phone" id="{{item.sendUserId}}" data-name="{{item.sendUserName}}">再次申领</view>
   </view>
 
 </view>
@@ -74,7 +74,26 @@
         <view class="xs">资产转增在对方领取前，转增资产处于冻结状态。当资产冻结超过一年，你可申请释放，释放的资产自动汇入可用资产中</view>
     </view> -->
 </view>
+<view wx:if='{{tar == 3}}'>
+  <view class="state_nav" wx:for='{{detail}}'>
+    <view class="state_sm" wx:if='{{item.applyType ==2 }}'>
+      用户 {{item.sendUserName}}申请{{item.applyCardNum}}张会员卡
+    </view>
+     <view class="state_sm" wx:else>
+      向 {{item.receiveUserName}}申请{{item.applyCardNum}}张会员卡
+    </view>
+     <view class="state_type" wx:if='{{item.applyStatus == 0 && item.applyType ==2}}'>
+    
+       <text class="linqu"  bindtap="confirmapplycard" id="{{item.id}}">处理</text>
+      
+    </view>
+    <view class="two"  wx:if='{{item.applyStatus == 1 }}'>已同意</view>
+    <view class="two"  wx:if='{{item.applyStatus == 2 }}'>已拒绝</view>
+    <view class="state_time">{{item.createDate}}</view>
+     
+  </view>
 
+</view>
 <tui-modal show="{{modal}}" custom="{{true}}">
   <view class="tui-modal-custom">
     <view class="tui-modal-custom-text tit">确定激活?</view>
@@ -98,3 +117,11 @@
     </view>
   </view>
 </tui-modal>
+
+  <tui-modal show="{{modal3}}" bind:cancel="hide3" custom="{{true}}" fadein="{{true}}">
+    <view class="tui-modal-custom">
+      <view class="tui-prompt-title">张数</view>
+      <input placeholder="请输入需要的张数" bindinput="again" class="tui-input" />
+      <tui-button type="danger" shape="circle" bind:click="click3" size="small">立即提交</tui-button>
+    </view>
+  </tui-modal>

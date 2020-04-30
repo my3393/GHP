@@ -8,5 +8,6 @@
     "navBar": "../../../component/navBar/navBar",
     "tui-modal": "../../component/modal/modal",
     "tui-button": "../../../component/button/button"
-  }
+  },
+  "enablePullDownRefresh": true
 }

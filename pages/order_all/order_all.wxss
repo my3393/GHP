@@ -210,3 +210,6 @@ page{
     float: right;
     color: #f12200;
 }
+.bott{
+  top: 150%;
+}

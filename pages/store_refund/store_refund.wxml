@@ -190,7 +190,7 @@
       <view class="ru_enter" bindtap="again">
         重新提交
       </view>
-      <sj />
+      
     </view>
 
 

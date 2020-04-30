@@ -254,25 +254,25 @@ Page({
     app.res.req('/member/discount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        if (that.data.user.memberType == 1) {
+       if (that.data.user.memberType == 0) {
           that.setData({
-            member_p: (that.data.prices - res.data.member1Discount * that.data.prices).toFixed(2)
+            z_price: ((that.data.prices + that.data.detail.expressFee) * 0.9).toFixed(2),
+            member_p: ((that.data.prices + that.data.detail.expressFee) * 0.1).toFixed(2),
           })
-        } else if (that.data.user.memberType == 2) {
+        }else{
+       
           that.setData({
-            member_p: (that.data.prices - res.data.member2Discount * that.data.prices).toFixed(2)
+            z_price: ((that.data.prices + that.data.detail.expressFee) * 0.8).toFixed(2),
+            member_p: ((that.data.prices + that.data.detail.expressFee) * 0.2).toFixed(2),
           })
-        } else if (that.data.user.memberType == 3) {
-          that.setData({
-            member_p: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
-          })
-        } else {
-          that.setData({
-            member_p: '0'
-          })
+        
         }
+        // that.setData({
+        //   z_price: (that.data.prices - that.data.member_p + that.data.detail.expressFee).toFixed(2),
+        //   member_zk: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
+        // })
         that.setData({
-          z_price: (that.data.prices - that.data.member_p + that.data.detail.expressFee).toFixed(2),
+        
           member_zk: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
         })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {

@@ -2,7 +2,10 @@
 const app = getApp();
 let card = [];
 let cards = [];
+let detail =[];
 let currentPage=1;
+let receiveUserName;
+let receiveUserId;
 Page({
 
   /**
@@ -12,11 +15,14 @@ Page({
      tag:[
        { name: '待领取资产' },
        { name: '资产状态' },
-       {name:'资产说明'}
+       { name: '资产说明' },
+       {name:'申领记录'},
      ],
      tar:0,
     modal: false,
     modal2: false,
+    modal3: false,
+    again:''
   },
 
   /**
@@ -64,6 +70,7 @@ Page({
   onUnload: function () {
      card = [];
      cards = [];
+     detail =[]
      currentPage = 1;
   }, 
 
@@ -85,6 +92,8 @@ Page({
         that.getzhuan();
       }else if(that.data.tar == 0){
         that.getdai();
+      } else if (that.data.tar == 2) {
+        that.applycardrecord()
       }
   },
 
@@ -94,22 +103,131 @@ Page({
   onShareAppMessage: function () {
 
   },
+  again(e) {
+   
+    this.setData({
+      again: e.detail.value
+    })
+  },
   //拨打电话
   phone(e){
+    receiveUserId = e.currentTarget.id
+    receiveUserName = e.currentTarget.dataset.name
+    this.setData({
+      modal3:true
+    })
+   
+  },
+  hide3() {
+    this.setData({
+      modal3: false
+    })
+
+  },
+  click3(e){   
+    if(this.data.again == '' || this.data.again == 0){
+      wx.showToast({
+        title: '请输入需要的张数',
+        icon: 'none'
+      })
+     
+    }else{
+      this.submitapplycard()
+    }
+   
+  },
+  submitapplycard(){
+    let that = this;
+    var nowTime = new Date();
+    if (nowTime - this.data.tapTime < 1000) {
+      console.log('阻断')
+      wx.showToast({
+        title: '你的操作太快了',
+        icon: 'none'
+      })
+      return;
+    }
+    let data = {
+      receiveUserId: receiveUserId,
+        receiveUserName: receiveUserName,
+        memberType:1,
+        cardNum:that.data.again
+    }
+    app.res.req('/membercard/submitapplycard', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          modal3:false
+        })
+         wx.showToast({
+           title: '申领成功',
+
+         })
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+    this.setData({
+      tapTime: nowTime
+    });
+  },
+  //确定还是拒绝
+  confirmapplycard(e){
+    let that = this;
     wx.showModal({
-      title: '提示',
-      content: '确定拨打该用户电话吗？',
+      cancelText: '拒绝',
+      confirmText: '同意',
+      confirmColor: '#f12200',
+      // cancelColor: '#cccccc',
+      //  title: '你还未绑定家乡',
+      content: '请选择同意还是拒绝',
       success(res) {
         if (res.confirm) {
-          wx.makePhoneCall({
-            phoneNumber: e.currentTarget.id //仅为示例，并非真实的电话号码
+          let data = {
+            id:e.currentTarget.id,
+            status:1
+            }
+          app.res.req('/membercard/confirmapplycard', data, (res) => {
+            console.log(res.data)
+            if (res.status == 1000) {
+              detail = []
+              currentPage = 1
+              that.applycardrecord()
+              that.getnum()
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
+            }
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          let data = {
+            id: e.currentTarget.id,
+            status: 2
+          }
+          app.res.req('/membercard/confirmapplycard', data, (res) => {
+            console.log(res.data)
+            if (res.status == 1000) {
+              detail =[]
+              currentPage = 1
+              that.applycardrecord()
+            } else {
+              wx.showToast({
+                title: res.msg,
+                icon: 'none'
+              })
+            }
+          })
         }
       }
     })
-   
+    
+    
   },
   jihuo() {
     this.setData({
@@ -143,7 +261,9 @@ Page({
     this.setData({
       memberType: 1
     })
-    
+    wx.navigateTo({
+      url: '../members/members',
+    })
 
     this.hide2()
   },
@@ -170,6 +290,9 @@ Page({
     }else if(index == 0){
       cards = []
       that.getdai();
+    }else if(index == 3){
+       detail = []
+      that.applycardrecord()
     }
     this.setData({
       tar:e.currentTarget.dataset.index
@@ -255,6 +378,37 @@ Page({
       tapTime: nowTime
     });
   },
+  //申请记录
+  applycardrecord(e) {
+    let that = this;
+    let data = {
+      currentPage: currentPage
+    }
+
+    app.res.req('/membercard/applycardrecord', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data == '') {
+          wx.showToast({
+            title: '已经没有了哦',
+            icon: 'none'
+          })
+        } else {
+          detail.push(...res.data)
+          that.setData({
+            detail: detail
+          })
+
+        }
+
+      }else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   //状态
   getzhuan(e) {
     let that = this;
@@ -309,6 +463,19 @@ Page({
 
         }
         
+      } else if (res.status == 1024){
+        wx.showToast({
+          title: '你还没绑定手机号,要重新登录绑定手机号',
+          icon:'none',
+          duration:3000
+        })
+       setTimeout(()=>{
+         wx.redirectTo({
+           url: '../login/login',
+         })
+         wx.setStorageSync('url', '../mine_assets/mine_assets')
+       },3000)
+
       } else {
         wx.showToast({
           title: res.msg,
@@ -344,4 +511,5 @@ Page({
       }
     })
   },
+ 
 })

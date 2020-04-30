@@ -16,6 +16,7 @@ Page({
    */
   onLoad: function (options) {
       this.getnum();
+      this.getcode()
   },
 
   /**
@@ -76,6 +77,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+ 
   //手机号
   number(e){
      this.setData({
@@ -176,6 +178,70 @@ Page({
         that.setData({
           nums: res.data
         })
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //查看图片
+  Preview: function (e) {
+    var that = this;
+
+    console.log(e)
+  
+      var a = []
+      a.push(e.currentTarget.id)
+      wx.previewImage({
+        current: e.currentTarget.id,
+        urls: a
+      })
+  
+
+
+  },
+  //二维码
+  getcode() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/qrcode/xcxscancode', data, (res) => {
+
+      if (res.status == 1000) {
+        
+       
+        var array = wx.base64ToArrayBuffer(res.data)
+        const fsm = wx.getFileSystemManager();
+        const FILE_BASE_NAME = 'mine';
+        const filePath = wx.env.USER_DATA_PATH + '/' + FILE_BASE_NAME + '.png';
+        fsm.writeFile({
+          filePath,
+          data: array,
+          encoding: 'binary',
+          success() {
+            console.log(filePath)
+            that.setData({
+              errormsg: '',
+              code: filePath //结果图片
+            })
+          },
+          fail() {
+
+          },
+        });
+
+
+
+      } else if (res.status == 1002) {
+
+      } else if (res.status == 1018) {
+
+      } else if (res.status == 1024) {
 
       } else {
         wx.showToast({

@@ -359,14 +359,14 @@ Page({
     }
     this.setData({
 
-      hours: ofh,
-      min: ofm,
+      hours:24- ofh,
+      min:60- ofm,
 
     })
-    console.log(ofd)
+   
     console.log(ofh)
     console.log(ofm)
-    console.log(ofm)
+    
   },
   //发货时间
   PaymentTimes() {

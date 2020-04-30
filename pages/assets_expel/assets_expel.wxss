@@ -19,3 +19,13 @@
   width: 480rpx;
   color: #000;
 }
+.imag{
+  margin-top: 60rpx;
+  width: 100%;
+  text-align: center;
+
+}
+.imag image{
+  width: 250rpx;
+  height: 250rpx;
+}

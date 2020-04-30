@@ -23,6 +23,7 @@ page{
 .inforin{
   display: inline-block;
   vertical-align: middle;
+  margin-top: 5rpx;
 }
 .inforin input{
   width: 560rpx;

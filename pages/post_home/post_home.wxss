@@ -44,8 +44,8 @@ box-sizing: border-box;
   margin-left: 20rpx;
 }
 .nav>image{
-  width: 220rpx;
-  height: 220rpx;
+  width: 230rpx;
+  height: 230rpx;
   float: left;
   margin-right: 20rpx;
 }

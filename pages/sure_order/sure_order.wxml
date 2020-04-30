@@ -113,7 +113,7 @@
         </view>
     </view>
     <view class="price_list">
-        会员优惠
+        艺呗抵扣
         <view class="price_r yan">
             ￥{{member_p}}
         </view>

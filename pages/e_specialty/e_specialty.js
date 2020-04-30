@@ -101,10 +101,12 @@ Page({
           })
         }else{
           that.getren()
+          that.getlive()
           wx.setTabBarItem({
-            index: 1,
+            index: 2,
             text: res.data.bindAreaName,
           })
+
         }
         if (res.data.bindAreaId == '511623'){
           that.setData({
@@ -282,7 +284,7 @@ Page({
             })
             that.getlist();
 
-          
+         
          
           that.getdymic();
           wx.hideLoading()
@@ -297,6 +299,45 @@ Page({
            icon: 'none'
          })
        }
+    })
+  },
+  getlive() {
+    let that = this;
+    console.log(that.data.user)
+    let data = {
+      liveStatus:101,
+      provinceId:''
+    }
+    app.res.req('/live/all', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+         if(res.data != ''){
+           wx.showModal({
+             cancelText: '暂时不去',
+             confirmText: '前往查看',
+             confirmColor: '#f12200',
+             cancelColor: '#cccccc',
+             title: '提示',
+             content: '有主播正在直播哦',
+             success(res) {
+               if (res.confirm) {
+                 wx.navigateTo({
+                   url: '../live/live',
+                 })
+               } else if (res.cancel) {
+
+               }
+             }
+           })
+         }
+          
+       
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
   },
   //商品列表

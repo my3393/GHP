@@ -65,7 +65,7 @@ page{
 }
 .state{
   margin-left: 20rpx;
-  margin-right: 40rpx;
+  margin-right: 20rpx;
   margin-top: 40rpx;
   display: inline-block;
   font-size: 32rpx;
@@ -86,8 +86,10 @@ page{
 .two{
   position: absolute;
   bottom: 20rpx;
-  right: 20rpx;
+  right: 40rpx;
   font-size: 22rpx;
+  color: #f12200;
+
 }
 .state_sm{
   display: inline-block;
@@ -127,16 +129,17 @@ page{
   height: 46rpx;
   text-align: center;
   line-height: 46rpx;
-  color: #f12200;
+  color: #fff;
+  background: #f12200;
  display: inline-block;
- border-radius: 30rpx
+ border-radius: 30rpx;
 }
 .lq{
   opacity: 0.5
 }
 .zcmx{
   width: 46rpx;
-  height: 40rpx;
+  height: 46rpx;
   float: left;
   margin-top: 16rpx;
   margin-right: 16rpx;
@@ -164,4 +167,24 @@ page{
   text-align: center;
   line-height: 70rpx;
   font-size: 30rpx;
+}
+.tui-modal-custom-text {
+  font-size: 30rpx;
+  color: #333;
+  padding: 20rpx 0;
+}
+
+.tui-prompt-title {
+  padding-bottom: 20rpx;
+  font-size: 34rpx;
+}
+
+.tui-input {
+  margin: 30rpx 40rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+  padding-bottom: 20rpx;
+  font-size: 32rpx;
+}
+.tui-modal-custom {
+  text-align: center;
 }

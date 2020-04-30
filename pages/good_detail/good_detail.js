@@ -13,6 +13,8 @@ let sex = 0; //判断是不是从立即购买打开的规格
 let userid;
 let tuij;
 let storeid;
+var log = require('../../utils/log.js') // 引用上面的log.js文件
+
 Page({
   data: {
     isvideo: true,
@@ -116,6 +118,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    log.info('hello test hahaha') // 日志会和当前打开的页面关联，建议在页面的onHide、onShow等生命周期里面打
+    log.warn('warn')
+    log.error('error')
+    log.setFilterMsg('filterkeyword')
+    log.setFilterMsg('addfilterkeyword')
     //获取id距离窗口高度
     var query = wx.createSelectorQuery();
     //选择id
@@ -623,9 +630,9 @@ Page({
     })
   },
   // 购买
-  buy() {
+  buy(e) {
     let that = this;
-
+     console.log(e)
     console.log(user.id)
     if (that.data.user.id == null || that.data.user.id == '') {
 

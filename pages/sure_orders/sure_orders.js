@@ -218,6 +218,7 @@ Page({
           Price:res.data,
           member_p: (res.data.payPrice - res.data.memberPayPrice).toFixed(2)
         })
+       this.checked()
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -275,26 +276,27 @@ Page({
     app.res.req('/member/discount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-        if (user.memberType == 1) {
+        if (that.data.user.memberType == 0) {
           that.setData({
-            member_p:( res.data.member1Discount * that.data.prices).toFixed(2)
-          })
-        } else if (user.memberType == 2) {
-          that.setData({
-            member_p: (res.data.member2Discount * that.data.prices).toFixed(2)
-          })
-        } else if (user.memberType == 3) {
-          that.setData({
-            member_p: (res.data.member3Discount * that.data.prices).toFixed(2)
+            z_price: ((that.data.Price.totalPrice + that.data.Price.totalExpressFee) * 0.9).toFixed(2),
+            member_p: ((that.data.Price.totalPrice + that.data.Price.totalExpressFee) * 0.1).toFixed(2),
           })
         } else {
+
           that.setData({
-            member_p: '0'
+            z_price: ((that.data.Price.totalPrice + that.data.Price.totalExpressFee) * 0.8).toFixed(2),
+            member_p: ((that.data.Price.totalPrice + that.data.Price.totalExpressFee) * 0.2).toFixed(2),
           })
+
         }
-        that.setData({
-          z_price: that.data.prices - that.data.member_p
-        })
+        // that.setData({
+        //   z_price: (that.data.prices  * 0.8).toFixed(2),
+        //   member_p: (that.data.prices * 0.2).toFixed(2),
+          
+        // })
+        // that.setData({
+        //   z_price: that.data.prices - that.data.member_p
+        // })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
           title: '请先登录',

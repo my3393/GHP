@@ -93,7 +93,19 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    let that = this
+
+    currentPage = 1
+    detail = [];
+   
+    wx.showLoading({
+      title: '刷新中',
+    })
+    setTimeout(() => {
+      wx.stopPullDownRefresh() //停止下拉刷新
+      that.getdetail();
+    }, 500)
+
   }, 
 
   /**

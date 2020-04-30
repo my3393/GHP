@@ -5,7 +5,7 @@ page {
   .shouye{
     position: fixed;
     right: 30rpx;
-    bottom: 160rpx;
+    bottom: 180rpx;
     background: #e65009;
     padding: 10rpx;
     color: #fff;
@@ -934,3 +934,6 @@ background: #fff;
   height: 44rpx;
 }
 /*顶部菜单*/
+.zstop{
+
+}

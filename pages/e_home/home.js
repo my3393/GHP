@@ -45,8 +45,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this;
-    
+    let that = this; 
+   
     if (wx.getStorageSync('token')) {
       that.getbanner();
       console.log('token存在')
@@ -65,14 +65,16 @@ Page({
       that.Bang();
       
     }
-    //绑定
-    if (wx.getStorageSync('bangId')) {
-      that.Bang();
-    }
+   
     if (decodeURIComponent(options.q).split('/')[4]){
-      
+       console.log(options.q)
       wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])
       that.Bang();
+    }
+    if (decodeURIComponent(options.q).split('/')[5]) {
+
+      wx.setStorageSync('bangIds', decodeURIComponent(options.q).split('/')[5])
+      that.Bangs();
     }
     //绑定店铺
 
@@ -111,6 +113,18 @@ Page({
     if (wx.getStorageSync('bangId')) {
       that.Bang();
       
+    }
+    if (wx.getStorageSync('bangIds')) {
+      wx.setStorage({
+        key: 'bangId',
+        data: wx.getStorageSync('bangIds'),
+        success: function(res){
+          that.Bang();
+        }
+      })
+     
+     
+      that.Bangs();
     }
     //3秒后隐藏关注组件
     that.setData({
@@ -153,24 +167,27 @@ Page({
              text: res.data.bindAreaName,
            })
 
-           if (res.data.memberType == 0 && res.data.bindUserNum != 0) {
-             wx.showModal({
-               cancelText: '先逛逛',
-               confirmText: '去开通',
-               confirmColor: '#f12200',
-               cancelColor: '#cccccc',
-               title: '会员',
-               content: '您当前已锁定' + res.data.bindUserNum + '名用户，开通会员即可获得锁定用户订单交易金额的10%分红收益',
-               success(res) {
-                 if (res.confirm) {
-                   wx.navigateTo({
-                     url: '../members/members',
-                   })
-                 } else if (res.cancel) {
+           if (res.data.memberType == 0 && res.data.bindUserNum != 0 ) {
+             if (res.data.phone){
+               wx.showModal({
+                 cancelText: '先逛逛',
+                 confirmText: '去开通',
+                 confirmColor: '#f12200',
+                 cancelColor: '#cccccc',
+                 title: '会员',
+                 content: '您当前已锁定' + res.data.bindUserNum + '名用户，开通会员即可获得锁定用户订单交易金额的10%分红收益',
+                 success(res) {
+                   if (res.confirm) {
+                     wx.navigateTo({
+                       url: '../members/members',
+                     })
+                   } else if (res.cancel) {
 
+                   }
                  }
-               }
-             })
+               })
+             }
+           
            }
          }
          if (res.data.phone == '' || res.data.phone == null) {
@@ -808,6 +825,33 @@ Page({
       } else if (res.status == 1031) {
         wx.removeStorageSync('bangId')
         console.log('----1031----')
+      }
+    })
+  },
+  //绑定
+  Bangs() {
+    let that = this;
+
+    let data = {
+      shareUserId: wx.getStorageSync('bangIds')
+    }
+
+    app.res.req("/membercard/scancodereceive", data, (res) => {
+      console.log(res)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+
+        wx.removeStorageSync('bangIds')
+      } else if (res.status == 1028) {
+        console.log('----1028s----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangIds')
+        console.log('----1030s----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangIds')
+        console.log('----1031s----')
       }
     })
   },

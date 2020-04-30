@@ -35,4 +35,9 @@
     </view>
   </tui-modal>
 
-  <sj />
+  <view class="imag">
+     <image src="{{code}}" id="{{code}}" bindtap="Preview"></image>
+     <view>点击后长按保存扫码领取</view>
+  </view>
+
+

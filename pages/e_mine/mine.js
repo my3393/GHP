@@ -711,10 +711,13 @@ Page({
     app.res.req('/membercard/unclaimedcardnum', data, (res) => {
       console.log(res.data)
       if (res.status == 1000 ) {
-        if(res.data != 0 && !res.dara.index){
-          that.setData({
-            modal: true
-          })
+        if(res.data != 0 ){
+          if (!res.data.index){
+            that.setData({
+              modal: true
+            })
+          }
+         
         }
         that.setData({
           nums: res.data

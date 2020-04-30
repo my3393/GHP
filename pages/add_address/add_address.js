@@ -561,7 +561,7 @@ Page({
 
           town.push(...res.data.data)
 
-          let a = { name: '-' }
+          let a = { name: '-',id:''}
           town.push(a)
           that.setData({
             towns: town,
