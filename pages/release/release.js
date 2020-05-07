@@ -16,6 +16,7 @@ let area_id = '';
 let town_id = '';
 let images = [];
 let simages = [];
+let zhao1 = '';
 Page({
 
   /**
@@ -37,7 +38,10 @@ Page({
     iscity: false,
     isqu: false,
     isjie: false,
+    zhao1: true,
     addres:'',
+    titer:'',
+
   },
 
   /**
@@ -125,6 +129,13 @@ Page({
       intor: e.detail.value
     })
   },
+  //简介
+  titer(e) {
+    let that = this;
+    this.setData({
+      titer: e.detail.value
+    })
+  },
   //手机号
   number(e) {
     this.setData({
@@ -149,28 +160,47 @@ Page({
     var that = this;
     console.log(e)
     console.log(that.data.imgs)
-
-
-    simages.splice(e.currentTarget.dataset.index, 1)
-    images.splice(e.currentTarget.dataset.index, 1)
-    that.setData({
-      images: images,
-      img_num: that.data.img_num - 1
-    })
-    console.log(simages.length)
-    if (simages.length < 3) {
+    if (e.currentTarget.dataset.num == 0) {
       that.setData({
-        img_show: false
+        zhao1: true,
+        zhaos1: '',
       })
+      zhao1 = ''
+    }else{
+      simages.splice(e.currentTarget.dataset.index, 1)
+      images.splice(e.currentTarget.dataset.index, 1)
+      that.setData({
+        images: images,
+        img_num: that.data.img_num - 1
+      })
+      console.log(simages.length)
+      if (simages.length < 3) {
+        that.setData({
+          img_show: false
+        })
+      }
     }
+
+
+   
 
   },
   //入驻提交
   sub() {
     let that = this;
-    if (that.data.intor == '') {
+    if (that.data.titer == '') {
       wx.showToast({
         title: '请描述下你的技能',
+        icon: 'none'
+      })
+    }else if (that.data.intor == '') {
+      wx.showToast({
+        title: '请描述下你的技能',
+        icon: 'none'
+      })
+    } else if (zhao1 == '') {
+      wx.showToast({
+        title: '请上传封面',
         icon: 'none'
       })
     } else if (simages == '') {
@@ -220,7 +250,8 @@ Page({
       contentImgs: simages,
       content: that.data.intor,
       latitude: that.data.latitude,
-      longitude: that.data.longitude
+      longitude: that.data.longitude,
+      
     }
 
     app.res.req('/sqorder/submitdynamic', data, (res) => {
@@ -257,7 +288,9 @@ Page({
       contentImgs: simages,
       content: that.data.intor,
       latitude: that.data.latitude,
-      longitude: that.data.longitude
+      longitude: that.data.longitude,
+      cover:zhao1,
+      title:that.data.titer
     }
 
     app.res.req('/sqdynamic/submitdynamic', data, (res) => {
@@ -888,7 +921,7 @@ Page({
         console.error(error);
       },
       complete: function (res) {
-        console.log(res);
+        //console.log(res);
       }
     })
   }

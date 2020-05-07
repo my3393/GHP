@@ -7,7 +7,7 @@
 <view class="skeleton">
 
   <view class="fixs" style='line-height:{{navH + 10}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}'>
-    善家
+    善家购
 
   </view>
  

@@ -1,5 +1,11 @@
 <!--pages/live/live.wxml-->
-<view wx:if='{{detail.length != 0}}'>
+<picker class="clearfix" range="{{province}}" range-key="name" value="{{index}}" bindchange="type">
+  <view class="pro">
+  <view>{{pro}}</view>
+  <view class="icon"></view>
+</view>
+</picker>
+<view wx:if='{{detail.length != 0}}' style="margin-top:40rpx;">
   <view class="nav" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
     <view class="top">
       <view class="dan">{{item.name}}</view>
@@ -34,4 +40,9 @@
 <view wx:else>
  <dump introduce='暂无直播'  />
  
+</view>
+
+<view class="shenq" bindtap="shen">
+<view>申请</view>
+  <view>直播</view>
 </view>

@@ -1,0 +1,2 @@
+/* pages/live_add/live_add.wxss */
+@import '../add_address/add_address'

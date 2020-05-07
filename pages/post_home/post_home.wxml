@@ -2,9 +2,9 @@
 <view class='main-wraper'>
   <navBar background='#fff' title='善家社区' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick" >
     <view class='location' slot="left" bindtap="xuan">
-      <!-- <image src="/images/"></image> -->
-      <view class='con dan'>{{address}}</view>
-      <view class='icon' />
+      <image style="width:28rpx;height:30rpx;" src="/images/sheq_dinw.png"></image>
+      <view class='con dan'>{{address}}></view>
+      <!-- <view class='icon' /> -->
     </view>
     
     <!-- <view class='lxy-nav-bar-search' slot="center">
@@ -16,7 +16,13 @@
   </navBar>
   <view class="tar">
     <view wx:for='{{tars}}' data-index="{{index}}" class="{{index == tas?'active':'' }}" bindtap="tars">{{item.name}}</view>
-
+      <view class="din-1" wx:if='{{user.memberType == 0}}' bindtap="zhizu">
+      
+      <view>加油打折</view>
+    </view>
+    <view wx:else>
+      <navigator target="miniProgram" open-type="navigate" app-id="wx1f1ea04b716771be" version="release" path="pages/index/index?platformType=98639258">加油打折</navigator>
+    </view>
   </view>
   <view>
     <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9" bindchange="testSwiper">
@@ -41,9 +47,11 @@
 
   <view>
      <view class="nav clearfix" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
-       <image src="{{item.headImgUrl}}"></image>
+       <image wx:if='{{item.coverOss}}' src="{{item.coverOss}}"></image>
+       <image wx:else src="{{item.headImgUrl}}"></image>
        <view class="nav_rig">
-         <view class="nav_name dan">{{item.userName}}</view>
+       <view class="nav_name dan" wx:if='{{item.title}}'>{{item.title}}</view>
+         <view class="nav_name dan" wx:else>{{item.userName}}</view>
          <view class="nav_jn ">详情：{{item.content}}</view>
          <view class="typ">{{item.typeName}}</view>
          <view class="distance">{{item.distance}}</view>

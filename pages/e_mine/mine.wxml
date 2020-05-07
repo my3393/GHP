@@ -37,7 +37,13 @@
       <view class="person" bindtap="person">
         <view>
           <view class="per-n" wx:if='{{user.userName == null}}'>{{phone}}</view>
-          <view class="per-n" wx:else>{{user.userName}}</view>
+          <view class="per-n" wx:else>{{user.userName}}
+             <view class="gongy" style="display:inline-block">
+                  <image  wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
+            <image  wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
+            <image wx:if='{{user.memberType == 3}}' src="../../images/mine_5.png"></image>
+             </view>
+          </view>
           <image wx:if='{{user.memberType != 0}}' src="{{code}}" class="ewm" catchtap="ewm"></image>
           <view class="hhr" catchtap="zhin">分享操作指南</view>
           <!-- <view class="hui" wx:if='{{user.memberType == 1}}'>
@@ -53,10 +59,10 @@
         <view>
           <view class="gongy">
             <!-- <image  src="../../images/mine_1.png"></image> -->
-            <image wx:if='{{user.isCollegeStudent ==1}}' src="../../images/mine_2.png"></image>
+            <!-- <image wx:if='{{user.isCollegeStudent ==1}}' src="../../images/mine_2.png"></image>
             <image wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
             <image wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
-            <image wx:if='{{user.memberType == 3}}' src="../../images/mine_5.png"></image>
+            <image wx:if='{{user.memberType == 3}}' src="../../images/mine_5.png"></image> -->
           </view>
 
         </view>
@@ -307,7 +313,7 @@
   </view>
 </view> -->
 
-<tui-modal show="{{modal5}}" bind:click="handleClick5" bind:cancel="hide5" content="全国加油77折起" color="#333" size="32" shape="circle" button='{{button5}}'>
+<tui-modal show="{{modal5}}" bind:click="handleClick5" bind:cancel="hide5" content="全国加油8折起" color="#333" size="32" shape="circle" button='{{button5}}'>
 
 
 </tui-modal>

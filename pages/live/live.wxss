@@ -3,6 +3,26 @@ page{
   background: #f9f9f9;
   font-size: 28rpx;
 }
+.icon{
+  width: 0;
+height: 0;
+border-left: 5PX solid transparent;
+border-right: 5PX solid transparent;
+border-top: 5PX solid #000;
+margin-left: 2.5PX;
+margin-top: 18rpx;
+float: right;
+}
+.pro{
+   float: right;
+   margin-right: 30rpx;
+   margin-top: 30rpx;
+}
+
+.pro view{
+  display: inline-block;
+ 
+}
 .nav{
   width: calc(100% - 60rpx);
   margin-left: 30rpx;
@@ -46,4 +66,20 @@ page{
   float: left;
   margin-top: 7rpx;
   margin-right: 10rpx;
+}
+.shenq{
+  width: 100rpx;
+height: 100rpx;
+border-radius: 50%;
+position: fixed;
+bottom: 40rpx;
+right: 40rpx;
+background: linear-gradient(to right, #f12200, #ff4e17);
+text-align: center;
+color: #fff;
+ font-size: 26rpx;
+ box-sizing: border-box;
+ padding-top: 14rpx;
+ box-shadow: 4rpx 4rpx 20rpx #f12200;
+
 }

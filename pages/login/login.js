@@ -216,9 +216,16 @@ Page({
 
                         } else if (wx.getStorageSync('url')) {
                           console.log('-----url----')
-                          wx.redirectTo({
-                            url: wx.getStorageSync('url'),
-                          })
+                          if (wx.getStorageSync('url') == '../post_home/post_home'){
+                            wx.switchTab({
+                              url: wx.getStorageSync('url'),
+                            })
+                          }else{
+                            wx.redirectTo({
+                              url: wx.getStorageSync('url'),
+                            })
+                          }
+                          
                           wx.removeStorageSync('url')
                         } else if (that.data.detail_id != '' && that.data.userid != '') {
                           console.log(11)

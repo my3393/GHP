@@ -1,0 +1,31 @@
+/* pages/solder/solder.wxss */
+page{
+  background: #f9f9f9;
+  font-size: 28rpx;
+}
+.nav{
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.nav>view{
+  display: inline-block;
+}
+.nav image{
+  width: 140rpx;
+  height: 140rpx;
+  float: left;
+  margin-right: 20rpx;
+}
+.titer{
+  margin-top: 20rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+.go{
+  width: 50rpx !important;
+  height: 50rpx !important;
+  float: right !important;
+  margin-top:30rpx !important;
+}

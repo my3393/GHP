@@ -326,7 +326,7 @@ Page({
        memberType: that.data.memberType
      }
      if(that.data.user.memberType == 0){
-       app.res.req('/order/membersubmit', data, (res) => {
+       app.res.req('/order/memberorder', data, (res) => {
          console.log(res.data)
          if (res.status == 1000) {
            app.res.req("/pay/xcxpay", data, (res) => {

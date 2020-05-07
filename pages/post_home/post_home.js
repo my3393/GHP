@@ -27,7 +27,9 @@ Page({
     tars: [
       { name: '善家联盟' },
       { name: '善家服务' },
+     
       { name: '善家驿站' },
+      { name: '善家直播' },
     ],
     tas: 1,
   },
@@ -56,7 +58,12 @@ Page({
     // })
    
     _this.postion()
+    if (options.userid) {
+      console.log(options.userid)
+      wx.setStorageSync('bangId', options.userid)
       
+
+    }  
    
 
   },
@@ -72,14 +79,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let that = this;
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
 
+        that.setData({
+          user: res.data
+        })
+        
+      }
+    })
+    if (wx.getStorageSync('bangId')) {
+      that.Bang();
+
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+     
   },
 
   /**
@@ -103,7 +124,7 @@ Page({
     })
     setTimeout(() => {
       wx.stopPullDownRefresh() //停止下拉刷新
-      that.getdetail();
+      that.getDetail();
     }, 500)
 
   }, 
@@ -120,8 +141,21 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this;
+   
+    return {
+      title: '免费领取超级福利全国加油8折起',
+      path: '/pages/post_home/post_home?userid=' + that.data.user.id,
 
+    }
   },
+  //查看分享图片
+  zhizu(){
+    wx.previewImage({
+      current: 'https://www.xingtu-group.cn/xcx_img/fxlk.jpg',
+      urls: ['https://www.xingtu-group.cn/xcx_img/fxlk.jpg']
+    })
+  }, 
   //banner跳转
   banner(e) {
     console.log(e)
@@ -139,10 +173,18 @@ Page({
   },
   tars(e){
     var index = e.currentTarget.dataset.index
-     if(index == 0 || index == 2){
+     if(index == 0 || index == 2 ){
        wx.showToast({
          title: '暂未开放',
          icon:'none'
+       })
+     }else if(index == 8){
+       wx.navigateTo({
+         url: '../solder/solder',
+       })
+     }else{
+       wx.navigateTo({
+         url: '../live/live',
        })
      }
   },
@@ -307,11 +349,7 @@ Page({
         })
         console.log(that.data.type)
         that.getDetail()
-      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
+      }  else {
         wx.showToast({
           title: res.msg,
           icon: 'none'
@@ -351,6 +389,7 @@ Page({
         wx.redirectTo({
           url: '../login/login',
         })
+        wx.setStorageSync('url', '../post_home/post_home')
       } else {
         console.log(111)
         wx.showToast({
@@ -421,5 +460,32 @@ Page({
        
       }
     })
-  }
+  },
+  //绑定
+  Bang() {
+    let that = this;
+
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
+
+    app.res.req("/user/sharebinduser", data, (res) => {
+      console.log(res)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+
+        wx.removeStorageSync('bangId')
+      } else if (res.status == 1028) {
+        console.log('----1028----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangId')
+        console.log('----1030----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangId')
+        console.log('----1031----')
+      }
+    })
+  },
 })

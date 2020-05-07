@@ -2,14 +2,15 @@
 const time = require("../../utils/util.js");
 const app = getApp();
 var currentPage = 1;
-let detail = []
+let detail = [];
+let pro_id =''
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    pro:'全国'
   },
 
   /**
@@ -17,6 +18,7 @@ Page({
    */
   onLoad: function (options) {
     this.getdetail();
+    this.getprov()
   },
 
   /**
@@ -55,7 +57,8 @@ Page({
    */
   onUnload: function () {
    detail = [],
-   currentPage = 1
+   currentPage = 1;
+    pro_id=''
   },
 
   /**
@@ -89,6 +92,11 @@ Page({
 
     }
   },
+  shen(){
+     wx.navigateTo({
+       url: '../live_add/live_add',
+     })
+  },
   detail(e){
     console.log(e)
     var that = this;
@@ -103,7 +111,7 @@ Page({
     let data = {
       liveStatus:0,
       currentPage: currentPage,
-      provinceId:''
+      provinceId:pro_id
     }
     app.res.req('/live/list', data, (res) => {
       console.log(res.data)
@@ -130,6 +138,46 @@ Page({
           url: '../login/login',
         })
         wx.setStorageSync('url', '../live/live')
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+
+  },
+  type(e){
+    console.log(e)
+    pro_id = this.data.province[e.detail.value].id
+    currentPage =1
+    detail = []
+    this.setData({
+      pro: this.data.province[e.detail.value].name
+    })
+    this.getdetail();
+  },
+  //省
+  getprov: function () {
+    let that = this
+    let data = {
+      grade: 1,
+      id: ''
+    }
+    app.res.req('/region/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+          
+       
+
+        that.setData({
+          province: res.data
+        })
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
       } else {
         wx.showToast({
           title: res.msg,

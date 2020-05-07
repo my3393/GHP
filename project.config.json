@@ -67,9 +67,9 @@
 				},
 				{
 					"id": 1,
-					"name": "pages/good_detail/good_detail",
-					"pathName": "pages/good_detail/good_detail",
-					"query": "storeid=10&userid=52&id=354",
+					"name": "pages/post_home/post_home",
+					"pathName": "pages/post_home/post_home",
+					"query": "userid=52",
 					"scene": null
 				}
 			]

@@ -1,0 +1,27 @@
+<!--pages/solder/solder.wxml-->
+<view>
+    <view class="nav clearfix"  bindtap="detail" id="10">
+       <image src="{{store1.storeLogoOss}}"></image>
+     <view>
+         <view class="name">{{store1.storeName}}</view>
+         <view class="titer">{{store1.publicSlogan}}</view>
+     </view>
+     <image class="go" catchtap="go" src="/images/go.png" data-name="锦联大厦A808" data-lng="113.866416" data-lat="22.607235"></image>
+    </view>
+     <view class="nav clearfix" bindtap="detail" id="111">
+       <image src="{{store2.storeLogoOss}}"></image>
+     <view>
+         <view class="name">{{store2.storeName}}</view>
+         <view class="titer">{{store2.publicSlogan}}</view>
+     </view>
+     <image class="go" catchtap="go" src="/images/go.png" data-name="景德镇三宝瓷谷陶艺基地" data-lng="117.264446" data-lat="29.260324"></image>
+    </view>
+     <view class="nav clearfix" bindtap="detail" id="3">
+       <image src="{{store3.storeLogoOss}}"></image>
+     <view>
+         <view class="name">{{store3.storeName}}</view>
+         <view class="titer">{{store3.publicSlogan}}</view>
+     </view>
+     <image class="go" catchtap="go" src="/images/go.png" data-name="木子店镇" data-lng="115.367612" data-lat="31.188658"></image>
+    </view>
+</view>

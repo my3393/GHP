@@ -1,0 +1,23 @@
+<!--pages/live_add/live_add.wxml-->
+<view class='infor'>
+      <view class='inform put'>姓 名</view>
+      <view class='inforin' style="margin-left:28rpx">
+        <input type='text' value="{{names}}" placeholder='请输入姓名' bindinput='names'></input>
+      </view>
+    </view>
+    <view class='infor'>
+      <view class='inform'>手机号</view>
+      <view class='inforin'>
+        <input maxlength='11' type='number' value="{{phone}}" placeholder='请输入联系人手机号' bindinput='phone'></input>
+      </view>
+    </view>
+     <view class='infor'>
+      <view class='inform'>微信号</view>
+      <view class='inforin'>
+        <input maxlength='11' type='number' value="{{wx}}" placeholder='请输入主播微信号' bindinput='wx'></input>
+      </view>
+    </view>
+
+<view class="a_submit sub" bindtap="sub">
+    保存
+  </view>

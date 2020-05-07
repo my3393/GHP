@@ -1,7 +1,28 @@
 <!--pages/realease/release.wxml-->
 <view class="nav">
+  标题
+  <input style="color:#000;margin-top:30rpx;" placeholder="请填写该服务标题" value="{{titer}}" bindinput="titer" maxlength="30"></input>
+</view>
+<view class="nav">
   服务描述
-  <textarea class="yw" placeholder="请简单介绍下招聘信息" value="{{intor}}" bindinput="intor" maxlength="50"></textarea>
+  <textarea class="yw" placeholder="请简单介绍下招聘信息" value="{{intor}}" bindinput="intor" maxlength="500"></textarea>
+</view>
+<view class="nav" style="margin-top:20rpx;">
+  <view>文章封面</view>
+   <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}" style="margin-top:20rpx;">
+    <view class="zhao_img">
+      <image src="../../images/zhao.png"></image>
+    </view>
+    <view>上传</view>
+  </view>
+  <view wx:else class="clearfix" style="margin-top:20rpx;">
+    <view class="tu_img" bindtap="Preview" id='{{zhaos1}}' data-num="{{0}}">
+      <image src="{{zhaos1}}"></image>
+      <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{0}}" catchtap="detels">
+        <image src="../../images/deteles.png" />
+      </view>
+    </view>
+  </view>
 </view>
 <view class="nav" style="margin-top:20rpx;">
   <view>图片介绍</view>

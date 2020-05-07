@@ -1,8 +1,10 @@
 <!--packageA/pages/post/detail/detail.wxml-->
 
 <view class="nav clearfix">
-  <image src="{{detail.headImgUrl}}" class="head_img"></image>
-  <view >{{detail.userName}}</view>
+  <image wx:if='{{detail.coverOss}}' src="{{detail.coverOss}}" class="head_img"></image>
+  <image wx:else src="{{detail.headImgUrl}}" class="head_img"></image>
+  <view wx:if='{{detail.title}}'>{{detail.title}}</view>
+  <view wx:else>{{detail.userName}}</view>
   <view class="head_type">{{detail.typeName}}</view>
 </view>
 
