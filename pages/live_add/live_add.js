@@ -9,7 +9,9 @@ Page({
        name:'',
        phone:'',
        wx:'',
-  },
+       pro:'',
+       remark:'',
+  }, 
 
   /**
    * 生命周期函数--监听页面加载
@@ -81,6 +83,16 @@ Page({
       wx: e.detail.value
     })
   },
+  remark(e) {
+    this.setData({
+      remark: e.detail.value
+    })
+  },
+  pro(e) {
+    this.setData({
+      pro: e.detail.value
+    })
+  },
   sub(e){
     var that = this
     var tel = /^1[3456789]\d{9}$/;
@@ -106,11 +118,13 @@ Page({
       })
     }else{
       let data = {
-          :that.data.name,
-          : that.data.phone,
-          : that.data.wx,
+        name :that.data.name,
+        contactPhone : that.data.phone,
+        weiXinNo : that.data.wx,
+        remark: that.data.remark,
+        liveArea:that.data.pro
       }
-      app.res.req('/region/list', data, (res) => {
+     app.res.req('/live/submitapply', data, (res) => {
         console.log(res.data)
         if (res.status == 1000) {
           wx.showToast({

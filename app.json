@@ -83,7 +83,8 @@
     "pages/release/release",
     "pages/live/live",
     "pages/solder/solder",
-    "pages/live_add/live_add"
+    "pages/live_add/live_add",
+    "pages/unions/unions"
   ],
   "subpackages": [
     {
