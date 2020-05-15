@@ -73,12 +73,12 @@
   </view>
 </view>
 <view class="nav">
-  <view class="list" >
+  <view class="list">
     <view class="nav_top">
       <view class="sotre_img">
         <image src="../../images/store.png" />
       </view>
-       <text bindtap="store" id="{{detail.storeId}}">{{detail.storeName}}</text>
+      <text bindtap="store" id="{{detail.storeId}}">{{detail.storeName}}</text>
       <view class="store_r">
         <image src="../../images/right.png" />
       </view>
@@ -90,22 +90,22 @@
       <view class="good_list">
         <view class='goodsname dan'> {{item.productName}}</view>
         <text class='specification'> {{item.provinceName}}  {{item.cityName}}  {{item.areaName}}  {{item.detailAddress}}</text>
-        <view class="guig" >
+        <view class="guig">
           <view class='gui-g' wx:if='{{item.isSpecification == 1}}'>{{item.specification}}</view>
         </view>
         <view>
           <view class='price'>
-            <text class="yuan">￥</text>  {{item.salePrice}}
+            <text class="yuan">￥</text> {{item.salePrice}}
           </view>
           <view class="good_num">× {{item.buyCount}}</view>
         </view>
         <view class="tuik" catchtap="refund" data-status='{{item.orderStatus}}' id="{{item.id}}" wx:if='{{detail.orderStatus != 0 && detail.orderStatus != 4 && item.orderStatus == 0 || item.orderStatus == 1  }}'>退款</view>
         <view class="tuik zhong" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 3 || item.orderStatus == 7 || item.orderStatus == 11 || item.orderStatus == 15 || item.orderStatus == 4 || item.orderStatus == 8 || item.orderStatus == 12 || item.orderStatus == 13 || item.orderStatus == 17}}'>退款中</view>
         <view class="tuik" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 6 || item.orderStatus == 10 || item.orderStatus == 14 || item.orderStatus == 18}}'>退款详情</view>
-         <view class="tuik zhong" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9 ||  item.orderStatus == 16}}'>退款成功</view> 
+        <view class="tuik zhong" catchtap="zhong" id="{{item.id}}" wx:if='{{item.orderStatus == 5 || item.orderStatus == 9 ||  item.orderStatus == 16}}'>退款成功</view>
       </view>
     </view>
-    
+
   </view>
 </view>
 <view class='nav'>
@@ -115,29 +115,30 @@
       <view class="price_r">￥{{detail.productTotalFee}}</view>
     </view>
     <view class="price_list">
-      会员优惠
-      <view class="price_r">￥{{member_p}}</view>
+      艺呗抵扣金额
+      <view class="price_r">￥{{detail.d_price}}</view>
     </view>
     <view class="price_list">
       运费
       <view class="price_r">￥{{detail.freight}}</view>
     </view>
     <view class="z_right">
-     <text wx:if='{{detail.orderStatus == 0}}'>需</text><text wx:else>实</text>付费:
+      <text wx:if='{{detail.orderStatus == 0}}'>需</text>
+      <text wx:else>实</text>付费:
       <view class="yan font">
-        <text style="font-size:22rpx">￥</text> {{detail.payMoney}}
+        <text style="font-size:22rpx">￥</text> {{z_price}}
       </view>
     </view>
   </view>
 </view>
 <view class="nav">
-  <view class="dind" >订单编号：{{detail.orderNo}}</view>
+  <view class="dind">订单编号：{{detail.orderNo}}</view>
   <view class="dind" wx:if='{{detail.createTime != null}}'>下单时间：{{detail.createTime}}</view>
   <view class="dind" wx:if='{{detail.payTime != null}}'>付款时间：{{detail.payTime}}</view>
   <view class="dind" wx:if='{{detail.sendTime != null}}'>发货时间：{{detail.sendTime}}</view>
   <view class="dind" wx:if='{{detail.closeTime != null}}'>关闭时间：{{detail.closeTime}}</view>
   <view class="dind" wx:if='{{detail.cancelTime != null}}'>取消时间：{{detail.cancelTime}}</view>
-  
+
   <view class="dind" bindtap="phone">
     <view class="lix">
       联系商家：
@@ -150,7 +151,7 @@
 </view>
 <view style='height:120rpx;'></view>
 <!-- 未付款 -->
-<view class="footer"  wx:if='{{detail.orderStatus == 0}}'>
+<view class="footer" wx:if='{{detail.orderStatus == 0}}'>
   <view class="footer_r">
 
     <view class="tuik fuk" bindtap="pay">付款 {{hours}}:{{min}}</view>
@@ -161,35 +162,35 @@
 </view>
 <!-- 未发货 -->
 <view class="footer" wx:if='{{detail.orderStatus == 1}}'>
-    <view class="footer_r">
+  <view class="footer_r">
 
-        <view class="tuik" bindtap="remind">提醒发货</view>
-                
-    </view>
+    <view class="tuik" bindtap="remind">提醒发货</view>
+
+  </view>
 </view>
 <!-- 发货后 -->
 <view class="footer" wx:if='{{detail.orderStatus == 2}}'>
-    <view class="footer_r">
+  <view class="footer_r">
 
-        <view class="tuik" bindtap="quer">确认签收</view>
-                <view class="tuik" bindtap="wul" >查看物流</view>
-    </view>
+    <view class="tuik" bindtap="quer">确认签收</view>
+    <view class="tuik" bindtap="wul">查看物流</view>
+  </view>
 </view>
 <!-- 确认收货后 -->
 <view class="footer" wx:if='{{detail.orderStatus == 3}}'>
-    <view class="footer_r">
+  <view class="footer_r">
 
-        <view class="tuik">立即评价</view>
-                <view class="tuik" bindtap="wul">查看物流</view>
-    </view>
+    <view class="tuik">立即评价</view>
+    <view class="tuik" bindtap="wul">查看物流</view>
+  </view>
 </view>
 <!-- 删除订单 -->
 <view class="footer" wx:if='{{detail.orderStatus == 4}}'>
-    <view class="footer_r">
+  <view class="footer_r">
 
-        <view class="tuik" bindtap="delete">删除订单</view>
-                
-    </view>
+    <view class="tuik" bindtap="delete">删除订单</view>
+
+  </view>
 </view>
 <!-- 删除订单 -->
 <view class="popup" hidden="{{isdelete}}">

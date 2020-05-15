@@ -1,5 +1,5 @@
 /* packageA/pages/prefect_commpany/prefect_commpany.wxss */
-@import '../../../pages/store_refund/store_refund';
+@import '../../../../pages/store_refund/store_refund';
 page{
   background: #f9f9f9;
   font-size: 28rpx;

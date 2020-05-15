@@ -1,0 +1,209 @@
+/* packageA/pages/union/order_detail/order_detail.wxss */
+@import '/pages/sure_order/sure_order';
+page{
+  background: #f9f9f9;
+}
+.top{
+  background:linear-gradient(to right, #f12200, #ff4e17);
+  width: 100%;
+  height: 180rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+.top_tu{
+    width: 26rpx;
+    height: 26rpx;
+    float: left;
+    margin-right: 15rpx;
+    margin-top: 3rpx;
+}
+.top_tu image{
+    width: 100%;
+    height: 100%;
+}
+.top_n{
+    color: #fff;
+    font-size: 30rpx;
+}
+.top_tit{
+    margin-left: 40rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+.nav{
+  width: calc(100% - 40rpx);
+  position: relative;
+  top: -50rpx;
+  border-radius: 14rpx;
+  margin-left: 20rpx;
+  background: #fff;
+  box-shadow:0px 3px 28px 0px rgba(204,204,204,0.18);
+}
+.res{
+  width: calc(100% - 40rpx);
+ 
+  border-radius: 14rpx;
+  margin-left: 20rpx;
+  background: #fff;
+  box-shadow:0px 3px 28px 0px rgba(204,204,204,0.18);
+}
+.address{
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    background: #fff;
+    border-radius: 12rpx;
+    padding: 30rpx 20rpx;
+    box-sizing: border-box;
+    margin-top: 20rpx;
+}
+.address_top{
+    font-size: 22rpx;
+    margin-bottom: 16rpx;
+}
+.mor{
+    border: 1rpx #F12200 solid;
+    color: #F12200;
+    border-radius: 4rpx;
+    padding: 2rpx 4rpx;
+    box-sizing: border-box;
+    margin-right: 12rpx;
+}
+
+.address_cent{
+    font-size: 26rpx;
+    display: inline-block;
+    width: 93%;
+    
+}
+.address_cent_r{
+    float: right;
+}
+.address_bott{
+    font-size: 24rpx;
+    color: #666;
+    margin-top: 12rpx;
+}
+.address_t{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  height: 7rpx;
+  position: relative;
+  top: -37rpx;  
+}
+.address_t image{
+    width: 100%;
+    height: 100%;
+}
+.add_address{
+    text-align: center;
+    display: inline-block;
+    width: 95%;
+    font-size: 26rpx;
+    color: #333;
+    margin-bottom: 25rpx;
+}
+.peis{
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid #F3F3F3;
+}
+
+.dind{
+    line-height: 70rpx;
+    margin-left: 20rpx;
+}
+.logistics_date{
+    font-size: 22rpx;
+    color: #999;
+    margin-left: 50rpx;
+    margin-top: 10rpx;
+    margin-bottom: 40rpx;
+}
+.logistics_right{
+   position: absolute;
+   top: 25rpx;
+   right: 10rpx;
+}
+.logistics_right image{
+    width: 20rpx;
+    height: 22rpx;
+}
+.chak{
+   position: relative;
+}
+.tuik{
+    width: 155rpx;
+    height: 55rpx;
+    border-radius: 40rpx;
+    line-height: 55rpx;
+    text-align: center;
+    border: 1rpx solid #e7e7e7;
+    font-size: 22rpx;
+    float: right;
+    margin-top: 20rpx;
+}
+.lix{
+    float: left;
+}
+.phone{
+    width: 26rpx;
+    height: 26rpx;
+    float: left;
+    margin-top: 4rpx;
+    margin-right: 10rpx;
+}
+.phone image{
+    width: 100%;
+    height: 100%;
+}
+.footeres{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100rpx;
+    background: #fff;
+}
+.footeres_r{
+    float: right;
+}
+.footeres_r>view{
+    display: inline-block;
+    margin-right: 30rpx;
+}
+.fuk{
+  color: #fff;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+}
+.picker{
+  display: inline-block;
+  margin-right: 40rpx;
+}
+.d_sh image{
+  width: 30rpx;
+  height: 24rpx;
+}
+.zhong{
+  border:1rpx solid #f12200;
+  color: #f12200;
+}
+.footer>view{
+  float: right;
+}
+.dit{
+  background: #F3F3F3;
+  border-radius: 30rpx;
+  width: 157rpx;
+  height: 56rpx;
+  text-align: center;
+  line-height: 56rpx;
+}
+.dit image{
+  width: 22rpx;
+  height: 32rpx;
+  float: left;
+  margin-left: 12rpx;
+  margin-top: 10rpx;
+}

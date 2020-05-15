@@ -1,4 +1,9 @@
 // pages/add_address/add_address.js
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
+
+var qqmapsdk = new QQMapWX({
+  key: 'PVXBZ-SXVC3-BSV3N-YN6BC-3IV45-DGF2L' // 必填
+});
 const app = getApp();
 let province = [];
 let city = [];
@@ -124,7 +129,10 @@ Page({
        area: address.areaName,
        town: address.townName,
        minute: address.detailAddress,
-       name: address.provinceName + '-' + address.cityName + '-' + address.areaName + '-' + address.townName
+       name: address.provinceName + '-' + address.cityName + '-' + address.areaName + '-' + address.townName,
+       result: address.provinceName + address.cityName + address.areaName + address.townName + address.detailAddress, 
+       latitude: address.latitude,
+       longitude: address.longitude,
      })
     province_id = address.provinceId
     city_id = address.cityId
@@ -175,6 +183,13 @@ Page({
     this.setData({
       minute: e.detail.value
     })
+    if (this.data.name){
+      this.setData({
+        result: this.data.prov + this.data.city + this.data.area + this.data.town + this.data.minute,
+      })
+     
+      this.postion();
+    }
   },
   diz() {
     this.getprov();
@@ -241,7 +256,9 @@ Page({
           areaId: area_id,
           townId: town_id,
           detailAddress: that.data.minute,
-          isDefault: sum
+          isDefault: sum,
+          latitude: that.data.latitude,
+          longitude: that.data.longitude
         }
         app.res.req('/useraddress/edit', data, (res) => {
           console.log(res.data)
@@ -283,7 +300,9 @@ Page({
           areaId: area_id,
           townId: town_id,
           detailAddress: that.data.minute,
-          isDefault: sum
+          isDefault: sum,
+          latitude: that.data.latitude,
+          longitude: that.data.longitude
         }
         app.res.req('/useraddress/add', data, (res) => {
           console.log(res.data)
@@ -596,5 +615,62 @@ Page({
       address: true,
       town: e.currentTarget.dataset.name
     })
+    if (that.data.minute) {
+      that.setData({
+        result: that.data.prov + that.data.city + that.data.area + that.data.town + that.data.minute,
+      })
+      that.postion();
+    }
+    
   },
+  postion() {
+    var _this = this
+    console.log(_this.data.result)
+    qqmapsdk.geocoder({
+      //获取表单传入地址
+
+      address: _this.data.result, //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
+      success: function (res) {//成功后的回调
+        console.log(res);
+
+        var res = res.result;
+        var latitude = res.location.lat;
+        var longitude = res.location.lng;
+        //根据地址解析在地图上标记解析地址位置
+        _this.setData({ // 获取返回结果，放到markers及poi中，并在地图展示
+          markers: [{
+            id: 0,
+            title: res.title,
+            latitude: latitude,
+            longitude: longitude,
+            iconPath: './resources/placeholder.png',//图标路径
+            width: 20,
+            height: 20,
+            callout: { //可根据需求是否展示经纬度
+              content: latitude + ',' + longitude,
+              color: '#000',
+              display: 'ALWAYS'
+            }
+          }],
+
+          latitude: latitude,
+          longitude: longitude
+
+        });
+      },
+      fail: function (error) {
+        console.error(error);
+      },
+      complete: function (res) {
+        //console.log(res);
+        if (res.status == '347') {
+          wx.showToast({
+            title: '该地址在地图上不存在请重新输入',
+            icon: 'none',
+            duration:2000
+          })
+        }
+      }
+    })
+  }
 })

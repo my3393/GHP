@@ -56,10 +56,12 @@
   overflow: hidden;
   float: left;
   margin-right: 20rpx;
+  margin-top: 24rpx;
 }
 .g_detail_name{
   margin-top: 16rpx;
   display: inline-block;
+  width: 280rpx;
 }
 .g_detail_time{
   float: right;
@@ -68,7 +70,7 @@
 }
 .g_store_name{
   display: inline-block;
-   margin-top: 4rpx;
+   margin-top: 16rpx;
    font-size: 28rpx;
 }
 .g_store_price{

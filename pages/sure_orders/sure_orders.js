@@ -213,9 +213,11 @@ Page({
     app.res.req("/shopcart/placeorder", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
+        res.data.z_price = (res.data.payPrice - res.data.deductionTotalMoney).toFixed(2)
         that.setData({
           detail: res.data.carts,
           Price:res.data,
+         
           member_p: (res.data.payPrice - res.data.memberPayPrice).toFixed(2)
         })
        this.checked()
@@ -316,6 +318,7 @@ Page({
 
 
   },
+  
   pay() {
     let that = this;
     if (that.data.defalutaddres != '' && that.data.adress.length == 0) {
@@ -479,7 +482,6 @@ Page({
 
     this.getDetail();
     //var options = { 'id': this.data.id }
-
 
   },
 

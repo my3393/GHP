@@ -95,9 +95,9 @@
         <view class="price_r">￥{{Price.totalPrice}}</view>
     </view>
     <view class="price_list">
-        艺呗抵扣
+        艺呗抵扣金额
         <!-- <view class="price_r yan" wx:if="{{user.memberType == 0}}">￥0.00</view> -->
-        <view class="price_r yan" >￥{{member_p}}</view>
+        <view class="price_r yan" >￥{{Price.deductionTotalMoney}}</view>
     </view>
     <view class="price_list">
         运费
@@ -105,11 +105,12 @@
     </view>
     <view class="z_right" wx:if='{{user.memberType == 0}}'>
         需付费:
-        <text class="yan font">￥{{Price.payPrice}}</text>
+        <text class="yan font">￥{{Price.z_price}}</text>
     </view>
     <view class="z_right" wx:else>
         需付费:
-        <text class="yan font">￥{{z_price}}</text>
+        <!-- <text class="yan font">￥{{z_price}}</text> -->
+         <text class="yan font">￥{{Price.z_price}}</text>
     </view>
 </view>
 <view class="badge">
@@ -146,13 +147,17 @@
 <view class='footer'>
     <view>
         合计：
-        <view wx:if="{{user.memberType == 0}}" class="price" style="display:inline-block" >
+        <!-- <view wx:if="{{user.memberType == 0}}" class="price" style="display:inline-block" >
             <text class="yuan">￥</text>
             {{z_price}}
         </view>
          <view wx:else class="price" style="display:inline-block" >
             <text class="yuan">￥</text>
              {{z_price}}
+        </view> -->
+         <view class="price" style="display:inline-block" >
+            <text class="yuan">￥</text>
+            {{Price.z_price}}
         </view>
     </view>
     <view class="pay" bindtap="pay">微信支付</view>

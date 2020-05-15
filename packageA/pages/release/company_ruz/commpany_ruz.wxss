@@ -1,5 +1,5 @@
 /* packageA/pages/company_ruz/commpany_ruz.wxss */
-@import '../../../pages/store_refund/store_refund';
+@import '../../../../pages/store_refund/store_refund';
 .chun_left{
   float: left;
   color: #000;

@@ -6,7 +6,7 @@
 <skeleton selector="skeleton" loading="spin" bgcolor="#FFF" wx:if="{{showSkeleton}}"></skeleton>
 <view class="skeleton">
 
-  <view class="fixs" style='line-height:{{navH + 10}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}'>
+  <view class="fixs" style='line-height:{{navH + 18}}px; height:{{navH}}px; background:{{opcity<0.5?gradientColor:"#fff"}}'>
     善家购
 
   </view>
@@ -102,7 +102,7 @@
       <tui-button type="danger" shape="circle" tui-button-class="tui-btn-mtop" bind:click="show3">确定</tui-button>
     </view>
   </tui-modal>
-  <view class="recommended">
+  <!-- <view class="recommended">
     <view class="rescom skeleton-rect">
       <text class="rescom-w skeleton-rect">至尊会员商城</text>
 
@@ -121,7 +121,7 @@
       </view>
 
     </view>
-  </view>
+  </view> -->
   <view class="recommended" wx:if='{{store_recommended.length != 0}}'>
     <view class="rescom skeleton-rect">
       <text class="rescom-w skeleton-rect">{{store_name.storeName}}</text>

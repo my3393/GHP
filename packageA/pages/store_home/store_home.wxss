@@ -1,5 +1,5 @@
 /* packageA/pages/store_home/store_home.wxss */
-@import "../receive_home/receive_home";
+@import "../release/receive_home/receive_home";
 page{
   font-size: 28rpx;
 }

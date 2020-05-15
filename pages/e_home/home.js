@@ -125,7 +125,7 @@ Page({
      
      
       that.Bangs();
-    }
+    } 
     //3秒后隐藏关注组件
     that.setData({
       isofficial: false,
@@ -825,6 +825,9 @@ Page({
       } else if (res.status == 1031) {
         wx.removeStorageSync('bangId')
         console.log('----1031----')
+      } else if (res.status == 1040) {
+        wx.removeStorageSync('bangId')
+        console.log('----1040----')
       }
     })
   },
@@ -852,6 +855,9 @@ Page({
       } else if (res.status == 1031) {
         wx.removeStorageSync('bangIds')
         console.log('----1031s----')
+      } else if (res.status == 1040) {
+        wx.removeStorageSync('bangId')
+        console.log('----1040----')
       }
     })
   },

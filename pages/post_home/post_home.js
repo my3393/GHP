@@ -28,7 +28,7 @@ Page({
       { name: '善家联盟' },
       { name: '善家服务' },
      
-      { name: '善家驿站' },
+     
       { name: '善家直播' },
     ],
     tas: 1,
@@ -173,7 +173,7 @@ Page({
   },
   tars(e){
     var index = e.currentTarget.dataset.index
-     if(index == 0 || index == 2 ){
+     if(index == 0  ){
        wx.showToast({
          title: '暂未开放',
          icon:'none'

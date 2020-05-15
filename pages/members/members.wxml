@@ -139,7 +139,7 @@
           <view>敬请期待</view>
         </view>
       </view>
-      <image src="https://www.xingtu-group.cn/xcx_img/sj_member.png" id="https://www.xingtu-group.cn/xcx_img/sj_member.png" style="width:97%;height:720rpx;" bindtap="member_sw"></image>
+      <image src="https://www.xingtu-group.cn/xcx_img/sj_member.png" id="https://www.xingtu-group.cn/xcx_img/sj_member.png" style="width:97%;height:900rpx;" bindtap="member_sw"></image>
       <view class="shuom">
 
         <view wx:if='{{current == 1}}'>
@@ -188,7 +188,7 @@
         <view>· 服务一经开通不支持取消/退款，敬请谅解</view>
       </view>
       <view style="height:140rpx"></view>
-      <view wx:if='{{user.phone == null || user.phone == ""}}'>
+      <view wx:if='{{user.phone == null || user.phone == ""}}' class="pos">
         <button class="submit" wx:if='{{current == 0}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{1}}">立即开通￥{{detail[2].memberPrice}}</button>
         <button class="submit" wx:if='{{current == 1}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{2}}">立即开通￥{{detail[1].memberPrice}}</button>
         <button class="submit" wx:if='{{current == 2}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" id="{{3}}">立即开通￥{{detail[0].memberPrice}}</button>

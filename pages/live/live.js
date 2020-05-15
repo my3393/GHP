@@ -9,7 +9,7 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
+  data: { 
     pro:'全国'
   },
 
@@ -17,6 +17,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    let that = this;
+    if (decodeURIComponent(options.q).split('/')[4]) {
+
+      wx.setStorageSync('bangIds', decodeURIComponent(options.q).split('/')[4])
+      wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])
+      wx.setStorageSync('shareUserId', decodeURIComponent(options.q).split('/')[4])
+      that.Bangs();
+    }
     this.getdetail();
     this.getprov()
   },
@@ -43,6 +52,16 @@ Page({
         })
       },
     })
+    if (wx.getStorageSync('bangIds')) {
+
+
+      that.Bangs();
+    }
+    if (wx.getStorageSync('bangId')) {
+
+
+      that.Bang();
+    }
   },
 
   /**
@@ -106,6 +125,59 @@ Page({
       url: `plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=${roomId}&custom_params=${customParams}`
     })
   },
+  fenx(){
+    wx.navigateTo({
+      url: '../zhin/zhin?code=' + this.data.code,
+    })
+  },
+  //二维码
+  getcode() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/qrcode/xcxliveqrcode', data, (res) => {
+
+      if (res.status == 1000) {
+
+
+        var array = wx.base64ToArrayBuffer(res.data)
+        const fsm = wx.getFileSystemManager();
+        const FILE_BASE_NAME = 'mine';
+        const filePath = wx.env.USER_DATA_PATH + '/' + FILE_BASE_NAME + '.png';
+        fsm.writeFile({
+          filePath,
+          data: array,
+          encoding: 'binary',
+          success() {
+            console.log(filePath)
+            that.setData({
+              errormsg: '',
+              code: filePath //结果图片
+            })
+          },
+          fail() {
+
+          },
+        });
+
+
+
+      } else if (res.status == 1002) {
+
+      } else if (res.status == 1018) {
+
+      } else if (res.status == 1024) {
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
   getdetail(){
     let that = this;
     let data = {
@@ -167,7 +239,7 @@ Page({
     app.res.req('/region/list', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-          
+        that.getcode();
        
 
         that.setData({
@@ -186,5 +258,64 @@ Page({
       }
     })
 
+  },
+  //绑定
+  Bang() {
+    let that = this;
+
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
+
+    app.res.req("/user/sharebinduser", data, (res) => {
+      console.log(res)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+
+        wx.removeStorageSync('bangId')
+      } else if (res.status == 1028) {
+        console.log('----1028----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangId')
+        console.log('----1030----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangId')
+        console.log('----1031----')
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+        wx.setStorageSync('url', '../live/live')
+      }
+    })
+  },
+  //绑定
+  Bangs() {
+    let that = this;
+
+    let data = {
+      shareUserId: wx.getStorageSync('bangIds')
+    }
+
+    app.res.req("/membercard/scancodereceive", data, (res) => {
+      console.log(res)
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+
+        wx.removeStorageSync('bangIds')
+      } else if (res.status == 1028) {
+        console.log('----1028s----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangIds')
+        console.log('----1030s----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangIds')
+        console.log('----1031s----')
+      }
+    })
   },
 })

@@ -11,7 +11,6 @@ Page({
    detail:[],
     isdelete:true,
     ismask:true,
-
   },
 
   /**

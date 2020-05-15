@@ -42,6 +42,11 @@
  
 </view>
 
+<view class="shenq" bindtap="fenx" style="bottom:160rpx">
+<view>分享</view>
+  <view>直播</view>
+</view>
+
 <view class="shenq" bindtap="shen">
 <view>申请</view>
   <view>直播</view>

@@ -1,0 +1,61 @@
+<!--packageA/pages/union/order_list/order_list.wxml-->
+<view class="nav clearfix">
+   <view>
+      <view class="store_name">
+         <image src="/images/store.png"></image>
+         <view >
+           <view class="store_n">小胖子杂货店</view>
+           <image src="/images/right.png"></image>
+         </view>
+      </view>
+      <view class="order_status">等待买家付款</view>
+   </view>
+   <scroll-view scroll-x  class="good_img">
+     <view>
+       <image src="/images/wxapp.png"></image>
+     </view>
+     <view>
+       <image src="/images/wxapp.png"></image>
+     </view>
+     <view>
+       <image src="/images/wxapp.png"></image>
+     </view>
+     <view>
+       <image src="/images/wxapp.png"></image>
+     </view>
+     <view>
+       <image src="/images/wxapp.png"></image>
+     </view>
+     <view>
+       <image src="/images/wxapp.png"></image>
+     </view>
+   </scroll-view>
+   <view class="peis">
+     <view>配送：商家配送</view>
+     <view>共1件商品，订单金额:<view style="font-size:36rpx"> <view style="font-size:28rpx">￥</view>56.00 </view> </view>
+   </view>
+   <view class="foot" >
+
+        <picker class="picker" mode='selector' value="{{index}}" range="{{cancel}}" range-key="name" bindchange="bindcancel">
+          <view>取消订单</view>
+        </picker>
+
+        <view >付款</view>
+      </view>
+</view>
+
+
+
+
+<!-- 弹窗 -->
+<tui-modal show="{{modal}}"  custom="{{true}}">
+    <view class="tui-modal-custom">
+     <view class="tui-modal-custom-text tit">{{tis}}</view>
+       <view class="tui-modal-custom-text tite">{{mess}}</view>
+     
+      <view class="tui-modal-foot">
+         <view bindtap="hide">取消</view>
+         <view bindtap="handclick">确定</view>
+      </view>
+    </view>
+  </tui-modal>

@@ -171,7 +171,7 @@ swiper-item image{
 }
 .submit{
    width: calc(100% - 40rpx);
-  margin-left: 20rpx;
+   margin-left: 20rpx;
   margin-top: 20rpx;
   text-align: center;
   line-height: 80rpx;

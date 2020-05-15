@@ -1,0 +1,100 @@
+/* packageA/pages/union/order_list/order_list.wxss */
+page{
+  background: #f9f9f9;
+}
+.nav{
+  width: calc(100% - 60rpx);
+  margin-left: 30rpx;
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+}
+.store_name{
+  display: inline-block;
+}
+.store_name>image{
+  width: 27rpx;
+  height: 26rpx;
+  float: left;
+  margin-top: 6rpx;
+  margin-right: 10rpx;
+}
+.store_name>view{
+  display: inline-block;
+}
+.store_name>view image{
+  width: 27rpx;
+  height: 26rpx;
+  float: right;
+  margin-top: 8rpx;
+  margin-left: 20rpx;
+}
+.store_n{
+  display: inline-block;
+  max-width: 300rpx;
+}
+.order_status{
+  float: right;
+  color: red;
+ 
+}
+.good_img{
+  width: 100%;
+  white-space: nowrap;
+  padding: 30rpx 0;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+  border-top: 1rpx solid #f9f9f9;
+  height: 230rpx;
+}
+.good_img view{
+  display: inline-block;
+  margin-right: 20rpx;
+}
+.good_img image{
+  width: 156rpx;
+  height: 156rpx;
+}
+.peis view{
+  display: inline-block;
+  font-size: 28rpx;
+  color: #333;
+}
+.peis :nth-child(2){
+  float: right;
+  margin-top: -6rpx;
+}
+.foot{
+  float: right;
+  margin-top: 30rpx;
+}
+.foot view{
+  width: 200rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  border-radius: 35rpx;
+  display: inline-block;
+}
+.picker{
+  display: inline-block;
+}
+.foot view:nth-child(1){
+  border: 1rpx solid #CCCCCC;
+  color: #000000;
+  margin-right: 30rpx;
+  box-sizing: border-box;
+}
+.foot view:nth-child(3){
+  border: 1rpx solid #f12200;
+  color: #f12200;
+  margin-right: 30rpx;
+  
+}
+.foot view:nth-child(2){
+  color: #fff;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+
+}

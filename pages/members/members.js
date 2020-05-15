@@ -78,18 +78,19 @@ Page({
         if (res.data.memberType == 2){
           that.setData({
             current: 1,
-
+            startDate: res.data.startDate.substring(0, 10),
+            endDate: res.data.endDate.substring(0, 10)
           })
         } else if (res.data.memberType == 3) {
           that.setData({
             current: 2,
-
+            startDate: res.data.startDate.substring(0, 10),
+            endDate: res.data.endDate.substring(0, 10)
           })
         }
         that.setData({
           user: res.data,
-          startDate: res.data.startDate.substring(0,10),
-          endDate: res.data.endDate.substring(0, 10)
+          
         })
         if (res.data.bindProvinceId == null || res.data.bindProvinceId == '' || res.data.homeProvinceId == null || res.data.homeProvinceId == ''){
                that.setData({

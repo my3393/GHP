@@ -430,17 +430,21 @@ Page({
           })
           console.log(that.data.logistics)
         }
-
-
+        
+        
+        
+        var d_price = 0;
+        for( var i in res.data.details){
+          d_price = res.data.details[i].deductionMoney + d_price
+        }
+        res.data.d_price = d_price.toFixed(2)
         that.setData({
           detail: res.data,
-          member_p: (res.data.productTotalFee + res.data.freight - res.data.payMoney).toFixed(2)
+          z_price: (res.data.payMoney - res.data.d_price).toFixed(2),
+          member_p: (res.data.productTotalFee + res.data.freight - res.data.payMoney).toFixed(2),
         })
-
-
         that.PaymentTime();
         that.PaymentTimes();
-
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',

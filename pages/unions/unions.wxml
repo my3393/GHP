@@ -1,6 +1,12 @@
 <!--pages/unions/unions.wxml-->
-  <view class="g_detail clearfix" wx:for='{{detail}}' wx:key='item'  wx:for-index='idx'>
-         <image src="{{item.headImgUrl}}" class="g_detail_img"></image>
-         <view class="g_detail_name">{{item.userName}}></view>
-         <view class="g_detail_time">{{item.bindUserDate}}</view>
+<view class="g_detail clearfix" wx:for='{{detail}}' wx:key='item' wx:for-index='idx'>
+  <image src="{{item.headImgUrl}}" class="g_detail_img"></image>
+  <view class="g_detail_name dan">{{item.userName}}</view>
+  <view class="g_detail_time">{{item.bindUserDate}}</view>
+  <view>
+    <view class="g_detail_name">绑定{{item.bindUserNum}}人</view>
+    <view class="g_detail_time" wx:if='{{item.memberType  == 0}}'>普通会员</view>
+    <view class="g_detail_time" wx:if='{{item.memberType  == 1}}'>至尊会员</view>
+    <view class="g_detail_time" wx:if='{{item.memberType  == 2}}'>伯爵会员</view>
   </view>
+</view>

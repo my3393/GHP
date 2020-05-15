@@ -1,5 +1,5 @@
 /* packageA/pages/person_ruz/person_ruz.wxss */
-@import '../../../pages/store_refund/store_refund';
+@import '../../../../pages/store_refund/store_refund';
 .infor_r input{
   text-align: left
 }

@@ -3,6 +3,7 @@ const app = getApp();
 let id;
 let user;
 let setTime = null;
+let shareUserId = '';
 Page({
 
   /**
@@ -76,6 +77,14 @@ Page({
        })
       },
     })
+    if (wx.getStorageSync('shareUserId')){
+      wx.getStorage({
+        key: 'shareUserId',
+        success: function (res) {
+          shareUserId:res.data
+        },
+      })
+    }
   },
 
   /**
@@ -255,16 +264,31 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
        if (that.data.user.memberType == 0) {
-          that.setData({
-            z_price: ((that.data.prices + that.data.detail.expressFee) * 0.9).toFixed(2),
-            member_p: ((that.data.prices + that.data.detail.expressFee) * 0.1).toFixed(2),
-          })
+         if (that.data.detail.defaultDeductionRatio == 0){
+           that.setData({
+             z_price: (that.data.prices + that.data.detail.expressFee).toFixed(2),
+             member_p:0,
+           })
+         }else{
+           that.setData({
+             z_price: ((that.data.prices * (1 - that.data.detail.defaultDeductionRatio)) + + that.data.detail.expressFee).toFixed(2),
+             member_p: (that.data.prices * that.data.detail.defaultDeductionRatio).toFixed(2),
+           })
+         } 
+        
         }else{
-       
-          that.setData({
-            z_price: ((that.data.prices + that.data.detail.expressFee) * 0.8).toFixed(2),
-            member_p: ((that.data.prices + that.data.detail.expressFee) * 0.2).toFixed(2),
-          })
+         if (that.data.detail.memberDeductionRatio == 0){
+           that.setData({
+             z_price: that.data.prices + that.data.detail.expressFee.toFixed(2),
+             member_p: 0,
+           })
+         }else{
+           that.setData({
+             z_price: ((that.data.prices * (1 - that.data.detail.memberDeductionRatio)) + that.data.detail.expressFee).toFixed(2),
+             member_p: (that.data.prices  * that.data.detail.memberDeductionRatio).toFixed(2),
+           })
+         }
+         
         
         }
         // that.setData({
@@ -336,7 +360,8 @@ Page({
       buyCount: that.data.buyNum,
       addressId: that.data.addressId,
       leaveMessage: that.data.inpu,
-      terminal: '小程序'
+      terminal: '小程序',
+      shareUserId: shareUserId
 
     }
     app.res.req('/order/productsubmit', data, (res) => {

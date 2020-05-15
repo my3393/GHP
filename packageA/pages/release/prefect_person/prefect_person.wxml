@@ -52,26 +52,26 @@
   </view>
 
   <view class="nop">
-          图片（用图片展示下你自己的技能）
+    图片（用图片展示下你自己的技能）
+  </view>
+  <view class="nav">
+    <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
+      <view class="zhao_img">
+        <image src="/images/zhao.png"></image>
+      </view>
+      <view>上传</view>
+    </view>
+    <view wx:else class="clearfix">
+      <view class="tu_img">
+        <image src="{{zhaos1}}"></image>
+        <view class="detele" data-num="{{0}}" catchtap="detels">
+          <image src="/images/deteles.png" />
         </view>
-        <view class="nav">
-          <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
-            <view class="zhao_img">
-              <image src="/images/zhao.png"></image>
-            </view>
-            <view>上传</view>
-          </view>
-          <view wx:else class="clearfix">
-            <view class="tu_img" >
-              <image src="{{zhaos1}}"></image>
-              <view class="detele"   data-num="{{0}}" catchtap="detels">
-                <image src="/images/deteles.png" />
-              </view>
-            </view>
-          </view>
-        
-        
-        </view>
+      </view>
+    </view>
+
+
+  </view>
 
   <view class="nav" style="margin-top:20rpx;">
     <view>技能</view>
@@ -90,22 +90,22 @@
       </view>
     </view>
   </view>
-  <view class="mor" >
-      隐藏主页
-      <view class="switch">
-        <switch color="#f12200" checked="{{isHide}}" bindchange="check" />
-      </view>
+  <view class="mor">
+    隐藏主页
+    <view class="switch">
+      <switch color="#f12200" checked="{{isHide}}" bindchange="check" />
+    </view>
   </view>
 </view>
 
 
-  <view class='container' hidden='{{isshow}}'>
-    <imgcut id='imgcut' src='{{src}}' width='350' height='350'></imgcut>
-    <view class="footer">
-      <view bindtap="chooseimg">选择图片</view>
-      <view bindtap="cut">保存</view>
-    </view>
+<view class='container' hidden='{{isshow}}'>
+  <imgcut id='imgcut' src='{{src}}' width='350' height='350'></imgcut>
+  <view class="footer">
+    <view bindtap="chooseimg">选择图片</view>
+    <view bindtap="cut">保存</view>
   </view>
+</view>
 
 
 <!-- 选择地址 -->

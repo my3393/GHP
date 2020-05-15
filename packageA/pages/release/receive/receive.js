@@ -1,16 +1,11 @@
-// packageA/pages/receive/receive.js
+// packageA/pages/release/receive/receive.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    type: [
-      { typeName: '果蔬' },
-      { typeName: '生鲜' },
-      { typeName: '商超' },
-      { typeName: '鲜花' },
-    ]
+
   },
 
   /**

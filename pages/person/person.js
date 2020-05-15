@@ -102,6 +102,15 @@ Page({
             bang_diz: '未绑定'
           })
         }
+        if (res.data.phone == '' || res.data.phone == null) {
+          that.setData({
+            phone: '未绑定'
+          })
+        }else{
+          that.setData({
+            phone: res.data.phone
+          })
+        }
         if (res.data.publicSlogan) {
           that.setData({
             publicSlogan: res.data.publicSlogan

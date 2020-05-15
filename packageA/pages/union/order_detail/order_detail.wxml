@@ -1,0 +1,190 @@
+<!--packageA/pages/union/order_detail/order_detail.wxml-->
+
+<view class="top">
+  <view>
+    <view>
+      <view class="top_tu">
+        <image src="/images/daojis.png" />
+      </view>
+      <view class="top_n">等待买家付款</view>
+    </view>
+    <view class="top_tit">订单将自动关闭</view>
+  </view>
+</view>
+
+<view class="nav">
+  <view wx:if='{{adress.length != 0}}' bindtap='choose'>
+    <view class="address">
+      <view class="address_top">
+        <!-- <text class="mor">默认</text> -->
+        {{adress.provinceName}} {{adress.cityName}} {{adress.areaName}} {{adress.townName}}
+      </view>
+      <view class="address_cent">
+        {{adress.detailAddress}}
+      </view>
+      <view class="address_cent_r">
+        >
+      </view>
+      <view class="address_bott">
+        {{adress.consigneeName}}
+        <text style='color:#999'>  {{adress.consigneePhone}}</text>
+      </view>
+    </view>
+
+  </view>
+  <view wx:elif='{{defalutaddres.length != 0}}' bindtap='choose'>
+    <view class="address">
+      <view class="address_top">
+        <text class="mor">默认</text> {{defalutaddres.provinceName}} {{defalutaddres.cityName}} {{defalutaddres.areaName}} {{defalutaddres.townName}}
+      </view>
+      <view class="address_cent">
+        {{defalutaddres.detailAddress}}
+      </view>
+      <view class="address_cent_r">
+        >
+      </view>
+      <view class="address_bott">
+        {{defalutaddres.consigneeName}}
+        <text style='color:#999'> {{defalutaddres.consigneePhone}}</text>
+      </view>
+    </view>
+
+  </view>
+  <view wx:else bindtap="choose">
+    <view class="address">
+
+      <view class="add_address">
+        + 添加收货地址
+      </view>
+      <view class="address_cent_r">
+        >
+      </view>
+
+    </view>
+
+  </view>
+  <view class="peis">
+    <view>配送方式</view>
+    <view>商家配送</view>
+  </view>
+  <view class="peis">
+    <view>送到时间</view>
+    <view>3-20 12:20</view>
+  </view>
+</view>
+<view class="nav">
+  <view class="peis">
+    <view>配送方式</view>
+    <view>到店自提</view>
+  </view>
+  <view class="peis">
+    <view>送到时间</view>
+    <view>3-20 12:20</view>
+  </view>
+   <view class="peis">
+    <view>自提电话</view>
+    <view>18245978451</view>
+  </view>
+  <view class="peis">
+    <view>提货地址</view>
+    <view class="dit">
+      <image src="/images/weizi.png"></image>
+      查看地图
+    </view>
+  </view>
+  <view class="peis">
+   深圳市宝安区下线街道前进看懂了皮康王
+  </view>
+</view>
+<view class="nav">
+  <view class="list clearfix">
+    <view class="nav_top">
+      <view class="sotre_img">
+        <image src="/images/store.png" />
+      </view>
+      小胖子杂货店
+      <view class="store_r">
+        <image src="/images/right.png" />
+      </view>
+    </view>
+    <view>
+      <view class="good_img">
+        <!-- <image src="{{detail.productDefaultImgOss}}" /> -->
+        <image src="/images/sjg.png"></image>
+      </view>
+      <view class="good_list">
+        <!-- <view class='goodsname dan'>{{detail.productName}}</view> -->
+        <view class='goodsname dan'>香蕉</view>
+        <view class="guig">
+          <view class='gui-g' wx:for='{{sku.skus}}' wx:key="{{item.id}}">{{item.value}}</view>
+        </view>
+        <text class='price' wx:if='{{detail.isSpecificaton == 0}}'><text class="yuan">￥</text>{{price}}</text>
+        <text class='price' wx:else><text class="yuan">￥</text>{{sku.price}}</text>
+        <view class="good_num">×{{buyNum}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="nav">
+  <view class="list clearfix">
+    <view class="price_list">
+      商品总额
+      <view class="price_r">
+        ￥{{prices}}
+      </view>
+    </view>
+    <view class="price_list">
+      配送费
+      <view class="price_r">
+        ￥{{prices}}
+      </view>
+    </view>
+    <view class="price_list">
+      会员优惠
+      <view class="price_r">
+        ￥{{detail.expressFee}}
+      </view>
+    </view>
+    <view class="price_list">
+      艺呗抵扣
+      <view class="price_r yan">
+        ￥{{member_p}}
+      </view>
+    </view>
+
+    <view class="z_right">
+      实付费:
+      <text class="yan font">￥{{z_price}}</text>
+    </view>
+  </view>
+
+</view>
+
+<view class="nav">
+  <view class="dind">订单编号：{{detail.orderNo}}</view>
+  <view class="dind" wx:if='{{detail.createTime != null}}'>下单时间：{{detail.createTime}}</view>
+  <view class="dind" wx:if='{{detail.payTime != null}}'>付款时间：{{detail.payTime}}</view>
+
+  <view class="dind" wx:if='{{detail.cancelTime != null}}'>取消时间：{{detail.cancelTime}}</view>
+
+  <view class="dind" bindtap="phone">
+    <view class="lix">
+      联系商家：
+    </view>
+    <view class="phone">
+      <image src="/images/boda.png" />
+    </view>
+    拨打电话
+  </view>
+</view>
+
+<view class="footeres">
+  <view class="footeres_r">
+
+    <view class="tuik fuk" bindtap="pay">付款 {{hours}}:{{min}}</view>
+    <picker class="picker" mode='selector' value="{{index}}" range="{{cancel}}" range-key="name" bindchange="bindcancel">
+      <view class="tuik" bindtap="cance_dd">取消订单</view>
+    </picker>
+  </view>
+</view>

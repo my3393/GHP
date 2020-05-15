@@ -108,7 +108,7 @@ Page({
           })
 
         }
-        if (res.data.bindAreaId == '511623'){
+        if (res.data.bindCityId == '5116'){
           that.setData({
             ismp:false
           })
