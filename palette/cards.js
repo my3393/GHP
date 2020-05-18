@@ -33,8 +33,8 @@ export default class LastMayday {
               
               "width": "120px",
               "height": "120px",
-              "top": "800px",
-              "left": "267px",
+              "top": "450px",
+              "left": "40px",
              
             }
           }

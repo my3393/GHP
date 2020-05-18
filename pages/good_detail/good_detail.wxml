@@ -36,7 +36,7 @@
           <image src="../../images/play.png"></image>
         </view>
       </swiper-item>
-      <swiper-item id="{{item.ids}}" bindtap="enters" class='swiper' wx:for='{{detail.productImgOss}}' wx:key="{{item.ids}}">
+      <swiper-item id="{{item.ids}}" bindtap="Preview" class='swiper' wx:for='{{detail.productImgOss}}' wx:key="{{item.ids}}">
         <image class="banner_img" src="{{item}}"></image>
       </swiper-item>
     </block>

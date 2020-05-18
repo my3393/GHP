@@ -1,0 +1,93 @@
+<!--packageA/pages/union/order_sure/order_sure.wxml-->
+
+<view class="nav">
+  <view class="tag">
+    <view wx:for="{{type}}" wx:key="item" wx:for-index="index" id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='{{tar == index?"active":""}}'>
+      {{item}}
+    </view>
+  </view>
+  <view wx:if='{{tar == 0}}'>
+    <view>
+      <view wx:if='{{adress.length != 0}}' bindtap='choose'>
+        <view class="address">
+          <view class="address_top">
+            <text class="mor" wx:if='{{adress.isDefault == 1}}'>默认</text>
+            {{adress.provinceName}} {{adress.cityName}} {{adress.areaName}} {{adress.townName}}
+          </view>
+          <view class="address_cent">
+            {{adress.detailAddress}}
+          </view>
+          <view class="address_cent_r">
+            >
+          </view>
+          <view class="address_bott">
+            {{adress.consigneeName}}
+            <text style='color:#999'>  {{adress.consigneePhone}}</text>
+          </view>
+        </view>
+
+      </view>
+      <view wx:elif='{{defalutaddres.length != 0}}' bindtap='choose'>
+        <view class="address">
+          <view class="address_top">
+            <text class="mor">默认</text> {{defalutaddres.provinceName}} {{defalutaddres.cityName}} {{defalutaddres.areaName}} {{defalutaddres.townName}}
+          </view>
+          <view class="address_cent">
+            {{defalutaddres.detailAddress}}
+          </view>
+          <view class="address_cent_r">
+            >
+          </view>
+          <view class="address_bott">
+            {{defalutaddres.consigneeName}}
+            <text style='color:#999'> {{defalutaddres.consigneePhone}}</text>
+          </view>
+        </view>
+
+      </view>
+      <view wx:else bindtap="choose">
+        <view class="address">
+
+          <view class="add_address">
+            + 添加收货地址
+          </view>
+          <view class="address_cent_r">
+            >
+          </view>
+
+        </view>
+
+      </view>
+    </view>
+    <view>
+      <view class="peis">
+        <view>送达时间</view>
+        <view>3-20 12:20
+          <image src="/images/right.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if='{{tar == 1}}'>
+      <view class="address">
+          <view class="address_top">
+           
+            <!-- {{store.provinceName}} {{store.cityName}} {{store.areaName}} {{store.townName}} -->
+            深圳市宝安区西乡街道分门类聚
+          </view>
+          <view class="address_cent">
+            <!-- {{store.detailAddress}} -->
+            前进二好了哦me咯
+          </view>
+          <view class="address_cent_r">
+            <image src=""></image>
+          </view>
+          <view class="address_bott">
+            <!-- {{store.consigneeName}} -->
+            <text style='color:#999'>
+              <!-- {{store.consigneePhone}} -->
+              </text>
+          </view>
+        </view>
+  </view>
+</view>

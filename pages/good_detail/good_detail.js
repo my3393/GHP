@@ -185,6 +185,22 @@ Page({
   
     }
   },
+  //查看图片
+  Preview: function (e) {
+    var that = this;
+
+    console.log(e)
+   
+     
+    
+      wx.previewImage({
+        current: e.currentTarget.id,
+        urls: that.data.detail.productImgOss
+      })
+    
+
+
+  },
   //Shouy
   shouye(){
     wx.switchTab({

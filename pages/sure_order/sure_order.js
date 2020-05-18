@@ -81,7 +81,7 @@ Page({
       wx.getStorage({
         key: 'shareUserId',
         success: function (res) {
-          shareUserId:res.data
+          shareUserId=res.data
         },
       })
     }

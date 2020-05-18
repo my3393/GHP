@@ -19,6 +19,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     let that = this;
+    
     if (decodeURIComponent(options.q).split('/')[4]) {
 
       wx.setStorageSync('bangIds', decodeURIComponent(options.q).split('/')[4])
@@ -126,9 +127,24 @@ Page({
     })
   },
   fenx(){
-    wx.navigateTo({
-      url: '../zhin/zhin?code=' + this.data.code,
-    })
+    if(this.data.user.id == '' || this.data.user.id == null){
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '../login/login',
+        })
+        wx.setStorageSync('url', '../live/live')
+      }, 1500)
+     
+    }else{
+      wx.navigateTo({
+        url: '../zhin/zhin?code=' + this.data.code,
+      })
+    }
+   
   },
   //二维码
   getcode() {
@@ -166,8 +182,17 @@ Page({
 
       } else if (res.status == 1002) {
 
-      } else if (res.status == 1018) {
-
+      } else if (res.status == 1018 || res.status == 1005) {
+        wx.showToast({
+          title: '请先登录',
+          icon:'none'
+        })
+        setTimeout(()=>{
+          wx.navigateTo({
+            url: '../login/login',
+          })
+          wx.setStorageSync('url', '../live/live')
+        },1500)
       } else if (res.status == 1024) {
 
       } else {
@@ -246,11 +271,7 @@ Page({
           province: res.data
         })
 
-      } else if (res.status == 1004 || res.status == 1005) {
-        wx.redirectTo({
-          url: '../login/login',
-        })
-      } else {
+      }else {
         wx.showToast({
           title: res.msg,
           icon: 'none'
@@ -315,6 +336,31 @@ Page({
       } else if (res.status == 1031) {
         wx.removeStorageSync('bangIds')
         console.log('----1031s----')
+      }
+    })
+  },
+  //获取用户信息
+  getuser() {
+    let that = this;
+    let data = {
+
+    }
+
+    app.res.req('/user/info', data, (res) => {
+      console.log(res.data)
+      wx.hideLoading()
+      if (res.status == 1000) {
+        wx.setStorage({
+          key: 'token',
+          data: res.data.token,
+        })
+        wx.setStorage({
+          key: 'userinfo',
+          data: res.data,
+        })
+        that.setData({
+          user: res.data
+        })
       }
     })
   },

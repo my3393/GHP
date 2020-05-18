@@ -1,4 +1,4 @@
-// packageA/pages/union/order_detail/order_detail.js
+// packageA/pages/union/order_sure/order_sure.js
 const app = getApp()
 Page({
 
@@ -6,12 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+     type:['商家配送','到店自提'],
+     tar:0,
     address: false,
     defalutaddres: [], //默认地址
     adress: [], //选择的地址
     inpu: '',
     loading: true,
-   
+
     deductionIntegral: '0'
   },
 
@@ -19,9 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      statusBarHeight: wx.getSystemInfoSync().statusBarHeight
-    })
+
   },
 
   /**
@@ -97,11 +97,16 @@ Page({
   onShareAppMessage: function () {
 
   },
+  tag(e){
+    this.setData({
+      tar:e.currentTarget.dataset.num
+    })
+  },
   //选择地址
   choose() {
     var that = this;
     wx.navigateTo({
-      url: '../address/address?sex=' + 1,
+      url: '/pages/address/address?sex=' + 1,
     })
   },
   //获取默认地址
@@ -136,7 +141,7 @@ Page({
   // 上个页面返回刷新
   changeData: function () {
 
-   // this.getDetail();
+    //this.getDetail();
     //var options = { 'id': this.data.id }
 
 

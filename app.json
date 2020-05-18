@@ -84,7 +84,8 @@
     "pages/live/live",
     "pages/solder/solder",
     "pages/live_add/live_add",
-    "pages/unions/unions"
+    "pages/unions/unions",
+    "pages/good_det/index"
   ],
   "subpackages": [
     {
@@ -114,7 +115,8 @@
         "pages/union/enter2/enter2",
         "pages/today/order/order",
         "pages/union/order_list/order_list",
-        "pages/union/order_detail/order_detail"
+        "pages/union/order_detail/order_detail",
+        "pages/union/order_sure/order_sure"
       ]
     }
   ],
@@ -162,7 +164,7 @@
   },
   "plugins": {
     "live-player-plugin": {
-      "version": "1.0.10",
+      "version": "1.0.11",
       "provider": "wx2b03c6e691cd7370"
     }
   },
