@@ -219,6 +219,7 @@ Page({
         }
       },
     })
+    that.getnums()
   },
 
   /**
@@ -419,7 +420,11 @@ Page({
             icon: 'none'
           })
         } else {
-          detail.push(...res.data)
+          for(var i in res.data){
+            res.data[i].duction = (res.data[i].memberDeductionRatio * res.data[i].lowestPrice).toFixed(2)
+            detail.push(res.data[i])
+          }
+         // detail.push(...res.data)
           that.setData({
             detail: detail,
 
@@ -515,6 +520,9 @@ Page({
     app.res.req("/home/recommend", data, (res) => {
       console.log(res.data)
       if(res.status == 1000){
+           for(var i in res.data){
+             res.data[i].duction = (res.data[i].memberDeductionRatio * res.data[i].lowestPrice).toFixed(2)
+           }
            that.setData({
             recommend:res.data,
 
@@ -858,6 +866,33 @@ Page({
       } else if (res.status == 1040) {
         wx.removeStorageSync('bangId')
         console.log('----1040----')
+      }
+    })
+  },
+  //领取提示
+  getnums() {
+    let that = this;
+    let data = {
+      memberType: 1
+    }
+
+    app.res.req('/membercard/unclaimedcardnum', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data > 0) {
+          wx.showTabBarRedDot({
+            index: 4,
+          })
+
+        }else{
+          wx.hideTabBarRedDot({
+            index: 4,
+          })
+        }
+       
+
+      }else {
+       
       }
     })
   },

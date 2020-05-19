@@ -31,10 +31,10 @@ export default class LastMayday {
             "url": res[0],
             "css": {
               
-              "width": "120px",
+              "width": "130px",
               "height": "120px",
-              "top": "450px",
-              "left": "40px",
+              "top": "520px",
+              "left": "55px",
              
             }
           }

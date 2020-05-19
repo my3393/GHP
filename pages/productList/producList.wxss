@@ -577,7 +577,7 @@ page {
 
 .tui-pro-price {
   padding-top: 18rpx;
-  position:absolute
+  position:absolute;
 }
 
 .tui-sale-price {
@@ -638,4 +638,9 @@ page {
 }
 .list-qu_h{
   width: 440rpx;
+}
+.dction{
+  color: #999999;
+  font-size: 18rpx;
+  float: right;
 }

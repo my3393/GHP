@@ -146,9 +146,11 @@
           <view class="tui-pro-price">
             <text class="tui-sale-price">
              <text style="font-size:22rpx;">￥</text> {{item.lowestPrice}}
+              
             </text>
-
+            
           </view>
+           <!-- <text class="dction">会员艺呗可抵{{item.duction}}</text> -->
           <view class="list-rig">
             <image src="../../images/shop.png" />
           </view>

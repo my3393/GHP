@@ -218,7 +218,7 @@ white-space: nowrap;
 }
 .class-t-p{
   color: #F12200;
-  font-size: 28rpx;
+  font-size: 24rpx;
   margin-top: 16rpx;
 }
 .res-two{
@@ -360,4 +360,9 @@ box-sizing: border-box;
 .official_det image{
   width: 26rpx;
   height: 26rpx;
+}
+.dction{
+  color: #999999;
+  font-size: 18rpx;
+ 
 }

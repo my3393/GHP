@@ -121,7 +121,7 @@
   <tui-modal show="{{modal3}}" bind:cancel="hide3" custom="{{true}}" fadein="{{true}}">
     <view class="tui-modal-custom">
       <view class="tui-prompt-title">张数</view>
-      <input placeholder="请输入需要的张数" bindinput="again" class="tui-input" />
+      <input hidden="{{!modal3}}" type="number" placeholder="请输入需要的张数" bindinput="again" class="tui-input" />
       <tui-button type="danger" shape="circle" bind:click="click3" size="small">立即提交</tui-button>
     </view>
   </tui-modal>

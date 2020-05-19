@@ -150,8 +150,8 @@
         "text": "购物车"
       },
       {
-        "selectedIconPath": "images/mine-active.png",
-        "iconPath": "images/mine.png",
+        "selectedIconPath": "/images/mine-active.png",
+        "iconPath": "/images/mine.png",
         "pagePath": "pages/e_mine/mine",
         "text": "我的"
       }

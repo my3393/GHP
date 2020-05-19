@@ -158,7 +158,9 @@
           {{item.productName}}
         </view>
         <view class="class-t-p skeleton-rect">
-          <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+          <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}
+             <text class="dction">会员艺呗可抵{{item.duction}}</text>
+          </view>
       </view>
 
     </view>
@@ -186,7 +188,9 @@
       <view class="list-qu"> {{item.cityName}} {{item.areaName}} {{item.townName}}</view>
 
       <view class="class-t-p ctp">
-        <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}</view>
+        <text style="font-size:22rpx">￥</text> {{item.lowestPrice}}
+        <text class="dction">会员艺呗可抵{{item.duction}}</text>
+        </view>
       <view class="list-rig">
         <image src="../../images/shop.png" /> </view>
     </view>

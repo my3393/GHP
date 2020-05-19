@@ -494,7 +494,11 @@ Page({
             pullUpOn: false
           })
         } else {
-          detail.push(...res.data)
+          for (var i in res.data) {
+            res.data[i].duction = (res.data[i].memberDeductionRatio * res.data[i].lowestPrice).toFixed(2)
+            detail.push(res.data[i])
+          }
+         // detail.push(...res.data)
           that.setData({
             detail: detail,
             status: res.data.orderStatus

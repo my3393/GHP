@@ -13,7 +13,7 @@ Page({
     adress: [], //选择的地址
     inpu: '',
     loading: true,
-
+    phone:'',
     deductionIntegral: '0'
   },
 
@@ -96,6 +96,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  phone(e){
+    this.setData({
+      phone:e.detail.value
+    })
   },
   tag(e){
     this.setData({

@@ -474,7 +474,22 @@ Page({
             that.pay();
           }, 1000)
 
-        } else if (res.data.status === 103) {
+        } else if (res.data.status === 1011) {
+          wx.showToast({
+            title: '登录信息已失效，请重新登录获取手机号',
+            icon: 'none',
+            duration:2000,
+          })
+          setTimeout(()=>{
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+            var url= '../sure_order/sure_order?id=' + id + '&num=' + that.data.buyNum +'&goodId=' + that.data.goodId 
+            wx.setStorageSync('url',url)
+          },2000)
+         
+
+        } else if (res.data.status === 1004) {
           wx.showToast({
             title: res.data.msg,
             icon: 'none'
@@ -484,10 +499,10 @@ Page({
           })
 
         } else {
-          // wx.showToast({
-          //   title: res.data.msg,
-          //   icon: 'none'
-          // })
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none'
+          })
         }
       }
     })
@@ -497,7 +512,6 @@ Page({
 
     this.getDetail();
     //var options = { 'id': this.data.id }
-
-
+     
   },
 })
