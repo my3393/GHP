@@ -1,0 +1,73 @@
+/* component/address/address.wxss */
+/* 地址选择 */
+.adres{
+  width: 100%;
+  height: 780rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0rpx;
+  background: #fff;
+  padding: 30rpx;
+  padding-bottom: 20rpx;
+  box-sizing: border-box;
+  font-family: PingFang-SC-Bold;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  z-index: 12;
+}
+.adres_all{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 780rpx;
+  right: 0;
+}
+.adres_h1{
+  font-size: 32rpx;
+}
+.detel{
+  float: right;
+  width: 36rpx;
+  height: 36rpx;
+ 
+}
+.detel image{
+  width: 100%;
+  height: 100%;
+}
+.adre_bott{
+  margin-top: 40rpx;
+  font-size: 26rpx;
+}
+.adre_bott>view{
+  margin-right: 42rpx;
+  display: inline-block;
+}
+.srcoll{
+  width: 100%;
+  height: 600rpx;
+  margin-top: 30rpx;
+}
+.adres_list{
+  height: 82rpx;
+  line-height: 82rpx;
+  font-size: 26rpx;
+}
+.adres_r{
+  float: right;
+  width: 26rpx;
+  height: 24rpx;
+}
+.adres_r image{
+  width: 100%;
+  height: 100%;
+}
+.hong{
+  color: #F12200;
+  height: 60rpx;
+  display: inline-block;
+  border-bottom: 4rpx solid #f12200;
+}
+.tas_a{
+  color: #f12200 !important;
+}

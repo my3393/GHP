@@ -1,0 +1,73 @@
+<!--component/address/address.wxml-->
+<!-- 选择地址 -->
+
+<view class="adres" >
+ <view class="adres_all" bindtap="adres_all"></view>
+  <view class="adres_h1">
+    选择地区
+    <view class="detel" bindtap="detel">
+      <image src="/images/xxx.png"></image>
+    </view>
+  </view>
+  <view class="adre_bott">
+    <view wx:if="{{prov.length == 0}}" class="{{isprov ? 'hong': ''}}">请选择</view>
+    <view wx:else bindtap="x_prov">
+      <text class="{{tar == 1 ? 'hong': ''}}">{{prov}}</text>
+    </view>
+    <view wx:if="{{iscitys}}">
+      <view wx:if="{{city.length == 0}}" class="{{iscity ? 'hong': ''}}">请选择</view>
+      <view wx:else bindtap="x_city">
+        <text class="{{tar == 2 ? 'hong': ''}}">{{city}}</text>
+      </view>
+    </view>
+    <view wx:if="{{isqus}}">
+      <view wx:if="{{area.length == 0}}" class="{{isqu ? 'hong': ''}}">请选择</view>
+      <view wx:else bindtap="x_qu">
+        <text class="{{tar == 3 ? 'hong': ''}}">{{area}}</text>
+      </view>
+    </view>
+    <view wx:if="{{isjies}}">
+      <view wx:if="{{town.length == 0}}" class="{{isjie ? 'hong': ''}}">请选择</view>
+      <view wx:else bindtap="x_jie">
+        <text class="{{tar == 4 ? 'hong': ''}}">{{town}}</text>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y="true" class="srcoll">
+    <!-- 省 -->
+    <view wx:if="{{isprov}}">
+      <view class="adres_list {{tas1 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{province}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getprovs">{{item.name}}
+        <view class="adres_r" wx:if="{{tas1 == idx}}">
+          <image src="/images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 市 -->
+    <view wx:if="{{iscity}}">
+      <view class="adres_list {{tas2 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{citys}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="getcity">{{item.name}}
+        <view class="adres_r" wx:if="{{tas2 == idx}}">
+          <image src="/images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 区 -->
+    <view wx:if="{{isqu}}">
+      <view class="adres_list {{tas3 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{areas}}" wx:for-index='idx' id="{{item.id}}" data-index="{{idx}}" data-name="{{item.name}}" bindtap="getarea" data-index="{{idx}}">{{item.name}}
+        <view class="adres_r" wx:if="{{tas3 == idx}}">
+          <image src="/images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 街道-->
+    <view wx:if="{{isjie}}">
+      <view class="adres_list {{tas4 == idx ? 'tas_a' : ''}}" wx:key='item' wx:for="{{towns}}" wx:for-index='idx' data-index="{{idx}}" id="{{item.id}}" data-name="{{item.name}}" bindtap="gettown">{{item.name}}
+        <view class="adres_r" wx:if="{{tas4 == idx}}">
+          <image src="/images/gou.png"></image>
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>
+</view>
+
+<view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>

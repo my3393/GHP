@@ -65,4 +65,3 @@ module.exports = {
   isValidUrl,
   equal
 };
-

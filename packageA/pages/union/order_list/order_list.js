@@ -1,4 +1,7 @@
 // packageA/pages/union/order_list/order_list.js
+const app = getApp();
+var currentPage =1;
+let list =[]
 Page({
 
   /**
@@ -12,14 +15,14 @@ Page({
       { name: '其他原因' },
      
     ],
-    modal:true
+    modal:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+     this.getlist()
   },
 
   /**
@@ -47,7 +50,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+   list =[]
   },
 
   /**
@@ -127,5 +130,30 @@ Page({
     })
     this.acncel()
 
+  },
+  //订单列表
+  getlist() {
+    let that = this;
+
+    let data = {
+      currentPage,
+    }
+
+    app.res.req('/squserorder/list', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        list.push(...res.data.data)
+        that.setData({
+          list: list
+        })
+
+        
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
 })

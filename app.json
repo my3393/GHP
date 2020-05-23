@@ -85,7 +85,8 @@
     "pages/solder/solder",
     "pages/live_add/live_add",
     "pages/unions/unions",
-    "pages/good_det/index"
+    "pages/good_det/index",
+    "component/address/address"
   ],
   "subpackages": [
     {
@@ -116,7 +117,8 @@
         "pages/today/order/order",
         "pages/union/order_list/order_list",
         "pages/union/order_detail/order_detail",
-        "pages/union/order_sure/order_sure"
+        "pages/union/order_sure/order_sure",
+        "pages/union/pay_success/pay_success"
       ]
     }
   ],

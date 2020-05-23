@@ -125,3 +125,4 @@
       <tui-button type="danger" shape="circle" bind:click="click3" size="small">立即提交</tui-button>
     </view>
   </tui-modal>
+ 

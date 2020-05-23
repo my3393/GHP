@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": false,
 		"postcss": true,
@@ -60,15 +60,15 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/union/order_sure/order_sure",
-					"pathName": "packageA/pages/union/order_sure/order_sure",
+					"name": "packageA/pages/store_home/store_home",
+					"pathName": "packageA/pages/store_home/store_home",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": 1,
-					"name": "pages/good_det/index",
-					"pathName": "pages/good_det/index",
+					"name": "pages/community/community",
+					"pathName": "pages/community/community",
 					"query": "userid=52",
 					"scene": null
 				}

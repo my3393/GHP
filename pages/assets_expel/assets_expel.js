@@ -195,11 +195,13 @@ Page({
   
       var a = []
       a.push(e.currentTarget.id)
-      wx.previewImage({
-        current: e.currentTarget.id,
-        urls: a
+      // wx.previewImage({
+      //   current: e.currentTarget.id,
+      //   urls: a
+      // })
+      wx.navigateTo({
+        url: '../zhin2/zhin?code=' + this.data.code,
       })
-  
 
 
   },
@@ -215,7 +217,8 @@ Page({
       if (res.status == 1000) {
         
        
-        var array = wx.base64ToArrayBuffer(res.data)
+        var base64 = res.data.replace(/[\r\n]/g, "")
+        var array = wx.base64ToArrayBuffer(base64)
         const fsm = wx.getFileSystemManager();
         const FILE_BASE_NAME = 'mine';
         const filePath = wx.env.USER_DATA_PATH + '/' + FILE_BASE_NAME + '.png';

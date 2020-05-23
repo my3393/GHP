@@ -34,10 +34,10 @@
 
       </view>
       <view class='infor'>
-        <view class='inform'>公司类型</view>
+        <view class='inform'>经营类目</view>
         <view class='inforin infor_r'>
-          <picker class="pick" range="{{type}}" range-key="typeName" value="{{index}}" bindchange="type">
-            <input disabled='true' type='text' value='{{typ}}' placeholder='请选择经营品类' ></input>
+          <picker class="pick" range="{{type}}" range-key="classifyName" value="{{index}}" bindchange="type">
+            <input disabled='true' type='text' value='{{typ}}' placeholder='请选择经营品类'></input>
           </picker>
         </view>
         <view class='enter'>
@@ -64,19 +64,19 @@
       </view>
 
       <view class="nav">
-        <view class="chun_left">店内照片</view>
-        <view class="zhao" wx:if='{{zhao2}}' bindtap="chooseImages" id="{{1}}">
-          <view class="zhao_img">
-            <image src="/images/zhao.png"></image>
-          </view>
-          <view>上传</view>
-        </view>
-        <view wx:else class="clearfix">
-          <view class="tu_img">
-            <image src="{{zhaos2}}"></image>
-            <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" catchtap="detels">
-              <image src="/images/deteles.png" />
+         <view class="chun_left">店内照片</view>
+        <view class="clearfix" style="margin-top:20rpx;">
+          <view class="tu_img" wx:for='{{images}}' wx:for-index='idx' wx:key='item'>
+            <image src="{{item}}" bindtap="Preview" data-num="{{1}}"></image>
+            <view class="detele" id="{{item}}" data-index='{{idx}}' data-num="{{1}}" bindtap="detels">
+              <image src="/images/xxx.png" />
             </view>
+          </view>
+          <view class="zhao" bindtap="chooseImages" id="{{1}}" hidden="{{img_show}}">
+            <view class="zhao_img">
+              <image src="/images/zhao.png"></image>
+            </view>
+            <view>上传</view>
           </view>
         </view>
         <view class="m_left">照片需真实反映店内情况</view>
@@ -101,7 +101,7 @@
         <view class="m_left">证件需清晰可辨认，不得使用复印件</view>
 
       </view>
-       <view class="nav">
+      <view class="nav">
         <view class="chun_left">经营许可证</view>
         <view class="zhao" wx:if='{{zhao4}}' bindtap="chooseImages" id="{{3}}">
           <view class="zhao_img">
@@ -111,7 +111,7 @@
         </view>
         <view wx:else class="clearfix">
           <view class="tu_img">
-            <image src="{{zhaos6}}"></image>
+            <image src="{{zhaos4}}"></image>
             <view class="detele" data-num="{{3}}" catchtap="detels">
               <image src="/images/deteles.png" />
             </view>
@@ -120,7 +120,7 @@
         <view class="m_left">证件需清晰可辨认，不得使用复印件</view>
 
       </view>
-     
+
       <view class='infor'>
         <view class='inform'>商家姓名</view>
         <view class='inforin'>
@@ -167,10 +167,10 @@
       <view class="kong_img">
         <image src="/images/store_true.png"></image>
       </view>
-      <view>  入驻申请已通过 </view>
-      <view wx:if='{{audits.isPay == 0}}'>认证费用￥{{audits.payMoney}}请尽快支付</view>
-      <view wx:if='{{audits.isPay == 0}}' class="pay" bindtap="pay">去支付</view>
-      <view class="pay" wx:if='{{audits.isPay == 1 || audits.isPay == 2}}' bindtap="go">去完善</view>
+      <view> 入驻申请已通过 </view>
+      <view wx:if='{{audits.isPay == 1}}'>认证费用￥{{audits.payMoney}}请尽快支付</view>
+      <view wx:if='{{audits.isPay == 1}}' class="pay" bindtap="pay">去支付</view>
+      <view class="pay" wx:if='{{audits.isPay == 0 || audits.isPay == 2}}' bindtap="go">去完善</view>
       <!-- <view class="ru_enter">
         进入我的店铺
       </view> -->
@@ -277,4 +277,3 @@
 </view>
 
 <view class="mask" hidden="{{ismask}}" catchtouchmove='true'></view>
-

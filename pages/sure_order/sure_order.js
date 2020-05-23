@@ -14,15 +14,15 @@ Page({
     defalutaddres: [], //默认地址
     adress: [], //选择的地址
     inpu: '',
-    loading:true,
-    member_zk:'',
-    deductionIntegral:'0'
+    loading: true,
+    member_zk: '',
+    deductionIntegral: '0'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
 
     id = options.id;
@@ -42,20 +42,20 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     console.log('-监听页面初次渲染完成')
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
     let that = this;
-    if (wx.getStorageSync('address')){
+    if (wx.getStorageSync('address')) {
       wx.getStorage({
         key: 'address',
-        success: function (res) {
+        success: function(res) {
           console.log(res.data)
           that.setData({
             adress: res.data
@@ -63,25 +63,25 @@ Page({
           that.getDefaultaddress()
         },
       })
-    }else{
+    } else {
       that.getDefaultaddress()
-       that.setData({
-         adress: []
-       })
+      that.setData({
+        adress: []
+      })
     }
     wx.getStorage({
       key: 'userinfo',
-      success: function (res) {
-       that.setData({
-         user: res.data
-       })
+      success: function(res) {
+        that.setData({
+          user: res.data
+        })
       },
     })
-    if (wx.getStorageSync('shareUserId')){
+    if (wx.getStorageSync('shareUserId')) {
       wx.getStorage({
         key: 'shareUserId',
-        success: function (res) {
-          shareUserId=res.data
+        success: function(res) {
+          shareUserId = res.data
         },
       })
     }
@@ -90,35 +90,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     var that = this;
 
     return {
@@ -127,7 +127,7 @@ Page({
 
     }
   },
-  member(){
+  member() {
     wx.navigateTo({
       url: '../members/members',
     })
@@ -198,9 +198,9 @@ Page({
           title_img: res.data.productDefaultImgOss
         })
 
-        if (res.data.isSpecificaton == 1){
+        if (res.data.isSpecificaton == 1) {
           that.getSku();
-        }else{
+        } else {
           that.setData({
             prices: res.data.lowestPrice * that.data.buyNum,
           })
@@ -230,7 +230,7 @@ Page({
       if (res.status == 1000) {
         that.setData({
           defalutaddres: [],
-          defalutaddresId:'',
+          defalutaddresId: '',
         })
         if (res.data != null) {
           that.setData({
@@ -263,40 +263,40 @@ Page({
     app.res.req('/member/discount', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
-       if (that.data.user.memberType == 0) {
-         if (that.data.detail.defaultDeductionRatio == 0){
-           that.setData({
-             z_price: (that.data.prices + that.data.detail.expressFee).toFixed(2),
-             member_p:0,
-           })
-         }else{
-           that.setData({
-             z_price: ((that.data.prices * (1 - that.data.detail.defaultDeductionRatio)) + + that.data.detail.expressFee).toFixed(2),
-             member_p: (that.data.prices * that.data.detail.defaultDeductionRatio).toFixed(2),
-           })
-         } 
-        
-        }else{
-         if (that.data.detail.memberDeductionRatio == 0){
-           that.setData({
-             z_price: that.data.prices + that.data.detail.expressFee.toFixed(2),
-             member_p: 0,
-           })
-         }else{
-           that.setData({
-             z_price: ((that.data.prices * (1 - that.data.detail.memberDeductionRatio)) + that.data.detail.expressFee).toFixed(2),
-             member_p: (that.data.prices  * that.data.detail.memberDeductionRatio).toFixed(2),
-           })
-         }
-         
-        
+        if (that.data.user.memberType == 0) {
+          if (that.data.detail.defaultDeductionRatio == 0) {
+            that.setData({
+              z_price: (that.data.prices + that.data.detail.expressFee).toFixed(2),
+              member_p: 0,
+            })
+          } else {
+            that.setData({
+              z_price: ((that.data.prices * (1 - that.data.detail.defaultDeductionRatio)) + +that.data.detail.expressFee).toFixed(2),
+              member_p: (that.data.prices * that.data.detail.defaultDeductionRatio).toFixed(2),
+            })
+          }
+
+        } else {
+          if (that.data.detail.memberDeductionRatio == 0) {
+            that.setData({
+              z_price: that.data.prices + that.data.detail.expressFee.toFixed(2),
+              member_p: 0,
+            })
+          } else {
+            that.setData({
+              z_price: ((that.data.prices * (1 - that.data.detail.memberDeductionRatio)) + that.data.detail.expressFee).toFixed(2),
+              member_p: (that.data.prices * that.data.detail.memberDeductionRatio).toFixed(2),
+            })
+          }
+
+
         }
         // that.setData({
         //   z_price: (that.data.prices - that.data.member_p + that.data.detail.expressFee).toFixed(2),
         //   member_zk: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
         // })
         that.setData({
-        
+
           member_zk: (that.data.prices - res.data.member3Discount * that.data.prices).toFixed(2)
         })
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
@@ -368,14 +368,14 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
 
-         wx.showLoading({
-           mask:true
-         })
+        wx.showLoading({
+          mask: true
+        })
 
-        setTimeout(function(){
+        setTimeout(function() {
           wx.hideLoading()
           that.pays();
-        },2000)
+        }, 2000)
       } else {
 
         wx.showToast({
@@ -384,10 +384,12 @@ Page({
         })
       }
     })
-    this.setData({ tapTime: nowTime });
+    this.setData({
+      tapTime: nowTime
+    });
   },
   //调取支付
-  pays(){
+  pays() {
     let that = this;
     let data = {
 
@@ -416,14 +418,14 @@ Page({
             })
           },
           fail(res) {
-             wx.redirectTo({
-               url: '../order_all/order_all?id=' + 0,
-             })
+            wx.redirectTo({
+              url: '../order_all/order_all?id=' + 0,
+            })
 
           }
         })
 
-      //   interval = null;
+        //   interval = null;
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -437,13 +439,13 @@ Page({
       }
     })
   },
-  por(){
+  por() {
     this.setData({
       loading: !this.data.loading
     })
   },
   //绑定手机号
-  getPhoneNumber: function (e) {
+  getPhoneNumber: function(e) {
     var that = this;
     console.log(e)
     wx.request({
@@ -459,7 +461,7 @@ Page({
         token: wx.getStorageSync('token')
       },
       dataType: 'json',
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.status === 1000) {
           wx.setStorage({
@@ -470,7 +472,7 @@ Page({
             key: 'userinfo',
             data: res.data.data,
           })
-          setTimeout(function () {
+          setTimeout(function() {
             that.pay();
           }, 1000)
 
@@ -478,16 +480,16 @@ Page({
           wx.showToast({
             title: '登录信息已失效，请重新登录获取手机号',
             icon: 'none',
-            duration:2000,
+            duration: 2000,
           })
-          setTimeout(()=>{
+          setTimeout(() => {
             wx.navigateTo({
               url: '/pages/login/login',
             })
-            var url= '../sure_order/sure_order?id=' + id + '&num=' + that.data.buyNum +'&goodId=' + that.data.goodId 
-            wx.setStorageSync('url',url)
-          },2000)
-         
+            var url = '../sure_order/sure_order?id=' + id + '&num=' + that.data.buyNum + '&goodId=' + that.data.goodId
+            wx.setStorageSync('url', url)
+          }, 2000)
+
 
         } else if (res.data.status === 1004) {
           wx.showToast({
@@ -508,10 +510,10 @@ Page({
     })
   },
   // 上个页面返回刷新
-  changeData: function () {
+  changeData: function() {
 
     this.getDetail();
     //var options = { 'id': this.data.id }
-     
+
   },
 })

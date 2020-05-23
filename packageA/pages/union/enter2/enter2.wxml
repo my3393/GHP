@@ -80,10 +80,12 @@
       <view class="kong_img">
         <image src="/images/store_true.png"></image>
       </view>
-      <view>  入驻申请已通过 </view>
-      <view wx:if='{{audits.isPay == 0}}'>认证费用￥{{audits.payMoney}}请尽快支付</view>
+      <view>  你的开店申请已通过 </view>
+      <view wx:if='{{audits.isPay == 0}}'>入驻费用￥{{audits.payMoney}}</view>
       <view wx:if='{{audits.isPay == 0}}' class="pay" bindtap="pay">去支付</view>
-      <view class="pay" wx:if='{{audits.isPay == 1 || audits.isPay == 2}}' bindtap="go">去完善</view>
+      <view class="pay" wx:if='{{audits.isPay == 1 || audits.isPay == 2}}' bindtap="go">
+         稍后你会收到短信通知，前往商家端完善店铺信息，添加商品门店营业
+      </view>
       <!-- <view class="ru_enter">
         进入我的店铺
       </view> -->

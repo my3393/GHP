@@ -97,7 +97,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+        currentPage++;
+        this.getdetail()
   },
 
   /**
@@ -141,7 +142,7 @@ Page({
      
     }else{
       wx.navigateTo({
-        url: '../zhin/zhin?code=' + this.data.code,
+        url: '../zhin1/zhin?code=' + this.data.code,
       })
     }
    
@@ -157,8 +158,8 @@ Page({
 
       if (res.status == 1000) {
 
-
-        var array = wx.base64ToArrayBuffer(res.data)
+        var base64 = res.data.replace(/[\r\n]/g, "")
+        var array = wx.base64ToArrayBuffer(base64)
         const fsm = wx.getFileSystemManager();
         const FILE_BASE_NAME = 'mine';
         const filePath = wx.env.USER_DATA_PATH + '/' + FILE_BASE_NAME + '.png';
@@ -217,16 +218,16 @@ Page({
            var s_da = time.formatTimeTwo(res.data.data[i].startTime, 'M/D')
            var s_time = time.formatTimeTwo(res.data.data[i].startTime,'h:m')
            var e_time = time.formatTimeTwo(res.data.data[i].endTime,'h:m')
-           console.log(e_time)
-           console.log(res.data.data[i].endTime)
+          //  console.log(e_time)
+          //  console.log(res.data.data[i].endTime)
            res.data.data[i].s_date = s_da.replace('/','.')
            res.data.data[i].s_time = s_time
            res.data.data[i].e_time = e_time
          }
          detail.push(...res.data.data)
-        var a = detail.reverse()
-        console.log(detail)
-         console.log(a)
+      //  var a = detail.reverse()
+       console.log(detail)
+
          that.setData({
            detail:detail
          })

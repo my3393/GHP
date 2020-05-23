@@ -87,11 +87,20 @@ page{
   margin-right: 30rpx;
   box-sizing: border-box;
 }
-.foot view:nth-child(3){
-  border: 1rpx solid #f12200;
-  color: #f12200;
-  margin-right: 30rpx;
+ .que{
+  margin-top: 20rpx;
+  text-align: right;
+}
+.que view{
+ border: 1rpx solid #f12200 !important;
+  color: #f12200 !important;
   
+   width: 200rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  border-radius: 35rpx;
+  display: inline-block;
 }
 .foot view:nth-child(2){
   color: #fff;

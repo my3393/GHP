@@ -36,8 +36,8 @@
   </tui-modal>
 
   <view class="imag">
-     <image src="{{code}}" id="{{code}}" bindtap="Preview"></image>
-     <view>点击后长按保存扫码领取</view>
+     <image show-menu-by-longpress src="{{code}}" id="{{code}}" bindtap="Preview"></image>
+     <view>点击保存扫码领取</view>
   </view>
 
 

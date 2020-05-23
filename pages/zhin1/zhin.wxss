@@ -1,0 +1,31 @@
+/* pages/zhin/zhin.wxss */
+page{
+ width: 100%;
+ height: 100%;
+}
+.img{
+  width: 100%;
+  height: 100%;
+
+}
+.img image{
+  width: 100%;
+  height: 100%;
+}
+.ewm{
+  width: 140rpx!important;
+  height: 140rpx!important;
+  position:absolute;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%,-50%)
+}
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

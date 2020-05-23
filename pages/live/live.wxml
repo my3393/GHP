@@ -10,7 +10,7 @@
     <view class="top">
       <view class="dan">{{item.name}}</view>
       <view class="mine">
-        <view>主播：{{item.anchorName}}</view>
+        <view class="dan" style="width:256rpx">主播：{{item.anchorName}}</view>
         <view>直播时间：{{item.s_date}} {{item.s_time}}~{{item.e_time}}</view>
       </view>
       

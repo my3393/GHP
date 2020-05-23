@@ -59,43 +59,48 @@
       </view>
     </view>
     <view>
-      <view class="peis">
+       <picker range="{{multiArray}}" mode="multiSelector" bindchange="xuan_time">
+         <view class="peis">
         <view>送达时间</view>
-        <view>3-20 12:20
+        <view>{{time}}
           <image src="/images/right.png"></image>
         </view>
+
       </view>
+     </picker>
     </view>
   </view>
   <view wx:if='{{tar == 1}}'>
     <view class="address">
-      <view class="address_top">
+      <view class="address_top" bindtap="go">
 
-        <!-- {{store.provinceName}} {{store.cityName}} {{store.areaName}} {{store.townName}} -->
-        深圳市宝安区西乡街道分门类聚
+        {{store.provinceName}} {{store.cityName}} {{store.areaName}} {{store.townName}}
+        
       </view>
       <view class="address_cent">
-        <!-- {{store.detailAddress}} -->
-        前进二好了哦me咯
+        {{store.detailAddress}}
+        
       </view>
       <view class="address_cent_r">
         <image src="/images/dinw.png"></image>
       </view>
       <view class="address_bott">
         <!-- {{store.consigneeName}} -->
-        <text style='color:#999'>
-              <!-- {{store.consigneePhone}} -->
+        <text style='color:red'>
+              {{distance}}
               </text>
       </view>
     </view>
     <view>
-      <view class="peis">
+     <picker range="{{multiArray}}" mode="multiSelector" bindchange="xuan_time">
+         <view class="peis" >
         <view>送达时间</view>
-        <view>3-20 12:20
+        <view>{{time}}
           <image src="/images/right.png"></image>
         </view>
 
       </view>
+     </picker>
     </view>
     <view>
       <view class="peis">
@@ -107,10 +112,11 @@
     </view>
     <view>
       <view class="peis">
-        <radio-group bindtap="checked_1">
-          <radio checked="{{checked_1}}" class="all_radio" color="#f12200">
+        <radio-group bindtap="checked">
+          <radio checked="{{checked}}" class="all_radio" color="#f12200">
+           同意《到店自提用户协议》
           </radio>
-          同意《到店自提用户协议》
+         
         </radio-group>
       </view>
     </view>
@@ -123,25 +129,27 @@
       <view class="sotre_img">
         <image src="/images/store.png" />
       </view>
-      小胖子杂货店
+      {{store.storeName}}
       <view class="store_r">
         <image src="/images/right.png" />
       </view>
     </view>
-    <view>
+    <view wx:for='{{cart}}' style="margin-bottom:20rpx;">
       <view class="good_img">
         <!-- <image src="{{detail.productDefaultImgOss}}" /> -->
-        <image src="/images/sjg.png"></image>
+        <image src="{{item.productDefaultImgOss}}"></image>
       </view>
       <view class="good_list">
         <!-- <view class='goodsname dan'>{{detail.productName}}</view> -->
-        <view class='goodsname dan'>香蕉</view>
+        <view class='goodsname dan'>{{item.productName}}</view>
         <view class="guig">
           <view class='gui-g' wx:for='{{sku.skus}}' wx:key="{{item.id}}">{{item.value}}</view>
         </view>
-        <text class='price' wx:if='{{detail.isSpecificaton == 0}}'><text class="yuan">￥</text>{{price}}</text>
-        <text class='price' wx:else><text class="yuan">￥</text>{{sku.price}}</text>
-        <view class="good_num">×{{buyNum}}</view>
+
+        <text class='price' wx:if='{{item.promotionType == 0}}'><text class="yuan">￥</text>{{item.salePrice}}</text>
+        <text class='price' wx:else><text class="yuan">￥</text>{{item.activityPrice}}</text>
+       
+        <view class="good_num">×{{item.buyCount}}</view>
       </view>
     </view>
   </view>
@@ -152,19 +160,19 @@
     <view class="price_list">
       商品总额
       <view class="price_r">
-        ￥{{prices}}
+        ￥{{z_price}}
       </view>
     </view>
     <view class="price_list">
       配送费
       <view class="price_r">
-        ￥{{prices}}
+        ￥{{store.postageFee}}
       </view>
     </view>
     <view class="price_list">
       会员优惠
       <view class="price_r">
-        ￥{{detail.expressFee}}
+        ￥{{member_p}}
       </view>
     </view>
     <view class="price_list">
@@ -176,7 +184,7 @@
 
     <view class="z_right">
       实付费:
-      <text class="yan font">￥{{z_price}}</text>
+      <text class="yan font">￥{{price}}</text>
     </view>
   </view>
 
@@ -185,8 +193,8 @@
 <view class="nav">
    <view class="peis">
       <view>备注</view>
-      <view>
-        <input placeholder="有什么要求可告知店家"></input>
+      <view style="width:80%;text-align:right">
+        <input placeholder="有什么要求可告知店家" bindinput="remark" value="{{remark}}" ></input>
       </view>
    </view>
 </view>
@@ -194,7 +202,7 @@
 <view class='footer'>
  <view >
      合计：<view class="price" style="display:inline-block">
-         <text class="yuan">￥</text>{{z_price}}
+         <text class="yuan">￥</text>{{price}}
      </view>
  </view>
  <button class="pay" size="mini" wx:if='{{user.phone == null || user.phone == ""}}' open-type="getPhoneNumber" 

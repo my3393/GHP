@@ -1,28 +1,28 @@
 <!--packageA/pages/store_home/store_home.wxml-->
 <view class="top_b"></view>
 <view class="hone clearfix">
-  <image src="../../../images/sjg.png"></image>
+  <image src="{{store.storeHeadImgUrlOss}}"></image>
   <view class="h1">
-    深圳市花覅额海公司
+    {{store.storeName}}
   </view>
   <view class="hone_rig">
     <view>
-      <image src="../../../images/xinxin_n.png"></image>
+      <image src="/images/xinxin_n.png"></image>
       <view>收藏</view>
     </view>
     <view>
-      <image src="../../../images/fenx.png"></image>
+      <image src="/images/fenx.png"></image>
       <view>分享</view>
     </view>
   </view>
   <view class="qis">
-    <text>起送￥20</text>
-    <text>配送费￥0</text>
+    <text>起送￥{{store.sendFee}}</text>
+    <text>配送费￥{{store.postageFee}}</text>
   </view>
-  <view class="qis">1.3km</view>
-  <view class="jies dan">深圳市海诚装饰设计工程有限公司成立于2011年海诚装饰（HaiCheng Decoration）简称海诚装饰。</view>
+  <view class="qis">{{distance}}</view>
+  <view class="jies dan">{{store.storeNotice}}</view>
   <view class="">
-    <text>极速退款</text>
+    <text>{{store.storeLabel}}</text>
   </view>
 </view>
 
@@ -41,35 +41,39 @@
 </view>
 <!-- 商品分类 -->
 <scroll-view scroll-y scroll-with-animation class="tab-view" scroll-top="{{scrollTop}}" style="height:{{menuHeight}}px">
-  <view wx:for="{{tabbar}}" wx:key="{{index}}" class="tab-bar-item {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" catchtap="swichNav">
-    <text>{{item}}</text>
+  <view wx:for="{{tabbar}}" wx:key="{{index}}" class="tab-bar-item {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" catchtap="swichNav" id="{{item.id}}">
+    <text>{{item.typeName}}</text>
   </view>
 </scroll-view>
 <!-- 右侧 -->
-<view class="right-box">
+<scroll-view class="right-box" scroll-y>
   <!--内容部分 start 自定义可删除-->
-  <block wx:for="{{tabbar}}" wx:key="{{index}}">
+  <block>
     <view class="page-view">
 
       <view class="class-box">
         <view class="class-item">
-          <view class="class-name">{{item}}</view>
-          <view class="clearfix">
+          <view class="class-name">{{typeName}}</view>
+          <view class="clearfix" wx:for="{{detail}}" wx:key="{{index}}">
             <view class="g-box" catchtap="productList" data-key="高价回收">
-              <image src="../../../images/ylsj.png" class="g-image" />
-              <view class="g-title dan">高价回收</view>
-              <view class="shou">售23</view>
+              <image src="{{item.productDefaultImgOss}}" class="g-image" />
+              <view class="g-title dan">{{item.productName}}</view>
+              <view class="shou">售{{item.totalSaleNum}}</view>
               <view>
-                <view>
-                  <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
-                  <text style="color:#ccc">￥29.9</text>
+                <view wx:if='{{currentTab == 1 || currentTab == 0}}'>
+                  <text class="price"><text style="font-size:14rpx">￥</text >{{item.activityPrice}}</text>
+                  <text style="color:#ccc">￥{{item.salePrice}}</text>
+                </view>
+                <view wx:else>
+                  <text class="price"><text style="font-size:14rpx">￥</text >{{item.salePrice}}</text>
+
                 </view>
                 <view class='goodsnum'>
-                  <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
+                  <!-- <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}" hover-class="reduction_h">
                     -
-                  </view>
+                  </view> -->
                   <view class="shu">{{item.buyCount}}</view>
-                  <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
+                  <view class="suan" id="{{item.id}}" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" hover-class="addCount_h">
                     +
                   </view>
                 </view>
@@ -84,23 +88,26 @@
 
   </block>
   <!--内容部分 end 自定义可删除-->
-</view>
+</scroll-view>
 
 <!-- footer -->
 <view class="foote">
   <view class="foote_left">
-    <view>
+    <view bindtap="cart" class="cart">
       <image src="../../../images/shop.png"></image>
+      <view class="cart_num" wx:if='{{cart_num != 0}}'>{{cart_num}}</view>
       <view>购物车</view>
     </view>
     <view class="hj">合计：
-      <text class="price"><text style="font-size:14rpx">￥</text >28.8</text> </view>
+      <text class="price"><text style="font-size:14rpx">￥</text >{{z_price}}</text>
+      <text class="sale_page" wx:if='{{cart.length != 0 && store.postageFee != 0}}'>另需配送费 ￥{{store.postageFee}}</text>
+    </view>
   </view>
   <view class="foote_right">
 
     <view>
-      <button size="mine" class='placeanorder' bindtap="aaa">
-        结算({{allnum}})
+      <button size="mine" class='placeanorder' bindtap="submit">
+        结算({{cart_num}})
 
 
       </button>
@@ -128,101 +135,74 @@
   </view>
 </van-popup>
 <!-- 购物车弹窗 -->
-<van-popup show="{{ show2 }}" bind:close="onClose2" position='bottom' custom-style="height: 60%" round>
-  <view class="show2_top">还差5.6元配送</view>
-  <scroll-view scroll-y='true' style="height:{{height}}rpx">
+<van-popup show="{{ show2 }}" bind:close="onClose2" position='bottom' custom-style="height: 70%" round>
+  <view class="show2_top" wx:if='{{sendFee > 0}}'>还差{{sendFee}}元配送</view>
+  <view class="show2_top" wx:else>已满足配送要求</view>
+  <view class="show2_midd">
+    <text>共{{cart_num}}件商品</text>
+    <view class="show2_detel" bindtap="cleancart">
+      <image src="../../../images/detele.png"></image>
+      清空购物车
+    </view>
+  </view>
+  <scroll-view scroll-y='true' class="good_scroll">
     <view class="show2 clearfix">
 
-      <view class="show2_midd">
-        <text>共3件商品</text>
-        <view class="show2_detel">
-          <image src="../../../images/detele.png"></image>
-          清空购物车
-        </view>
-      </view>
-      <view class="show2_good dan">
-        <image src="../../../images/sjg.png"></image>
-        <view>苹果20个进口的五金</view>
+
+      <view class="show2_good dan" wx:for='{{cart}}' wx:key='item.id'>
+        <image src="{{item.productDefaultImgOss}}"></image>
+        <view>{{item.productName}}</view>
         <view style="margin-top:90rpx">
-          <view>
-            <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
-            <text style="color:#ccc">￥29.9</text>
+          <view wx:if='{{item.promotionType == 0}}'>
+            <text class="price"><text style="font-size:14rpx">￥</text >{{item.salePrice}}</text>
+
+          </view>
+          <view wx:else>
+            <text class="price"><text style="font-size:14rpx">￥</text >{{item.activityPrice}}</text>
+            <text style="color:#ccc">￥{{item.salePrice}}</text>
+
           </view>
           <view class='goodsnum'>
-            <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
+            <view class="suan reduction" id="{{item.productId}}" catchtap="minusCount_num" data-index="{{index}}" data-select-index="{{idx}}">
               -
             </view>
             <view class="shu">{{item.buyCount}}</view>
-            <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
+            <view class="suan" id="{{item.productId}}" catchtap="addCount_num" data-index="{{index}}" data-select-index="{{idx}}" hover-class="addCount_h">
               +
             </view>
           </view>
         </view>
       </view>
-      <view class="show2_good dan">
-        <image src="../../../images/sjg.png"></image>
-        <view>苹果20个进口的五金</view>
-        <view style="margin-top:90rpx">
-          <view>
-            <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
-            <text style="color:#ccc">￥29.9</text>
-          </view>
-          <view class='goodsnum'>
-            <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
-              -
-            </view>
-            <view class="shu">{{item.buyCount}}</view>
-            <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
-              +
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class="show2_good dan">
-        <image src="../../../images/sjg.png"></image>
-        <view>苹果20个进口的五金</view>
-        <view style="margin-top:90rpx">
-          <view>
-            <text class="price"><text style="font-size:14rpx">￥</text >28.8</text>
-            <text style="color:#ccc">￥29.9</text>
-          </view>
-          <view class='goodsnum'>
-            <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}">
-              -
-            </view>
-            <view class="shu">{{item.buyCount}}</view>
-            <view class="suan" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}">
-              +
-            </view>
-          </view>
-        </view>
-      </view>
-      <view>
+
+      <!-- <view>
         <view class="show2_midd">
-          <text>共3件商品</text>
+          <text>失效商品</text>
           <view class="show2_detel">
 
             删除
           </view>
         </view>
-      </view>
+      </view> -->
     </view>
 
   </scroll-view>
   <view class="foote">
     <view class="foote_left">
-      <view>
+      <view bindtap="cart" class="cart">
         <image src="../../../images/shop.png"></image>
+        <view class="cart_num" wx:if='{{cart_num != 0}}'>{{cart_num}}</view>
         <view>购物车</view>
       </view>
       <view class="hj">合计：
-        <text class="price"><text style="font-size:14rpx">￥</text >28.8</text> </view>
+        <text class="price"><text style="font-size:14rpx">￥</text >{{z_price}}</text>
+        <text class="sale_page" wx:if='{{cart.length != 0 && store.postageFee != 0}}'>另需配送费 ￥{{store.postageFee}}</text>
+      </view>
     </view>
     <view class="foote_right">
 
       <view>
-        <button size="mine" class='placeanorder' bindtap="pay">
-          结算({{allnum}})
+        <button size="mine" class='placeanorder' bindtap="submit">
+          结算({{cart_num}})
 
 
         </button>
@@ -232,3 +212,52 @@
 </van-popup>
 
 <!-- 规格弹窗 -->
+<view hidden='{{ishidegg}}' class='mark'>
+  <!-- <view class="gug_all" bindtap="gug_all"></view> -->
+  <view class="gug clearfix {{!isgug ? 'gug_show' : ''}} ">
+
+    <view class='close' catchtap='showgg'>
+      <image src='/images/xx.png'></image>
+    </view>
+    <view class='gouwtu'>
+      <view class='ggtup'>
+        <image src='{{title_img}}'></image>
+      </view>
+      <view class='pric'>
+        <text style="font-size:22rpx;">￥</text> {{price}}
+      </view>
+      <view class='chos'>
+        请选择：
+        <view class='chim'>{{selected}}</view>
+
+      </view>
+    </view>
+
+    <!-- 规格型号 -->
+
+    <view class='gund'>
+      <view class='chima clearfix ' wx:for='{{spec}}' wx:for-index='idx'>
+        <view class='cm' catchtap='size'>{{spec[idx].name}}</view>
+        <view>
+          <view class='dax {{item.isSelect ?"actives":""}}' catchtap='pack' wx:for='{{spec[idx].entries}}' wx:for-index='ids' data-attr-id='{{item.id}}' data-attr-value='{{item.value}}' data-select-index="{{idx}}" data-attr-index="{{ids}}">
+            {{spec[idx].entries[ids].value}}
+          </view>
+
+        </view>
+      </view>
+      <view class='shul'>
+        <view>购买数量</view>
+        <view class='jis'>
+          <view class='beij' catchtap='reduction'>-</view>
+          <view class='duos beij'>{{num}}</view>
+          <view class='beij' catchtap='add'>+</view>
+        </view>
+      </view>
+
+    </view>
+    <view class='duih' catchtap='confirm'>
+      确定
+    </view>
+
+  </view>
+</view>

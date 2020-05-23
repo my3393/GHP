@@ -1,6 +1,5 @@
 // pages/zhin/zhin.js
-import Card from '../../palette/cards';
-
+import Card from '../../palette/cards1';
 Page({
 
   /**
@@ -48,7 +47,7 @@ Page({
     })
     let res = [
       this.data.code,
-      'https://sjg.xcx.api.xingtu-group.cn/xcx/xuanc1.jpg'
+      'https://sjg.xcx.api.xingtu-group.cn/xcx/xuanc.jpg'
     ]
     this.setData({
       template: new Card().palette(res)

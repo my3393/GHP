@@ -1,16 +1,16 @@
 <!--pages/community/community.wxml-->
 <view class='main-wraper'>
-  <navBar background='#fff' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick">
-    <view class='location' slot="left">
-      <view class='con'>上海东莞得</view>
+  <navBar background='#fff' title='善家联盟' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick">
+    <view class='location' slot="left" bindtap="xuan">
+      <view class='con'>{{address}}</view>
       <view class='icon' />
     </view>
-    <view class='lxy-nav-bar-search' slot="center">
+    <!-- <view class='lxy-nav-bar-search' slot="center">
       <view class='lxy-nav-bar-search__icon' />
       <view class='lxy-nav-bar-search__input'>
         <input autoFocus="true" bindconfirm="confirmSearch" bindinput="search" class="srch-ipt" confirmType="search" placeholder="搜索内容" placeholderClass="ipt-placeholder" type="text" value=""></input>
       </view>
-    </view>
+    </view> -->
   </navBar>
   <view class="tar">
     <view wx:for='{{tar}}' data-index="{{index}}" class="{{index == tas?'active':'' }}">{{item.name}}</view>
@@ -35,10 +35,10 @@
       <image src="../../images/head.png"></image>
       <view>邀请有奖</view>
     </view>
-    <view class="navs_list">
+    <navigator url="/packageA/pages/union/order_list/order_list" class="navs_list">
       <image src="../../images/head.png"></image>
       <view>订单</view>
-    </view>
+    </navigator>
     <view class="navs_list">
       <image src="../../images/head.png"></image>
       <view>收藏</view>
@@ -50,22 +50,22 @@
     <view>
       <view class="h1">限时秒杀</view>
       <view>买到就是赚到</view>
-      <view>
-        <view class="tooday_img">
-          <image src="../../images/ylsj.png"></image>
-          <view>9.9</view>
+      <scroll-view scroll-x="true" style="white-space:nowrap;display:flex;">
+        <view class="tooday_img" wx:for='{{kill}}'>
+          <image src="{{item.productDefaultImgOss}}"></image>
+          <view>{{item.activityPrice}}</view>
         </view>
-      </view>
+      </scroll-view>
     </view>
     <view>
       <view class="h1">今日特价</view>
       <view>每日低价出售</view>
-      <view>
-        <view class="tooday_img">
-          <image src="../../images/ylsj.png"></image>
-          <view>9.9</view>
+      <scroll-view scroll-x="true" style="white-space:nowrap;display:flex;">
+        <view class="tooday_img" wx:for='{{special}}'>
+          <image src="{{item.productDefaultImgOss}}"></image>
+          <view>{{item.activityPrice}}</view>
         </view>
-      </view>
+      </scroll-view>
     </view>
   </view>
   <!--  swiper-->
@@ -80,53 +80,39 @@
 
   </view>
   <!-- 种类选择 -->
-  <scroll-view scroll-x="true" class="tag">
-    <view wx:for="{{type}}" wx:key="item" wx:for-index="index" data-id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tar == index?"actives":""}}'>
-      {{item.typeName}}
+<scroll-view scroll-x="true" class="tag">
+    <view wx:for="{{type}}" wx:key="item" wx:for-index="index" id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tars == index?"actives":""}}'>
+      {{item.classifyName}}
     </view>
   </scroll-view>
   <!-- d店铺 -->
   <view>
-    <view class="store clearfix">
-      <image src="../../images/sjg.png"></image>
+    <view class="store clearfix" wx:for='{{detail}}'>
+      <image src="{{item.storeHeadImgUrlOss}}"></image>
       <view>
-        <view class="h1">全国便利店（西乡店）</view>
+        <view class="h1">{{item.storeName}}</view>
         <view class="peix">
-          <text>配送￥0</text>
-          <text>配送￥0</text>
+          <text>起送￥{{item.sendFee}}</text>
+          <text>配送￥{{item.postageFee}}</text>
         </view>
         <view class="peix_r">
           <text>30分钟</text>
-          <text>1.3km</text>
+          <!-- <text>{{item.}}</text> -->
         </view>
       </view>
       <view class="dol">
-        <view>急速退款</view>
-        <view>急速退款</view>
-        <view>急速退款</view>
-        <view>急速退款</view>
+        <view wx:for='{{item.storeLabel}}'>{{item.storeLabel}}</view>
+       
       </view>
       <scroll-view  class="out" scroll-x="true">
-        <view class="store_detail">
-            <image src="../../images/ylsj.png"></image>
-            <view class="titr dan">乐事薯片蜂王浆哦</view>
-            <view class="price"><text style="font-size:12rpx">￥</text>9.9 <text class="cha">199</text></view>
+        <view class="store_detail" wx:for='{{item.products}}'>
+            <image src="{{item.productDefaultImgOss}}"></image>
+            <view class="titr dan">{{item.productName}}</view>
+            <view class="price"><text style="font-size:12rpx">￥</text>{{item.salePrice}}
+              <!-- <text class="cha">{{item.activityPrice}}</text> -->
+             </view>
         </view>
-        <view class="store_detail">
-            <image src="../../images/ylsj.png"></image>
-            <view class="titr dan">乐事薯片蜂王浆哦</view>
-            <view class="price"><text style="font-size:12rpx">￥</text>9.9</view>
-        </view>
-        <view class="store_detail">
-            <image src="../../images/ylsj.png"></image>
-            <view class="titr dan">乐事薯片蜂王浆哦</view>
-            <view class="price"><text style="font-size:12rpx">￥</text>9.9</view>
-        </view>
-        <view class="store_detail">
-            <image src="../../images/ylsj.png"></image>
-            <view class="titr dan">乐事薯片蜂王浆哦</view>
-            <view class="price"><text style="font-size:12rpx">￥</text>9.9</view>
-        </view>
+        
       </scroll-view>
     </view>
   </view>

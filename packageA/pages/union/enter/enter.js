@@ -1,4 +1,9 @@
 // pages/store_refund/store_refund.js
+var QQMapWX = require('../../../../utils/qqmap-wx-jssdk.min.js');
+
+var qqmapsdk = new QQMapWX({
+  key: 'PVXBZ-SXVC3-BSV3N-YN6BC-3IV45-DGF2L' // 必填
+});
 var url;
 const app = getApp();
 let province = [];
@@ -15,9 +20,12 @@ let zhao3 = '';
 let zhao4 = '';
 let zhao5 = '';
 let zhao6 = '';
-let latitude;
-let longitude;
+
 let userid;
+let ratioId='';
+let images=[];
+
+let simages = []
 Page({
 
   /**
@@ -97,15 +105,7 @@ Page({
         })
       },
     })
-    wx.getLocation({
-      type: 'wgs84',
-      success(res) {
-        latitude = res.latitude
-        longitude = res.longitude
-        const speed = res.speed
-        const accuracy = res.accuracy
-      }
-    })
+  
   },
 
   /**
@@ -119,7 +119,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    images = [];
+    simages = [];
   },
 
   /**
@@ -163,11 +164,18 @@ Page({
       })
       zhao1 = ''
     } else if (e.currentTarget.dataset.num == 1) {
+      simages.splice(e.currentTarget.dataset.index, 1)
+      images.splice(e.currentTarget.dataset.index, 1)
       that.setData({
-        zhao2: true,
-        zhaos2: '',
+        images: images,
+        img_num: that.data.img_num - 1
       })
-      zhao2 = ''
+      if (simages.length < 5) {
+        that.setData({
+          img_show: false
+        })
+      }
+      console.log(simages.length)
     } else if (e.currentTarget.dataset.num == 2) {
       that.setData({
         zhao3: true,
@@ -208,17 +216,28 @@ Page({
       phone: e.detail.value
     })
   },
-  //宣言
+  //详细地址
   xuan(e) {
+    let that = this
     this.setData({
       xuan: e.detail.value
     })
+    if (this.data.addres){
+      that.setData({
+        result: that.data.prov + that.data.city + that.data.area + that.data.town + that.data.xuan,
+      })
+      console.log(that.data.xuan)
+      that.postion();
+     
+    }
+      
+    
   },
   //类型
   type(e) {
     console.log(e)
     this.setData({
-      typ: this.data.type[e.detail.value].typeName,
+      typ: this.data.type[e.detail.value].classifyName,
       typeId: this.data.type[e.detail.value].id,
     })
   },
@@ -252,24 +271,34 @@ Page({
         title: '请填写详细地址',
         icon: 'none'
       })
-    } else if (that.data.zhao1 == '') {
+    } else if (that.data.zhaos1 == '') {
       wx.showToast({
         title: '请上传门匾照',
         icon: 'none'
       })
-    } else if (that.data.zhao2 == '') {
+    } else if (images == '') {
       wx.showToast({
         title: '请上传店内照片',
         icon: 'none'
       })
-    } else if (that.data.zhao3 == '') {
+    } else if (that.data.zhaos3 == '') {
       wx.showToast({
         title: '请上传营业执照',
         icon: 'none'
       })
-    } else if (that.data.zhao4 == '') {
+    } else if (that.data.zhaos4 == '') {
       wx.showToast({
         title: '请上传经营许可证',
+        icon: 'none'
+      })
+    } else if (that.data.names == '') {
+      wx.showToast({
+        title: '请填写商家姓名',
+        icon: 'none'
+      })
+    } else if (that.data.phone == '') {
+      wx.showToast({
+        title: '请填写商家手机号',
         icon: 'none'
       })
     }
@@ -281,27 +310,26 @@ Page({
   submit() {
     let that = this;
     let data = {
-      enterpriseType: '1',
-      frontDeskImg: zhao1,
-      companyLogo: zhao2,
+      storeName: that.data.name,
+      storeLogo: zhao1,
+      storeImgs: images,
       businessImg: zhao3,
-      identityCard1: zhao4,
-      identityCard2: zhao5,
-      licenseImgs: zhao6,
-      companyName: that.data.name,
-      legalPersonName: that.data.names,
-      typeId: that.data.typeId,
+      licenseImg: zhao4,
+      ratioId: ratioId,
+      storeUserName: that.data.names,
+    
+      classifyId: that.data.typeId,
       provinceId: province_id,
       cityId: city_id,
       areaId: area_id,
       townId: town_id,
       detailAddress: that.data.xuan,
-      longitude: longitude,
-      latitude: latitude,
-      contactPhone: that.data.phone
+      longitude: that.data.longitude,
+      latitude: that.data.latitude,
+      storePhone: that.data.phone
     }
 
-    app.res.req('/sqapply/subenterprise', data, (res) => {
+    app.res.req('/sqapply/substore', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         // that.setData({
@@ -328,30 +356,29 @@ Page({
     city_id = this.data.audits.cityId;
     area_id = this.data.audits.areaId;
     town_id = this.data.audits.townId;
-    zhao1 = this.data.audits.frontDeskImg;
-    zhao2 = this.data.audits.companyLogo;
+    zhao1 = this.data.audits.storeLogo;
+     images= this.data.audits.storeLogoOss;
     zhao3 = this.data.audits.businessImg;
-    zhao4 = this.data.audits.identityCard1;
-    zhao5 = this.data.audits.identityCard2;
-    zhao6 = this.data.audits.licenseImgsList;
+    zhao4 = this.data.audits.licenseImg;
+    
     this.setData({
-      name: this.data.audits.companyName,
-      names: this.data.audits.legalPersonName,
-      typ: this.data.audits.typeName,
-      typeId: this.data.audits.typeId,
+      name: this.data.audits.storeName,
+    
+      typ: this.data.audits.classifyName,
+      typeId: this.data.audits.classifyId,
       prov: this.data.audits.provinceName,
       city: this.data.audits.cityName,
       area: this.data.audits.areaName,
       town: this.data.audits.townName,
-      phone: this.data.audits.contactPhone,
-      zhaos1: this.data.audits.frontDeskImgOss,
-      zhaos2: this.data.audits.companyLogoOss,
+      phone: this.data.audits.storePhone,
+      names: this.data.audits.storeUserName,
+      zhaos1: this.data.audits.storeLogoOss,
+      simages: this.data.audits.storeImgsOss,
       zhaos3: this.data.audits.businessImgOss,
-      zhaos4: this.data.audits.identityCard1Oss,
-      zhaos5: this.data.audits.identityCard2Oss,
-      zhaos6: this.data.audits.licenseImgsOss,
+      zhaos4: this.data.audits.licenseImgOss,
       xuan: this.data.audits.detailAddress,
-
+      latitude:this.data.audits.latitude,
+      longitude:this.data.longitude,
       addres: this.data.audits.provinceName + '-' + this.data.audits.cityName + '-' + this.data.audits.areaName + '-' + this.data.audits.townName,
       zhao1: false,
       zhao2: false,
@@ -419,7 +446,7 @@ Page({
 
     }
 
-    app.res.req('/sqenterprise/enterprisetype', data, (res) => {
+    app.res.req('/sqstore/storeclassify', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
@@ -444,10 +471,10 @@ Page({
       title: '加载中',
     })
     let data = {
-      enterpriseType: 1
+     
     }
 
-    app.res.req('/sqapply/enterpriseinfo', data, (res) => {
+    app.res.req('/sqapply/storeinfo', data, (res) => {
       console.log(res.data)
       that.getType();
       wx.hideLoading()
@@ -772,11 +799,18 @@ Page({
               })
               zhao1 = datas.data.fileName
             } else if (e.currentTarget.id == 1) {
+              images.push(datas.data.url)
+              simages.push(datas.data.fileName)
+              console.log(simages)
               that.setData({
-                zhaos2: datas.data.url,
-                zhao2: false
+                images: images,
+                img_num: images.length
               })
-              zhao2 = datas.data.fileName
+              if (simages.length == 5) {
+                that.setData({
+                  img_show: !that.data.img_show
+                })
+              }
             } else if (e.currentTarget.id == 2) {
               that.setData({
                 zhaos3: datas.data.url,
@@ -796,13 +830,14 @@ Page({
               })
               zhao5 = datas.data.fileName
             }
-            clearTimeout(test1);
-            wx.hideLoading();
+            
             // do something
             wx.showToast({
               title: '上传成功',
               icon: 'none'
             })
+            clearTimeout(test1);
+            wx.hideLoading();
           },
           fail(res) {
             wx.hideLoading();
@@ -1126,5 +1161,60 @@ Page({
       address: true,
       town: e.currentTarget.dataset.name
     })
+    if (that.data.xuan) {
+      that.setData({
+        result: that.data.prov + that.data.city + that.data.area + that.data.town + that.data.xuan,
+      })
+      that.postion();
+    }
   },
+  postion() {
+    var _this = this
+    console.log(_this.data.result)
+    qqmapsdk.geocoder({
+      //获取表单传入地址
+
+      address: _this.data.result, //地址参数，例：固定地址，address: '北京市海淀区彩和坊路海淀西大街74号'
+      success: function (res) {//成功后的回调
+        console.log(res);
+
+        var res = res.result;
+        var latitude = res.location.lat;
+        var longitude = res.location.lng;
+        //根据地址解析在地图上标记解析地址位置
+        _this.setData({ // 获取返回结果，放到markers及poi中，并在地图展示
+          markers: [{
+            id: 0,
+            title: res.title,
+            latitude: latitude,
+            longitude: longitude,
+            iconPath: './resources/placeholder.png',//图标路径
+            width: 20,
+            height: 20,
+            callout: { //可根据需求是否展示经纬度
+              content: latitude + ',' + longitude,
+              color: '#000',
+              display: 'ALWAYS'
+            }
+          }],
+
+          latitude: latitude,
+          longitude: longitude
+
+        });
+      },
+      fail: function (error) {
+        console.error(error);
+      },
+      complete: function (res) {
+        //console.log(res);
+        if (res.status == '347') {
+          wx.showToast({
+            title: '该地址不存在请重新输入',
+            icon: 'none'
+          })
+        }
+      }
+    })
+  }
 })

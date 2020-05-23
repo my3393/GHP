@@ -6,7 +6,7 @@ let detail = [];
 var qqmapsdk = new QQMapWX({
   key: 'PVXBZ-SXVC3-BSV3N-YN6BC-3IV45-DGF2L' // 必填
 });
-var qqmapsdk;
+
 let provinceId = '';
 let cityId = '';
 let areaId = '';

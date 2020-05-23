@@ -3,9 +3,9 @@ export default class LastMayday {
   palette(res) {
     console.log(res)
     return (
-     
+
       {
-        
+
         "width": "654px",
         "height": "1000px",
         "background": "#fff",
@@ -30,12 +30,12 @@ export default class LastMayday {
             "type": "image",
             "url": res[0],
             "css": {
-              
+
               "width": "130px",
               "height": "120px",
-              "top": "780px",
-              "left": "260px",
-             
+              "top": "520px",
+              "left": "55px",
+
             }
           }
         ]

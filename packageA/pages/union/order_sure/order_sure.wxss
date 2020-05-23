@@ -97,5 +97,5 @@ page{
   height: 34rpx;
 }
 .all_radio{
-  scale: 0.6;
+  scale: 0.8;
 }

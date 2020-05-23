@@ -41,27 +41,27 @@ Page({
       text: "搜索特产",
       size: 26,
       badge: 0
-    }, {
+     }, {
       icon: "../../images/tui_2.png",
       text: "善家",
       size: 23,
-      badge: 0
-    }, {
+       badge: 0
+     }, {
       icon: "../../images/tui_3.png",
       text: "家乡特产",
       size: 26,
       badge: 0
-    }, {
+     }, {
       icon: "../../images/tui_4.png",
       text: "个人中心",
       size: 23,
       badge: 0
-    }, {
+     }, {
       icon: "../../images/tui_5.png",
       text: "我的收藏",
       size: 26,
       badge: 0
-    }, {
+     }, {
       icon: "../../images/tui_6.png",
       text: "意见反馈",
       size: 23,

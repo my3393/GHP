@@ -582,7 +582,8 @@ Page({
     app.res.req('/qrcode/xcx', data, (res) => {
      
       if (res.status == 1000) {
-        var array = wx.base64ToArrayBuffer(res.data)
+        var base64 = res.data.replace(/[\r\n]/g, "")
+        var array = wx.base64ToArrayBuffer(base64)
         const fsm = wx.getFileSystemManager();
         const FILE_BASE_NAME = 'mine_base64';
         const filePath = wx.env.USER_DATA_PATH + '/' + FILE_BASE_NAME + '.png';
@@ -718,6 +719,16 @@ Page({
             })
           }
          
+        }
+        if (res.data > 0) {
+          wx.showTabBarRedDot({
+            index: 4,
+          })
+
+        } else {
+          wx.hideTabBarRedDot({
+            index: 4,
+          })
         }
         that.setData({
           nums: res.data
