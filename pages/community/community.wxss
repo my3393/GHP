@@ -288,6 +288,7 @@ box-sizing: border-box;
   height: 140rpx;
   float: left;
   margin-right: 12rpx;
+  border-radius: 10rpx;
 }
 .peix{
   color: #333333;
@@ -321,7 +322,7 @@ box-sizing: border-box;
 }
 .out{
   width: 100%;
-  height: 50vw;
+  height: 312rpx;
    padding: 20rpx;
   box-sizing: border-box;
   overflow:hidden;
@@ -335,6 +336,7 @@ box-sizing: border-box;
 .store_detail>image{
   width: 180rpx;
   height: 180rpx;
+  border-radius: 10rpx;
 }
 .price{
   color: #f12200;

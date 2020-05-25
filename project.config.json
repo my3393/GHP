@@ -60,8 +60,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/store_home/store_home",
-					"pathName": "packageA/pages/store_home/store_home",
+					"name": "packageA/pages/today/seckill/seckill",
+					"pathName": "packageA/pages/today/seckill/seckill",
 					"query": "",
 					"scene": null
 				},

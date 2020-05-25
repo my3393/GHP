@@ -10,10 +10,10 @@ Page({
   data: {
     cancel: [
       { name: '不想买了' },
-      { name: '地址信息填写有误' },
-      { name: '商家缺货' },
+      { name: '地址填错了' },
+      { name: '选错配送方式' },
+      { name: '商品缺货' },
       { name: '其他原因' },
-     
     ],
     modal:false
   },
@@ -72,6 +72,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  detail(e){
+    wx.navigateTo({
+      url: '../order_detail/order_detail?id=' + e.currentTarget.id,
+    })
   },
   hide() {
     this.setData({
@@ -148,6 +153,72 @@ Page({
         })
 
         
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  pay(e) {
+    let that = this;
+    let data = {
+      id: e.currentTarget.id
+    }
+
+    app.res.req('/sqpay/gopay', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        app.res.req("/sqpay/xcxpay", data, (res) => {
+          console.log(res.data)
+          if (res.status == 1000) {
+            wx.requestPayment({
+              timeStamp: res.data.sign.timeStamp,
+              nonceStr: res.data.sign.nonceStr,
+              package: res.data.sign.package,
+              signType: 'MD5',
+              paySign: res.data.sign.paySign,
+              success(res) {
+                list = []
+                that.getlist();
+                wx.showToast({
+                  title: '支付成功',
+                  icon: 'none',
+                  duration: 1000
+                })
+                // that.setData({
+                //   isdelete: !that.data.isdelete,
+                //   ismask: !that.data.ismask
+                // })
+              },
+              fail(res) {
+                wx.showToast({
+                  title: '支付失败',
+                  icon: 'none',
+                  duration: 1000
+                })
+
+              }
+            })
+
+          } else if (res.status == 1004 || res.status == 1005) {
+            wx.redirectTo({
+              url: '../login/login',
+            })
+          } else {
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
+        })
+
+
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
       } else {
         wx.showToast({
           title: res.msg,

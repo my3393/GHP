@@ -12,6 +12,10 @@ Component({
     introduce: {
       type: String,
       value: '大爱无疆，助力家乡'
+    },
+    intro: {
+      type: String,
+      value: ''
     }
   },
 

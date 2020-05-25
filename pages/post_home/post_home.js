@@ -174,9 +174,8 @@ Page({
   tars(e){
     var index = e.currentTarget.dataset.index
      if(index == 0  ){
-       wx.showToast({
-         title: '暂未开放',
-         icon:'none'
+       wx.navigateTo({
+         url: '../community/community',
        })
      }else if(index == 8){
        wx.navigateTo({

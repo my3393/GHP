@@ -99,7 +99,7 @@ page{
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
-  border-radius: 35rpx;
+  border-radius: 34rpx;
   display: inline-block;
 }
 .foot view:nth-child(2){

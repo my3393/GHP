@@ -123,3 +123,16 @@ page{
   font-weight: 500
 
 }
+.guang{
+  width: 140rpx;
+  height: 60ropx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  background: #f12200;
+  position: absolute;
+  border-radius: 30rpx;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%,-50%)
+}

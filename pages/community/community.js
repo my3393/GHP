@@ -35,6 +35,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     this.postion()
     this.getbanner();
    
@@ -65,7 +68,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    currentPage = 1
+   detail = [];
   },
 
   /**
@@ -88,16 +92,35 @@ Page({
   onShareAppMessage: function () {
 
   },
+  kill(e){
+    wx.navigateTo({
+      url: '/packageA/pages/today/seckill/seckill?id=' + e.currentTarget.id,
+    })
+  },
+  tars(w){
+    var num = w.currentTarget.dataset.index
+    if(num == 1){
+      wx.switchTab({
+        url: '/pages/post_home/post_home',
+      })
+    }
+  },
   tag(e) {
     var index = e.currentTarget.dataset.num
     detail = []
     currentPage = 1
     this.setData({
       typeId: e.currentTarget.id,
-      tar: index
+      tars: index
     })
     this.getDetail()
 
+  },
+  //店铺详情
+  detail(e){
+    wx.navigateTo({
+      url: '/packageA/pages/store_home/store_home?id=' + e.currentTarget.id,
+    })
   },
   //banner
   getbanner() {
@@ -227,11 +250,15 @@ Page({
           })
         } else {
           for (var i in res.data.data) {
-            if (res.data.data[i].distance < 1000)
+            if (res.data.data[i].distance < 1000){
               res.data.data[i].distance = res.data.data[i].distance + "m"
-            else if (res.data.data[i].distance > 1000)
+            }else if (res.data.data[i].distance > 1000){
               res.data.data[i].distance = (Math.round(res.data.data[i].distance / 100) / 10).toFixed(1) + "km"
-
+            }
+            if (res.data.data[i].storeLabel){
+              res.data.data[i].labels = res.data.data[i].storeLabel.split(',')
+            }
+           
           }
           detail.push(...res.data.data)
           that.setData({
@@ -306,8 +333,8 @@ Page({
       scope: 'scope.userLocation',
       success: (res) => {
         wx.chooseLocation({
-          latitude: 22.55329,
-          longitude: 113.88308,
+          latitude: '',
+          longitude: '',
           success: (location) => {
             console.log(location);
             _this.setData({

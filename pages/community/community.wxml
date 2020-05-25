@@ -1,9 +1,10 @@
 <!--pages/community/community.wxml-->
 <view class='main-wraper'>
-  <navBar background='#fff' title='善家联盟' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick">
+  <navBar background='#fff' title='善家联盟' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick" >
     <view class='location' slot="left" bindtap="xuan">
-      <view class='con'>{{address}}</view>
-      <view class='icon' />
+      <image style="width:28rpx;height:30rpx;" src="/images/sheq_dinw.png"></image>
+      <view class='con dan'>{{address}}</view>
+      <!-- <view class='icon' /> -->
     </view>
     <!-- <view class='lxy-nav-bar-search' slot="center">
       <view class='lxy-nav-bar-search__icon' />
@@ -13,11 +14,11 @@
     </view> -->
   </navBar>
   <view class="tar">
-    <view wx:for='{{tar}}' data-index="{{index}}" class="{{index == tas?'active':'' }}">{{item.name}}</view>
+    <view wx:for='{{tar}}' data-index="{{index}}" class="{{index == tas?'active':'' }}" bindtap="tars">{{item.name}}</view>
 
   </view>
   <view>
-    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9" bindchange="testSwiper">
+    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#fff" indicator-active-color="#f12200" bindchange="testSwiper">
       <block>
         <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{banner}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
           <image class="banner_img skeleton-rect" src="{{item.bannerImgOss}}" lazy-load="true"></image>
@@ -47,7 +48,7 @@
   </view>
   <!-- 今日特价 -->
   <view class="today">
-    <view>
+    <view bindtap="kill" id="1">
       <view class="h1">限时秒杀</view>
       <view>买到就是赚到</view>
       <scroll-view scroll-x="true" style="white-space:nowrap;display:flex;">
@@ -57,7 +58,7 @@
         </view>
       </scroll-view>
     </view>
-    <view>
+    <view bindtap="kill" id="2">
       <view class="h1">今日特价</view>
       <view>每日低价出售</view>
       <scroll-view scroll-x="true" style="white-space:nowrap;display:flex;">
@@ -86,8 +87,8 @@
     </view>
   </scroll-view>
   <!-- d店铺 -->
-  <view>
-    <view class="store clearfix" wx:for='{{detail}}'>
+  <view style="margin-top:30rpx;">
+    <view class="store clearfix" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
       <image src="{{item.storeHeadImgUrlOss}}"></image>
       <view>
         <view class="h1">{{item.storeName}}</view>
@@ -96,12 +97,12 @@
           <text>配送￥{{item.postageFee}}</text>
         </view>
         <view class="peix_r">
-          <text>30分钟</text>
-          <!-- <text>{{item.}}</text> -->
+          <!-- <text>30分钟</text> -->
+          <text>{{item.distance}}</text>
         </view>
       </view>
       <view class="dol">
-        <view wx:for='{{item.storeLabel}}'>{{item.storeLabel}}</view>
+        <view wx:for='{{item.labels}}'>{{item}}</view>
        
       </view>
       <scroll-view  class="out" scroll-x="true">

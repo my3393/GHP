@@ -122,12 +122,12 @@ Page({
   },
   //去店里
   go(){
-   
+    var name = this.data.store.provinceName + this.data.store.cityName + this.data.store.areaName + this.data.store.townName + this.data.store.detailAddress
     wx.openLocation({
-      //name: e.currentTarget.dataset.name,
+      name:name,
 
       latitude: this.data.store.latitude,
-      longitude: this.data.longitude.longitude,
+      longitude: this.data.store.longitude,
       scale: 18
     })
   },
@@ -467,7 +467,7 @@ Page({
           }, 2000)
         }else if(res.status == 1002){
           wx.showToast({
-            title: '超出2公里不能配送哦！',
+            title: '超出2公里不能配送哦！可选择到店自取',
             icon:'none',
             duration:2000
           })
@@ -498,7 +498,7 @@ Page({
     let data = {
 
     }
-    app.res.req("/pay/xcxpay", data, (res) => {
+    app.res.req("/sqpay/xcxpay", data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
        // clearInterval(setTime)
@@ -522,12 +522,10 @@ Page({
             })
           },
           fail(res) {
+          
             wx.redirectTo({
-              url: '../pay_success/pay_success?id=' + that.data.price,
+              url: '../order_list/order_list',
             })
-            // wx.redirectTo({
-            //   url: '../order_list/order_list',
-            // })
 
           }
         })
@@ -546,4 +544,5 @@ Page({
       }
     })
   },
+  
 })

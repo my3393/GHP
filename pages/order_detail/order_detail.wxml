@@ -62,7 +62,7 @@
   <view>
     <view>
       <view class="logistics_img">
-        <image src="../../images/weizi.png" />
+        <image src="/images/weizi.png" />
       </view>
       <view class='logistics_n'>
         {{detail.consigneeName}}

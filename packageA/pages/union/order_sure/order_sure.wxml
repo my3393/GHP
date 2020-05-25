@@ -71,8 +71,8 @@
     </view>
   </view>
   <view wx:if='{{tar == 1}}'>
-    <view class="address">
-      <view class="address_top" bindtap="go">
+    <view class="address" bindtap="go">
+      <view class="address_top" >
 
         {{store.provinceName}} {{store.cityName}} {{store.areaName}} {{store.townName}}
         
@@ -81,7 +81,7 @@
         {{store.detailAddress}}
         
       </view>
-      <view class="address_cent_r">
+      <view class="address_cent_r" bindtap="go">
         <image src="/images/dinw.png"></image>
       </view>
       <view class="address_bott">

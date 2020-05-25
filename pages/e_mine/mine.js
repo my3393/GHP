@@ -670,20 +670,13 @@ Page({
   ewm: function (e) {
     var that = this;
     console.log(e)
+    
     wx.navigateTo({
       url: '../zhin/zhin?code=' + this.data.code,
     })
-    // wx.showToast({
-    //   title: '长按保存图片',
-    //   icon: 'none',
-    //   duration: 3000
-    // })
-    // //图片预览
-    // wx.previewImage({
-    //   current: that.data.code, // 当前显示图片的http链接
-    //   urls: [that.data.code],// 需要预览的图片http链接列表
-
-    // })
+    
+    //图片预览
+   
   },
   //张数
   getnum() {

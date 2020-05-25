@@ -26,10 +26,10 @@
   </view>
 </view>
 
-<view class="search">
+<!-- <view class="search">
   <image src="../../../images/search.png"></image>
   <input placeholder="商品名称"></input>
-</view>
+</view> -->
 <view>
   <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
     <block>

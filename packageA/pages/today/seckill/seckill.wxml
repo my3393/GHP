@@ -1,50 +1,95 @@
 <!--packageA/pages/today/seckill/seckill.wxml-->
-<view class="top_img">
-  <image  src="https://www.xingtu-group.cn/xcx_img/seckill.png"></image>
-</view>
+<view wx:if='{{tar == 1}}'>
+  <view class="top_img">
+    <image  src="https://www.xingtu-group.cn/xcx_img/seckill.png"></image>
+  </view>
 
-<view class="time">
-  <view>
-    <view >10:00</view>
-    <view>抢购</view>
+  <view class="time">
+    <view class="{{current == 0}}">
+      <view>10:00</view>
+      <view>抢购</view>
+    </view>
+    <view class="active">
+      <view >12:00</view>
+      <view>抢购</view>
+    </view>
+    <view class="actives">
+      <view >14:00</view>
+      <view>抢购</view>
+    </view>
+    <view>
+      <view >16:00</view>
+      <view>抢购</view>
+    </view>
   </view>
-  <view class="active">
-    <view >12:00</view>
-    <view>抢购</view>
+  <view wx:if='{{list.length == 0}}'>
+    <graph />
   </view>
-  <view class="actives">
-    <view >14:00</view>
-    <view>抢购</view>
-  </view>
-  <view>
-    <view >16:00</view>
-    <view>抢购</view>
+   <view wx:else>
+    <view  class="nav" wx:for='{{list}}' >
+      <view class="nav_top">
+        <view>
+          <image src="/images/store.png"></image>
+          <text>{{item.storeName}}</text>
+        </view>
+        <view class="nav_top_r">
+          <text>起送{{item.sendFee}}</text>
+          <text>配送{{item.postageFee}}</text>
+        </view>
+      </view>
+      <view class="nav_good clearfix">
+        <image src="{{item.productDefaultImgOss}}"></image>
+        <view class="dan">{{item.productName}}</view>
+        <view class="ilmit">限{{item.restrictBuyCount}}人份</view>
+        <view>
+          <view class="pro">
+          <progress class="progress" activeColor='#f12200' backgroundColor='#ff4e17' percent='{{item.percentage}}' border-radius='10'  stroke-width='7'></progress>
+          <text>余{{item.productInventory}}件</text>
+          </view>
+          <view class="snap" bindtap="detail" id="{{item.storeId}}">
+          去抢购
+          </view>
+        </view>
+        <view class="price"><text style="font-size:12rpx">￥</text>{{item.activityPrice}} <text class="cha">{{item.salePrice}}</text></view>
+      </view>
+    </view>
   </view>
 </view>
-<view class="nav">
-  <view class="nav_top">
-    <view>
-      <image src="../../../../images/store.png"></image>
-      <text>王大锤神仙店铺</text>
-    </view>
-    <view class="nav_top_r">
-      <text>起送20</text>
-      <text>配送0</text>
-    </view>
+<view wx:else>
+  <view class="top_img">
+    <image  src="https://www.xingtu-group.cn/xcx_img/seckill.png"></image>
   </view>
-  <view class="nav_good clearfix">
-    <image src="../../../../images/sjg.png"></image>
-    <view class="dan">见过大礼包</view>
-    <view class="ilmit">限一人份</view>
-    <view>
-      <view class="pro">
-       <progress class="progress" activeColor='#f12200' backgroundColor='#ff4e17' percent='70' border-radius='10'  stroke-width='7'></progress>
-       <text>余2件</text>
+    <view wx:if='{{list.length == 0}}'>
+    <graph introduce='今日暂无特价商品去附近店家看看吧' />
+    <view class="guang" bindtap="guang">逛逛</view>
+  </view>
+  <view wx:else>
+    <view  class="nav" wx:for='{{list}}' >
+      <view class="nav_top">
+        <view>
+          <image src="/images/store.png"></image>
+          <text>{{item.storeName}}</text>
+        </view>
+        <view class="nav_top_r">
+          <text>起送{{item.sendFee}}</text>
+          <text>配送{{item.postageFee}}</text>
+        </view>
       </view>
-      <view class="snap">
-       去抢购
+      <view class="nav_good clearfix">
+        <image src="{{item.productDefaultImgOss}}"></image>
+        <view class="dan">{{item.productName}}</view>
+        <view class="ilmit">限{{item.restrictBuyCount}}人份</view>
+        <view>
+          <view class="pro">
+          <progress class="progress" activeColor='#f12200' backgroundColor='#ff4e17' percent='{{item.percentage}}' border-radius='10'  stroke-width='7'></progress>
+          <text>余{{item.productInventory}}件</text>
+          </view>
+          <view class="snap" bindtap="detail" id="{{item.storeId}}">
+          去抢购
+          </view>
+        </view>
+        <view class="price"><text style="font-size:12rpx">￥</text>{{item.activityPrice}} <text class="cha">{{item.salePrice}}</text></view>
       </view>
     </view>
-    <view class="price"><text style="font-size:12rpx">￥</text>9.9 <text class="cha">199</text></view>
   </view>
 </view>

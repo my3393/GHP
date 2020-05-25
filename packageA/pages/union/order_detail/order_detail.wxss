@@ -6,7 +6,7 @@ page{
 .top{
   background:linear-gradient(to right, #f12200, #ff4e17);
   width: 100%;
-  height: 180rpx;
+  height: 200rpx;
   padding: 30rpx;
   box-sizing: border-box;
 }
@@ -206,4 +206,41 @@ page{
   float: left;
   margin-left: 12rpx;
   margin-top: 10rpx;
+}
+.logistics_n{
+  width: 86%;
+  margin-left: 50rpx;
+}
+.top_tit{
+    
+  
+    margin-left: 40rpx;
+    color: #fff;
+    font-size: 24rpx;
+}
+.logistics{
+    position: relative;
+    top: -40rpx;
+    background: #fff;
+    width: calc(100% - 40rpx);
+    margin-left: 20rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+    border-radius: 12rpx;
+}
+.logistics_img{
+    float: left;
+    margin-top: 2rpx;
+margin-right: 20rpx
+}
+.logistics_img image{
+    width: 19rpx;
+    height: 29rpx;
+    
+}
+.logistics_diz{
+    color: #666;
+    margin-top: 20rpx;
+    font-size: 24rpx;
+    margin-left: 41rpx;
 }

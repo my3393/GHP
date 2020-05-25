@@ -44,6 +44,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    storeid = options.id
     this.getbanner();
     this.getType();
     this.getstore();
@@ -156,7 +157,7 @@ Page({
       })
     } else if (this.data.sendFee > 0){
       wx.showToast({
-        title: '你还未达到配送要求哦',
+        title: '你还差'+ this.data.sendFee + '元才能配送哦！',
         icon: 'none'
       })
 

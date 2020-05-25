@@ -2,4 +2,5 @@
 <view class="plugin_img">
   <image src="{{plugin_img}}"></image>
   <view>{{introduce}}</view>
+  <view>{{intro}}</view>
 </view>
