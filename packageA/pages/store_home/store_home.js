@@ -33,6 +33,7 @@ Page({
     allnum:'0',
     show1:false,
     show2:false,
+    show3:false,
     height:600,
     isgug: true, //规格
     typeName:'秒杀',
@@ -113,6 +114,18 @@ Page({
    
     
   },
+  //预览照片
+  preview(e){
+    wx.previewImage({
+      current:e.currentTarget.id,
+      urls: this.data.store.storeImgsOss,
+    })
+  },
+  license(){
+   wx.previewImage({
+     urls: [this.data.store.licenseImgOss],
+   })
+  },
   swichNav(e){
     var _this = this
     var index = e.currentTarget.dataset.current
@@ -147,6 +160,12 @@ Page({
 
   onClose2() {
     this.setData({ show2: false });
+  },
+  onClose3() {
+    this.setData({ show3: false });
+  },
+  showPopup3() {
+    this.setData({ show3: true });
   },
   //提交订单
   submit(e){

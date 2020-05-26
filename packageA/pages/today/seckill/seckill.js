@@ -7,6 +7,7 @@ Page({
    */
   data: {
      tar:1,
+     tag:['10','12','14','16']
   },
 
   /**
@@ -83,7 +84,7 @@ Page({
   },
   detail(e){
     wx.navigateTo({
-      url: '../store_home/store_home?id=' + e.currentTarget.id,
+      url: '../../store_home/store_home?id=' + e.currentTarget.id,
     })
   },
   //当前时间
@@ -91,28 +92,31 @@ Page({
     let that = this
     var date = new Date();
     var currentHours = date.getHours(); //获取当前时间 时
-    if (currentHours < 10 || 12> currentHours >10){
+    console.log(currentHours)
+    if (currentHours <= 12){
       
       this.setData({
         current_time:10,
         current:0
       })
-    } else if (14 > currentHours >= 12){
+    } else if ( currentHours >= 12 && currentHours < 14){
       this.setData({
         current_time: 12,
         current: 1
       })
-    } else if (16 > currentHours >= 14) {
+    } else if ( currentHours >= 14 && currentHours <16) {
       this.setData({
         current_time: 14,
         current: 2
       })
+      console.log('11')
     } else if (currentHours >= 16) {
       this.setData({
         current_time: 16,
         current: 3
       })
     }
+   
     wx.getLocation({
       type: 'wgs84',
       success(res) {
@@ -124,8 +128,10 @@ Page({
         that.setData({
           latitude,
           longitude
+        },res=>{
+          that.getdetail()
         })
-        that.getdetail()
+        
       }
     })
   },
@@ -134,7 +140,7 @@ Page({
     let that = this;
     let data = {
       promotionType:that.data.tar,
-        seckillStartTime:that.data.current_time,
+      seckillStartTime:that.data.current_time,
       longitude: that.data.longitude,
       latitude: that.data.latitude
     }

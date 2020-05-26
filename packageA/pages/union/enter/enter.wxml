@@ -44,6 +44,17 @@
           <image src='/images/enter.png'></image>
         </view>
       </view>
+      <view class='infor'>
+        <view class='inform'>会员折扣比</view>
+        <view class='inforin infor_r'>
+          <picker class="pick" range="{{allratio}}" range-key="showRatio" value="{{index}}" bindchange="allratio">
+            <input disabled='true' style="width:510rpx;" type='text' value='{{ratio}}' placeholder='选填'></input>
+          </picker>
+        </view>
+        <view class='enter'>
+          <image src='/images/enter.png'></image>
+        </view>
+      </view>
       <view class="nav">
         <view class="chun_left">门匾照</view>
         <view class="zhao" wx:if='{{zhao1}}' bindtap="chooseImages" id="{{0}}">
@@ -160,7 +171,7 @@
       <view class="kong_img">
         <image src="/images/store_z.png"></image>
       </view>
-      <view> 企业入驻审核中</view>
+      <view> 商户入驻审核中</view>
       <view>平台将在1~3个工作日反馈审核结果</view>
     </view>
     <view class="audit" wx:if="{{audit == 1}}">
@@ -168,9 +179,10 @@
         <image src="/images/store_true.png"></image>
       </view>
       <view> 入驻申请已通过 </view>
-      <view wx:if='{{audits.isPay == 1}}'>认证费用￥{{audits.payMoney}}请尽快支付</view>
-      <view wx:if='{{audits.isPay == 1}}' class="pay" bindtap="pay">去支付</view>
-      <view class="pay" wx:if='{{audits.isPay == 0 || audits.isPay == 2}}' bindtap="go">去完善</view>
+      <view wx:if='{{audits.isPay == 0}}'>认证费用￥{{audits.payMoney}}请尽快支付</view>
+      <view wx:if='{{audits.isPay == 0}}' class="pay" bindtap="pay">去支付</view>
+      <view  wx:if='{{audits.isPay == 1 || audits.isPay == 2}}' >恭喜开店成功</view>
+      <view  wx:if='{{audits.isPay == 1 || audits.isPay == 2}}' >稍后你会收到短信通知，前往商家端完善店铺信息</view>
       <!-- <view class="ru_enter">
         进入我的店铺
       </view> -->
@@ -189,7 +201,7 @@
         重新提交
       </view>
       <view class="bott">
-        <view>善家</view>
+        <view>善家购</view>
         <view>大爱无疆，感恩家乡</view>
       </view>
     </view>

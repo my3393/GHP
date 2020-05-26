@@ -28,20 +28,20 @@
   </view>
   <!-- 联盟商户 -->
   <view class="navs">
-    <view class="navs_list">
-      <image src="../../images/head.png"></image>
+    <navigator url="/packageA/pages/union/shop_open/shop_open" class="navs_list">
+      <image src="/images/community2.png"></image>
       <view>联盟商户</view>
-    </view>
+    </navigator>
     <view class="navs_list">
-      <image src="../../images/head.png"></image>
+      <image src="/images/community1.png"></image>
       <view>邀请有奖</view>
     </view>
     <navigator url="/packageA/pages/union/order_list/order_list" class="navs_list">
-      <image src="../../images/head.png"></image>
+      <image src="/images/community3.png"></image>
       <view>订单</view>
     </navigator>
     <view class="navs_list">
-      <image src="../../images/head.png"></image>
+      <image src="/images/community4.png"></image>
       <view>收藏</view>
     </view>
 
@@ -73,7 +73,7 @@
   <view>
     <swiper class="advert skeleton-radius" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#f12200">
       <block>
-        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{advert}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
+        <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{banners}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
           <image src="{{item.advertiseImgOss}}" lazy-load="true"></image>
         </swiper-item>
       </block>

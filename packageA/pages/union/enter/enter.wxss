@@ -9,6 +9,9 @@
 .you{
   margin-left: 180rpx;
 }
+.pick{
+  width: 510rpx;
+}
 .zhao{
   margin-top: 20rpx;
 }
@@ -26,4 +29,7 @@
 .tu_img{
   margin: 20rpx;
   margin-left: 0;
+}
+.bott{
+  top:120%;
 }

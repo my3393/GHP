@@ -60,14 +60,14 @@ Page({
       })
     }, 1000)
     if(options.userid){
-      console.log(options.userid)
+     
       wx.setStorageSync('bangId', options.userid)
       that.Bang();
       
     }
    
     if (decodeURIComponent(options.q).split('/')[4]){
-       console.log(options.q)
+      
       wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[4])
       that.Bang();
     }
@@ -366,7 +366,7 @@ Page({
     }
 
     app.res.req("/home/choiceness/product", data, (res) => {
-      console.log(res.data)
+    
       if(res.status == 1000){
            if(res.data == ''){
              wx.showToast({
@@ -412,7 +412,7 @@ Page({
     }
 
     app.res.req("/product/list", data, (res) => {
-      console.log(res.data)
+      
       if (res.status == 1000) {
         if (res.data == '') {
           wx.showToast({
@@ -452,7 +452,7 @@ Page({
 
     }
     app.res.req("/home/advertise", data, (res) => {
-      console.log(res.data)
+     
       if(res.status == 1000){
         for (var i in res.data) {
           if (res.data[i].xcxUrl != '') {
@@ -485,7 +485,7 @@ Page({
 
     }
     app.res.req("/home/classify", data, (res) => {
-      console.log(res.data)
+   
       if(res.status == 1000){
            that.setData({
             className:res.data,
@@ -518,7 +518,7 @@ Page({
       isRefresh:isRefresh
     }
     app.res.req("/home/recommend", data, (res) => {
-      console.log(res.data)
+     
       if(res.status == 1000){
            for(var i in res.data){
              res.data[i].duction = (res.data[i].memberDeductionRatio * res.data[i].lowestPrice).toFixed(2)
@@ -554,7 +554,7 @@ Page({
       isRefresh: isRefresh
     }
     app.res.req("/home/memberproduct", data, (res) => {
-      console.log(res.data)
+    
       if (res.status == 1000) {
         that.setData({
           memberproduct: res.data,
@@ -583,7 +583,7 @@ Page({
     }
 
     app.res.req('/home/grade/type', data, (res) => {
-      console.log(res.data)
+     
        if(res.status == 1000){
          let typ = [
            {id:'',typeName:'全部'}
@@ -613,7 +613,7 @@ Page({
 
     }
     app.res.req('/home/banner', data, (res) => {
-      console.log(res.data)
+     
        if(res.status == 1000){
           if(res.data.index == 1007){
             wx.showToast({
@@ -707,7 +707,7 @@ Page({
     let that = this;
     let data = {}
     app.res.req("/follow/wx", data, (res) => {
-     console.log(res.data)
+    
      if(res.data == 1){
        that.setData({
          isofficial: true,
@@ -723,7 +723,7 @@ Page({
     }
 
     app.res.req("/store/recommendproduct", data, (res) => {
-      console.log(res.data)
+   
       if (res.status == 1000) {
         that.setData({
           store_recommended: res.data
@@ -754,7 +754,7 @@ Page({
     }
 
     app.res.req("/store/detail", data, (res) => {
-      console.log(res.data)
+     
       if (res.status == 1000) {
         that.setData({
           store_name: res.data
@@ -818,7 +818,7 @@ Page({
     }
 
     app.res.req("/user/sharebinduser", data, (res) => {
-      console.log(res)
+  
       if (res.status == 1000) {
         // wx.showToast({
         //   title: '绑定成功',
@@ -848,7 +848,7 @@ Page({
     }
 
     app.res.req("/membercard/scancodereceive", data, (res) => {
-      console.log(res)
+    
       if (res.status == 1000) {
         // wx.showToast({
         //   title: '绑定成功',
@@ -877,7 +877,7 @@ Page({
     }
 
     app.res.req('/membercard/unclaimedcardnum', data, (res) => {
-      console.log(res.data)
+     
       if (res.status == 1000) {
         if (res.data > 0) {
           wx.showTabBarRedDot({

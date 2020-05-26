@@ -5,22 +5,11 @@
   </view>
 
   <view class="time">
-    <view class="{{current == 0}}">
-      <view>10:00</view>
+    <view wx:for='{{tag}}'>
+      <view>{{item}}:00</view>
       <view>抢购</view>
     </view>
-    <view class="active">
-      <view >12:00</view>
-      <view>抢购</view>
-    </view>
-    <view class="actives">
-      <view >14:00</view>
-      <view>抢购</view>
-    </view>
-    <view>
-      <view >16:00</view>
-      <view>抢购</view>
-    </view>
+   
   </view>
   <view wx:if='{{list.length == 0}}'>
     <graph />

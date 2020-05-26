@@ -1,6 +1,6 @@
 <!--packageA/pages/store_home/store_home.wxml-->
 <view class="top_b"></view>
-<view class="hone clearfix">
+<view class="hone clearfix" bindtap="showPopup3">
   <image src="{{store.storeHeadImgUrlOss}}"></image>
   <view class="h1">
     {{store.storeName}}
@@ -210,7 +210,41 @@
     </view>
   </view>
 </van-popup>
-
+<!-- 店铺信息 -->
+<van-popup show="{{ show3}}" bind:close="onClose3"  closeable close-icon="close" position='bottom' custom-style="height: 70%" round>
+  <scroll-view scroll-y='true' class="store_scroll">
+    <view class="h1" style="width:''">{{store.storeName}}</view>
+    <view>
+       <view class="store_adress">
+         <image src="/images/dinw.png"></image>
+         <view>{{store.provinceName}}{{store.cityName}}{{store.areaName}}{{store.townName}}{{store.detailAddress}}</view>
+       </view>
+       <view class="store_adress">
+         <image src="/images/phone.png"></image>
+         <view>点击联系商家</view>
+       </view>
+       <view class="store_adress">
+         <image src="/images/daojis_h.png"></image>
+         <view>{{store.startTime}}-{{store.endTime}}</view>
+       </view>
+       <view class="store_adress">
+         <image src="/images/d-sh.png"></image>
+         <view>配送：由商家提供配送服务</view>
+       </view>
+    </view>
+    <view class="h1 h2">公告</view>
+    <view style="color:#999999">{{store.storeNotice}}</view>
+    <view class="h1 h2">店铺照片</view>
+    <scroll-view class="store_img" scroll-x>
+      <image  wx:for='{{store.storeImgsOss}}' src="{{item}}" bindtap="preview" id="{{item}}"></image>
+    </scroll-view>
+    <view class="h1 h2">店铺资质</view>
+    <view class="store_img">
+      <image src="{{store.licenseImgOss}}" bindtap="license"></image>
+    </view>
+  </scroll-view>
+  
+</van-popup>
 <!-- 规格弹窗 -->
 <view hidden='{{ishidegg}}' class='mark'>
   <!-- <view class="gug_all" bindtap="gug_all"></view> -->

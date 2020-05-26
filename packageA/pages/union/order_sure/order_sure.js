@@ -159,7 +159,12 @@ Page({
     if(currentMinute >30){
       currentHours++
     }
-     temp[0] = ["今天"];
+   
+      temp[0] = ["今天"];
+  
+    
+  
+    
      temp[1] = [];
     
      //每半小时累加

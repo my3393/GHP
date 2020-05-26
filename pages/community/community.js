@@ -7,7 +7,7 @@ var qqmapsdk = new QQMapWX({
   key: 'PVXBZ-SXVC3-BSV3N-YN6BC-3IV45-DGF2L' // 必填
 });
 let keyword = '';
-let type = []
+let type = [] 
 Page({
 
   /**
@@ -38,6 +38,11 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    if (options.shareUserId){
+       this.setData({
+         shareUserId: options.shareUserId
+       })
+    }
     this.postion()
     this.getbanner();
    
@@ -69,7 +74,7 @@ Page({
    */
   onUnload: function () {
     currentPage = 1
-   detail = [];
+    detail = [];
   },
 
   /**
@@ -92,6 +97,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+ 
   kill(e){
     wx.navigateTo({
       url: '/packageA/pages/today/seckill/seckill?id=' + e.currentTarget.id,
@@ -102,6 +108,11 @@ Page({
     if(num == 1){
       wx.switchTab({
         url: '/pages/post_home/post_home',
+      })
+    }else if(num == 2){
+      wx.showToast({
+        title: '暂未开放',
+        icon:'none'
       })
     }
   },
@@ -120,6 +131,55 @@ Page({
   detail(e){
     wx.navigateTo({
       url: '/packageA/pages/store_home/store_home?id=' + e.currentTarget.id,
+    })
+  },
+  //banner跳转
+  banner(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.xcxurl == '') {
+
+    } else if (e.currentTarget.dataset.xcx.id == '') {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page,
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page + e.currentTarget.dataset.xcx.id,
+      })
+    }
+  },
+  //轮播
+  getbanners() {
+    let that = this;
+    let data = {
+
+    }
+    app.res.req('/home/personalcenteradvertise', data, (res) => {
+
+      if (res.status == 1000) {
+        for (var i in res.data) {
+          if (res.data[i].xcxUrl != '') {
+            res.data[i].xcx = JSON.parse(res.data[i].xcxUrl)
+          }
+
+        }
+
+        that.setData({
+          banners: res.data,
+
+        })
+      
+
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
     })
   },
   //banner
@@ -148,7 +208,7 @@ Page({
           banner: res.data,
 
         })
-       
+        that.getbanners()
       } else if (res.status == 1004 || res.status == 1005) {
         console.log(1)
         wx.redirectTo({
@@ -264,9 +324,13 @@ Page({
           that.setData({
             detail: detail,
 
+          },res=>{
+            wx.hideLoading()
+           
           })
+         
         }
-        wx.hideLoading()
+        
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.redirectTo({
           url: '../login/login',
@@ -342,10 +406,12 @@ Page({
               address: location.name,
               latitude: location.latitude,
               longitude: location.longitude
+            },res=>{
+              detail = []
+              currentPage = 1
+              _this.getDetail()
             })
-            detail = []
-            currentPage = 1
-            _this.getDetail()
+          
           }
         })
       },
@@ -414,10 +480,12 @@ Page({
           address: res.address_component.street,
           latitude: res.location.lat,
           longitude: res.location.lng
+        },res=>{
+          _this.gettype()
+          _this.gethomepromotion()
+          _this.gethomepromotions()
         });
-        _this.gettype()
-        _this.gethomepromotion()
-        _this.gethomepromotions()
+       
       },
       fail: function (error) {
         console.error(error);
@@ -427,7 +495,7 @@ Page({
         _this.gettype()
       },
       complete: function (res) {
-        console.log(res);
+        //console.log(res);
 
 
       }

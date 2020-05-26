@@ -22,7 +22,7 @@ let zhao5 = '';
 let zhao6 = '';
 
 let userid;
-let ratioId='';
+
 let images=[];
 
 let simages = []
@@ -32,7 +32,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    load: false, //
+    load: true, //
     num: 0,
     isshow: true,
     isg: true,
@@ -67,6 +67,8 @@ Page({
     typ: '',
     xuan: '',
     phone: '',
+    images:[],
+    ratioId:'',
   },
 
   /**
@@ -154,7 +156,7 @@ Page({
   detels(e) {
     var that = this;
     console.log(e)
-    console.log(that.data.imgs)
+    
 
 
     if (e.currentTarget.dataset.num == 0) {
@@ -241,7 +243,13 @@ Page({
       typeId: this.data.type[e.detail.value].id,
     })
   },
-
+   //折扣比
+  allratio(e){
+    this.setData({
+      ratio: this.data.allratio[e.detail.value].showRatio,
+      ratioId: this.data.allratio[e.detail.value].id,
+    })
+  },
   //查看协议
   web() {
     wx.navigateTo({
@@ -312,10 +320,10 @@ Page({
     let data = {
       storeName: that.data.name,
       storeLogo: zhao1,
-      storeImgs: images,
+      storeImgs: simages,
       businessImg: zhao3,
       licenseImg: zhao4,
-      ratioId: ratioId,
+      
       storeUserName: that.data.names,
     
       classifyId: that.data.typeId,
@@ -326,7 +334,8 @@ Page({
       detailAddress: that.data.xuan,
       longitude: that.data.longitude,
       latitude: that.data.latitude,
-      storePhone: that.data.phone
+      storePhone: that.data.phone,
+      ratioId: that.data.ratioId,
     }
 
     app.res.req('/sqapply/substore', data, (res) => {
@@ -357,13 +366,14 @@ Page({
     area_id = this.data.audits.areaId;
     town_id = this.data.audits.townId;
     zhao1 = this.data.audits.storeLogo;
-     images= this.data.audits.storeLogoOss;
+    images = this.data.audits.storeImgsOss;
+    simages = this.data.audits.storeImgList;
     zhao3 = this.data.audits.businessImg;
     zhao4 = this.data.audits.licenseImg;
     
     this.setData({
       name: this.data.audits.storeName,
-    
+     
       typ: this.data.audits.classifyName,
       typeId: this.data.audits.classifyId,
       prov: this.data.audits.provinceName,
@@ -373,12 +383,13 @@ Page({
       phone: this.data.audits.storePhone,
       names: this.data.audits.storeUserName,
       zhaos1: this.data.audits.storeLogoOss,
-      simages: this.data.audits.storeImgsOss,
+     
+      images: this.data.audits.storeImgsOss,
       zhaos3: this.data.audits.businessImgOss,
       zhaos4: this.data.audits.licenseImgOss,
       xuan: this.data.audits.detailAddress,
       latitude:this.data.audits.latitude,
-      longitude:this.data.longitude,
+      longitude: this.data.audits.longitude,
       addres: this.data.audits.provinceName + '-' + this.data.audits.cityName + '-' + this.data.audits.areaName + '-' + this.data.audits.townName,
       zhao1: false,
       zhao2: false,
@@ -389,6 +400,12 @@ Page({
       isprov: true,
       audit: 3,
     })
+    if(this.data.audits.ratioId){
+      this.setData({
+        ratioId: this.data.audits.ratioId,
+        ratio: this.data.audits.showRatio,
+      })
+    }
   },
   getPhoneNumber: function (e) {
     var that = this;
@@ -452,6 +469,35 @@ Page({
         that.setData({
           type: res.data
         })
+        that.getallratio();
+      } else if (res.status == 1004 || res.status == 1005) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  getallratio() {
+    let that = this;
+
+    let data = {
+
+    }
+
+    app.res.req('/sqstore/allratio', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        let allratio = [{ showRatio:'选填',id:''}]
+        allratio.push(...res.data)
+        
+        that.setData({
+          allratio: allratio
+        })
 
       } else if (res.status == 1004 || res.status == 1005) {
         wx.redirectTo({
@@ -483,16 +529,22 @@ Page({
           that.setData({
 
             audit: 3
+          }, res => {
+            that.setData({
+              load: false
+            })
           })
         } else {
           that.setData({
             audits: res.data,
             audit: res.data.auditStatus
+          },res=>{
+            that.setData({
+              load: false
+            })
           })
         }
-        that.setData({
-          load: false
-        })
+       
 
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
@@ -524,8 +576,9 @@ Page({
       return;
     }
     let data = {
-      applyType: 2
+      applyType: 1
     }
+    
     app.res.req('/sqorder/applysubmit', data, (res) => {
       console.log(res.data)
       if (res.status == 1000) {
@@ -799,9 +852,11 @@ Page({
               })
               zhao1 = datas.data.fileName
             } else if (e.currentTarget.id == 1) {
-              images.push(datas.data.url)
+             
               simages.push(datas.data.fileName)
-              console.log(simages)
+              images.push(datas.data.url)
+             
+             
               that.setData({
                 images: images,
                 img_num: images.length

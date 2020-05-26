@@ -3,7 +3,7 @@
   <navBar background='#fff' title='善家社区' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick" >
     <view class='location' slot="left" bindtap="xuan">
       <image style="width:28rpx;height:30rpx;" src="/images/sheq_dinw.png"></image>
-      <view class='con dan'>{{address}}></view>
+      <view class='con dan'>{{address}}</view>
       <!-- <view class='icon' /> -->
     </view>
     

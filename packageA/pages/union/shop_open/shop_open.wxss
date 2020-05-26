@@ -54,8 +54,7 @@
   background: #f12200;
   text-align: center;
   line-height: 80rpx;
-  margin-top: 10rpx;
-  margin-left: 20rpx;
+  margin: 20rpx;
   color: #fff;
   border-radius: 40rpx;
 }

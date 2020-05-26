@@ -124,6 +124,8 @@ Page({
          that.setData({
            history:[]
          })
+
+         
       },
     })
   },

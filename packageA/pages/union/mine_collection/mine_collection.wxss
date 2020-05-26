@@ -1,0 +1,127 @@
+/* pages/mine_collection/mine_collection.wxss */
+@import "/pages/search_store/search_store";
+page{
+  background: #f9f9f9;
+}
+.top{
+    width: 100%;
+    background: #fff;
+    height: 80rpx;
+    position: fixed;
+    top: 2rpx;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    line-height: 80rpx;
+  }
+  .top_a{
+    color: #f12200;
+    border-bottom: 2rpx solid #f12200;
+  }
+  .goods-list{
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.goods-img{
+  width: 220rpx;
+  height: 220rpx;
+  float: left;
+  margin-right: 18rpx;
+  position: relative;
+}
+.goods-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.goods-j{
+  margin-top: 10rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size: 26rpx;
+}
+.goods-q{
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+.goods-t{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 60rpx;
+}
+.goods-p{
+  color: #f12200;
+ 
+}
+.goods-g{
+  width: 38rpx;
+  height: 38rpx;
+  background: #f3f3f3;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 38rpx;
+}
+.goods-g image{
+  width: 21rpx;
+  height: 23rpx;
+  
+}
+.list{
+  width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  margin-top: 100rpx;
+}
+.yishi{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0,0,0.5);
+  color:#fff;
+  padding: 6rpx 10rpx;
+  box-sizing: border-box;
+  font-size: 24rpx;
+  border-top-left-radius: 14rpx;
+  border-bottom-right-radius: 14rpx;
+}
+
+/*  */
+
+.kong{
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  color: #999;
+  text-align: center;
+}
+.kong_img{
+  width: 295rpx;
+  height: 250rpx;
+  display: inline-block;
+}
+.kong_img image{
+  width: 100%;
+  height: 100%;
+
+}
+.foot-boot{
+  position: absolute;
+  top: 160%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.xuang{
+  margin-top: 50rpx;
+  width: 170rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  display: inline-block;
+  border-radius: 30rpx;
+  background:linear-gradient(to right, #f12200, #ff4e17);
+}

@@ -29,6 +29,6 @@
 </view>
 <view style="height:180rpx;"></view>
 <view class="foots">
-   <view>个体商户入驻（推荐）</view>
-   <view> 以自由卖家入驻 </view>
+   <navigator url="../enter/enter">个体商户入驻</navigator>
+   <!-- <view> 以自由卖家入驻 </view> -->
 </view>

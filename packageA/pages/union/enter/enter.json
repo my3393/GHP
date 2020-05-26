@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "商户入驻",
-  "usingComponents": {}
+  "usingComponents": {
+    "sj":"/component/sjg/sjg"
+  }
 }

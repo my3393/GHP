@@ -481,3 +481,33 @@ margin-top: 10rpx !important;
    position: relative;
    margin-bottom: 20rpx;
 }
+
+.store_scroll{
+  padding:40rpx 40rpx 0rpx 40rpx;
+  box-sizing: border-box;
+}
+.store_adress{
+  line-height: 66rpx;
+}
+.store_adress image{
+  width: 28rpx;
+  height: 30rpx;
+  float: left;
+  margin-right: 20rpx;
+  margin-top: 18rpx;
+}
+.store_adress view{
+  margin-left: 50rpx;
+}
+.store_img{
+  white-space: nowrap;
+  overflow: hidden;
+}
+.store_img image{
+  width: 240rpx;
+  height: 180rpx;
+  margin-right: 30rpx;
+}
+.h2{
+  margin-top: 20rpx;
+}
