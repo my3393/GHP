@@ -58,8 +58,8 @@ Page({
     })
   },
   home() {
-    wx.switchTab({
-      url: 'pages/community/community',
+    wx.navigateTo({
+      url: '/pages/community/community',
     })
   }
 

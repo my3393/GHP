@@ -104,11 +104,11 @@
     </view>
   </view>
   <view class="peis">
-    {{detail.provinceName}} {{detail.cityName}} {{detail.areaName}} {{detail.townName}} {{detail.detailAddress}}
+    {{detail.storeAddress}}
   </view>
 </view>
 <view class="nav">
-  <view class="list clearfix">
+  <view class="list clearfix" bindtap="detail" id="{{detail.storeId}}">
     <view class="nav_top">
       <view class="sotre_img">
         <image src="/images/store.png" />
@@ -190,7 +190,7 @@
   </view>
 </view>
 <view style="height:120rpx;"></view>
-<view class="footeres">
+<view class="footeres" wx:if='{{detail.payStatus == 0 && detail.orderStatus == 0}}'>
   <view class="footeres_r">
 
     <view class="tuik fuk" bindtap="pay">付款</view>

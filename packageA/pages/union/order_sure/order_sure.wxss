@@ -23,6 +23,12 @@ page{
   background: #fff !important;
   color: #000 !important;
 }
+.goodsname{
+  margin-bottom: 20rpx;
+}
+.guig{
+  height: 50rpx;
+}
 .address{
     width: calc(100% - 40rpx);
     margin-left: 20rpx;
@@ -89,7 +95,7 @@ page{
   width: 28rpx;
   height: 28rpx;
   float: right;
-  margin-top: 6rpx;
+  margin-top: 5rpx;
   margin-left: 10rpx;
 }
 .address_cent_r image{

@@ -96,9 +96,14 @@ Page({
     wx.openLocation({
       name: this.data.detail.storeAddress,
 
-      latitude: this.data.detail.latitude,
-      longitude: this.data.detail.longitude,
+      latitude: this.data.store.latitude,
+      longitude: this.data.store.longitude,
       scale: 18
+    })
+  },
+  detail(e){
+    wx.navigateTo({
+      url: '../../store_home/store_home?id=' + e.currentTarget.id,
     })
   },
   //取消订单
@@ -160,7 +165,7 @@ Page({
           detail:res.data,
           z_price: (res.data.productMoney - res.data.deductionMoney + res.data.postageFee).toFixed(2)
         })
-
+        that.getstore()
 
       } else {
         wx.showToast({
@@ -189,8 +194,8 @@ Page({
               signType: 'MD5',
               paySign: res.data.sign.paySign,
               success(res) {
-                list = []
-                that.getlist();
+               
+                that.getdetail();
                 wx.showToast({
                   title: '支付成功',
                   icon: 'none',
@@ -228,6 +233,29 @@ Page({
         wx.redirectTo({
           url: '../login/login',
         })
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //店铺详情
+  getstore() {
+    let that = this;
+
+    let data = {
+      storeId: that.data.detail.storeId
+    }
+
+    app.res.req('/sqproduct/storedetail', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          store: res.data
+        })
+      
       } else {
         wx.showToast({
           title: res.msg,

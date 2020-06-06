@@ -24,7 +24,7 @@ let zhao6 = '';
 let userid;
 
 let images=[];
-
+let shareUserId ='';
 let simages = []
 Page({
 
@@ -69,6 +69,8 @@ Page({
     phone: '',
     images:[],
     ratioId:'',
+    nav_tab:'0',
+    phone_t:''
   },
 
   /**
@@ -80,6 +82,7 @@ Page({
     // this.getType()
     if (options.userid) {
       userid = options.userid
+      shareUserId = options.userid
       wx.setStorageSync('bangId', userid)
       this.Bang();
     }
@@ -147,11 +150,16 @@ Page({
 
     return {
       title: '我是' + that.data.user.userName + +that.data.user.bindCityName + that.data.user.bindAreaName + '人平台海量老乡，欢迎特产入驻。',
-      path: '/pages/store_refund/store_refund?userid=' + that.data.user.id,
+      path: '/packageA/pages/union/enter/enter?userid=' + that.data.user.id,
 
     }
   },
-
+  nav_tab(e){
+     this.setData({
+       nav_tab:e.currentTarget.dataset.index,
+       nav_id: this.data.storemeal[e.currentTarget.dataset.index].id
+     })
+  },
   //删除个人照照片
   detels(e) {
     var that = this;
@@ -218,6 +226,11 @@ Page({
       phone: e.detail.value
     })
   },
+  number_t(e){
+    this.setData({
+      phone_t: e.detail.value
+    })
+  },
   //详细地址
   xuan(e) {
     let that = this
@@ -253,7 +266,7 @@ Page({
   //查看协议
   web() {
     wx.navigateTo({
-      url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.html',
+      url: '/pages/agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/store_agreement.html',
     })
   },
   //入驻提交
@@ -323,9 +336,9 @@ Page({
       storeImgs: simages,
       businessImg: zhao3,
       licenseImg: zhao4,
-      
+      storeMealId:that.data.nav_id,
       storeUserName: that.data.names,
-    
+      saleManPhone: that.data.phone_t,
       classifyId: that.data.typeId,
       provinceId: province_id,
       cityId: city_id,
@@ -336,6 +349,7 @@ Page({
       latitude: that.data.latitude,
       storePhone: that.data.phone,
       ratioId: that.data.ratioId,
+      shareUserId,
     }
 
     app.res.req('/sqapply/substore', data, (res) => {
@@ -523,6 +537,7 @@ Page({
     app.res.req('/sqapply/storeinfo', data, (res) => {
       console.log(res.data)
       that.getType();
+      that.storemeal()
       wx.hideLoading()
       if (res.status == 1000) {
         if (res.data == null) {
@@ -537,7 +552,7 @@ Page({
         } else {
           that.setData({
             audits: res.data,
-            audit: res.data.auditStatus
+             audit: res.data.auditStatus
           },res=>{
             that.setData({
               load: false
@@ -548,17 +563,22 @@ Page({
 
 
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
-        if (userid) {
+        
           wx.redirectTo({
-            url: '../login/login?store_refund=' + 1 + '&userid=' + userid
+            url: '/pages/login/login'
           })
-        } else {
-          wx.redirectTo({
-            url: '../login/login?mine=' + 1
-          })
-        }
+          var url = '/packageA/pages/union/enter/enter?userid=' + userid
+          wx.setStorageSync('url', url)
+       
       } else if (res.status == 1035) {
+        that.setData({
 
+          audit: 3
+        }, res => {
+          that.setData({
+            load: false
+          })
+        })
       } else {
         wx.showToast({
           title: res.msg,
@@ -685,6 +705,30 @@ Page({
 
       } else if (res.status == 1030) {
 
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //商户套餐
+  storemeal() {
+    let that = this;
+    let data = {}
+
+    app.res.req('/sqstore/storemeal', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          storemeal: res.data,
+          nav_id:res.data[0].id
+        })
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        wx.redirectTo({
+          url: '../login/login',
+        })
       } else {
         wx.showToast({
           title: res.msg,

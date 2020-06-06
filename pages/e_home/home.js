@@ -636,7 +636,7 @@ Page({
            that.getAdvert();
            
            that.getRecommend();
-         that.getmemberproduct();
+        // that.getmemberproduct();
            that.getClass();
            that.gongz();
        }else if(res.status == 1004 || res.status == 1005){

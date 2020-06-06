@@ -129,7 +129,7 @@ Page({
   detail(e){
     let that = this;
     let data = {
-      currentPage: currentPage,
+      currentPage: 1,
       id:e.currentTarget.id
     }
 

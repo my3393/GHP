@@ -7,7 +7,9 @@ Page({
    */
   data: {
      tar:1,
-     tag:['10','12','14','16']
+     tag:[],
+     latitude:'',
+     longitude:''
   },
 
   /**
@@ -17,8 +19,11 @@ Page({
      this.setData({
        tar:options.id
      })
-    this.current_time()
-
+   
+    this.seckillstarttime()
+    var i = '12'
+    var j = '14:00'
+    console.log(i<j)
   },
 
   /**
@@ -77,6 +82,22 @@ Page({
   onShareAppMessage: function () {
 
   },
+  tar(e){
+    var id = e.currentTarget.id
+    var index = e.currentTarget.dataset.index
+    if (id == '12:00'){
+       if(index == 0){
+
+       }
+    }
+    this.setData({
+      current_time:e.currentTarget.id,
+      current:e.currentTarget.dataset.index
+    },()=>{
+      this.getdetail()
+    })
+
+  },
   guang(e){
     wx.navigateBack({
       url: '/pages/community/community',
@@ -91,32 +112,33 @@ Page({
   current_time(){
     let that = this
     var date = new Date();
-    var currentHours = date.getHours(); //获取当前时间 时
-    console.log(currentHours)
-    if (currentHours <= 12){
+    var currentHours = date.getHours(); //获取当前时间 
+   
+    if (currentHours <= that.data.tag[1].substring(0, 2)){
       
       this.setData({
-        current_time:10,
+        current_time: that.data.tag[0],
         current:0
       })
-    } else if ( currentHours >= 12 && currentHours < 14){
+    } else if (currentHours >= that.data.tag[1].substring(0, 2) && currentHours < that.data.tag[2].substring(0, 2)){
       this.setData({
-        current_time: 12,
+        current_time: that.data.tag[1],
         current: 1
       })
-    } else if ( currentHours >= 14 && currentHours <16) {
+    } else if (currentHours >= that.data.tag[2].substring(0, 2) && currentHours < that.data.tag[3].substring(0, 2)) {
       this.setData({
-        current_time: 14,
+        current_time: that.data.tag[2],
         current: 2
       })
-      console.log('11')
-    } else if (currentHours >= 16) {
+      console.log(that.data.tag[2])
+    } else if (currentHours >= that.data.tag[3].substring(0, 2)) {
       this.setData({
-        current_time: 16,
+        current_time: that.data.tag[3],
         current: 3
       })
     }
-   
+    console.log(that.data.tag[3])
+    that.getdetail()
     wx.getLocation({
       type: 'wgs84',
       success(res) {
@@ -129,7 +151,12 @@ Page({
           latitude,
           longitude
         },res=>{
-          that.getdetail()
+          if(that.data.tar == 2){
+            that.setData({
+              current_time:''
+            })
+          }
+         
         })
         
       }
@@ -141,8 +168,11 @@ Page({
     let data = {
       promotionType:that.data.tar,
       seckillStartTime:that.data.current_time,
-      longitude: that.data.longitude,
-      latitude: that.data.latitude
+      longitude:'',
+      latitude:''
+      // longitude: that.data.longitude,
+      // latitude: that.data.latitude
+
     }
     app.res.req('/sqproduct/allpromotion', data, (res) => {
    
@@ -170,4 +200,34 @@ Page({
     })
 
   },
+  //秒杀时段
+  seckillstarttime() {
+    let that = this;
+    let data = {
+       
+    }
+    app.res.req('/sqproduct/seckillstarttime', data, (res) => {
+
+      if (res.status == 1000) {
+        that.setData({
+          tag:res.data
+        })
+        that.current_time()
+        console.log(res.data)
+      } else if (res.status == 1004 || res.status == 1005) {
+        console.log(1)
+        wx.redirectTo({
+          url: '../login/login',
+        })
+      } else {
+        console.log(111)
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+
+  },
+  
 })

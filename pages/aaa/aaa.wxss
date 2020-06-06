@@ -1,0 +1,47 @@
+/* pages/aaa/aaa.wxss */
+.tao{
+  width: 100%;
+  height: 60rpx;
+  background: #000;
+  opacity: 0;
+  position: fixed;
+  top: 0rpx;
+  left: 0;
+  transform: translateZ(0) translateY(-100%);
+  transition: all 0.3s ease-in-out;
+}
+.top{
+   transform: translateZ(0) translateY(0);
+   opacity: 1;
+}
+/* 弹窗 */
+.bott{
+  z-index: 997;
+  width: 100%;
+  height: 60%;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  transform:translateY(100%);
+   transition: all 1s ease-in-out;
+}
+.mark{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+
+  z-index: 996;
+  background: rgba(0, 0, 0, 0.6);
+ 
+  transition: all 1s ease-in-out;
+  opacity: 0;
+}
+.mask_show{
+  opacity: 1;
+  
+  transform: translateY(0);
+}

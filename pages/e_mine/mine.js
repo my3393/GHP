@@ -156,6 +156,12 @@ Page({
 
     }
   },
+  //卡号领取
+  kah(){
+    wx.navigateTo({
+      url: '../z_kahao/index',
+    })
+  },
   hide() {
     this.setData({
       modal: false
@@ -828,10 +834,17 @@ Page({
 
   },
   //文艺商学
-  wysx(){
-    wx.showToast({
-      title: '暂未开放',
-      icon:'none'
-    })
+  wysx(e){
+    if(e.currentTarget.id == 0){
+      wx.navigateTo({
+        url: '../community/community',
+      })
+    }else{
+      wx.showToast({
+        title: '暂未开放',
+        icon: 'none'
+      })
+    }
+  
   }
 })

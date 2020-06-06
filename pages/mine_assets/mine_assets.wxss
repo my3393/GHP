@@ -85,7 +85,7 @@ page{
 }
 .two{
   position: absolute;
-  bottom: 20rpx;
+  top: 90rpx;
   right: 40rpx;
   font-size: 22rpx;
   color: #f12200;

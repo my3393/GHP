@@ -1,43 +1,57 @@
-
 <!--pages/yb_zeng/yb_zeng.wxml-->
 <view class="nav clearfix">
-    <view class="xia">转赠用户</view>
-    <view class="xia_i">
-       <input placeholder="请输入转赠用户手机号" type="number" class="inpt" bindinput="number" value="{{number}}"></input>
-      
-    </view>
-  <view style="margin-top:40rpx">
-     <view class="xia">资产转赠数</view>
-    <view class="xia_i">
-       <input placeholder="0" type="number" class="inpts" bindinput="num" value="{{num}}"></input>
-       <view>
-         可转赠资产 : {{nums}}
-         <view class="quan" bindtap="all">全部转赠</view>
-       </view>
+  <view class="tag">
+    <view wx:for="{{type}}" wx:key="item" wx:for-index="index" id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='{{tar == index?"active":""}}'>
+      {{item}}
     </view>
   </view>
+  <view class="tar">
+    <view class="xia">转赠用户</view>
+    <view class="xia_i">
+      <input placeholder="请输入转赠用户手机号" type="number" class="inpt" bindinput="number" value="{{number}}"></input>
+
+    </view>
+    <view style="margin-top:40rpx">
+      <view class="xia">资产转赠数</view>
+      <view class="xia_i">
+        <input placeholder="0" type="number" class="inpts" bindinput="num" value="{{num}}"></input>
+        <view wx:if='{{tar == 0}}'>
+          可转赠资产 : {{nums}}
+          <view class="quan" bindtap="all">全部转赠</view>
+        </view>
+         <view wx:else>
+          可转赠卡号 : {{card.cardNum}}
+          <view class="quan" bindtap="all">全部转赠</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="card" wx:if='{{tar == 1}}'>
+  转赠卡号：
+  <text>{{card.minCardNo}}~{{card.maxCardNo}}</text>
+  
+  
 </view>
 <button class="but" bindtap="sub">确定</button>
 
 <view class="sm">
-   <view>转赠说明</view>
-   <view> 1.请根据页面提示填写转赠信息即可。</view>
-   <view>2.一旦发出去赠送不予撤回，请谨慎操作。</view>
-   <view>3.至尊会员激活卷为本平台的至尊会员激活卡卷，所有解释权归平台所有。</view>
+  <view>转赠说明</view>
+  <view> 1.请根据页面提示填写转赠信息即可。</view>
+  <view>2.一旦发出去赠送不予撤回，请谨慎操作。</view>
+  <view>3.至尊会员激活卷为本平台的至尊会员激活卡卷，所有解释权归平台所有。</view>
 </view>
 
- <tui-modal show="{{modal}}"  custom="{{true}}">
-    <view class="tui-modal-custom">
-     <view class="tui-modal-custom-text tit">转赠成功</view>
-       <view class="tui-modal-custom-text tite">待用户查收，3天未接受自动退回本账号</view>
-     
-      <tui-button type="danger" shape="circle" tui-button-class="tui-btn-mtop" bindtap="hide">确定</tui-button>
-    </view>
-  </tui-modal>
+<tui-modal show="{{modal}}" custom="{{true}}">
+  <view class="tui-modal-custom">
+    <view class="tui-modal-custom-text tit">转赠成功</view>
+    <view class="tui-modal-custom-text tite">待用户查收，3天未接受自动退回本账号</view>
 
-  <view class="imag">
-     <image show-menu-by-longpress src="{{code}}" id="{{code}}" bindtap="Preview"></image>
-     <view>点击保存扫码领取</view>
+    <tui-button type="danger" shape="circle" tui-button-class="tui-btn-mtop" bindtap="hide">确定</tui-button>
   </view>
+</tui-modal>
 
-
+<view class="imag">
+  <image show-menu-by-longpress src="{{code}}" id="{{code}}" bindtap="Preview"></image>
+  <view>点击保存扫码领取</view>
+</view>

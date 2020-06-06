@@ -177,6 +177,10 @@ Page({
        wx.navigateTo({
          url: '../community/community',
        })
+      // wx.showToast({
+      //   title: '暂未开放',
+      //   icon:'none'
+      // })
      }else if(index == 8){
        wx.navigateTo({
          url: '../solder/solder',

@@ -511,3 +511,18 @@ margin-top: 10rpx !important;
 .h2{
   margin-top: 20rpx;
 }
+.xian{
+  background: #FF8D39;
+  color: #fff;
+  padding: 2rpx 6rpx;
+  box-sizing: border-box;
+  border-radius: 4rpx;
+}
+.dump{
+  text-align: center;
+  color: #999;
+}
+.dump image{
+   width: 250rpx;
+   height: 250rpx;
+}

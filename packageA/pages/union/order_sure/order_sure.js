@@ -7,7 +7,7 @@ var qqmapsdk = new QQMapWX({
 });
 let storeid;
 Page({
-
+ 
   /**
    * 页面的初始数据
    */
@@ -27,6 +27,7 @@ Page({
     phone:'',
     remark:'',
     checked:true,
+    vals:['sf','dw']
   },
 
   /**
@@ -115,6 +116,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  //查看协议
+  web() {
+    wx.navigateTo({
+      url: '/pages/agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/collect_yourself.html',
+    })
+  },
   phone(e){
     this.setData({
       phone:e.detail.value
@@ -132,10 +139,18 @@ Page({
     })
   },
   tag(e){
-    this.setData({
-      tar:e.currentTarget.dataset.num,
-      sendType: Number(e.currentTarget.dataset.num) + 1
-    })
+    if (e.currentTarget.dataset.num == 1 && this.data.store.isInvite == 0){
+       wx.showToast({
+         title: '该商家暂不支持到店自取',
+         icon:'none'
+       })
+    }else{
+      this.setData({
+        tar: e.currentTarget.dataset.num,
+        sendType: Number(e.currentTarget.dataset.num) + 1
+      })
+    }
+   
   },
   remark(e){
     this.setData({
@@ -151,6 +166,12 @@ Page({
     var temp = [];
     var start = that.data.store.startTime.substring(0, 2)
     var end = that.data.store.endTime.substring(0,2)//截取店铺结束时间前两位
+    if (that.data.store.isNight == '1') {
+      temp[0] = ["今天", '凌晨'];
+      end = '24'
+    } else {
+      temp[0] = ["今天"];
+    }
     var j = 0
     //判断当前时间是否在30分钟内
     if ( 30>currentMinute >0){
@@ -159,8 +180,8 @@ Page({
     if(currentMinute >30){
       currentHours++
     }
-   
-      temp[0] = ["今天"];
+  
+     
   
     
   
@@ -181,6 +202,81 @@ Page({
       }
      
       // i += 1;
+    }
+    this.setData({
+      multiArray: temp,
+    })
+  },
+  bindcolumnchange(e){
+    var that = this
+    console.log(e)
+    console.log('第几列发生变化', e.detail.column)
+    console.log('选择第几个', e.detail.value)
+    var date = new Date();
+    var currentHours = date.getHours(); //获取当前时间 时
+    var currentMinute = date.getMinutes();//获取当前时间 秒
+    let c = e.detail.column;
+    let v = e.detail.value;
+    var temp = this.data.multiArray;
+    var start = that.data.store.startTime.substring(0, 2)
+   
+  
+    if(c == 0){
+      console.log(temp)
+      if (temp[c][v] == '今天') {
+        var j = 0
+        if (that.data.store.isNight == '1') { //判断是否有凌晨
+          var  end = '24'
+        }else{
+          var end = that.data.store.endTime.substring(0, 2)
+        }
+        if (30 > currentMinute > 0) {
+          j++
+        }
+        if (currentMinute > 30) {
+          currentHours++
+        }
+        temp[1] = [];
+         
+        
+        //每半小时累加
+        for (let i = currentHours; i < end; i++) {
+          var i1 = Number(i) + 1;
+          if (j % 2 == 0) {
+            temp[1].push(i + ':00' + '-' + i + ':30')
+            j++
+          }
+
+          if (j % 2 != 0) {
+            temp[1].push(i + ':30' + '-' + i1 + ':00')
+            j++
+          }
+
+          // i += 1;
+        }
+      }else{
+        var j = 0
+        start = '00'
+        temp[1] = [];
+        var end = that.data.store.endTime.substring(0, 2)
+        //每半小时累加
+        for (let i = '00'; i < end; i++) {
+          var i1 = Number(i) + 1;
+          if (j % 2 == 0) {
+            temp[1].push(i + ':00' + '-' + i + ':30')
+            j++
+          }
+
+          if (j % 2 != 0) {
+            temp[1].push(i + ':30' + '-' + i1 + ':00')
+            j++
+          }
+
+          // i += 1;
+        }
+      }
+      //判断当前时间是否在30分钟内
+      
     }
     this.setData({
       multiArray: temp,
@@ -221,10 +317,12 @@ Page({
       if (res.status == 1000) {
         that.setData({
           store: res.data
+        },()=>{
+          that.getcart();
+          that.calculate_time()
         })
        
-        that.getcart();
-        that.calculate_time()
+       
       } else {
         wx.showToast({
           title: res.msg,

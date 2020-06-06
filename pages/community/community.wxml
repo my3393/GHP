@@ -1,6 +1,6 @@
 <!--pages/community/community.wxml-->
 <view class='main-wraper'>
-  <navBar background='#fff' title='善家联盟' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick" >
+  <navBar background='#fff' title='善家联盟' color='#000' iconTheme='white' bindback="handlerGobackClick" bindhome="handlerGohomeClick">
     <view class='location' slot="left" bindtap="xuan">
       <image style="width:28rpx;height:30rpx;" src="/images/sheq_dinw.png"></image>
       <view class='con dan'>{{address}}</view>
@@ -18,7 +18,7 @@
 
   </view>
   <view>
-    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#fff" indicator-active-color="#f12200" bindchange="testSwiper">
+    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#fff" indicator-active-color="#f12200">
       <block>
         <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{banner}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
           <image class="banner_img skeleton-rect" src="{{item.bannerImgOss}}" lazy-load="true"></image>
@@ -32,25 +32,25 @@
       <image src="/images/community2.png"></image>
       <view>联盟商户</view>
     </navigator>
-    <view class="navs_list">
+    <!-- <view class="navs_list">
       <image src="/images/community1.png"></image>
       <view>邀请有奖</view>
-    </view>
+    </view> -->
     <navigator url="/packageA/pages/union/order_list/order_list" class="navs_list">
       <image src="/images/community3.png"></image>
       <view>订单</view>
     </navigator>
-    <view class="navs_list">
+    <!-- <view class="navs_list">
       <image src="/images/community4.png"></image>
       <view>收藏</view>
-    </view>
+    </view> -->
 
   </view>
   <!-- 今日特价 -->
   <view class="today">
     <view bindtap="kill" id="1">
       <view class="h1">限时秒杀</view>
-      <view>买到就是赚到</view>
+      <view style="margin:20rpx 0">买到就是赚到</view>
       <scroll-view scroll-x="true" style="white-space:nowrap;display:flex;">
         <view class="tooday_img" wx:for='{{kill}}'>
           <image src="{{item.productDefaultImgOss}}"></image>
@@ -60,7 +60,7 @@
     </view>
     <view bindtap="kill" id="2">
       <view class="h1">今日特价</view>
-      <view>每日低价出售</view>
+      <view style="margin:20rpx 0">每日低价出售</view>
       <scroll-view scroll-x="true" style="white-space:nowrap;display:flex;">
         <view class="tooday_img" wx:for='{{special}}'>
           <image src="{{item.productDefaultImgOss}}"></image>
@@ -81,15 +81,48 @@
 
   </view>
   <!-- 种类选择 -->
-<scroll-view scroll-x="true" class="tag">
+  <scroll-view scroll-x="true" class="tag">
     <view wx:for="{{type}}" wx:key="item" wx:for-index="index" id="{{item.id}}" bindtap="tag" data-num='{{index}}' class='tags {{tars == index?"actives":""}}'>
       {{item.classifyName}}
     </view>
   </scroll-view>
   <!-- d店铺 -->
   <view style="margin-top:30rpx;">
-    <view class="store clearfix" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}">
-      <image src="{{item.storeHeadImgUrlOss}}"></image>
+    <view wx:if='{{store}}'>
+      <view class="store clearfix" bindtap="detail" id="{{store.id}}">
+           <image src="{{item.storeHeadImgUrlOss}}" wx:if='{{item.storeHeadImgUrlOss}}'></image>
+      <image src="{{item.storeLogoOss}}" wx:else></image>
+        <view>
+          <view class="h1">{{store.storeName}}</view>
+          <view class="peix">
+            <text>起送￥{{store.sendFee}}</text>
+            <text>配送￥{{store.postageFee}}</text>
+          </view>
+          <view class="peix_r">
+            <!-- <text>30分钟</text> -->
+            <text>{{distance}}</text>
+          </view>
+        </view>
+        <view class="dol">
+          <view wx:for='{{store.labels}}'>{{item}}</view>
+
+        </view>
+        <scroll-view class="out" scroll-x="true">
+          <view class="store_detail" wx:for='{{store.products}}'>
+            <image src="{{item.productDefaultImgOss}}"></image>
+            <view class="titr dan">{{item.productName}}</view>
+            <view class="price">
+              <text style="font-size:12rpx">￥</text>{{item.salePrice}}
+              <!-- <text class="cha">{{item.activityPrice}}</text> -->
+            </view>
+          </view>
+
+        </scroll-view>
+      </view>
+    </view>
+    <view class="store clearfix" wx:for='{{detail}}' bindtap="detail" id="{{item.id}}" wx:if='{{item.id != store.id}}'>
+      <image src="{{item.storeHeadImgUrlOss}}" wx:if='{{item.storeHeadImgUrlOss}}'></image>
+      <image src="{{item.storeLogoOss}}" wx:else></image>
       <view>
         <view class="h1">{{item.storeName}}</view>
         <view class="peix">
@@ -103,17 +136,18 @@
       </view>
       <view class="dol">
         <view wx:for='{{item.labels}}'>{{item}}</view>
-       
+
       </view>
-      <scroll-view  class="out" scroll-x="true">
+      <scroll-view class="out" scroll-x="true">
         <view class="store_detail" wx:for='{{item.products}}'>
-            <image src="{{item.productDefaultImgOss}}"></image>
-            <view class="titr dan">{{item.productName}}</view>
-            <view class="price"><text style="font-size:12rpx">￥</text>{{item.salePrice}}
-              <!-- <text class="cha">{{item.activityPrice}}</text> -->
-             </view>
+          <image src="{{item.productDefaultImgOss}}"></image>
+          <view class="titr dan">{{item.productName}}</view>
+          <view class="price">
+            <text style="font-size:12rpx">￥</text>{{item.salePrice}}
+            <!-- <text class="cha">{{item.activityPrice}}</text> -->
+          </view>
         </view>
-        
+
       </scroll-view>
     </view>
   </view>

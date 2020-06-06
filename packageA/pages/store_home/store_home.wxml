@@ -2,26 +2,26 @@
 <view class="top_b"></view>
 <view class="hone clearfix" bindtap="showPopup3">
   <image src="{{store.storeHeadImgUrlOss}}"></image>
-  <view class="h1">
+  <view class="h1 dan">
     {{store.storeName}}
   </view>
   <view class="hone_rig">
-    <view>
+    <!-- <view>
       <image src="/images/xinxin_n.png"></image>
       <view>收藏</view>
-    </view>
-    <view>
+    </view> -->
+    <button open-type="share" class="share" catchtap="onShareAppMessage">
       <image src="/images/fenx.png"></image>
-      <view>分享</view>
-    </view>
+      <view >分享</view>
+    </button>
   </view>
   <view class="qis">
     <text>起送￥{{store.sendFee}}</text>
     <text>配送费￥{{store.postageFee}}</text>
   </view>
   <view class="qis">{{distance}}</view>
-  <view class="jies dan">{{store.storeNotice}}</view>
-  <view class="">
+  <view class="jies dan" wx:if='{{store.storeNotice != null}}'>{{store.storeNotice}}</view>
+  <view wx:if='{{store.storeLabel != null}}'>
     <text>{{store.storeLabel}}</text>
   </view>
 </view>
@@ -44,7 +44,9 @@
   <view wx:for="{{tabbar}}" wx:key="{{index}}" class="tab-bar-item {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" catchtap="swichNav" id="{{item.id}}">
     <text>{{item.typeName}}</text>
   </view>
+  <view style="height:100rpx;"></view>
 </scroll-view>
+
 <!-- 右侧 -->
 <scroll-view class="right-box" scroll-y>
   <!--内容部分 start 自定义可删除-->
@@ -54,32 +56,40 @@
       <view class="class-box">
         <view class="class-item">
           <view class="class-name">{{typeName}}</view>
-          <view class="clearfix" wx:for="{{detail}}" wx:key="{{index}}">
-            <view class="g-box" catchtap="productList" data-key="高价回收">
-              <image src="{{item.productDefaultImgOss}}" class="g-image" />
-              <view class="g-title dan">{{item.productName}}</view>
-              <view class="shou">售{{item.totalSaleNum}}</view>
-              <view>
-                <view wx:if='{{currentTab == 1 || currentTab == 0}}'>
-                  <text class="price"><text style="font-size:14rpx">￥</text >{{item.activityPrice}}</text>
-                  <text style="color:#ccc">￥{{item.salePrice}}</text>
-                </view>
-                <view wx:else>
-                  <text class="price"><text style="font-size:14rpx">￥</text >{{item.salePrice}}</text>
+          <view wx:if='{{detail.length == 0}}'>
+            <view class="dump">
+                <image src="/images/mine_fund.png"></image>
+                <view>该类型下商家还没上架商品哦</view>
+            </view>
+          </view>
+          <view wx:else>
+            <view class="clearfix" wx:for="{{detail}}" wx:key="{{index}}">
+              <view class="g-box" catchtap="productList" data-key="高价回收">
+                <image src="{{item.productDefaultImgOss}}" class="g-image" catchtap="pervie" id="{{item.productDefaultImgOss}}" />
+                <view class="g-title dan">{{item.productName}}</view>
+                <view class="shou">售{{item.totalSaleNum}} <text class="xian" wx:if='{{item.restrictBuyCount >0 && item.promotionType ==0}}'>限{{item.restrictBuyCount}}{{item.productUnit}}/人</text> </view>
+                <view>
+                  <view wx:if='{{item.activityPrice}}'>
+                    <text class="price"><text style="font-size:14rpx">￥</text >{{item.activityPrice}}</text>
+                    <text style="color:#ccc">￥{{item.salePrice}}</text>
+                  </view>
+                  <view wx:else>
+                    <text class="price"><text style="font-size:14rpx">￥</text >{{item.salePrice}}</text>
 
-                </view>
-                <view class='goodsnum'>
-                  <!-- <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}" hover-class="reduction_h">
-                    -
-                  </view> -->
-                  <view class="shu">{{item.buyCount}}</view>
-                  <view class="suan" id="{{item.id}}" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" hover-class="addCount_h">
-                    +
+                  </view>
+                  <view class='goodsnum'>
+                    <!-- <view class="suan reduction" catchtap="minusCount" data-index="{{index}}" data-select-index="{{idx}}" hover-class="reduction_h">
+                      -
+                    </view> -->
+                    <!-- <view class="shu">{{item.buyCount}}</view> -->
+                    <view class="suan" id="{{item.id}}" catchtap="addCount" data-index="{{index}}" data-select-index="{{idx}}" hover-class="addCount_h">
+                      +
+                    </view>
                   </view>
                 </view>
               </view>
-            </view>
 
+            </view>
           </view>
         </view>
 
@@ -89,7 +99,7 @@
   </block>
   <!--内容部分 end 自定义可删除-->
 </scroll-view>
-
+<view style="height:100rpx;"></view>
 <!-- footer -->
 <view class="foote">
   <view class="foote_left">
@@ -140,7 +150,7 @@
   <view class="show2_top" wx:else>已满足配送要求</view>
   <view class="show2_midd">
     <text>共{{cart_num}}件商品</text>
-    <view class="show2_detel" bindtap="cleancart">
+    <view class="show2_detel" bindtap="c_cart">
       <image src="../../../images/detele.png"></image>
       清空购物车
     </view>
@@ -151,7 +161,7 @@
 
       <view class="show2_good dan" wx:for='{{cart}}' wx:key='item.id'>
         <image src="{{item.productDefaultImgOss}}"></image>
-        <view>{{item.productName}}</view>
+        <view class="dan">{{item.productName}}</view>
         <view style="margin-top:90rpx">
           <view wx:if='{{item.promotionType == 0}}'>
             <text class="price"><text style="font-size:14rpx">￥</text >{{item.salePrice}}</text>
@@ -213,7 +223,7 @@
 <!-- 店铺信息 -->
 <van-popup show="{{ show3}}" bind:close="onClose3"  closeable close-icon="close" position='bottom' custom-style="height: 70%" round>
   <scroll-view scroll-y='true' class="store_scroll">
-    <view class="h1" style="width:''">{{store.storeName}}</view>
+    <view class="h1" style="width:100%">{{store.storeName}}</view>
     <view>
        <view class="store_adress">
          <image src="/images/dinw.png"></image>
@@ -295,3 +305,9 @@
 
   </view>
 </view>
+
+<!--  -->
+<tui-modal show="{{modal}}" bind:click="handleClick" bind:cancel="hide" content="确定清空购物车吗" color="#333" size="32" shape="circle" button='{{button}}'>
+
+
+</tui-modal>

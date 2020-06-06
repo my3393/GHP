@@ -86,7 +86,9 @@
     "pages/live_add/live_add",
     "pages/unions/unions",
     "pages/good_det/index",
-    "component/address/address"
+    "component/address/address",
+    "pages/aaa/aaa",
+    "pages/z_kahao/index"
   ],
   "subpackages": [
     {
@@ -118,7 +120,8 @@
         "pages/union/order_list/order_list",
         "pages/union/order_detail/order_detail",
         "pages/union/order_sure/order_sure",
-        "pages/union/pay_success/pay_success"
+        "pages/union/pay_success/pay_success",
+        "pages/web/web/index"
       ]
     }
   ],
@@ -166,7 +169,7 @@
   },
   "plugins": {
     "live-player-plugin": {
-      "version": "1.0.11",
+      "version": "1.0.15",
       "provider": "wx2b03c6e691cd7370"
     }
   },

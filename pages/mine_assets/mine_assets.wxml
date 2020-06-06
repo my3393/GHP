@@ -41,7 +41,10 @@
       <text wx:if='{{item.status == 1}}' style="color:#ccc">已领取</text>
     </view>
     <view class="state_time">{{item.createDate}}</view>
-   
+     <view wx:if='{{item.sendType == 1}}' style="margin-top:20rpx;">
+        <text >卡号转赠</text>
+        <view style="float:right">{{item.endCardNo}}~{{item.startCardNo}}</view>
+    </view>
   </view>
 </view>
 <view wx:if='{{tar == 0}}'>
@@ -57,6 +60,10 @@
     
     <view class="state_time">{{item.createDate}}</view>
      <view class="two" bindtap="phone" id="{{item.sendUserId}}" data-name="{{item.sendUserName}}">再次申领</view>
+    <view wx:if='{{item.sendType == 1}}' style="margin-top:20rpx;">
+        <text >卡号转赠</text>
+        <view style="float:right">{{item.endCardNo}}~{{item.startCardNo}}</view>
+    </view>
   </view>
 
 </view>

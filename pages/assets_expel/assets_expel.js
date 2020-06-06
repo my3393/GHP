@@ -9,6 +9,8 @@ Page({
     number:'',
     num:'',
     nums:'',
+    type: [],
+    tar:0,
   },
 
   /**
@@ -92,9 +94,26 @@ Page({
   },
   //全部
   all(){
-    this.setData({
-      num:this.data.nums
-    })
+    if(this.data.tar == 0){
+      this.setData({
+        num: this.data.nums
+      })
+    }else{
+      this.setData({
+        num: this.data.card.cardNum
+      })
+      this.findsend()
+    }
+   
+  },
+  tag(e) {
+   
+      this.setData({
+        tar: e.currentTarget.dataset.num,
+        
+      })
+      
+  
   },
   //
   sub(e) {
@@ -119,7 +138,8 @@ Page({
     }else if(that.data.number == '' || that.data.number.length != 11 || !tel.test(that.data.number) ){
       wx.showToast({
         title: '请输入正确手机号',
-        icon:'none'
+        icon:'none',
+       
       })
     } else if (that.data.phone == that.data.user.phone) {
       wx.showToast({
@@ -132,38 +152,122 @@ Page({
         title: '请输入转赠张数',
         icon: 'none'
       })
-    } else if (that.data.num > that.data.nums) {
-      wx.showToast({
-        title: '转赠张数大于当前可转赠数',
-        icon: 'none'
-      })
-    }else{
-      let data = {
-        receiveUserPhone: that.data.number,
-        cardNum: that.data.num,
-        memberType: 1
-      }
-      app.res.req('/membercard/sendcard', data, (res) => {
-        console.log(res.data)
-        if (res.status == 1000) {
+    }
+    //  else if (that.data.num > that.data.nums) {
+    //   wx.showToast({
+    //     title: '转赠张数大于当前可转赠数',
+    //     icon: 'none'
+    //   })
+    // }
+    else{
+      if(that.data.tar == 0){
+        let data = {
+          receiveUserPhone: that.data.number,
+          cardNum: that.data.num,
+          memberType: 1
+        }
+        app.res.req('/membercard/sendcard', data, (res) => {
+          console.log(res.data)
+          if (res.status == 1000) {
             wx.showToast({
               title: '转赠成功',
-              
-            }) 
+              mask: true,
+              duration:2000,
+            })
+            that.setData({
+              num: 0
+            })
             that.getnum();
 
-        } else {
-          console.log(111)
-          wx.showToast({
-            title: res.msg,
-            icon: 'none'
-          })
+          } else {
+            console.log(111)
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
+        })
+      }else{
+        let data = {
+          receiveUserPhone: that.data.number,
+          cardNum: that.data.num,
+          memberType: 1
         }
-      })
+        app.res.req('/membercard/sendcardnumber', data, (res) => {
+          console.log(res.data)
+          if (res.status == 1000) {
+            wx.showToast({
+              title: '转赠成功',
+              mask: true,
+              duration: 2000,
+            })
+            that.setData({
+              num:0
+            })
+            that.getnum();
+
+          } else {
+            console.log(111)
+            wx.showToast({
+              title: res.msg,
+              icon: 'none'
+            })
+          }
+        })
+      }
     }
     this.setData({
       tapTime: nowTime
     });
+  },
+  //卡号
+  getcard() {
+    let that = this;
+    let data = {
+    
+    }
+
+    app.res.req('/membercard/findusernumberparagraph', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          card: res.data
+        })
+        if (res.data.cardNum >0){
+          that.setData({
+            type:['直接转赠','卡号转赠']
+          })
+        }
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  //卡号
+  findsend() {
+    let that = this;
+    let data = {
+      cardNum:this.data.num
+    }
+
+    app.res.req('/membercard/findsendnumberparagraph', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        that.setData({
+          card_num: res.data
+        })
+
+      } else {
+        wx.showToast({
+          title: res.msg,
+          icon: 'none'
+        })
+      }
+    })
   },
   //张数
   getnum() {
@@ -176,8 +280,14 @@ Page({
       console.log(res.data)
       if (res.status == 1000) {
         that.setData({
-          nums: res.data
+          nums: Number(res.data)
         })
+        that.getcard()
+      }else if(res.status == 1004 || res.status == 1005  || res.status == 1018){
+         wx.redirectTo({
+           url: '/pages/login/login',
+         })
+         wx.setStorageSync('url', '/pages/assets_expel/assets_expel')
 
       } else {
         wx.showToast({

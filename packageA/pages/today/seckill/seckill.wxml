@@ -5,14 +5,14 @@
   </view>
 
   <view class="time">
-    <view wx:for='{{tag}}'>
-      <view>{{item}}:00</view>
+    <view wx:for='{{tag}}'  bindtap="tar" id="{{item}}" class="{{current == index ? 'active':''}}" data-index="{{index}}">
+      <view>{{item}}</view>
       <view>抢购</view>
     </view>
    
   </view>
   <view wx:if='{{list.length == 0}}'>
-    <graph />
+    <graph introduce='该时段没有抢购商品哦' />
   </view>
    <view wx:else>
     <view  class="nav" wx:for='{{list}}' >

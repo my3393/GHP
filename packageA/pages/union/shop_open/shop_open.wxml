@@ -25,7 +25,8 @@
 </view>
 <view class="navs">
    <view>收益说明</view>
-   <view>平台收取成交订单的百分之三十作为平台运营推广费用。</view>
+   <view>商家入驻自愿贡献这一比例，作为联盟客户流量共享的消费者折扣以及商户分红。</view>
+   <image src=""></image>
 </view>
 <view style="height:180rpx;"></view>
 <view class="foots">

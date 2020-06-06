@@ -1,0 +1,16 @@
+<!--pages/aaa/aaa.wxml-->
+
+<!-- 提示框 -->
+<view class="tao {{show?'top':''}}"></view>
+
+
+<button style="margin-top:100px" bindtap="tap">点击</button>
+
+<!-- 弹窗 -->
+<view>
+  <view class="bott {{is?'mask_show':''}}">
+   <slot>
+   </slot>
+ </view>
+ <view class="mark {{is?'mask_show':''}}" bindtap="ismark"></view>
+</view>

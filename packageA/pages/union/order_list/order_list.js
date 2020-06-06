@@ -73,6 +73,7 @@ Page({
   onShareAppMessage: function () {
 
   },
+  
   detail(e){
     wx.navigateTo({
       url: '../order_detail/order_detail?id=' + e.currentTarget.id,
@@ -153,6 +154,11 @@ Page({
         })
 
         
+      }else if(res.status == 1004 || res.status == 1005 || res.status == 1018){
+        wx.redirectTo({
+          url: '/pages/login/login',
+        })
+        wx.setStorageSync('url', '/packageA/pages/union/order_list/order_list')
       } else {
         wx.showToast({
           title: res.msg,
@@ -181,6 +187,7 @@ Page({
               paySign: res.data.sign.paySign,
               success(res) {
                 list = []
+                currentPage = 1
                 that.getlist();
                 wx.showToast({
                   title: '支付成功',

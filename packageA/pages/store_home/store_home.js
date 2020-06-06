@@ -20,6 +20,7 @@ let promotionType =1 //促销商品
 let detail = [];
 let currentPage =1;
 let typeId = '';
+let userid = '';
 Page({
 
   /**
@@ -38,7 +39,16 @@ Page({
     isgug: true, //规格
     typeName:'秒杀',
     distance:'0',//距离
-    cart_num:'0'
+    cart_num:'0',
+    cart:[],
+    button: [{
+      text: "取消",
+      type: 'gray'
+    }, {
+      text: "确定",
+      type: 'red'
+    }],
+    pages:1
   },
 
   /**
@@ -46,8 +56,10 @@ Page({
    */
   onLoad: function (options) {
     storeid = options.id
-    this.getbanner();
-    this.getType();
+    if(options.userid){
+      userid = options.userid,
+      this.Bang()
+    }
     this.getstore();
   },
 
@@ -62,7 +74,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getcart()
+    let that = this;
+    //获取本地用户信息
+    wx.getStorage({
+      key: 'userinfo',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          user: res.data
+        })
+      },
+    })
   },
 
   /**
@@ -76,7 +99,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    detail = []
+    currentPage = 1;
   },
 
   /**
@@ -90,14 +114,21 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+  
+   
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this;
+    
+    return {
+      title: '我是' + that.data.user.userName ,
+      path: 'packageA/pages/store_home/store_home?userid=' + that.data.store.id + '&id=' + that.data.store.id ,
 
+    }
   }, 
   //购物车弹窗
   cart(){
@@ -121,23 +152,43 @@ Page({
       urls: this.data.store.storeImgsOss,
     })
   },
+  pervie(e){
+    wx.previewImage({
+      current: e.currentTarget.id,
+      urls: [e.currentTarget.id],
+    })
+  },
   license(){
    wx.previewImage({
      urls: [this.data.store.licenseImgOss],
    })
+  },
+  hide() {
+    this.setData({
+      modal: false
+    })
+  },
+  handleClick(e) {
+    let index = e.detail.index;
+    if(index == 1){
+      this.cleancart()
+    }
+   
+    this.hide()
   },
   swichNav(e){
     var _this = this
     var index = e.currentTarget.dataset.current
     detail = []
     currentPage = 1
-    if (index == 0) {
+    console.log(this.data.tabbar.length)
+    if (index == this.data.tabbar.length-2) {
       promotionType = 1
       _this.getcdetail()
-    } else if (index == 1) {
+    } else if (index == this.data.tabbar.length - 1) {
       promotionType = 2
       _this.getcdetail()
-    } else if (index > 1) {
+    } else if (index<this.data.tabbar.length - 2) {
       typeId = e.currentTarget.id
       _this.getdetail()
     }
@@ -147,17 +198,20 @@ Page({
        typeName: this.data.tabbar[index].typeName
        })
   },
+  c_cart(e){
+     this.setData({
+       modal:true
+     })
+  },
   showPopup() {
     this.setData({ show: true });
   },
-
   onClose() {
     this.setData({ show: false });
   },
   showPopup2() {
     this.setData({ show2: true });
   },
-
   onClose2() {
     this.setData({ show2: false });
   },
@@ -166,6 +220,21 @@ Page({
   },
   showPopup3() {
     this.setData({ show3: true });
+  },
+  //banner跳转
+  banner(e) {
+    console.log(e)
+    if (e.currentTarget.dataset.xcxurl == '') {
+
+    } else if (e.currentTarget.dataset.xcx.id == '') {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page,
+      })
+    } else {
+      wx.navigateTo({
+        url: e.currentTarget.dataset.xcx.page + e.currentTarget.dataset.xcx.id,
+      })
+    }
   },
   //提交订单
   submit(e){
@@ -201,7 +270,7 @@ Page({
         that.getcart()
       } else {
         wx.showToast({
-          title: res.msg,
+          title: res.data,
           icon: 'none'
         })
       }
@@ -239,9 +308,21 @@ Page({
     
       if (res.status == 1000) {
         that.getcart()
+      } else if (res.status == 1024) {
+        wx.showToast({
+          title: '请先重新登录绑定手机号',
+          icon: 'none'
+        })
+        setTimeout(()=>{
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
+          var url = '/packageA/pages/store_home/store_home?id=' + storeid
+          wx.setStorageSync('url', url)
+        },1500)
       }else{
         wx.showToast({
-          title: res.msg,
+          title: res.data,
           icon: 'none'
         })
       }
@@ -309,8 +390,20 @@ Page({
         that.setData({
           cart: res.data,
           z_price: z_price.toFixed(2),
-          sendFee: (that.data.store.sendFee - z_price).toFixed(2)
+         
         })
+        setTimeout(()=>{
+          that.setData({ sendFee: (that.data.store.sendFee - z_price).toFixed(2)})
+        },2000)
+      } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
+        
+        wx.redirectTo({
+          url: '/pages/login/login',
+        })
+        var url = '/packageA/pages/store_home/store_home?id=' + storeid + '&userid=' + userid
+        wx.setStorageSync('url', url)
+      }else if(res.status == 1024){
+
       } else {
         wx.showToast({
           title: res.msg,
@@ -368,18 +461,25 @@ Page({
         if (res.data == '') {
 
         } else {
-          var tabb = [{
-            typeName: '秒杀'
-          },
-          {
-            typeName: '特价'
-          },
+          var tabb = [
           ]
           tabb.push(...res.data)
+          var a = [
+            {
+              typeName: '秒杀'
+            },
+            {
+              typeName: '特价'
+            },
+          ]
+          tabb.push(...a)
+          typeId= tabb[0].id
           that.setData({
-            tabbar: tabb
+            tabbar: tabb,
+            typeName: tabb[0].typeName,
+         
           })
-          that.getcdetail()
+          that.getdetail()
         }
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
         wx.showToast({
@@ -472,7 +572,13 @@ Page({
           store:res.data
         })
         that.formSubmit();
-        that.getcart();
+        wx.setNavigationBarTitle({
+          title:res.data.storeName
+        })
+        this.getbanner();
+       
+        this.getType();
+        //that.getcart();
       } else {
         wx.showToast({
           title: res.msg,
@@ -545,5 +651,22 @@ Page({
         console.log(res);
       }
     });
-  }
+  },
+  //类型
+  Bang() {
+    let that = this;
+
+    let data = {
+      storeId: userid,
+
+    }
+
+    app.res.req('/sqstore/sharebindstore', data, (res) => {
+      console.log(res.data)
+
+      if (res.status == 1000) {
+          
+      }
+    })
+  },
 })

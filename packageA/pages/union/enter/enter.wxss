@@ -33,3 +33,35 @@
 .bott{
   top:120%;
 }
+.nav_list{
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.nav_list h1{
+  font-weight: 600
+}
+.nav_li{
+  margin-top:30rpx; 
+  width: calc((100% - 60rpx)/2);
+  padding: 30rpx;
+  box-sizing: border-box;
+  margin-left: 20rpx;
+  background:rgba(249,249,249,1);
+  display: inline-block;
+  font-weight: 700;
+  font-size: 38rpx;
+  position: relative;
+  border-radius: 10rpx;
+}
+.nav_active{
+  background:rgba(241,34,0,0.2);
+  color: #f12200;
+}
+.nav_li image{
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+ top: 10rpx;
+ right: 10rpx;
+}

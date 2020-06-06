@@ -9,5 +9,9 @@
     <view class="list_date">
       <view>{{item.createDate}}</view>
     </view>
+     <view wx:if='{{item.sendType == 1}}' style="margin-top:20rpx;">
+        <text >卡号转赠</text>
+        <view style="float:right">{{item.endCardNo}}~{{item.startCardNo}}</view>
+    </view>
   </view>
 </view>

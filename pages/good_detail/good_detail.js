@@ -381,13 +381,16 @@ Page({
     spec[selectIndex].entries[attrIndex].isSelect = true;
     selectIndexArray[selectIndex] = spec[selectIndex].entries[attrIndex].value;
     if (selectAttrid.length == 0) {
-      selectAttrid.push(spec[selectIndex].entries[attrIndex].id)
+      if(selectIndex != 0){
+        selectAttrid[0] = 999
+      }
+      selectAttrid[selectIndex] = spec[selectIndex].entries[attrIndex].id
     } else {
       selectAttrid[selectIndex] = spec[selectIndex].entries[attrIndex].id;
-
+        
     }
 
-
+    console.log(selectAttrid)
     this.setData({
       spec: spec, //变换选择框
       selected: selectIndexArray.join("-"),
@@ -411,6 +414,7 @@ Page({
             goodId: that.data.sku[i].id,
 
           })
+          
           return ds = true;
         }
       }
@@ -711,6 +715,7 @@ Page({
       that.setData({
         loading: !that.data.loading
       })
+     
     }
 
   },

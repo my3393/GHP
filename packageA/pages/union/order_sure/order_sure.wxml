@@ -59,7 +59,7 @@
       </view>
     </view>
     <view>
-       <picker range="{{multiArray}}" mode="multiSelector" bindchange="xuan_time">
+       <picker range="{{multiArray}}" mode="multiSelector" value="{{vals}}" bindchange="xuan_time" bindcolumnchange='bindcolumnchange'>
          <view class="peis">
         <view>送达时间</view>
         <view>{{time}}
@@ -92,7 +92,7 @@
       </view>
     </view>
     <view>
-     <picker range="{{multiArray}}" mode="multiSelector" bindchange="xuan_time">
+     <picker range="{{multiArray}}" mode="multiSelector" bindchange="xuan_time" bindcolumnchange='bindcolumnchange'>
          <view class="peis" >
         <view>送达时间</view>
         <view>{{time}}
@@ -114,7 +114,7 @@
       <view class="peis">
         <radio-group bindtap="checked">
           <radio checked="{{checked}}" class="all_radio" color="#f12200">
-           同意《到店自提用户协议》
+          <view catchtap="web"> 同意《到店自提用户协议》</view>
           </radio>
          
         </radio-group>
@@ -139,7 +139,7 @@
         <!-- <image src="{{detail.productDefaultImgOss}}" /> -->
         <image src="{{item.productDefaultImgOss}}"></image>
       </view>
-      <view class="good_list">
+      <view class="good_list clearfix">
         <!-- <view class='goodsname dan'>{{detail.productName}}</view> -->
         <view class='goodsname dan'>{{item.productName}}</view>
         <view class="guig">
@@ -169,12 +169,12 @@
         ￥{{store.postageFee}}
       </view>
     </view>
-    <view class="price_list">
+    <!-- <view class="price_list">
       会员优惠
       <view class="price_r">
         ￥{{member_p}}
       </view>
-    </view>
+    </view> -->
     <view class="price_list">
       艺呗抵扣
       <view class="price_r yan">

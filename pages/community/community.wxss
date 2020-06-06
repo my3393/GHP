@@ -257,6 +257,11 @@ box-sizing: border-box;
   margin-top: 28rpx;
   white-space: nowrap;
   display: flex;
+  overflow: hidden;
+   position: sticky;
+  top: 68px;
+  background: #f2f2f2;
+  z-index: 10;
 }
 .actives{
  background:#F12200;
@@ -272,7 +277,7 @@ box-sizing: border-box;
   margin-right: 24rpx;
   border-radius: 30rpx;
   font-size: 24rpx;
-
+ 
 }
 .tag-hover{
   background: red;
@@ -321,12 +326,12 @@ box-sizing: border-box;
   border-radius: 4rpx;
 }
 .out{
-  width: 100%;
+  width: calc(100% - 140rpx);
   height: 312rpx;
    padding: 20rpx;
   box-sizing: border-box;
   overflow:hidden;
-  margin-left: 120rpx;
+  margin-left: 140rpx;
   white-space: nowrap;
 }
 .store_detail{

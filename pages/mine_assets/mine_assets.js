@@ -344,7 +344,7 @@ Page({
   lingqu(e) {
     let that = this;
     var nowTime = new Date();
-    if (nowTime - this.data.tapTime < 800) {
+    if (nowTime - this.data.tapTime < 1000) {
       console.log('阻断')
       return;
     }

@@ -1,7 +1,7 @@
 <!--pages/sure_order/sure_order.wxml-->
 <view class="top" wx:if='{{user.memberType == 0}}' bindtap="member">
     <view class="top_img">
-        <image  src="../../images/hyjlb.png" />
+        <image  src="/images/hyjlb.png" />
     </view>
     <view class="top_n">
         开通会员，预计本单最高可为您节省￥{{member_zk}}
@@ -28,7 +28,7 @@
         </view>
     </view>
     <view class="address_t">
-        <image src="../../images/address_t.png" />
+        <image src="/images/address_t.png" />
     </view>
 </view>
 <view wx:elif='{{defalutaddres.length != 0}}' bindtap='choose'>
@@ -48,7 +48,7 @@
         </view>
     </view>
     <view class="address_t">
-        <image src="../../images/address_t.png" />
+        <image src="/images/address_t.png" />
     </view>
 </view>
 <view wx:else bindtap="choose">
@@ -70,11 +70,11 @@
    <view class="list clearfix">
         <view class="nav_top">
         <view class="sotre_img">
-            <image src="../../images/store.png" />
+            <image src="/images/store.png" />
         </view>
         {{detail.storeName}}
         <view class="store_r">
-            <image src="../../images/right.png" />
+            <image src="/images/right.png" />
         </view>
         </view>
         <view>
@@ -131,19 +131,19 @@
 
 <view class="badge">
   <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-img"> <image src="/images/badge.png"></image></view>
     <view class="badge-n">助力家乡</view>
   </view>
   <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-img"> <image src="/images/badge.png"></image></view>
     <view class="badge-n">家乡公益</view>
   </view>
   <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-img"> <image src="/images/badge.png"></image></view>
     <view class="badge-n">服务保障</view>
   </view>
   <view >
-    <view class="badge-img"> <image src="../../images/badge.png"></image></view>
+    <view class="badge-img"> <image src="/images/badge.png"></image></view>
     <view class="badge-n">担保交易</view>
   </view>
 </view>
@@ -169,3 +169,5 @@
        微信支付
  </button>
 </view>
+
+

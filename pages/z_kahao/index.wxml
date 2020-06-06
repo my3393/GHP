@@ -1,0 +1,15 @@
+<!--pages/z_kahao/index.wxml-->
+ <view class="nav">
+  <view style="margin-top:40rpx">
+      <view class="xia">输入激活码</view>
+      <view class="xia_i">
+        <input placeholder="请输入激活码" type="number" class="inpts" bindinput="num" value="{{num}}"></input>
+       
+         
+      </view>
+ </view>
+ </view>
+
+    <button class="but" bindtap="getphone">确定</button>
+
+<image style="width:100%;height:1300rpx;margin-top:20rpx;" src="https://sjg.xcx.api.xingtu-group.cn/xcx/vipx.jpg"></image>

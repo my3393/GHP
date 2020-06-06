@@ -132,7 +132,7 @@
   </view>
 </view>
 <view>
-  <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9">
+  <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#fff" indicator-active-color="#f12200">
     <block>
       <swiper-item wx:for='{{banner}}' id="{{item.id}}" bindtap="banner" class='swiper' data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
         <image class="banner_img" src="{{item.advertiseImgOss}}"></image>
@@ -179,7 +179,7 @@
       </view>
       <view>知识产权</view>
     </view>
-     <view class="din-1" bindtap="wysx">
+     <view class="din-1" bindtap="wysx" id="0">
        <view class="din-img">
         <image src="../../images/superme_6.png" />
       </view>
@@ -197,6 +197,12 @@
       </view>
       <view>加油打折</view>
     </navigator>
+     <view class="din-1"  bindtap="kah">
+       <view class="din-img">
+        <image src="/images/superme_6.png" />
+      </view>
+      <view>卡号领取</view>
+    </view>
   </view>
 
 </view>

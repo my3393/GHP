@@ -25,7 +25,7 @@
     </view>
   </view>
   <view>
-    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9" bindchange="testSwiper">
+    <swiper class="banner" indicator-dots="true" circular="true" autoplay="true" duration="1000" indicator-color="#a7a7a7" indicator-active-color="#fe5ba9" >
       <block>
         <swiper-item id="{{item.id}}" bindtap="banner" class='swiper' wx:for='{{banner}}' wx:key="item" data-xcx='{{item.xcx}}' data-xcxurl='{{item.xcxUrl}}'>
           <image class="banner_img skeleton-rect" src="{{item.bannerImgOss}}" lazy-load="true"></image>

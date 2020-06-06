@@ -10,6 +10,9 @@
   width: 480rpx;
    color: #000;
 }
+.nav{
+  padding: 0;
+}
 .inpts{
   display: inline-block;
   border-bottom: 1rpx solid #CCCCCC;
@@ -28,4 +31,29 @@
 .imag image{
   width: 250rpx;
   height: 250rpx;
+}
+.tag>view{
+  width: 50%;
+  height: 79rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 79rpx;
+  background: #f9f9f9;
+  color: #666;
+}
+.active{
+  background: #fff !important;
+  color: #000 !important;
+}
+.tar{
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.card{
+   width: calc(100% - 40rpx);
+  margin-left: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: rgba(244, 43, 5, 0.4);
+  color: #f12200;
 }

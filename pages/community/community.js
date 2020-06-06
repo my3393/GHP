@@ -17,15 +17,10 @@ Page({
      tar:[
        { name: '善家联盟' },
        { name: '善家服务' },
-       { name:'善家驿站'},
+      //  { name:'善家驿站'},
      ],
      tas:0,
-     type:[
-       { typeName: '果蔬' },
-       { typeName: '生鲜' },
-       { typeName: '商超' },
-       { typeName:'鲜花'},
-     ],
+   
     address: '定位中...',
     tars:0,
     type:[]
@@ -47,7 +42,7 @@ Page({
     this.getbanner();
    
   }, 
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -88,7 +83,11 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+       var aa = this.data.pages
+       aa++
+       this.setData({
+         pages:aa
+       })
   },
 
   /**
@@ -328,7 +327,7 @@ Page({
             wx.hideLoading()
            
           })
-         
+          this.getdetail()
         }
         
       } else if (res.status == 1004 || res.status == 1005 || res.status == 1018) {
@@ -341,6 +340,43 @@ Page({
           icon: 'none'
         })
       }
+    })
+  },
+  //绑定的商户
+  getdetail() {
+    let that = this;
+    let data = {
+        
+    }
+
+    app.res.req('/sqstore/bindstoreinfo', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+        if (res.data.data == '' && currentPage != 1) {
+          wx.showToast({
+            title: '已经加载完了',
+            icon: 'none'
+          })
+        } else {
+       
+           
+            if (res.data.storeLabel) {
+              res.data.labels = res.data.storeLabel.split(',')
+            }
+
+          
+         
+          that.setData({
+            store: res.data,
+
+          }, res => {
+            wx.hideLoading()
+            that.formSubmit()
+          })
+
+        }
+
+      } 
     })
   },
   gettype() {
@@ -501,4 +537,45 @@ Page({
       }
     })
   },
+  //计算绑定商户的距离
+  formSubmit(e) {
+    var _this = this;
+    //调用距离计算接口
+    qqmapsdk.calculateDistance({
+      //mode: 'driving',//可选值：'driving'（驾车）、'walking'（步行），不填默认：'walking',可不填
+      //from参数不填默认当前地址
+      //获取表单提交的经纬度并设置from和to参数（示例为string格式）
+      from: '', //若起点有数据则采用起点坐标，若为空默认当前地址
+      // to: e.detail.value.dest, //终点坐标
+
+      to: [{
+        latitude: _this.data.store.latitude,
+        longitude: _this.data.store.longitude
+      }],
+      success: function (res) {//成功后的回调
+        // console.log(res);
+        var res = res.result;
+        var dis = [];
+        for (var i = 0; i < res.elements.length; i++) {
+          dis.push(res.elements[i].distance); //将返回数据存入dis数组，
+        }
+        if (dis < 1000) {
+          dis = dis + "m"
+        } else if (dis > 1000) {
+          dis = (Math.round(dis / 100) / 10).toFixed(1) + "km"
+
+        }
+        _this.setData({ //设置并更新distance数据
+          distance: dis
+        });
+
+      },
+      fail: function (error) {
+        console.error(error);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
+    });
+  }
 })

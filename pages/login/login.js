@@ -14,7 +14,7 @@ Page({
 
   },
   onLoad(options) {
-    console.log(options)
+   // console.log(options)
     let that = this;
     if (options.id && options.userid) {
       that.setData({
@@ -63,7 +63,7 @@ Page({
         console.log(res)
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-
+          
           wx.login({
             success: function(res) {
               wx.getUserInfo({
@@ -130,7 +130,7 @@ Page({
     })
   },
   bindGetUserInfo(e) {
-    console.log(e.detail.userInfo)
+    console.log(e)
     var that = this;
     var nowTime = new Date();
     if (nowTime - this.data.tapTime < 800) {
@@ -142,7 +142,7 @@ Page({
     })
     wx.getSetting({
       success(res) {
-        console.log(res)
+       
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
 
@@ -181,7 +181,7 @@ Page({
                     },
                     dataType: 'json',
                     success: function(res) {
-                      console.log(res.data);
+                    //  console.log(res.data);
 
                       if (res.data.status == 1000) {
                         wx.hideLoading()
@@ -243,7 +243,6 @@ Page({
                           })
                         } else if (that.data.userid != '' && that.data.storeId != '') {
                           console.log('店铺')
-                          console.log(that.data.storeId)
                           wx.redirectTo({
                             url: '../store_detail/store_detail?id=' + that.data.storeId
                           })
@@ -301,9 +300,7 @@ Page({
                             url: '../e_mine/mine'
                           })
                         } else {
-                          console.log(2)
-                          console.log(that.data.storeId)
-                          console.log(that.data.userid)
+                         
                           wx.switchTab({
                             url: '../e_home/home'
                           })
@@ -314,7 +311,7 @@ Page({
                           title: res.data.msg,
 
                         })
-                        console.log(11)
+                        
                       }
                     }
                   })

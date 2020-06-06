@@ -12,6 +12,17 @@ page{
   --color-disabled: #dfdfdf;
   --color-red: #ff2a2a;
 }
+/* 分享按钮 */
+.share{
+  margin: 0;
+  padding: 0;
+  background: 0;
+  font-size: 28rpx;
+  line-height: 34rpx;
+}
+.share::after{
+  border: 0
+}
 .container {
   height: 100%;
   display: flex;

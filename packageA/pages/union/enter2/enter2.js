@@ -171,7 +171,7 @@ Page({
   //查看协议
   web() {
     wx.navigateTo({
-      url: '../agreement_store/agreement_store?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/3_Settled_in.html',
+      url: '../../web/web/index?src=' + 'https://www.xingtu-group.cn/sjg_xieyi/collect_yourself.html',
     })
   },
   //入驻提交

@@ -25,7 +25,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.3",
+	"libVersion": "2.10.4",
 	"appid": "wxd01b5807647c44d9",
 	"projectname": "xian",
 	"debugOptions": {
@@ -60,9 +60,9 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "packageA/pages/today/seckill/seckill",
-					"pathName": "packageA/pages/today/seckill/seckill",
-					"query": "",
+					"name": "packageA/pages/store_home/store_home",
+					"pathName": "packageA/pages/store_home/store_home",
+					"query": "userid=2&id=2",
 					"scene": null
 				},
 				{
@@ -70,6 +70,20 @@
 					"name": "pages/community/community",
 					"pathName": "pages/community/community",
 					"query": "userid=52",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/aaa/aaa",
+					"pathName": "pages/aaa/aaa",
+					"query": "userid=52",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/assets_expel/assets_expel",
+					"pathName": "packageA/pages/union/enter/enter",
+					"query": "",
 					"scene": null
 				}
 			]
