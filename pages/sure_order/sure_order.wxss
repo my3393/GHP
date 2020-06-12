@@ -125,7 +125,7 @@ page{
 .goodsname{
     width: 400rpx;
     font-size: 26rpx;
-    margin-bottom: 80rpx;
+    margin-bottom: 20rpx;
   }
   .specification{
     color: #999;
@@ -133,7 +133,7 @@ page{
     font-size: 22rpx;
   }
   .guig{
-    height: 80rpx;
+    height: 40rpx;
    
   }
   .gui-g{

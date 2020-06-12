@@ -56,8 +56,20 @@ Page({
    */
   onLoad: function (options) {
     storeid = options.id
+    if (decodeURIComponent(options.q).split('/')[4]) {
+    
+      storeid = decodeURIComponent(options.q).split('/')[4]
+    
+      wx.setStorageSync('storeID', decodeURIComponent(options.q).split('/')[4])
+     
+    }
+    if (decodeURIComponent(options.q).split('/')[5]) {
+
+      wx.setStorageSync('bangId', decodeURIComponent(options.q).split('/')[5])
+     
+    }
     if(options.userid){
-      userid = options.userid,
+      userid = options.userid
       this.Bang()
     }
     this.getstore();
@@ -76,6 +88,14 @@ Page({
   onShow: function () {
     this.getcart()
     let that = this;
+    if(wx.getStorageSync('storeID')){
+      userid = wx.getStorageSync('storeID')
+      this.Bang()
+      this.member_k()
+    }
+    if (wx.getStorageSync('bangId')){
+       this.Banges()
+    }
     //获取本地用户信息
     wx.getStorage({
       key: 'userinfo',
@@ -652,7 +672,7 @@ Page({
       }
     });
   },
-  //类型
+  //店铺绑定
   Bang() {
     let that = this;
 
@@ -667,6 +687,51 @@ Page({
       if (res.status == 1000) {
           
       }
+    })
+  },
+  //绑定上级
+  Banges() {
+    let that = this;
+
+    let data = {
+      id: wx.getStorageSync('bangId')
+    }
+
+    app.res.req("/user/sharebinduser", data, (res) => {
+
+      if (res.status == 1000) {
+        // wx.showToast({
+        //   title: '绑定成功',
+        // })
+
+        wx.removeStorageSync('bangId')
+      } else if (res.status == 1028) {
+        console.log('----1028----')
+      } else if (res.status == 1030) {
+        wx.removeStorageSync('bangId')
+        console.log('----1030----')
+      } else if (res.status == 1031) {
+        wx.removeStorageSync('bangId')
+        console.log('----1031----')
+      } else if (res.status == 1040) {
+        wx.removeStorageSync('bangId')
+        console.log('----1040----')
+      }
+    })
+  },
+  //领取会员卡
+  member_k() {
+    let that = this;
+
+    let data = {
+      storeId: storeid
+    }
+
+    app.res.req('/membercard/sqstorescancodereceive', data, (res) => {
+      console.log(res.data)
+      if (res.status == 1000) {
+       
+      } 
     })
   },
 })

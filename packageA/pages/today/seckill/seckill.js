@@ -85,17 +85,22 @@ Page({
   tar(e){
     var id = e.currentTarget.id
     var index = e.currentTarget.dataset.index
-    if (id == '12:00'){
-       if(index == 0){
-
-       }
+    var date = new Date();
+    var currentHours = date.getHours();
+    if (this.data.tag[index].substring(0, 2) < currentHours){
+      wx.showToast({
+        title: '已经过了抢购时间哦',
+        icon:'none'
+      })
+    }else{
+      this.setData({
+        current_time: e.currentTarget.id,
+        current: e.currentTarget.dataset.index
+      }, () => {
+        this.getdetail()
+      })
     }
-    this.setData({
-      current_time:e.currentTarget.id,
-      current:e.currentTarget.dataset.index
-    },()=>{
-      this.getdetail()
-    })
+  
 
   },
   guang(e){

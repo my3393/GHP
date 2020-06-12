@@ -957,8 +957,8 @@ Page({
           detail: res.data,
           spec: res.data.specificationItems,
           price: res.data.lowestPrice,
-          title_img: res.data.productDefaultImgOss
-
+          title_img: res.data.productDefaultImgOss,
+          discount: (res.data.topPrice - res.data.topMemberPrice).toFixed(2)// 艺呗折扣价格
         })
 
         that.getStore();

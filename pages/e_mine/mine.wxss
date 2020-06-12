@@ -156,6 +156,8 @@ border:none;
 .gongy{
     font-size: 26rpx;
     color: #fff;
+    position: relative;
+    top: -6rpx;
     display: inline-block;
 }
 .gongy image{
@@ -169,6 +171,7 @@ border:none;
 }
 .jies{
     font-size: 22rpx;
+    width: 360rpx;
 }
 .members{
     background: #F9A41D;

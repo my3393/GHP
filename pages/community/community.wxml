@@ -90,8 +90,8 @@
   <view style="margin-top:30rpx;">
     <view wx:if='{{store}}'>
       <view class="store clearfix" bindtap="detail" id="{{store.id}}">
-           <image src="{{item.storeHeadImgUrlOss}}" wx:if='{{item.storeHeadImgUrlOss}}'></image>
-      <image src="{{item.storeLogoOss}}" wx:else></image>
+        <image src="{{store.storeHeadImgUrlOss}}" wx:if='{{store.storeHeadImgUrlOss}}'></image>
+        <image src="{{store.storeLogoOss}}" wx:else></image>
         <view>
           <view class="h1">{{store.storeName}}</view>
           <view class="peix">

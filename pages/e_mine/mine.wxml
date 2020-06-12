@@ -37,7 +37,8 @@
       <view class="person" bindtap="person">
         <view>
           <view class="per-n" wx:if='{{user.userName == null}}'>{{phone}}</view>
-          <view class="per-n" wx:else>{{user.userName}}
+          <view class="per-n" wx:else>
+             <text class="dan" style="max-width:400rpx;display:inline-block">{{user.userName}}</text>
              <view class="gongy" style="display:inline-block">
                   <image  wx:if='{{user.memberType == 1}}' src="../../images/mine_3.png"></image>
             <image  wx:if='{{user.memberType == 2}}' src="../../images/mine_4.png"></image>
@@ -66,7 +67,7 @@
           </view>
 
         </view>
-        <view class="jies" wx:if='{{user.publicSlogan}}'>{{user.publicSlogan}}</view>
+        <view class="jies dan" wx:if='{{user.publicSlogan}}'>{{user.publicSlogan}}</view>
         <!-- <view class="jies" wx:else>请设置你的公益宣言</view> -->
       </view>
       <view class="members" bindtap="member" wx:if='{{user.memberType == 0}}'>

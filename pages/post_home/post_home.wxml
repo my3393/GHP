@@ -4,7 +4,7 @@
     <view class='location' slot="left" bindtap="xuan">
       <image style="width:28rpx;height:30rpx;" src="/images/sheq_dinw.png"></image>
       <view class='con dan'>{{address}}</view>
-      <!-- <view class='icon' /> -->
+      <view class='icon' />
     </view>
     
     <!-- <view class='lxy-nav-bar-search' slot="center">
